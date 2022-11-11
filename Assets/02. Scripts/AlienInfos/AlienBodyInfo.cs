@@ -17,7 +17,10 @@ public class AlienBodyInfo {
     public AlienBodyPartInfo MainBodyInfo;
     public AlienBodyPartInfo LegInfo;
 
-    private List<AlienBodyPartInfo> allBodyInfos = new List<AlienBodyPartInfo>();
+    /// <summary>
+    /// ¥”œ¬Õ˘…œ
+    /// </summary>
+    public List<AlienBodyPartInfo> AllBodyInfos = new List<AlienBodyPartInfo>();
 
 
     public AlienVoiceType VoiceType;
@@ -52,7 +55,7 @@ public class AlienBodyInfo {
 
     public bool CheckContainTags<T>(out List<T> tags) where T : IAlienTag {
         List<T> allTags = new List<T>();
-        foreach (var bodyInfo in allBodyInfos) {
+        foreach (var bodyInfo in AllBodyInfos) {
             foreach (IAlienTag tag in bodyInfo.Tags) {
                 if (tag is T t) {
                     allTags.Add(t);
@@ -65,16 +68,16 @@ public class AlienBodyInfo {
 
     public float GetAverageFatness() {
         float totalFatness = 0;
-        foreach (var bodyInfo in allBodyInfos) {
+        foreach (var bodyInfo in AllBodyInfos) {
             totalFatness += bodyInfo.HeightTag.Height;
         }
 
-        return totalFatness / allBodyInfos.Count;
+        return totalFatness / AllBodyInfos.Count;
     }
 
     public float GetTotalHeight() {
         float totalHeight = 0;
-        foreach (var bodyInfo in allBodyInfos) {
+        foreach (var bodyInfo in AllBodyInfos) {
             totalHeight += bodyInfo.HeightTag.Height;
         }
         return totalHeight;
@@ -89,7 +92,7 @@ public class AlienBodyInfo {
         MainBodyInfo = mainBodyPartInfo;
         LegInfo = legInfo;
         VoiceType = voiceType;
-        allBodyInfos = new List<AlienBodyPartInfo>() {headInfo, mainBodyPartInfo, legInfo};
+        AllBodyInfos = new List<AlienBodyPartInfo>() { legInfo, mainBodyPartInfo, headInfo};
     }
 
     public static AlienBodyInfo GetRandomAlienInfo() {
