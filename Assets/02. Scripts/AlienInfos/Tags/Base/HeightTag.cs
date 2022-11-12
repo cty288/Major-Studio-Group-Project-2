@@ -13,4 +13,7 @@ public class HeightTag : AbstractAlienTag, IHeightTag {
     public HeightTag(float height) {
         this.Height = height;
     }
+
+    public override List<string> RealDescriptions { get; } = new List<string>() { };
+    public override List<string> FakeDescriptions { get;} = new List<string>();
 }

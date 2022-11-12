@@ -1,7 +1,71 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Text;
+using Random = UnityEngine.Random;
 
-public static class AlienDescriptionFactory{
-    
+public static class AlienDescriptionFactory {
+
+    public static List<Func<AlienBodyInfo,bool, string>> RadioDescriptions = new List<Func<AlienBodyInfo, bool, string>>();
+
+    private static bool inited = false;
+
+    public static void Init() {
+        RegisterRadioDescription(TestRadioDescription);
+    }
+
+    public static string GetRadioDescription(AlienBodyInfo bodyInfo, bool isReal) {
+        if (!inited) {
+            Init();
+        }
+        bodyInfo = AlienBodyInfo.GetRandomAlienInfo();
+        return RadioDescriptions[Random.Range(0, RadioDescriptions.Count)](bodyInfo, isReal);
+    }
+
+    public static void RegisterRadioDescription(Func<AlienBodyInfo, bool, string> description) {
+        RadioDescriptions.Add(description);
+    }
+
+
+    private static string TestRadioDescription(AlienBodyInfo body, bool isReal) {
+        StringBuilder sb = new StringBuilder();
+        sb.Append("We have a new alien in the area. ");
+
+        float fatness = body.GetAverageFatness();
+        if (!isReal) {
+            fatness = 1 - fatness;
+        }
+        
+        if (fatness < 0.3f) {
+            sb.Append("It is very thin. ");
+        }
+        else if (fatness < 0.6f) {
+            sb.Append("It is average. ");
+        }
+        else {
+            sb.Append("It is very fat. ");
+        }
+
+        float height = body.GetTotalHeight();
+        if (!isReal) {
+            height = 3 - height;
+        }
+        
+        if (height < 1.5f) {
+            sb.Append("It is very short. ");
+        }
+        else if (height < 2f) {
+            sb.Append("It is average. ");
+        }
+        else {
+            sb.Append("It is very tall. ");
+        }
+
+        sb.Append("It was reported that it attacked a human this morning!");
+        if (body.CheckContainTag<IClothTag>(out IClothTag cloth)) {
+            sb.Append(" It was wearing " + cloth.GetRandomDescription(isReal) + "!");
+        }
+
+        return sb.ToString();
+    }
 }

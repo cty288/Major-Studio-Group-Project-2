@@ -10,15 +10,14 @@ public enum BodyPartType {
     Body,
     Legs
 }
-public abstract class AlienBodyPartInfo {
+public abstract class AlienBodyPartInfo : MonoBehaviour {
     public abstract IFatTag FatTag { get; }
     public abstract IHeightTag HeightTag { get; }
     
     public abstract List<IAlienTag> Tags { get; }
-
-    public abstract string BodyPartPrefabAssetName { get; }
-
     public abstract BodyPartType BodyPartType { get; }
+
+    public Transform JointPoint;
 
 }
 

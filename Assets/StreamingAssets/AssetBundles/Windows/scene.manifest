@@ -1,0 +1,46 @@
+ManifestFileVersion: 0
+CRC: 3259818499
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 12dca71ce7ae2e23bfa3ec7d3b80fa6d
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ad1a254dc486562719462512bfcb4bca
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 81
+  Script: {instanceID: 0}
+- Class: 104
+  Script: {instanceID: 0}
+- Class: 108
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 81e610ea901aa28408fda655c26e474a, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 157
+  Script: {instanceID: 0}
+- Class: 196
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/MikroFramework/Runtime/Examples/ResKit/04. HotUpdateExample/HotUpdateExampleScene.unity
+Dependencies:
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/mftest2

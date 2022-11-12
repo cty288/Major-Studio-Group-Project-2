@@ -13,14 +13,14 @@ public enum AlienVoiceType {
 
 public class AlienBodyInfo {
     //https://stackoverflow.com/questions/35577011/custom-string-formatter-in-c-sharp
-    public AlienBodyPartInfo HeadInfo;
-    public AlienBodyPartInfo MainBodyInfo;
-    public AlienBodyPartInfo LegInfo;
+    public AlienBodyPartInfo HeadInfoPrefab;
+    public AlienBodyPartInfo MainBodyInfoPrefab;
+    public AlienBodyPartInfo LegInfoPreab;
 
     /// <summary>
     /// ¥”œ¬Õ˘…œ
     /// </summary>
-    public List<AlienBodyPartInfo> AllBodyInfos = new List<AlienBodyPartInfo>();
+    public List<AlienBodyPartInfo> AllBodyInfoPrefabs = new List<AlienBodyPartInfo>();
 
 
     public AlienVoiceType VoiceType;
@@ -30,19 +30,9 @@ public class AlienBodyInfo {
     public static List<AlienBodyPartInfo> allBodyPartInstances = null;
     
     
-    public static List<AlienBodyPartInfo> headBodyPartInstances = null;
-    public static List<AlienBodyPartInfo> mainBodyPartInstances = null;
-    public static List<AlienBodyPartInfo> legBodyPartInstances = null;
+   
 
-    public static void CreateAllInstances() {
-        allBodyPartInstances =  typeof(AlienBodyInfo).Assembly.GetTypes() 
-            .Where(t => typeof(AlienBodyPartInfo).IsAssignableFrom(t)) 
-            .Where(t => !t.IsAbstract && t.IsClass) 
-            .Select(t => (AlienBodyPartInfo)Activator.CreateInstance(t)).ToList();
-        headBodyPartInstances = allBodyPartInstances.Where((info => info.BodyPartType == BodyPartType.Head)).ToList();
-        mainBodyPartInstances = allBodyPartInstances.Where((info => info.BodyPartType == BodyPartType.Body)).ToList();
-        legBodyPartInstances = allBodyPartInstances.Where((info => info.BodyPartType == BodyPartType.Legs)).ToList();
-    }
+    
 
     public bool CheckContainTag<T>(out T tag) where T : class, IAlienTag {
         tag = null;
@@ -55,7 +45,7 @@ public class AlienBodyInfo {
 
     public bool CheckContainTags<T>(out List<T> tags) where T : IAlienTag {
         List<T> allTags = new List<T>();
-        foreach (var bodyInfo in AllBodyInfos) {
+        foreach (var bodyInfo in AllBodyInfoPrefabs) {
             foreach (IAlienTag tag in bodyInfo.Tags) {
                 if (tag is T t) {
                     allTags.Add(t);
@@ -68,16 +58,16 @@ public class AlienBodyInfo {
 
     public float GetAverageFatness() {
         float totalFatness = 0;
-        foreach (var bodyInfo in AllBodyInfos) {
+        foreach (var bodyInfo in AllBodyInfoPrefabs) {
             totalFatness += bodyInfo.HeightTag.Height;
         }
 
-        return totalFatness / AllBodyInfos.Count;
+        return totalFatness / AllBodyInfoPrefabs.Count;
     }
 
     public float GetTotalHeight() {
         float totalHeight = 0;
-        foreach (var bodyInfo in AllBodyInfos) {
+        foreach (var bodyInfo in AllBodyInfoPrefabs) {
             totalHeight += bodyInfo.HeightTag.Height;
         }
         return totalHeight;
@@ -87,24 +77,21 @@ public class AlienBodyInfo {
     private AlienBodyInfo() {
 
     }
-    private AlienBodyInfo(AlienVoiceType voiceType, AlienBodyPartInfo headInfo, AlienBodyPartInfo mainBodyPartInfo, AlienBodyPartInfo legInfo) {
-        HeadInfo = headInfo;
-        MainBodyInfo = mainBodyPartInfo;
-        LegInfo = legInfo;
+    private AlienBodyInfo(AlienVoiceType voiceType, AlienBodyPartInfo headInfoPrefab, AlienBodyPartInfo mainBodyPartInfoPrefab, AlienBodyPartInfo legInfoPreab) {
+        HeadInfoPrefab = headInfoPrefab;
+        MainBodyInfoPrefab = mainBodyPartInfoPrefab;
+        LegInfoPreab = legInfoPreab;
         VoiceType = voiceType;
-        AllBodyInfos = new List<AlienBodyPartInfo>() { legInfo, mainBodyPartInfo, headInfo};
+        AllBodyInfoPrefabs = new List<AlienBodyPartInfo>() { legInfoPreab, mainBodyPartInfoPrefab, headInfoPrefab};
     }
 
     public static AlienBodyInfo GetRandomAlienInfo() {
-        if (!instancesCreated) { 
-            CreateAllInstances();
-        }
-
+       
         AlienVoiceType[] voiceValues = (AlienVoiceType[]) Enum.GetValues(typeof(AlienVoiceType));
         return new AlienBodyInfo(voiceValues[Random.Range(0, voiceValues.Length)],
-            headBodyPartInstances[Random.Range(0, headBodyPartInstances.Count)],
-            mainBodyPartInstances[Random.Range(0, mainBodyPartInstances.Count)],
-            legBodyPartInstances[Random.Range(0, legBodyPartInstances.Count)]);
+            AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartType.Head),
+            AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartType.Body),
+            AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartType.Legs));
     }
 
 }

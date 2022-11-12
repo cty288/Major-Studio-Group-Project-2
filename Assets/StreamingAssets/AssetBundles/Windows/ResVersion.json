@@ -1,0 +1,135 @@
+{
+  "Version": "1.0",
+  "ABMD5List": [
+    {
+      "AssetName": "aliens",
+      "MD5": "869cc7980f5af7105165c95ebc8628a0",
+      "FileSize": 2.23535156,
+      "assetDatas": [
+        {
+          "Name": "AlienBody",
+          "OwnerBundleName": "aliens",
+          "AssetType": "UnityEngine.GameObject"
+        }
+      ]
+    },
+    {
+      "AssetName": "mftest",
+      "MD5": "98a67acc7757ab910273810a1933f7a6",
+      "FileSize": 446.2832,
+      "assetDatas": [
+        {
+          "Name": "War loop",
+          "OwnerBundleName": "mftest",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "Asteroid_1",
+          "OwnerBundleName": "mftest",
+          "AssetType": "UnityEngine.Texture2D"
+        },
+        {
+          "Name": "Cylinder",
+          "OwnerBundleName": "mftest",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "TestABObj",
+          "OwnerBundleName": "mftest",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "AboutPanel",
+          "OwnerBundleName": "mftest",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "OpenFilesSubPanel",
+          "OwnerBundleName": "mftest",
+          "AssetType": "UnityEngine.GameObject"
+        }
+      ]
+    },
+    {
+      "AssetName": "mftest2",
+      "MD5": "a7240402c951f39c0c71a6fc828b7473",
+      "FileSize": 5.11328125,
+      "assetDatas": [
+        {
+          "Name": "War loop",
+          "OwnerBundleName": "mftest2",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "TestABObj",
+          "OwnerBundleName": "mftest2",
+          "AssetType": "UnityEngine.GameObject"
+        }
+      ]
+    },
+    {
+      "AssetName": "others",
+      "MD5": "2618377f0305b993fc6aabb736ef5ca8",
+      "FileSize": 20.55957,
+      "assetDatas": [
+        {
+          "Name": "Lose",
+          "OwnerBundleName": "others",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "2DSound",
+          "OwnerBundleName": "others",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "3DSound",
+          "OwnerBundleName": "others",
+          "AssetType": "UnityEngine.GameObject"
+        }
+      ]
+    },
+    {
+      "AssetName": "scene",
+      "MD5": "774d1973ecdfe7bee9f78341afc8bf5b",
+      "FileSize": 27.1542969,
+      "assetDatas": [
+        {
+          "Name": "HotUpdateExampleScene",
+          "OwnerBundleName": "scene",
+          "AssetType": "UnityEditor.SceneAsset"
+        }
+      ]
+    },
+    {
+      "AssetName": "test_sphere",
+      "MD5": "7f60def4821c8a56c8fa08978384c74c",
+      "FileSize": 44.4736328,
+      "assetDatas": [
+        {
+          "Name": "Sphere",
+          "OwnerBundleName": "test_sphere",
+          "AssetType": "UnityEngine.GameObject"
+        }
+      ]
+    },
+    {
+      "AssetName": "Windows",
+      "MD5": "a3b6488c714da9aa8b7a17e7d7235688",
+      "FileSize": 1.73046875,
+      "assetDatas": []
+    },
+    {
+      "AssetName": "test/scene_test.ab",
+      "MD5": "8c775902e8106ca930571186964c57e2",
+      "FileSize": 53.6865234,
+      "assetDatas": [
+        {
+          "Name": "TestABScene",
+          "OwnerBundleName": "test/scene_test.ab",
+          "AssetType": "UnityEditor.SceneAsset"
+        }
+      ]
+    }
+  ]
+}

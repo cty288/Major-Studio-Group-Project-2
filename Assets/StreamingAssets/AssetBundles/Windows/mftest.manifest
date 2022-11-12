@@ -1,0 +1,85 @@
+ManifestFileVersion: 0
+CRC: 836889605
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 19c8e542ebbd356aa4910c01b4f9fa77
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 9ab3634cd062011fac2f6a57231abf2a
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9c907c6f2d3531c40a00cc5b79abecd6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4da06b530a82c204b8596b8c198e7d59, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0f4e1a19541f27c4c9354abc4ecf9330, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 136
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.VertexGradient
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.AnimationTriggers
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Button/ButtonClickedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ColorBlock
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.FontData
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Navigation
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.SpriteState
+Assets:
+- Assets/MikroFramework/Runtime/Examples/AudioKit/01. BasicExample/Resources/War
+  loop.wav
+- Assets/MikroFramework/Runtime/Examples/UIKit/01. BasicExample/AboutPanel.prefab
+- Assets/MikroFramework/Runtime/Examples/ResKit/02. AssetBundleExample/folder/TestABObj.prefab
+- Assets/MikroFramework/Runtime/Examples/ResKit/02. AssetBundleExample/folder/folder/Asteroid_1.png
+- Assets/MikroFramework/Runtime/Examples/UIKit/01. BasicExample/OpenFilesSubPanel.prefab
+- Assets/MikroFramework/Runtime/Examples/ResKit/02. AssetBundleExample/folder/folder/Cylinder.prefab
+Dependencies: []

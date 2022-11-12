@@ -1,0 +1,33 @@
+ManifestFileVersion: 0
+CRC: 2432290683
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 076a8eda39ee6c8a08f2ae4016cf26d3
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: b3849ca72660b12eee2b9d5152ebbf0e
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 82
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: f5f870245e7796642b3a38ae058342c6, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.UnityEvent
+Assets:
+- Assets/MikroFramework/Runtime/Framework/AudioKit/2DSound.prefab
+- Assets/MikroFramework/Runtime/Examples/AudioKit/01. BasicExample/Resources/Lose.wav
+- Assets/MikroFramework/Runtime/Framework/AudioKit/3DSound.prefab
+Dependencies: []
