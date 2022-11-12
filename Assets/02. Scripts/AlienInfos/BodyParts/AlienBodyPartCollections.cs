@@ -6,29 +6,42 @@ using MikroFramework.Singletons;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+
+[Serializable]
+public struct BodyPartCollection {
+    public List<GameObject> HumanTraitPartsPrefabs;
+    public List<GameObject> AlienOnlyPartsPrefabs;
+}
+
 public class AlienBodyPartCollections : MonoPersistentMikroSingleton<AlienBodyPartCollections> {
-    public  List<GameObject> HeadBodyPartPrefabs = null;
-    public  List<GameObject> MainBodyPartPrefabs = null;
-    public  List<GameObject> LegBodyPartPrefabs = null;
+    public BodyPartCollection HeadBodyPartPrefabs;
+    public BodyPartCollection MainBodyPartPrefabs;
+    public BodyPartCollection LegBodyPartPrefabs;
 
 
     private void Start() {
         MainGame.Interface.GetUtility<ResLoader>();
     }
 
-    public AlienBodyPartInfo GetRandomBodyPartInfo(BodyPartType bodyPartType) {
+    public AlienBodyPartInfo GetRandomBodyPartInfo(BodyPartType bodyPartType, bool isAlien) {
         switch (bodyPartType) {
             case BodyPartType.Body:
-                return MainBodyPartPrefabs[Random.Range(0, MainBodyPartPrefabs.Count)]
-                    .GetComponent<AlienBodyPartInfo>();
+                return GetRandomBodyPartInfo(MainBodyPartPrefabs, isAlien);
             case BodyPartType.Head:
-                return HeadBodyPartPrefabs[Random.Range(0, HeadBodyPartPrefabs.Count)]
-                    .GetComponent<AlienBodyPartInfo>();
+                return GetRandomBodyPartInfo(HeadBodyPartPrefabs, isAlien);
             case BodyPartType.Legs:
-                return LegBodyPartPrefabs[Random.Range(0, LegBodyPartPrefabs.Count)]
-                    .GetComponent<AlienBodyPartInfo>();
+                return GetRandomBodyPartInfo(LegBodyPartPrefabs, isAlien);
         }
 
         return null;
+    }
+
+    private AlienBodyPartInfo GetRandomBodyPartInfo(BodyPartCollection targetCollection, bool isAlien) {
+        List<GameObject> targetList = new List<GameObject>(targetCollection.HumanTraitPartsPrefabs);
+        if (isAlien) {
+            targetList.AddRange(targetCollection.AlienOnlyPartsPrefabs);
+        }
+
+        return targetList[Random.Range(0, targetList.Count)].GetComponent<AlienBodyPartInfo>();
     }
 }

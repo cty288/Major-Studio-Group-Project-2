@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public static class AlienDescriptionFactory {
 
-    public static List<Func<AlienBodyInfo,float, string>> RadioDescriptions = new List<Func<AlienBodyInfo, float, string>>();
+    public static List<Func<BodyInfo,float, string>> RadioDescriptions = new List<Func<BodyInfo, float, string>>();
 
     private static bool inited = false;
 
@@ -14,20 +14,20 @@ public static class AlienDescriptionFactory {
         RegisterRadioDescription(TestRadioDescription);
     }
 
-    public static string GetRadioDescription(AlienBodyInfo bodyInfo, float reality) {
+    public static string GetRadioDescription(BodyInfo bodyInfo, float reality) {
         if (!inited) {
             Init();
         }
-        bodyInfo = AlienBodyInfo.GetRandomAlienInfo();
+       // bodyInfo = BodyInfo.GetRandomBodyInfo();
         return RadioDescriptions[Random.Range(0, RadioDescriptions.Count)](bodyInfo, reality);
     }
 
-    public static void RegisterRadioDescription(Func<AlienBodyInfo, float, string> description) {
+    public static void RegisterRadioDescription(Func<BodyInfo, float, string> description) {
         RadioDescriptions.Add(description);
     }
 
 
-    private static string TestRadioDescription(AlienBodyInfo body, float reality) {
+    private static string TestRadioDescription(BodyInfo body, float reality) {
         StringBuilder sb = new StringBuilder();
         sb.Append("We have a new alien in the area. ");
 

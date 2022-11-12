@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class AlienBody : AbstractMikroController<MainGame> {
 
-    public AlienBodyInfo BodyInfo;
-    public static GameObject BuildAlienBody(AlienBodyInfo info) {
+    public BodyInfo BodyInfo;
+    public static GameObject BuildAlienBody(BodyInfo info) {
         ResLoader resLoader = MainGame.Interface.GetUtility<ResLoader>();
         GameObject body = resLoader.LoadSync<GameObject>("aliens","AlienBody");
         GameObject bodyInstance = GameObject.Instantiate(body);

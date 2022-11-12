@@ -11,7 +11,7 @@ public enum AlienVoiceType {
     Female
 }
 
-public class AlienBodyInfo {
+public class BodyInfo {
     //https://stackoverflow.com/questions/35577011/custom-string-formatter-in-c-sharp
     public AlienBodyPartInfo HeadInfoPrefab;
     public AlienBodyPartInfo MainBodyInfoPrefab;
@@ -74,10 +74,10 @@ public class AlienBodyInfo {
     }
 
     
-    private AlienBodyInfo() {
+    private BodyInfo() {
 
     }
-    private AlienBodyInfo(AlienVoiceType voiceType, AlienBodyPartInfo headInfoPrefab, AlienBodyPartInfo mainBodyPartInfoPrefab, AlienBodyPartInfo legInfoPreab) {
+    private BodyInfo(AlienVoiceType voiceType, AlienBodyPartInfo headInfoPrefab, AlienBodyPartInfo mainBodyPartInfoPrefab, AlienBodyPartInfo legInfoPreab) {
         HeadInfoPrefab = headInfoPrefab;
         MainBodyInfoPrefab = mainBodyPartInfoPrefab;
         LegInfoPreab = legInfoPreab;
@@ -85,13 +85,46 @@ public class AlienBodyInfo {
         AllBodyInfoPrefabs = new List<AlienBodyPartInfo>() { legInfoPreab, mainBodyPartInfoPrefab, headInfoPrefab};
     }
 
-    public static AlienBodyInfo GetRandomAlienInfo() {
-       
+    public static BodyInfo GetRandomBodyInfo(bool isAlien) {
         AlienVoiceType[] voiceValues = (AlienVoiceType[]) Enum.GetValues(typeof(AlienVoiceType));
-        return new AlienBodyInfo(voiceValues[Random.Range(0, voiceValues.Length)],
-            AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartType.Head),
-            AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartType.Body),
-            AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartType.Legs));
+        return new BodyInfo(voiceValues[Random.Range(0, voiceValues.Length)],
+            AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartType.Head, isAlien),
+            AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartType.Body, isAlien),
+            AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartType.Legs, isAlien));
+    }
+
+    public static BodyInfo GetBodyInfoOpposite(BodyInfo original, float oppositeChance) {
+        AlienBodyPartInfo headInfoPrefab;
+        AlienBodyPartInfo mainBodyPartInfoPrefab;
+        AlienBodyPartInfo legInfoPreab;
+
+        headInfoPrefab = GetOpposite(original.HeadInfoPrefab, oppositeChance);
+        mainBodyPartInfoPrefab = GetOpposite(original.MainBodyInfoPrefab, oppositeChance);
+        legInfoPreab = GetOpposite(original.LegInfoPreab, oppositeChance);
+        AlienVoiceType voice = GetOpposite(original.VoiceType, oppositeChance);
+        return new BodyInfo(voice, headInfoPrefab, mainBodyPartInfoPrefab, legInfoPreab);
+    }
+
+    private static AlienBodyPartInfo GetOpposite(AlienBodyPartInfo original, float oppositeChance) {
+        if (original.OppositeTraitBodyPart) {
+            if (Random.Range(0f, 1f) < oppositeChance) {
+                return original.OppositeTraitBodyPart.GetComponent<AlienBodyPartInfo>();
+            }
+        }
+        return original;
+    }
+    private static AlienVoiceType GetOpposite(AlienVoiceType original, float oppositeChance) {
+        bool isOpposite = Random.Range(0f, 1f) < oppositeChance;
+        if (isOpposite) {
+            if (original == AlienVoiceType.Female) {
+                return AlienVoiceType.Male;
+            }
+            else {
+                return AlienVoiceType.Female;
+            }
+        }
+
+        return original;
     }
 
 }

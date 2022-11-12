@@ -1649,11 +1649,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HeadBodyPartPrefabs:
-  - {fileID: 5854546655780741347, guid: b4056ecd65609e045bc0f8396753f56f, type: 3}
+    HumanTraitPartsPrefabs:
+    - {fileID: 5854546655780741347, guid: b4056ecd65609e045bc0f8396753f56f, type: 3}
+    AlienOnlyPartsPrefabs: []
   MainBodyPartPrefabs:
-  - {fileID: 3641836124542417107, guid: d0965f167d1e4314089509bd7e296071, type: 3}
+    HumanTraitPartsPrefabs:
+    - {fileID: 3641836124542417107, guid: d0965f167d1e4314089509bd7e296071, type: 3}
+    AlienOnlyPartsPrefabs: []
   LegBodyPartPrefabs:
-  - {fileID: 8786174276118608117, guid: 498d3384995a433499bd97ffc61ffad2, type: 3}
+    HumanTraitPartsPrefabs:
+    - {fileID: 8786174276118608117, guid: 498d3384995a433499bd97ffc61ffad2, type: 3}
+    AlienOnlyPartsPrefabs: []
 --- !u!4 &1170442370
 Transform:
   m_ObjectHideFlags: 0

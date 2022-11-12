@@ -19,6 +19,10 @@ public abstract class AlienBodyPartInfo : MonoBehaviour {
 
     public Transform JointPoint;
 
+    public GameObject OppositeTraitBodyPart;
+
+    public bool IsAlienOnly = false;
+
 }
 
 
