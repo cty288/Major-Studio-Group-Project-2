@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public static class AlienDescriptionFactory {
 
-    public static List<Func<AlienBodyInfo,bool, string>> RadioDescriptions = new List<Func<AlienBodyInfo, bool, string>>();
+    public static List<Func<AlienBodyInfo,float, string>> RadioDescriptions = new List<Func<AlienBodyInfo, float, string>>();
 
     private static bool inited = false;
 
@@ -14,25 +14,25 @@ public static class AlienDescriptionFactory {
         RegisterRadioDescription(TestRadioDescription);
     }
 
-    public static string GetRadioDescription(AlienBodyInfo bodyInfo, bool isReal) {
+    public static string GetRadioDescription(AlienBodyInfo bodyInfo, float reality) {
         if (!inited) {
             Init();
         }
         bodyInfo = AlienBodyInfo.GetRandomAlienInfo();
-        return RadioDescriptions[Random.Range(0, RadioDescriptions.Count)](bodyInfo, isReal);
+        return RadioDescriptions[Random.Range(0, RadioDescriptions.Count)](bodyInfo, reality);
     }
 
-    public static void RegisterRadioDescription(Func<AlienBodyInfo, bool, string> description) {
+    public static void RegisterRadioDescription(Func<AlienBodyInfo, float, string> description) {
         RadioDescriptions.Add(description);
     }
 
 
-    private static string TestRadioDescription(AlienBodyInfo body, bool isReal) {
+    private static string TestRadioDescription(AlienBodyInfo body, float reality) {
         StringBuilder sb = new StringBuilder();
         sb.Append("We have a new alien in the area. ");
 
         float fatness = body.GetAverageFatness();
-        if (!isReal) {
+        if (!IsReal(reality)) {
             fatness = 1 - fatness;
         }
         
@@ -47,7 +47,7 @@ public static class AlienDescriptionFactory {
         }
 
         float height = body.GetTotalHeight();
-        if (!isReal) {
+        if (!IsReal(reality)) {
             height = 3 - height;
         }
         
@@ -63,9 +63,14 @@ public static class AlienDescriptionFactory {
 
         sb.Append("It was reported that it attacked a human this morning!");
         if (body.CheckContainTag<IClothTag>(out IClothTag cloth)) {
-            sb.Append(" It was wearing " + cloth.GetRandomDescription(isReal) + "!");
+            sb.Append(" It was wearing " + cloth.GetRandomDescription(IsReal(reality)) + "!");
         }
 
         return sb.ToString();
+    }
+
+
+    private static bool IsReal(float reality) {
+        return Random.Range(0f, 1f) < reality;
     }
 }

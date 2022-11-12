@@ -76,7 +76,7 @@ PlayerSettings:
   androidFullscreenMode: 1
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
-  runInBackground: 0
+  runInBackground: 1
   captureSingleScreen: 0
   muteOtherAudioSources: 0
   Prepare IOS For Recording: 0
@@ -569,7 +569,22 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: CT_RTV;CT_PROC;CT_RTV_DEMO;CT_UI
+    CloudRendering: CT_RTV;CT_PROC;CT_RTV_DEMO;CT_UI
+    EmbeddedLinux: CT_RTV;CT_PROC;CT_RTV_DEMO;CT_UI
+    GameCoreXboxOne: CT_RTV;CT_PROC;CT_RTV_DEMO;CT_UI
+    Lumin: CT_RTV;CT_PROC;CT_RTV_DEMO;CT_UI
+    Nintendo Switch: CT_RTV;CT_PROC;CT_RTV_DEMO;CT_UI
+    PS4: CT_RTV;CT_PROC;CT_RTV_DEMO;CT_UI
+    PS5: CT_RTV;CT_PROC;CT_RTV_DEMO;CT_UI
+    Stadia: CT_RTV;CT_PROC;CT_RTV_DEMO;CT_UI
+    Standalone: CT_RTV;CT_PROC;CT_RTV_DEMO;CT_UI
+    WebGL: CT_RTV;CT_PROC;CT_RTV_DEMO;CT_UI
+    Windows Store Apps: CT_RTV;CT_PROC;CT_RTV_DEMO;CT_UI
+    XboxOne: CT_RTV;CT_PROC;CT_RTV_DEMO;CT_UI
+    iPhone: CT_RTV;CT_PROC;CT_RTV_DEMO;CT_UI
+    tvOS: CT_RTV;CT_PROC;CT_RTV_DEMO;CT_UI
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
