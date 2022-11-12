@@ -7,12 +7,28 @@ using MikroFramework.Architecture;
 using UnityEngine;
 using UnityEngine.Audio;
 
+
+public class SentenceInfo {
+    public string CompleteSentence;
+    public string SentenceFragment;
+    public Action Callback;
+    public float Rate;
+    public SentenceInfo(string completeSentence, string sentenceFragment, Action callback, float rate) {
+        this.CompleteSentence = completeSentence;
+        this.SentenceFragment = sentenceFragment;
+        this.Callback = callback;
+        this.Rate = rate;
+    }
+}
+
 [RequireComponent(typeof(AudioSource))]
 public class Speaker :  AbstractMikroController<MainGame> {
     private AudioSource audioSource;
     private AudioMixer audioMixer;
 
-    private Queue<string> sentenceQueues = new Queue<string>();
+    private Queue<SentenceInfo> sentenceQueues = new Queue<SentenceInfo>();
+    private SentenceInfo currentSentence = null;
+    
     [SerializeField] private Subtitle subtitile;
     private void Awake() {
         audioSource = GetComponent<AudioSource>();
@@ -26,24 +42,29 @@ public class Speaker :  AbstractMikroController<MainGame> {
 
     private void OnSpeakCompleted(string s) {
         if (sentenceQueues.Count > 0) {
-            string nextSentence = sentenceQueues.Dequeue();
-            SpeakSentence(nextSentence);
+            SentenceInfo nextSentence = sentenceQueues.Dequeue();
+            if(currentSentence!=null && currentSentence.CompleteSentence != nextSentence.CompleteSentence) {
+                currentSentence.Callback?.Invoke();
+            }
+
+            SpeakSentence(nextSentence, nextSentence.Rate);
         }
         else {
             Stop();
         }
     }
 
-    public void Speak(string sentence) {
+    public void Speak(string sentence, Action onEnd = null, float rate = 1f) {
         bool needSpeak = sentenceQueues.Count == 0;
         List<string> splitedSentences = VoiceTextSpliter.Split(sentence);
         foreach (string splitedSentence in splitedSentences) {
-            sentenceQueues.Enqueue(splitedSentence);
+            sentenceQueues.Enqueue(new SentenceInfo(sentence, splitedSentence, onEnd, rate));
         }
 
         if (needSpeak) {
-            string text = sentenceQueues.Dequeue();
-            SpeakSentence(text);
+            SentenceInfo text = sentenceQueues.Dequeue();
+           
+            SpeakSentence(text, rate);
         }
     }
 
@@ -54,11 +75,12 @@ public class Speaker :  AbstractMikroController<MainGame> {
         });
         audioMixer.DOSetFloat("resonance", 10, time);
     }
-
-    private void SpeakSentence(string text) {
-        Crosstales.RTVoice.Speaker.Instance.Speak(text, audioSource, Crosstales.RTVoice.Speaker.Instance.VoiceForGender(Gender.MALE));
+    
+    private void SpeakSentence(SentenceInfo text, float rate) {
+        currentSentence = text;
+        Crosstales.RTVoice.Speaker.Instance.Speak(text.SentenceFragment, audioSource, Crosstales.RTVoice.Speaker.Instance.VoiceForGender(Gender.MALE), true, rate);
         if (subtitile) {
-            subtitile.OnSpeakStart(text);
+            subtitile.OnSpeakStart(text.SentenceFragment);
         }
      
     }
@@ -72,5 +94,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
         audioMixer.SetFloat("cutoffFreq", 4600);
         audioMixer.SetFloat("resonance", 1);
         audioSource.Stop();
+        currentSentence.Callback?.Invoke();
+        currentSentence = null;
     }
 }
