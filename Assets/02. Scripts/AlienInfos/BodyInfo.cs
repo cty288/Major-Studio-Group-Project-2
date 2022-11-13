@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
+
 //using NHibernate.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -24,16 +26,6 @@ public class BodyInfo {
 
 
     public AlienVoiceType VoiceType;
-
-    public static bool instancesCreated = false;
-    
-    public static List<AlienBodyPartInfo> allBodyPartInstances = null;
-    
-    
-   
-
-    
-
     public bool CheckContainTag<T>(out T tag) where T : class, IAlienTag {
         tag = null;
         bool hasTags = CheckContainTags(out List<T> tags);
@@ -56,61 +48,111 @@ public class BodyInfo {
         return allTags.Count > 0;
     }
 
-    public float GetAverageFatness() {
-        float totalFatness = 0;
-        foreach (var bodyInfo in AllBodyInfoPrefabs) {
-            totalFatness += bodyInfo.HeightTag.Height;
+    public FatType GetFatness() {
+        if (CheckContainTag<IFatTag>(out IFatTag fatTag)) {
+            return fatTag.Fatness;
         }
-
-        return totalFatness / AllBodyInfoPrefabs.Count;
+        return FatType.Fat;
     }
 
-    public float GetTotalHeight() {
-        float totalHeight = 0;
-        foreach (var bodyInfo in AllBodyInfoPrefabs) {
-            totalHeight += bodyInfo.HeightTag.Height;
-        }
-        return totalHeight;
-    }
+    public HeightType Height;
 
     
+    
+
+    public BodyPartDisplayType DisplayType;
     private BodyInfo() {
 
     }
-    private BodyInfo(AlienVoiceType voiceType, AlienBodyPartInfo headInfoPrefab, AlienBodyPartInfo mainBodyPartInfoPrefab, AlienBodyPartInfo legInfoPreab) {
+    private BodyInfo(AlienVoiceType voiceType, AlienBodyPartInfo headInfoPrefab, AlienBodyPartInfo mainBodyPartInfoPrefab, AlienBodyPartInfo legInfoPreab, BodyPartDisplayType displayType,
+        HeightType height) {
         HeadInfoPrefab = headInfoPrefab;
         MainBodyInfoPrefab = mainBodyPartInfoPrefab;
         LegInfoPreab = legInfoPreab;
         VoiceType = voiceType;
         AllBodyInfoPrefabs = new List<AlienBodyPartInfo>() { legInfoPreab, mainBodyPartInfoPrefab, headInfoPrefab};
+        this.DisplayType = displayType;
+        this.Height = height;
     }
 
-    public static BodyInfo GetRandomBodyInfo(bool isAlien) {
+
+    #region Static
+    
+    public static BodyInfo GetRandomBodyInfo(BodyPartDisplayType displayType, bool isAlien) {
         AlienVoiceType[] voiceValues = (AlienVoiceType[]) Enum.GetValues(typeof(AlienVoiceType));
-        return new BodyInfo(voiceValues[Random.Range(0, voiceValues.Length)],
-            AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartType.Head, isAlien),
-            AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartType.Body, isAlien),
-            AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartType.Legs, isAlien));
+        HeightType height = Random.Range(0, 2) == 0 ? HeightType.Short : HeightType.Tall;
+        
+        AlienBodyPartInfo leg = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, BodyPartType.Legs, isAlien, height);
+        AlienBodyPartInfo body = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo( displayType, BodyPartType.Body, isAlien, height);
+        AlienBodyPartInfo head = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, BodyPartType.Head, isAlien, height);
+        return new BodyInfo(voiceValues[Random.Range(0, voiceValues.Length)], head, body, leg, displayType, height);
     }
 
-    public static BodyInfo GetBodyInfoOpposite(BodyInfo original, float oppositeChance) {
+    public static BodyInfo GetBodyInfoOpposite(BodyInfo original, float oppositeChance, bool originalIsAlien) {
         AlienBodyPartInfo headInfoPrefab;
         AlienBodyPartInfo mainBodyPartInfoPrefab;
         AlienBodyPartInfo legInfoPreab;
-
-        headInfoPrefab = GetOpposite(original.HeadInfoPrefab, oppositeChance);
-        mainBodyPartInfoPrefab = GetOpposite(original.MainBodyInfoPrefab, oppositeChance);
-        legInfoPreab = GetOpposite(original.LegInfoPreab, oppositeChance);
+        HeightType height = original.Height;
+        
+        legInfoPreab = GetOpposite(original.DisplayType, original.LegInfoPreab, BodyPartType.Legs, height, oppositeChance, originalIsAlien);
+        headInfoPrefab = GetOpposite(original.DisplayType, original.HeadInfoPrefab, BodyPartType.Head, height, oppositeChance, originalIsAlien);
+        mainBodyPartInfoPrefab = GetOpposite(original.DisplayType, original.MainBodyInfoPrefab, BodyPartType.Body, height, oppositeChance, originalIsAlien);
+        
+        
         AlienVoiceType voice = GetOpposite(original.VoiceType, oppositeChance);
-        return new BodyInfo(voice, headInfoPrefab, mainBodyPartInfoPrefab, legInfoPreab);
+        return new BodyInfo(voice, headInfoPrefab, mainBodyPartInfoPrefab, legInfoPreab, original.DisplayType, height);
     }
 
-    private static AlienBodyPartInfo GetOpposite(AlienBodyPartInfo original, float oppositeChance) {
-        if (original.OppositeTraitBodyPart) {
+
+    public static BodyInfo GetBodyInfoForDisplay(BodyInfo original, BodyPartDisplayType targetDisplayType) {
+        HeightType height = original.Height;
+        AlienBodyPartInfo head = AlienBodyPartCollections.Singleton.GetBodyPartInfoForDisplay(targetDisplayType,
+            original.DisplayType, original.HeadInfoPrefab, height);
+
+        AlienBodyPartInfo body = AlienBodyPartCollections.Singleton.GetBodyPartInfoForDisplay(targetDisplayType,
+            original.DisplayType, original.MainBodyInfoPrefab, height);
+
+        AlienBodyPartInfo leg = AlienBodyPartCollections.Singleton.GetBodyPartInfoForDisplay(targetDisplayType, original.DisplayType,
+            original.LegInfoPreab, height);
+        
+        return new BodyInfo(original.VoiceType, head, body, leg, targetDisplayType, height);
+    }
+    
+    private static AlienBodyPartInfo GetOpposite(BodyPartDisplayType displayType, AlienBodyPartInfo original, BodyPartType bodyPartType, HeightType height, float oppositeChance, bool originalIsAlien) {
+        if (originalIsAlien) {
+            if (original.IsAlienOnly) {
+                return AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, bodyPartType, false, height);
+            }else {
+                if (Random.Range(0f, 1f) < oppositeChance) {
+                    AlienBodyPartInfo heightOpposite = AlienBodyPartCollections.Singleton.TryGetHeightOppositeBodyPartInfo(displayType, original, false, height);
+
+                    if (heightOpposite != null) {
+                        if (heightOpposite.OppositeTraitBodyPart) {
+                            return heightOpposite.OppositeTraitBodyPart.GetComponent<AlienBodyPartInfo>();
+                        }else {
+                            return AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, bodyPartType, false,
+                                height == HeightType.Tall ? HeightType.Short : HeightType.Tall);
+                        }
+                    }
+                }
+            }
+        }else {
             if (Random.Range(0f, 1f) < oppositeChance) {
-                return original.OppositeTraitBodyPart.GetComponent<AlienBodyPartInfo>();
+                AlienBodyPartInfo heightOpposite =
+                    AlienBodyPartCollections.Singleton.TryGetHeightOppositeBodyPartInfo(displayType, original, false, height);
+
+                if (heightOpposite != null) {
+                    if (heightOpposite.OppositeTraitBodyPart) {
+                        return heightOpposite.OppositeTraitBodyPart.GetComponent<AlienBodyPartInfo>();
+                    }
+                    else {
+                        return AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, bodyPartType, true,
+                            height == HeightType.Tall ? HeightType.Short : HeightType.Tall);
+                    }
+                }
             }
         }
+        
         return original;
     }
     private static AlienVoiceType GetOpposite(AlienVoiceType original, float oppositeChance) {
@@ -126,5 +168,6 @@ public class BodyInfo {
 
         return original;
     }
+    #endregion
 
 }

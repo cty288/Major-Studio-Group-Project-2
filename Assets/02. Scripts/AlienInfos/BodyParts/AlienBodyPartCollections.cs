@@ -4,17 +4,37 @@ using System.Collections.Generic;
 using MikroFramework.ResKit;
 using MikroFramework.Singletons;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 
+public enum BodyPartDisplayType {
+    Newspaper,
+    Shadow
+}
+
+
 [Serializable]
-public struct BodyPartCollection {
+public class BodyPartDisplays {
     public List<GameObject> HumanTraitPartsPrefabs;
+    [HideInInspector]
     public List<GameObject> AlienOnlyPartsPrefabs;
+}
+
+[Serializable]
+public class BodyPartHeightSubCollection {
+    public BodyPartDisplays ShadowBodyPartPrefabs;
+    public BodyPartDisplays NewspaperBodyPartDisplays;
+}
+
+[Serializable]
+public class BodyPartCollection {
+    public List<BodyPartHeightSubCollection> HeightSubCollections;
 }
 
 public class AlienBodyPartCollections : MonoPersistentMikroSingleton<AlienBodyPartCollections> {
     public BodyPartCollection HeadBodyPartPrefabs;
+    [FormerlySerializedAs("MainBodyPartPrefabs")]
     public BodyPartCollection MainBodyPartPrefabs;
     public BodyPartCollection LegBodyPartPrefabs;
 
@@ -23,25 +43,114 @@ public class AlienBodyPartCollections : MonoPersistentMikroSingleton<AlienBodyPa
         MainGame.Interface.GetUtility<ResLoader>();
     }
 
-    public AlienBodyPartInfo GetRandomBodyPartInfo(BodyPartType bodyPartType, bool isAlien) {
-        switch (bodyPartType) {
-            case BodyPartType.Body:
-                return GetRandomBodyPartInfo(MainBodyPartPrefabs, isAlien);
-            case BodyPartType.Head:
-                return GetRandomBodyPartInfo(HeadBodyPartPrefabs, isAlien);
-            case BodyPartType.Legs:
-                return GetRandomBodyPartInfo(LegBodyPartPrefabs, isAlien);
+    /// <summary>
+    ///E.g. High alien body part -> low alien body part
+    /// </summary>
+    /// <param name="displayType"></param>
+    /// <param name="original"></param>
+    /// <param name="originalIsAlienOnly"></param>
+    /// <param name="originalHeight"></param>
+    /// <returns></returns>
+    public AlienBodyPartInfo TryGetHeightOppositeBodyPartInfo(BodyPartDisplayType displayType, AlienBodyPartInfo original, bool originalIsAlienOnly, HeightType height) {
+
+        BodyPartDisplays originalDisplays = null;
+        BodyPartDisplays targetDisplays = null;
+
+        HeightType originalHeight = height;
+        HeightType targetHeight = originalHeight == HeightType.Short ? HeightType.Tall : HeightType.Short;
+
+
+        BodyPartHeightSubCollection targetSubCollection = TryGetBodyPartHeightSubCollection(GetBodyPartCollectionByBodyType(original.BodyPartType), targetHeight);
+        targetDisplays = GetBodyPartDisplayByType(targetSubCollection, displayType);
+        
+
+        BodyPartHeightSubCollection originalSubCollection = TryGetBodyPartHeightSubCollection(GetBodyPartCollectionByBodyType(original.BodyPartType), height);
+        originalDisplays = GetBodyPartDisplayByType(originalSubCollection, displayType);
+
+        int index = originalIsAlienOnly ? originalDisplays.AlienOnlyPartsPrefabs.IndexOf(original.gameObject) : originalDisplays.HumanTraitPartsPrefabs.IndexOf(original.gameObject);
+
+        List<GameObject> targetList = originalIsAlienOnly ? targetDisplays.AlienOnlyPartsPrefabs : targetDisplays.HumanTraitPartsPrefabs;
+        if (index >= 0 && index < targetList.Count) {
+            return targetList[index].GetComponent<AlienBodyPartInfo>();
+        }
+        else {
+            return original;
+        }
+    }
+    
+
+    public AlienBodyPartInfo GetRandomBodyPartInfo(BodyPartDisplayType displayType, BodyPartType bodyPartType, bool isAlien, HeightType height) {
+      
+        BodyPartCollection collection = GetBodyPartCollectionByBodyType(bodyPartType);
+        BodyPartHeightSubCollection subCollection = TryGetBodyPartHeightSubCollection(collection, height);
+        BodyPartDisplays targetDisplays = GetBodyPartDisplayByType(subCollection, displayType);
+        return GetRandomBodyPartInfo(targetDisplays, isAlien);
+    }
+
+
+    
+    public AlienBodyPartInfo GetBodyPartInfoForDisplay(BodyPartDisplayType targetDisplay, BodyPartDisplayType originalDisplay, AlienBodyPartInfo originalBodyPart, HeightType height) {
+        BodyPartCollection collection = GetBodyPartCollectionByBodyType(originalBodyPart.BodyPartType);
+        BodyPartHeightSubCollection subCollection = TryGetBodyPartHeightSubCollection(collection, height);
+
+        BodyPartDisplays originalDisplays = GetBodyPartDisplayByType(subCollection, originalDisplay);
+        BodyPartDisplays targetDisplays = GetBodyPartDisplayByType(subCollection, targetDisplay);
+
+        List<GameObject> originalList = originalBodyPart.IsAlienOnly ? originalDisplays.AlienOnlyPartsPrefabs : originalDisplays.HumanTraitPartsPrefabs;
+        List<GameObject> targetList = originalBodyPart.IsAlienOnly ? targetDisplays.AlienOnlyPartsPrefabs : targetDisplays.HumanTraitPartsPrefabs;
+
+        int index = originalList.IndexOf(originalBodyPart.gameObject);
+        if (index >= 0 && index < targetList.Count) {
+            return targetList[index].GetComponent<AlienBodyPartInfo>();
         }
 
         return null;
     }
 
-    private AlienBodyPartInfo GetRandomBodyPartInfo(BodyPartCollection targetCollection, bool isAlien) {
-        List<GameObject> targetList = new List<GameObject>(targetCollection.HumanTraitPartsPrefabs);
-        if (isAlien) {
-            targetList.AddRange(targetCollection.AlienOnlyPartsPrefabs);
+    private BodyPartHeightSubCollection TryGetBodyPartHeightSubCollection(BodyPartCollection collection, HeightType height) {
+
+        int targetHeightListIndex = (int)height;
+
+        var subCollections = collection.HeightSubCollections;
+
+        if (targetHeightListIndex < 0 || targetHeightListIndex >= subCollections.Count) {
+            targetHeightListIndex = 0;
         }
 
-        return targetList[Random.Range(0, targetList.Count)].GetComponent<AlienBodyPartInfo>();
+        return subCollections[targetHeightListIndex];
+    }
+    private BodyPartDisplays GetBodyPartDisplayByType(BodyPartHeightSubCollection collection, BodyPartDisplayType displayType) {
+        switch (displayType) {
+            case BodyPartDisplayType.Shadow:
+                return collection.ShadowBodyPartPrefabs;
+            case BodyPartDisplayType.Newspaper:
+                return collection.NewspaperBodyPartDisplays;
+        }
+
+        return null;
+    }
+   
+    private AlienBodyPartInfo GetRandomBodyPartInfo(BodyPartDisplays targetDisplays, bool isAlien) {
+        List<GameObject> targetList = new List<GameObject>(targetDisplays.HumanTraitPartsPrefabs);
+        if (isAlien) {
+            targetList.AddRange(targetDisplays.AlienOnlyPartsPrefabs);
+        }
+
+        AlienBodyPartInfo info = targetList[Random.Range(0, targetList.Count)].GetComponent<AlienBodyPartInfo>();
+        info.IsAlienOnly = targetDisplays.AlienOnlyPartsPrefabs.Contains(info.gameObject);
+        return info;
+    }
+
+    private BodyPartCollection GetBodyPartCollectionByBodyType(BodyPartType type) {
+        switch (type) {
+            case BodyPartType.Body:
+                return MainBodyPartPrefabs;
+            case BodyPartType.Head:
+                return HeadBodyPartPrefabs;
+            case BodyPartType.Legs:
+                return LegBodyPartPrefabs;
+        }
+
+        return null;
     }
 }

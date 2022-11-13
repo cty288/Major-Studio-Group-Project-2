@@ -31,35 +31,31 @@ public static class AlienDescriptionFactory {
         StringBuilder sb = new StringBuilder();
         sb.Append("We have a new alien in the area. ");
 
-        float fatness = body.GetAverageFatness();
+        FatType fatness = body.GetFatness();
         if (!IsReal(reality)) {
-            fatness = 1 - fatness;
+            fatness = fatness == FatType.Fat ? FatType.Thin : FatType.Fat;
         }
         
-        if (fatness < 0.3f) {
+        if (fatness == FatType.Thin) {
             sb.Append("It is very thin. ");
         }
-        else if (fatness < 0.6f) {
-            sb.Append("It is average. ");
-        }
-        else {
+        else if (fatness == FatType.Fat) {
             sb.Append("It is very fat. ");
         }
-
-        float height = body.GetTotalHeight();
-        if (!IsReal(reality)) {
-            height = 3 - height;
-        }
+     
         
-        if (height < 1.5f) {
+        HeightType height = body.Height;
+        if (!IsReal(reality)) {
+            height = height == HeightType.Tall ? HeightType.Short : HeightType.Tall;
+        }
+
+        if (height == HeightType.Short) {
             sb.Append("It is very short. ");
         }
-        else if (height < 2f) {
-            sb.Append("It is average. ");
-        }
-        else {
+        else if (height == HeightType.Tall) {
             sb.Append("It is very tall. ");
         }
+        
 
         sb.Append("It was reported that it attacked a human this morning!");
         if (body.CheckContainTag<IClothTag>(out IClothTag cloth)) {

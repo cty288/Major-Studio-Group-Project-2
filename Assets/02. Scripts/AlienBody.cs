@@ -18,8 +18,10 @@ public class AlienBody : AbstractMikroController<MainGame> {
                 position = lastInfo.JointPoint.position;
             }
 
-            GameObject spawnedBodyPart = Instantiate(partInfo.gameObject, position, Quaternion.identity, bodyInstance.transform);
-            lastInfo = spawnedBodyPart.GetComponent<AlienBodyPartInfo>();
+            if (partInfo) {
+                GameObject spawnedBodyPart = Instantiate(partInfo.gameObject, position, Quaternion.identity, bodyInstance.transform);
+                lastInfo = spawnedBodyPart.GetComponent<AlienBodyPartInfo>();
+            }
         }
 
         return bodyInstance;

@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface IFatTag : IAlienTag {
-    public float Fatness { get; }
+    public FatType Fatness { get; }
 }
 
+public enum FatType {
+    Fat,
+    Thin
+}
 public class FatTag : AbstractAlienTag, IFatTag {
-    [SerializeField] private float fatness;
-    public float Fatness => fatness;
+    [SerializeField] private FatType fatness;
+    public FatType Fatness => fatness;
 
-    public FatTag(float fatness) {
+    public FatTag(FatType fatness) {
         this.fatness = fatness;
     }
 
