@@ -18,7 +18,7 @@ public class TestHairCutTag : HaircutTag
     {
         get
         {
-            return new List<string>() { "Fancy Cloth", "Very Expensive cloth" };
+            return new List<string>() { "Horse Shit Head" };
         }
     }
 
@@ -26,7 +26,7 @@ public class TestHairCutTag : HaircutTag
     {
         get
         {
-            return new List<string>() { "Not fancy cloth", "Very cheap cloth" };
+            return new List<string>() { "Horse Tail Head" };
         }
     }
 }

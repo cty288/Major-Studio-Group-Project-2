@@ -124,7 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4765117181526495087}
-  - component: {fileID: 2067311900805582242}
+  - component: {fileID: 59665624898584887}
   m_Layer: 0
   m_Name: Leg_1_Long_Shadow
   m_TagString: Untagged
@@ -149,7 +149,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2067311900805582242
+--- !u!114 &59665624898584887
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4747785536886524387}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da743950707c3b74aa9285f37bff641f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c7feb7ed06d44f84b4bc27bf1bee200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   JointPoint: {fileID: 7315007751789383284}
