@@ -152,8 +152,8 @@ public class BodyInfo {
                         return heightReflectedBodyPartInfo;
                     }
                     
-                       if (heightReflectedBodyPartInfo.OppositeTraitBodyPart) {
-                           return heightReflectedBodyPartInfo.OppositeTraitBodyPart.GetComponent<AlienBodyPartInfo>();
+                       if (heightReflectedBodyPartInfo.OppositeTraitBodyParts.Any()) {
+                           return heightReflectedBodyPartInfo.OppositeTraitBodyParts[Random.Range(0, heightReflectedBodyPartInfo.OppositeTraitBodyParts.Count)].GetComponent<AlienBodyPartInfo>();
                        }else {
                            return AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, bodyPartType,
                                false,
@@ -179,10 +179,12 @@ public class BodyInfo {
                     {
                         return heightReflectedBodyPartInfo;
                     }
-                if (heightReflectedBodyPartInfo.OppositeTraitBodyPart) {
-                        return heightReflectedBodyPartInfo.OppositeTraitBodyPart.GetComponent<AlienBodyPartInfo>();
-                }
-                else {
+                    if (heightReflectedBodyPartInfo.OppositeTraitBodyParts.Any())
+                    {
+                        return heightReflectedBodyPartInfo.OppositeTraitBodyParts[Random.Range(0, heightReflectedBodyPartInfo.OppositeTraitBodyParts.Count)].GetComponent<AlienBodyPartInfo>();
+                    }
+                    else
+                    {
                     return AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, bodyPartType,
                         true,
                         targetHeight);

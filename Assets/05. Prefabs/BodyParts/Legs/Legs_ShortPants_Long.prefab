@@ -162,5 +162,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JointPoint: {fileID: 7315007751789383284}
-  OppositeTraitBodyPart: {fileID: 0}
+  OppositeTraitBodyParts: []
   IsAlienOnly: 0

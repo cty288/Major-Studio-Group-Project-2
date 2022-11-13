@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 //反射获取所有继承此类的类
 
@@ -16,7 +17,7 @@ public abstract class AlienBodyPartInfo : MonoBehaviour {
 
     public Transform JointPoint;
 
-    public GameObject OppositeTraitBodyPart;
+    [FormerlySerializedAs("OppositeTraitBodyPart")] public List<GameObject> OppositeTraitBodyParts = new List<GameObject>();
 
     [HideInInspector]
     public bool IsAlienOnly = false;

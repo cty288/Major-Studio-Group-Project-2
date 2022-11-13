@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JointPoint: {fileID: 3437790722982815266}
-  OppositeTraitBodyPart: {fileID: 0}
+  OppositeTraitBodyParts: []
   IsAlienOnly: 0
 --- !u!1 &6342888319092770844
 GameObject:
