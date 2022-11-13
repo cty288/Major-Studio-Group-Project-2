@@ -3,11 +3,16 @@
   "ABMD5List": [
     {
       "AssetName": "aliens",
-      "MD5": "869cc7980f5af7105165c95ebc8628a0",
-      "FileSize": 2.23535156,
+      "MD5": "4d91682699cd9036a25460ac372365b8",
+      "FileSize": 8.895508,
       "assetDatas": [
         {
           "Name": "AlienBody",
+          "OwnerBundleName": "aliens",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "NewspaperFrame",
           "OwnerBundleName": "aliens",
           "AssetType": "UnityEngine.GameObject"
         }
@@ -15,8 +20,8 @@
     },
     {
       "AssetName": "mftest",
-      "MD5": "98a67acc7757ab910273810a1933f7a6",
-      "FileSize": 446.2832,
+      "MD5": "10871f3c51118b1714a66e98177ea1a8",
+      "FileSize": 1028.24707,
       "assetDatas": [
         {
           "Name": "War loop",
@@ -115,7 +120,7 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "a3b6488c714da9aa8b7a17e7d7235688",
+      "MD5": "3383156b709fb68aa83eb726d99d804f",
       "FileSize": 1.73046875,
       "assetDatas": []
     },

@@ -1,23 +1,36 @@
 ManifestFileVersion: 0
-CRC: 2767599223
+CRC: 3423726988
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 46285f01ae97892575a8be38bb2145e1
+    Hash: 65a380a32c380f24ff002da87ef0a2c7
   TypeTreeHash:
     serializedVersion: 2
-    Hash: dbcd99cd37622fe9a07228bebba3b210
+    Hash: cd8b0ed0c6438f7b915e4d5f8153d70d
 HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
 - Class: 4
   Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: c970362297f1557409e7dd0011d7ea29, type: 3}
 - Class: 115
   Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 331
+  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/05. Prefabs/Newspaper/NewspaperFrame.prefab
 - Assets/05. Prefabs/AlienBody.prefab
 Dependencies: []

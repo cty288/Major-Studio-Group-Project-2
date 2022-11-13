@@ -61,7 +61,7 @@ public class AlienBody : AbstractMikroController<MainGame> {
             if (partInfo)
             {
                 GameObject spawnedBodyPart = Instantiate(partInfo.gameObject, position, Quaternion.identity, bodyInstance.transform);
-                spawnedBodyPart.GetComponent<SpriteRenderer>().sortingOrder = layer;
+                spawnedBodyPart.GetComponentInChildren<SpriteRenderer>().sortingOrder = layer;
                 lastInfo = spawnedBodyPart.GetComponent<AlienBodyPartInfo>();
             }
             layer++;

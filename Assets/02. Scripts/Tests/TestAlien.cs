@@ -16,10 +16,17 @@ public class TestAlien : AbstractMikroController<MainGame> {
             GameObject o1 = AlienBody.BuildShadowAlienBody(info1);
             o1.transform.position = new Vector3(0, 0, 0);
 
-            BodyInfo info2 = BodyInfo.GetBodyInfoOpposite(info1, 0.5f, true);
+            BodyInfo info2 = BodyInfo.GetBodyInfoOpposite(info1, 0.5f, 0.5f, true);
             GameObject o2 = AlienBody.BuildShadowAlienBody(info2);
             o2.transform.position = new Vector3(10, 0, 0);
 
+            BodyInfo news = BodyInfo.GetBodyInfoForDisplay(info1, BodyPartDisplayType.Newspaper);
+            GameObject o3 = AlienBody.BuildNewspaperAlienBody(news);
+            o3.transform.position = new Vector3(20, 0, 0);
+
+            BodyInfo news2 = BodyInfo.GetBodyInfoForDisplay(info2, BodyPartDisplayType.Newspaper);
+            GameObject o4 = AlienBody.BuildNewspaperAlienBody(news2);
+            o4.transform.position = new Vector3(30, 0, 0);
         });
     }
 }

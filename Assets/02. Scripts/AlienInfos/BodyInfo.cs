@@ -93,18 +93,26 @@ public class BodyInfo {
         return new BodyInfo(voiceValues[Random.Range(0, voiceValues.Length)], head, body, leg, displayType, height);
     }
 
-    public static BodyInfo GetBodyInfoOpposite(BodyInfo original, float oppositeChance, bool originalIsAlien) {
-        AlienBodyPartInfo headInfoPrefab;
-        AlienBodyPartInfo mainBodyPartInfoPrefab;
-        AlienBodyPartInfo legInfoPreab;
+    public static BodyInfo GetBodyInfoOpposite(BodyInfo original, float bodyPartOppositeChance, float heightOppositeChance, bool originalIsAlien) {
+        AlienBodyPartInfo headInfoPrefab = original.HeadInfoPrefab;
+        AlienBodyPartInfo mainBodyPartInfoPrefab = original.MainBodyInfoPrefab;
+        AlienBodyPartInfo legInfoPreab = original.LegInfoPreab;
         HeightType height = original.Height;
+
+        bool heightOpposite = heightOppositeChance >= Random.Range(0f, 1f);
+       
         
-        legInfoPreab = GetOpposite(original.DisplayType, original.LegInfoPreab, BodyPartType.Legs, height, oppositeChance, originalIsAlien);
-        headInfoPrefab = GetOpposite(original.DisplayType, original.HeadInfoPrefab, BodyPartType.Head, height, oppositeChance, originalIsAlien);
-        mainBodyPartInfoPrefab = GetOpposite(original.DisplayType, original.MainBodyInfoPrefab, BodyPartType.Body, height, oppositeChance, originalIsAlien);
+        legInfoPreab = GetOpposite(original.DisplayType, original.LegInfoPreab, BodyPartType.Legs, height, originalIsAlien, heightOpposite, bodyPartOppositeChance);
+        mainBodyPartInfoPrefab = GetOpposite(original.DisplayType, original.MainBodyInfoPrefab, BodyPartType.Body,
+            height, originalIsAlien, heightOpposite, bodyPartOppositeChance);
+        headInfoPrefab = GetOpposite(original.DisplayType, original.HeadInfoPrefab, BodyPartType.Head, height,
+            originalIsAlien, heightOpposite, bodyPartOppositeChance);
         
+     
         
-        AlienVoiceType voice = GetOpposite(original.VoiceType, oppositeChance);
+        AlienVoiceType voice = GetOpposite(original.VoiceType, bodyPartOppositeChance);
+        height = heightOpposite ? (height == HeightType.Short ? HeightType.Tall : HeightType.Short) : height;
+
         return new BodyInfo(voice, headInfoPrefab, mainBodyPartInfoPrefab, legInfoPreab, original.DisplayType, height);
     }
 
@@ -123,39 +131,64 @@ public class BodyInfo {
         return new BodyInfo(original.VoiceType, head, body, leg, targetDisplayType, height);
     }
     
-    private static AlienBodyPartInfo GetOpposite(BodyPartDisplayType displayType, AlienBodyPartInfo original, BodyPartType bodyPartType, HeightType height, float oppositeChance, bool originalIsAlien) {
+    private static AlienBodyPartInfo GetOpposite(BodyPartDisplayType displayType, AlienBodyPartInfo original, BodyPartType bodyPartType,  HeightType height, bool originalIsAlien, bool changeHeight,
+        float changeToOppositeChance) {
         if (originalIsAlien) {
             if (original.IsAlienOnly) {
                 return AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, bodyPartType, false, height);
             }else {
-                if (Random.Range(0f, 1f) < oppositeChance) {
-                    AlienBodyPartInfo heightOpposite = AlienBodyPartCollections.Singleton.TryGetHeightOppositeBodyPartInfo(displayType, original, false, height);
-
-                    if (heightOpposite != null) {
-                        if (heightOpposite.OppositeTraitBodyPart) {
-                            return heightOpposite.OppositeTraitBodyPart.GetComponent<AlienBodyPartInfo>();
-                        }else {
-                            return AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, bodyPartType, false,
-                                height == HeightType.Tall ? HeightType.Short : HeightType.Tall);
-                        }
+               // if (Random.Range(0f, 1f) < oppositeChance) {
+                   AlienBodyPartInfo heightReflectedBodyPartInfo = original;
+                   if (changeHeight) {
+                       heightReflectedBodyPartInfo = AlienBodyPartCollections.Singleton.TryGetHeightOppositeBodyPartInfo(displayType, original, false, height);
+                   }
+                   
+                   HeightType targetHeight = changeHeight
+                       ? (height == HeightType.Short ? HeightType.Tall : HeightType.Short)
+                       : height;
+                   
+                if (heightReflectedBodyPartInfo != null) {
+                    if (changeToOppositeChance < Random.Range(0f, 1f)) {
+                        return heightReflectedBodyPartInfo;
                     }
-                }
+                    
+                       if (heightReflectedBodyPartInfo.OppositeTraitBodyPart) {
+                           return heightReflectedBodyPartInfo.OppositeTraitBodyPart.GetComponent<AlienBodyPartInfo>();
+                       }else {
+                           return AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, bodyPartType,
+                               false,
+                               targetHeight);
+                       }
+                   }
+                   //}
             }
         }else {
-            if (Random.Range(0f, 1f) < oppositeChance) {
-                AlienBodyPartInfo heightOpposite =
-                    AlienBodyPartCollections.Singleton.TryGetHeightOppositeBodyPartInfo(displayType, original, false, height);
-
-                if (heightOpposite != null) {
-                    if (heightOpposite.OppositeTraitBodyPart) {
-                        return heightOpposite.OppositeTraitBodyPart.GetComponent<AlienBodyPartInfo>();
-                    }
-                    else {
-                        return AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, bodyPartType, true,
-                            height == HeightType.Tall ? HeightType.Short : HeightType.Tall);
-                    }
+            //if (Random.Range(0f, 1f) < oppositeChance) {
+                AlienBodyPartInfo heightReflectedBodyPartInfo = original;
+                if (changeHeight)
+                {
+                    heightReflectedBodyPartInfo = AlienBodyPartCollections.Singleton.TryGetHeightOppositeBodyPartInfo(displayType, original, false, height);
                 }
-            }
+
+                HeightType targetHeight = changeHeight
+                    ? (height == HeightType.Short ? HeightType.Tall : HeightType.Short)
+                    : height;
+
+                if (heightReflectedBodyPartInfo != null) {
+                    if (changeToOppositeChance < Random.Range(0f, 1f))
+                    {
+                        return heightReflectedBodyPartInfo;
+                    }
+                if (heightReflectedBodyPartInfo.OppositeTraitBodyPart) {
+                        return heightReflectedBodyPartInfo.OppositeTraitBodyPart.GetComponent<AlienBodyPartInfo>();
+                }
+                else {
+                    return AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, bodyPartType,
+                        true,
+                        targetHeight);
+                }
+                }
+                // }
         }
         
         return original;
