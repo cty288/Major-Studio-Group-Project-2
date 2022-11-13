@@ -13,11 +13,11 @@ public class TestAlien : AbstractMikroController<MainGame> {
         
         this.Delay(1f, () => {
             BodyInfo info1 = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false);
-            GameObject o1 = AlienBody.BuildAlienBody(info1);
+            GameObject o1 = AlienBody.BuildShadowAlienBody(info1);
             o1.transform.position = new Vector3(0, 0, 0);
 
             BodyInfo info2 = BodyInfo.GetBodyInfoOpposite(info1, 0.5f, true);
-            GameObject o2 = AlienBody.BuildAlienBody(info2);
+            GameObject o2 = AlienBody.BuildShadowAlienBody(info2);
             o2.transform.position = new Vector3(10, 0, 0);
 
         });

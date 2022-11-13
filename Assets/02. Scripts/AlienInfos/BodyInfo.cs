@@ -70,7 +70,12 @@ public class BodyInfo {
         MainBodyInfoPrefab = mainBodyPartInfoPrefab;
         LegInfoPreab = legInfoPreab;
         VoiceType = voiceType;
-        AllBodyInfoPrefabs = new List<AlienBodyPartInfo>() { legInfoPreab, mainBodyPartInfoPrefab, headInfoPrefab};
+        if (displayType == BodyPartDisplayType.Shadow) {
+            AllBodyInfoPrefabs = new List<AlienBodyPartInfo>() { legInfoPreab, mainBodyPartInfoPrefab, headInfoPrefab };
+        }else if (displayType == BodyPartDisplayType.Newspaper) {
+            AllBodyInfoPrefabs = new List<AlienBodyPartInfo>() { headInfoPrefab, mainBodyPartInfoPrefab, legInfoPreab };
+        }
+       
         this.DisplayType = displayType;
         this.Height = height;
     }
