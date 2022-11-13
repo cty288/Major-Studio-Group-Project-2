@@ -1674,7 +1674,21 @@ MonoBehaviour:
         HumanTraitPartsPrefabs: []
         AlienOnlyPartsPrefabs: []
   LegBodyPartPrefabs:
-    HeightSubCollections: []
+    HeightSubCollections:
+    - ShadowBodyPartPrefabs:
+        HumanTraitPartsPrefabs:
+        - {fileID: 8786174276118608117, guid: 498d3384995a433499bd97ffc61ffad2, type: 3}
+        AlienOnlyPartsPrefabs: []
+      NewspaperBodyPartDisplays:
+        HumanTraitPartsPrefabs: []
+        AlienOnlyPartsPrefabs: []
+    - ShadowBodyPartPrefabs:
+        HumanTraitPartsPrefabs:
+        - {fileID: 8786174276118608117, guid: 5606247281fa2204fbe7b565193907ea, type: 3}
+        AlienOnlyPartsPrefabs: []
+      NewspaperBodyPartDisplays:
+        HumanTraitPartsPrefabs: []
+        AlienOnlyPartsPrefabs: []
 --- !u!4 &1170442370
 Transform:
   m_ObjectHideFlags: 0

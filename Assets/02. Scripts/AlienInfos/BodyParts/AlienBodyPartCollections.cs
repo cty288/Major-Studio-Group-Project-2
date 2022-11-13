@@ -1,8 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using MikroFramework.ResKit;
 using MikroFramework.Singletons;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -89,7 +88,7 @@ public class AlienBodyPartCollections : MonoPersistentMikroSingleton<AlienBodyPa
 
 
     
-    public AlienBodyPartInfo GetBodyPartInfoForDisplay(BodyPartDisplayType targetDisplay, BodyPartDisplayType originalDisplay, AlienBodyPartInfo originalBodyPart, HeightType height) {
+    public AlienBodyPartInfo GetBodyPartInfoForDisplay(BodyPartDisplayType targetDisplay, BodyPartDisplayType originalDisplay, AlienBodyPartInfo originalBodyPart, HeightType height, float reality) {
         BodyPartCollection collection = GetBodyPartCollectionByBodyType(originalBodyPart.BodyPartType);
         BodyPartHeightSubCollection subCollection = TryGetBodyPartHeightSubCollection(collection, height);
 
@@ -101,7 +100,13 @@ public class AlienBodyPartCollections : MonoPersistentMikroSingleton<AlienBodyPa
 
         int index = originalList.IndexOf(originalBodyPart.gameObject);
         if (index >= 0 && index < targetList.Count) {
-            return targetList[index].GetComponent<AlienBodyPartInfo>();
+            if (reality >= Random.Range(0f, 1f)) {
+                return targetList[index].GetComponent<AlienBodyPartInfo>();
+            }
+            else {
+                return targetList[Random.Range(0, targetList.Count)].GetComponent<AlienBodyPartInfo>();
+            }
+           
         }
 
         return null;

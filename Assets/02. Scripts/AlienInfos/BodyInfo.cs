@@ -104,16 +104,16 @@ public class BodyInfo {
     }
 
 
-    public static BodyInfo GetBodyInfoForDisplay(BodyInfo original, BodyPartDisplayType targetDisplayType) {
+    public static BodyInfo GetBodyInfoForDisplay(BodyInfo original, BodyPartDisplayType targetDisplayType, float reality = 1) {
         HeightType height = original.Height;
         AlienBodyPartInfo head = AlienBodyPartCollections.Singleton.GetBodyPartInfoForDisplay(targetDisplayType,
-            original.DisplayType, original.HeadInfoPrefab, height);
+            original.DisplayType, original.HeadInfoPrefab, height, reality);
 
         AlienBodyPartInfo body = AlienBodyPartCollections.Singleton.GetBodyPartInfoForDisplay(targetDisplayType,
-            original.DisplayType, original.MainBodyInfoPrefab, height);
+            original.DisplayType, original.MainBodyInfoPrefab, height, reality);
 
         AlienBodyPartInfo leg = AlienBodyPartCollections.Singleton.GetBodyPartInfoForDisplay(targetDisplayType, original.DisplayType,
-            original.LegInfoPreab, height);
+            original.LegInfoPreab, height, reality);
         
         return new BodyInfo(original.VoiceType, head, body, leg, targetDisplayType, height);
     }

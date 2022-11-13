@@ -7,6 +7,9 @@ using MikroFramework.BindableProperty;
 using MikroFramework.Singletons;
 using UnityEngine;
 
+public struct OnNewDay {
+    public DateTime Date;
+}
 public class GameTimeManager : MonoMikroSingleton<GameTimeManager>, ISystem {
 
     private Func<bool> beforeEndOfTodayEvent = null;
@@ -28,7 +31,11 @@ public class GameTimeManager : MonoMikroSingleton<GameTimeManager>, ISystem {
         beforeEndOfTodayEvent = null;
         OnDayStart?.Invoke(day);
         this.Delay(3f, () => {
-            CurrentTime.Value = new DateTime(2022, 11, 12, 22, 0, 0);
+            CurrentTime.Value = CurrentTime.Value.AddDays(1);
+            CurrentTime.Value = new DateTime(CurrentTime.Value.Year, CurrentTime.Value.Month, CurrentTime.Value.Day, 22, 0, 0);
+            this.SendEvent<OnNewDay>(new OnNewDay() {
+                Date = CurrentTime.Value
+            });
             this.Delay(3f, StartTimer);
         });
     }
@@ -63,7 +70,7 @@ public class GameTimeManager : MonoMikroSingleton<GameTimeManager>, ISystem {
     private IArchitecture architecture;
     public IArchitecture GetArchitecture()
     {
-        return architecture;
+        return MainGame.Interface;
     }
 
     public void SetArchitecture(IArchitecture architecture)
