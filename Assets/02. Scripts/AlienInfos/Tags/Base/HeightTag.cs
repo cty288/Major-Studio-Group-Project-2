@@ -6,13 +6,13 @@ public enum HeightType {
     Tall,
     Short
 }
-/*
+
 public interface IHeightTag : IAlienTag
 {
     public HeightType Height { get; }
 }
 
-
+/*
 public class HeightTag : AbstractAlienTag, IHeightTag {
     public HeightType Height { get; set; }
 

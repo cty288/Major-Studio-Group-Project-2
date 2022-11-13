@@ -30,3 +30,23 @@ public class TestHairCutTag : HaircutTag
         }
     }
 }
+
+public class HairCutTagHorseShit : HaircutTag
+{
+    public override List<string> RealDescriptions
+    {
+        get
+        {
+            return new List<string>() { "Horse Shit Head" };
+        }
+    }
+
+    public override List<string> FakeDescriptions
+    {
+        get
+        {
+            return new List<string>() { "Horse Tail Head" };
+        }
+    }
+}
+

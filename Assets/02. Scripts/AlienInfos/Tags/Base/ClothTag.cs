@@ -23,3 +23,47 @@ public class TestClothTag : ClothTag {
         }
     }
 }
+
+#region Body Clothes
+public class ClothTagShirt : ClothTag
+{
+    public override List<string> RealDescriptions
+    {
+        get
+        {
+            return new List<string>() { "Shirt", "Black Shirt" };
+        }
+    }
+
+    public override List<string> FakeDescriptions
+    {
+        get
+        {
+            return new List<string>() { "Coat", "White Jacket" };
+        }
+    }
+}
+#endregion
+
+
+#region Legs Clothes
+
+public class ClothTagShortPants: ClothTag
+{
+    public override List<string> RealDescriptions
+    {
+        get
+        {
+            return new List<string>() { "Short pants", "Not long pants" };
+        }
+    }
+
+    public override List<string> FakeDescriptions
+    {
+        get
+        {
+            return new List<string>() { "Skirt", "Underwear" };
+        }
+    }
+}
+#endregion
