@@ -15,6 +15,7 @@ public class TestAlien : AbstractMikroController<MainGame> {
             BodyInfo info1 = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false);
             GameObject o1 = AlienBody.BuildShadowAlienBody(info1);
             o1.transform.position = new Vector3(0, 0, 0);
+            Debug.Log(AlienDescriptionFactory.GetRadioDescription(info1, 0.3f));
 
             BodyInfo info2 = BodyInfo.GetBodyInfoOpposite(info1, 0.5f, 0.5f, true);
             GameObject o2 = AlienBody.BuildShadowAlienBody(info2);

@@ -10,6 +10,7 @@ public static class AlienDescriptionFactory {
 
     private static bool inited = false;
 
+    private static DescriptionFormatter formatter = new DescriptionFormatter();
     public static void Init() {
         RegisterRadioDescription(TestRadioDescription);
     }
@@ -18,7 +19,9 @@ public static class AlienDescriptionFactory {
         if (!inited) {
             Init();
         }
-       // bodyInfo = BodyInfo.GetRandomBodyInfo();
+
+       
+        // bodyInfo = BodyInfo.GetRandomBodyInfo();
         return RadioDescriptions[Random.Range(0, RadioDescriptions.Count)](bodyInfo, reality);
     }
 
@@ -28,39 +31,12 @@ public static class AlienDescriptionFactory {
 
 
     private static string TestRadioDescription(BodyInfo body, float reality) {
+        DescriptionFormatter.Reality = reality;
         StringBuilder sb = new StringBuilder();
-        sb.Append("We have a new alien in the area. ");
-
-        FatType fatness = body.GetFatness();
-        if (!IsReal(reality)) {
-            fatness = fatness == FatType.Fat ? FatType.Thin : FatType.Fat;
-        }
         
-        if (fatness == FatType.Thin) {
-            sb.Append("It is very thin. ");
-        }
-        else if (fatness == FatType.Fat) {
-            sb.Append("It is very fat. ");
-        }
-     
-        
-        HeightType height = body.Height;
-        if (!IsReal(reality)) {
-            height = height == HeightType.Tall ? HeightType.Short : HeightType.Tall;
-        }
-
-        if (height == HeightType.Short) {
-            sb.Append("It is very short. ");
-        }
-        else if (height == HeightType.Tall) {
-            sb.Append("It is very tall. ");
-        }
-        
-
+        sb.AppendFormat(formatter, "We have a new alien in the area. {0:fat} It {0:height}", body);
         sb.Append("It was reported that it attacked a human this morning!");
-        if (body.CheckContainTag<IClothTag>(out IClothTag cloth)) {
-            sb.Append(" It was wearing " + cloth.GetRandomDescription(IsReal(reality)) + "!");
-        }
+        sb.AppendFormat(formatter, "{0:clothb} {0:clothl}", body);
 
         return sb.ToString();
     }

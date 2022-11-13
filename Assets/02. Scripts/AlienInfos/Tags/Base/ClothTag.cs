@@ -31,7 +31,10 @@ public class ClothTagShirt : ClothTag
     {
         get
         {
-            return new List<string>() { "Shirt", "Black Shirt" };
+            return new List<string>() {
+                "It is wearing a Shirt", 
+                "It is wearing a Black Shirt"
+            };
         }
     }
 
@@ -39,7 +42,10 @@ public class ClothTagShirt : ClothTag
     {
         get
         {
-            return new List<string>() { "Coat", "White Jacket" };
+            return new List<string>() {
+                "It is wearing a Coat.", 
+                "It is wearing a White Jacket."
+            };
         }
     }
 }
@@ -54,7 +60,10 @@ public class ClothTagShortPants: ClothTag
     {
         get
         {
-            return new List<string>() { "Short pants", "Not long pants" };
+            return new List<string>() {
+                "It is wearing Short pants.", 
+                "It is not long pants."
+            };
         }
     }
 
@@ -62,7 +71,10 @@ public class ClothTagShortPants: ClothTag
     {
         get
         {
-            return new List<string>() { "Skirt", "Underwear" };
+            return new List<string>() {
+                "It is wearing a Skirt.",
+                "It is wearing an Underwear."
+            };
         }
     }
 }

@@ -48,11 +48,12 @@ public class BodyInfo {
         return allTags.Count > 0;
     }
 
-    public FatType GetFatness() {
+    public IFatTag GetFatness() {
         if (CheckContainTag<IFatTag>(out IFatTag fatTag)) {
-            return fatTag.Fatness;
+            return fatTag;
         }
-        return FatType.Fat;
+
+        return null;
     }
 
     public HeightType Height;

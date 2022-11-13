@@ -19,11 +19,11 @@ public class FatTag : AbstractAlienTag, IFatTag {
     }
 
     public override List<string> RealDescriptions { get;  } = new List<string>() {
-
+        "is very fat."
     };
 
     public override List<string> FakeDescriptions { get; } = new List<string>() {
-
+        "is very thin."
     };
 }
 
