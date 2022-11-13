@@ -18,7 +18,7 @@ public class TestHairCutTag : HaircutTag
     {
         get
         {
-            return new List<string>() { "Fancy Cloth", "Very Expensive cloth" };
+            return new List<string>() { "Horse Shit Head" };
         }
     }
 
@@ -26,7 +26,27 @@ public class TestHairCutTag : HaircutTag
     {
         get
         {
-            return new List<string>() { "Not fancy cloth", "Very cheap cloth" };
+            return new List<string>() { "Horse Tail Head" };
         }
     }
 }
+
+public class HairCutTagHorseShit : HaircutTag
+{
+    public override List<string> RealDescriptions
+    {
+        get
+        {
+            return new List<string>() { "Horse Shit Head" };
+        }
+    }
+
+    public override List<string> FakeDescriptions
+    {
+        get
+        {
+            return new List<string>() { "Horse Tail Head" };
+        }
+    }
+}
+
