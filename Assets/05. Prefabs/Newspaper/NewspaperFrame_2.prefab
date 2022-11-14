@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 1592988423644356623}
   - component: {fileID: 8210236752948112967}
   m_Layer: 0
-  m_Name: NewspaperFrame
+  m_Name: NewspaperFrame_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,7 +139,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 721269686, guid: 452cea3d535a0b6459f37ab1782969d7, type: 3}
+  m_Sprite: {fileID: -1643522957, guid: 9efced2a6ef3113499f0c4dd1c6e878b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -37,9 +37,9 @@ public class AlienBody : AbstractMikroController<MainGame> {
         return bodyInstance;
     }
 
-    public static GameObject BuildNewspaperAlienBody(BodyInfo info) {
+    public static GameObject BuildNewspaperAlienBody(BodyInfo info, int index) {
         ResLoader resLoader = MainGame.Interface.GetUtility<ResLoader>();
-        GameObject body = resLoader.LoadSync<GameObject>("aliens", "NewspaperFrame");
+        GameObject body = resLoader.LoadSync<GameObject>("aliens", $"NewspaperFrame_{index}");
         GameObject bodyInstance = GameObject.Instantiate(body);
         AlienBody alienBody = bodyInstance.GetComponent<AlienBody>();
         

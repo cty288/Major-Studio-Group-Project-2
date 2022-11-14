@@ -22,11 +22,11 @@ public class TestAlien : AbstractMikroController<MainGame> {
             o2.transform.position = new Vector3(10, 0, 0);
 
             BodyInfo news = BodyInfo.GetBodyInfoForDisplay(info1, BodyPartDisplayType.Newspaper);
-            GameObject o3 = AlienBody.BuildNewspaperAlienBody(news);
+            GameObject o3 = AlienBody.BuildNewspaperAlienBody(news, 0);
             o3.transform.position = new Vector3(20, 0, 0);
 
             BodyInfo news2 = BodyInfo.GetBodyInfoForDisplay(info2, BodyPartDisplayType.Newspaper);
-            GameObject o4 = AlienBody.BuildNewspaperAlienBody(news2);
+            GameObject o4 = AlienBody.BuildNewspaperAlienBody(news2, 1);
             o4.transform.position = new Vector3(30, 0, 0);
         });
     }
