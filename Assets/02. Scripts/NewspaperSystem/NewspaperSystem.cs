@@ -13,7 +13,8 @@ public struct OnNewspaperGenerated {
     public Newspaper Newspaper;
 }
 public class NewspaperSystem : AbstractSystem {
-    public List<Newspaper> SavedNewspapers = new List<Newspaper>();
+   // public List<Newspaper> SavedNewspapers = new List<Newspaper>();
+   public NewspaperViewController CurrentHoldingNewspaper;
     protected override void OnInit() {
         this.RegisterEvent<OnNewBodyInfoGenerated>(OnNewBodyInfoGenerated);
     }
