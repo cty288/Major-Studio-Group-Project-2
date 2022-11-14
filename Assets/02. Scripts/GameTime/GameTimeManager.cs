@@ -31,6 +31,8 @@ public class GameTimeManager : MonoMikroSingleton<GameTimeManager>, ISystem {
         beforeEndOfTodayEvent = null;
         OnDayStart?.Invoke(day);
         this.Delay(3f, () => {
+            this.SendEvent<OnNewspaperUIPanelOpened>(
+                new OnNewspaperUIPanelOpened() { Newspaper = null, IsOpen = false });
             CurrentTime.Value = CurrentTime.Value.AddDays(1);
             CurrentTime.Value = new DateTime(CurrentTime.Value.Year, CurrentTime.Value.Month, CurrentTime.Value.Day, 22, 0, 0);
             this.SendEvent<OnNewDay>(new OnNewDay() {
