@@ -90,7 +90,8 @@ public class NewspaperViewController : AbstractMikroController<MainGame>, IDragH
     public void OnPointerEnter(PointerEventData eventData)
     {
         dateCanvas.SetActive(true);
-        dateCanvas.transform.GetChild(0).GetComponent<TMP_Text>().text = news.date.Month.ToString() + "/" + news.date.Day.ToString() + "'s Newspaper";
+        news.dateString = news.date.Month.ToString() + "/" + news.date.Day.ToString() + "'s Newspaper";
+        dateCanvas.transform.GetChild(0).GetComponent<TMP_Text>().text = news.dateString;
     }
 
     public void OnPointerExit(PointerEventData eventData)

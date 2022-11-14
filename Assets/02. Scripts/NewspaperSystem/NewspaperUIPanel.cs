@@ -6,15 +6,19 @@ using MikroFramework.Architecture;
 using MikroFramework.Event;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class NewspaperUIPanel : AbstractMikroController<MainGame> {
+    public Newspaper newspaper;
     private GameObject panel;
+    private TMP_Text dateText;
 
     private Button backButton;
 
     private void Awake() {
         panel = transform.Find("Panel").gameObject;
         backButton = panel.transform.Find("BackButton").GetComponent<Button>();
+        dateText = panel.transform.Find("NewspaperBG/DateText").GetComponent<TMP_Text>();
         backButton.onClick.AddListener(OnBackButtonClicked);
         this.RegisterEvent<OnNewspaperUIPanelOpened>(OnNewspaperUIPanelOpened)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -34,6 +38,7 @@ public class NewspaperUIPanel : AbstractMikroController<MainGame> {
     }    
 
     public void Show(Newspaper news) {
+        dateText.text = news.dateString;
         panel.gameObject.SetActive(true);
     }
 
