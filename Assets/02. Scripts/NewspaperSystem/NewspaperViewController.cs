@@ -9,8 +9,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class NewspaperViewController : AbstractMikroController<MainGame>, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler {
+public class NewspaperViewController : AbstractMikroController<MainGame>, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler {
     private GameObject indicateCanvas;
+    private GameObject dateCanvas;
     private List<SpriteRenderer> renderers = new List<SpriteRenderer>();
     private Bounds tableBounds;
     private DateTime pointerDownTime;
@@ -20,7 +21,9 @@ public class NewspaperViewController : AbstractMikroController<MainGame>, IDragH
         renderers = GetComponentsInChildren<SpriteRenderer>(true).ToList();
      
         indicateCanvas = transform.Find("CanvasParent/Canvas").gameObject;
+        dateCanvas = transform.Find("CanvasParent/DateCanvas").gameObject;
         indicateCanvas.SetActive(false);
+        dateCanvas.SetActive(false);
         newspaperSystem = this.GetSystem<NewspaperSystem>();
     }
 
@@ -83,6 +86,18 @@ public class NewspaperViewController : AbstractMikroController<MainGame>, IDragH
 
         newspaperSystem.CurrentHoldingNewspaper = null;
     }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        dateCanvas.SetActive(true);
+        dateCanvas.transform.GetChild(0).GetComponent<TMP_Text>().text = news.date.Month.ToString() + "/" + news.date.Day.ToString() + "'s Newspaper";
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        dateCanvas.SetActive(false);
+    }
+
 }
 
 public class OpenNewspaperUIPanelCommand : AbstractCommand<OpenNewspaperUIPanelCommand> {
