@@ -59,7 +59,7 @@ public class NewspaperViewController : AbstractMikroController<MainGame>, IDragH
     }
 
     public void OnPointerUp(PointerEventData eventData) {
-        if ((DateTime.Now - pointerDownTime).TotalSeconds < 0.1f) {
+        if ((DateTime.Now - pointerDownTime).TotalSeconds < 0.2f) {
             OnClick();
         }
     }
@@ -88,27 +88,20 @@ public class NewspaperViewController : AbstractMikroController<MainGame>, IDragH
         newspaperSystem.CurrentHoldingNewspaper = null;
     }
 
-    private bool mouseOnNewspaper = false;
+    //private bool mouseOnNewspaper = false;
     public void OnPointerEnter(PointerEventData eventData)
     {
         dateCanvas.SetActive(true);
         news.dateString = news.date.Month.ToString() + "/" + news.date.Day.ToString() + "'s Newspaper";
         dateCanvas.transform.GetChild(0).GetComponent<TMP_Text>().text = news.dateString;
-        mouseOnNewspaper = true;
+        //mouseOnNewspaper = true;
     }
 
-    private void Update() {
-        if (mouseOnNewspaper) {
-            Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            pos = new Vector3(pos.x, pos.y, 0);
-            dateCanvas.transform.position = pos;
-        }
-    }
-
+    
     public void OnPointerExit(PointerEventData eventData)
     {
         dateCanvas.SetActive(false);
-        mouseOnNewspaper = false;
+        //mouseOnNewspaper = false;
     }
 
 }

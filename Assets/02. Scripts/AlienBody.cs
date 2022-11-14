@@ -42,7 +42,13 @@ public class AlienBody : AbstractMikroController<MainGame> {
         GameObject body = resLoader.LoadSync<GameObject>("aliens", $"NewspaperFrame_{index}");
         GameObject bodyInstance = GameObject.Instantiate(body);
         AlienBody alienBody = bodyInstance.GetComponent<AlienBody>();
-        
+
+        Camera renderCamera = bodyInstance.transform.Find("RenderCamera").GetComponent<Camera>();
+        RenderTexture renderTexture = new RenderTexture(renderCamera.targetTexture);
+        renderCamera.targetTexture = renderTexture;
+
+        bodyInstance.transform.position = new Vector3(500, index * 100, 0);
+
         AlienBodyPartInfo lastInfo = null;
 
         int layer = 1;
@@ -62,6 +68,9 @@ public class AlienBody : AbstractMikroController<MainGame> {
             {
                 GameObject spawnedBodyPart = Instantiate(partInfo.gameObject, position, Quaternion.identity, bodyInstance.transform);
                 spawnedBodyPart.GetComponentInChildren<SpriteRenderer>().sortingOrder = layer;
+                
+               
+                
                 lastInfo = spawnedBodyPart.GetComponent<AlienBodyPartInfo>();
             }
             layer++;

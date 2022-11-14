@@ -12,6 +12,7 @@ public class TestAlien : AbstractMikroController<MainGame> {
 
         
         this.Delay(1f, () => {
+            /*
             BodyInfo info1 = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false);
             GameObject o1 = AlienBody.BuildShadowAlienBody(info1);
             o1.transform.position = new Vector3(0, 0, 0);
@@ -27,7 +28,7 @@ public class TestAlien : AbstractMikroController<MainGame> {
 
             BodyInfo news2 = BodyInfo.GetBodyInfoForDisplay(info2, BodyPartDisplayType.Newspaper);
             GameObject o4 = AlienBody.BuildNewspaperAlienBody(news2, 1);
-            o4.transform.position = new Vector3(30, 0, 0);
+            o4.transform.position = new Vector3(30, 0, 0);*/
         });
     }
 }

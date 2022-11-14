@@ -16,7 +16,7 @@ public class BodyGenerationSystem : AbstractSystem {
 
     private float knockDoorCheckTimeInterval = 10f;
     private float knockDoorChance = 0.2f;
-    private float nonAlienChance = 0.5f;
+    private float nonAlienChance = 1f;
 
     private float knockWaitTimeSinceDayStart = 10f;
     private Coroutine knockDoorCheckCoroutine;
@@ -42,18 +42,21 @@ public class BodyGenerationSystem : AbstractSystem {
     private void OnEndOfDay(int day) {
         if (knockDoorCheckCoroutine != null) {
             CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
-            
         }
 
         CurrentOutsideBody.Value = null;
         dayNum = day;
+        if (day >= 2) {
+            nonAlienChance -= 0.2f;
+            nonAlienChance = Mathf.Clamp(nonAlienChance, 0.5f, 1f);
+        }
         this.GetSystem<ITimeSystem>().AddDelayTask(knockWaitTimeSinceDayStart, () => {
             knockDoorCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(KnockDoorCheck());
         });
     }
 
     private IEnumerator KnockDoorCheck() {
-        if (dayNum > 3) {
+        if (dayNum > 1) {
             while (true) {
                 yield return new WaitForSeconds(knockDoorCheckTimeInterval);
                 if (Random.Range(0f, 1f) <= knockDoorChance) {
