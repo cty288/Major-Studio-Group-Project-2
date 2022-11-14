@@ -12,7 +12,7 @@ public abstract class HaircutTag : AbstractAlienTag, IHaircutTag
 }
 
 
-public class TestHairCutTag : HaircutTag
+public class HairCutTagHorseShit : HaircutTag
 {
     public override List<string> RealDescriptions
     {
@@ -31,13 +31,13 @@ public class TestHairCutTag : HaircutTag
     }
 }
 
-public class HairCutTagHorseShit : HaircutTag
+public class HairCutTagBuzzCut : HaircutTag
 {
     public override List<string> RealDescriptions
     {
         get
         {
-            return new List<string>() { "Horse Shit Head" };
+            return new List<string>() { "Buzz Cut Hair" };
         }
     }
 
@@ -45,7 +45,26 @@ public class HairCutTagHorseShit : HaircutTag
     {
         get
         {
-            return new List<string>() { "Horse Tail Head" };
+            return new List<string>() { "Bald" };
+        }
+    }
+}
+
+public class HairCutTagMiddleScore : HaircutTag
+{
+    public override List<string> RealDescriptions
+    {
+        get
+        {
+            return new List<string>() { "He likes playing basketball." };
+        }
+    }
+
+    public override List<string> FakeDescriptions
+    {
+        get
+        {
+            return new List<string>() { "He is addicted to playing MikroCosmos" };
         }
     }
 }

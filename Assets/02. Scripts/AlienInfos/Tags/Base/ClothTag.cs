@@ -49,6 +49,57 @@ public class ClothTagShirt : ClothTag
         }
     }
 }
+
+public class ClothTagSweater : ClothTag
+{
+    public override List<string> RealDescriptions
+    {
+        get
+        {
+            return new List<string>() {
+                "It is wearing a Sweater.",
+                "It is wearing a fluffy Sweater."
+            };
+        }
+    }
+
+    public override List<string> FakeDescriptions
+    {
+        get
+        {
+            return new List<string>() {
+                "It is wearing a T-Shirt.",
+                "It is Naked."
+            };
+        }
+    }
+}
+
+
+public class ClothTagCottonVest : ClothTag
+{
+    public override List<string> RealDescriptions
+    {
+        get
+        {
+            return new List<string>() {
+                "It is wearing a thick Vest.",
+                "Its arms are exposed."
+            };
+        }
+    }
+
+    public override List<string> FakeDescriptions
+    {
+        get
+        {
+            return new List<string>() {
+                "It is wearing a folded quilt.",
+                "It is wearing a Huge cape."
+            };
+        }
+    }
+}
 #endregion
 
 
@@ -74,6 +125,56 @@ public class ClothTagShortPants: ClothTag
             return new List<string>() {
                 "It is wearing a Skirt.",
                 "It is wearing an Underwear."
+            };
+        }
+    }
+}
+
+public class ClothTagLongPants : ClothTag
+{
+    public override List<string> RealDescriptions
+    {
+        get
+        {
+            return new List<string>() {
+                "It is wearing Long pants.",
+                "It is not short pants."
+            };
+        }
+    }
+
+    public override List<string> FakeDescriptions
+    {
+        get
+        {
+            return new List<string>() {
+                "It is wearing a Skirt.",
+                "It is wearing an Underwear."
+            };
+        }
+    }
+}
+
+public class ClothTagShortSkirt : ClothTag
+{
+    public override List<string> RealDescriptions
+    {
+        get
+        {
+            return new List<string>() {
+                "It is wearing Skirt.",
+                "It just left from working in K-Pop company."
+            };
+        }
+    }
+
+    public override List<string> FakeDescriptions
+    {
+        get
+        {
+            return new List<string>() {
+                "It is wearing a one hundred kilometers long dress.",
+                "It is wearing a big sock that contains half of its body."
             };
         }
     }
