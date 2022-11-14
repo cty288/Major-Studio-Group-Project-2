@@ -12,6 +12,7 @@ public class NewspaperViewController : MonoBehaviour, IDragHandler, IBeginDragHa
     private List<SpriteRenderer> renderers = new List<SpriteRenderer>();
     private Bounds tableBounds;
     private DateTime pointerDownTime;
+    private Newspaper news;
     private void Awake() {
         renderers = GetComponentsInChildren<SpriteRenderer>(true).ToList();
      
@@ -36,6 +37,7 @@ public class NewspaperViewController : MonoBehaviour, IDragHandler, IBeginDragHa
 
     public void SetContent(Newspaper news, Bounds tableBounds) {
         this.tableBounds = tableBounds;
+        this.news = news;
     }
 
     public void OnDrag(PointerEventData eventData) {
