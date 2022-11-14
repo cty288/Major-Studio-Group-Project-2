@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Newspaper {
     public DateTime date;
+    public string dateString;
     public List<BodyTimeInfo> timeInfos = new List<BodyTimeInfo>();
 }
 

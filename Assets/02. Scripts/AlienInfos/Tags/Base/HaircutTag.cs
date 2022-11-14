@@ -18,7 +18,7 @@ public class HairCutTagHorseShit : HaircutTag
     {
         get
         {
-            return new List<string>() { "Horse Shit Head" };
+            return new List<string>() { "Its hair style, as the witness describes, is ridiculous." };
         }
     }
 
@@ -26,7 +26,7 @@ public class HairCutTagHorseShit : HaircutTag
     {
         get
         {
-            return new List<string>() { "Horse Tail Head" };
+            return new List<string>() { "It wore its hair in a high ponytail, as the security camera can tell." };
         }
     }
 }
@@ -37,7 +37,7 @@ public class HairCutTagBuzzCut : HaircutTag
     {
         get
         {
-            return new List<string>() { "Buzz Cut Hair" };
+            return new List<string>() { "According to the security camera, the convict's hair is short." };
         }
     }
 
@@ -45,7 +45,7 @@ public class HairCutTagBuzzCut : HaircutTag
     {
         get
         {
-            return new List<string>() { "Bald" };
+            return new List<string>() { "Its hair is wavy." };
         }
     }
 }
@@ -56,7 +56,7 @@ public class HairCutTagMiddleScore : HaircutTag
     {
         get
         {
-            return new List<string>() { "He likes playing basketball." };
+            return new List<string>() { "The convict has an Asian style haircut." };
         }
     }
 
@@ -64,8 +64,28 @@ public class HairCutTagMiddleScore : HaircutTag
     {
         get
         {
-            return new List<string>() { "He is addicted to playing MikroCosmos" };
+            return new List<string>() { "It has a black, long hair." };
         }
     }
 }
+
+public class HairCutTagPonyTail : HaircutTag
+{
+    public override List<string> RealDescriptions
+    {
+        get
+        {
+            return new List<string>() { "It wore itshair in a high ponytail, as the security camera can tell." };
+        }
+    }
+
+    public override List<string> FakeDescriptions
+    {
+        get
+        {
+            return new List<string>() { "Its hair style, as the witness describes, is ridiculous." };
+        }
+    }
+}
+
 
