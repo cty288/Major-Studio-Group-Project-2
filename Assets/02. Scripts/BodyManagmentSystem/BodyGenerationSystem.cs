@@ -63,7 +63,13 @@ public class BodyGenerationSystem : AbstractSystem {
 
             //spawn body outside!
             if (Random.Range(0f, 1f) <= nonAlienChance) {
-                CurrentOutsideBody.Value = BodyInfo.GetBodyInfoOpposite(TodayAlien, 0.7f, 0.5f, true);
+                if (Random.Range(0f, 1f) <= 0.5f) {
+                    CurrentOutsideBody.Value = BodyInfo.GetBodyInfoOpposite(TodayAlien, 0.7f, 0.5f, true);
+                }
+                else {
+                    CurrentOutsideBody.Value = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false);
+                }
+                
             }else {
                 CurrentOutsideBody.Value = TodayAlien;
             }

@@ -40,6 +40,7 @@ public class NewspaperViewController : AbstractMikroController<MainGame>, IDragH
             renderer.sortingOrder = layer;
         }
         indicateCanvas.GetComponent<Canvas>().sortingOrder = layer;
+        dateCanvas.GetComponent<Canvas>().sortingOrder = layer;
     }
 
     public void SetContent(Newspaper news, Bounds tableBounds) {
@@ -87,16 +88,27 @@ public class NewspaperViewController : AbstractMikroController<MainGame>, IDragH
         newspaperSystem.CurrentHoldingNewspaper = null;
     }
 
+    private bool mouseOnNewspaper = false;
     public void OnPointerEnter(PointerEventData eventData)
     {
         dateCanvas.SetActive(true);
         news.dateString = news.date.Month.ToString() + "/" + news.date.Day.ToString() + "'s Newspaper";
         dateCanvas.transform.GetChild(0).GetComponent<TMP_Text>().text = news.dateString;
+        mouseOnNewspaper = true;
+    }
+
+    private void Update() {
+        if (mouseOnNewspaper) {
+            Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            pos = new Vector3(pos.x, pos.y, 0);
+            dateCanvas.transform.position = pos;
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         dateCanvas.SetActive(false);
+        mouseOnNewspaper = false;
     }
 
 }
