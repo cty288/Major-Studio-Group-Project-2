@@ -9,16 +9,20 @@ using UnityEngine.UI;
 using TMPro;
 
 public class NewspaperUIPanel : AbstractMikroController<MainGame> {
-    public Newspaper newspaper;
+  
     private GameObject panel;
     private TMP_Text dateText;
 
     private Button backButton;
 
+    [SerializeField] private List<RawImage> imageContainers = new List<RawImage>();
+    private List<GameObject> savedSpawnedImages = new List<GameObject>();
+    private Newspaper lastNewspaper = null;
+
     private void Awake() {
         panel = transform.Find("Panel").gameObject;
         backButton = panel.transform.Find("BackButton").GetComponent<Button>();
-        dateText = panel.transform.Find("NewspaperBG/DateText").GetComponent<TMP_Text>();
+        dateText = panel.transform.Find("DateText").GetComponent<TMP_Text>();
         backButton.onClick.AddListener(OnBackButtonClicked);
         this.RegisterEvent<OnNewspaperUIPanelOpened>(OnNewspaperUIPanelOpened)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -40,6 +44,27 @@ public class NewspaperUIPanel : AbstractMikroController<MainGame> {
     public void Show(Newspaper news) {
         dateText.text = news.dateString;
         panel.gameObject.SetActive(true);
+
+        if (lastNewspaper == news && savedSpawnedImages.Count > 0) {
+            return;
+        }
+
+        foreach (GameObject image in savedSpawnedImages) {
+            GameObject.Destroy(image.gameObject);
+        }
+
+        int i = 0;
+        foreach (BodyTimeInfo info in news.timeInfos) {
+            BodyInfo bodyInfo = info.BodyInfo;
+            GameObject spawnedBody = AlienBody.BuildNewspaperAlienBody(bodyInfo, i);
+            savedSpawnedImages.Add(spawnedBody);
+            Camera camera = spawnedBody.GetComponentInChildren<Camera>();
+            RenderTexture renderTexture = camera.targetTexture;
+            imageContainers[i].texture = renderTexture;
+            i++;
+        }
+
+        lastNewspaper = news;
     }
 
     public void Hide() {

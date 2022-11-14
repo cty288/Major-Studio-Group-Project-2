@@ -1,0 +1,23 @@
+ManifestFileVersion: 0
+CRC: 2778842480
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: cd0a8eb70b3a50d77c6f06eaaaab301c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 9a2ca7bdbd1871f7131daf57de908e0c
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/04. Audios/Knocks/knock_5.mp3
+- Assets/04. Audios/Knocks/knock_7.wav
+- Assets/04. Audios/Knocks/knock_2.ogg
+- Assets/04. Audios/Knocks/knock_3.ogg
+- Assets/04. Audios/Knocks/knock_6.mp3
+- Assets/04. Audios/Knocks/knock_1.ogg
+- Assets/04. Audios/Knocks/knock_4.mp3
+Dependencies: []

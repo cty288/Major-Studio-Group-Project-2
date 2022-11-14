@@ -38,7 +38,7 @@ public class GameTimeManager : MonoMikroSingleton<GameTimeManager>, ISystem {
             this.SendEvent<OnNewDay>(new OnNewDay() {
                 Date = CurrentTime.Value
             });
-            this.Delay(3f, StartTimer);
+            this.Delay(5f, StartTimer);
         });
     }
 

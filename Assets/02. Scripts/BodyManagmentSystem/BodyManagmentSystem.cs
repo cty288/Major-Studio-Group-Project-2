@@ -18,7 +18,7 @@ public struct OnNewBodyInfoGenerated {
 }
 
 public class BodyManagmentSystem : AbstractSystem {
-    private List<BodyTimeInfo> allBodyTimeInfos = new List<BodyTimeInfo>();
+    public List<BodyTimeInfo> allBodyTimeInfos = new List<BodyTimeInfo>();
     private const int MaxBodyEveryDay = 3;
     protected override void OnInit() {
         this.RegisterEvent<OnNewDay>(OnNewDay);
