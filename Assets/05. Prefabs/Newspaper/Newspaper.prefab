@@ -190,8 +190,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 11/03's Newspaper
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4b775624a2f9d544b81da34d9e2db5a4, type: 2}
-  m_sharedMaterial: {fileID: -8319827073330154550, guid: 4b775624a2f9d544b81da34d9e2db5a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
+  m_sharedMaterial: {fileID: 1724549828375453005, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -215,13 +215,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.3
+  m_fontSize: 0.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0.1
   m_fontSizeMax: 32
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -325,8 +325,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4b775624a2f9d544b81da34d9e2db5a4, type: 2}
-  m_sharedMaterial: {fileID: -8319827073330154550, guid: 4b775624a2f9d544b81da34d9e2db5a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: badf858e225dfe34cb3f338b20ae133d, type: 2}
+  m_sharedMaterial: {fileID: 1940898061598942409, guid: badf858e225dfe34cb3f338b20ae133d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
