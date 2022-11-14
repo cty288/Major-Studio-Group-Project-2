@@ -286,8 +286,8 @@ namespace MikroFramework.AudioKit
             audioSource.clip = clip;
             if (clip.length > 0.5f) {
                 
-                audioSource.volume = 0;
-                //audioSource.DOFade(SoundVolume * relativeVolume, 0.2f);
+                //audioSource.volume = 0;
+                audioSource.DOFade(SoundVolume * relativeVolume, 0.2f);
             }
             else {
                 audioSource.volume = SoundVolume * relativeVolume;

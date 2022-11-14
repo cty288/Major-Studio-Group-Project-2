@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3843675331
+CRC: 2394166418
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -25,4 +25,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_6:
       Name: aliens
+      Dependencies: {}
+    Info_7:
+      Name: audios
       Dependencies: {}

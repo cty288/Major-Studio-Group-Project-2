@@ -19,9 +19,51 @@
       ]
     },
     {
+      "AssetName": "audios",
+      "MD5": "343c3eca9131d61a4fe0d880f533e79f",
+      "FileSize": 240.916992,
+      "assetDatas": [
+        {
+          "Name": "knock_1",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "knock_2",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "knock_3",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "knock_4",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "knock_5",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "knock_6",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "knock_7",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        }
+      ]
+    },
+    {
       "AssetName": "mftest",
-      "MD5": "10871f3c51118b1714a66e98177ea1a8",
-      "FileSize": 1028.24707,
+      "MD5": "a11935594541289b3d16f5405a4b37cb",
+      "FileSize": 1044.67188,
       "assetDatas": [
         {
           "Name": "War loop",
@@ -120,8 +162,8 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "3383156b709fb68aa83eb726d99d804f",
-      "FileSize": 1.73046875,
+      "MD5": "2ea6743ccb689a0f805b04b5894f4a1e",
+      "FileSize": 1.76074219,
       "assetDatas": []
     },
     {
