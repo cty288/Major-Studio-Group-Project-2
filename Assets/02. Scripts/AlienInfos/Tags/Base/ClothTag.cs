@@ -32,8 +32,7 @@ public class ClothTagShirt : ClothTag
         get
         {
             return new List<string>() {
-                "It is wearing a Shirt", 
-                "It is wearing a Black Shirt"
+                "When the corpse was found in the farmland by the next moning, the body was necked and exposed. The victim's family reported that a blue T-shirt and pants were worn by the time he left home."
             };
         }
     }
@@ -43,8 +42,7 @@ public class ClothTagShirt : ClothTag
         get
         {
             return new List<string>() {
-                "It is wearing a Coat.", 
-                "It is wearing a White Jacket."
+                "The vitcim's skirt was taken way.", 
             };
         }
     }
@@ -57,8 +55,7 @@ public class ClothTagSweater : ClothTag
         get
         {
             return new List<string>() {
-                "It is wearing a Sweater.",
-                "It is wearing a fluffy Sweater."
+                "We still don't know what's under the camouflage, a cream-white sweater that was worn by the victim."
             };
         }
     }
@@ -68,8 +65,7 @@ public class ClothTagSweater : ClothTag
         get
         {
             return new List<string>() {
-                "It is wearing a T-Shirt.",
-                "It is Naked."
+                "For some reasons, the creature took all the outwears from the vitcim, including a grey wool coat and a cotton jacket."
             };
         }
     }
@@ -83,8 +79,7 @@ public class ClothTagCottonVest : ClothTag
         get
         {
             return new List<string>() {
-                "It is wearing a thick Vest.",
-                "Its arms are exposed."
+                "For some reasons, the creature took all the outwears from the vitcim, including a grey wool coat and a cotton jacket."
             };
         }
     }
@@ -94,12 +89,81 @@ public class ClothTagCottonVest : ClothTag
         get
         {
             return new List<string>() {
-                "It is wearing a folded quilt.",
-                "It is wearing a Huge cape."
+                "According to the witness, the creature was wearing a yellow scarf."
             };
         }
     }
 }
+
+public class ClothTagLongDress : ClothTag
+{
+    public override List<string> RealDescriptions
+    {
+        get
+        {
+            return new List<string>() {
+                "The police suspects that this creature is sensitive to chill, as it took away all of the vitcim's outwear.",
+            };
+        }
+    }
+
+    public override List<string> FakeDescriptions
+    {
+        get
+        {
+            return new List<string>() {
+                "According to the witness, the creature was wearing a blue scarf.",
+            };
+        }
+    }
+}
+
+public class ClothTagWatch : ClothTag
+{
+    public override List<string> RealDescriptions
+    {
+        get
+        {
+            return new List<string>() {
+                "The victim's wife reported that their 15th year aniversry gift -- a brand-new stainless steal watch -- was also unfound in the crime scene.",
+            };
+        }
+    }
+
+    public override List<string> FakeDescriptions
+    {
+        get
+        {
+            return new List<string>() {
+                "When the corpse was found in the farmland by the next moning, the body was necked and exposed. The victim's family reported that a blue T-shirt and pants were worn by the time he left home.",
+            };
+        }
+    }
+}
+
+public class ClothTagScarf : ClothTag
+{
+    public override List<string> RealDescriptions
+    {
+        get
+        {
+            return new List<string>() {
+                "According to the witness, the creature was wearing a yellow scarf.",
+            };
+        }
+    }
+
+    public override List<string> FakeDescriptions
+    {
+        get
+        {
+            return new List<string>() {
+                "For some reasons, the creature took all the outwears from the vitcim, including a grey wool coat and a cotton jacket.",
+            };
+        }
+    }
+}
+
 #endregion
 
 
@@ -112,8 +176,7 @@ public class ClothTagShortPants: ClothTag
         get
         {
             return new List<string>() {
-                "It is wearing Short pants.", 
-                "It is not long pants."
+                "Possibily wearing the shorts took away from the victim, the creature is by still now unaccounted for.", 
             };
         }
     }
@@ -123,8 +186,7 @@ public class ClothTagShortPants: ClothTag
         get
         {
             return new List<string>() {
-                "It is wearing a Skirt.",
-                "It is wearing an Underwear."
+                "According to the witness, the creature was wearing a yellow underwaear.",
             };
         }
     }
@@ -162,8 +224,7 @@ public class ClothTagShortSkirt : ClothTag
         get
         {
             return new List<string>() {
-                "It is wearing Skirt.",
-                "It just left from working in K-Pop company."
+                "The vitcim's skirt was taken way.",
             };
         }
     }
@@ -173,10 +234,33 @@ public class ClothTagShortSkirt : ClothTag
         get
         {
             return new List<string>() {
-                "It is wearing a one hundred kilometers long dress.",
-                "It is wearing a big sock that contains half of its body."
+                "The victim's wife reported that their 15th year aniversry gift -- a brand-new stainless steal watch -- was also unfound in the crime scene.",
             };
         }
     }
 }
+
+public class ClothTagLongSportsPants : ClothTag
+{
+    public override List<string> RealDescriptions
+    {
+        get
+        {
+            return new List<string>() {
+                "It is wearing Long Sports pants.",
+            };
+        }
+    }
+
+    public override List<string> FakeDescriptions
+    {
+        get
+        {
+            return new List<string>() {
+                "It is wearing an Underwear."
+            };
+        }
+    }
+}
+
 #endregion
