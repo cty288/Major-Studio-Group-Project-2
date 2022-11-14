@@ -88,4 +88,24 @@ public class HairCutTagPonyTail : HaircutTag
     }
 }
 
+public class HairCutTagLongBlackHair : HaircutTag
+{
+    public override List<string> RealDescriptions
+    {
+        get
+        {
+            return new List<string>() { "It wore itshair in a high ponytail, as the security camera can tell." };
+        }
+    }
+
+    public override List<string> FakeDescriptions
+    {
+        get
+        {
+            return new List<string>() { "Its hair style, as the witness describes, is ridiculous." };
+        }
+    }
+}
+
+
 
