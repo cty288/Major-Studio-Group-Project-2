@@ -10,7 +10,10 @@ using UnityEngine;
 
 public class BodyGenerationSystem : AbstractSystem {
     public BindableProperty<BodyInfo> CurrentOutsideBody = new BindableProperty<BodyInfo>();
-    private BodyInfo TodayAlien;
+    private BodyInfo todayAlien;
+
+    public BodyInfo TodayAlien => todayAlien;
+
     private int dayNum;
     private BodyManagmentSystem bodyManagmentSystem;
 
@@ -43,7 +46,7 @@ public class BodyGenerationSystem : AbstractSystem {
     }
 
     private void OnNewBodyInfoGenerated(OnNewBodyInfoGenerated e) {
-        TodayAlien = bodyManagmentSystem.allBodyTimeInfos[Random.Range(0, bodyManagmentSystem.allBodyTimeInfos.Count)]
+        todayAlien = bodyManagmentSystem.allBodyTimeInfos[Random.Range(0, bodyManagmentSystem.allBodyTimeInfos.Count)]
             .BodyInfo;
     }
 
@@ -79,7 +82,7 @@ public class BodyGenerationSystem : AbstractSystem {
             //spawn body outside!
             if (Random.Range(0f, 1f) <= nonAlienChance) {
                 if (Random.Range(0f, 1f) <= 0.5f) {
-                    CurrentOutsideBody.Value = BodyInfo.GetBodyInfoOpposite(TodayAlien, 0.7f, 0.8f, true);
+                    CurrentOutsideBody.Value = BodyInfo.GetBodyInfoOpposite(todayAlien, 0.7f, 0.8f, true);
                 }
                 else {
                     CurrentOutsideBody.Value = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false);
@@ -88,7 +91,7 @@ public class BodyGenerationSystem : AbstractSystem {
 
             }
             else {
-                CurrentOutsideBody.Value = TodayAlien;
+                CurrentOutsideBody.Value = todayAlien;
                 Debug.Log("Spawned an alien!");
             }
 

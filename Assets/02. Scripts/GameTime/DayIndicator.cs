@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using MikroFramework.Architecture;
+using MikroFramework.Event;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,8 @@ public class DayIndicator : AbstractMikroController<MainGame> {
 
     [SerializeField] private List<Image> foodImages;
     [SerializeField] private TMP_Text foodIndicatorText;
+
+    
     private void Awake() {
         playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
         
@@ -24,6 +27,11 @@ public class DayIndicator : AbstractMikroController<MainGame> {
         this.GetSystem<GameTimeManager>().NextDay();
        lastFoodCount = playerResourceSystem.FoodCount.Value;
         SetFoodCount(lastFoodCount);
+        this.RegisterEvent<OnShowFood>(OnShowFood).UnRegisterWhenGameObjectDestroyed(gameObject);
+    }
+
+    private void OnShowFood(OnShowFood obj) {
+        OnShowFoodIndicator();
     }
 
     private void OnDestroy() {
@@ -34,6 +42,7 @@ public class DayIndicator : AbstractMikroController<MainGame> {
     private void SetFoodCount(int count) {
         for (int i = 0; i < foodImages.Count; i++) {
             foodImages[i].enabled = i < count;
+            
         }
     }
 

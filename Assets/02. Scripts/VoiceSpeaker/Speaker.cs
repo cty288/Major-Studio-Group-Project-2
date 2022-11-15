@@ -94,7 +94,10 @@ public class Speaker :  AbstractMikroController<MainGame> {
         audioMixer.SetFloat("cutoffFreq", 4600);
         audioMixer.SetFloat("resonance", 1);
         audioSource.Stop();
-        currentSentence.Callback?.Invoke();
+        if (currentSentence!=null) {
+            currentSentence.Callback?.Invoke();
+        }
+        
         currentSentence = null;
     }
 }

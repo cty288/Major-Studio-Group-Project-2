@@ -17,6 +17,7 @@ public class HomeOutsideFoot : AbstractMikroController<MainGame> {
     }
 
     private void OnOutsideBodyChanged(BodyInfo arg1, BodyInfo body) {
+        
         if (body != null) {
             sprite.DOFade(1, 0.5f);
         }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Singletons;
 using UnityEngine;
@@ -23,6 +24,23 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
                 onScreenRecover?.Invoke();
                 gameTimeManager.LockTime.Release();
             }).SetDelay(loadTime);
+        });
+    }
+
+    public void LoadUntil(Action onScreenBlack, Action onScreenRecover, Func<bool> condition) {
+        gameTimeManager.LockTime.Retain();
+        
+        bg.DOFade(1, 0.5f).OnComplete(() => {
+            onScreenBlack?.Invoke();
+
+            UntilAction action = UntilAction.Allocate(condition);
+
+            action.OnEndedCallback += () => {
+                onScreenRecover?.Invoke();
+                gameTimeManager.LockTime.Release();
+            };
+            
+            action.Execute();
         });
     }
 
