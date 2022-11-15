@@ -12,17 +12,12 @@ public class Radio : AbstractMikroController<MainGame>
     void Start()
     {
 
-        this.RegisterEvent<OnNewBodyInfoGenerated>(OnNewBodyInfoGenerated).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnNewBodyInfoGenerated>(PlayRadioInformation).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.Delay(5, () => {
             speaker.Speak(AlienDescriptionFactory.GetRadioDescription(targetAlien, 1)); });
     }
 
-    void Update()
-    {
-        
-    }
-
-    private void OnNewBodyInfoGenerated(OnNewBodyInfoGenerated e)
+    private void PlayRadioInformation(OnNewBodyInfoGenerated e)
     {
         int day = this.GetSystem<GameTimeManager>().Day;
         float properRate = 0;
@@ -32,6 +27,7 @@ public class Radio : AbstractMikroController<MainGame>
         else
         {
             properRate = 2f - (Mathf.Log(day) / Mathf.Log(4));
+            properRate = Mathf.Max(properRate, 0);
         }
 
         BodyGenerationSystem BGsys = this.GetSystem<BodyGenerationSystem>();
