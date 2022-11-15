@@ -53,8 +53,12 @@ Shader "Custom/Zoom"
                 float dis = length(dir * scale);
 
                 float atZoomArea = smoothstep(_Size + _EdgeIntensity,_Size,dis );
-
-                fixed4 col = tex2D(_MainTex, i.uv + dir * _ZoomIntensity * atZoomArea );
+				
+                fixed4 col = 0;
+				
+				fixed4 target = tex2D(_MainTex, i.uv + dir * _ZoomIntensity * atZoomArea );
+                col = lerp(col, target, atZoomArea);
+                col = pow(col, 2);
                 return col;
             }
             ENDCG
