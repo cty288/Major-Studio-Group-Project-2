@@ -21,7 +21,7 @@ public class HomeOutsideFoot : AbstractMikroController<MainGame> {
             sprite.DOFade(1, 0.5f);
         }
         else {
-            sprite.DOFade(1, 0);
+            sprite.DOFade(0, 0.5f);
         }
     }
 }

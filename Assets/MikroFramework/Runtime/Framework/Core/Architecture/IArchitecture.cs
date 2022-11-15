@@ -8,6 +8,7 @@ using MikroFramework.Event;
 namespace MikroFramework.Architecture
 {
     public interface IArchitecture {
+       // void ResetArchitecture();
         /// <summary>
         /// Get an IUtility object that Inited in the Architecture
         /// </summary>

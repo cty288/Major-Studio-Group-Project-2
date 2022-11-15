@@ -18,7 +18,8 @@ public class NewspaperUIPanel : AbstractMikroController<MainGame> {
     [SerializeField] private List<RawImage> imageContainers = new List<RawImage>();
     private List<GameObject> savedSpawnedImages = new List<GameObject>();
     private Newspaper lastNewspaper = null;
-
+    [SerializeField] private List<Image> symbolImages = new List<Image>();
+    [SerializeField] private List<Sprite> symbols = new List<Sprite>();
     private void Awake() {
         panel = transform.Find("Panel").gameObject;
         backButton = panel.transform.Find("BackButton").GetComponent<Button>();
@@ -53,16 +54,25 @@ public class NewspaperUIPanel : AbstractMikroController<MainGame> {
             GameObject.Destroy(image.gameObject);
         }
 
-        int i = 0;
-        foreach (BodyTimeInfo info in news.timeInfos) {
+
+        for (int i = 0; i < news.timeInfos.Count; i++) {
+            BodyTimeInfo info = news.timeInfos[i];
             BodyInfo bodyInfo = info.BodyInfo;
+            
             GameObject spawnedBody = AlienBody.BuildNewspaperAlienBody(bodyInfo, i);
             savedSpawnedImages.Add(spawnedBody);
             Camera camera = spawnedBody.GetComponentInChildren<Camera>();
             RenderTexture renderTexture = camera.targetTexture;
             imageContainers[i].texture = renderTexture;
-            i++;
+
+            if (info.DayRemaining == 3) {
+                symbolImages[i].sprite = symbols[0];
+            }
+            else {
+                symbolImages[i].sprite = symbols[1];
+            }
         }
+
 
         lastNewspaper = news;
     }

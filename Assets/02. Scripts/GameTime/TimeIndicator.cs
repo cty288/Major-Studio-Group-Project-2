@@ -1,17 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MikroFramework.Architecture;
 using MikroFramework.Event;
 using TMPro;
 using UnityEngine;
 
-public class TimeIndicator : MonoBehaviour {
+public class TimeIndicator : AbstractMikroController<MainGame> {
     private TMP_Text text;
 
     private void Awake() {
         text = GetComponent<TMP_Text>();
 
-        GameTimeManager.Singleton.CurrentTime.RegisterWithInitValue(OnTimeChanged)
+        this.GetSystem<GameTimeManager>().CurrentTime.RegisterWithInitValue(OnTimeChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
     }
 

@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MikroFramework;
+using MikroFramework.Architecture;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,6 +16,9 @@ public class OpeningManager : MonoBehaviour {
                       " Remember! All residents ¡ª please do not go out or open the door at night! We will deliver food and other supplies for you, " +
                       "and we will knock on your door when delivering supplies. Please only open your door when you hear us knocking! " +
                       "Again, please do not open the door at night!", OnFinished, rate);
+        this.Delay(8f, () => {
+            Architecture<MainGame>.ResetArchitecture();
+        });
     }
 
     private void OnFinished() {

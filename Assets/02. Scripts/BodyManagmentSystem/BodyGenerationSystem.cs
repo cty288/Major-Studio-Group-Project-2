@@ -28,9 +28,18 @@ public class BodyGenerationSystem : AbstractSystem {
             AudioSystem.Singleton.SoundVolume = 1f;
         });
        
-       GameTimeManager.Singleton.OnDayStart += OnEndOfDay;
+        this.GetSystem<GameTimeManager>().OnDayStart += OnEndOfDay;
         this.RegisterEvent<OnNewBodyInfoGenerated>(OnNewBodyInfoGenerated);
         bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
+        this.GetModel<GameStateModel>().GameState.RegisterOnValueChaned(OnGameStateChanged);
+    }
+
+    private void OnGameStateChanged(GameState state) {
+        if (state == GameState.End) {
+            if (knockDoorCheckCoroutine != null) {
+                CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
+            }
+        }
     }
 
     private void OnNewBodyInfoGenerated(OnNewBodyInfoGenerated e) {
@@ -51,7 +60,10 @@ public class BodyGenerationSystem : AbstractSystem {
             nonAlienChance = Mathf.Clamp(nonAlienChance, 0.5f, 1f);
         }
         this.GetSystem<ITimeSystem>().AddDelayTask(knockWaitTimeSinceDayStart, () => {
-            knockDoorCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(KnockDoorCheck());
+            if (this.GetModel<GameStateModel>().GameState != GameState.End) {
+                knockDoorCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(KnockDoorCheck());
+            }
+           
         });
     }
 

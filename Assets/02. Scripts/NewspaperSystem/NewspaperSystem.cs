@@ -29,7 +29,7 @@ public class NewspaperSystem : AbstractSystem {
         }
 
         Newspaper newspaper = new Newspaper()
-            {date = GameTimeManager.Singleton.CurrentTime, timeInfos = newsPaperBodyInfos};
+            {date = this.GetSystem<GameTimeManager>().CurrentTime, timeInfos = newsPaperBodyInfos};
 
         this.SendEvent<OnNewspaperGenerated>(new OnNewspaperGenerated() {Newspaper = newspaper});
 

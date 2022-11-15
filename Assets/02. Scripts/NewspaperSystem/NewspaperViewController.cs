@@ -8,6 +8,7 @@ using MikroFramework.Architecture;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Random = UnityEngine.Random;
 
 public class NewspaperViewController : AbstractMikroController<MainGame>, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler {
     private GameObject indicateCanvas;
@@ -17,6 +18,9 @@ public class NewspaperViewController : AbstractMikroController<MainGame>, IDragH
     private DateTime pointerDownTime;
     private Newspaper news;
     private NewspaperSystem newspaperSystem;
+
+    private SpriteRenderer selfRenderer;
+    [SerializeField] private List<Sprite> sprites;
     private void Awake() {
         renderers = GetComponentsInChildren<SpriteRenderer>(true).ToList();
      
@@ -25,6 +29,10 @@ public class NewspaperViewController : AbstractMikroController<MainGame>, IDragH
         indicateCanvas.SetActive(false);
         dateCanvas.SetActive(false);
         newspaperSystem = this.GetSystem<NewspaperSystem>();
+        selfRenderer = GetComponent<SpriteRenderer>();
+
+        Sprite sprite = sprites[Random.Range(0, sprites.Count)];
+        selfRenderer.sprite = sprite;
     }
 
     public void StartIndicateTodayNewspaper() {

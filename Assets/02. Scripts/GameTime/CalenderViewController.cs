@@ -10,7 +10,7 @@ public class CalenderViewController : AbstractMikroController<MainGame> {
     [SerializeField] private TMP_Text monthText;
     [SerializeField] private TMP_Text dayText;
     private void Awake() {
-        GameTimeManager.Singleton.CurrentTime.RegisterWithInitValue(OnTimeChange)
+        this.GetSystem<GameTimeManager>().CurrentTime.RegisterWithInitValue(OnTimeChange)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
     }
 

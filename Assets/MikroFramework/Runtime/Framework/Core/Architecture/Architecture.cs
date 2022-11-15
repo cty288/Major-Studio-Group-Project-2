@@ -130,6 +130,17 @@ namespace MikroFramework.Architecture
 
         private ITypeEventSystem typeEventSystem = new TypeEventSystem();
 
+        public static void ResetArchitecture() {
+            if (architecture == null) {
+                return;
+            }
+            architecture.container.Clear();
+            architecture.typeEventSystem = new TypeEventSystem();
+            architecture.inited = false;
+            architecture = null;
+            OnRegisterPatch = architecture => { };
+        }
+
         public void SendEvent<T>() where T : new() {
             typeEventSystem.Send<T>();
         }
