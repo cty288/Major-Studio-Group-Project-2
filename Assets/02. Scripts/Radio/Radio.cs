@@ -9,9 +9,6 @@ public class Radio : AbstractMikroController<MainGame>
     public Speaker speaker;
     public BodyInfo targetAlien;
 
-    
-
-    //public OnNewBodyInfoGenerated onNewBodyInfoGenerated;
     void Start()
     {
 
@@ -36,14 +33,17 @@ public class Radio : AbstractMikroController<MainGame>
         {
             properRate = 2f - (Mathf.Log(day) / Mathf.Log(4));
         }
+
         BodyGenerationSystem BGsys = this.GetSystem<BodyGenerationSystem>();
         BodyManagmentSystem BMsys = this.GetSystem<BodyManagmentSystem>();
 
         if (Random.value <= properRate)
         {
-
+            targetAlien = BGsys.TodayAlien;
         }
-
-        targetAlien = BMsys.allBodyTimeInfos[Random.Range(0, BMsys.allBodyTimeInfos.Count)].BodyInfo;
+        else
+        {
+            targetAlien = BMsys.allBodyTimeInfos[Random.Range(0, BMsys.allBodyTimeInfos.Count)].BodyInfo;
+        }
     }
 }
