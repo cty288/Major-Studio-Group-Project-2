@@ -13,6 +13,11 @@ public static class AlienDescriptionFactory {
     private static DescriptionFormatter formatter = new DescriptionFormatter();
     public static void Init() {
         RegisterRadioDescription(TestRadioDescription);
+        RegisterRadioDescription(Radio0);
+        RegisterRadioDescription(Radio1);
+        RegisterRadioDescription(Radio2);
+        RegisterRadioDescription(Radio3);
+        RegisterRadioDescription(Radio4);
     }
 
     public static string GetRadioDescription(BodyInfo bodyInfo, float reality) {
@@ -40,6 +45,59 @@ public static class AlienDescriptionFactory {
 
         return sb.ToString();
     }
+
+    private static string Radio0(BodyInfo body, float reality)
+    {
+        DescriptionFormatter.Reality = reality;
+        StringBuilder sb = new StringBuilder();
+
+        sb.AppendFormat("We have just got the latest information of the newly discovered corpse!");
+        sb.AppendFormat(formatter, "{0:height} and {0:clothb} Also, {0:clothl}", body);
+        return sb.ToString();
+    }
+
+    private static string Radio1(BodyInfo body, float reality)
+    {
+        DescriptionFormatter.Reality = reality;
+        StringBuilder sb = new StringBuilder();
+
+        sb.AppendFormat("Welcome back, we have some updated information about the dead body we found this morning.");
+        sb.AppendFormat(formatter, "According to our source, {0:height} and it is also believed that, {0:clothb}", body);
+        return sb.ToString();
+    }
+
+    private static string Radio2(BodyInfo body, float reality)
+    {
+        DescriptionFormatter.Reality = reality;
+        StringBuilder sb = new StringBuilder();
+
+        sb.AppendFormat("This is Radio XXX, and I’m your host. New reports indicate that a newly found dead body yesterday has the following trait: ");
+        sb.AppendFormat(formatter, "{0:height} and {0:clothb}", body);
+        sb.AppendFormat("Since the creature can disguise itself into human bodies, we highly recommend you to be aware of anyone who looks like this dead body.");
+        return sb.ToString();
+    }
+
+    private static string Radio3(BodyInfo body, float reality)
+    {
+        DescriptionFormatter.Reality = reality;
+        StringBuilder sb = new StringBuilder();
+
+        sb.AppendFormat("This just in. A resident was reported misssing since yesterday morning.");
+        sb.AppendFormat(formatter, "{0:height} Other sources have shown what ii was wearing {0:clothb} {0:clothl}", body);
+        return sb.ToString();
+    }
+
+    private static string Radio4(BodyInfo body, float reality)
+    {
+        DescriptionFormatter.Reality = reality;
+        StringBuilder sb = new StringBuilder();
+
+        sb.AppendFormat("I’ve got news for you.A resident went missing since two days ago.");
+        sb.AppendFormat(formatter, "{0:height} and {0:clothb} In addition, {0:clothl} before missing.", body);
+        sb.AppendFormat("Please be aware of those who have the similar traits.");
+        return sb.ToString();
+    }
+
 
 
     private static bool IsReal(float reality) {

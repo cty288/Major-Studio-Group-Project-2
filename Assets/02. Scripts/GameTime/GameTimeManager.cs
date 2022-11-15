@@ -17,6 +17,7 @@ public class GameTimeManager : AbstractSystem, ISystem {
 
     private Func<bool> beforeEndOfTodayEvent = null;
     private int day = 0;
+    public int Day { get { return day; } set { day = value; } }
 
     public Action<int> OnDayStart = null;
     public BindableProperty<DateTime> CurrentTime = new BindableProperty<DateTime>(new DateTime(2022, 11, 12, 22, 0, 0));

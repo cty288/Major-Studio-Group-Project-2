@@ -661,6 +661,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: 5a6db85ebb9466f4b90af9ebdd3c4fdc, type: 2}
   followingObject: {fileID: 1982097157}
+  followingObjectIsUI: 0
 --- !u!61 &248798440
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2293,6 +2294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: 5a6db85ebb9466f4b90af9ebdd3c4fdc, type: 2}
   followingObject: {fileID: 970605457}
+  followingObjectIsUI: 0
 --- !u!61 &574240997
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4057,6 +4059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: 5a6db85ebb9466f4b90af9ebdd3c4fdc, type: 2}
   followingObject: {fileID: 1672847243}
+  followingObjectIsUI: 0
 --- !u!61 &1050978007
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4844,6 +4847,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: 5a6db85ebb9466f4b90af9ebdd3c4fdc, type: 2}
   followingObject: {fileID: 392922043}
+  followingObjectIsUI: 0
 --- !u!61 &1359247904
 BoxCollider2D:
   m_ObjectHideFlags: 0
