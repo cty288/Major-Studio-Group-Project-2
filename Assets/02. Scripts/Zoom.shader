@@ -3,6 +3,7 @@ Shader "Custom/Zoom"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _Color("Color", Color) = (1,1,1,1)
     }
     SubShader
     {
@@ -35,6 +36,7 @@ Shader "Custom/Zoom"
             float _ZoomIntensity;
             float _EdgeIntensity;
             float _Size;
+			float4 _Color;
 
             Interpolators vert (MeshData v)
             {
@@ -44,6 +46,18 @@ Shader "Custom/Zoom"
                 return o;
             }
 
+			fixed noise (float2 uv){
+			uv *= 10;
+			uv = frac(uv);
+			uv += dot(uv, uv + 19.19);
+			return frac((uv.x + uv.y) * uv.y);
+			
+            }
+
+			
+			
+         
+			
             fixed4 frag (Interpolators i) : SV_Target
             {
                 float2 scale = float2(_ScreenParams.x / _ScreenParams.y, 1);
@@ -58,7 +72,9 @@ Shader "Custom/Zoom"
 				
 				fixed4 target = tex2D(_MainTex, i.uv + dir * _ZoomIntensity * atZoomArea );
                 col = lerp(col, target, atZoomArea);
-                col = pow(col, 2);
+                col = pow(col, 1);
+                col = col * _Color * dis * 5; 
+                col = col * noise(i.uv+ _Time.x);
                 return col;
             }
             ENDCG

@@ -61,10 +61,10 @@ public class DayIndicator : AbstractMikroController<MainGame> {
         }
 
         foreach (Image foodImage in foodImages) {
-            foodImage.DOFade(0, 1f).SetDelay(4);
+            foodImage.DOFade(0, 1f).SetDelay(4.5f);
         }
 
-        foodIndicatorText.DOFade(0, 1f).SetDelay(4);
+        foodIndicatorText.DOFade(0, 1f).SetDelay(4.5f);
 
         lastFoodCount = playerResourceSystem.FoodCount;
 

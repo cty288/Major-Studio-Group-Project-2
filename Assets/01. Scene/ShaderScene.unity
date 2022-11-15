@@ -1804,9 +1804,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 2ceb6ffa246a249b2a5b830b203ebd7d, type: 2}
   spyhole: {fileID: 211408953}
-  zoomIntensity: 0.4
-  size: 0.15
-  edgeIntensity: 0.05
+  zoomIntensity: 0.22
+  size: 0.49
+  edgeIntensity: 0.1
 --- !u!1 &621589684
 GameObject:
   m_ObjectHideFlags: 0
@@ -2702,6 +2702,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa3b49f59aa702743bd673c5b1037a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodImages: []
+  foodIndicatorText: {fileID: 0}
 --- !u!95 &830020777
 Animator:
   serializedVersion: 4
@@ -3753,6 +3755,8 @@ MonoBehaviour:
   - {fileID: 1960694488}
   - {fileID: 1747967967}
   - {fileID: 778412166}
+  symbolImages: []
+  symbols: []
 --- !u!1 &1558214076
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using DG.Tweening;
 using MikroFramework.Architecture;
 using MikroFramework.ResKit;
 using UnityEngine;
@@ -12,16 +14,37 @@ public class AlienBody : AbstractMikroController<MainGame> {
     private Transform tallSpawnPosition;
     private Transform shortSpawnPosition;
 
+    private List<SpriteRenderer> spriteRenderers;
+    
+
     private void Awake() {
         tallSpawnPosition = transform.Find("TallSpawnPosition");
         shortSpawnPosition = transform.Find("LowSpawnPosition");
+       
     }
 
-    public static GameObject BuildShadowAlienBody(BodyInfo info) {
+    public void OnBuilt() {
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>().ToList();
+    }
+
+    public void Hide() {
+        foreach (SpriteRenderer spriteRenderer in spriteRenderers) {
+            spriteRenderer.DOFade(0, 0.5f);
+        }
+    }
+
+    public void Show() {
+        foreach (SpriteRenderer spriteRenderer in spriteRenderers) {
+            spriteRenderer.DOFade(1, 0.5f);
+        }
+    }
+
+    public static GameObject BuildShadowAlienBody(BodyInfo info, bool hide) {
         ResLoader resLoader = MainGame.Interface.GetUtility<ResLoader>();
         GameObject body = resLoader.LoadSync<GameObject>("aliens","AlienBody");
         GameObject bodyInstance = GameObject.Instantiate(body);
         AlienBodyPartInfo lastInfo = null;
+        AlienBody alienBody = bodyInstance.GetComponent<AlienBody>();
         foreach (AlienBodyPartInfo partInfo in info.AllBodyInfoPrefabs) {
             Vector2 position = Vector2.zero;
             if (lastInfo != null) {
@@ -31,9 +54,14 @@ public class AlienBody : AbstractMikroController<MainGame> {
             if (partInfo) {
                 GameObject spawnedBodyPart = Instantiate(partInfo.gameObject, position, Quaternion.identity, bodyInstance.transform);
                 lastInfo = spawnedBodyPart.GetComponent<AlienBodyPartInfo>();
+                if (hide) {
+                    spawnedBodyPart.GetComponentsInChildren<SpriteRenderer>(true).ToList()
+                        .ForEach(s => s.color = new Color(1, 1, 1, 0));
+                }
             }
         }
 
+        alienBody.OnBuilt();
         return bodyInstance;
     }
 
@@ -75,7 +103,7 @@ public class AlienBody : AbstractMikroController<MainGame> {
             }
             layer++;
         }
-
+        alienBody.OnBuilt();
         return bodyInstance;
     }
 }
