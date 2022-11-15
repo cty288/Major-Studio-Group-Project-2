@@ -6,8 +6,9 @@ using DG.Tweening;
 using MikroFramework.Architecture;
 using MikroFramework.ResKit;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class AlienBody : AbstractMikroController<MainGame> {
+public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler {
 
     public BodyInfo BodyInfo;
 
@@ -105,5 +106,10 @@ public class AlienBody : AbstractMikroController<MainGame> {
         }
         alienBody.OnBuilt();
         return bodyInstance;
+    }
+
+    public Action onClickAlienBody;
+    public void OnPointerClick(PointerEventData eventData) {
+        onClickAlienBody?.Invoke();
     }
 }

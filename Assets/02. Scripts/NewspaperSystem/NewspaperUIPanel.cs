@@ -64,13 +64,18 @@ public class NewspaperUIPanel : AbstractMikroController<MainGame> {
             Camera camera = spawnedBody.GetComponentInChildren<Camera>();
             RenderTexture renderTexture = camera.targetTexture;
             imageContainers[i].texture = renderTexture;
-
+            TMP_Text hintText = symbolImages[i].GetComponentInChildren<TMP_Text>(true);
             if (info.DayRemaining == 3) {
                 symbolImages[i].sprite = symbols[0];
+                hintText.text = "This person is dead.";
             }
             else {
                 symbolImages[i].sprite = symbols[1];
+                hintText.text = "This person is missing.";
             }
+
+            
+            
         }
 
 

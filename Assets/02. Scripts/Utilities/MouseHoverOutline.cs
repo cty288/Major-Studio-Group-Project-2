@@ -3,33 +3,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-[RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
+[RequireComponent(typeof(Collider2D))]
 public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     [SerializeField] private Material outlineMaterial;
     private SpriteRenderer spriteRenderer;
+    private Image image;
     private Material defaultMaterial;
     private bool isHovering = false;
     [SerializeField] private GameObject followingObject;
+    [SerializeField] private bool followingObjectIsUI = false;
     
     private void Awake() {
-        outlineMaterial = Material.Instantiate(outlineMaterial);
+        if (outlineMaterial) {
+            outlineMaterial = Material.Instantiate(outlineMaterial);
+        }
+       
         spriteRenderer = GetComponent<SpriteRenderer>();
-        defaultMaterial = spriteRenderer.material;
+        image = GetComponent<Image>();
+        if (spriteRenderer) {
+            defaultMaterial = spriteRenderer.material;
+        }
+
+        if (image) {
+            defaultMaterial = image.material;
+        }
+       
     }
 
     private void Update() {
         if (isHovering) {
             if (followingObject) {
-                Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                pos = new Vector3(pos.x, pos.y, 0);
-                followingObject.transform.position = pos;
+                if (!followingObjectIsUI) {
+                    Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    pos = new Vector3(pos.x, pos.y, 0);
+                    followingObject.transform.position = pos;
+                }
+                else {
+                    Vector3 pos = Input.mousePosition;
+                    pos = new Vector3(pos.x, pos.y, 0);
+                    followingObject.transform.position = pos;
+                }
+               
             }
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        spriteRenderer.material = outlineMaterial;
+        if (outlineMaterial) {
+            if (spriteRenderer) {
+                spriteRenderer.material = outlineMaterial;
+            }
+            if (image)
+            {
+                image.material = outlineMaterial;
+            }
+        }
+       
         isHovering = true;
         if (followingObject) {
             followingObject.SetActive(true);
@@ -37,7 +68,15 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-        spriteRenderer.material = defaultMaterial;
+        if (outlineMaterial) {
+            if (spriteRenderer) {
+                spriteRenderer.material = defaultMaterial;
+            }
+            if (image) {
+                image.material = defaultMaterial;
+            }
+        }
+        
         isHovering = false;
         if (followingObject)
         {

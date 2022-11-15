@@ -79,14 +79,17 @@ public class BodyGenerationSystem : AbstractSystem {
             //spawn body outside!
             if (Random.Range(0f, 1f) <= nonAlienChance) {
                 if (Random.Range(0f, 1f) <= 0.5f) {
-                    CurrentOutsideBody.Value = BodyInfo.GetBodyInfoOpposite(TodayAlien, 0.7f, 0.5f, true);
+                    CurrentOutsideBody.Value = BodyInfo.GetBodyInfoOpposite(TodayAlien, 0.7f, 0.8f, true);
                 }
                 else {
                     CurrentOutsideBody.Value = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false);
                 }
-                
-            }else {
+                Debug.Log("Spawned a non-alien");
+
+            }
+            else {
                 CurrentOutsideBody.Value = TodayAlien;
+                Debug.Log("Spawned an alien!");
             }
 
             Debug.Log("Start Knock");
