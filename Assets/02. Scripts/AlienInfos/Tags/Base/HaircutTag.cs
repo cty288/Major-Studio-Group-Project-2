@@ -75,7 +75,7 @@ public class HairCutTagPonyTail : HaircutTag
     {
         get
         {
-            return new List<string>() { "It wore itshair in a high ponytail, as the security camera can tell." };
+            return new List<string>() { "Its hair is in a high ponytail, as the security camera can tell." };
         }
     }
 
@@ -94,7 +94,7 @@ public class HairCutTagLongBlackHair : HaircutTag
     {
         get
         {
-            return new List<string>() { "It wore itshair in a high ponytail, as the security camera can tell." };
+            return new List<string>() { "Its hair is in a high ponytail, as the security camera can tell." };
         }
     }
 

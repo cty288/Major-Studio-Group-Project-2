@@ -2,16 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
+using Crosstales.RTVoice.Model.Enum;
 
 //using NHibernate.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public enum AlienVoiceType {
-    Male,
-    Female
-}
 
 public class BodyInfo {
     //https://stackoverflow.com/questions/35577011/custom-string-formatter-in-c-sharp
@@ -25,7 +21,7 @@ public class BodyInfo {
     public List<AlienBodyPartInfo> AllBodyInfoPrefabs = new List<AlienBodyPartInfo>();
 
 
-    public AlienVoiceType VoiceType;
+    public Gender VoiceType;
     public bool CheckContainTag<T>(out T tag) where T : class, IAlienTag {
         tag = null;
         bool hasTags = CheckContainTags(out List<T> tags);
@@ -65,7 +61,7 @@ public class BodyInfo {
     private BodyInfo() {
 
     }
-    private BodyInfo(AlienVoiceType voiceType, AlienBodyPartInfo headInfoPrefab, AlienBodyPartInfo mainBodyPartInfoPrefab, AlienBodyPartInfo legInfoPreab, BodyPartDisplayType displayType,
+    private BodyInfo(Gender voiceType, AlienBodyPartInfo headInfoPrefab, AlienBodyPartInfo mainBodyPartInfoPrefab, AlienBodyPartInfo legInfoPreab, BodyPartDisplayType displayType,
         HeightType height) {
         HeadInfoPrefab = headInfoPrefab;
         MainBodyInfoPrefab = mainBodyPartInfoPrefab;
@@ -85,7 +81,7 @@ public class BodyInfo {
     #region Static
     
     public static BodyInfo GetRandomBodyInfo(BodyPartDisplayType displayType, bool isAlien) {
-        AlienVoiceType[] voiceValues = (AlienVoiceType[]) Enum.GetValues(typeof(AlienVoiceType));
+        Gender[] voiceValues = (Gender[]) Enum.GetValues(typeof(Gender));
         HeightType height = Random.Range(0, 2) == 0 ? HeightType.Short : HeightType.Tall;
         
         AlienBodyPartInfo leg = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, BodyPartType.Legs, isAlien, height);
@@ -108,10 +104,10 @@ public class BodyInfo {
             height, originalIsAlien, heightOpposite, bodyPartOppositeChance);
         headInfoPrefab = GetOpposite(original.DisplayType, original.HeadInfoPrefab, BodyPartType.Head, height,
             originalIsAlien, heightOpposite, bodyPartOppositeChance);
-        
-     
-        
-        AlienVoiceType voice = GetOpposite(original.VoiceType, bodyPartOppositeChance);
+
+
+
+        Gender voice = GetOpposite(original.VoiceType, bodyPartOppositeChance);
         height = heightOpposite ? (height == HeightType.Short ? HeightType.Tall : HeightType.Short) : height;
 
         return new BodyInfo(voice, headInfoPrefab, mainBodyPartInfoPrefab, legInfoPreab, original.DisplayType, height);
@@ -196,14 +192,14 @@ public class BodyInfo {
         
         return original;
     }
-    private static AlienVoiceType GetOpposite(AlienVoiceType original, float oppositeChance) {
+    private static Gender GetOpposite(Gender original, float oppositeChance) {
         bool isOpposite = Random.Range(0f, 1f) < oppositeChance;
         if (isOpposite) {
-            if (original == AlienVoiceType.Female) {
-                return AlienVoiceType.Male;
+            if (original == Gender.FEMALE) {
+                return Gender.MALE;
             }
             else {
-                return AlienVoiceType.Female;
+                return Gender.FEMALE;
             }
         }
 

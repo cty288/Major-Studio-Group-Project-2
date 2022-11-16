@@ -15,6 +15,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<NewspaperSystem>(new NewspaperSystem());
         this.RegisterSystem<PlayerResourceSystem>(new PlayerResourceSystem());
         this.RegisterModel<GameStateModel>(new GameStateModel());
+        this.RegisterModel<GameSceneModel>(new GameSceneModel());
         
     }
 

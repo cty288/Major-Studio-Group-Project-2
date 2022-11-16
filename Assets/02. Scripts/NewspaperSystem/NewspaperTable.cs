@@ -36,10 +36,10 @@ public class NewspaperTable : AbstractMikroController<MainGame>, IPointerEnterHa
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        Debug.Log("Table Pointer Enter");
+        
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-        Debug.Log("Table Pointer Exit");
+      
     }
 }

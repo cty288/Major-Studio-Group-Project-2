@@ -32,7 +32,7 @@ public class ClothTagShirt : ClothTag
         get
         {
             return new List<string>() {
-                "When the corpse was found in the farmland by the next moning, the body was necked and exposed. The victim's family reported that a blue T-shirt and pants were worn by the time he left home."
+                "When the corpse was found in the farmland by the next morning, the body was necked and exposed. The victim's family reported that a blue T-shirt and pants were worn by the time he left home."
             };
         }
     }
@@ -42,7 +42,7 @@ public class ClothTagShirt : ClothTag
         get
         {
             return new List<string>() {
-                "The vitcim's skirt was taken way.", 
+                "The victim's skirt was taken way.", 
             };
         }
     }
@@ -65,7 +65,7 @@ public class ClothTagSweater : ClothTag
         get
         {
             return new List<string>() {
-                "For some reasons, the creature took all the outwears from the vitcim, including a grey wool coat and a cotton jacket."
+                "For some reasons, the creature took all the outwears from the victim, including a grey wool coat and a cotton jacket."
             };
         }
     }
@@ -79,7 +79,7 @@ public class ClothTagCottonVest : ClothTag
         get
         {
             return new List<string>() {
-                "For some reasons, the creature took all the outwears from the vitcim, including a grey wool coat and a cotton jacket."
+                "For some reasons, the creature took all the outwears from the victim, including a grey wool coat and a cotton jacket."
             };
         }
     }
@@ -102,7 +102,7 @@ public class ClothTagLongDress : ClothTag
         get
         {
             return new List<string>() {
-                "The police suspects that this creature is sensitive to chill, as it took away all of the vitcim's outwear.",
+                "The police suspects that this creature is sensitive to chill, as it took away all of the victim's outwear.",
             };
         }
     }
@@ -125,7 +125,7 @@ public class ClothTagWatch : ClothTag
         get
         {
             return new List<string>() {
-                "The victim's wife reported that their 15th year aniversry gift -- a brand-new stainless steal watch -- was also unfound in the crime scene.",
+                "The victim's wife reported that their 15th year anniversary gift -- a brand-new stainless steal watch -- was also unfound in the crime scene.",
             };
         }
     }
@@ -135,7 +135,7 @@ public class ClothTagWatch : ClothTag
         get
         {
             return new List<string>() {
-                "When the corpse was found in the farmland by the next moning, the body was necked and exposed. The victim's family reported that a blue T-shirt and pants were worn by the time he left home.",
+                "When the corpse was found in the farmland by the next morning, the body was necked and exposed. The victim's family reported that a blue T-shirt and pants were worn by the time he left home.",
             };
         }
     }
@@ -158,7 +158,7 @@ public class ClothTagScarf : ClothTag
         get
         {
             return new List<string>() {
-                "For some reasons, the creature took all the outwears from the vitcim, including a grey wool coat and a cotton jacket.",
+                "For some reasons, the creature took all the outwears from the victim, including a grey wool coat and a cotton jacket.",
             };
         }
     }
@@ -176,7 +176,7 @@ public class ClothTagShortPants: ClothTag
         get
         {
             return new List<string>() {
-                "Possibily wearing the shorts took away from the victim, the creature is by still now unaccounted for.", 
+                "Possibly wearing the shorts took away from the victim, the creature is by still now unaccounted for.", 
             };
         }
     }
@@ -186,7 +186,7 @@ public class ClothTagShortPants: ClothTag
         get
         {
             return new List<string>() {
-                "According to the witness, the creature was wearing a yellow underwaear.",
+                "According to the witness, the creature was wearing a yellow underwear.",
             };
         }
     }
@@ -199,7 +199,7 @@ public class ClothTagLongPants : ClothTag
         get
         {
             return new List<string>() {
-                "The withness saw it ran away along the 4th Aveune, but we have no clue where it is now. It was confirmed that it was last seen in a white shirt and black pants.",
+                "The witness saw it ran away along the 4th Avenue, but we have no clue where it is now. It was confirmed that it was last seen in a white shirt and black pants.",
             };
         }
     }
@@ -222,7 +222,7 @@ public class ClothTagShortSkirt : ClothTag
         get
         {
             return new List<string>() {
-                "The vitcim's skirt was taken way.",
+                "The victim's skirt was taken way.",
             };
         }
     }
@@ -232,7 +232,7 @@ public class ClothTagShortSkirt : ClothTag
         get
         {
             return new List<string>() {
-                "The victim's wife reported that their 15th year aniversry gift -- a brand-new stainless steal watch -- was also unfound in the crime scene.",
+                "The victim's wife reported that their 15th year anniversary gift -- a brand-new stainless steal watch -- was also unfound in the crime scene.",
             };
         }
     }

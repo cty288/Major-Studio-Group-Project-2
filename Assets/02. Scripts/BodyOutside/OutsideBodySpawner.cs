@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
@@ -13,10 +14,16 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
     [SerializeField] private Speaker speaker;
 
     private bool speakEnd = false;
+    private bool todaysAlienIsVeryLarge = false;
     private void Awake() {
         bodyGenerationSystem = this.GetSystem<BodyGenerationSystem>();
         bodyGenerationSystem.CurrentOutsideBody.RegisterOnValueChaned(OnOutsideBodyChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.GetSystem<GameTimeManager>().OnDayStart += OnDayStart;
+    }
+
+    private void OnDayStart(int obj) {
+        todaysAlienIsVeryLarge = Random.value < 0.1f;
     }
 
     private void OnOutsideBodyChanged(BodyInfo oldBody, BodyInfo body) {
@@ -32,6 +39,12 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
         else {
             bodyViewController = AlienBody.BuildShadowAlienBody(body, true).GetComponent<AlienBody>();
             bodyViewController.transform.position = transform.position;
+            if (body == bodyGenerationSystem.TodayAlien) {
+                if (todaysAlienIsVeryLarge) {
+                    bodyViewController.gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                    bodyViewController.gameObject.transform.DOLocalMoveY(-4, 0f);
+                }
+            }
             bodyViewController.Show();
             bodyViewController.onClickAlienBody += OnOutsideBodyClicked;
         }

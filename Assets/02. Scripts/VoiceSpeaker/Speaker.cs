@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Crosstales.RTVoice;
 using Crosstales.RTVoice.Model.Enum;
 using DG.Tweening;
 using MikroFramework.Architecture;
@@ -13,27 +14,42 @@ public class SentenceInfo {
     public string SentenceFragment;
     public Action Callback;
     public float Rate;
-    public SentenceInfo(string completeSentence, string sentenceFragment, Action callback, float rate) {
+    public Gender SpeakGender;
+    public SentenceInfo(string completeSentence, string sentenceFragment, Action callback, float rate, Gender speakGender) {
         this.CompleteSentence = completeSentence;
         this.SentenceFragment = sentenceFragment;
         this.Callback = callback;
         this.Rate = rate;
+        this.SpeakGender = speakGender;
     }
 }
 
 [RequireComponent(typeof(AudioSource))]
 public class Speaker :  AbstractMikroController<MainGame> {
     private AudioSource audioSource;
+
+    public AudioSource AudioSource => audioSource;
     private AudioMixer audioMixer;
+
+    public AudioMixer AudioMixer => audioMixer;
 
     private Queue<SentenceInfo> sentenceQueues = new Queue<SentenceInfo>();
     private SentenceInfo currentSentence = null;
     
     [SerializeField] private Subtitle subtitile;
+
+    public bool IsSpeaking = false;
+
+    private bool inited = false;
+    
     private void Awake() {
         audioSource = GetComponent<AudioSource>();
-        audioMixer = audioSource.outputAudioMixerGroup.audioMixer;
+        if (audioMixer) {
+            audioMixer = audioSource.outputAudioMixerGroup.audioMixer;
+        }
+        
         Crosstales.RTVoice.Speaker.Instance.OnSpeakCompleted.AddListener(OnSpeakCompleted);
+        Destroy(GetComponent<LiveSpeaker>());
     }
 
     private void OnDestroy() {
@@ -41,6 +57,9 @@ public class Speaker :  AbstractMikroController<MainGame> {
     }
 
     private void OnSpeakCompleted(string s) {
+        if (!inited) {
+            return;
+        }
         if (sentenceQueues.Count > 0) {
             SentenceInfo nextSentence = sentenceQueues.Dequeue();
             if(currentSentence!=null && currentSentence.CompleteSentence != nextSentence.CompleteSentence) {
@@ -54,21 +73,30 @@ public class Speaker :  AbstractMikroController<MainGame> {
         }
     }
 
-    public void Speak(string sentence, Action onEnd = null, float rate = 1f) {
+    public void Speak(string sentence, Action onEnd = null, float rate = 1f, Gender gender = Gender.MALE) {
+        inited = true;
+        IsSpeaking = true;
         bool needSpeak = sentenceQueues.Count == 0;
         List<string> splitedSentences = VoiceTextSpliter.Split(sentence);
         foreach (string splitedSentence in splitedSentences) {
-            sentenceQueues.Enqueue(new SentenceInfo(sentence, splitedSentence, onEnd, rate));
+            sentenceQueues.Enqueue(new SentenceInfo(sentence, splitedSentence, onEnd, rate, gender));
         }
 
         if (needSpeak) {
             SentenceInfo text = sentenceQueues.Dequeue();
+            if (audioMixer) {
+                audioMixer.SetFloat("cutoffFreq", 4600);
+                audioMixer.SetFloat("resonance", 1);
+            }
            
             SpeakSentence(text, rate);
         }
     }
 
     public void Corrupt(float time, Action onFinished) {
+        if (!audioMixer) {
+            return;
+        }
         //change cutoff freq
         audioMixer.DOSetFloat("cutoffFreq", 0, time).OnComplete(() => {
             onFinished?.Invoke();
@@ -78,7 +106,9 @@ public class Speaker :  AbstractMikroController<MainGame> {
     
     private void SpeakSentence(SentenceInfo text, float rate) {
         currentSentence = text;
-        Crosstales.RTVoice.Speaker.Instance.Speak(text.SentenceFragment, audioSource, Crosstales.RTVoice.Speaker.Instance.VoiceForGender(Gender.MALE), true, rate);
+        float volume = text.SpeakGender == Gender.MALE ? 0.5f : 0.8f;
+        Crosstales.RTVoice.Speaker.Instance.Speak(text.SentenceFragment, audioSource, Crosstales.RTVoice.Speaker.Instance.VoiceForGender(text.SpeakGender), true, rate,1, volume);
+        audioSource.volume = volume;
         if (subtitile) {
             subtitile.OnSpeakStart(text.SentenceFragment);
         }
@@ -91,13 +121,17 @@ public class Speaker :  AbstractMikroController<MainGame> {
             subtitile.OnSpeakStart("");
         }
 
-        audioMixer.SetFloat("cutoffFreq", 4600);
-        audioMixer.SetFloat("resonance", 1);
+        if (audioMixer) {
+            audioMixer.SetFloat("cutoffFreq", 4600);
+            audioMixer.SetFloat("resonance", 1);
+        }
+       
         audioSource.Stop();
         if (currentSentence!=null) {
             currentSentence.Callback?.Invoke();
         }
         
         currentSentence = null;
+        IsSpeaking = false;
     }
 }

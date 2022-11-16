@@ -25,8 +25,8 @@ public class FatTag : AbstractAlienTag, IFatTag {
         }
         else if(fatness == FatType.Thin)
         {
-            RealDescriptions = new List<string>() { "The creature's body is reported to be slim." };
-            FakeDescriptions = new List<string>() { "The witness saw this creature batter down a wall with its fist." };
+            RealDescriptions = new List<string>() { "The victim's body is reported to be slim." };
+            FakeDescriptions = new List<string>() { "The witness saw this victim's batter down a wall with its fist." };
         }
     }
 

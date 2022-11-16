@@ -12,7 +12,7 @@ public static class AlienDescriptionFactory {
 
     private static DescriptionFormatter formatter = new DescriptionFormatter();
     public static void Init() {
-        RegisterRadioDescription(TestRadioDescription);
+        //RegisterRadioDescription(TestRadioDescription);
         RegisterRadioDescription(Radio0);
         RegisterRadioDescription(Radio1);
         RegisterRadioDescription(Radio2);
@@ -52,7 +52,7 @@ public static class AlienDescriptionFactory {
         StringBuilder sb = new StringBuilder();
 
         sb.AppendFormat("We have just got the latest information of the newly discovered corpse!");
-        sb.AppendFormat(formatter, "{0:height} and {0:clothb} Also, {0:clothl}", body);
+        sb.AppendFormat(formatter, "{0:height} and {0:clothb} Also, {0:hair}", body);
         return sb.ToString();
     }
 
@@ -71,7 +71,7 @@ public static class AlienDescriptionFactory {
         DescriptionFormatter.Reality = reality;
         StringBuilder sb = new StringBuilder();
 
-        sb.AppendFormat("This is Radio XXX, and I’m your host. New reports indicate that a newly found dead body yesterday has the following trait: ");
+        sb.AppendFormat("This is Radio MK, and I’m your host. New reports indicate that a newly found dead body yesterday has the following trait: ");
         sb.AppendFormat(formatter, "{0:height} and {0:clothb}", body);
         sb.AppendFormat("Since the creature can disguise itself into human bodies, we highly recommend you to be aware of anyone who looks like this dead body.");
         return sb.ToString();
@@ -83,7 +83,7 @@ public static class AlienDescriptionFactory {
         StringBuilder sb = new StringBuilder();
 
         sb.AppendFormat("This just in. A resident was reported misssing since yesterday morning.");
-        sb.AppendFormat(formatter, "{0:height} Other sources have shown what ii was wearing {0:clothb} {0:clothl}", body);
+        sb.AppendFormat(formatter, "{0:fat} Other sources have shown what ii was wearing {0:clothb} {0:clothl}", body);
         return sb.ToString();
     }
 
@@ -92,8 +92,8 @@ public static class AlienDescriptionFactory {
         DescriptionFormatter.Reality = reality;
         StringBuilder sb = new StringBuilder();
 
-        sb.AppendFormat("I’ve got news for you.A resident went missing since two days ago.");
-        sb.AppendFormat(formatter, "{0:height} and {0:clothb} In addition, {0:clothl} before missing.", body);
+        sb.AppendFormat("From recent reports, a resident went missing since two days ago.");
+        sb.AppendFormat(formatter, "{0:hair} and {0:fat} In addition, {0:clothl} before missing.", body);
         sb.AppendFormat("Please be aware of those who have the similar traits.");
         return sb.ToString();
     }

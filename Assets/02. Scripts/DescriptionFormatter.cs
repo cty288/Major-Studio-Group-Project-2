@@ -42,11 +42,24 @@ public class DescriptionFormatter : IFormatProvider, ICustomFormatter {
     }
 
     private string GetVoiceDescription(BodyInfo body, float reality) {
-        return "voice";
+        return "";
     }
 
     public static string GetHeightDescriptions(BodyInfo body, float reality) {
-        return "is very high.";
+        List<string> shortDescriptions = new List<string>() {
+            "The victim is short in size."
+        };
+        List<string> highDescription = new List<string>() {
+            "The victim has a relatively large size."
+        };
+
+        List<string> targetList = body.Height == HeightType.Short ? shortDescriptions : highDescription;
+        if (Random.Range(0f, 1f) > reality)
+        {
+            targetList = targetList == shortDescriptions ? highDescription : shortDescriptions;
+        }
+
+        return targetList[Random.Range(0, targetList.Count)];
     }
 
     public static string GetByTag<T>(BodyInfo body, float reality) where T : class, IAlienTag {

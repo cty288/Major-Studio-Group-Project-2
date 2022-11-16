@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using MikroFramework.Architecture;
 using MikroFramework.Singletons;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BackButton : MonoMikroSingleton<BackButton> {
+public class BackButton : MonoMikroSingleton<BackButton>, IController {
     private Button button;
     private Image image;
 
@@ -43,14 +44,12 @@ public class BackButton : MonoMikroSingleton<BackButton> {
         hintText.DOFade(0, 0.5f);
     }
     public void OnBackButtonClicked() {
-        LoadCanvas.Singleton.Load(0.2f, () => {
-            foreach (Camera sceneCamera in sceneCameras) {
-                sceneCamera.gameObject.SetActive(false);
-            }
-            mainCamera.gameObject.SetActive(true);
-            Hide();
-        }, null);
+        this.GetModel<GameSceneModel>().GameScene.Value = GameScene.MainGame;
+        
     }
 
-    
+
+    public IArchitecture GetArchitecture() {
+        return MainGame.Interface;
+    }
 }

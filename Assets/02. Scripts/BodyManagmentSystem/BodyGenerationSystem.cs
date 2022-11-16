@@ -99,7 +99,6 @@ public class BodyGenerationSystem : AbstractSystem {
                     CurrentOutsideBody.Value = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false);
                 }
                 Debug.Log("Spawned a non-alien");
-
             }
             else {
                 CurrentOutsideBody.Value = todayAlien;
