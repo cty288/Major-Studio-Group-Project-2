@@ -199,8 +199,7 @@ public class ClothTagLongPants : ClothTag
         get
         {
             return new List<string>() {
-                "It is wearing Long pants.",
-                "It is not short pants."
+                "The withness saw it ran away along the 4th Aveune, but we have no clue where it is now. It was confirmed that it was last seen in a white shirt and black pants.",
             };
         }
     }
@@ -210,8 +209,7 @@ public class ClothTagLongPants : ClothTag
         get
         {
             return new List<string>() {
-                "It is wearing a Skirt.",
-                "It is wearing an Underwear."
+                "We still don't know what's under the camouflage, a cream-white sweater that was worn by the victim.",
             };
         }
     }
@@ -235,29 +233,6 @@ public class ClothTagShortSkirt : ClothTag
         {
             return new List<string>() {
                 "The victim's wife reported that their 15th year aniversry gift -- a brand-new stainless steal watch -- was also unfound in the crime scene.",
-            };
-        }
-    }
-}
-
-public class ClothTagLongSportsPants : ClothTag
-{
-    public override List<string> RealDescriptions
-    {
-        get
-        {
-            return new List<string>() {
-                "It is wearing Long Sports pants.",
-            };
-        }
-    }
-
-    public override List<string> FakeDescriptions
-    {
-        get
-        {
-            return new List<string>() {
-                "It is wearing an Underwear."
             };
         }
     }
