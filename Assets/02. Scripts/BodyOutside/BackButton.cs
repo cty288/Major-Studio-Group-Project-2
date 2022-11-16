@@ -42,7 +42,7 @@ public class BackButton : MonoMikroSingleton<BackButton> {
         });
         hintText.DOFade(0, 0.5f);
     }
-    private void OnBackButtonClicked() {
+    public void OnBackButtonClicked() {
         LoadCanvas.Singleton.Load(0.2f, () => {
             foreach (Camera sceneCamera in sceneCameras) {
                 sceneCamera.gameObject.SetActive(false);

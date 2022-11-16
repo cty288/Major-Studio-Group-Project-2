@@ -62,6 +62,7 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
             }
         }
 
+        alienBody.BodyInfo = info;
         alienBody.OnBuilt();
         return bodyInstance;
     }
@@ -104,6 +105,7 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
             }
             layer++;
         }
+        alienBody.BodyInfo = info;
         alienBody.OnBuilt();
         return bodyInstance;
     }

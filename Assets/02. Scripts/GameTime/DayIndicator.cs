@@ -62,10 +62,14 @@ public class DayIndicator : AbstractMikroController<MainGame> {
         }
         else if (lastFoodCount < playerResourceSystem.FoodCount) {
             int count = playerResourceSystem.FoodCount - lastFoodCount;
+           
             for (int i = lastFoodCount; i < lastFoodCount + count; i++) {
+                foodImages[i].DOKill();
+                foodImages[i].enabled = true;
                 foodImages[i].color = new Color(1, 1, 1, 0);
                 foodImages[i].gameObject.SetActive(true);
                 foodImages[i].DOFade(1, 1f).SetDelay(2);
+
             }
         }
 

@@ -40,7 +40,7 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
     private void OnOutsideBodyClicked() {
         Debug.Log("Clicked");
         if (bodyViewController.BodyInfo == bodyGenerationSystem.TodayAlien) {
-
+            BackButton.Singleton.Hide();
             LoadCanvas.Singleton.LoadUntil(() => {
                 speaker.Speak("Hahaha! I will kill you!", OnAlienSpeakEnd);
             }, () => {
@@ -48,9 +48,11 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
             }, () => false);
         }
         else {
+            BackButton.Singleton.Hide();
             LoadCanvas.Singleton.LoadUntil(() => {
                 speaker.Speak("Hey, I brought you some foods! Take care!", OnSpeakEnd);
                 this.GetSystem<PlayerResourceSystem>().AddFood(Random.Range(2, 4));
+                this.GetSystem<BodyGenerationSystem>().StopCurrentBodyAndStartNew();
             }, () => {
 
             }, () => speakEnd);
@@ -66,6 +68,7 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
         this.SendEvent<OnShowFood>();
         this.Delay(4.5f, () => {
             speakEnd = true;
+            BackButton.Singleton.OnBackButtonClicked();
         });
         
     }

@@ -70,6 +70,17 @@ public class BodyGenerationSystem : AbstractSystem {
         });
     }
 
+    public void StopCurrentBodyAndStartNew() {
+        if (knockDoorCheckCoroutine != null) {
+            CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
+        }
+        CurrentOutsideBody.Value = null;        
+
+        if (this.GetModel<GameStateModel>().GameState != GameState.End) {
+            knockDoorCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(KnockDoorCheck());
+        }
+    }
+    
     private IEnumerator KnockDoorCheck() {
         if (dayNum > 1) {
             while (true) {
