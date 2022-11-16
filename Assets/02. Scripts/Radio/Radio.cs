@@ -4,18 +4,29 @@ using UnityEngine;
 using MikroFramework.Event;
 using MikroFramework.Architecture;
 using MikroFramework;
+using MikroFramework.AudioKit;
 public class Radio : AbstractMikroController<MainGame>
 {
     public Speaker speaker;
+    [SerializeField]
+    private AudioClip radioOpenSound;
     public BodyInfo targetAlien;
 
     void Start()
     {
-
         this.RegisterEvent<OnNewBodyInfoGenerated>(PlayRadioInformation).UnRegisterWhenGameObjectDestroyed(gameObject);
-        this.Delay(5, () => {
-            speaker.Speak(AlienDescriptionFactory.GetRadioDescription(targetAlien, 1)); });
     }
+
+
+    public void PlayRadioInformation()//播放radio info
+    {
+        AudioSource aus = AudioSystem.Singleton.Play2DSound(radioOpenSound, 1);
+        this.Delay(radioOpenSound.length, () => {
+            speaker.Speak(AlienDescriptionFactory.GetRadioDescription(targetAlien, 1));
+        });
+    }
+
+
 
     private void PlayRadioInformation(OnNewBodyInfoGenerated e)
     {
