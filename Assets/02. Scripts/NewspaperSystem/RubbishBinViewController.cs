@@ -10,7 +10,7 @@ public class RubbishBinViewController : AbstractMikroController<MainGame> {
     private Material defaultMaterial;
     private NewspaperSystem newspaperSystem;
     [SerializeField] private GameObject hintCanvas;
-
+    private Collider2D collider;
     private NewspaperViewController newspaperHovering;
     private void Awake()
     {
@@ -18,13 +18,14 @@ public class RubbishBinViewController : AbstractMikroController<MainGame> {
         spriteRenderer = GetComponent<SpriteRenderer>();
         defaultMaterial = spriteRenderer.material;
         newspaperSystem = this.GetSystem<NewspaperSystem>();
+        collider = GetComponent<Collider2D>();
     }
 
     private void Update() {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition = new Vector3(mousePosition.x, mousePosition.y, 0);
         //check if the mouse is over the sprite
-        if (spriteRenderer.bounds.Contains(mousePosition)) {
+        if (collider.bounds.Contains(mousePosition)) {
             if (newspaperSystem.CurrentHoldingNewspaper) {
                 Highlight();
                 newspaperHovering = newspaperSystem.CurrentHoldingNewspaper;

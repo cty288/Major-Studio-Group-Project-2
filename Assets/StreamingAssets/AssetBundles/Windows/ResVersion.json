@@ -3,8 +3,8 @@
   "ABMD5List": [
     {
       "AssetName": "aliens",
-      "MD5": "4d91682699cd9036a25460ac372365b8",
-      "FileSize": 8.895508,
+      "MD5": "f8eca0d700918823df0cef4a107acd19",
+      "FileSize": 123.31543,
       "assetDatas": [
         {
           "Name": "AlienBody",
@@ -12,16 +12,31 @@
           "AssetType": "UnityEngine.GameObject"
         },
         {
-          "Name": "NewspaperFrame",
+          "Name": "NewspaperFrame_0",
           "OwnerBundleName": "aliens",
           "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "NewspaperFrame_1",
+          "OwnerBundleName": "aliens",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "NewspaperFrame_2",
+          "OwnerBundleName": "aliens",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "NewspaperTex1",
+          "OwnerBundleName": "aliens",
+          "AssetType": "UnityEngine.RenderTexture"
         }
       ]
     },
     {
       "AssetName": "audios",
-      "MD5": "343c3eca9131d61a4fe0d880f533e79f",
-      "FileSize": 240.916992,
+      "MD5": "4017943a4590a082a817a57b2e7a0d73",
+      "FileSize": 288.855469,
       "assetDatas": [
         {
           "Name": "knock_1",
@@ -62,8 +77,8 @@
     },
     {
       "AssetName": "mftest",
-      "MD5": "a11935594541289b3d16f5405a4b37cb",
-      "FileSize": 1044.67188,
+      "MD5": "e456a79bad48d075e0b4407bf249778f",
+      "FileSize": 1036.31445,
       "assetDatas": [
         {
           "Name": "War loop",
@@ -162,7 +177,7 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "2ea6743ccb689a0f805b04b5894f4a1e",
+      "MD5": "4c65ff5bd39cd47587c5ffdf35fc7fe9",
       "FileSize": 1.76074219,
       "assetDatas": []
     },
