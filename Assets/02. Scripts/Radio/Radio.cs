@@ -38,22 +38,36 @@ public class Radio : AbstractMikroController<MainGame>
     private BodyGenerationSystem bodyGenerationSystem;
     private BodyManagmentSystem bodyManagmentSystem;
     private bool isSpeaking = false;
+    private GameTimeManager gameTimeManager;
     private void Awake() {
         radioOpenAudioSource = GetComponent<AudioSource>();
         bodyGenerationSystem = this.GetSystem<BodyGenerationSystem>();
         bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
-        this.GetSystem<GameTimeManager>().OnDayStart += OnDayEnd;
+        gameTimeManager = this.GetSystem<GameTimeManager>();
+        gameTimeManager.CurrentTime.RegisterOnValueChaned(OnTimeChanged).UnRegisterWhenGameObjectDestroyed(gameObject);// += OnDayEnd;
         this.GetModel<GameStateModel>().GameState.RegisterOnValueChaned(OnGameStateChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
+    }
+
+    private void OnTimeChanged(DateTime time) {
+        if (time.Hour == 23 && time.Minute >= 50) {
+            if (dailyRadioCoroutine != null) {
+                StopCoroutine(dailyRadioCoroutine);
+                dailyRadioCoroutine = null;
+                StopRadio();
+            }
+           
+        }
+        //throw new NotImplementedException();
     }
 
     private void OnGameStateChanged(GameState arg1, GameState state) {
         if (state == GameState.End) {
-            StopRadio();
+            speaker.Stop();
         }
     }
 
     private void OnDayEnd(int obj) {
-        StopRadio();
+        
     }
 
     void Start() {
@@ -85,6 +99,9 @@ public class Radio : AbstractMikroController<MainGame>
         while (true) {
             if (!isSpeaking) {
                 yield return new WaitForSeconds(Random.Range(6f, 20f));
+                if (gameTimeManager.CurrentTime.Value.Hour == 23 && gameTimeManager.CurrentTime.Value.Minute >= 50) {
+                    
+                }
                 if (descriptionDatas.Count == 0) {
                     ConstructDescriptionDatas(descriptionDatas, radioReality, day);
                 }

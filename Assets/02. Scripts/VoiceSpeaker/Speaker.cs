@@ -44,9 +44,12 @@ public class Speaker :  AbstractMikroController<MainGame> {
     
     private void Awake() {
         audioSource = GetComponent<AudioSource>();
-        if (audioMixer) {
+
+        if (audioSource.outputAudioMixerGroup) {
             audioMixer = audioSource.outputAudioMixerGroup.audioMixer;
         }
+   
+        
         
         Crosstales.RTVoice.Speaker.Instance.OnSpeakCompleted.AddListener(OnSpeakCompleted);
         Destroy(GetComponent<LiveSpeaker>());
@@ -57,7 +60,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
     }
 
     private void OnSpeakCompleted(string s) {
-        if (!inited) {
+        if (!inited || !IsSpeaking) {
             return;
         }
         if (sentenceQueues.Count > 0) {
@@ -133,5 +136,6 @@ public class Speaker :  AbstractMikroController<MainGame> {
         
         currentSentence = null;
         IsSpeaking = false;
+        
     }
 }

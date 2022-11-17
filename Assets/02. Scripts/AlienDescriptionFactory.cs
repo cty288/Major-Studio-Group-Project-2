@@ -93,7 +93,7 @@ public static class AlienDescriptionFactory {
         StringBuilder sb = new StringBuilder();
 
         sb.AppendFormat("From recent reports, a resident went missing since two days ago.");
-        sb.AppendFormat(formatter, "{0:hair} and {0:fat} In addition, {0:clothl} before missing.", body);
+        sb.AppendFormat(formatter, "{0:hair} and {0:fat} In addition, {0:clothl}", body);
         sb.AppendFormat("Please be aware of those who have the similar traits.");
         return sb.ToString();
     }
