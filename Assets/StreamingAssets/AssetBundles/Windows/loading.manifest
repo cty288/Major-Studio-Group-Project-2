@@ -1,0 +1,53 @@
+ManifestFileVersion: 0
+CRC: 3979948059
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 4b949de4febb9ed8d605485e17be7eaa
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c29c357128feff56790ec9816c4fc93d
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/04. Sprites/UI/Menu/Loading/Loading_27.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_5.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_4.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_26.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_9.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_28.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_21.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_1.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading.spriteatlas
+- Assets/04. Sprites/UI/Menu/Loading/Loading_6.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_20.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_7.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_10.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_12.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_25.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_23.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_19.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_31.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_8.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_17.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_011.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_2.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_13.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_29.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_24.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_30.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_32.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_15.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_3.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_16.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_14.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_22.png
+- Assets/04. Sprites/UI/Menu/Loading/Loading_18.png
+Dependencies: []

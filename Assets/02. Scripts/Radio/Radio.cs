@@ -25,8 +25,7 @@ public class AlienDescriptionData {
 public class Radio : AbstractMikroController<MainGame>
 {
     public Speaker speaker;
-    [SerializeField]
-    private AudioClip radioOpenSound;
+    
     public BodyInfo targetAlien;
 
     private AudioSource radioOpenAudioSource;
@@ -99,9 +98,7 @@ public class Radio : AbstractMikroController<MainGame>
         while (true) {
             if (!isSpeaking) {
                 yield return new WaitForSeconds(Random.Range(6f, 20f));
-                if (gameTimeManager.CurrentTime.Value.Hour == 23 && gameTimeManager.CurrentTime.Value.Minute >= 50) {
-                    
-                }
+               
                 if (descriptionDatas.Count == 0) {
                     ConstructDescriptionDatas(descriptionDatas, radioReality, day);
                 }

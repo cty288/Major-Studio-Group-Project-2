@@ -1,0 +1,22 @@
+ManifestFileVersion: 0
+CRC: 2011690795
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 3fc33e423efe9997b48bae9859bd2670
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c29c357128feff56790ec9816c4fc93d
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/04. Sprites/Planets/Tutorial/TutorialPlanet1.png
+- Assets/04. Sprites/Planets/Tutorial/TutorialPlanet2.png
+Dependencies: []

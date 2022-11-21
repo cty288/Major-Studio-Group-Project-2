@@ -1,33 +1,107 @@
 ManifestFileVersion: 0
-CRC: 2432290683
+CRC: 3925968035
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 076a8eda39ee6c8a08f2ae4016cf26d3
+    Hash: 08ce43099f3a0835dfb535fab39b26bd
   TypeTreeHash:
     serializedVersion: 2
-    Hash: b3849ca72660b12eee2b9d5152ebbf0e
+    Hash: 93774e0fd1a239937c9308d3e3c16dde
 HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
 - Class: 4
   Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 50
+  Script: {instanceID: 0}
+- Class: 61
+  Script: {instanceID: 0}
+- Class: 62
+  Script: {instanceID: 0}
 - Class: 82
   Script: {instanceID: 0}
-- Class: 83
-  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: b46ff1cb7e87ed14fa105476fd9e4ebc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 52a7f5503a2505a49aca73bf2063239a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3f99d8d5b9cd55a4d95552d02d803f49, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: f5f870245e7796642b3a38ae058342c6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9dc4c5d80178d9945bf8edd927b4b509, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 728e083f0b501834ca14dc65f99c5fa7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
 - Class: 115
   Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers:
+- AssemblyName: Unity.RenderPipelines.Universal.Runtime
+  ClassName: UnityEngine.Rendering.Universal.LightUtility/LightMeshVertex
 - AssemblyName: UnityEngine.CoreModule
   ClassName: UnityEngine.Events.PersistentCallGroup
 - AssemblyName: UnityEngine.CoreModule
   ClassName: UnityEngine.Events.UnityEvent
 Assets:
-- Assets/MikroFramework/Runtime/Framework/AudioKit/2DSound.prefab
-- Assets/MikroFramework/Runtime/Examples/AudioKit/01. BasicExample/Resources/Lose.wav
-- Assets/MikroFramework/Runtime/Framework/AudioKit/3DSound.prefab
+- Assets/04. Sprites/Ripple Effect/thin ripple.png
+- Assets/03. Prefabs/Game/Particles/longTrail_Fast.prefab
+- Assets/07. Materials/DottedLines/DottedLineMapPath.mat
+- Assets/07. Materials/PlayerBounce.physicsMaterial2D
+- Assets/03. Prefabs/Game/Particles/Planets/PlanetBullet.prefab
+- Assets/03. Prefabs/2DSound.prefab
+- Assets/03. Prefabs/Game/Items/Template.prefab
+- Assets/TextMesh Pro/Shaders/TMP_SDF.shader
+- Assets/07. Materials/VisionStaticBackground.mat
+- Assets/VisionEffect/Materials/vision_entity_text.mat
+- Assets/Mirror/Editor/Icon/MirrorIcon.png
+- Assets/07. Materials/DottedLines/DottedLineBigMapPath.mat
+- Assets/03. Prefabs/3DSound.prefab
+- Assets/VisionEffect/Shaders/VisionStaticBackground.shader
+- Assets/04. Sprites/Ripple Effect/square ring.png
+- Assets/03. Prefabs/Game/Particles/Planets/Big Bump.prefab
+- Assets/VisionEffect/Materials/vision_entity_text_black.mat
+- Assets/05. Shaders/Map/DottedOutline.shader
+- Assets/03. Prefabs/Game/Particles/smallSpark.prefab
+- Assets/07. Materials/DottedLines/DottedLineTutorialBorder.mat
+- Assets/04. Sprites/UI/Info&Hints/MapPointers/label 1-01.png
+- Assets/03. Prefabs/Game/Particles/Explosion/Particle - Mine explosion.prefab
+- Assets/04. Sprites/Items/BananaSprite.png
+- Assets/VisionEffect/Materials/vision_entity_text_green.mat
+- Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader
+- Assets/VisionEffect/Shaders/VisionEntity.shader
+- Assets/03. Prefabs/Game/Particles/Planets/Small Bump.prefab
+- Assets/04. Sprites/Ripple Effect/explosion circle.png
+- Assets/02. Scripts/Game/ViewController/Visions/FOV Vision.prefab
+- Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader
+- Assets/04. Sprites/Ripple Effect/explosion star.png
+- Assets/04. Sprites/Spaceships/spaceship1/spaceship1.png
+- Assets/07. Materials/DottedLines/DottedLineMapBorder.mat
+- Assets/VisionEffect/Materials/vision_entity.mat
+- Assets/03. Prefabs/Game/Particles/Em.mat
+- Assets/04. Sprites/Others/DottedLine.png
+- Assets/03. Prefabs/Game/Particles/Planets/Constant Planet Effect.prefab
 Dependencies: []

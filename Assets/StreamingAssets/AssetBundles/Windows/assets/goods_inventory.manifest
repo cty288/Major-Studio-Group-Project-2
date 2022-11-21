@@ -1,0 +1,49 @@
+ManifestFileVersion: 0
+CRC: 133029242
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 6d19656c2e879cdc76358e4b86d69d82
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c29c357128feff56790ec9816c4fc93d
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/04. Sprites/Items/ItemInventorySprite/HermitSnakeSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/ThrusterSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/LandMineSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/MetalBallSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/KrowEyeSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/KindleSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/CactusShotgunSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/TrumpetSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/FlowerSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/StoneShieldSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/PoisonSpearSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/FireOreSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/FirePlantSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/VoodooDollSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/StatelliteSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/SeaweedFruitSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/InvisibleRadarSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/BirdCannonSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/TolietSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/ScrambledItemSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/SunFlowerSonSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/MaskSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/PickaxeSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/JellyGunSprite.png
+- Assets/04. Sprites/Items/ItemInventoryAtlas.spriteatlas
+- Assets/04. Sprites/Items/ItemInventorySprite/FrogHammerSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/EarthMushroomSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/LeafKnifeSprite.png
+- Assets/04. Sprites/Items/ItemInventorySprite/SpaceshipCoreSprite.png
+Dependencies: []

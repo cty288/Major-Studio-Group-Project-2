@@ -1,0 +1,78 @@
+ManifestFileVersion: 0
+CRC: 3861433562
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 74a3ca9966faff5558dd28f26fd7fff3
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c1344c7ff175d4420780664cf7411283
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ad93dd09ec0ccad4a887149432659e38, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: MikroFramework
+  ClassName: MikroFramework.BindableProperty.BindableProperty`1[System.Int32]
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+Assets:
+- Assets/03. Prefabs/Game/UI/BuffIcons/CriminalDeBuffIcon.prefab
+- Assets/03. Prefabs/Game/UI/BuffIcons/AimingSpeedDownDeBuffIcon.prefab
+- Assets/03. Prefabs/Game/UI/BuffIcons/BattleRoyaleBurnDeBuffIcon.prefab
+- Assets/03. Prefabs/Game/UI/BuffIcons/InvincibleBuffIcon.prefab
+- Assets/03. Prefabs/Game/UI/BuffIcons/PermanentSpeedUpBuffIcon.prefab
+- Assets/03. Prefabs/Game/UI/BuffIcons/BuffIcon.prefab
+- Assets/04. Sprites/UI/Buff/buff_invincible.png
+- Assets/04. Sprites/UI/Buff/VisionOcclusion/JellyGunDebuff2.png
+- Assets/03. Prefabs/Game/UI/BuffIcons/PermanentVisionExpansionBuffIcon.prefab
+- Assets/04. Sprites/UI/Buff/buff_poison.png
+- Assets/04. Sprites/UI/Buff/VisionOcclusion/JellyGunDebuff1.png
+- Assets/04. Sprites/UI/Buff/buff_affinity.png
+- Assets/04. Sprites/UI/Buff/buff_speed.png
+- Assets/03. Prefabs/Game/UI/BuffIcons/PermanentAffinityBuffIcon.prefab
+- Assets/04. Sprites/UI/Buff/buff_invisible.png
+- Assets/04. Sprites/UI/Buff/buff_health.png
+- Assets/04. Sprites/UI/Buff/buff_speed_down.png
+- Assets/03. Prefabs/Game/UI/BuffIcons/PermanentPowerUpBuffIcon.prefab
+- Assets/04. Sprites/UI/Buff/debuff_overweight.png
+- Assets/04. Sprites/UI/Buff/buff_double_affinity.png
+- Assets/03. Prefabs/Game/UI/BuffIcons/PermanentHealthBuffIcon.prefab
+- Assets/04. Sprites/UI/Buff/VisionOcclusion/JellyGunDebuff0.png
+- Assets/04. Sprites/UI/Buff/buff frame.png
+- Assets/03. Prefabs/Game/UI/BuffIcons/KrowEyeSpeedDownDeBuffIcon.prefab
+- Assets/03. Prefabs/Game/UI/BuffIcons/TradingAffinityDoubledBuffIcon.prefab
+- Assets/04. Sprites/UI/Buff/buff_vision_expand.png
+- Assets/03. Prefabs/Game/UI/BuffIcons/VisionOcclusionDeBuffIcon.prefab
+- Assets/03. Prefabs/Game/UI/BuffIcons/DieBuffIcon.prefab
+- Assets/03. Prefabs/Game/UI/BuffIcons/VisionExpansionBuffIcon.prefab
+- Assets/04. Sprites/UI/Buff/VisionOcclusion/JellyGunDebuff3.png
+- Assets/04. Sprites/UI/Buff/buff_vision_occlusion.png
+- Assets/03. Prefabs/Game/UI/BuffIcons/PoisonBuffIcon.prefab
+- Assets/04. Sprites/UI/Buff/buff_burnt.png
+- Assets/04. Sprites/UI/Buff/buff_power.png
+- Assets/03. Prefabs/Game/UI/BuffIcons/InvisibleBuffIcon.prefab
+- Assets/04. Sprites/UI/Buff/buff vision infinite.png
+- Assets/03. Prefabs/Game/UI/BuffIcons/OverweightDeBuffIcon.prefab
+- Assets/04. Sprites/UI/Buff/buff_die.png
+- Assets/04. Sprites/UI/Buff/buff_heal.png
+- Assets/03. Prefabs/Game/UI/BuffIcons/HealBuffIcon.prefab
+Dependencies: []

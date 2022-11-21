@@ -23,7 +23,7 @@ public class GameTimeManager : AbstractSystem, ISystem {
     public BindableProperty<DateTime> CurrentTime = new BindableProperty<DateTime>(new DateTime(2022, 11, 12, 22, 0, 0));
     private GameStateModel gameStateModel;
 
-    public SimpleRC LockTime { get; } = new SimpleRC();
+    public SimpleRC LockDayEnd { get; } = new SimpleRC();
  
     public void RegisterBeforeEndOfTodayEvent(Func<bool> beforeEndOfTodayEvent) {
         this.beforeEndOfTodayEvent = beforeEndOfTodayEvent;
@@ -65,11 +65,16 @@ public class GameTimeManager : AbstractSystem, ISystem {
                 break;
             }
             yield return new WaitForSeconds(1f);
-            if (LockTime.RefCount > 0) {
-                continue;
+            
+
+            if (!(CurrentTime.Value.Hour == 23 && CurrentTime.Value.Minute == 59)) {
+                CurrentTime.Value = CurrentTime.Value.AddMinutes(1);
             }
-            CurrentTime.Value = CurrentTime.Value.AddMinutes(1);
+            
             if (CurrentTime.Value.Hour == 23 && CurrentTime.Value.Minute == 59) {
+                if (LockDayEnd.RefCount > 0) {
+                    continue;
+                }
                 OnDayEnd();
                 break;
             }

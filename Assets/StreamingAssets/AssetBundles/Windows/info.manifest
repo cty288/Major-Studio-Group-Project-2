@@ -1,0 +1,189 @@
+ManifestFileVersion: 0
+CRC: 2995593739
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: f0c3ab035e9da5bc9036529e12b26638
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 159521371fe4b2d50de08510e03a5fbf
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d94ff35c4cfc4284d8a900779c2727c7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4bc01d4a76eb9554a9a44272533ab8bd, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9a959955a379357489e784da8679f769, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.VertexGradient
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+Assets:
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/BasicInfoSprites/InfoProgress_Yellow.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Click/click2-01.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Scroll/MouseScrollHint.controller
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/BasicInfoSprites/InfoProgress_Purple.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/BasicInfoSprites/InfoBar_Yellow.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/Missions/StrangeMeteorMissionInfoIcon.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/progress bar - arrows.png
+- Assets/04. Sprites/UI/GameCanvas/inventory/SelectedIcon.png
+- Assets/04. Sprites/Planets/GeneralUI/3 second UI.png
+- Assets/04. Sprites/UI/Info&Hints/Trading/affinity_bg2.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Scroll/scroll1-01.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/progress bar - red base.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/EscapeHint/click8-01.png
+- Assets/04. Sprites/UI/GameCanvas/inventory/durability_normal.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Scroll/scroll7-01.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Scroll/MouseScrollHint.anim
+- Assets/04. Sprites/UI/Info&Hints/DescriptionPanel/NormalSprites/item description
+  - image frame.png
+- Assets/03. Prefabs/Game/UI/Info/WarningInfoElement.prefab
+- Assets/04. Sprites/UI/GameCanvas/ShootCharge/Charge_BG.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/Missions/SpaceMinecartMissionInfoIcon.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/left handle.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/progress bar - threedots.png
+- Assets/06 Animations/UI/EscapeHint/Mouse.controller
+- Assets/04. Sprites/UI/Info&Hints/Countdown/alert message 5.png
+- Assets/04. Sprites/UI/Info&Hints/DescriptionPanel/NormalSprites/item description
+  - star empty.png
+- Assets/03. Prefabs/Game/UI/Common/HUDProgressBar.prefab
+- Assets/04. Sprites/UI/Info&Hints/MapPointers/label 2-01 1.png
+- Assets/04. Sprites/UI/Info&Hints/GameStartCountdown/begin2.png
+- Assets/04. Sprites/UI/GameCanvas/WinnerInfo/winner alert whole.png
+- Assets/04. Sprites/UI/Info&Hints/DescriptionPanel/NormalSprites/item description
+  - star box.png
+- Assets/04. Sprites/UI/Info&Hints/MapPointers/label 2-01.png
+- Assets/04. Sprites/UI/Info&Hints/Player/team1_filled.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/BasicInfoSprites/InfoIcon_Green.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/info_slider.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/EscapeHint/escape_icon_01.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/progress bar - empty.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Scroll/scroll3-01.png
+- Assets/04. Sprites/UI/Info&Hints/Countdown/background layer-01.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Click/click4-01.png
+- Assets/04. Sprites/UI/Info&Hints/MapPointers/nav_outline.png
+- Assets/04. Sprites/UI/Info&Hints/Countdown/alert message 6.png
+- Assets/04. Sprites/UI/Info&Hints/Countdown/alert message 2.png
+- Assets/04. Sprites/UI/Info&Hints/DescriptionPanel/NormalSprites/item description
+  - combined right body.png
+- Assets/04. Sprites/UI/Info&Hints/MapPointers/nav_progress.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Scroll/scroll8-01.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/right handle.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/Missions/ShrimpMissionUi.png
+- Assets/04. Sprites/UI/Info&Hints/DescriptionPanel/NormalSprites/item description
+  - right.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/Missions/SendEggMissionInfoIcon.png
+- Assets/04. Sprites/UI/GameCanvas/WinnerInfo/Winner alert title.png
+- Assets/04. Sprites/UI/Info&Hints/Player/team2_empty.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Click/click3-01.png
+- Assets/04. Sprites/UI/Info&Hints/Player/team1_empty.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/progress bar - diamond dark.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/info_long_blue.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Click/click8-01.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/BasicInfoSprites/InfoBar_Green.png
+- Assets/04. Sprites/UI/Info&Hints/Player/team2_filled.png
+- Assets/04. Sprites/UI/GameCanvas/inventory/inventory_countbg.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/EscapeHint/click4-01.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/progress bar - diamond white.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/progress bar - connecting lines.png
+- Assets/04. Sprites/UI/Info&Hints/GameStartCountdown/begin1.png
+- Assets/04. Sprites/UI/Info&Hints/Trading/affinity_bg.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/progressbar - questionmark.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/EscapeHint/click3-01.png
+- Assets/06 Animations/UI/EscapeHint/Mouse.anim
+- Assets/04. Sprites/UI/GameCanvas/inventory/inventory blank-01.png
+- Assets/04. Sprites/UI/GameCanvas/WinnerInfo/winner alert crown.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Click/click6-01.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/progress bar - mask.png
+- Assets/04. Sprites/UI/Info&Hints/Countdown/alert message 3.png
+- Assets/03. Prefabs/Game/UI/Info/MissionInfoElement.prefab
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/progress bar - dark.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/EscapeHint/click7-01.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Click/click1-01.png
+- Assets/04. Sprites/UI/GameCanvas/inventory/durability_compound.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/BasicInfoSprites/InfoIcon_Yellow.png
+- Assets/04. Sprites/UI/GameCanvas/MoneyUI.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Scroll/scroll2-01.png
+- Assets/04. Sprites/UI/Info&Hints/DescriptionPanel/NormalSprites/item description
+  - left.png
+- Assets/04. Sprites/UI/Info&Hints/GameStartCountdown/begin3.png
+- Assets/04. Sprites/UI/Info&Hints/GameStartCountdown/begin5.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Scroll/scroll4-01.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/EscapeHint/click1-01.png
+- Assets/04. Sprites/UI/GameCanvas/ShootCharge/Charge_Icon.png
+- Assets/04. Sprites/UI/Info&Hints/GameStartCountdown/begin4.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/EscapeHint/circle ring.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/progress bar - blue base.png
+- Assets/04. Sprites/UI/GameCanvas/inventory/inventory full-01.png
+- Assets/04. Sprites/UI/Info&Hints/DescriptionPanel/NormalSprites/item description
+  - star full.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/BasicInfoSprites/InfoBar_Purple.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/BasicInfoSprites/InfoBar_Pink.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/BasicInfoSprites/InfoIcon_Pink.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Scroll/scroll6-01.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/BasicInfoSprites/InfoProgress_Pink.png
+- Assets/04. Sprites/UI/GameCanvas/WinnerInfo/winner alert middle.png
+- Assets/04. Sprites/UI/Info&Hints/Countdown/alert message 1.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/EscapeHint/click5-01.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Click/click7-01.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/progress bar - tick.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/BasicInfoSprites/InfoIcon_Purple.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Click/click5-01.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/progress bar - connecting lines
+  white.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/progress bar - crown.png
+- Assets/04. Sprites/UI/GameCanvas/WinnerInfo/winner alert bottom bar.png
+- Assets/04. Sprites/UI/Info&Hints/Countdown/alert message 4.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/single_arrow.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/progress bar - filling.png
+- Assets/04. Sprites/UI/Info&Hints/DescriptionPanel/NormalSprites/item description
+  - main body.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/info_long_red.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/EscapeHint/click1-01.controller
+- Assets/04. Sprites/UI/GameCanvas/WinnerInfo/winner alert top bar.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/Scroll/scroll5-01.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/EscapeHint/click2-01.png
+- Assets/04. Sprites/UI/Info&Hints/MapPointers/label 1-01 1.png
+- Assets/04. Sprites/UI/Info&Hints/GameProgressBar/progress bar - failed.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/Missions/FinalMissionUI.png
+- Assets/04. Sprites/UI/Info&Hints/GameStartCountdown/begin6.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/BasicInfoSprites/InfoProgress_Green.png
+- Assets/04. Sprites/UI/Info&Hints/InfoSystem/BountyHunter/WantedInfoIcon.png
+- Assets/04. Sprites/UI/GameCanvas/inventory/durability_weapon.png
+- Assets/04. Sprites/UI/Info&Hints/KeySprites/EscapeHint/escape_icon_02.png
+Dependencies:
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/assets/fonts

@@ -1,0 +1,100 @@
+ManifestFileVersion: 0
+CRC: 3814097562
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: dc11709f342777bb034c166b9c7773b7
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 9a2ca7bdbd1871f7131daf57de908e0c
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/08. Audios/AudioEffects/General/High-Tech Gadget Activate.wav
+- Assets/08. Audios/AudioEffects/interaction_1.wav
+- Assets/08. Audios/AudioEffects/signal_interference.wav
+- Assets/08. Audios/AudioEffects/tutorialLevelComplete.wav
+- Assets/08. Audios/AudioEffects/progressBarimpact.wav
+- Assets/08. Audios/OpenBigMap.ogg
+- Assets/08. Audios/AudioEffects/General/Hologram Menu Open-2.wav
+- Assets/08. Audios/AudioEffects/General/button_1.wav
+- Assets/08. Audios/AudioEffects/metal_2.wav
+- Assets/08. Audios/AudioEffects/General/Old Terminal Popup Appear Low.wav
+- Assets/08. Audios/AudioEffects/laserChargeUp.wav
+- Assets/08. Audios/AddMoney.ogg
+- Assets/08. Audios/AudioEffects/shoot_implode.wav
+- Assets/08. Audios/AudioEffects/metal_3.wav
+- Assets/08. Audios/AudioEffects/metal_1.wav
+- Assets/08. Audios/AudioEffects/General/FUI Holographic Interaction Radiate.wav
+- Assets/08. Audios/AudioEffects/fish_machine_shoot_1.wav
+- Assets/08. Audios/AudioEffects/hurt_small_1.mp3
+- Assets/08. Audios/AudioEffects/leaf_knife.wav
+- Assets/08. Audios/AudioEffects/beep_1.wav
+- Assets/08. Audios/AudioEffects/activation_prewarm.wav
+- Assets/08. Audios/BGM/ending_featured_bgm.wav
+- Assets/08. Audios/Sell.wav
+- Assets/08. Audios/AudioEffects/jelly_3.wav
+- Assets/08. Audios/AudioEffects/hurt_big_2.wav
+- Assets/08. Audios/AudioEffects/interact_2.wav
+- Assets/08. Audios/AudioEffects/radar.wav
+- Assets/08. Audios/AudioEffects/mrDan.ogg
+- Assets/08. Audios/AudioEffects/PUNCH_PERCUSSIVE_HEAVY_09.wav
+- Assets/08. Audios/AudioEffects/General/UI Message Appear 01.wav
+- Assets/08. Audios/Buy.ogg
+- Assets/08. Audios/AudioEffects/leaf_knife_miss.wav
+- Assets/08. Audios/AudioEffects/broken.mp3
+- Assets/08. Audios/AudioEffects/explosion2.wav
+- Assets/08. Audios/AudioEffects/UInewQuestPop.wav
+- Assets/08. Audios/AudioEffects/swing_air.wav
+- Assets/08. Audios/AudioEffects/beep_3.wav
+- Assets/08. Audios/AudioEffects/PUNCH_PERCUSSIVE_HEAVY_08.wav
+- Assets/08. Audios/AudioEffects/dragonShrimpMoveLoop.wav
+- Assets/08. Audios/AudioEffects/General/IMPACT_LOW_THUD_03.wav
+- Assets/08. Audios/AudioEffects/hit.mp3
+- Assets/08. Audios/AudioEffects/General/IMPACT_LOW_THUD_02.wav
+- Assets/08. Audios/AudioEffects/stone_shield_using.wav
+- Assets/08. Audios/BGM/Mission/metorolite_featured_bgm.wav
+- Assets/08. Audios/AudioEffects/beep_4.wav
+- Assets/08. Audios/AudioEffects/hurt_small_2.wav
+- Assets/08. Audios/AudioEffects/Aerolite_timer.wav
+- Assets/08. Audios/BGM/Mission/space_minecart_featured_bgm.wav
+- Assets/08. Audios/AudioEffects/playerCharge.wav
+- Assets/08. Audios/AudioEffects/poison_spear.wav
+- Assets/08. Audios/AudioEffects/ui_beep.wav
+- Assets/08. Audios/AudioEffects/endGameCheers.wav
+- Assets/08. Audios/AudioEffects/stone_shield_using_end.ogg
+- Assets/08. Audios/AudioEffects/boosterloop.wav
+- Assets/08. Audios/AudioEffects/explosion1.ogg
+- Assets/08. Audios/AudioEffects/General/button_2.wav
+- Assets/08. Audios/BuffUpgrade.ogg
+- Assets/08. Audios/AudioEffects/alarm_loop.wav
+- Assets/08. Audios/AudioEffects/General/Old Terminal Computing-3.wav
+- Assets/08. Audios/AudioEffects/playerMoveEngine.wav
+- Assets/08. Audios/AudioEffects/jelly_2.wav
+- Assets/08. Audios/BGM/09_IMAscore_Tron.wav
+- Assets/08. Audios/AudioEffects/metal_4.wav
+- Assets/08. Audios/AudioEffects/die.wav
+- Assets/08. Audios/AudioEffects/General/FUI Ping Triplet Echo.wav
+- Assets/08. Audios/InfoUpcoming.ogg
+- Assets/08. Audios/AudioEffects/UIquestWinner.wav
+- Assets/08. Audios/AudioEffects/tank-reload.wav
+- Assets/08. Audios/AudioEffects/stone_shield_using_start.ogg
+- Assets/08. Audios/Team2Hook.ogg
+- Assets/08. Audios/AudioEffects/leaf_knife_2.wav
+- Assets/08. Audios/AudioEffects/collide.wav
+- Assets/08. Audios/AudioEffects/beep_2.wav
+- Assets/08. Audios/AudioEffects/General/error_2.wav
+- Assets/08. Audios/AudioEffects/eggCarEngineLoop.wav
+- Assets/08. Audios/AudioEffects/stoneshield_wave_hit_entity.wav
+- Assets/08. Audios/AudioEffects/jelly_1.wav
+- Assets/08. Audios/AudioEffects/error.wav
+- Assets/08. Audios/AudioEffects/shoot.wav
+- Assets/08. Audios/AudioEffects/General/IMPACT_LOW_THUD_07.wav
+- Assets/08. Audios/AudioEffects/General/countdown_start.wav
+- Assets/08. Audios/AudioEffects/hurt_big_1.wav
+- Assets/08. Audios/AudioEffects/hit_2.wav
+- Assets/08. Audios/AudioEffects/impact_low.wav
+Dependencies: []
