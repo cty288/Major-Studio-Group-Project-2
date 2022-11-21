@@ -10,13 +10,16 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterExtensibleUtility<ResLoader>(ResLoader.Allocate());
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>(new GameTimeManager());
+        this.RegisterSystem<GameEventSystem>(new GameEventSystem());
         this.RegisterSystem<BodyGenerationSystem>(new BodyGenerationSystem());
         this.RegisterSystem<BodyManagmentSystem>(new BodyManagmentSystem());
         this.RegisterSystem<NewspaperSystem>(new NewspaperSystem());
         this.RegisterSystem<PlayerResourceSystem>(new PlayerResourceSystem());
-        this.RegisterSystem<GameEventSystem>(new GameEventSystem());
+        
         this.RegisterModel<GameStateModel>(new GameStateModel());
         this.RegisterModel<GameSceneModel>(new GameSceneModel());
+        this.RegisterModel<RadioModel>(new RadioModel());
+        this.RegisterModel<BodyGenerationModel>(new BodyGenerationModel());
 
     }
 

@@ -7197,7 +7197,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speaker: {fileID: 348698864}
-  radioOpenSound: {fileID: 8300000, guid: 85933a1672422473cb043fb61a23b947, type: 3}
   radioRealityCurve:
     serializedVersion: 2
     m_Curve:

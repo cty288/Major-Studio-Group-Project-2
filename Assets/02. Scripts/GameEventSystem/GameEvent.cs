@@ -14,8 +14,8 @@ public enum EventState {
 }
 
 public class TimeRange {
-    public DateTime StartTime { get; }
-    public DateTime EndTime { get; }
+    public DateTime StartTime { get; set; }
+    public DateTime EndTime { get; set; }
 
     public TimeRange(DateTime startTime, DateTime endTime) {
         this.StartTime = startTime;
@@ -29,7 +29,7 @@ public class TimeRange {
 }
 
 
-public abstract class GameEvent: ICanGetSystem {
+public abstract class GameEvent: ICanGetSystem, ICanGetModel {
     public abstract GameEventType GameEventType { get; }
     public EventState EventState { get; set; } = EventState.NotStart;
     public abstract float TriggerChance { get; }
@@ -38,10 +38,14 @@ public abstract class GameEvent: ICanGetSystem {
     protected GameTimeManager gameTimeManager;
 
     public TimeRange StartTimeRange { get; }
+
+    protected GameEventSystem gameEventSystem;
+    protected GameStateModel gameStateModel;
     public GameEvent(TimeRange startTimeRange) {
         gameTimeManager = this.GetSystem<GameTimeManager>();
         this.StartTimeRange = startTimeRange;
-        
+        gameEventSystem = this.GetSystem<GameEventSystem>();
+        gameStateModel = this.GetModel<GameStateModel>();
     }
 
     public void Start() {

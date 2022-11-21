@@ -18,7 +18,8 @@ public class GameEventSystemUpdater : MonoBehaviour {
 }
 
 public enum GameEventType {
-    Radio
+    Radio,
+    BodyGeneration
 }
 public class GameEventSystem : AbstractSystem {
 
@@ -32,21 +33,24 @@ public class GameEventSystem : AbstractSystem {
     private GameEventSystemUpdater updater;
 
     private Dictionary<GameEventType, GameEvent> currentEvents = new Dictionary<GameEventType, GameEvent>();
+
+    private Array gameEventTypeValues = Enum.GetValues(typeof(GameEventType));
     protected override void OnInit() {
+        gameTimeManager = this.GetSystem<GameTimeManager>();
         gameTimeManager.CurrentTime.RegisterOnValueChaned(OnTimeChanged);
         
         updater = new GameObject("GameEventSystemUpdater").AddComponent<GameEventSystemUpdater>();
         updater.OnUpdate += Update;
 
         //GameEventType[] eventTypes = Enum.GetValues(typeof(GameEventType)).Cast<GameEventType>().ToArray();
-        foreach (object value in Enum.GetValues(typeof(GameEventType))) {
+        foreach (object value in gameEventTypeValues) {
             currentEvents.Add((GameEventType) value, null);
             AllPossibleEvents.Add((GameEventType) value, new List<GameEvent>());
         }
     }
 
     private void Update() {
-        foreach (GameEventType eventType in currentEvents.Keys) {
+        foreach (GameEventType eventType in gameEventTypeValues) {
             GameEvent currentEvent = currentEvents[eventType];
             
             if (currentEvents[eventType]  != null) {
@@ -58,7 +62,7 @@ public class GameEventSystem : AbstractSystem {
                 }
                 else if (eventState == EventState.End)
                 {
-                    currentEvent.OnEnd();
+                    currentEvent.End();
                     currentEvents[eventType] = null;
                     // AllPossibleEvents.Remove(currentEvent);
                 }
@@ -71,7 +75,7 @@ public class GameEventSystem : AbstractSystem {
                     if (Random.Range(0, 1f) <= ev.TriggerChance)
                     {
                         currentEvents[eventType] = ev;
-                        ev.OnStart();
+                        ev.Start();
                     }
                     else {
                         ev.OnMissed();
@@ -83,6 +87,7 @@ public class GameEventSystem : AbstractSystem {
     }
 
     private void OnTimeChanged(DateTime oldTime, DateTime newTime) {
+        
         foreach (List<GameEvent> events in AllPossibleEvents.Values) {
             events.RemoveAll((ev => {
                 if (ev.StartTimeRange.EndTime < newTime) {
@@ -92,6 +97,9 @@ public class GameEventSystem : AbstractSystem {
                 return false;
             }));
         }
+
+        
+        
       
         
         if (EventDict.ContainsKey(newTime)) {
@@ -116,6 +124,14 @@ public class GameEventSystem : AbstractSystem {
             return;
         }
 
+        if (startTimeRange.StartTime.Hour < 22) {
+            DateTime gameStartTime = new DateTime(startTimeRange.StartTime.Year, startTimeRange.StartTime.Month,
+                startTimeRange.StartTime.Day, 22, 0, 0);
+
+            int minuteInterval = Random.Range(8, 15);
+            startTimeRange.StartTime = gameStartTime.AddMinutes(minuteInterval);
+            startTimeRange.EndTime = startTimeRange.StartTime.AddMinutes(5);
+        }
         if (!EventDict.ContainsKey(startTimeRange.StartTime)) {
             EventDict.Add(startTimeRange.StartTime, new List<GameEvent>() {ev});
         }else {

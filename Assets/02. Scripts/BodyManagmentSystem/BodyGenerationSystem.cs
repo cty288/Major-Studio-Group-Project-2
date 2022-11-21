@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using MikroFramework.Architecture;
@@ -7,23 +8,30 @@ using MikroFramework.TimeSystem;
 using UniRx.InternalUtil;
 
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BodyGenerationSystem : AbstractSystem {
-    public BindableProperty<BodyInfo> CurrentOutsideBody = new BindableProperty<BodyInfo>();
+   
     private BodyInfo todayAlien;
 
     public BodyInfo TodayAlien => todayAlien;
 
     private int dayNum;
     private BodyManagmentSystem bodyManagmentSystem;
+    private GameTimeManager gameTimeManager;
 
-    private float knockDoorCheckTimeInterval = 10f;
+    private GameEventSystem gameEventSystem;
+
+    private int knockDoorCheckTimeInterval = 15;
     private float knockDoorChance = 0.2f;
     private float nonAlienChance = 1f;
 
-    private float knockWaitTimeSinceDayStart = 10f;
-    private Coroutine knockDoorCheckCoroutine;
+    private float knockWaitTimeSinceDayStart = 60f;
+    
+    //private Coroutine knockDoorCheckCoroutine;
+    private BodyGenerationModel bodyGenerationModel;
     protected override void OnInit() {
+        gameEventSystem = this.GetSystem<GameEventSystem>();
         this.GetSystem<ITimeSystem>().AddDelayTask(0.1f, () => {
             AudioSystem.Singleton.Initialize(null);
             AudioSystem.Singleton.MasterVolume = 1f;
@@ -34,17 +42,12 @@ public class BodyGenerationSystem : AbstractSystem {
         this.GetSystem<GameTimeManager>().OnDayStart += OnEndOfDay;
         this.RegisterEvent<OnNewBodyInfoGenerated>(OnNewBodyInfoGenerated);
         bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
-        this.GetModel<GameStateModel>().GameState.RegisterOnValueChaned(OnGameStateChanged);
+        bodyGenerationModel = this.GetModel<BodyGenerationModel>();
+        gameTimeManager = this.GetSystem<GameTimeManager>();
+
     }
 
-    private void OnGameStateChanged(GameState state) {
-        if (state == GameState.End) {
-            if (knockDoorCheckCoroutine != null) {
-                CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
-            }
-        }
-    }
-
+  
     private void OnNewBodyInfoGenerated(OnNewBodyInfoGenerated e) {
         todayAlien = bodyManagmentSystem.allBodyTimeInfos[Random.Range(0, bodyManagmentSystem.allBodyTimeInfos.Count)]
             .BodyInfo;
@@ -52,72 +55,49 @@ public class BodyGenerationSystem : AbstractSystem {
 
 
     private void OnEndOfDay(int day) {
-        if (knockDoorCheckCoroutine != null) {
-            CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
-        }
-
-        CurrentOutsideBody.Value = null;
         dayNum = day;
         if (day >= 2) {
             nonAlienChance -= 0.2f;
             nonAlienChance = Mathf.Clamp(nonAlienChance, 0.5f, 1f);
         }
-        this.GetSystem<ITimeSystem>().AddDelayTask(knockWaitTimeSinceDayStart, () => {
-            if (this.GetModel<GameStateModel>().GameState != GameState.End) {
-                knockDoorCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(KnockDoorCheck());
-            }
-           
-        });
+
+        if (day == 1) {
+            this.GetSystem<ITimeSystem>().AddDelayTask(knockWaitTimeSinceDayStart, SpawnAlienOrDeliverBody);
+        }
+       
     }
 
-    public void StopCurrentBodyAndStartNew() {
-        if (knockDoorCheckCoroutine != null) {
-            CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
-        }
-        CurrentOutsideBody.Value = null;        
-
-        if (this.GetModel<GameStateModel>().GameState != GameState.End) {
-            knockDoorCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(KnockDoorCheck());
-        }
-    }
-    
-    private IEnumerator KnockDoorCheck() {
-        if (dayNum > 1) {
-            while (true) {
-                yield return new WaitForSeconds(knockDoorCheckTimeInterval);
-                if (Random.Range(0f, 1f) <= knockDoorChance) {
-                    break;
-                }
-            }
-
-            //spawn body outside!
-            if (Random.Range(0f, 1f) <= nonAlienChance) {
-                if (Random.Range(0f, 1f) <= 0.5f) {
-                    CurrentOutsideBody.Value = BodyInfo.GetBodyInfoOpposite(todayAlien, 0.7f, 0.8f, true);
-                }
-                else {
-                    CurrentOutsideBody.Value = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false);
-                }
-                Debug.Log("Spawned a non-alien");
+    private void SpawnAlienOrDeliverBody() {
+        BodyInfo targetBody;
+        //spawn body outside!
+        if (Random.Range(0f, 1f) <= nonAlienChance || dayNum==1) {
+            if (Random.Range(0f, 1f) <= 0.5f) {
+                targetBody = BodyInfo.GetBodyInfoOpposite(todayAlien, 0.7f, 0.8f, true);
             }
             else {
-                CurrentOutsideBody.Value = todayAlien;
-                Debug.Log("Spawned an alien!");
+                targetBody = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false);
             }
-
-            Debug.Log("Start Knock");
-            //alien start knocking
-            int knockDoorTimeInterval = 3;
-            int knockTime = Random.Range(6, 9);
-
-            for (int i = 0; i < knockTime; i++) {
-                string clipName = $"knock_{Random.Range(1, 8)}";
-                AudioSource source = AudioSystem.Singleton.Play2DSound(clipName, 1, false);
-                yield return new WaitForSeconds(source.clip.length + knockDoorTimeInterval);
-            }
-
-            CurrentOutsideBody.Value = null;
-            knockDoorCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(KnockDoorCheck());
+            Debug.Log("Spawned a non-alien");
         }
+        else {
+            targetBody = todayAlien;
+            Debug.Log("Spawned an alien!");
+        }
+
+        int knockDoorTimeInterval = 3;
+        int knockTime = Random.Range(6, 9);
+        DateTime currentTime = gameTimeManager.CurrentTime;
+
+        gameEventSystem.AddEvent(new BodyGenerationEvent(
+            new TimeRange(currentTime + new TimeSpan(0, knockDoorCheckTimeInterval, 0)), targetBody, knockDoorTimeInterval,
+            knockTime,
+            knockDoorChance, SpawnAlienOrDeliverBody, SpawnAlienOrDeliverBody));
     }
+
+    public void StopCurrentBody() {
+        bodyGenerationModel.CurrentOutsideBody.Value = null;
+        bodyGenerationModel.CurrentOutsideBodyConversationFinishing = false;
+    }
+    
+    
 }

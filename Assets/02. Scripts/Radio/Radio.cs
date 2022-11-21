@@ -33,44 +33,42 @@ public class Radio : AbstractMikroController<MainGame>
     [SerializeField] private AnimationCurve unrelatedBodyInfoCountWithDay;
     [SerializeField] private AnimationCurve realAlienDescriptionRepeatTimeWithDay;
 
-    private Coroutine dailyRadioCoroutine;
+ 
     private BodyGenerationSystem bodyGenerationSystem;
     private BodyManagmentSystem bodyManagmentSystem;
-    private bool isSpeaking = false;
+   
     private GameTimeManager gameTimeManager;
+    private RadioModel radioModel;
     private void Awake() {
         radioOpenAudioSource = GetComponent<AudioSource>();
         bodyGenerationSystem = this.GetSystem<BodyGenerationSystem>();
         bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
         gameTimeManager = this.GetSystem<GameTimeManager>();
-        gameTimeManager.CurrentTime.RegisterOnValueChaned(OnTimeChanged).UnRegisterWhenGameObjectDestroyed(gameObject);// += OnDayEnd;
-        this.GetModel<GameStateModel>().GameState.RegisterOnValueChaned(OnGameStateChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
+
+        this.RegisterEvent<OnRadioEnd>(OnRadioEnd).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnRadioStart>(OnRadioStart).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnConstructDescriptionDatas>(OnConstructDescriptionDatas).UnRegisterWhenGameObjectDestroyed(gameObject);
+        radioModel = this.GetModel<RadioModel>();
+
     }
 
-    private void OnTimeChanged(DateTime time) {
-        if (time.Hour == 23 && time.Minute >= 50) {
-            if (dailyRadioCoroutine != null) {
-                StopCoroutine(dailyRadioCoroutine);
-                dailyRadioCoroutine = null;
-                StopRadio();
-            }
-           
-        }
-        //throw new NotImplementedException();
+    private void OnConstructDescriptionDatas(OnConstructDescriptionDatas obj) {
+        int day = this.GetSystem<GameTimeManager>().Day;
+        float radioReality = radioRealityCurve.Evaluate(day);
+        ConstructDescriptionDatas(radioModel.DescriptionDatas, radioReality, day);
     }
 
-    private void OnGameStateChanged(GameState arg1, GameState state) {
-        if (state == GameState.End) {
-            speaker.Stop();
-        }
+    private void OnRadioStart(OnRadioStart e) {
+        RadioSpeak(e.speakContent, e.speakRate, e.speakGender);
     }
 
-    private void OnDayEnd(int obj) {
-        
+    private void OnRadioEnd(OnRadioEnd e) {
+        StopRadio(true);
     }
 
+    
     void Start() {
-        this.RegisterEvent<OnNewBodyInfoGenerated>(PlayRadioInformation).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnNewBodyInfoGenerated>(OnBodyInfoGenerated).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.GetModel<GameSceneModel>().GameScene.RegisterOnValueChaned(OnGameSceneChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
     }
@@ -88,45 +86,15 @@ public class Radio : AbstractMikroController<MainGame>
     }
 
 
-    private IEnumerator DailyRadioCoroutine() {
-        int day = this.GetSystem<GameTimeManager>().Day;
-        float radioReality = radioRealityCurve.Evaluate(day);
 
-        List<AlienDescriptionData> descriptionDatas = new List<AlienDescriptionData>();
 
-        yield return new WaitForSeconds(Random.Range(5, 10));
-        while (true) {
-            if (!isSpeaking) {
-                yield return new WaitForSeconds(Random.Range(6f, 20f));
-               
-                if (descriptionDatas.Count == 0) {
-                    ConstructDescriptionDatas(descriptionDatas, radioReality, day);
-                }
-
-                AlienDescriptionData descriptionData = descriptionDatas[0];
-                descriptionDatas.RemoveAt(0);
-                if (!speaker.IsSpeaking) {
-                    RadioSpeak(AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo,
-                        descriptionData.Reality));
-                }
-            }
-            else {
-                yield return new WaitForSeconds(Random.Range(15f, 25f));
-                if (Random.Range(0, 100) <= 30) {
-                    StopRadio();
-                }
-            }
-        }
-    }
-
-    private void RadioSpeak(string speakText) {
-        isSpeaking = true;
+    private void RadioSpeak(string speakText, float speakRate, Gender speakGender) {
+        radioModel.IsSpeaking = true;
         radioOpenAudioSource.DOFade(0.2f, 1f);
         this.Delay(1 + Random.Range(2f, 5f), () => {
             if (this) {
                 radioOpenAudioSource.DOFade(0.03f, 1f);
-                Gender randomGender = Random.Range(0, 2) == 0 ? Gender.MALE : Gender.FEMALE;
-                speaker.Speak(speakText, StopRadio, Random.Range(0.8f, 1.2f), randomGender);
+                speaker.Speak(speakText, OnSpeakerStop, speakRate, speakGender);
             }
         });
     }
@@ -159,20 +127,42 @@ public class Radio : AbstractMikroController<MainGame>
 
     }
 
-    private void PlayRadioInformation(OnNewBodyInfoGenerated e) {
-        if (dailyRadioCoroutine != null) {
-            StopCoroutine(dailyRadioCoroutine);
-            StopRadio();
-        }
-        dailyRadioCoroutine = StartCoroutine(DailyRadioCoroutine());
+    private void OnBodyInfoGenerated(OnNewBodyInfoGenerated e) {
+        int day = this.GetSystem<GameTimeManager>().Day;
+        float radioReality = radioRealityCurve.Evaluate(day);
+        
+        radioModel.DescriptionDatas.Clear();
+       ConstructDescriptionDatas(radioModel.DescriptionDatas, radioReality, day);
+
+       DateTime currentTime = gameTimeManager.CurrentTime.Value;
+       if (day == 1) {
+            AlienDescriptionData descriptionData = radioModel.DescriptionDatas[0];
+            radioModel.DescriptionDatas.RemoveAt(0);
+            
+            this.GetSystem<GameEventSystem>().AddEvent(new DailyBodyRadio(
+                new TimeRange(currentTime + new TimeSpan(0, 10, 0), currentTime + new TimeSpan(0, 20, 0)),
+                AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo, descriptionData.Reality),
+                Random.Range(0.85f, 1.2f), Random.Range(0, 2) == 0 ? Gender.MALE : Gender.FEMALE));
+       }
     }
 
 
-    private void StopRadio() {
-        isSpeaking = false;
-        speaker.Corrupt(5, () => {
+    private void StopRadio(bool corrupt) {
+       
+        if (corrupt) {
+            speaker.Corrupt(5, () => {
+                speaker.Stop();
+            });
+        }
+        else {
             speaker.Stop();
-        });
+        }
+      
+       
+    }
+
+    private void OnSpeakerStop() {
+        radioModel.IsSpeaking = false;
         radioOpenAudioSource.DOFade(0, 1f);
     }
 }

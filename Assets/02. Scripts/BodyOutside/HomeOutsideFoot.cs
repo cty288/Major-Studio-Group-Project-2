@@ -7,11 +7,11 @@ using MikroFramework.Event;
 using UnityEngine;
 
 public class HomeOutsideFoot : AbstractMikroController<MainGame> {
-    private BodyGenerationSystem bodyGenerationSystem;
+    private BodyGenerationModel bodyGenerationModel;
     private SpriteRenderer sprite;
     private void Awake() {
-        bodyGenerationSystem = this.GetSystem<BodyGenerationSystem>();
-        bodyGenerationSystem.CurrentOutsideBody.RegisterOnValueChaned(OnOutsideBodyChanged)
+        bodyGenerationModel = this.GetModel<BodyGenerationModel>();
+        bodyGenerationModel.CurrentOutsideBody.RegisterOnValueChaned(OnOutsideBodyChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
         sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
     }

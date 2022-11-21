@@ -1,18 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using MikroFramework.Architecture;
 using UnityEngine;
 
-public class RadioModel : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
+public class RadioModel : AbstractModel {
+
+    public List<AlienDescriptionData> DescriptionDatas { get; } = new List<AlienDescriptionData>();
+
+    public bool IsSpeaking { get; set; } = false;
+    protected override void OnInit() {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
