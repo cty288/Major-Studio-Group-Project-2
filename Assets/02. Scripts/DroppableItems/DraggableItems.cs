@@ -6,13 +6,13 @@ using MikroFramework.Architecture;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class DroppableItems : AbstractMikroController<MainGame>, IDragHandler, IBeginDragHandler, IEndDragHandler {
+public abstract class DraggableItems : AbstractMikroController<MainGame>, IDragHandler, IBeginDragHandler, IEndDragHandler {
     private Vector2 dragStartPos;
     private Bounds tableBounds;
 
    
 
-    private static DroppableItems currentDroppingItem;
+    private static DraggableItems currentDroppingItem;
 
     public void SetBounds(Bounds bounds) {
         tableBounds = bounds;

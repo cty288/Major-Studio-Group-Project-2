@@ -6,7 +6,7 @@ using MikroFramework.Event;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class NewspaperTable : AbstractMikroController<MainGame>, IPointerEnterHandler, IPointerExitHandler {
+public class Table : AbstractMikroController<MainGame>, IPointerEnterHandler, IPointerExitHandler {
     [SerializeField] private GameObject newspaperPrefab;
     private int currentMaxLayer = 1;
     private Collider2D collider;
@@ -36,7 +36,7 @@ public class NewspaperTable : AbstractMikroController<MainGame>, IPointerEnterHa
         Vector3 position = new Vector3(UnityEngine.Random.Range(bounds.min.x, bounds.max.x),
             UnityEngine.Random.Range(bounds.min.y, bounds.max.y), 0);
 
-        DroppableItems obj = Instantiate(prefab, position, Quaternion.identity).GetComponent<DroppableItems>();
+        DraggableItems obj = Instantiate(prefab, position, Quaternion.identity).GetComponent<DraggableItems>();
 
         obj.SetLayer(currentMaxLayer++);
         obj.SetBounds(collider.bounds);

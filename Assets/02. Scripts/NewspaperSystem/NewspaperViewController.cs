@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
-public class NewspaperViewController : DroppableItems, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler {
+public class NewspaperViewController : DraggableItems, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler {
     private GameObject indicateCanvas;
     private GameObject dateCanvas;
     private List<SpriteRenderer> renderers = new List<SpriteRenderer>();
