@@ -10,11 +10,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
-public class NewspaperViewController : AbstractMikroController<MainGame>, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler {
+public class NewspaperViewController : DroppableItems, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler {
     private GameObject indicateCanvas;
     private GameObject dateCanvas;
     private List<SpriteRenderer> renderers = new List<SpriteRenderer>();
-    private Bounds tableBounds;
+   
     private DateTime pointerDownTime;
     private Newspaper news;
     private NewspaperSystem newspaperSystem;
@@ -43,7 +43,7 @@ public class NewspaperViewController : AbstractMikroController<MainGame>, IDragH
         indicateCanvas.SetActive(false);
     }
 
-    public void SetLayer(int layer) {
+    public override void SetLayer(int layer) {
         foreach (var renderer in renderers) {
             renderer.sortingOrder = layer;
         }
@@ -51,16 +51,10 @@ public class NewspaperViewController : AbstractMikroController<MainGame>, IDragH
         dateCanvas.GetComponent<Canvas>().sortingOrder = layer;
     }
 
-    public void SetContent(Newspaper news, Bounds tableBounds) {
-        this.tableBounds = tableBounds;
+    public void SetContent(Newspaper news) {
         this.news = news;
     }
 
-    public void OnDrag(PointerEventData eventData) {
-        var pos = Camera.main.ScreenToWorldPoint(eventData.position);
-        pos.z = 0;
-        transform.position = pos;
-    }
 
     public void OnPointerDown(PointerEventData eventData) {
         pointerDownTime = DateTime.Now;
@@ -81,20 +75,7 @@ public class NewspaperViewController : AbstractMikroController<MainGame>, IDragH
         });
     }
 
-    private Vector2 dragStartPos;
-    public void OnBeginDrag(PointerEventData eventData) {
-        dragStartPos = transform.position;
-        newspaperSystem.CurrentHoldingNewspaper = this;
-    }
-
-    public void OnEndDrag(PointerEventData eventData) {
-        var pos = transform.position;
-        if (!tableBounds.Contains(pos)) {
-            transform.DOMove(dragStartPos, 0.5f);
-        }
-
-        newspaperSystem.CurrentHoldingNewspaper = null;
-    }
+   
 
     //private bool mouseOnNewspaper = false;
     public void OnPointerEnter(PointerEventData eventData)

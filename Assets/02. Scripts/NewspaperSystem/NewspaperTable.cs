@@ -24,17 +24,29 @@ public class NewspaperTable : AbstractMikroController<MainGame>, IPointerEnterHa
             todayNewspaper.StopIndicateTodayNewspaper();
         }
 
+        
+        todayNewspaper = SpawnItem(newspaperPrefab).GetComponent<NewspaperViewController>();
+        todayNewspaper.StartIndicateTodayNewspaper();
+        todayNewspaper.SetContent(e.Newspaper);
+    }
+
+    public GameObject SpawnItem(GameObject prefab) {
         Bounds bounds = collider.bounds;
         //spawn a newspaper on the table within the bounds
         Vector3 position = new Vector3(UnityEngine.Random.Range(bounds.min.x, bounds.max.x),
             UnityEngine.Random.Range(bounds.min.y, bounds.max.y), 0);
-        GameObject newspaper = Instantiate(newspaperPrefab, position, Quaternion.identity);
-        todayNewspaper = newspaper.GetComponent<NewspaperViewController>();
-        todayNewspaper.StartIndicateTodayNewspaper();
-        todayNewspaper.SetLayer(currentMaxLayer++);
-        todayNewspaper.SetContent(e.Newspaper, collider.bounds);
-    }
 
+        DroppableItems obj = Instantiate(prefab, position, Quaternion.identity).GetComponent<DroppableItems>();
+
+        obj.SetLayer(currentMaxLayer++);
+        obj.SetBounds(collider.bounds);
+
+        if (currentMaxLayer > 100) {
+            currentMaxLayer = 2;
+        }
+
+        return obj.gameObject;
+    }
     public void OnPointerEnter(PointerEventData eventData) {
         
     }
