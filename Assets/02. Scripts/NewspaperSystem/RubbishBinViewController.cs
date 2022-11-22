@@ -11,7 +11,7 @@ public class RubbishBinViewController : AbstractMikroController<MainGame> {
     private NewspaperSystem newspaperSystem;
     [SerializeField] private GameObject hintCanvas;
     private Collider2D collider;
-    private NewspaperViewController newspaperHovering;
+    private DraggableItems draggingItem;
     private void Awake()
     {
         outlineMaterial = Material.Instantiate(outlineMaterial);
@@ -26,23 +26,23 @@ public class RubbishBinViewController : AbstractMikroController<MainGame> {
         mousePosition = new Vector3(mousePosition.x, mousePosition.y, 0);
         //check if the mouse is over the sprite
         if (collider.bounds.Contains(mousePosition)) {
-            if (newspaperSystem.CurrentHoldingNewspaper) {
+            if (DraggableItems.CurrentDroppingItem) {
                 Highlight();
-                newspaperHovering = newspaperSystem.CurrentHoldingNewspaper;
+                draggingItem = DraggableItems.CurrentDroppingItem;
             }
             else {
-                if (newspaperHovering) {
+                if (draggingItem) {
                    
                     StopHighlight();
-                    Destroy(newspaperHovering.gameObject);
-                    newspaperSystem.CurrentHoldingNewspaper = null;
-                    newspaperHovering = null;
+                    Destroy(draggingItem.gameObject);
+                    DraggableItems.CurrentDroppingItem = null;
+                    draggingItem = null;
                 }
             }
         }
         else {
             StopHighlight();
-            newspaperHovering = null;
+            draggingItem = null;
         }
     }
 

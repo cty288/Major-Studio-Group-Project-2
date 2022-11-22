@@ -36,8 +36,7 @@ public class GameTimeManager : AbstractSystem, ISystem {
         this.GetSystem<ITimeSystem>().AddDelayTask(3f, () => {
             if (gameStateModel.GameState != GameState.End) {
                 this.GetModel<GameSceneModel>().GameScene.Value = GameScene.MainGame;
-                this.SendEvent<OnNewspaperUIPanelOpened>(
-                    new OnNewspaperUIPanelOpened() { Newspaper = null, IsOpen = false });
+                
                 CurrentTime.Value = CurrentTime.Value.AddDays(1);
                 CurrentTime.Value = new DateTime(CurrentTime.Value.Year, CurrentTime.Value.Month, CurrentTime.Value.Day, 22, 0, 0);
                 this.SendEvent<OnNewDay>(new OnNewDay()

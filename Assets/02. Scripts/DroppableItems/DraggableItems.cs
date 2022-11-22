@@ -9,10 +9,10 @@ using UnityEngine.EventSystems;
 public abstract class DraggableItems : AbstractMikroController<MainGame>, IDragHandler, IBeginDragHandler, IEndDragHandler {
     private Vector2 dragStartPos;
     private Bounds tableBounds;
-
+    
    
 
-    private static DraggableItems currentDroppingItem;
+    public static DraggableItems CurrentDroppingItem;
 
     public void SetBounds(Bounds bounds) {
         tableBounds = bounds;
@@ -26,7 +26,7 @@ public abstract class DraggableItems : AbstractMikroController<MainGame>, IDragH
 
     public void OnBeginDrag(PointerEventData eventData) {
         dragStartPos = transform.position;
-        currentDroppingItem = this;
+        CurrentDroppingItem = this;
     }
 
     public void OnEndDrag(PointerEventData eventData) {
@@ -36,7 +36,7 @@ public abstract class DraggableItems : AbstractMikroController<MainGame>, IDragH
             transform.DOMove(dragStartPos, 0.5f);
         }
 
-        currentDroppingItem = null;
+        CurrentDroppingItem = null;
     }
 
     public abstract  void SetLayer(int layer);

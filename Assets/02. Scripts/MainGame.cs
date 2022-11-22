@@ -15,6 +15,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<BodyManagmentSystem>(new BodyManagmentSystem());
         this.RegisterSystem<NewspaperSystem>(new NewspaperSystem());
         this.RegisterSystem<PlayerResourceSystem>(new PlayerResourceSystem());
+        this.RegisterSystem<TelephoneSystem>(new TelephoneSystem());
         
         this.RegisterModel<GameStateModel>(new GameStateModel());
         this.RegisterModel<GameSceneModel>(new GameSceneModel());

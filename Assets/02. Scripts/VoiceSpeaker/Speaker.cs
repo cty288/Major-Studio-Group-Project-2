@@ -15,12 +15,14 @@ public class SentenceInfo {
     public Action Callback;
     public float Rate;
     public Gender SpeakGender;
-    public SentenceInfo(string completeSentence, string sentenceFragment, Action callback, float rate, Gender speakGender) {
+    public float volumeMultiplier;
+    public SentenceInfo(string completeSentence, string sentenceFragment, Action callback, float rate, Gender speakGender, float volumeMultiplier=1) {
         this.CompleteSentence = completeSentence;
         this.SentenceFragment = sentenceFragment;
         this.Callback = callback;
         this.Rate = rate;
         this.SpeakGender = speakGender;
+        this.volumeMultiplier = volumeMultiplier;
     }
 }
 
@@ -69,20 +71,20 @@ public class Speaker :  AbstractMikroController<MainGame> {
                 currentSentence.Callback?.Invoke();
             }
 
-            SpeakSentence(nextSentence, nextSentence.Rate);
+            SpeakSentence(nextSentence, nextSentence.Rate, nextSentence.volumeMultiplier);
         }
         else {
             Stop();
         }
     }
 
-    public void Speak(string sentence, Action onEnd = null, float rate = 1f, Gender gender = Gender.MALE) {
+    public void Speak(string sentence, Action onEnd = null, float rate = 1f, float volumeMultiplier = 1f, Gender gender = Gender.MALE) {
         inited = true;
         IsSpeaking = true;
         bool needSpeak = sentenceQueues.Count == 0;
         List<string> splitedSentences = VoiceTextSpliter.Split(sentence);
         foreach (string splitedSentence in splitedSentences) {
-            sentenceQueues.Enqueue(new SentenceInfo(sentence, splitedSentence, onEnd, rate, gender));
+            sentenceQueues.Enqueue(new SentenceInfo(sentence, splitedSentence, onEnd, rate, gender, volumeMultiplier));
         }
 
         if (needSpeak) {
@@ -92,7 +94,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
                 audioMixer.SetFloat("resonance", 1);
             }
            
-            SpeakSentence(text, rate);
+            SpeakSentence(text, rate, volumeMultiplier);
         }
     }
 
@@ -107,9 +109,10 @@ public class Speaker :  AbstractMikroController<MainGame> {
         audioMixer.DOSetFloat("resonance", 10, time);
     }
     
-    private void SpeakSentence(SentenceInfo text, float rate) {
+    private void SpeakSentence(SentenceInfo text, float rate, float volumeMultiplier) {
         currentSentence = text;
         float volume = text.SpeakGender == Gender.MALE ? 0.5f : 0.8f;
+        volume *= volumeMultiplier;
         Crosstales.RTVoice.Speaker.Instance.Speak(text.SentenceFragment, audioSource, Crosstales.RTVoice.Speaker.Instance.VoiceForGender(text.SpeakGender), true, rate,1, volume);
         audioSource.volume = volume;
         if (subtitile) {

@@ -10,6 +10,7 @@ using MikroFramework.Event;
 using MikroFramework.Architecture;
 using MikroFramework;
 using MikroFramework.AudioKit;
+using MikroFramework.Utilities;
 using Random = UnityEngine.Random;
 
 public class AlienDescriptionData {
@@ -19,6 +20,14 @@ public class AlienDescriptionData {
     public AlienDescriptionData(BodyInfo bodyInfo, float reality) {
         this.BodyInfo = bodyInfo;
         this.Reality = reality;
+    }
+}
+
+public class RadioRC : SimpleRC {
+    public Action OnRefCleared;
+    protected override void OnZeroRef() {
+        base.OnZeroRef();
+        OnRefCleared?.Invoke();
     }
 }
 
@@ -39,6 +48,8 @@ public class Radio : AbstractMikroController<MainGame>
    
     private GameTimeManager gameTimeManager;
     private RadioModel radioModel;
+
+    private RadioRC lowSoundLock = new RadioRC();
     private void Awake() {
         radioOpenAudioSource = GetComponent<AudioSource>();
         bodyGenerationSystem = this.GetSystem<BodyGenerationSystem>();
@@ -48,8 +59,46 @@ public class Radio : AbstractMikroController<MainGame>
         this.RegisterEvent<OnRadioEnd>(OnRadioEnd).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnRadioStart>(OnRadioStart).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnConstructDescriptionDatas>(OnConstructDescriptionDatas).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.GetSystem<TelephoneSystem>().State.RegisterOnValueChaned(OnTelephoneStateChange).UnRegisterWhenGameObjectDestroyed(gameObject);
         radioModel = this.GetModel<RadioModel>();
+        lowSoundLock.OnRefCleared += OnLowSoundReleased;
 
+    }
+
+    private void OnDestroy() {
+        lowSoundLock.OnRefCleared -= OnLowSoundReleased;
+    }
+
+    private void OnLowSoundReleased() {
+        radioOpenAudioSource.DOFade(0.03f, 1f);
+        speaker.AudioMixer.DOSetFloat("volume", -20, 1f);
+    }
+
+    private void OnGameSceneChanged(GameScene arg1, GameScene scene) {
+      
+        if (scene == GameScene.MainGame) {
+            lowSoundLock.Release();
+        }
+        else {
+            lowSoundLock.Retain();
+            speaker.AudioMixer.DOSetFloat("volume", -45, 1f);
+            radioOpenAudioSource.DOFade(0.01f, 1f);
+        }
+    }
+
+    private void OnTelephoneStateChange(TelephoneState oldState, TelephoneState newState) {
+        if ((oldState == TelephoneState.Idle || oldState == TelephoneState.Dealing) &&
+            (newState == TelephoneState.IncomingCall || newState == TelephoneState.Waiting ||
+             newState == TelephoneState.Talking)) {
+            lowSoundLock.Retain();
+            speaker.AudioMixer.DOSetFloat("volume", -45, 1f);
+            radioOpenAudioSource.DOFade(0.01f, 1f);
+        }
+        else if ((oldState == TelephoneState.IncomingCall || oldState == TelephoneState.Waiting ||
+                 oldState == TelephoneState.Talking) &&
+                (newState == TelephoneState.Idle || newState == TelephoneState.Dealing)) {
+            lowSoundLock.Release();
+        }
     }
 
     private void OnConstructDescriptionDatas(OnConstructDescriptionDatas obj) {
@@ -60,10 +109,13 @@ public class Radio : AbstractMikroController<MainGame>
 
     private void OnRadioStart(OnRadioStart e) {
         RadioSpeak(e.speakContent, e.speakRate, e.speakGender);
+        transform.DOShakeRotation(3f, 5, 20, 90, false).SetLoops(-1);
+
     }
 
     private void OnRadioEnd(OnRadioEnd e) {
         StopRadio(true);
+        
     }
 
     
@@ -73,17 +125,6 @@ public class Radio : AbstractMikroController<MainGame>
             .UnRegisterWhenGameObjectDestroyed(gameObject);
     }
 
-    private void OnGameSceneChanged(GameScene arg1, GameScene scene) {
-        if (scene == GameScene.MainGame) {
-            radioOpenAudioSource.DOFade(0.03f, 1f);
-            speaker.AudioMixer.DOSetFloat("volume", -20, 1f);
-           
-        }
-        else {
-            speaker.AudioMixer.DOSetFloat("volume", -45, 1f);
-            radioOpenAudioSource.DOFade(0.01f, 1f);
-        }
-    }
 
 
 
@@ -94,7 +135,7 @@ public class Radio : AbstractMikroController<MainGame>
         this.Delay(1 + Random.Range(2f, 5f), () => {
             if (this) {
                 radioOpenAudioSource.DOFade(0.03f, 1f);
-                speaker.Speak(speakText, OnSpeakerStop, speakRate, speakGender);
+                speaker.Speak(speakText, OnSpeakerStop, speakRate, 1f, speakGender);
             }
         });
     }
@@ -164,5 +205,6 @@ public class Radio : AbstractMikroController<MainGame>
     private void OnSpeakerStop() {
         radioModel.IsSpeaking = false;
         radioOpenAudioSource.DOFade(0, 1f);
+        transform.DOKill(true);
     }
 }

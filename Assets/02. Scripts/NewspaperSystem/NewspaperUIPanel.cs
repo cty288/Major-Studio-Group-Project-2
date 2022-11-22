@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class NewspaperUIPanel : AbstractMikroController<MainGame> {
+public class NewspaperUIPanel : OpenableUIPanel {
   
     private GameObject panel;
     private TMP_Text dateText;
@@ -20,7 +20,14 @@ public class NewspaperUIPanel : AbstractMikroController<MainGame> {
     private Newspaper lastNewspaper = null;
     [SerializeField] private List<Image> symbolImages = new List<Image>();
     [SerializeField] private List<Sprite> symbols = new List<Sprite>();
-    private void Awake() {
+
+    protected Newspaper news;
+    public override void OnDayEnd() {
+        Hide();
+    }
+
+    protected override void Awake() {
+        base.Awake();
         panel = transform.Find("Panel").gameObject;
         backButton = panel.transform.Find("BackButton").GetComponent<Button>();
         dateText = panel.transform.Find("DateText").GetComponent<TMP_Text>();
@@ -31,10 +38,11 @@ public class NewspaperUIPanel : AbstractMikroController<MainGame> {
 
     private void OnNewspaperUIPanelOpened(OnNewspaperUIPanelOpened e) {
         if (e.IsOpen) {
+            news = e.Newspaper;
             Show(e.Newspaper);
         }
         else {
-            Hide();
+            //Hide();
         }
     }
 
@@ -82,7 +90,11 @@ public class NewspaperUIPanel : AbstractMikroController<MainGame> {
         lastNewspaper = news;
     }
 
-    public void Hide() {
+    public override void Show() {
+        Show(news);
+    }
+
+    public override void Hide() {
         panel.gameObject.GetComponent<Animator>().CrossFade("Stop", 0.5f);
         this.Delay(0.5f, () => {
             panel.gameObject.SetActive(false);
