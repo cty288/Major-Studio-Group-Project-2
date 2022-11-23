@@ -5,11 +5,11 @@ using UnityEngine;
 using TMPro;
 using UnityEditor.VersionControl;
 
-public class Notebook : MonoBehaviour
+public class NotebookWritePage : MonoBehaviour
 {
     public TMP_InputField inputField;
     public string noteString;
-    private void Start()
+    private void Awake()
     {
         inputField.caretColor = Color.clear;
         inputField.onValueChanged.AddListener(OnInputFieldValueChang);
