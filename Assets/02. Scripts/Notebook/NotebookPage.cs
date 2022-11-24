@@ -11,60 +11,67 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
-public class NotebookPage : DraggableItems, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
-{
-    public GameObject pageCanvas;
-    public string pageContentText;
+public class NotebookPage : DraggableItems {
+    
+    private GameObject pageCanvas;
+    private TMP_Text pageContentText;
+    private string pageContentString;
     private List<SpriteRenderer> renderers = new List<SpriteRenderer>();
-    private DateTime pointerDownTime;
 
-    private void Awake()
-    {
+    
+   
+
+    protected override void Awake() {
+        base.Awake();
         renderers = GetComponentsInChildren<SpriteRenderer>(true).ToList();
-        pageCanvas = transform.Find("CanvasParent/PageCanvas").gameObject;
+        pageCanvas = transform.Find("PageCanvas").gameObject;
+        pageContentText = pageCanvas.transform.Find("Text").GetComponent<TMP_Text>();
         pageCanvas.SetActive(false);
 
     }
 
-    public void OpenPage()
-    {
-        NotebookPagePanel.notebookPagePanel.OpenPageText(this);
-    }
-    
-    public void OnPointerDown(PointerEventData eventData) {
-        pointerDownTime = DateTime.Now;
-    }
-
-    public void OnPointerUp(PointerEventData eventData) {
-        if ((DateTime.Now - pointerDownTime).TotalSeconds < 0.2f) {
-            OnClick();
+    public void SetContent(string content) {
+        pageContentString = content;
+        //get the first line of the content
+        string firstLine = content.Split('\n')[0];
+        //get the first 12 characters of the first line
+        string first12Chars = firstLine.Substring(0, Math.Min(firstLine.Length, 12));
+        if (firstLine.Length > 12) {
+            first12Chars += "...";
         }
-    }
-    
-    private void OnClick() {
-        Debug.Log("OnClick");
-        this.Delay(0.1f, () => {
-            if (this) {
-                OpenPage();
-            }
-        });
+        pageContentText.text = first12Chars;
+
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        pageCanvas.SetActive(true);
-    }
-    
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        pageCanvas.SetActive(false);
+    protected override void OnClick() {
+        this.SendCommand<OpenNotePanelCommand>(new OpenNotePanelCommand() {Content = pageContentString });
     }
 
+    public override void OnThrownToRubbishBin() {
+        
+    }
+
+   
     public override void SetLayer(int layer)
     {
         foreach (var renderer in renderers) {
             renderer.sortingOrder = layer;
         }
-        pageCanvas.GetComponent<Canvas>().sortingOrder = layer;
+        pageCanvas.GetComponent<Canvas>().sortingOrder = 1000;
     }
+}
+
+
+public class OpenNotePanelCommand : AbstractCommand<OpenNotePanelCommand> {
+    public string Content;
+    public OpenNotePanelCommand() { }
+    protected override void OnExecute()
+    {
+        this.SendEvent<OnNotePanelOpened>(
+            new OnNotePanelOpened() { Content = Content});
+    }
+}
+
+public struct OnNotePanelOpened {
+    public string Content;
 }

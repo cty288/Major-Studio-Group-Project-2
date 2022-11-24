@@ -28,7 +28,7 @@ public class AbstractDroppableItemContainerViewController : AbstractMikroControl
         spawnedColliders.Add(collider2D);
     }
 
-    protected GameObject SpawnItem(GameObject prefab) {
+    public GameObject SpawnItem(GameObject prefab) {
         spawnedColliders.RemoveWhere((c => !c));
         Bounds bounds = collider.bounds;
 

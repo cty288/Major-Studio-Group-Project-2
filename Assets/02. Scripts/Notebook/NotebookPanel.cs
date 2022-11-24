@@ -11,18 +11,14 @@ using TMPro;
 
 public class NotebookPanel : OpenableUIPanel
 {
-    public static NotebookPanel notebookPanel;
+    
     private GameObject panel;
     private Button backButton;
-    private NotebookWritePage writePage;
-    public NotebookPage notebookPage;
-
-    private void Awake()
-    {
-        notebookPanel = this;
+  
+    protected override void Awake() {
+        base.Awake();
         panel = transform.Find("Panel").gameObject;
         backButton = panel.transform.Find("BackButton").GetComponent<Button>();
-        writePage = panel.transform.Find("NotebookWritePage").GetComponent<NotebookWritePage>();
         backButton.onClick.AddListener(OnBackButtonClicked);
     }
     public override void OnDayEnd()
@@ -33,22 +29,25 @@ public class NotebookPanel : OpenableUIPanel
     private void OnBackButtonClicked() {
         Hide();
     }    
-    public override void Show()
-    {
+    public override void Show() {
         panel.gameObject.SetActive(true);
+        if (GetComponentInChildren<TMP_SelectionCaret>(true)) {
+            GetComponentInChildren<TMP_SelectionCaret>(true).raycastTarget = true;
+        }
     }
 
     public override void Hide() {
         panel.gameObject.GetComponent<Animator>().CrossFade("Stop", 0.5f);
+        if (GetComponentInChildren<TMP_SelectionCaret>(true))
+        {
+            GetComponentInChildren<TMP_SelectionCaret>(true).raycastTarget = false;
+        }
+
         this.Delay(0.5f, () => {
             panel.gameObject.SetActive(false);
         });
     }
 
     //生成page
-    public void CeratePage()
-    {
-        NotebookPage np = Instantiate(notebookPage).GetComponent<NotebookPage>();
-        np.pageContentText = writePage.inputField.text;
-    }
+    
 }

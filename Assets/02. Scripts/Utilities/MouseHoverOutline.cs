@@ -13,8 +13,8 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
     
     private Material defaultMaterial;
     private bool isHovering = false;
-    [SerializeField] private GameObject followingObject;
-    [SerializeField] private bool followingObjectIsUI = false;
+    [SerializeField] public GameObject followingObject;
+    [SerializeField] public bool followingObjectIsUI = false;
     
     private void Awake() {
         if (outlineMaterial) {

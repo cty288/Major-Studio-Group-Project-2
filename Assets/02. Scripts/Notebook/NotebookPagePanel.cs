@@ -9,13 +9,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class NotebookPagePanel : OpenableUIPanel
-{
-    public static NotebookPagePanel notebookPagePanel;    
-    public TMP_Text pageText;
+public class NotebookPagePanel : OpenableUIPanel {
+   
+    protected TMP_Text pageText;
     private GameObject panel;
     private Button backButton;
-    public NotebookPage page;
+   
 
     public override void OnDayEnd()
     {
@@ -26,24 +25,29 @@ public class NotebookPagePanel : OpenableUIPanel
         Hide();
     }    
 
-    private void Awake()
-    {
-        notebookPagePanel = this;
+    protected override void Awake() {
+        base.Awake();
         panel = transform.Find("Panel").gameObject;
         backButton = panel.transform.Find("BackButton").GetComponent<Button>();
         backButton.onClick.AddListener(OnBackButtonClicked);
+        pageText = transform.Find("Panel/NotebookWritePage/Text").GetComponent<TMP_Text>();
+        this.RegisterEvent<OnNotePanelOpened>(OnNotePanelOpened).UnRegisterWhenGameObjectDestroyed(gameObject);
     }
 
-    public void OpenPageText(NotebookPage page)
-    {
-        this.page = page;
+    private void OnNotePanelOpened(OnNotePanelOpened e) {
+        SetContent(e.Content);
+        Show();
+    }
+
+
+    private string content;
+    public void SetContent(string content) {
+        this.content = content;
+    }
+    
+    public override void Show() {
         panel.gameObject.SetActive(true);
-        pageText.text = page.pageContentText;
-    }
-
-    public override void Show()
-    {
-        OpenPageText(page);
+        pageText.text = content;
     }
 
     public override void Hide() {
