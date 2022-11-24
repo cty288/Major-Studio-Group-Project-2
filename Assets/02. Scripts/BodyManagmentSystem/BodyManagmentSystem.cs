@@ -15,15 +15,36 @@ public class BodyTimeInfo {
 
 public struct OnNewBodyInfoGenerated {
     public List<BodyTimeInfo> BodyTimeInfos;
+    public List<BodyTimeInfo> Aliens;
 }
 
 public class BodyManagmentSystem : AbstractSystem {
     public List<BodyTimeInfo> allBodyTimeInfos = new List<BodyTimeInfo>();
+
+    public List<BodyTimeInfo> Aliens {
+        get {
+            return allBodyTimeInfos.FindAll(bodyTimeInfo => bodyTimeInfo.BodyInfo.IsAlien);
+        }
+    }
+
+    public List<BodyTimeInfo> Humans {
+        get {
+            return allBodyTimeInfos.FindAll(bodyTimeInfo => !bodyTimeInfo.BodyInfo.IsAlien);
+        }
+    }
+
     private const int MaxBodyEveryDay = 3;
     protected override void OnInit() {
         this.RegisterEvent<OnNewDay>(OnNewDay);
     }
 
+    public void RemoveBodyInfo(BodyInfo bodyInfo) {
+        allBodyTimeInfos.RemoveAll(bodyTimeInfo => bodyTimeInfo.BodyInfo == bodyInfo);
+    }
+
+    public bool IsAlien(BodyInfo bodyInfo) {
+        return Aliens.Exists(bodyTimeInfo => bodyTimeInfo.BodyInfo == bodyInfo);
+    }
     private void OnNewDay(OnNewDay e) {
         foreach (BodyTimeInfo timeInfo in allBodyTimeInfos) {
             timeInfo.DayRemaining--;
@@ -44,8 +65,13 @@ public class BodyManagmentSystem : AbstractSystem {
             newBodyInfos.Add(timeInfo);
             Debug.Log($"New Body Info Generated! Height: {info.Height}, VoiceType: {info.VoiceType}.");
         }
+        //transform an alien
+        allBodyTimeInfos[Random.Range(0, allBodyTimeInfos.Count)].BodyInfo.IsAlien = true;
 
-        this.SendEvent<OnNewBodyInfoGenerated>(new OnNewBodyInfoGenerated() {BodyTimeInfos = newBodyInfos});
+        this.SendEvent<OnNewBodyInfoGenerated>(new OnNewBodyInfoGenerated() {
+            BodyTimeInfos = newBodyInfos,
+            Aliens = Aliens
+        });
 
     }
 

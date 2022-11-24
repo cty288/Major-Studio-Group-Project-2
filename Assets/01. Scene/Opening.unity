@@ -169,6 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speaker: {fileID: 348698864}
   rate: 1.15
+  mixer: {fileID: 24300002, guid: 51b479af75576e940ae8966eca49d920, type: 2}
 --- !u!1 &348698861
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,6 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   subtitile: {fileID: 503810903}
+  IsSpeaking: 0
 --- !u!114 &348698865
 MonoBehaviour:
   m_ObjectHideFlags: 0

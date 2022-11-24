@@ -14,7 +14,7 @@ public class BodyInfo {
     public AlienBodyPartInfo HeadInfoPrefab;
     public AlienBodyPartInfo MainBodyInfoPrefab;
     public AlienBodyPartInfo LegInfoPreab;
-
+    public bool IsAlien = false;
     /// <summary>
     /// ´ÓÏÂÍùÉÏ
     /// </summary>

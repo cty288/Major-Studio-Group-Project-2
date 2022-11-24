@@ -20,7 +20,7 @@ public class FatTag : AbstractAlienTag, IFatTag {
 
         if(fatness == FatType.Fat)
         {
-            RealDescriptions = new List<string>() { "The convict is a fatty, according to sthe witness." };
+            RealDescriptions = new List<string>() { "The convict is a fatty, according to the witness." };
             FakeDescriptions = new List<string>() { "It is strong, as the witness reported." };
         }
         else if(fatness == FatType.Thin)

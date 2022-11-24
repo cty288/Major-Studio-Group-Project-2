@@ -11,10 +11,9 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class BodyGenerationSystem : AbstractSystem {
-   
-    private BodyInfo todayAlien;
-
-    public BodyInfo TodayAlien => todayAlien;
+    //private BodyInfo todayAlien;
+    
+    //public BodyInfo TodayAlien => todayAlien;
 
     private int dayNum;
     private BodyManagmentSystem bodyManagmentSystem;
@@ -40,7 +39,7 @@ public class BodyGenerationSystem : AbstractSystem {
         });
        
         this.GetSystem<GameTimeManager>().OnDayStart += OnEndOfDay;
-        this.RegisterEvent<OnNewBodyInfoGenerated>(OnNewBodyInfoGenerated);
+        //this.RegisterEvent<OnNewBodyInfoGenerated>(OnNewBodyInfoGenerated);
         bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
         bodyGenerationModel = this.GetModel<BodyGenerationModel>();
         gameTimeManager = this.GetSystem<GameTimeManager>();
@@ -48,10 +47,7 @@ public class BodyGenerationSystem : AbstractSystem {
     }
 
   
-    private void OnNewBodyInfoGenerated(OnNewBodyInfoGenerated e) {
-        todayAlien = bodyManagmentSystem.allBodyTimeInfos[Random.Range(0, bodyManagmentSystem.allBodyTimeInfos.Count)]
-            .BodyInfo;
-    }
+    
 
 
     private void OnEndOfDay(int day) {
@@ -68,11 +64,15 @@ public class BodyGenerationSystem : AbstractSystem {
     }
 
     private void SpawnAlienOrDeliverBody() {
+        List<BodyTimeInfo> Aliens = bodyManagmentSystem.Aliens;
+        List<BodyTimeInfo> Humans = bodyManagmentSystem.Humans;
+        
         BodyInfo targetBody;
-        //spawn body outside!
-        if (Random.Range(0f, 1f) <= nonAlienChance || dayNum==1) {
-            if (Random.Range(0f, 1f) <= 0.5f) {
-                targetBody = BodyInfo.GetBodyInfoOpposite(todayAlien, 0.7f, 0.8f, true);
+       
+        
+        if (Random.Range(0f, 1f) <= nonAlienChance || dayNum==1 || Aliens.Count==0) {
+            if (Random.Range(0f, 1f) <= 0.5f && Aliens.Count > 0) {
+                targetBody = BodyInfo.GetBodyInfoOpposite(Aliens[Random.Range(0, Aliens.Count)].BodyInfo, 0.7f, 0.8f, true);
             }
             else {
                 targetBody = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false);
@@ -80,7 +80,7 @@ public class BodyGenerationSystem : AbstractSystem {
             Debug.Log("Spawned a non-alien");
         }
         else {
-            targetBody = todayAlien;
+            targetBody = Aliens[Random.Range(0, Aliens.Count)].BodyInfo;
             Debug.Log("Spawned an alien!");
         }
 

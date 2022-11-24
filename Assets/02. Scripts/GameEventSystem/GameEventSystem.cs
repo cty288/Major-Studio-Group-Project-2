@@ -19,7 +19,8 @@ public class GameEventSystemUpdater : MonoBehaviour {
 
 public enum GameEventType {
     Radio,
-    BodyGeneration
+    BodyGeneration,
+    General
 }
 public class GameEventSystem : AbstractSystem {
 
@@ -87,16 +88,29 @@ public class GameEventSystem : AbstractSystem {
     }
 
     private void OnTimeChanged(DateTime oldTime, DateTime newTime) {
-        
+        HashSet<GameEvent> removedEvents = new HashSet<GameEvent>();
         foreach (List<GameEvent> events in AllPossibleEvents.Values) {
             events.RemoveAll((ev => {
                 if (ev.StartTimeRange.EndTime < newTime) {
                     ev.OnMissed();
+                    removedEvents.Add(ev);
                     return true;
                 }
                 return false;
             }));
         }
+        /*
+        foreach (var evs in EventDict.Values) {
+            evs.RemoveAll(ev => {
+                if (ev.StartTimeRange.EndTime < newTime) {
+                    if (!removedEvents.Contains(ev))
+                        ev.OnMissed();
+                    return true;
+                }
+                return false;
+            });
+        }*/
+        
 
         
         

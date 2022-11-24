@@ -5,6 +5,7 @@ using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public struct OnRadioEnd {
 
@@ -14,6 +15,7 @@ public struct OnRadioStart {
     public string speakContent;
     public float speakRate;
     public Gender speakGender;
+    public AudioMixerGroup mixer;
 }
 public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
     public override GameEventType GameEventType { get; } = GameEventType.Radio;
@@ -23,14 +25,16 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
     protected string speakContent;
     protected float speakRate;
     protected Gender speakGender;
+    protected AudioMixerGroup mixer;
 
     protected bool started = false;
-    protected RadioEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender) : base(startTimeRange) {
+    protected RadioEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer) : base(startTimeRange) {
         radioModel = this.GetModel<RadioModel>();
         gameStateModel = this.GetModel<GameStateModel>();
         this.speakContent = speakContent;
         this.speakRate = speakRate;
         this.speakGender = speakGender;
+        this.mixer = mixer;
     }
 
     public override void OnStart() {
@@ -49,7 +53,8 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
             this.SendEvent<OnRadioStart>(new OnRadioStart() {
                 speakContent = speakContent,
                 speakRate = speakRate,
-                speakGender = speakGender
+                speakGender = speakGender,
+                mixer = mixer
             });
             OnRadioStart();
         }

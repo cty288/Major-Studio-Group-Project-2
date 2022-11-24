@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using System.Collections.Generic;using MikroFramework.Architecture;
 using UnityEngine;
 
-public abstract class TelephoneContact {
+public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegisterEvent {
     public Action OnConversationComplete { get; set; }
-
+   
     public void Start() {
         OnStart();
     }
@@ -28,4 +28,7 @@ public abstract class TelephoneContact {
     protected abstract void OnHangUp();
 
     protected abstract void OnEnd();
+    public IArchitecture GetArchitecture() {
+        return MainGame.Interface;
+    }
 }

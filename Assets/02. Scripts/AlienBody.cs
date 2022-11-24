@@ -8,20 +8,28 @@ using MikroFramework.ResKit;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler {
+public interface IHaveBodyInfo {
+    public BodyInfo BodyInfo { get; set; }
+}
 
-    public BodyInfo BodyInfo;
+public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler, IHaveBodyInfo {
+
+    public BodyInfo BodyInfo { get; set; }
 
     private Transform tallSpawnPosition;
     private Transform shortSpawnPosition;
 
     private List<SpriteRenderer> spriteRenderers;
-    
+
+    public Action onClickAlienBody;
+
+    private BountyHunterSystem bountyHunterSystem;
 
     private void Awake() {
         tallSpawnPosition = transform.Find("TallSpawnPosition");
         shortSpawnPosition = transform.Find("LowSpawnPosition");
-       
+        bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
+
     }
 
     public void OnBuilt() {
@@ -110,8 +118,11 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
         return bodyInstance;
     }
 
-    public Action onClickAlienBody;
+  
     public void OnPointerClick(PointerEventData eventData) {
+        if (bountyHunterSystem.IsBountyHunting) {
+            return;
+        }
         onClickAlienBody?.Invoke();
     }
 }

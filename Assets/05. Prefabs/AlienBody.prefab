@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 5221414117374197077}
   - component: {fileID: 8168652459858958397}
   - component: {fileID: 91536515793053261}
+  - component: {fileID: 8969456685576946037}
   m_Layer: 0
   m_Name: AlienBody
   m_TagString: Untagged
@@ -223,6 +224,19 @@ MonoBehaviour:
   outlineMaterial: {fileID: 0}
   followingObject: {fileID: 7669932490035817638}
   followingObjectIsUI: 0
+--- !u!114 &8969456685576946037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5588787867597016321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9eb877b9eb711947a1ec483016c8aff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hintText: {fileID: 8263963401429766371}
 --- !u!1 &7669932490035817638
 GameObject:
   m_ObjectHideFlags: 0

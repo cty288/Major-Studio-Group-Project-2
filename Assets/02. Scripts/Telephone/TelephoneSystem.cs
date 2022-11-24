@@ -24,6 +24,10 @@ public class TelephoneSystemUpdater : MonoBehaviour {
     }
 }
 
+public struct OnDialDigit {
+    public int Digit;
+}
+
 public enum PhoneDealErrorType {
     NumberNotExists,
     NumberNotAvailable,
@@ -68,8 +72,13 @@ public class TelephoneSystem : AbstractSystem {
                 dayEndLocked = true;
             }
             
-            ClearDigits();
+            
             dealWaitTimer = 0;
+        }
+
+        if (newState == TelephoneState.Idle) {
+            gameTimeManager.LockDayEnd.Release();
+            dayEndLocked = false;
         }
     }
 
@@ -117,11 +126,12 @@ public class TelephoneSystem : AbstractSystem {
                 OnDealFailedCallback();
             }else {
                 dealWaitCoroutine = null;
-                UntilAction untilAction = UntilAction.Allocate(OnDealFailed(PhoneDealErrorType.NumberNotAvailable));
+                UntilAction untilAction = UntilAction.Allocate(OnDealFailed(PhoneDealErrorType.NumberNotExists));
                 untilAction.OnEndedCallback += OnDealFailedCallback;
                 untilAction.Execute();
             }
         }
+        ClearDigits();
     }
 
     public void AddContact(string phoneNumber, TelephoneContact contact) {
@@ -155,8 +165,7 @@ public class TelephoneSystem : AbstractSystem {
     public void HangUp() {
         if (State.Value != TelephoneState.Idle && State.Value != TelephoneState.Dealing) {
             State.Value = TelephoneState.Idle;
-            gameTimeManager.LockDayEnd.Release();
-            dayEndLocked = false;
+          
 
             if (State.Value == TelephoneState.Waiting && dealWaitCoroutine == null) {
                 return; //error messasge speaking
@@ -183,6 +192,8 @@ public class TelephoneSystem : AbstractSystem {
             dealWaitTimer = 0;
             dealingDigits += digit;
         }
+
+        this.SendEvent<OnDialDigit>(new OnDialDigit() {Digit = digit});
     }
 
     public void ClearDigits() {

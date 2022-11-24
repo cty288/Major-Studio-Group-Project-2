@@ -11,6 +11,7 @@ using MikroFramework.Architecture;
 using MikroFramework;
 using MikroFramework.AudioKit;
 using MikroFramework.Utilities;
+using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 public class AlienDescriptionData {
@@ -42,7 +43,9 @@ public class Radio : AbstractMikroController<MainGame>
     [SerializeField] private AnimationCurve unrelatedBodyInfoCountWithDay;
     [SerializeField] private AnimationCurve realAlienDescriptionRepeatTimeWithDay;
 
- 
+    [SerializeField] protected AudioMixerGroup radioNormalBroadcaseAudioMixerGroup;
+   
+
     private BodyGenerationSystem bodyGenerationSystem;
     private BodyManagmentSystem bodyManagmentSystem;
    
@@ -70,7 +73,7 @@ public class Radio : AbstractMikroController<MainGame>
     }
 
     private void OnLowSoundReleased() {
-        radioOpenAudioSource.DOFade(0.03f, 1f);
+        radioOpenAudioSource.DOFade(0.02f, 1f);
         speaker.AudioMixer.DOSetFloat("volume", -20, 1f);
     }
 
@@ -108,7 +111,7 @@ public class Radio : AbstractMikroController<MainGame>
     }
 
     private void OnRadioStart(OnRadioStart e) {
-        RadioSpeak(e.speakContent, e.speakRate, e.speakGender);
+        RadioSpeak(e.speakContent, e.speakRate, e.speakGender, e.mixer);
         transform.DOShakeRotation(3f, 5, 20, 90, false).SetLoops(-1);
 
     }
@@ -129,19 +132,32 @@ public class Radio : AbstractMikroController<MainGame>
 
 
 
-    private void RadioSpeak(string speakText, float speakRate, Gender speakGender) {
+    private void RadioSpeak(string speakText, float speakRate, Gender speakGender, AudioMixerGroup mixer) {
+        if (lowSoundLock.RefCount == 0) {
+            radioOpenAudioSource.DOFade(0.06f, 1f);
+        }
         radioModel.IsSpeaking = true;
-        radioOpenAudioSource.DOFade(0.2f, 1f);
+      
         this.Delay(1 + Random.Range(2f, 5f), () => {
             if (this) {
-                radioOpenAudioSource.DOFade(0.03f, 1f);
-                speaker.Speak(speakText, OnSpeakerStop, speakRate, 1f, speakGender);
+                if (lowSoundLock.RefCount == 0) {
+                    radioOpenAudioSource.DOFade(0.02f, 1f);
+                }
+
+               
+                speaker.Speak(speakText, mixer, OnSpeakerStop, speakRate, 1f, speakGender);
             }
         });
     }
 
     private void ConstructDescriptionDatas(List<AlienDescriptionData> descriptionDatas, float radioReality, int day) {
-        BodyInfo todayAlien = bodyGenerationSystem.TodayAlien;
+
+        BodyInfo todayAlien = null;
+        if (bodyManagmentSystem.Aliens.Count > 0) {
+            todayAlien = bodyManagmentSystem.Aliens[Random.Range(0, bodyManagmentSystem.Aliens.Count)].BodyInfo;
+        }
+          
+
         List<BodyInfo> allPossibleBodyInfos =
             bodyManagmentSystem.allBodyTimeInfos.Select((info => info.BodyInfo)).ToList();
 
@@ -179,11 +195,13 @@ public class Radio : AbstractMikroController<MainGame>
        if (day == 1) {
             AlienDescriptionData descriptionData = radioModel.DescriptionDatas[0];
             radioModel.DescriptionDatas.RemoveAt(0);
-            
+
             this.GetSystem<GameEventSystem>().AddEvent(new DailyBodyRadio(
                 new TimeRange(currentTime + new TimeSpan(0, 10, 0), currentTime + new TimeSpan(0, 20, 0)),
                 AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo, descriptionData.Reality),
-                Random.Range(0.85f, 1.2f), Random.Range(0, 2) == 0 ? Gender.MALE : Gender.FEMALE));
+                Random.Range(0.85f, 1.2f), Random.Range(0, 2) == 0 ? Gender.MALE : Gender.FEMALE,
+                radioNormalBroadcaseAudioMixerGroup));
+
        }
     }
 

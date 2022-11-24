@@ -37,8 +37,8 @@ public class GameTimeManager : AbstractSystem, ISystem {
             if (gameStateModel.GameState != GameState.End) {
                 this.GetModel<GameSceneModel>().GameScene.Value = GameScene.MainGame;
                 
-                CurrentTime.Value = CurrentTime.Value.AddDays(1);
-                CurrentTime.Value = new DateTime(CurrentTime.Value.Year, CurrentTime.Value.Month, CurrentTime.Value.Day, 22, 0, 0);
+              //  CurrentTime.Value = CurrentTime.Value.AddDays(1);
+                CurrentTime.Value = new DateTime(CurrentTime.Value.Year, CurrentTime.Value.Month, CurrentTime.Value.Day+1, 22, 0, 0);
                 this.SendEvent<OnNewDay>(new OnNewDay()
                 {
                     Date = CurrentTime.Value

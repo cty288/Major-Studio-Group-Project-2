@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using UnityEngine;
+using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 public struct OnConstructDescriptionDatas {
@@ -15,8 +16,8 @@ public struct OnConstructDescriptionDatas {
 public class DailyBodyRadio : RadioEvent {
 
 
-    private Coroutine radioCorruptCheckCoroutine;
-    public DailyBodyRadio(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender) : base(startTimeRange, speakContent, speakRate, speakGender) {
+        private Coroutine radioCorruptCheckCoroutine;
+         public DailyBodyRadio(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer) : base(startTimeRange, speakContent, speakRate, speakGender, mixer) {
 
         }
 
@@ -49,7 +50,7 @@ public class DailyBodyRadio : RadioEvent {
                 new TimeRange(currentTime + new TimeSpan(0, nextEventInterval, 0),
                     currentTime + new TimeSpan(0, nextEventInterval + 10, 0)),
                 AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo, descriptionData.Reality),
-                Random.Range(0.85f, 1.2f), Random.Range(0, 2) == 0 ? Gender.MALE : Gender.FEMALE));
+                Random.Range(0.85f, 1.2f), Random.Range(0, 2) == 0 ? Gender.MALE : Gender.FEMALE, mixer));
         }
 
         protected override void OnRadioStart() {

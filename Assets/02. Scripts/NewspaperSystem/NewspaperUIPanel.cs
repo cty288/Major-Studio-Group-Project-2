@@ -72,6 +72,8 @@ public class NewspaperUIPanel : OpenableUIPanel {
             Camera camera = spawnedBody.GetComponentInChildren<Camera>();
             RenderTexture renderTexture = camera.targetTexture;
             imageContainers[i].texture = renderTexture;
+            imageContainers[i].GetComponent<IHaveBodyInfo>().BodyInfo = bodyInfo;
+
             TMP_Text hintText = symbolImages[i].GetComponentInChildren<TMP_Text>(true);
             if (info.DayRemaining == 3) {
                 symbolImages[i].sprite = symbols[0];

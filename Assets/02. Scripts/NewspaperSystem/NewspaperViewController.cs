@@ -10,18 +10,19 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
-public class NewspaperViewController : DraggableItems, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler {
+public class NewspaperViewController : DraggableItems, IPointerEnterHandler, IPointerExitHandler {
     private GameObject indicateCanvas;
     private GameObject dateCanvas;
     private List<SpriteRenderer> renderers = new List<SpriteRenderer>();
    
-    private DateTime pointerDownTime;
+
     private Newspaper news;
     private NewspaperSystem newspaperSystem;
 
     private SpriteRenderer selfRenderer;
     [SerializeField] private List<Sprite> sprites;
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         renderers = GetComponentsInChildren<SpriteRenderer>(true).ToList();
      
         indicateCanvas = transform.Find("CanvasParent/Canvas").gameObject;
@@ -48,7 +49,7 @@ public class NewspaperViewController : DraggableItems, IPointerDownHandler, IPoi
             renderer.sortingOrder = layer;
         }
         indicateCanvas.GetComponent<Canvas>().sortingOrder = layer;
-        dateCanvas.GetComponent<Canvas>().sortingOrder = layer;
+        dateCanvas.GetComponent<Canvas>().sortingOrder = 1000;
     }
 
     public void SetContent(Newspaper news) {
@@ -56,17 +57,9 @@ public class NewspaperViewController : DraggableItems, IPointerDownHandler, IPoi
     }
 
 
-    public void OnPointerDown(PointerEventData eventData) {
-        pointerDownTime = DateTime.Now;
-    }
+  
 
-    public void OnPointerUp(PointerEventData eventData) {
-        if ((DateTime.Now - pointerDownTime).TotalSeconds < 0.2f) {
-            OnClick();
-        }
-    }
-
-    private void OnClick() {
+    protected override void OnClick() {
         Debug.Log("OnClick");
         this.Delay(0.1f, () => {
             if (this) {
@@ -75,7 +68,10 @@ public class NewspaperViewController : DraggableItems, IPointerDownHandler, IPoi
         });
     }
 
-   
+    public override void OnThrownToRubbishBin() {
+        
+    }
+
 
     //private bool mouseOnNewspaper = false;
     public void OnPointerEnter(PointerEventData eventData)

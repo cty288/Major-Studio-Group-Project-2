@@ -9,7 +9,8 @@ using UnityEngine.UI;
 public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     [SerializeField] private Material outlineMaterial;
     private SpriteRenderer spriteRenderer;
-    private Image image;
+    private MaskableGraphic image;
+    
     private Material defaultMaterial;
     private bool isHovering = false;
     [SerializeField] private GameObject followingObject;
@@ -21,7 +22,7 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
         }
        
         spriteRenderer = GetComponent<SpriteRenderer>();
-        image = GetComponent<Image>();
+        image = GetComponent<MaskableGraphic>();
         if (spriteRenderer) {
             defaultMaterial = spriteRenderer.material;
         }

@@ -4,22 +4,30 @@ using System.Collections.Generic;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 
 public class TelephoneViewController : AbstractMikroController<MainGame>, IPointerClickHandler {
     [SerializeField] private OpenableUIPanel panel;
     [SerializeField] private Speaker speaker;
+    
     private TelephoneSystem telephoneSystem;
 
     private void Awake() {
         telephoneSystem = this.GetSystem<TelephoneSystem>();
         telephoneSystem.OnDealWaitBeep += OnDealWaitBeep;
         telephoneSystem.OnDealFailed += OnDealFailed;
+        telephoneSystem.OnHangUp += OnHangUp;
     }
 
     private void OnDestroy() {
         telephoneSystem.OnDealWaitBeep -= OnDealWaitBeep;
         telephoneSystem.OnDealFailed -= OnDealFailed;
+        telephoneSystem.OnHangUp -= OnHangUp;
+    }
+
+    private void OnHangUp() {
+        AudioSystem.Singleton.Play2DSound("hang_out");
     }
 
     private Func<bool> OnDealFailed(PhoneDealErrorType failType) {
@@ -33,7 +41,7 @@ public class TelephoneViewController : AbstractMikroController<MainGame>, IPoint
                 break;
         }
 
-        speaker.Speak(speakText, null, 1f, 1.5f);
+        speaker.Speak(speakText, null,null, 1f, 1.5f);
         return () => !speaker.IsSpeaking;
     }
 

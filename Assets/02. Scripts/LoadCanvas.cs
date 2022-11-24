@@ -6,17 +6,20 @@ using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
 using MikroFramework.Singletons;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
     private GameTimeManager gameTimeManager;
     private Image bg;
+    private TMP_Text message;
 
     [SerializeField] private List<Camera> scenesToCameras = new List<Camera>();
     private void Awake() {
         gameTimeManager = this.GetSystem<GameTimeManager>();
         bg = transform.Find("BG").GetComponent<Image>();
+        message = transform.Find("Message").GetComponent<TMP_Text>();
         this.GetModel<GameSceneModel>().GameScene.RegisterOnValueChaned(OnGameSceneChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
     }
 
@@ -68,6 +71,15 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
             
             action.Execute();
         });
+    }
+
+    public void ShowMessage(string message) {
+        this.message.text = message;
+        this.message.DOFade(1, 1f);
+    }
+
+    public void HideMessage() {
+        this.message.DOFade(0, 1f);
     }
 
     public IArchitecture GetArchitecture() {
