@@ -3,18 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Crosstales.RTVoice.Model.Enum;
+using MikroFramework.Architecture;
 
 //using NHibernate.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 
-public class BodyInfo {
+public class BodyInfo : ICanRegisterEvent {
     //https://stackoverflow.com/questions/35577011/custom-string-formatter-in-c-sharp
     public AlienBodyPartInfo HeadInfoPrefab;
     public AlienBodyPartInfo MainBodyInfoPrefab;
     public AlienBodyPartInfo LegInfoPreab;
     public bool IsAlien = false;
+    public long ID;
     /// <summary>
     /// ¥”œ¬Õ˘…œ
     /// </summary>
@@ -63,6 +65,8 @@ public class BodyInfo {
     }
     private BodyInfo(Gender voiceType, AlienBodyPartInfo headInfoPrefab, AlienBodyPartInfo mainBodyPartInfoPrefab, AlienBodyPartInfo legInfoPreab, BodyPartDisplayType displayType,
         HeightType height) {
+        this.RegisterEvent<OnBodyInfoBecomeAlien>(OnBodyInfoBecomeAlien);
+        this.RegisterEvent<OnBodyInfoRemoved>(OnBodyInfoRemoved);
         HeadInfoPrefab = headInfoPrefab;
         MainBodyInfoPrefab = mainBodyPartInfoPrefab;
         LegInfoPreab = legInfoPreab;
@@ -75,6 +79,24 @@ public class BodyInfo {
        
         this.DisplayType = displayType;
         this.Height = height;
+        this.ID = Random.Range(-1000000000, 1000000000);
+    }
+
+    private void OnBodyInfoRemoved(OnBodyInfoRemoved e) {
+        if (e.ID == ID) {
+            UnregisterEvents();
+        }
+    }
+
+    private void UnregisterEvents() {
+        this.UnRegisterEvent<OnBodyInfoBecomeAlien>(OnBodyInfoBecomeAlien);
+        this.UnRegisterEvent<OnBodyInfoRemoved>(OnBodyInfoRemoved);
+    }
+
+    private void OnBodyInfoBecomeAlien(OnBodyInfoBecomeAlien e) {
+        if (e.ID == ID) {
+            this.IsAlien = true;
+        }
     }
 
 
@@ -110,11 +132,13 @@ public class BodyInfo {
         Gender voice = GetOpposite(original.VoiceType, bodyPartOppositeChance);
         height = heightOpposite ? (height == HeightType.Short ? HeightType.Tall : HeightType.Short) : height;
 
-        return new BodyInfo(voice, headInfoPrefab, mainBodyPartInfoPrefab, legInfoPreab, original.DisplayType, height);
+        BodyInfo info = new BodyInfo(voice, headInfoPrefab, mainBodyPartInfoPrefab, legInfoPreab, original.DisplayType, height);
+        info.IsAlien = !originalIsAlien;
+        return info;
     }
 
 
-    public static BodyInfo GetBodyInfoForDisplay(BodyInfo original, BodyPartDisplayType targetDisplayType, float reality = 1) {
+    public static BodyInfo GetBodyInfoForDisplay(BodyInfo original, BodyPartDisplayType targetDisplayType, float reality = 1, bool sameID = true) {
         HeightType height = original.Height;
         AlienBodyPartInfo head = AlienBodyPartCollections.Singleton.GetBodyPartInfoForDisplay(targetDisplayType,
             original.DisplayType, original.HeadInfoPrefab, height, reality);
@@ -125,7 +149,12 @@ public class BodyInfo {
         AlienBodyPartInfo leg = AlienBodyPartCollections.Singleton.GetBodyPartInfoForDisplay(targetDisplayType, original.DisplayType,
             original.LegInfoPreab, height, reality);
         
-        return new BodyInfo(original.VoiceType, head, body, leg, targetDisplayType, height);
+        BodyInfo info = new BodyInfo(original.VoiceType, head, body, leg, targetDisplayType, height);
+        info.IsAlien = original.IsAlien;
+        if (sameID) {
+            info.ID = original.ID;
+        }
+        return info;
     }
     
     private static AlienBodyPartInfo GetOpposite(BodyPartDisplayType displayType, AlienBodyPartInfo original, BodyPartType bodyPartType,  HeightType height, bool originalIsAlien, bool changeHeight,
@@ -207,4 +236,7 @@ public class BodyInfo {
     }
     #endregion
 
+    public IArchitecture GetArchitecture() {
+        return MainGame.Interface;
+    }
 }

@@ -47,7 +47,7 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
             bodyViewController = AlienBody.BuildShadowAlienBody(body, true).GetComponent<AlienBody>();
             bodyViewController.transform.position = transform.position;
             
-            if (bodyManagmentSystem.IsAlien(body)) {
+            if (body.IsAlien) {
                 if (todaysAlienIsVeryLarge) {
                     bodyViewController.gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
                     bodyViewController.gameObject.transform.DOLocalMoveY(-4, 0f);
@@ -65,7 +65,7 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
         bodyGenerationModel.CurrentOutsideBodyConversationFinishing = true;
         speakEnd = false;
         Debug.Log("Clicked");
-        if (bodyManagmentSystem.IsAlien(bodyViewController.BodyInfo)) {
+        if (bodyViewController.BodyInfo.IsAlien) {
             BackButton.Singleton.Hide();
             LoadCanvas.Singleton.LoadUntil(() => {
                 speaker.Speak("Hahaha! I will kill you!", null, OnAlienSpeakEnd);

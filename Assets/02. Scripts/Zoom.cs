@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mikrocosmos;
 using UnityEngine;
 
 public class Zoom :MonoBehaviour
@@ -16,19 +17,19 @@ public class Zoom :MonoBehaviour
 
     public float edgeIntensity = 0.05f;
 
-    void OnRenderImage(RenderTexture source, RenderTexture destination)
-    {
+    private void Awake() {
+        material = ImageEffectController.Singleton.GetScriptableRendererFeatureMaterial(0);
+        gameObject.SetActive(false);
+    }
+
+    private void Update() {
         if (material)
         {
             material.SetVector("_Pos", spyhole.transform.position);
             material.SetFloat("_ZoomIntensity", zoomIntensity);
             material.SetFloat("_EdgeIntensity", edgeIntensity);
             material.SetFloat("_Size", size);
-            Graphics.Blit(source, destination, material);
-        }
-        else
-        {
-            Graphics.Blit(source, destination);
+            
         }
     }
 }

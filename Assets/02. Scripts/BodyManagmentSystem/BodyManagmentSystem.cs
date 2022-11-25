@@ -39,18 +39,33 @@ public class BodyManagmentSystem : AbstractSystem {
     }
 
     public void RemoveBodyInfo(BodyInfo bodyInfo) {
-        allBodyTimeInfos.RemoveAll(bodyTimeInfo => bodyTimeInfo.BodyInfo == bodyInfo);
-    }
+        allBodyTimeInfos.RemoveAll(bodyTimeInfo => {
 
+            if (bodyTimeInfo.BodyInfo.ID == bodyInfo.ID) {
+                this.SendEvent<OnBodyInfoRemoved>(new OnBodyInfoRemoved() {ID = bodyTimeInfo.BodyInfo.ID});
+                return true;
+            }
+
+            return false;
+        });
+    }
+    /*
     public bool IsAlien(BodyInfo bodyInfo) {
         return Aliens.Exists(bodyTimeInfo => bodyTimeInfo.BodyInfo == bodyInfo);
-    }
+    }*/
     private void OnNewDay(OnNewDay e) {
         foreach (BodyTimeInfo timeInfo in allBodyTimeInfos) {
             timeInfo.DayRemaining--;
         }
 
-        allBodyTimeInfos.RemoveAll(timeInfo => timeInfo.DayRemaining <= 0);
+        allBodyTimeInfos.RemoveAll(timeInfo => {
+            if (timeInfo.DayRemaining <= 0) {
+                this.SendEvent<OnBodyInfoRemoved>(new OnBodyInfoRemoved() {ID = timeInfo.BodyInfo.ID});
+                return true;
+            }
+
+            return false;
+        });
 
         List<BodyTimeInfo> newBodyInfos = new List<BodyTimeInfo>();
         for (int i = 0; i < MaxBodyEveryDay; i++) {
@@ -66,8 +81,9 @@ public class BodyManagmentSystem : AbstractSystem {
             Debug.Log($"New Body Info Generated! Height: {info.Height}, VoiceType: {info.VoiceType}.");
         }
         //transform an alien
-        allBodyTimeInfos[Random.Range(0, allBodyTimeInfos.Count)].BodyInfo.IsAlien = true;
-
+        BodyInfo selectedAlien = allBodyTimeInfos[Random.Range(0, allBodyTimeInfos.Count)].BodyInfo;
+        selectedAlien.IsAlien = true;
+        this.SendEvent<OnBodyInfoBecomeAlien>(new OnBodyInfoBecomeAlien() {ID = selectedAlien.ID});
         this.SendEvent<OnNewBodyInfoGenerated>(new OnNewBodyInfoGenerated() {
             BodyTimeInfos = newBodyInfos,
             Aliens = Aliens
@@ -75,4 +91,14 @@ public class BodyManagmentSystem : AbstractSystem {
 
     }
 
+}
+
+
+
+public struct OnBodyInfoBecomeAlien {
+    public long ID;
+}
+
+public struct OnBodyInfoRemoved {
+    public long ID;
 }

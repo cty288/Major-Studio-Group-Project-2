@@ -17,7 +17,7 @@ public class MerchantSystem : AbstractSystem {
         gameEventSystem = this.GetSystem<GameEventSystem>();
         telephoneSystem = this.GetSystem<TelephoneSystem>();
         
-        phoneNumber = PhoneNumberGenor.GeneratePhoneNumber(10);
+        phoneNumber = PhoneNumberGenor.GeneratePhoneNumber(8);
         phoneNumberGenerationDate = Random.Range(2, 5);
 
         AddMerchantPhoneNumebrEvent();

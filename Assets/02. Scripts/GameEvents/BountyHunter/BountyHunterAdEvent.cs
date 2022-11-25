@@ -44,9 +44,9 @@ public class BountyHunterAdEvent : RadioEvent {
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
         int nextDayInterval = bountyHunterSystem.ContactedBountyHunter ? 1 : 3;
 
-        
+        DateTime nextEventDay = currentTime.AddDays(Random.Range(1, 1 + nextDayInterval));
         DateTime nextEventTime = new DateTime(currentTime.Year, currentTime.Month,
-            currentTime.Day + Random.Range(1,1 + nextDayInterval), Random.Range(22,24), Random.Range(0, 60), 0);
+            nextEventDay.Day, Random.Range(22,24), Random.Range(0, 60), 0);
 
         
         gameEventSystem.AddEvent(new BountyHunterAdEvent(

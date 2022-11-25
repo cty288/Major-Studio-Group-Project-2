@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2733399107
+CRC: 704868139
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 49214fc88a236b7947ad168948444c7d
+    Hash: 76921e493032614b6ae6d73bf2341702
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9a2ca7bdbd1871f7131daf57de908e0c
@@ -15,7 +15,10 @@ SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/04. Audios/Knocks/knock_5.mp3
 - Assets/04. Audios/Knocks/knock_7.wav
+- Assets/04. Audios/telephone/hang_out.ogg
+- Assets/04. Audios/Gun/gun_fire.wav
 - Assets/04. Audios/Knocks/knock_2.ogg
+- Assets/04. Audios/telephone/phone_dialing.ogg
 - Assets/04. Audios/Knocks/knock_3.ogg
 - Assets/04. Audios/Knocks/knock_6.mp3
 - Assets/04. Audios/Knocks/knock_1.ogg

@@ -22,7 +22,7 @@ public class NewspaperSystem : AbstractSystem {
     private void OnNewBodyInfoGenerated(OnNewBodyInfoGenerated e) {
         List<BodyTimeInfo> newsPaperBodyInfos = new List<BodyTimeInfo>();
         foreach (BodyTimeInfo bodyTimeInfo in e.BodyTimeInfos) {
-            BodyInfo newsPaperInfo =
+                BodyInfo newsPaperInfo =
                 BodyInfo.GetBodyInfoForDisplay(bodyTimeInfo.BodyInfo, BodyPartDisplayType.Newspaper);
             newsPaperBodyInfos.Add(new BodyTimeInfo(bodyTimeInfo.DayRemaining, newsPaperInfo));
         }

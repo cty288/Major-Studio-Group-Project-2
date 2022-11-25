@@ -64,9 +64,10 @@ public class BountyHunterPhone : TelephoneContact {
         //remove this body from the manager no matter what
         BodyInfo info = e.bodyInfo;
         DateTime current = gameTimeManager.CurrentTime.Value;
-        DateTime tomorrow = new DateTime(current.Year, current.Month, current.Day + 1, 22, 0, 0);
+        current = current.AddDays(1);
+        DateTime tomorrow = new DateTime(current.Year, current.Month, current.Day , 22, 0, 0);
         
-        if (bodyManagmentSystem.IsAlien(info)) {
+        if (info.IsAlien) {
             nextAvailableDate = gameTimeManager.CurrentTime.Value.AddDays(1);
         }
         else {

@@ -127,7 +127,8 @@ public class MerchantPhone : TelephoneContact {
                         "Thanks for your order. The item will be delivered to you tomorrow. You can continue shopping or press 9 to repeat the list.";
 
                     DateTime currentTime = gameTimeManager.CurrentTime.Value;
-                    currentTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day + 1, 22,
+                    currentTime = currentTime.AddDays(1);
+                    currentTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 22,
                         0, 0);
                     gameEventSystem.AddEvent(new GetResourceEvent(new BulletGoods(),1 ,new TimeRange(currentTime)));
                 }
