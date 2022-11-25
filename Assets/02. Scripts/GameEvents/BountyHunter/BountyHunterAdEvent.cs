@@ -45,12 +45,12 @@ public class BountyHunterAdEvent : RadioEvent {
         int nextDayInterval = bountyHunterSystem.ContactedBountyHunter ? 1 : 3;
 
         DateTime nextEventDay = currentTime.AddDays(Random.Range(1, 1 + nextDayInterval));
-        DateTime nextEventTime = new DateTime(currentTime.Year, currentTime.Month,
+        DateTime nextEventTime = new DateTime(nextEventDay.Year, nextEventDay.Month,
             nextEventDay.Day, Random.Range(22,24), Random.Range(0, 60), 0);
+        DateTime nextEventTimeRange2 = nextEventTime.AddMinutes(Random.Range(10, 30));
 
-        
         gameEventSystem.AddEvent(new BountyHunterAdEvent(
-            new TimeRange(nextEventTime, nextEventTime + new TimeSpan(0, 0, Random.Range(10, 30), 0, 0)),
+            new TimeRange(nextEventTime, nextEventTimeRange2),
             GetRandomAD(), 1, Gender.MALE, AudioMixerList.Singleton.AudioMixerGroups[0], triggerChance));
     }
     protected override void OnRadioStart() {
