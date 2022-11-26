@@ -4316,7 +4316,6 @@ GameObject:
   m_Component:
   - component: {fileID: 437468772}
   - component: {fileID: 437468773}
-  - component: {fileID: 437468774}
   m_Layer: 0
   m_Name: Square (1)
   m_TagString: Untagged
@@ -4391,19 +4390,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &437468774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 437468771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2695c720035ef4549bbeeb840d0719dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flashlight: {fileID: 437468773}
 --- !u!1 &461817264
 GameObject:
   m_ObjectHideFlags: 0
@@ -10685,7 +10671,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1256547846}
-  - component: {fileID: 1256547847}
   m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
@@ -10711,19 +10696,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1256547847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1256547845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f10fed3cbc19422bba628fff172e431, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  houseLight: {fileID: 1819493818}
 --- !u!1 &1258237511
 GameObject:
   m_ObjectHideFlags: 0
@@ -14297,7 +14269,6 @@ GameObject:
   - component: {fileID: 1704553490}
   - component: {fileID: 1704553489}
   - component: {fileID: 1704553492}
-  - component: {fileID: 1704553493}
   m_Layer: 0
   m_Name: Telephone
   m_TagString: Untagged
@@ -14433,19 +14404,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1539047111}
   speaker: {fileID: 153000027}
---- !u!114 &1704553493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1704553487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: deee447fc52f741be9564a743351ebc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enabled: 1
 --- !u!1 &1708327521
 GameObject:
   m_ObjectHideFlags: 0
@@ -15949,7 +15907,6 @@ GameObject:
   - component: {fileID: 1819245658}
   - component: {fileID: 1819245660}
   - component: {fileID: 1819245661}
-  - component: {fileID: 1819245662}
   m_Layer: 0
   m_Name: Radio
   m_TagString: Untagged
@@ -16314,19 +16271,6 @@ MonoBehaviour:
   outlineMaterial: {fileID: 2100000, guid: 5a6db85ebb9466f4b90af9ebdd3c4fdc, type: 2}
   followingObject: {fileID: 907750099}
   followingObjectIsUI: 0
---- !u!114 &1819245662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1819245655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: deee447fc52f741be9564a743351ebc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enabled: 1
 --- !u!1 &1819493817
 GameObject:
   m_ObjectHideFlags: 0
