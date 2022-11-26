@@ -32,7 +32,7 @@ public class RadioRC : SimpleRC {
     }
 }
 
-public class Radio : AbstractMikroController<MainGame>
+public class Radio : ElectricalApplicance
 {
     public Speaker speaker;
     
@@ -53,7 +53,8 @@ public class Radio : AbstractMikroController<MainGame>
     private RadioModel radioModel;
 
     private RadioRC lowSoundLock = new RadioRC();
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         radioOpenAudioSource = GetComponent<AudioSource>();
         bodyGenerationSystem = this.GetSystem<BodyGenerationSystem>();
         bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
@@ -66,6 +67,14 @@ public class Radio : AbstractMikroController<MainGame>
         radioModel = this.GetModel<RadioModel>();
         lowSoundLock.OnRefCleared += OnLowSoundReleased;
 
+    }
+
+    protected override void OnNoElectricity() {
+        StopRadio(false);
+    }
+
+    protected override void OnElectricityRecovered() {
+        
     }
 
     private void OnDestroy() {
@@ -111,6 +120,9 @@ public class Radio : AbstractMikroController<MainGame>
     }
 
     private void OnRadioStart(OnRadioStart e) {
+        if (!electricitySystem.HasElectricity()) {
+            return;
+        }
         RadioSpeak(e.speakContent, e.speakRate, e.speakGender, e.mixer);
         transform.DOShakeRotation(3f, 5, 20, 90, false).SetLoops(-1);
 

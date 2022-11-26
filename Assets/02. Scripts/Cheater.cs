@@ -20,5 +20,9 @@ public class Cheater : AbstractMikroController<MainGame>
         if (Input.GetKeyDown(KeyCode.F)) {
             this.GetSystem<PlayerResourceSystem>().AddFood(1);
         }
+
+        if (Input.GetKeyDown(KeyCode.E)) {
+            this.GetSystem<ElectricitySystem>().AddElectricity(1);
+        }
     }
 }

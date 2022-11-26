@@ -45,7 +45,7 @@ public class BulletGoods : MerchantGoods {
 }
 public class MerchantPhone : TelephoneContact {
     protected GameEventSystem gameEventSystem;    
-    private Speaker merchantSpeaker;
+   
     private GameTimeManager gameTimeManager;
     private PlayerResourceSystem playerResourceSystem;
     private float dailyAvailability = 0.7f;
@@ -58,11 +58,11 @@ public class MerchantPhone : TelephoneContact {
 
     private AudioMixerGroup mixer;
     public MerchantPhone() {
-        merchantSpeaker = GameObject.Find("MerchantSpeaker").GetComponent<Speaker>();
+        speaker = GameObject.Find("MerchantSpeaker").GetComponent<Speaker>();
         gameTimeManager = this.GetSystem<GameTimeManager>();
         playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
         gameEventSystem = this.GetSystem<GameEventSystem>();
-        this.mixer = merchantSpeaker.GetComponent<AudioSource>().outputAudioMixerGroup;
+        this.mixer = speaker.GetComponent<AudioSource>().outputAudioMixerGroup;
         gameTimeManager.OnDayStart += OnDayStart;
         RefreshAvailability();
         RefreshDailyGoods();
@@ -97,7 +97,7 @@ public class MerchantPhone : TelephoneContact {
     protected override void OnStart() {
         string welcome = "Hello, here is the best underground merchant in MK Town! The following list is the items sold today, press the corresponding number to buy: ";
         welcome += GetSellListSentence();
-        merchantSpeaker.Speak(welcome, mixer,OnWelcomeSpeakFinished);
+        speaker.Speak(welcome, mixer,OnWelcomeSpeakFinished);
     }
 
     private void OnWelcomeSpeakFinished() {
@@ -107,7 +107,7 @@ public class MerchantPhone : TelephoneContact {
     private void OnDialDigit(OnDialDigit e) {
         this.UnRegisterEvent<OnDialDigit>(OnDialDigit);
         if (e.Digit == 9) {
-            merchantSpeaker.Speak(GetSellListSentence(), mixer, OnWelcomeSpeakFinished);
+            speaker.Speak(GetSellListSentence(), mixer, OnWelcomeSpeakFinished);
         }
         else {
             int index = e.Digit - 1;
@@ -133,7 +133,7 @@ public class MerchantPhone : TelephoneContact {
                     gameEventSystem.AddEvent(new GetResourceEvent(new BulletGoods(),1 ,new TimeRange(currentTime)));
                 }
             }
-            merchantSpeaker.Speak(reply, mixer, OnWelcomeSpeakFinished);
+            speaker.Speak(reply, mixer, OnWelcomeSpeakFinished);
         }
     }
 
@@ -156,7 +156,7 @@ public class MerchantPhone : TelephoneContact {
     }
 
     private void StopSpeaking() {
-        merchantSpeaker.Stop();
+        speaker.Stop();
         this.UnRegisterEvent<OnDialDigit>(OnDialDigit);
     }
 }

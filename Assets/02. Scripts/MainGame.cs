@@ -18,6 +18,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<TelephoneSystem>(new TelephoneSystem());
         this.RegisterSystem<MerchantSystem>(new MerchantSystem());
         this.RegisterSystem<BountyHunterSystem>(new BountyHunterSystem());
+        this.RegisterSystem<ElectricitySystem>(new ElectricitySystem());
         
         this.RegisterModel<GameStateModel>(new GameStateModel());
         this.RegisterModel<GameSceneModel>(new GameSceneModel());

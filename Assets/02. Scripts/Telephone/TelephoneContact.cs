@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegisterEvent {
     public Action OnConversationComplete { get; set; }
-   
+    protected Speaker speaker;
     public void Start() {
         OnStart();
     }

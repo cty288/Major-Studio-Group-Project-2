@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 public class BountyHunterPhone : TelephoneContact {
     private BountyHunterSystem bountyHunterSystem;
    
-    private Speaker speaker;
+    
     private GameTimeManager gameTimeManager;
     private AudioMixerGroup mixer;
     private Coroutine waitingForInteractionCoroutine;
@@ -120,6 +120,7 @@ public class BountyHunterPhone : TelephoneContact {
     }
 
     private void End() {
+        speaker.Stop();
         bountyHunterSystem.IsBountyHunting.Value = false;
         TopScreenHintText.Singleton.Hide();
         this.UnRegisterEvent<OnBodyHuntingSelect>(OnBodyHuntingSelect);

@@ -7,17 +7,26 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 
-public class TelephoneViewController : AbstractMikroController<MainGame>, IPointerClickHandler {
+public class TelephoneViewController : ElectricalApplicance, IPointerClickHandler {
     [SerializeField] private OpenableUIPanel panel;
     [SerializeField] private Speaker speaker;
     
     private TelephoneSystem telephoneSystem;
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         telephoneSystem = this.GetSystem<TelephoneSystem>();
         telephoneSystem.OnDealWaitBeep += OnDealWaitBeep;
         telephoneSystem.OnDealFailed += OnDealFailed;
         telephoneSystem.OnHangUp += OnHangUp;
+    }
+
+    protected override void OnNoElectricity() {
+        telephoneSystem.HangUp();
+    }
+
+    protected override void OnElectricityRecovered() {
+       
     }
 
     private void OnDestroy() {
@@ -28,6 +37,7 @@ public class TelephoneViewController : AbstractMikroController<MainGame>, IPoint
 
     private void OnHangUp() {
         AudioSystem.Singleton.Play2DSound("hang_out");
+        speaker.Stop();
     }
 
     private Func<bool> OnDealFailed(PhoneDealErrorType failType) {
@@ -50,6 +60,9 @@ public class TelephoneViewController : AbstractMikroController<MainGame>, IPoint
     }
 
     public void OnPointerClick(PointerEventData eventData) {
+        if (!electricitySystem.HasElectricity()) {
+            return;
+        }
         panel.Show();
     }
 }
