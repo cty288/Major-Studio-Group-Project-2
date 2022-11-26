@@ -23,4 +23,5 @@ public abstract class ElectricalApplicance : AbstractMikroController<MainGame> {
 
     protected abstract void OnNoElectricity();
     protected abstract void OnElectricityRecovered();
+
 }
