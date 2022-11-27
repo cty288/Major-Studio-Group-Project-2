@@ -59,7 +59,6 @@ public class Speaker :  AbstractMikroController<MainGame> {
     private void Awake() {
         audioSource = GetComponent<AudioSource>();
 
-       
    
         
         

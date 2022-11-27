@@ -5,9 +5,13 @@ using UnityEngine.Rendering.Universal;
 
 public class HouseLight : ElectricalApplicance
 {
-    public Light2D houseLight;
-    void Update()
-    {
+    private Light2D houseLight;
+    protected override void Awake() {
+        base.Awake();
+        houseLight = this.GetComponent<Light2D>();
+    }
+
+    void Update() {
         SetLightIntensity();
     }
 

@@ -122,9 +122,11 @@ public class MerchantPhone : TelephoneContact {
                 }
                 else {
                     playerResourceSystem.RemoveFood(goods.FoodPerUnit);
-                   
-                    reply =
-                        "Thanks for your order. The item will be delivered to you tomorrow. You can continue shopping or press 9 to repeat the list.";
+                    List<string> replies = new List<string>();
+                    replies.Add("Thanks for your order. The item will be delivered to you tomorrow. You can continue shopping or press 9 to repeat the list.");
+                    replies.Add("There you go, sir! You¡¯ve made the right decision! It will be delivered tomorrow. Good luck!");
+                    reply = replies[Random.Range(0, replies.Count)];
+
 
                     DateTime currentTime = gameTimeManager.CurrentTime.Value;
                     currentTime = currentTime.AddDays(1);

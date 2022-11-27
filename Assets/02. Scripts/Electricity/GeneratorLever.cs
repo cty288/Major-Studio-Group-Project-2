@@ -9,6 +9,7 @@ public class GeneratorLever : AbstractMikroController<MainGame>, IPointerEnterHa
 {
     private PointerEventData cachedEventData;
     private bool isPreparingWorking, isWorking;
+    [SerializeField]
     private float z0,z1;
     public float effeciency;
 
@@ -40,7 +41,13 @@ public class GeneratorLever : AbstractMikroController<MainGame>, IPointerEnterHa
         Vector2 directionTo = curScreenPosition - eventData.position;
         Vector2 directionFrom = directionTo - eventData.delta;
         this.transform.rotation *= Quaternion.FromToRotation(directionTo, directionFrom);
-        this.GetSystem<ElectricitySystem>().AddElectricity(effeciency * Mathf.Abs(z0 - z1));
+
+        float realAngle = Mathf.Abs(z0 - z1);
+        if (realAngle > 180) {
+            realAngle = 360 - realAngle;
+        }
+
+        this.GetSystem<ElectricitySystem>().AddElectricity(effeciency * realAngle * Time.deltaTime);
         Debug.Log(this.GetSystem<ElectricitySystem>().Electricity.Value);
         isWorking = true;
         z1 = z0;
