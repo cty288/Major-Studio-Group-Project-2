@@ -138,6 +138,8 @@ public class Radio : ElectricalApplicance
         this.RegisterEvent<OnNewBodyInfoGenerated>(OnBodyInfoGenerated).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.GetModel<GameSceneModel>().GameScene.RegisterOnValueChaned(OnGameSceneChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
+
+       // this.GetSystem<GameEventSystem>().AddEvent(new RandomStuffRadio(new TimeRange(gameTimeManager.)));
     }
 
 
@@ -208,11 +210,17 @@ public class Radio : ElectricalApplicance
             AlienDescriptionData descriptionData = radioModel.DescriptionDatas[0];
             radioModel.DescriptionDatas.RemoveAt(0);
 
-            this.GetSystem<GameEventSystem>().AddEvent(new DailyBodyRadio(
+
+            GameEventSystem eventSystem = this.GetSystem<GameEventSystem>();
+            eventSystem.AddEvent(new DailyBodyRadio(
                 new TimeRange(currentTime + new TimeSpan(0, 10, 0), currentTime + new TimeSpan(0, 20, 0)),
                 AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo, descriptionData.Reality),
                 Random.Range(0.85f, 1.2f), Random.Range(0, 2) == 0 ? Gender.MALE : Gender.FEMALE,
                 radioNormalBroadcaseAudioMixerGroup));
+
+            eventSystem.AddEvent(new RandomStuffRadio(
+                new TimeRange(currentTime + new TimeSpan(0, Random.Range(30, 60), 0)),
+                RadioRandomStuff.Singleton.GetNextRandomRadio()));
 
        }
     }
