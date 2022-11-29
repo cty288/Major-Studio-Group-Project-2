@@ -29,5 +29,14 @@ public class Cheater : AbstractMikroController<MainGame>
             this.GetModel<BodyGenerationModel>().CurrentOutsideBody.Value =
                 BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true);
         }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow)) {
+            Time.timeScale += 10;
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow)) {
+            Time.timeScale -= 10;
+            Time.timeScale = Mathf.Max(Time.timeScale, 1);
+        }
     }
 }

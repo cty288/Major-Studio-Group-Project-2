@@ -22,12 +22,13 @@ public struct OnElectricityRecovered {
 }
 public class ElectricitySystem : AbstractSystem {
     private ElectricitySystemUpdater updater;
-    public BindableProperty<float> Electricity { get; private set; } = new BindableProperty<float>(0.5f);
+    public BindableProperty<float> Electricity { get; private set; } = new BindableProperty<float>(0.6f);
 
-    private float electricityDecreaseRate = 0.01f;
+    private float electricityDecreaseRate = 0.003f;
     protected override void OnInit() {
         updater = new GameObject("ElectricitySystemUpdater").AddComponent<ElectricitySystemUpdater>();
         Electricity.RegisterOnValueChaned(OnElectricityChange);
+        
         updater.OnUpdate += Update;
     }
 
