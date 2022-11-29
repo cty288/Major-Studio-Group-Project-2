@@ -32,7 +32,8 @@ public class ClothTagShirt : ClothTag
         get
         {
             return new List<string>() {
-                "When the corpse was found in the farmland by the next morning, the body was necked and exposed. The victim's family reported that a blue T-shirt and pants were worn by the time he left home."
+                "When the corpse was found in the farmland by the next morning, the body was necked and exposed. The victim's family reported that a blue T-shirt and pants were worn by the time he left home.",
+                "According to information provided by the family, the victim was wearing a shirt before disappearing."
             };
         }
     }
@@ -42,7 +43,8 @@ public class ClothTagShirt : ClothTag
         get
         {
             return new List<string>() {
-                "The victim's skirt was taken way.", 
+                "The victim's dress was taken way.", 
+                "Police have not been able to find any information relating to the victim's top clothing."
             };
         }
     }
@@ -55,7 +57,8 @@ public class ClothTagSweater : ClothTag
         get
         {
             return new List<string>() {
-                "We still don't know what's under the camouflage, a cream-white sweater that was worn by the victim."
+                "We still don't know what's under the camouflage, a cream-white sweater that was worn by the victim.",
+                "We found black wool from where the victim was killed, and investigators speculate the victim was wearing a black sweater."
             };
         }
     }
@@ -65,7 +68,8 @@ public class ClothTagSweater : ClothTag
         get
         {
             return new List<string>() {
-                "For some reasons, the creature took all the outwears from the victim, including a grey wool coat and a cotton jacket."
+                "For some reasons, the creature took all the outwears from the victim, including a grey wool coat and a cotton jacket.",
+                "We have not been able to find any information relating to the victim's top clothing."
             };
         }
     }
@@ -79,7 +83,8 @@ public class ClothTagCottonVest : ClothTag
         get
         {
             return new List<string>() {
-                "For some reasons, the creature took all the outwears from the victim, including a grey wool coat and a cotton jacket."
+                "For some reasons, the creature took all the outwears from the victim, including a grey wool coat and a cotton jacket.",
+                "A friend of the victim provided us with photos showing the man wearing a red cotton vest before he was killed."
             };
         }
     }
@@ -89,7 +94,8 @@ public class ClothTagCottonVest : ClothTag
         get
         {
             return new List<string>() {
-                "According to the witness, the creature was wearing a yellow scarf."
+                "According to the witness, the creature was wearing a yellow scarf.",
+                "We have not been able to find any information relating to the victim's top clothing."
             };
         }
     }
@@ -114,6 +120,7 @@ public class ClothTagLongDress : ClothTag
         {
             return new List<string>() {
                 "According to the witness, the creature was wearing a blue scarf.",
+                "For now, we have not been able to find any information relating to the victim's clothing. We will keep searching."
             };
         }
     }
@@ -138,6 +145,7 @@ public class ClothTagWatch : ClothTag
         {
             return new List<string>() {
                 "When the corpse was found in the farmland by the next morning, the body was necked and exposed. The victim's family reported that a blue T-shirt and pants were worn by the time he left home.",
+                "The victim's hand was brutally cut off. We are obtaining additional information."
             };
         }
     }
@@ -163,6 +171,7 @@ public class ClothTagScarf : ClothTag
         {
             return new List<string>() {
                 "For some reasons, the creature took all the outwears from the victim, including a grey wool coat and a cotton jacket.",
+                "We have not been able to find any information relating to the victim's top clothing."
             };
         }
     }
@@ -192,7 +201,8 @@ public class ClothTagShortPants: ClothTag
         get
         {
             return new List<string>() {
-                "According to the witness, the creature was wearing a yellow underwear.",
+                "According to the witness, the creature was wearing a long yellow pants.",
+                "We have not been able to find any information relating to the victim's bottom clothing."
             };
         }
     }
@@ -217,7 +227,7 @@ public class ClothTagLongPants : ClothTag
         {
             return new List<string>() {
                 "We still don't know what's under the camouflage, a cream-white sweater that was worn by the victim.",
-                
+                "We have not been able to find any information relating to the victim's bottom clothing."
             };
         }
     }
@@ -231,6 +241,7 @@ public class ClothTagShortSkirt : ClothTag
         {
             return new List<string>() {
                 "The victim's skirt was taken way.",
+                "Surveillance showed that the victim was wearing a short skirt for a period of time before being killed."
             };
         }
     }
@@ -241,6 +252,7 @@ public class ClothTagShortSkirt : ClothTag
         {
             return new List<string>() {
                 "The victim's wife reported that their 15th year anniversary gift -- a brand-new stainless steal watch -- was also unfound in the crime scene.",
+                "We have not been able to find any information relating to the victim's bottom clothing."
             };
         }
     }
