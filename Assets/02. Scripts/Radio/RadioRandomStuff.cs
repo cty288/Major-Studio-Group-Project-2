@@ -78,7 +78,7 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
         string singer = singers[Random.Range(0, singers.Count)];
         string songName = songNames[Random.Range(0, songNames.Count)];
         string content = $"The newest album from our beloved singer {singer}, \"{songName}\" is now available on the market. Please support our local artists!";
-        return new RadioMessage("a ba a ba", Random.Range(0.8f, 1.2f), Gender.FEMALE, Random.Range(0.2f, 0.8f), 1);
+        return new RadioMessage(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f), 1);
     }
     
     private void RegisterRadioMessages(Func<RadioMessage> message) {
