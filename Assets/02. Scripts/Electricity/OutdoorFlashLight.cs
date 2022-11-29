@@ -40,6 +40,7 @@ public class OutdoorFlashLight : ElectricalApplicance
                     List<string> replies = new List<string>();
                     replies.Add("Hey! Da fuck are you doing?! Stop pointing that stupid light at me!");
                     replies.Add("Holy! You¡¯ve got a SUN in your house?! Don't tell me you are some kind of giant light bulb alien!");
+                    replies.Add("Cut it off, mister! Or I will call the officers!");
                     string reply = replies[UnityEngine.Random.Range(0, replies.Count)];
                     speaker.Speak(reply, null, null, Random.Range(0.8f, 1.2f));
                 }

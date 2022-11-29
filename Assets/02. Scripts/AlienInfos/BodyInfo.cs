@@ -109,7 +109,9 @@ public class BodyInfo : ICanRegisterEvent {
         AlienBodyPartInfo leg = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, BodyPartType.Legs, isAlien, height);
         AlienBodyPartInfo body = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo( displayType, BodyPartType.Body, isAlien, height);
         AlienBodyPartInfo head = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, BodyPartType.Head, isAlien, height);
-        return new BodyInfo(voiceValues[Random.Range(0, voiceValues.Length)], head, body, leg, displayType, height);
+        BodyInfo info = new BodyInfo(voiceValues[Random.Range(0, voiceValues.Length)], head, body, leg, displayType, height);
+        info.IsAlien = isAlien;
+        return info;
     }
 
     public static BodyInfo GetBodyInfoOpposite(BodyInfo original, float bodyPartOppositeChance, float heightOppositeChance, bool originalIsAlien) {

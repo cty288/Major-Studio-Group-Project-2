@@ -10,28 +10,24 @@ using UnityEngine.Rendering.Universal;
 
 namespace Mikrocosmos
 {
-    public class ImageEffectController : MonoMikroSingleton<ImageEffectController>, IController {
-        private ResLoader resLoader;
+    public class ImageEffectController : MonoMikroSingleton<ImageEffectController> {
+       
         private Renderer2DData render2DData;
         private void Awake() {
-            resLoader = this.GetUtility<ResLoader>();
-            render2DData = resLoader.LoadSync<Renderer2DData>("resources://MainRendererData");
+         
+            render2DData = Resources.Load<Renderer2DData>("MainRendererData");
          
         }
 
         public void DisableAllFeatures() {
+            render2DData = Resources.Load<Renderer2DData>("MainRendererData");
             var features = render2DData.rendererFeatures;
             foreach (ScriptableRendererFeature feature in features)
             {
                 feature.SetActive(false);
             }
         }
-        private IEnumerator LoadRenderData() {
-            while (resLoader==null || !resLoader.IsReady) {
-                yield return null;
-            }
-           
-        }
+   
 
         public CustomRenderPassFeature GetScriptableRendererFeature(int index) {
             return render2DData.rendererFeatures[index] as CustomRenderPassFeature;

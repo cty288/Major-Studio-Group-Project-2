@@ -1,31 +1,124 @@
 ManifestFileVersion: 0
-CRC: 1652950941
+CRC: 814392543
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: scene
-      Dependencies:
-        Dependency_0: mftest2
+      Name: buff_icons
+      Dependencies: {}
     Info_1:
-      Name: others
+      Name: audio
       Dependencies: {}
     Info_2:
-      Name: mftest
+      Name: profile
       Dependencies: {}
     Info_3:
-      Name: test/scene_test.ab
+      Name: info
       Dependencies:
-        Dependency_0: mftest
+        Dependency_0: assets/fonts
     Info_4:
-      Name: mftest2
-      Dependencies:
-        Dependency_0: mftest
+      Name: assets/goods_inventory
+      Dependencies: {}
     Info_5:
-      Name: test_sphere
-      Dependencies: {}
+      Name: assets/fonts
+      Dependencies:
+        Dependency_0: others
     Info_6:
-      Name: aliens
-      Dependencies: {}
+      Name: description
+      Dependencies:
+        Dependency_0: info
+        Dependency_1: assets/fonts
+        Dependency_2: settings
     Info_7:
-      Name: audios
+      Name: scenes
+      Dependencies:
+        Dependency_0: buff_icons
+        Dependency_1: audio
+        Dependency_2: profile
+        Dependency_3: info
+        Dependency_4: assets/fonts
+        Dependency_5: assets/planets/general
+        Dependency_6: others
+        Dependency_7: assets/goods/general
+        Dependency_8: assets/goods/default
+        Dependency_9: assets/planets/default
+        Dependency_10: assets/planets/tutorial
+        Dependency_11: general
+        Dependency_12: assets/missions
+        Dependency_13: scene_sprites
+        Dependency_14: settings
+    Info_8:
+      Name: assets/planets/general
+      Dependencies:
+        Dependency_0: info
+        Dependency_1: assets/fonts
+        Dependency_2: others
+    Info_9:
+      Name: others
+      Dependencies: {}
+    Info_10:
+      Name: assets/goods/general
+      Dependencies:
+        Dependency_0: audio
+        Dependency_1: info
+        Dependency_2: assets/fonts
+        Dependency_3: others
+    Info_11:
+      Name: assets/goods/default
+      Dependencies:
+        Dependency_0: buff_icons
+        Dependency_1: audio
+        Dependency_2: info
+        Dependency_3: assets/goods_inventory
+        Dependency_4: assets/planets/general
+        Dependency_5: others
+        Dependency_6: assets/goods/general
+        Dependency_7: scene_sprites
+    Info_12:
+      Name: assets/planets/default
+      Dependencies:
+        Dependency_0: assets/planets/general
+        Dependency_1: others
+    Info_13:
+      Name: data
+      Dependencies:
+        Dependency_0: settings
+    Info_14:
+      Name: assets/planets/tutorial
+      Dependencies: {}
+    Info_15:
+      Name: general
+      Dependencies:
+        Dependency_0: audio
+        Dependency_1: assets/fonts
+    Info_16:
+      Name: scenes_general
+      Dependencies:
+        Dependency_0: audio
+        Dependency_1: info
+        Dependency_2: assets/fonts
+        Dependency_3: description
+        Dependency_4: others
+        Dependency_5: assets/goods/general
+        Dependency_6: assets/goods/default
+        Dependency_7: general
+        Dependency_8: assets/missions
+        Dependency_9: loading
+        Dependency_10: settings
+    Info_17:
+      Name: assets/missions
+      Dependencies:
+        Dependency_0: audio
+        Dependency_1: info
+        Dependency_2: assets/fonts
+        Dependency_3: assets/planets/general
+        Dependency_4: others
+        Dependency_5: assets/goods/general
+    Info_18:
+      Name: scene_sprites
+      Dependencies: {}
+    Info_19:
+      Name: loading
+      Dependencies: {}
+    Info_20:
+      Name: settings
       Dependencies: {}

@@ -103,6 +103,7 @@ public class ClothTagLongDress : ClothTag
         {
             return new List<string>() {
                 "The police suspects that this creature is sensitive to chill, as it took away all of the victim's outwear.",
+                "Some reports showed that the victim's trench coat was taken by a mysterious suspect.",
             };
         }
     }
@@ -125,7 +126,8 @@ public class ClothTagWatch : ClothTag
         get
         {
             return new List<string>() {
-                "The victim's wife reported that their 15th year anniversary gift -- a brand-new stainless steal watch -- was also unfound in the crime scene.",
+                "The victim's wife reported that their 15th year anniversary gift -- a brand-new stainless steal watch -- was also disappeared in the crime scene.",
+                "The victim was wearing a watch when he left home, but it was missing when the police arrived at the crime scene."
             };
         }
     }
@@ -148,7 +150,9 @@ public class ClothTagScarf : ClothTag
         get
         {
             return new List<string>() {
-                "According to the witness, the creature was wearing a yellow scarf.",
+                "According to the witness, the victim was wearing a yellow scarf.",
+                "According to the investigation, the victim wore a blue scarf when he left home. However, the scarf was missing when the police arrived at the crime scene.",
+                
             };
         }
     }
@@ -176,7 +180,9 @@ public class ClothTagShortPants: ClothTag
         get
         {
             return new List<string>() {
-                "Possibly wearing the shorts took away from the victim, the creature is by still now unaccounted for.", 
+                "Possibly wearing the shorts took away from the victim, the creature is by still now unaccounted for.",
+                "A short pants was found on the victim's body, but it was not the one he was wearing when he left home.",
+                "By witness's report, the victim's short pants was taken away.",
             };
         }
     }
@@ -200,6 +206,7 @@ public class ClothTagLongPants : ClothTag
         {
             return new List<string>() {
                 "The witness saw it ran away along the 4th Avenue, but we have no clue where it is now. It was confirmed that it was last seen in a white shirt and black pants.",
+                "The victim's trouser, which color is black, was disappeared in the crime scene.",
             };
         }
     }
@@ -210,6 +217,7 @@ public class ClothTagLongPants : ClothTag
         {
             return new List<string>() {
                 "We still don't know what's under the camouflage, a cream-white sweater that was worn by the victim.",
+                
             };
         }
     }

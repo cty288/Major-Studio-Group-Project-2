@@ -18,6 +18,7 @@ public static class AlienDescriptionFactory {
         RegisterRadioDescription(Radio2);
         RegisterRadioDescription(Radio3);
         RegisterRadioDescription(Radio4);
+        RegisterRadioDescription(Radio5);
     }
 
     public static string GetRadioDescription(BodyInfo bodyInfo, float reality) {
@@ -83,7 +84,7 @@ public static class AlienDescriptionFactory {
         StringBuilder sb = new StringBuilder();
 
         sb.AppendFormat("This just in. A resident was reported misssing since yesterday morning.");
-        sb.AppendFormat(formatter, "{0:fat} Other sources have shown what ii was wearing {0:clothb} {0:clothl}", body);
+        sb.AppendFormat(formatter, "{0:fat} Other sources have shown what it was wearing. {0:clothb} {0:clothl}", body);
         return sb.ToString();
     }
 
@@ -98,6 +99,16 @@ public static class AlienDescriptionFactory {
         return sb.ToString();
     }
 
+    private static string Radio5(BodyInfo body, float reality)
+    {
+        DescriptionFormatter.Reality = reality;
+        StringBuilder sb = new StringBuilder();
+
+        sb.AppendFormat(formatter,
+            "We’ve got some news for you coming right up. One of the delivery couriers went missing yesterday according to our source.");
+        sb.AppendFormat(formatter, "{0:height}  {0:clothb} and {0:hair}", body);
+        return sb.ToString();
+    }
 
 
     private static bool IsReal(float reality) {

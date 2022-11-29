@@ -6,7 +6,8 @@ using UnityEngine;
 
 public enum GameScene {
     MainGame,
-    Peephole
+    Peephole,
+    PowerGenerator
 }
 public class GameSceneModel : AbstractModel {
     public BindableProperty<GameScene> GameScene { get; } = new BindableProperty<GameScene>(global::GameScene.MainGame);

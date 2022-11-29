@@ -24,5 +24,10 @@ public class Cheater : AbstractMikroController<MainGame>
         if (Input.GetKeyDown(KeyCode.E)) {
             this.GetSystem<ElectricitySystem>().AddElectricity(1);
         }
+
+        if (Input.GetKeyDown(KeyCode.A)) {
+            this.GetModel<BodyGenerationModel>().CurrentOutsideBody.Value =
+                BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true);
+        }
     }
 }
