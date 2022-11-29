@@ -62,7 +62,7 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
         RegisterRadioMessages(Message_Missing_Something);
         RegisterRadioMessages(Message_Weather_Report);
         RegisterRadioMessages(Message_Announcement_Of_President);
-        RegisterRadioMessages(Message_Alien);
+        RegisterRadioMessages(Message_Hacked);
         RegisterRadioMessages(Message_Christian_Church);
         RegisterRadioMessages(Message_Research);
         RegisterRadioMessages(Message_Military);
@@ -121,14 +121,14 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
                          GetRandomString(
                              "The whole country must raise the alert level.",
                              "Troops are maintaining order in our vital cities.",
-                             "He fought an alien and won.",
+                             "He fought an creature and won.",
                              "He is forcing Congress to pass the bill. He claimed that we have run out of time to hesitate.");
         return new RadioMessage(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f), 1);
     }
 
-    private RadioMessage Message_Alien()
+    private RadioMessage Message_Hacked()
     {
-        string content = "This is Alien. For human. Surrender then live. Otherwise, die.";
+        string content = "This is us. For human. Surrender then live. Otherwise, die.";
         return new RadioMessage(content, 0.5f, Gender.MALE, 1f, 1);
     }
 
@@ -136,7 +136,7 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
     {
         string content =
             "Residents! This is Colonel Sanders! On behalf of the military, I request you not to go out in the middle of the night! ";
-        content += "Aliens can camouflage as humans! You are likely to be in danger if you go out late at night. ";
+        content += "these creatures can camouflage as humans! You are likely to be in danger if you go out late at night. ";
         content += "We will often repeat this message to ensure safety of everyone.";
         return new RadioMessage(content, 1f, Gender.MALE, 1f, 1);
     }
@@ -151,7 +151,7 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
     private RadioMessage Message_Research()
     {
         string content =
-            "According to research, aliens have only a slight advantage over humans in terms of bodily functions. If you have a firearm in your home, make sure it is always ready to use.";
+            "According to research, this mysterious creature have only a slight advantage over humans in terms of bodily functions. If you have a firearm in your home, make sure it is always ready to use.";
         return new RadioMessage(content, 1.2f, Gender.MALE, 1f, 1);
     }
     
