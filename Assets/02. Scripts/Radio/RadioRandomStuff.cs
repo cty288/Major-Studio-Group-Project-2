@@ -59,6 +59,14 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
 
     private  void Init() {
         RegisterRadioMessages(Message1);
+        RegisterRadioMessages(Message_Missing_Something);
+        RegisterRadioMessages(Message_Weather_Report);
+        RegisterRadioMessages(Message_Announcement_Of_President);
+        RegisterRadioMessages(Message_Alien);
+        RegisterRadioMessages(Message_Christian_Church);
+        RegisterRadioMessages(Message_Research);
+        RegisterRadioMessages(Message_Military);
+
         radioMessageCopies.AddRange(_radioMessages);
     }
     
@@ -86,7 +94,7 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
         return new RadioMessage(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f), 1);
     }
     
-    private RadioMessage Message_MissingSomething()
+    private RadioMessage Message_Missing_Something()
     {
         string content = "Accroding to an informer, "
                          + GetRandomString("their child is missing. ", "her wallet got robbed. ",
@@ -95,12 +103,12 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
         return new RadioMessage(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f), 1);
     }
 
-    private RadioMessage Message_WeatherReport()
+    private RadioMessage Message_Weather_Report()
     {
         string content = "Weather report of tomorrow. "
                          + GetRandomString("In tomorrow morning ", "On tomorrow afternoon", "In tomorrow evening")
                          + "The temperature will be "
-                         + GetRandomString("40", "41", "43", "44", "45", "47", "52", "57", "59", "62")
+                         + GetRandomString("40", "41", "43", "44", "45", "47", "52", "57", "59", "62", "74", "76", "83", "88","91", "97")
                          + " Fahrenheit. Also, tomorrow day will be a "
                          +GetRandomString("rainy", "windy", "cloudy", "sunny", "snowy")
                          + " day.";
@@ -124,6 +132,29 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
         return new RadioMessage(content, 0.5f, Gender.MALE, 1f, 1);
     }
 
+    private RadioMessage Message_Military()
+    {
+        string content =
+            "Residents! This is Colonel Sanders! On behalf of the military, I request you not to go out in the middle of the night! ";
+        content += "Aliens can camouflage as humans! You are likely to be in danger if you go out late at night. ";
+        content += "We will often repeat this message to ensure safety of everyone.";
+        return new RadioMessage(content, 1f, Gender.MALE, 1f, 1);
+    }
+
+    private RadioMessage Message_Christian_Church()
+    {
+        string content =
+            "Children! And all terrified people! I am the priest of the local church. Do not be afraid. We are praying together during this difficult time!";
+        return new RadioMessage(content, 0.9f, Gender.MALE, 1f, 1);
+    }
+
+    private RadioMessage Message_Research()
+    {
+        string content =
+            "According to research, aliens have only a slight advantage over humans in terms of bodily functions. If you have a firearm in your home, make sure it is always ready to use.";
+        return new RadioMessage(content, 1.2f, Gender.MALE, 1f, 1);
+    }
+    
     private void RegisterRadioMessages(Func<RadioMessage> message) {
         _radioMessages.Add(message);
     }
