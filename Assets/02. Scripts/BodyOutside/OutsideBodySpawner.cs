@@ -73,16 +73,18 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
         
         BackButton.Singleton.Hide();
         
-        LoadCanvas.Singleton.LoadUntil(() => bodyViewController.OnBodyClickedOnPeephole(), OnFinishOutsideBodyInteraction);
+        this.SendEvent<OnOutsideBodyClicked>(new OnOutsideBodyClicked() {BodyInfo = bodyViewController.BodyInfo});
+        
     }
 
-    private void OnFinishOutsideBodyInteraction() {
-        BackButton.Singleton.OnBackButtonClicked();
-        this.GetSystem<BodyGenerationSystem>().StopCurrentBody();
-    }
+ 
 }
 
 
 public struct OnShowFood {
 
+}
+
+public struct OnOutsideBodyClicked {
+    public BodyInfo BodyInfo;
 }

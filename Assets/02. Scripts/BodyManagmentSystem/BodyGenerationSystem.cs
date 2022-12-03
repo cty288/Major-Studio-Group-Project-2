@@ -25,6 +25,7 @@ public class BodyGenerationSystem : AbstractSystem {
     private float knockDoorChance = 0.2f;
     private float nonAlienChance = 1f;
 
+
     private float knockWaitTimeSinceDayStart = 60f;
     
     //private Coroutine knockDoorCheckCoroutine;
@@ -45,11 +46,7 @@ public class BodyGenerationSystem : AbstractSystem {
         gameTimeManager = this.GetSystem<GameTimeManager>();
 
     }
-
-  
     
-
-
     private void OnEndOfDay(int day) {
         dayNum = day;
         if (day >= 2) {
@@ -59,10 +56,29 @@ public class BodyGenerationSystem : AbstractSystem {
 
         if (day == 1) {
             this.GetSystem<ITimeSystem>().AddDelayTask(knockWaitTimeSinceDayStart, SpawnAlienOrDeliverBody);
+            SpawnDog(Random.Range(2, 5));
         }
-       
     }
 
+    private void SpawnDog(int eventStartDay) {
+        BodyInfo targetBody = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false);
+
+        int knockDoorTimeInterval = 3;
+        int knockTime = Random.Range(6, 9);
+        DateTime dogStartTime = gameTimeManager.CurrentTime.Value.AddDays(eventStartDay);
+        int hour =  Random.Range(22, 24);
+        int minute = Random.Range(20, 40);
+
+        dogStartTime = new DateTime(dogStartTime.Year, dogStartTime.Month, dogStartTime.Day, hour, minute, 0);
+
+        DateTime dogEventEndTime = dogStartTime.AddMinutes(Random.Range(20, 40));
+
+        gameEventSystem.AddEvent(new BodyGenerationEvent(
+            new TimeRange(dogStartTime, dogEventEndTime), targetBody, knockDoorTimeInterval,
+            knockTime,
+            knockDoorChance, null, null));
+    }
+    
     private void SpawnAlienOrDeliverBody() {
         List<BodyTimeInfo> Aliens = bodyManagmentSystem.Aliens;
         List<BodyTimeInfo> Humans = bodyManagmentSystem.Humans;

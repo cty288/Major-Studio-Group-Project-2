@@ -46,11 +46,15 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
     }
 
     public void Load(float loadTime, Action onScreenBlack, Action onScreenRecover) {
+        bg.raycastTarget = true;
         gameTimeManager.LockDayEnd.Retain();
         bg.DOFade(1, 0.5f).OnComplete(() => {
             onScreenBlack?.Invoke();
-            bg.DOFade(0, 0.5f).OnComplete(() => {
+            this.Delay(loadTime, () => {
+                bg.raycastTarget = false;
                 onScreenRecover?.Invoke();
+            });
+            bg.DOFade(0, 0.5f).OnComplete(() => {
                 gameTimeManager.LockDayEnd.Release();
             }).SetDelay(loadTime);
         });
@@ -58,7 +62,7 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
 
     public void LoadUntil(Func<Func<bool>> onScreenBlack, Action onScreenRecover) {
         gameTimeManager.LockDayEnd.Retain();
-        
+        bg.raycastTarget = true;
         bg.DOFade(1, 0.5f).OnComplete(() => {
             Func<bool> condition = onScreenBlack?.Invoke();
 
@@ -66,6 +70,7 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
 
             action.OnEndedCallback += () => {
                 onScreenRecover?.Invoke();
+                bg.raycastTarget = false;
                 gameTimeManager.LockDayEnd.Release();
             };
             

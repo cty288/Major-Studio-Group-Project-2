@@ -28,16 +28,15 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
 
     private BountyHunterSystem bountyHunterSystem;
 
-    protected Speaker speaker;
-    protected PlayerResourceSystem playerResourceSystem;
+    
+    
 
-    protected bool onClickPeepholeSpeakEnd = false;
+    
     protected virtual void Awake() {
         tallSpawnPosition = transform.Find("TallSpawnPosition");
         shortSpawnPosition = transform.Find("LowSpawnPosition");
         bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
-        speaker = GameObject.Find("OutsideBodySpeaker").GetComponent<Speaker>();
-        playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
+      
     }
 
     public void OnBuilt() {
@@ -135,44 +134,7 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
         onClickAlienBody?.Invoke();
     }
 
-    public virtual Func<bool> OnBodyClickedOnPeephole() {
-        onClickPeepholeSpeakEnd = false;
-        if (BodyInfo.IsAlien) {
-            speaker.Speak("Hahaha! I will kill you!", null, OnAlienClickedOutside);
-        }
-        else {
-            speaker.Speak("Hey, I brought you some foods! Take care!", null, OnDelivererClickedOutside);
-        }
-        return () => onClickPeepholeSpeakEnd;
-    }
+    
 
-    private void OnDelivererClickedOutside() {
-        this.GetSystem<PlayerResourceSystem>().AddFood(Random.Range(1, 3));
-        this.SendEvent<OnShowFood>();
-        this.Delay(4.5f, () => {
-            onClickPeepholeSpeakEnd = true;
-        });
-    }
-
-    private void OnAlienClickedOutside() {
-        if (playerResourceSystem.HasEnoughResource<BulletGoods>(1) && playerResourceSystem.HasEnoughResource<GunResource>(1)) {
-            playerResourceSystem.RemoveResource<BulletGoods>(1);
-            float clipLength = AudioSystem.Singleton.Play2DSound("gun_fire").clip.length;
-            
-            this.Delay(1f, () => {
-                LoadCanvas.Singleton.ShowMessage("You shot the creature and it fleed.\n\nBullet - 1");
-                this.Delay(2f, () => {
-                    LoadCanvas.Singleton.HideMessage();
-                    this.Delay(1f, () => {
-                        onClickPeepholeSpeakEnd = true;
-                    });
-                });
-            });
-        }
-        else {
-            DieCanvas.Singleton.Show("You are killed by the creature!");
-            this.GetModel<GameStateModel>().GameState.Value = GameState.End;
-            this.GetSystem<BodyGenerationSystem>().StopCurrentBody();
-        }
-    }
+    
 }
