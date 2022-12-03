@@ -56,11 +56,11 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
         });
     }
 
-    public void LoadUntil(Action onScreenBlack, Action onScreenRecover, Func<bool> condition) {
+    public void LoadUntil(Func<Func<bool>> onScreenBlack, Action onScreenRecover) {
         gameTimeManager.LockDayEnd.Retain();
         
         bg.DOFade(1, 0.5f).OnComplete(() => {
-            onScreenBlack?.Invoke();
+            Func<bool> condition = onScreenBlack?.Invoke();
 
             UntilAction action = UntilAction.Allocate(condition);
 

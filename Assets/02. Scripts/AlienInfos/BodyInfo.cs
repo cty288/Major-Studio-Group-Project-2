@@ -17,6 +17,7 @@ public class BodyInfo : ICanRegisterEvent {
     public AlienBodyPartInfo LegInfoPreab;
     public bool IsAlien = false;
     public long ID;
+    public string BuiltBodyOverriddenPrefabName;
     /// <summary>
     /// ¥”œ¬Õ˘…œ
     /// </summary>
@@ -64,7 +65,7 @@ public class BodyInfo : ICanRegisterEvent {
 
     }
     private BodyInfo(Gender voiceType, AlienBodyPartInfo headInfoPrefab, AlienBodyPartInfo mainBodyPartInfoPrefab, AlienBodyPartInfo legInfoPreab, BodyPartDisplayType displayType,
-        HeightType height) {
+        HeightType height, string builtBodyOverriddenPrefabName) {
         this.RegisterEvent<OnBodyInfoBecomeAlien>(OnBodyInfoBecomeAlien);
         this.RegisterEvent<OnBodyInfoRemoved>(OnBodyInfoRemoved);
         HeadInfoPrefab = headInfoPrefab;
@@ -80,6 +81,7 @@ public class BodyInfo : ICanRegisterEvent {
         this.DisplayType = displayType;
         this.Height = height;
         this.ID = Random.Range(-1000000000, 1000000000);
+        this.BuiltBodyOverriddenPrefabName = builtBodyOverriddenPrefabName;
     }
 
     private void OnBodyInfoRemoved(OnBodyInfoRemoved e) {
@@ -102,19 +104,27 @@ public class BodyInfo : ICanRegisterEvent {
 
     #region Static
     
-    public static BodyInfo GetRandomBodyInfo(BodyPartDisplayType displayType, bool isAlien) {
+    public static BodyInfo GetRandomBodyInfo(BodyPartDisplayType displayType, bool isAlien, string builtBodyOverriddenPrefabName = "") {
         Gender[] voiceValues = (Gender[]) Enum.GetValues(typeof(Gender));
         HeightType height = Random.Range(0, 2) == 0 ? HeightType.Short : HeightType.Tall;
-        
+        Gender gender = voiceValues[Random.Range(0, voiceValues.Length)];
+
         AlienBodyPartInfo leg = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, BodyPartType.Legs, isAlien, height);
         AlienBodyPartInfo body = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo( displayType, BodyPartType.Body, isAlien, height);
         AlienBodyPartInfo head = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, BodyPartType.Head, isAlien, height);
-        BodyInfo info = new BodyInfo(voiceValues[Random.Range(0, voiceValues.Length)], head, body, leg, displayType, height);
+        return GetBodyInfo(leg, body, head, height, gender, displayType, isAlien, builtBodyOverriddenPrefabName);
+    }
+
+    public static BodyInfo GetBodyInfo(AlienBodyPartInfo leg, AlienBodyPartInfo body, AlienBodyPartInfo head,
+        HeightType height, Gender gender, BodyPartDisplayType displayType, bool isAlien, string builtBodyOverriddenPrefabName = "") {
+        
+        BodyInfo info = new BodyInfo(gender, head, body, leg, displayType,
+            height, builtBodyOverriddenPrefabName);
         info.IsAlien = isAlien;
         return info;
     }
 
-    public static BodyInfo GetBodyInfoOpposite(BodyInfo original, float bodyPartOppositeChance, float heightOppositeChance, bool originalIsAlien) {
+    public static BodyInfo GetBodyInfoOpposite(BodyInfo original, float bodyPartOppositeChance, float heightOppositeChance, bool originalIsAlien, string builtBodyOverriddenPrefabName = "") {
         AlienBodyPartInfo headInfoPrefab = original.HeadInfoPrefab;
         AlienBodyPartInfo mainBodyPartInfoPrefab = original.MainBodyInfoPrefab;
         AlienBodyPartInfo legInfoPreab = original.LegInfoPreab;
@@ -134,13 +144,14 @@ public class BodyInfo : ICanRegisterEvent {
         Gender voice = GetOpposite(original.VoiceType, bodyPartOppositeChance);
         height = heightOpposite ? (height == HeightType.Short ? HeightType.Tall : HeightType.Short) : height;
 
-        BodyInfo info = new BodyInfo(voice, headInfoPrefab, mainBodyPartInfoPrefab, legInfoPreab, original.DisplayType, height);
+        BodyInfo info = new BodyInfo(voice, headInfoPrefab, mainBodyPartInfoPrefab, legInfoPreab, original.DisplayType,
+            height, builtBodyOverriddenPrefabName);
         info.IsAlien = !originalIsAlien;
         return info;
     }
 
 
-    public static BodyInfo GetBodyInfoForDisplay(BodyInfo original, BodyPartDisplayType targetDisplayType, float reality = 1, bool sameID = true) {
+    public static BodyInfo GetBodyInfoForDisplay(BodyInfo original, BodyPartDisplayType targetDisplayType, float reality = 1, bool sameID = true, string builtBodyOverriddenPrefabName = "") {
         HeightType height = original.Height;
         AlienBodyPartInfo head = AlienBodyPartCollections.Singleton.GetBodyPartInfoForDisplay(targetDisplayType,
             original.DisplayType, original.HeadInfoPrefab, height, reality);
@@ -150,8 +161,9 @@ public class BodyInfo : ICanRegisterEvent {
 
         AlienBodyPartInfo leg = AlienBodyPartCollections.Singleton.GetBodyPartInfoForDisplay(targetDisplayType, original.DisplayType,
             original.LegInfoPreab, height, reality);
-        
-        BodyInfo info = new BodyInfo(original.VoiceType, head, body, leg, targetDisplayType, height);
+
+        BodyInfo info = new BodyInfo(original.VoiceType, head, body, leg, targetDisplayType, height,
+            builtBodyOverriddenPrefabName);
         info.IsAlien = original.IsAlien;
         if (sameID) {
             info.ID = original.ID;

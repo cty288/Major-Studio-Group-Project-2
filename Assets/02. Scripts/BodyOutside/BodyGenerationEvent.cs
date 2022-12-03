@@ -20,8 +20,9 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel {
     private Action onEnd;
     private Action onMissed;
     private bool started = false;
+    protected string overrideAudioClipName;
     public BodyGenerationEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float knockDoorTimeInterval, int knockTime, float eventTriggerChance,
-        Action onEnd, Action onMissed) : base(startTimeRange) {
+        Action onEnd, Action onMissed, string overrideAudioClipName = null) : base(startTimeRange) {
         bodyGenerationModel = this.GetModel<BodyGenerationModel>();
         this.bodyInfo = bodyInfo;
         this.knockDoorTimeInterval = knockDoorTimeInterval;
@@ -29,6 +30,7 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel {
         this.TriggerChance = eventTriggerChance;
         this.onEnd = onEnd;
         this.onMissed = onMissed;
+        this.overrideAudioClipName = overrideAudioClipName;
     }
 
     public override void OnStart() {
@@ -86,7 +88,11 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel {
         Debug.Log("Start Knock");
         
         for (int i = 0; i < knockTime; i++) {
-            string clipName = $"knock_{Random.Range(1, 8)}";
+            string clipName = overrideAudioClipName;
+            if (String.IsNullOrEmpty(overrideAudioClipName)) {
+                 clipName = $"knock_{Random.Range(1, 8)}";
+            }
+           
             AudioSource source = AudioSystem.Singleton.Play2DSound(clipName, 1, false);
             yield return new WaitForSeconds(source.clip.length + knockDoorTimeInterval);
         }

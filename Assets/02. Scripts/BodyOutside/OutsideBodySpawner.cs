@@ -15,9 +15,9 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
     private BodyGenerationSystem bodyGenerationSystem;
     private PlayerResourceSystem playerResourceSystem;
     private BodyManagmentSystem bodyManagmentSystem;
-    [SerializeField] private Speaker speaker;
+  
 
-    private bool speakEnd = false;
+    //private bool speakEnd = false;
     private bool todaysAlienIsVeryLarge = false;
     private void Awake() {
         bodyGenerationModel = this.GetModel<BodyGenerationModel>();
@@ -44,7 +44,14 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
             });
         }
         else {
-            bodyViewController = AlienBody.BuildShadowAlienBody(body, true).GetComponent<AlienBody>();
+            
+            if(String.IsNullOrEmpty(body.BuiltBodyOverriddenPrefabName)){
+                bodyViewController = AlienBody.BuildShadowBody(body, true).GetComponent<AlienBody>();
+            }
+            else {
+                bodyViewController = AlienBody.BuildShadowBody(body, true, body.BuiltBodyOverriddenPrefabName).GetComponent<AlienBody>();
+            }
+            
             bodyViewController.transform.position = transform.position;
             
             if (body.IsAlien) {
@@ -63,61 +70,15 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
             return;
         }
         bodyGenerationModel.CurrentOutsideBodyConversationFinishing = true;
-        speakEnd = false;
-        Debug.Log("Clicked");
-        if (bodyViewController.BodyInfo.IsAlien) {
-            BackButton.Singleton.Hide();
-            LoadCanvas.Singleton.LoadUntil(() => {
-                speaker.Speak("Hahaha! I will kill you!", null, OnAlienSpeakEnd);
-            }, () => {
-                
-            }, () => speakEnd);
-        }
-        else {
-            BackButton.Singleton.Hide();
-            LoadCanvas.Singleton.LoadUntil(() => {
-                speaker.Speak("Hey, I brought you some foods! Take care!",null, OnSpeakEnd);
-                this.GetSystem<PlayerResourceSystem>().AddFood(Random.Range(1, 3));
-                
-            }, () => {
-
-            }, () => speakEnd);
-        }
-
-    }
-
-    private void OnAlienSpeakEnd() {
-        if (playerResourceSystem.HasEnoughResource<BulletGoods>(1) && playerResourceSystem.HasEnoughResource<GunResource>(1)) {
-            playerResourceSystem.RemoveResource<BulletGoods>(1);
-            float clipLength = AudioSystem.Singleton.Play2DSound("gun_fire").clip.length;
-            this.Delay(1f, () => {
-                LoadCanvas.Singleton.ShowMessage("You shot the creature and it fleed.\n\nBullet - 1");
-                this.Delay(2f, () => {
-                    LoadCanvas.Singleton.HideMessage();
-                    this.Delay(1f, () => {
-                        speakEnd = true;
-                        BackButton.Singleton.OnBackButtonClicked();
-                        this.GetSystem<BodyGenerationSystem>().StopCurrentBody();                        
-                    });
-                });
-            });
-        }
-        else {
-            speakEnd = true;
-            DieCanvas.Singleton.Show("You are killed by the creature!");
-            this.GetModel<GameStateModel>().GameState.Value = GameState.End;
-            this.GetSystem<BodyGenerationSystem>().StopCurrentBody();
-        }
-    }
-
-    private void OnSpeakEnd() {
-        this.SendEvent<OnShowFood>();
-        this.Delay(4.5f, () => {
-            speakEnd = true;
-            BackButton.Singleton.OnBackButtonClicked();
-            this.GetSystem<BodyGenerationSystem>().StopCurrentBody();
-        });
         
+        BackButton.Singleton.Hide();
+        
+        LoadCanvas.Singleton.LoadUntil(() => bodyViewController.OnBodyClickedOnPeephole(), OnFinishOutsideBodyInteraction);
+    }
+
+    private void OnFinishOutsideBodyInteraction() {
+        BackButton.Singleton.OnBackButtonClicked();
+        this.GetSystem<BodyGenerationSystem>().StopCurrentBody();
     }
 }
 
