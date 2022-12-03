@@ -12,15 +12,15 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
     public override GameEventType GameEventType { get; } = GameEventType.BodyGeneration;
     public override float TriggerChance { get; }
 
-    private BodyGenerationModel bodyGenerationModel;
+    protected BodyGenerationModel bodyGenerationModel;
 
-    private Coroutine knockDoorCheckCoroutine;
-    private BodyInfo bodyInfo;
-    private float knockDoorTimeInterval;
-    private int knockTime;
-    private Action onEnd;
-    private Action onMissed;
-    private bool started = false;
+    protected Coroutine knockDoorCheckCoroutine;
+    protected BodyInfo bodyInfo;
+    protected float knockDoorTimeInterval;
+    protected int knockTime;
+    protected Action onEnd;
+    protected Action onMissed;
+    protected bool started = false;
     protected string overrideAudioClipName;
     protected bool onClickPeepholeSpeakEnd = false;
     protected PlayerResourceSystem playerResourceSystem;

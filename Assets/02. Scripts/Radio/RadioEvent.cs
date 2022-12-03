@@ -37,7 +37,10 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
         this.mixer = mixer;
     }
 
-   
+    public override void OnStart() {
+       
+    }
+
     public override EventState OnUpdate() {
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
         if ((currentTime.Hour == 23 && currentTime.Minute >= 50) || gameStateModel.GameState.Value == GameState.End) {
