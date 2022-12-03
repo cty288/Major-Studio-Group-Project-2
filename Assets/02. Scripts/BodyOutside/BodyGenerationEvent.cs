@@ -156,6 +156,7 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
     public override void OnMissed() {
        onMissed?.Invoke();
        UnregisterListeners();
+       
     }
 
 

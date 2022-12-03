@@ -29,7 +29,7 @@ public class TimeRange {
 }
 
 
-public abstract class GameEvent: ICanGetSystem, ICanGetModel, ICanSendEvent {
+public abstract class GameEvent: ICanGetSystem, ICanGetModel, ICanSendEvent, ICanRegisterEvent {
     public abstract GameEventType GameEventType { get; }
     public EventState EventState { get; set; } = EventState.NotStart;
     public abstract float TriggerChance { get; }

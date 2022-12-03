@@ -14,12 +14,12 @@ public class BountyHunterPhone : TelephoneContact {
     private GameTimeManager gameTimeManager;
     private AudioMixerGroup mixer;
     private Coroutine waitingForInteractionCoroutine;
-    private BodyInfo providedBodyInfo = null;
-    private BodyManagmentSystem bodyManagmentSystem;
+   
     private GameEventSystem gameEventSystem;
     private bool talkedBefore = false;
     private DateTime nextAvailableDate;
 
+    
     public bool GetAvailable() {
         return nextAvailableDate.Date <= gameTimeManager.CurrentTime.Value.Date;
     }
@@ -28,7 +28,6 @@ public class BountyHunterPhone : TelephoneContact {
         bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
         gameTimeManager = this.GetSystem<GameTimeManager>();
         this.mixer = speaker.GetComponent<AudioSource>().outputAudioMixerGroup;
-        bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
         gameEventSystem = this.GetSystem<GameEventSystem>();
         nextAvailableDate = gameTimeManager.CurrentTime.Value;
     }
@@ -37,7 +36,6 @@ public class BountyHunterPhone : TelephoneContact {
     }
 
     protected override void OnStart() {
-        providedBodyInfo = null;
         bountyHunterSystem.ContactedBountyHunter = true;
         string welcome = "Howdy! I'm the Bounty Hunter! I can reward you foods if you give me correct information about those creatures! Do you have any information about them?";
         if (talkedBefore) {
@@ -112,6 +110,7 @@ public class BountyHunterPhone : TelephoneContact {
                 speaker.Speak(noInfo, mixer, null);
             }
         }
+      
     }
     protected override void OnHangUp() {
         End();

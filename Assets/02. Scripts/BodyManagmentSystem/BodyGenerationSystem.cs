@@ -73,7 +73,7 @@ public class BodyGenerationSystem : AbstractSystem {
 
         DateTime dogEventEndTime = dogStartTime.AddMinutes(Random.Range(20, 40));
 
-        gameEventSystem.AddEvent(new BodyGenerationEvent(
+        gameEventSystem.AddEvent(new DogKnockEvent(
             new TimeRange(dogStartTime, dogEventEndTime), targetBody, knockDoorTimeInterval,
             knockTime,
             knockDoorChance, null, null));

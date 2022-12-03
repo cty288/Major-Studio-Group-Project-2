@@ -233,9 +233,6 @@ public class TelephoneSystem : AbstractSystem {
             OnHangUp?.Invoke();
         }
     }
-
-    
-
     public void AddDealingDigit(int digit) {
         if (State == TelephoneState.Idle || State == TelephoneState.Dealing) {
             State.Value = TelephoneState.Dealing;
