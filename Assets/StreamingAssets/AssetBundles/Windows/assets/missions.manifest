@@ -1,0 +1,326 @@
+ManifestFileVersion: 0
+CRC: 933161033
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 63f04f61132e6611bc526cc9dc643cf6
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 812572bf29b046055f75e2df0a4666a3
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 50
+  Script: {instanceID: 0}
+- Class: 58
+  Script: {instanceID: 0}
+- Class: 61
+  Script: {instanceID: 0}
+- Class: 70
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 97b66b5285539064a9af81c6f561e4b9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b46ff1cb7e87ed14fa105476fd9e4ebc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 52a7f5503a2505a49aca73bf2063239a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 39573eedcbf1e5f4b8590c90f8754e7a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 89c222e166929f044ab49a6cb035abeb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 51851453d93634a409c525849cb9a2f6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0d5952b7370610142a33baee56c07390, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b8b37cbd90acfff40bb0472f955d1ffb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 09e8aa4c5e8d8774e858d9d16e41e737, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e72581908d7743143a2281464d29088f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 34632e44488196849baadcf017457e63, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b436c0e60f5b75c449995652ca4ee304, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9d1de09509287094b9b15a251c817147, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5ed991046576bbd409ba2fe5d30e7d03, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cb2319b099477394a98a84a440e23e28, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f3cddec3d35bdfc4ba65f3719edd8e08, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 73bf3f660d9226c43bba03090aec86bd, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3f99d8d5b9cd55a4d95552d02d803f49, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 97d6eadb1d86b2b44a98900ac85a020a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c56d9a36aa97fe449bac3f083a22c657, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3f5b96c0fafb5e249aacd84631a4a32d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0e53acd87faa68c43ba5c36cfcd714fa, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 814caf26ef3815e43a5b958bd02fc6df, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ab2cbc52526ea384ba280d13cd1a57b9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f5a4ff224e999fd4eadf8296fc0dd7c7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 847a14d4dc9cc43679ab34fc78e0182f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 18658476032860a409f513d9189fcd83, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e43b12d91b399d947b2624c2d7549a83, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d4e22fd70c9a96b46a16cddaff45e556, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8c818f234758ec84fa1f1d0a29d6ee85, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8c5944f2e01bd0c4681ba37b342491e4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 83bb869c09fdab84f90b1203c47546c2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2f9b42a775c33ab46b4b196b516cf65a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2d2286fcfd6e7304da2941f5d8c82856, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ea8d2f74123ee524b9bc4de6daeb100e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 33817d1a3358b674188f3d0be8794067, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 120
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: AstarPathfindingProject
+  ClassName: Pathfinding.AutoRepathPolicy
+- AssemblyName: AstarPathfindingProject
+  ClassName: Pathfinding.GraphMask
+- AssemblyName: AstarPathfindingProject
+  ClassName: Pathfinding.StartEndModifier
+- AssemblyName: MikroFramework
+  ClassName: MikroFramework.BindableProperty.BindableProperty`1[UnityEngine.Vector2Int]
+- AssemblyName: Mikrocosmos
+  ClassName: Mikrocosmos.GoodsConfigure
+- AssemblyName: Unity.RenderPipelines.Universal.Runtime
+  ClassName: UnityEngine.Rendering.Universal.LightUtility/LightMeshVertex
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.VertexGradient
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.RectOffset
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.AnimationTriggers
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ColorBlock
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.FontData
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Navigation
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Slider/SliderEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.SpriteState
+Assets:
+- Assets/04. Sprites/Missions/ObjectSprites/ScrambleMission/DragonShrimp_6.png
+- Assets/03. Prefabs/Game/Missions/Football/Football.prefab
+- Assets/06 Animations/Mission/SendEggMission/SunFlowerChildMapUIStop.anim
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_20.png
+- Assets/04. Sprites/Missions/ObjectSprites/StrangeMeteorolite/StrangeMeteoroliteSprite_2.png
+- Assets/04. Sprites/Missions/UISprites/SendEggMission/EggmanGuideUI.png
+- Assets/04. Sprites/Missions/ObjectSprites/ScrambleMission/DragonShrimp_2.png
+- Assets/03. Prefabs/Game/Missions/SpaceMinecartMission/SpaceMinecartMission_Tutorial.prefab
+- Assets/06 Animations/Mission/SendEggMission/SunFlowerTradeFinished.anim
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_6.png
+- Assets/06 Animations/Mission/StrangeMeteorMission/StrangeMeteorRingChanging.anim
+- Assets/06 Animations/Mission/SendEggMission/MapUI.controller
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_3.png
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_body.png
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/Sunflower/Happy/SunflowerHappy_5.png
+- Assets/03. Prefabs/Game/Missions/SpaceMinecartMission/SpaceMinecartBigMapPath.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_16.png
+- Assets/06 Animations/Mission/SendEggMission/SunFlowerTradeFinishedLoop.anim
+- Assets/03. Prefabs/Game/Missions/Football/FootballMission.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/StrangeMeteorolite/StrangeMeteorolite3MapSprite.png
+- Assets/06 Animations/Mission/SpaceMinecartMission/Right.controller
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_7.png
+- Assets/03. Prefabs/Game/Missions/SpaceMinecartMission/SpaceMinecart_Tutorial.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_12.png
+- Assets/04. Sprites/Missions/ObjectSprites/ScrambleMission/DragonShrimp_3.png
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/Sunflower/Happy/SunflowerHappy_0.png
+- Assets/03. Prefabs/Game/Missions/SpaceMinecartMission/SpaceMinecart.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/Sunflower/SunflowerSprite_0.png
+- Assets/03. Prefabs/Game/Missions/ScrambleMission/ScrambleMission.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_14.png
+- Assets/03. Prefabs/Game/UI/Pointers/Missions/ScrambleMission/ScrambleMissionPointer.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/Sunflower/SunflowerSprite_5.png
+- Assets/04. Sprites/Missions/ObjectSprites/StrangeMeteorolite/StrangeMeteorolite1MapSprite.png
+- Assets/04. Sprites/Missions/UISprites/StrangeMeteorMission/territory ring red.png
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipTurn_4.png
+- Assets/06 Animations/Mission/StrangeMeteorMission/StrangeMeteorMapUI.anim
+- Assets/03. Prefabs/Game/Missions/StrangeMeteor/StrangeMeteor2.prefab
+- Assets/03. Prefabs/Game/Missions/ScrambleMission/ScrambledItem.prefab
+- Assets/04. Sprites/Missions/UISprites/StrangeMeteorMission/MeteoriteGuideUI.png
+- Assets/04. Sprites/Missions/UISprites/ScrambleMission/ShrimpGuideUI.png
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_1.png
+- Assets/06 Animations/Mission/ScrambleMission/ScrambleItem/ScrambledItem.controller
+- Assets/04. Sprites/Missions/ObjectSprites/StrangeMeteorolite/StrangeMeteoroliteSprite_3.png
+- Assets/03. Prefabs/Game/Missions/Football/FootballMissionPanel.prefab
+- Assets/06 Animations/Mission/SpaceMinecartMission/StrangeMeteorMepUI.anim
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/Sunflower/Happy/SunflowerHappy_4.png
+- Assets/03. Prefabs/Game/UI/Pointers/Missions/SpaceMinecartMission/SpaceMinecartPointer.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipTurn_3.png
+- Assets/06 Animations/Mission/StrangeMeteorMission/MapUI.controller
+- Assets/06 Animations/Mission/SpaceMinecartMission/Moving.anim
+- Assets/03. Prefabs/Game/Missions/SendEggMission/SunFlower.prefab
+- Assets/06 Animations/Mission/SendEggMission/Image.controller
+- Assets/06 Animations/Mission/SendEggMission/SunFlowerAppear.anim
+- Assets/03. Prefabs/Game/UI/Pointers/Missions/MissionPointerWindow.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/Sunflower/Happy/SunflowerHappy_8.png
+- Assets/06 Animations/Mission/SendEggMission/BuyBubbleAnimation.anim
+- Assets/03. Prefabs/Game/Missions/SpaceMinecartMission/SpaceMinecartGamePath.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/ScrambleMission/DragonShrimp_1.png
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_11.png
+- Assets/04. Sprites/Missions/UISprites/SendEggMission/EggmanJrGuideUI.png
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_18.png
+- Assets/06 Animations/Mission/SendEggMission/SunFlowerNormal.anim
+- Assets/04. Sprites/Missions/UISprites/StrangeMeteorMission/territory ring blue.png
+- Assets/04. Sprites/Missions/ObjectSprites/StrangeMeteorolite/StrangeMeteoroliteSprite_1.png
+- Assets/04. Sprites/Missions/ObjectSprites/StrangeMeteorolite/territory circle.png
+- Assets/06 Animations/Mission/SpaceMinecartMission/StartMove.anim
+- Assets/03. Prefabs/Game/Missions/SendEggMission/SunFlowerBuyBubbleBG.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_13.png
+- Assets/06 Animations/Mission/StrangeMeteorMission/StrangeMeteorRing.anim
+- Assets/06 Animations/Mission/ScrambleMission/ScrambleItem/Idle.anim
+- Assets/04. Sprites/Missions/ObjectSprites/FootballMission/KCKGoals_blue_2.png
+- Assets/03. Prefabs/Game/UI/Pointers/Missions/StrangeMeteorMission/StrangeMeteorPointer.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/Sunflower/Happy/SunflowerHappy_6.png
+- Assets/06 Animations/Mission/StrangeMeteorMission/StrangeMeteorAppear.anim
+- Assets/04. Sprites/Missions/ObjectSprites/ScrambleMission/ShrimpMapSprite.png
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/Sunflower/Happy/SunflowerHappy_1.png
+- Assets/04. Sprites/Missions/UISprites/StrangeMeteorMission/territory ring.png
+- Assets/06 Animations/Mission/SpaceMinecartMission/SpaceMinecart.controller
+- Assets/03. Prefabs/Game/UI/Pointers/Missions/SendEggMission/EggmanPointer.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_17.png
+- Assets/06 Animations/Mission/StrangeMeteorMission/Canvas.controller
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/Sunflower/Happy/SunflowerHappy_2.png
+- Assets/03. Prefabs/Game/UI/Pointers/Missions/SendEggMission/EggPointer.prefab
+- Assets/03. Prefabs/Game/Missions/SendEggMission/DottedOutlineBanana 1.mat
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/SunflowerSonSprite_01.png
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/SunflowerSonMapSprite.png
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_5.png
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/Sunflower/Happy/SunflowerHappy_9.png
+- Assets/06 Animations/Mission/SendEggMission/SunFlowerChildMapUI.anim
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/Sunflower/SunflowerSprite_4.png
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipTurn_1.png
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_8.png
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/Sunflower/Happy/SunflowerHappy_3.png
+- Assets/06 Animations/Mission/SpaceMinecartMission/MapUI.controller
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/Sunflower/SunflowerSprite_2.png
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_10.png
+- Assets/04. Sprites/Missions/ObjectSprites/ScrambleMission/DragonShrimp_4.png
+- Assets/03. Prefabs/Game/Missions/SendEggMission/SunFlowerChild.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/StrangeMeteorolite/StrangeMeteorolite2MapSprite.png
+- Assets/06 Animations/Mission/SendEggMission/SunFlower.controller
+- Assets/04. Sprites/Missions/ObjectSprites/FootballMission/KCKGoals_red_2.png
+- Assets/03. Prefabs/Game/Missions/StrangeMeteor/StrangeMeteor3.prefab
+- Assets/03. Prefabs/Game/Missions/BattleRoyale/BattleRoyaleMission.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/StrangeMeteorolite/territory circle 1.png
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_21.png
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/Sunflower/SunflowerSprite_1.png
+- Assets/03. Prefabs/Game/Missions/StrangeMeteor/StrangeMeteor1.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipTurn_2.png
+- Assets/03. Prefabs/Game/Missions/SendEggMission/SendEggMission.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_2.png
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/Sunflower/SunflowerSprite_3.png
+- Assets/04. Sprites/Missions/ObjectSprites/ScrambleMission/DragonShrimp_5.png
+- Assets/04. Sprites/Missions/UISprites/SpaceMinecartMission/MineSpaceshipGuideUI.png
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/Sunflower/Happy/SunflowerHappy_7.png
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipMapSprite.png
+- Assets/06 Animations/Mission/ScrambleMission/ScrambleItem/Moving.anim
+- Assets/04. Sprites/Missions/ObjectSprites/SendEggMission/SunflowerMapSprite.png
+- Assets/04. Sprites/Missions/ObjectSprites/FootballMission/KCKGoals_blue_1.png
+- Assets/06 Animations/Mission/SpaceMinecartMission/Idle.anim
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_9.png
+- Assets/04. Sprites/Missions/ObjectSprites/FootballMission/KCKGoals_red_1.png
+- Assets/06 Animations/Mission/StrangeMeteorMission/StrangeMeteor1.controller
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_4.png
+- Assets/06 Animations/Mission/SpaceMinecartMission/StopMove.anim
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_15.png
+- Assets/03. Prefabs/Game/Missions/ScrambleMission/ScrambleMissionPanel.prefab
+- Assets/03. Prefabs/Game/Missions/StrangeMeteor/StrangeMeteorMission 1.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/SpaceMinecartMission/MineSpaceshipFly_19.png
+- Assets/03. Prefabs/Game/Missions/SpaceMinecartMission/SpaceMinecartMission.prefab
+- Assets/04. Sprites/Missions/ObjectSprites/FootballMission/KCKBall.png
+Dependencies:
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/assets/fonts
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/assets/goods/general
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/assets/planets/general
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/audio
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/info
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/others

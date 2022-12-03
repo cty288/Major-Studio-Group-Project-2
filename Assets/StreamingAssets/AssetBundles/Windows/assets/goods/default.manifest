@@ -1,0 +1,669 @@
+ManifestFileVersion: 0
+CRC: 1108414505
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: ea2d1538afe3426823f5a009fe498f17
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 78f256e4ae17aaf67844c6424d56d5b1
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 50
+  Script: {instanceID: 0}
+- Class: 58
+  Script: {instanceID: 0}
+- Class: 60
+  Script: {instanceID: 0}
+- Class: 61
+  Script: {instanceID: 0}
+- Class: 70
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 96
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8c17d5fb6b3e92348ac515424ba086d8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7272634b3e5ad84448fb935731751944, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 058a3304973f74d4490dbcad44e39cdf, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d94ff35c4cfc4284d8a900779c2727c7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: bfb308d2d94bb5742812578b0d097cf2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 311063edff106cd4eb942c1bd167e39e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b46ff1cb7e87ed14fa105476fd9e4ebc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a0ad90a49ad9bd34eb5e30fd1b8e6ed7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 70848c4cb992748418834496819ae51a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9d3e4f5a35b8ffd4e896baf6375229e3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: efeb2cd6803c7e34c8310a15382e1f7d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 52a7f5503a2505a49aca73bf2063239a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: bbf355d86d3245949a8d2e29322f6b7e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0b2509b752622df4cb0bd630a430be04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 452af57b64303ea468c7056585f84e64, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e103ccf06e718624bac7eb83ab7a0f7b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: afc8cd290c5077248b16faa66d008b4d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: eac87e66466a1fd47b0b79ada3842fd0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3484c07865f39ae4b800bf67fed1a85d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2d0495378802ad84bb1828722d128e8d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c78a7cef1dbca834386fba7dcbe6b4c9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 534aeb91442d26a49bbc4384f472df5d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9d1de09509287094b9b15a251c817147, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9cfa0787f0d18884a9c62e28d8ff7970, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b3f47737b61fa4e48bcc38781e9942d6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3ac393aa92d3a4242a20ba9821858770, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c0f85b49a51fcfe478d7f8197c5d7e01, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c11f60af6d49de04fac527e3c4b4e4e9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9b402707eec851942bcbb23f855ba04b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5e9af30b60d572b4da84a7b88536d674, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7c1ec26cc22c0924ea51c8c6137844bb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3f99d8d5b9cd55a4d95552d02d803f49, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2c0ddfc42a109774b9d75472c85f0f55, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cb5024c97a22e7840a8caf0f0d67fbfa, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 725f48982cd761b4281b7a8461fe14d5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2bfea0b13fdd02941bad2fbba4ba28c2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 384bc511d353eaa4fb504844a5535b72, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e8bbe79709a6b384ba721e2666383d67, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7a97ff5978b23bf46af0f9ed38ad7284, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2b46d332440183e4e8ff9fd9fe06454c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5833f4d93833f8e43b0aede280ce527b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ab2cbc52526ea384ba280d13cd1a57b9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e080dec2d1559a9488510af5e0758324, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 69f579ef9eaed4e449cfe93af2892d1e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e5af11a9e8ef0b2409ae2cded8f0f388, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9dc4c5d80178d9945bf8edd927b4b509, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e5d82cc105e79334a974d907e9d3055a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d2c2216fd391fe848b292a470536734f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 892680322abc5e34ab1072e7a6be84d6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4fc4636dca2ceb747bdae12e443658e7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 895b089ac32dd2b46927ee71124312c3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7bb02c2c49faac14fb43bf1aa2abde3e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d21eeec519b7bd646aebae373088255f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 034d4b5fd95d89444ac154c2c45d1da6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 728e083f0b501834ca14dc65f99c5fa7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b629bd1565be586478c0c6b213fec5d0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ef4ebc533ee81ca419778328f20834b8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cde434166412da54cb9f800f23f8579d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 831a4ac79030815488a8d2ae80877d99, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 120
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: MikroFramework
+  ClassName: MikroFramework.BindableProperty.BindableProperty`1[System.Int32]
+- AssemblyName: Unity.RenderPipelines.Core.Runtime
+  ClassName: UnityEngine.Rendering.BoolParameter
+- AssemblyName: Unity.RenderPipelines.Core.Runtime
+  ClassName: UnityEngine.Rendering.ClampedFloatParameter
+- AssemblyName: Unity.RenderPipelines.Core.Runtime
+  ClassName: UnityEngine.Rendering.ClampedIntParameter
+- AssemblyName: Unity.RenderPipelines.Core.Runtime
+  ClassName: UnityEngine.Rendering.ColorParameter
+- AssemblyName: Unity.RenderPipelines.Core.Runtime
+  ClassName: UnityEngine.Rendering.MinFloatParameter
+- AssemblyName: Unity.RenderPipelines.Core.Runtime
+  ClassName: UnityEngine.Rendering.TextureParameter
+- AssemblyName: Unity.RenderPipelines.Universal.Runtime
+  ClassName: UnityEngine.Rendering.Universal.LightUtility/LightMeshVertex
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.VertexGradient
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.ArgumentCache
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentListenerMode
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.UnityEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+Assets:
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/Temporary/Banana/Banana.prefab
+- Assets/06 Animations/Items/Default/FirePlant/Using.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/RawMaterials/SeaweedFruit/SeaweedFruitSprite_01.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/PoisonSpear/PoisonSpearSprite_5.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeShoot_11.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye2/KrowEye2Sprite_4.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/Temporary/Banana2/DottedOutlineBanana
+  1.mat
+- Assets/04. Sprites/Items/DefaultPack/Goods/LeafKnife/LeafKnifeSprite_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye2/KrowEye2Sprite_16.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_1.png
+- Assets/06 Animations/Items/Default/StoneShieldWave/Hit.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeShoot_5.png
+- Assets/06 Animations/Items/Default/CactusShotgun/Shooting.anim
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/LandMine/LandMineInstalledEntity2.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/VoodooDoll/voodooBullet_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye2/KrowEye2Sprite_5.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/Deployed/krowEyeSprite_0.png
+- Assets/06 Animations/Items/Default/BirdCanon/BirdCanonBulletShoot.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeShoot_10.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/KrowEye1Sprite_9.png
+- Assets/06 Animations/Items/Default/CactusShotgun/CactusShotgun.controller
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeShoot_9.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMine/landMineSprite_0.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdCannon/BirdCannonSprite_12.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/BananaGun/BananaGun.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn3_8.png
+- Assets/06 Animations/Items/Default/LeafKnife/LeafKnife.controller
+- Assets/06 Animations/Items/Default/FirePlant/Fire2/Fire2.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/VoodooDoll/vooDooDollSprite_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/CactusShotgun/CactusShotgunSprite_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/JellyGun/JellyGunSprite_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/VoodooDoll/voodooBullet_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn2_7.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Trumpet/Trumpet/TrumpetRange.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunAttract/bananaGunAttract_13.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneWave/StoneWaveSprite_5.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/KrowEye/KrowEyeDeployed.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/Thruster/ThrusterSprite_12.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunAttract/bananaGunAttract_14.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/JellyGun/Occulasion1.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeShoot_3.png
+- Assets/06 Animations/Items/Default/JellyGun/JellyBulletHit.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn2_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_13.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMine/landMineSprite_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye2/KrowEye2Sprite_14.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/VoodooDoll/vooDooDollSprite_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/Deployed/krowEyeSprite_2.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/RawMaterials/MetalBall/DottedOutlineBirdCannon.mat
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_27.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/InvisibleRadar/InvisibleRadarSprite_11.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/Deployed/krowEyeSprite_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/FirePlant/FirePlantSprit_0.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye2/KrowEye2Sprite_10.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_3.png
+- Assets/06 Animations/Items/Default/StoneShield/Shoot.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_11.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/Deployed/krowEyeSprite_6.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/InvisibleRadar/InvisibleRadarSprite_8.png
+- Assets/06 Animations/Items/Default/KrowEye/Team1.anim
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/CactusShotgun/Bullet/CactusGunBullet.prefab
+- Assets/06 Animations/Tutorial/Aggressive_EarthBag/AgressiveKrowBullet.controller
+- Assets/04. Sprites/Items/DefaultPack/Goods/InvisibleRadar/InvisibleRadarSprite_9.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn3_6.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/VoodooDoll/VoodooDoll.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunAttract/bananaGunAttract_8.png
+- Assets/06 Animations/Items/Default/JellyGun/JellyBulletNormal.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/JellyGun/JellyRange.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LeafKnife/LeafKnifeSprite_6.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_18.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/FishMachineGun/MachineRange.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn1_1.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/RawMaterials/EarthMushroom/DottedOutlineEarthMushroom.mat
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/Deployed/krowEyeSprite_5.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/FirePlant/DottedOutlineFirePlant.mat
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/KrowEye1Sprite_12.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn3_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEyeMapSprite.png
+- Assets/06 Animations/Items/Default/FirePlant/Fire2/Fire1.controller
+- Assets/06 Animations/Items/Default/KrowEye/KrowEyeMapSprite.controller
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/KrowEye1Sprite_6.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_14.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn1_7.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/Fire1/Fire1Sprite_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_5.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunAttract/bananaGunAttract_15.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/KrowEye1Sprite_0.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/KrowEye1Sprite_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/InvisibleRadar/InvisibleRadarSprite_5.png
+- Assets/06 Animations/Items/Default/LeafKnife/Idle.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/Fire2/Fire2Sprite_6.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/Deployed/krowEyeSprite_7.png
+- Assets/06 Animations/Items/Default/KrowEye/MapUINoTeam.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeBullet_1.png
+- Assets/06 Animations/Tutorial/Aggressive_EarthBag/Idle.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/Thruster/ThrusterSprite_11.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye2/KrowEye2Sprite_13.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_19.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LeafKnife/LeafKnifeSprite_5.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/RawMaterials/Flower/DottedOutlineBirdCannon.mat
+- Assets/06 Animations/Items/Default/BirdCanon/Shoot.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/KrowEye1Sprite_15.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_30.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_9.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/InvisibleRadar/InvisibleRadarSprite_0.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdCannon/BirdCannonSprite_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/FirePlant/FirePlantSprite_2.png
+- Assets/06 Animations/Items/Default/StoneShieldWave/Start.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye2/KrowEye2Sprite_11.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdCannon/BirdCannonSprite_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_10.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeBullet_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/PoisonSpear/PoisonSpearSprite_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunAttract/bananaGunAttract_6.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/RawMaterials/SeaweedFruit/DottedOutlineBirdCannon.mat
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn2_5.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye2/KrowEye2Sprite_9.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/PoisonSpear/PoisonSpearSprite_0.png
+- Assets/06 Animations/Items/Default/PoisonSpear/Using.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/JellyGun/JellyGunSprite_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye2/KrowEye2Sprite_12.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeShoot_12.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/VoodooDoll/vooDooRange.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye2/KrowEye2Sprite_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeShoot_13.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/LandMine/LandMineInstalledEntity3.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneWave/StoneWaveSprite_1.png
+- Assets/06 Animations/Items/Default/BirdCanon/ChargeEnd.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/JellyGun/JellyGunSprite_5.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdCannon/BirdCannonSprite_6.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn3_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdBullet/BirdBulletSprite_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_3.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/LandMine/LandMineInstalledEntity1.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_7.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/Fire2/Fire2Sprite_5.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/JellyGun/Occulasion2.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/RawMaterials/MetalBall/MetalBallSprite_01.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/Thruster/Thruster.prefab
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/FishMachineGun/FishMachineGunBullet.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_9.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/RawMaterials/Kindle/KindleSprite_01.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/FrogHammer/DottedOutlineFrogHammer.mat
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_13.png
+- Assets/06 Animations/Items/Default/KrowEye/MapUITeam2.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_16.png
+- Assets/06 Animations/Items/Default/JellyGun/DebuffStart.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/Fire2/Fire2Sprite_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/VoodooDoll/vooDooDollSprite_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn3_1.png
+- Assets/06 Animations/Items/Default/StoneShield/StoneShield.controller
+- Assets/06 Animations/Items/Default/CactusShotgun/CactusShotGunNormal.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/Thruster/ThrusterSprite_9.png
+- Assets/06 Animations/Items/Default/PoisonSpear/PoisonSpear.controller
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/RawMaterials/FireOre/DottedOutlineBirdCannon.mat
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/FishMachineGun/Trail Profile.asset
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/Temporary/Banana/BananaTemp.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeShoot_8.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/BirdCannon/Bullet/BirdCannonBullet.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/JellyGun/JellyGunSprite_6.png
+- Assets/03. Prefabs/Tutorial/AgressiveKrowBullet.prefab
+- Assets/06 Animations/Items/Default/JellyGun/Idle.anim
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/FishMachineGun/FishMachineGun.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/JellyGun/JellyGunSprite_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneWave/StoneWaveSprite_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/KrowEye1Sprite_10.png
+- Assets/06 Animations/Items/Default/JellyGun/JellyGunBullet.controller
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/RawMaterials/Kindle/DottedOutlineBirdCannon.mat
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn1_2.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/CactusShotgun/CactusShotgun.prefab
+- Assets/06 Animations/Items/Default/FirePlant/Start.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/Fire1/Fire1Sprite_5.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/PoisonSpear/PoisonSpearSprite_3.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/Temporary/Toliet/Toliet.prefab
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/CactusShotgun/DottedOutlineBirdCannon.mat
+- Assets/04. Sprites/Items/DefaultPack/Goods/CactusShotgun/CactusRange 1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Thruster/ThrusterSprite_10.png
+- Assets/06 Animations/Items/Default/StoneShieldWave/StoneShieldWave.controller
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeShoot_14.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye2/KrowEye2Sprite_1.png
+- Assets/06 Animations/Items/Default/Thruster/Idle.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/Fire2/Fire2Sprite_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineRange.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/Fire1/Fire1Sprite_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMine/landMineSprite_5.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_23.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_11.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMine/landMineSprite_6.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/KrowEye1Sprite_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/InvisibleRadar/InvisibleRadarSprite_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunAttract/bananaGunAttract_12.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Thruster/ThrusterSprite_8.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdCannon/BirdCannonSprite_14.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/InvisibleRadar/InvisibleRadar.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeSprite_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_0.png
+- Assets/06 Animations/Items/Default/BirdCanon/BirdCannonBullet.controller
+- Assets/04. Sprites/Items/DefaultPack/Goods/RawMaterials/FireOre/FireOreSprite_01.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/Fire2/Fire2Sprite_3.png
+- Assets/06 Animations/Items/Default/PoisonSpear/Idle.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/KrowEye1Sprite_16.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/SnakeMeleeRange.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/FirePlant/FirePlantSprite_3.png
+- Assets/06 Animations/Tutorial/Aggressive_EarthBag/Attack.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye2/KrowEye2Sprite_8.png
+- Assets/06 Animations/Thruster.controller
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/RawMaterials/Flower/Flower.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/KrowEye1Sprite_3.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/VoodooDoll/VoodooDollBullet.prefab
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/RawMaterials/MetalBall/MetalBall.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdCannon/BirdCannonSprite_10.png
+- Assets/06 Animations/Items/Default/FirePlant/Idle.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_26.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/FrogHammer/FrogHammer.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/Fire1/Fire1Sprite_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_0.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMine/landMineSprite_7.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LeafKnife/LeafKnifeSprite_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Thruster/ThrusterSprite_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Thruster/ThrusterSprite_5.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/InvisibleRadar/InvisibleRadarSprite_7.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeSprite_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_14.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMine/landMineSprite_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneWave/StoneWaveSprite_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/SnakeRange.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye2/KrowEye2Sprite_15.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Thruster/ThrusterSprite_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeSprite_0.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeSprite_5.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdCannon/BirdCannonSprite_8.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdCannon/BirdCannonSprite_5.png
+- Assets/06 Animations/Items/Default/JellyGun/SmallOcclusionEnd.anim
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/Temporary/Toliet/DottedOutlineStatellite.mat
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/RawMaterials/Kindle/Kindle.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_28.png
+- Assets/06 Animations/Items/Default/StoneShield/StoneShieldWave.controller
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn3_9.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/CactusShotgun/CactusShotgunSprite_5.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/VoodooDoll/vooDooDollSprite_6.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn2_9.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeShoot_1.png
+- Assets/06 Animations/Items/Default/JellyGun/JellyGun.controller
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/Thruster/DottedOutlineThruster.mat
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/Temporary/Banana2/Banana.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_6.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_15.png
+- Assets/06 Animations/Items/Default/KrowEye/MapUITeam1.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn3_5.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaRange.png
+- Assets/06 Animations/Items/Default/KrowEye/KrowEye.controller
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn2_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneWave/StoneWaveSprite_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/VoodooDoll/vooDooDollSprite_5.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/JellyGun/JellyBulletSprite_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/KrowEye1Sprite_7.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/InvisibleRadar/InvisibleRadarSprite_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_18.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn2_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/JellyGun/JellyBulletSprite_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn1_9.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye2/KrowEye2Sprite_6.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye2/KrowEye2Sprite_7.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_20.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/PoisonSpear/PoisonSpearSprite_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/InvisibleRadar/InvisibleRadarSprite_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeShoot_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/RawMaterials/Flower/FlowerSprite_01.png
+- Assets/06 Animations/Items/Default/FirePlant/Fire2/Fire2Sprite_1.controller
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMine/landMineSprite_8.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMine/landMineSprite_3.png
+- Assets/06 Animations/Items/Default/FirePlant/FirePlant.controller
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunAttract/bananaGunAttract_3.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/KrowEye/KrowEye.prefab
+- Assets/06 Animations/Tutorial/Aggressive_EarthBag/EarthBagBullet.anim
+- Assets/06 Animations/Items/Default/CactusShotgun/Idle.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_17.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_10.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeSprite_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_8.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_15.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/FirePlant/FirePlantSprite_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeSprite_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunAttract/bananaGunAttract_9.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/KrowEye1Sprite_1.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/JellyGun/DottedOutlineJellyGun.mat
+- Assets/06 Animations/Items/Default/KrowEye/Idle.anim
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/LeafKnife/DottedOutlineBanana 1.mat
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_17.png
+- Assets/06 Animations/Items/Default/FirePlant/Fire2/Fire1.anim
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/BananaGun/BananaBulletIndicator.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeShoot_0.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/JellyGun/JellyGunSprite_2.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/BirdCannon/BirdCannon.prefab
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/PoisonSpear/DottedOutlineBanana.mat
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn1_8.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_22.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_24.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/JellyGun/Bullet/JellyGunBullet.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdCannon/BirdCannonSprite_0.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/Trumpt/Trumpet.prefab
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/LeafKnife/LeafKnife.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/PoisonSpear/PoisonSpearSprite_4.png
+- Assets/06 Animations/Items/Default/BirdCanon/ChargeLoop.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunAttract/bananaGunAttract_0.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdCannon/BirdCannonSprite_13.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/CactusShotgun/CactusShotgunSprite_0.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/CactusShotgun/CactusBulletSprite_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_12.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/FirePlant/FirePlant.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/CactusShotgun/CactusShotgunSprite_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdCannon/BirdCannonSprite_2.png
+- Assets/06 Animations/Items/Default/StoneShieldWave/Flying.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/CactusShotgun/CactusShotgunSprite_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/KrowEye1Sprite_5.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_29.png
+- Assets/06 Animations/Items/Default/Thruster/Start.anim
+- Assets/06 Animations/Items/Default/BirdCanon/Charge.anim
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/JellyGun/JellyGun.prefab
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/PoisonSpear/PoisonSpear.prefab
+- Assets/06 Animations/Items/Default/BirdCanon/Idle.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeShoot_6.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/Fire2/Fire2Sprite_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_20.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/StoneShield/StoneShieldWave.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/LeafKnife/LeafKnifeSprite_4.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/StoneShield/StoneShield.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/Fire1/Fire1Sprite_6.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/InvisibleRadar/InvisibleRadarSprite_6.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_12.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn2_6.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_5.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_25.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn1_6.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/FirePlant/FirePlantSprite_4.png
+- Assets/06 Animations/Items/Default/JellyGun/Occulasion1.controller
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/HermitSnake/HermitSnake.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_7.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/LandMine/LandMine.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/Thruster/ThrusterSprite_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/VoodooDoll/vooDooDollSprite_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdBullet/BirdBulletSprite_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeBullet_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn3_7.png
+- Assets/06 Animations/Items/Default/JellyGun/VisionOcclusionDebuff.controller
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/KrowEye/DottedOutlineKrowEye.mat
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunAttract/bananaGunAttract_7.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunAttract/bananaGunAttract_10.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_8.png
+- Assets/06 Animations/Items/Default/JellyGun/SmallOcclusionStart.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdCannon/BirdCannonSprite_7.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/KrowEye1Sprite_11.png
+- Assets/06 Animations/Items/Default/Thruster/End.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/KrowEye1Sprite_13.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/FirePlant/FireRange.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/VoodooDoll/vooDooDollSprite_0.png
+- Assets/06 Animations/Items/Default/JellyGun/Shooting.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/VoodooDoll/voodooBullet.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/KrowEye/Team2.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_21.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeShoot_7.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/HermitSnake/HermitSnakeBullet.prefab
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/BirdCannon/DottedOutlineBirdCannon.mat
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunAttract/bananaGunAttract_5.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/BirdCannon/Bullet/GlowVisionEntity
+  1.mat
+- Assets/04. Sprites/Items/DefaultPack/Goods/JellyGun/JellyBulletSprite_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_19.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Thruster/ThrusterSprite_0.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/JellyGun/Occulasion3.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_1.png
+- Assets/06 Animations/Tutorial/Aggressive_EarthBag/Krow.controller
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunAttract/bananaGunAttract_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn2_8.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/Deployed/krowEyeSprite_8.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/BananaGun/BananaGunBullet.prefab
+- Assets/06 Animations/Items/Default/CactusShotgun/CactusGunBullet.controller
+- Assets/06 Animations/Items/Default/LeafKnife/LeafKnifeUse.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/Deployed/krowEyeSprite_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/RawMaterials/EarthMushroom/EarthMushroomSprite_01.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunAttract/bananaGunAttract_11.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/StoneShield/StoneShield/StoneShieldSprite_16.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn2_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Thruster/ThrusterSprite_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Thruster/ThrusterSprite_6.png
+- Assets/06 Animations/Items/Default/StoneShield/Start.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdCannon/CannonRange.png
+- Assets/06 Animations/Items/Default/BirdCanon/BirdCannon.controller
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/KrowEye1Sprite_8.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdCannon/BirdCannonSprite_11.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye2/KrowEye2Sprite_0.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/CactusShotgun/CactusShotgunSprite_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn1_5.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/RawMaterials/SeaweedFruit/SeaweedFruit.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/LeafKnife/LeafRange.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/RawMaterials/EarthMushroom/EarthMushroom.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaBullet.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunAttract/bananaGunAttract_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn3_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdCannon/BirdCannonSprite_9.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye2/KrowEye2Sprite_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/KrowEye1Sprite_14.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/HermitSnake/HermitSnakeShoot/HermitSnakeShoot_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMine/landMineSprite_2.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn1_4.png
+- Assets/06 Animations/Items/Default/JellyGun/DebuffEnd.anim
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/RawMaterials/FireOre/FireOre.prefab
+- Assets/04. Sprites/Items/DefaultPack/Goods/Eye/KrowEye1/Deployed/krowEyeSprite_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/Thruster/ThrusterSprite_7.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LandMine/landMineSpawn/landMineSpawn1_3.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_6.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/LeafKnife/LeafKnifeSprite_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunAttract/bananaGunAttract_1.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/BirdCannon/BirdCannon/BirdCannonSprite_1.png
+- Assets/06 Animations/Tutorial/Aggressive_EarthBag/EarthBagBulletHit.anim
+- Assets/06 Animations/Items/Default/StoneShield/Expanded.anim
+- Assets/06 Animations/Items/Default/StoneShield/Idle.anim
+- Assets/06 Animations/Items/Default/Thruster/Using.anim
+- Assets/04. Sprites/Items/DefaultPack/Goods/FirePlant/Fire1/Fire1Sprite_4.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/CactusShotgun/CactusShotgunSprite_6.png
+- Assets/03. Prefabs/Game/Items/DefaultPack/Goods/StoneShield/DottedOutlineStoneShield.mat
+- Assets/04. Sprites/Items/DefaultPack/Goods/BananaGun/bananaGunRound/bananaGunSprite_21.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/InvisibleRadar/InvisibleRadarSprite_10.png
+- Assets/04. Sprites/Items/DefaultPack/Goods/InvisibleRadar/InvisibleRadarSprite_2.png
+Dependencies:
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/assets/goods/general
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/assets/goods_inventory
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/assets/planets/general
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/audio
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/buff_icons
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/info
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/others
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/scene_sprites

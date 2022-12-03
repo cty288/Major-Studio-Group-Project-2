@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
 using UnityEngine;
@@ -12,13 +13,28 @@ public class TelephoneViewController : ElectricalApplicance, IPointerClickHandle
     [SerializeField] private Speaker speaker;
     
     private TelephoneSystem telephoneSystem;
-
+    private AudioSource incomingCallAudioSource;
     protected override void Awake() {
         base.Awake();
         telephoneSystem = this.GetSystem<TelephoneSystem>();
         telephoneSystem.OnDealWaitBeep += OnDealWaitBeep;
         telephoneSystem.OnDealFailed += OnDealFailed;
         telephoneSystem.OnHangUp += OnHangUp;
+        telephoneSystem.OnIncomingCallBeep += OnIncomingCallBeep;
+        telephoneSystem.OnPickUp += OnPickUp;
+    }
+
+    private void OnPickUp() {
+        if (incomingCallAudioSource)
+        {
+            incomingCallAudioSource.Stop();
+            incomingCallAudioSource = null;
+        }
+    }
+
+    private void OnIncomingCallBeep() {
+        incomingCallAudioSource =  AudioSystem.Singleton.Play2DSound("incoming_call");
+        transform.DOShakeRotation(2.5f, 1, 30, 90, false);
     }
 
     protected override void OnNoElectricity() {
@@ -36,7 +52,14 @@ public class TelephoneViewController : ElectricalApplicance, IPointerClickHandle
     }
 
     private void OnHangUp() {
-        AudioSystem.Singleton.Play2DSound("hang_out");
+        if (electricitySystem.HasElectricity()) {
+            AudioSystem.Singleton.Play2DSound("hang_out");
+        }
+      
+        if (incomingCallAudioSource) {
+            incomingCallAudioSource.Stop();
+            incomingCallAudioSource = null;
+        }
         speaker.Stop();
     }
 
@@ -64,5 +87,8 @@ public class TelephoneViewController : ElectricalApplicance, IPointerClickHandle
             return;
         }
         panel.Show();
+        if (telephoneSystem.CurrentIncomingCallContact != null) {
+            telephoneSystem.ReceiveIncomingCall();
+        }
     }
 }

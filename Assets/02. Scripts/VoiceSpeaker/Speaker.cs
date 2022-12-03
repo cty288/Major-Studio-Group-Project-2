@@ -141,7 +141,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
         if (subtitile) {
             subtitile.OnSpeakStart("");
         }
-
+        IsSpeaking = false;
         if (AudioMixer) {
             AudioMixer.SetFloat("cutoffFreq", 4600);
             AudioMixer.SetFloat("resonance", 1);
@@ -153,7 +153,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
         }
         
         currentSentence = null;
-        IsSpeaking = false;
+        
         
     }
 }

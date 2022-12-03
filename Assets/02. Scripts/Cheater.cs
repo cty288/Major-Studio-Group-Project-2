@@ -38,5 +38,9 @@ public class Cheater : AbstractMikroController<MainGame>
             Time.timeScale -= 10;
             Time.timeScale = Mathf.Max(Time.timeScale, 1);
         }
+
+        if (Input.GetKeyDown(KeyCode.I)) {
+            this.GetSystem<TelephoneSystem>().IncomingCall(new TestIncomingCallContact(), 3);
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using MikroFramework;
 using MikroFramework.Architecture;
+using MikroFramework.AudioKit;
 using MikroFramework.BindableProperty;
 using MikroFramework.FSM;
 using UnityEngine;
@@ -44,14 +45,19 @@ public class TelephoneSystem : AbstractSystem {
     private GameTimeManager gameTimeManager;
     
     public Action OnDealWaitBeep { get; set; }
+
+    public Action OnIncomingCallBeep { get; set; }
     public Func<PhoneDealErrorType, Func<bool>> OnDealFailed { get; set; }
 
     public Action OnHangUp { get; set; }
 
+    public Action OnPickUp { get; set; }
+
     public Dictionary<string, TelephoneContact> Contacts { get; } = new Dictionary<string, TelephoneContact>();
 
     private Coroutine dealWaitCoroutine;
-
+    private Coroutine incomingCallCoroutine;
+    private ElectricitySystem electricitySystem;
     public BindableProperty<TelephoneContact> CurrentTalkingContact { get; } =
         new BindableProperty<TelephoneContact>();
     protected override void OnInit() {
@@ -59,7 +65,7 @@ public class TelephoneSystem : AbstractSystem {
         gameTimeManager.OnDayStart += OnDayEnd;
         updater = new GameObject("TelephoneSystemUpdater").AddComponent<TelephoneSystemUpdater>();
         updater.OnUpdate += Update;
-
+        electricitySystem = this.GetSystem<ElectricitySystem>();
         State.RegisterOnValueChaned(OnStateChanged);
     }
 
@@ -98,8 +104,41 @@ public class TelephoneSystem : AbstractSystem {
     public bool CheckContactExists(string digits) {
         return Contacts.ContainsKey(digits);
     }
+
+    private TelephoneContact currentIncomingCallContact = null;
+
+    public TelephoneContact CurrentIncomingCallContact => currentIncomingCallContact;
+    public void IncomingCall(TelephoneContact contact, int maxWaitTime) {
+        if ( (State.Value == TelephoneState.Idle || State.Value == TelephoneState.Dealing) && electricitySystem.HasElectricity()) {
+            currentIncomingCallContact = contact;
+            State.Value = TelephoneState.IncomingCall;
+
+            incomingCallCoroutine = CoroutineRunner.Singleton.StartCoroutine(IncomingCallWait(maxWaitTime));
+        }
+        else {
+            contact.HangUp();
+        }
+    }
+
+    public void ReceiveIncomingCall() {
+        if (State.Value == TelephoneState.IncomingCall && currentIncomingCallContact != null) {
+            CoroutineRunner.Singleton.StopCoroutine(incomingCallCoroutine);
+            StartCallConversation(currentIncomingCallContact);
+            OnPickUp.Invoke();
+            currentIncomingCallContact = null;
+        }
+    }
+    private IEnumerator IncomingCallWait(int maxWaitTime) {
+        for (int i = 0; i < maxWaitTime; i++) {
+            OnIncomingCallBeep?.Invoke();
+            yield return new WaitForSeconds(4.5f);
+        }
+        incomingCallCoroutine = null;
+        HangUp();
+    }
+
     private IEnumerator DealWait() {
-        int beepTime = Random.Range(3, 6);
+        int beepTime = Random.Range(2, 5);
         for (int i = 0; i < beepTime; i++) {
             OnDealWaitBeep?.Invoke();
             yield return new WaitForSeconds(2.5f);
@@ -152,6 +191,7 @@ public class TelephoneSystem : AbstractSystem {
     private void OnFinishConversation() {
         CurrentTalkingContact.Value.OnConversationComplete -= OnFinishConversation;
         CurrentTalkingContact.Value = null;
+        currentIncomingCallContact = null;
         State.Value = TelephoneState.Idle;
     }
 
@@ -165,7 +205,11 @@ public class TelephoneSystem : AbstractSystem {
     public void HangUp() {
         if (State.Value != TelephoneState.Idle && State.Value != TelephoneState.Dealing) {
             State.Value = TelephoneState.Idle;
-          
+
+            if (incomingCallCoroutine != null) {
+                CoroutineRunner.Singleton.StopCoroutine(incomingCallCoroutine);
+                incomingCallCoroutine = null;
+            }
 
             if (State.Value == TelephoneState.Waiting && dealWaitCoroutine == null) {
                 return; //error messasge speaking
@@ -179,6 +223,12 @@ public class TelephoneSystem : AbstractSystem {
                 CurrentTalkingContact.Value.OnConversationComplete -= OnFinishConversation;
                 CurrentTalkingContact.Value.HangUp();
                 CurrentTalkingContact.Value = null;
+            }
+
+            if (currentIncomingCallContact != null) {
+                currentIncomingCallContact.OnConversationComplete -= OnFinishConversation;
+                currentIncomingCallContact.HangUp();
+                currentIncomingCallContact = null;
             }
             OnHangUp?.Invoke();
         }

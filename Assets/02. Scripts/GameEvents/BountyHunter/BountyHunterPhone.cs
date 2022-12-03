@@ -17,7 +17,7 @@ public class BountyHunterPhone : TelephoneContact {
     private BodyInfo providedBodyInfo = null;
     private BodyManagmentSystem bodyManagmentSystem;
     private GameEventSystem gameEventSystem;
-
+    private bool talkedBefore = false;
     private DateTime nextAvailableDate;
 
     public bool GetAvailable() {
@@ -39,8 +39,10 @@ public class BountyHunterPhone : TelephoneContact {
     protected override void OnStart() {
         providedBodyInfo = null;
         bountyHunterSystem.ContactedBountyHunter = true;
-
         string welcome = "Howdy! I'm the Bounty Hunter! I can reward you foods if you give me correct information about those creatures! Do you have any information about them?";
+        if (talkedBefore) {
+            welcome = "Hey my friend! What brought you here again? Do you have any information about those creatures?";
+        }
         speaker.Speak(welcome, mixer, OnWelcomeEnd);
     }
 
@@ -69,6 +71,7 @@ public class BountyHunterPhone : TelephoneContact {
         
         if (info.IsAlien) {
             nextAvailableDate = gameTimeManager.CurrentTime.Value.AddDays(1);
+            talkedBefore = true;
         }
         else {
             nextAvailableDate = gameTimeManager.CurrentTime.Value.AddDays(Random.Range(3, 5));
@@ -98,7 +101,6 @@ public class BountyHunterPhone : TelephoneContact {
     }
 
     private void OnEndingSpeak() {
-        
         EndConversation();
     }
 
@@ -120,7 +122,6 @@ public class BountyHunterPhone : TelephoneContact {
     }
 
     private void End() {
-        speaker.Stop();
         bountyHunterSystem.IsBountyHunting.Value = false;
         TopScreenHintText.Singleton.Hide();
         this.UnRegisterEvent<OnBodyHuntingSelect>(OnBodyHuntingSelect);

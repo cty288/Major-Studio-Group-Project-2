@@ -1,0 +1,72 @@
+ManifestFileVersion: 0
+CRC: 2311408115
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b7dcc5294cf9173edadf13da34dd269a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: e7d21f36c808efcf12462854316f81bc
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2792aa999eb66464a8ef06515b7cc8b4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fcff740047e35a24294c06be33838616, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.VertexGradient
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.RectOffset
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+Assets:
+- Assets/03. Prefabs/Game/UI/DescriptionPanel/HintIcons/GeneralHintIconNoSprite.prefab
+- Assets/03. Prefabs/Game/UI/DescriptionPanel/DescriptionPanel_Raw.prefab
+- Assets/03. Prefabs/Game/UI/DescriptionPanel/DescriptionPanel_General.prefab
+- Assets/03. Prefabs/Game/UI/DescriptionPanel/HintIcons/RightClick.prefab
+- Assets/03. Prefabs/Game/UI/DescriptionPanel/HintIcons/LeftClick.prefab
+- Assets/03. Prefabs/Game/UI/DescriptionPanel/HintIcons/GeneralHintIcon.prefab
+- Assets/03. Prefabs/Game/UI/DescriptionPanel/DescriptionPanel_Buffs.prefab
+Dependencies:
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/assets/fonts
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/info
+- D:/Unity Projects/Major Studio Group Project 2/Assets/StreamingAssets/AssetBundles/Windows/settings

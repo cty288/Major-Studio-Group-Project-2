@@ -13,25 +13,22 @@ public class OutdoorFlashLight : ElectricalApplicance
     private SpriteRenderer flashlight;
     private BodyGenerationModel bodyGenerationModel;
     [SerializeField] private Speaker speaker;
+    [SerializeField] private PeepholeSceneUI peepholeSceneUI;
     protected override void Awake() {
         base.Awake();
         bodyGenerationModel = this.GetModel<BodyGenerationModel>();
+      
     }
 
     void Start() {
         flashlight = this.GetComponent<SpriteRenderer>();
+        peepholeSceneUI.OnLightButtonPressed += OpenFlashLight;
     }
     
-    private void Update() {
-        
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            OpenFlashLight();
-        }
-    }
-
+   
     void OpenFlashLight()
     {
-        if (this.electricitySystem.Electricity.Value > 0.95f) {
+        if (this.electricitySystem.Electricity.Value > 0.9f) {
             if (bodyGenerationModel.CurrentOutsideBody.Value != null) {
                 if (bodyGenerationModel.CurrentOutsideBody.Value.IsAlien) {
                     bodyGenerationModel.CurrentOutsideBody.Value = null;
@@ -47,7 +44,7 @@ public class OutdoorFlashLight : ElectricalApplicance
             }
             flashlight.DOFade(1, 0.1f);
             flashlight.DOFade(0, 0.1f).SetDelay(0.3f);
-            this.electricitySystem.UseElectricity(0.95f);
+            this.electricitySystem.UseElectricity(0.9f);
         }
     }
 

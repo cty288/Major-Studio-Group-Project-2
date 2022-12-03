@@ -1,13 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Antlr.Runtime.Misc;
 using Crosstales;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using MikroFramework.Singletons;
 //using UnityEditor.ShaderGraph;
-using UnityEngine;
 using UnityEngine.Audio;
+using Random = UnityEngine.Random;
 
 public class RadioMessage {
     public string Content;
@@ -33,8 +33,8 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
 
     
     
-    private  List<Func<RadioMessage>> _radioMessages = new List<Func<RadioMessage>>();
-    private List<Func<RadioMessage>> radioMessageCopies = new List<Func<RadioMessage>>();
+    private  List<Antlr.Runtime.Misc.Func<RadioMessage>> _radioMessages = new List<Antlr.Runtime.Misc.Func<RadioMessage>>();
+    private List<Antlr.Runtime.Misc.Func<RadioMessage>> radioMessageCopies = new List<Antlr.Runtime.Misc.Func<RadioMessage>>();
 
 
     public RadioMessage GetNextRandomRadio() {
@@ -154,8 +154,18 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
             "According to research, this mysterious creature have only a slight advantage over humans in terms of bodily functions. If you have a firearm in your home, make sure it is always ready to use.";
         return new RadioMessage(content, 1.2f, Gender.MALE, 1f, 1);
     }
-    
-    private void RegisterRadioMessages(Func<RadioMessage> message) {
+
+    private RadioMessage Message_KFCVMe50() {
+        DateTime today = this.GetSystem<GameTimeManager>().CurrentTime.Value;
+        float chance = 0f;
+        if (today.DayOfWeek == DayOfWeek.Thursday) {
+            chance = 1;
+        }
+
+        string content = "Crazy Thursday is back! Call 233333 to get a V50 combo for half price!";
+        return new RadioMessage(content, 1.2f, Gender.MALE, chance, 1);
+    }
+    private void RegisterRadioMessages(Antlr.Runtime.Misc.Func<RadioMessage> message) {
         _radioMessages.Add(message);
     }
 

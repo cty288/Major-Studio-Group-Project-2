@@ -1,0 +1,89 @@
+ManifestFileVersion: 0
+CRC: 1005610494
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 02bd9e9f722e8632ca14d1e1480342bd
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c29c357128feff56790ec9816c4fc93d
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/XboxOne_LB.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - Arrow Right.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - Main Base Mask.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/XboxOne_A.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - Tick.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings -Fat Horizonal Row.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/PS4_Square.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/XboxOne_Dpad.png
+- Assets/04. Sprites/UI/GameEntrance/Settings - Back to Default Button 1.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Keyboard&Mouse/RMB.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/XboxOne_Dpad_Left.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - Button Long 2.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - scrollbar 1.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Keyboard&Mouse/tab icon.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/PS4_L2.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Keyboard&Mouse/Shift Icon.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - Arrow Left.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/PS4_Left_Stick.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/XboxOne_Menu.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/XboxOne_X.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Keyboard&Mouse/Enter Icon.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - Button 2.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/XboxOne_B.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - Button Long 1.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/XboxOne_LT.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/XboxOne_RT.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/XboxOne_Windows.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/PS4_Dpad.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Keyboard&Mouse/Settings - WASD.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - scrollbar 2.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/PS4_Circle.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings -  screen overlay.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/XboxOne_RB.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - Full Cross.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - Button Big 1.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings -Horizontal Row.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - Main Base.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/PS4_Dpad_Left.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/XboxOne_Right_Stick.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - Button 1.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Keyboard&Mouse/Settings -Arrow Keys_Left.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/PS4_Dpad_Right.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Keyboard&Mouse/Single Key Icon.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - Button Seperation Line.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/PS4_Share.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/PS4_Dpad_Up.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/PS4_R2.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/PS4_R1.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/PS4_Triangle.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/PS4_Right_Stick.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/PS4_L1.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/XboxOne_Y.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/XboxOne_Left_Stick.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/XboxOne_Dpad_Up.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Keyboard&Mouse/Settings -Arrow Keys_Down.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - Button Long 3.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Keyboard&Mouse/LMB.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/PS4_Options.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Keyboard&Mouse/Space.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - Cross.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/XboxOne_Dpad_Right.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/PS4_Cross.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Keyboard&Mouse/MMB.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - Button Big 2.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/XboxOne_Dpad_Down.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Gamepad/PS4_Dpad_Down.png
+- Assets/04. Sprites/UI/Menu/Settings/Settings - Back to Default Button.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Keyboard&Mouse/Settings -Arrow Keys_Right.png
+- Assets/04. Sprites/UI/Menu/Settings/Icons_Keyboard&Mouse/Settings -Arrow Keys_Up.png
+Dependencies: []

@@ -12,12 +12,19 @@ public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegist
 
     public void HangUp() {
         OnConversationComplete = null;
+        if (speaker.IsSpeaking) {
+            speaker.Stop();
+        }
         OnHangUp();
     }
     
 
     protected void EndConversation() {
         OnConversationComplete?.Invoke();
+        if (speaker.IsSpeaking)
+        {
+            speaker.Stop();
+        }
         OnEnd();
     }
 
