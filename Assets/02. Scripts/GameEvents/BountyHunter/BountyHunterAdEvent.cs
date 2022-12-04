@@ -67,7 +67,7 @@ public class BountyHunterAdEvent : RadioEvent {
 
         List<string> ads = new List<string>();
         ads.Add(
-            $"Ever wanted to earn some extra money? Help out our bounty hunters! Help defend our sweet motherland from the disgusting creatures! Dial {spacedPhoneNumber}!");
+            $"Ever wanted to earn some extra foods? Help out our bounty hunters! Help defend our sweet motherland from the disgusting creatures! Dial {spacedPhoneNumber}!");
         return ads[Random.Range(0, ads.Count)];
     }
 }

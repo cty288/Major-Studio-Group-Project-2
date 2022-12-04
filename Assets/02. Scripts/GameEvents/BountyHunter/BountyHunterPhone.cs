@@ -18,8 +18,10 @@ public class BountyHunterPhone : TelephoneContact {
     private GameEventSystem gameEventSystem;
     private bool talkedBefore = false;
     private DateTime nextAvailableDate;
+    private int provideCorrectInfoCount = 0;
+    private bool isInJail = false;
 
-    
+    public bool IsInJail => isInJail;
     public bool GetAvailable() {
         return nextAvailableDate.Date <= gameTimeManager.CurrentTime.Value.Date;
     }
@@ -36,6 +38,7 @@ public class BountyHunterPhone : TelephoneContact {
     }
 
     protected override void OnStart() {
+        isInJail = false;
         bountyHunterSystem.ContactedBountyHunter = true;
         string welcome = "Howdy! I'm the Bounty Hunter! I can reward you foods if you give me correct information about those creatures! Do you have any information about them?";
         if (talkedBefore) {
@@ -70,10 +73,17 @@ public class BountyHunterPhone : TelephoneContact {
         if (info.IsAlien) {
             nextAvailableDate = gameTimeManager.CurrentTime.Value.AddDays(1);
             talkedBefore = true;
+            provideCorrectInfoCount++;
+            if (provideCorrectInfoCount == 1) {
+                DateTime questStartTime = tomorrow.AddMinutes(Random.Range(30, 60));
+                DateTime questEndTime = new DateTime(questStartTime.Year, questStartTime.Month, questStartTime.Day, 23, 58, 0);
+                gameEventSystem.AddEvent(new BountyHunterQuestStartEvent(new TimeRange(questStartTime, questEndTime),
+                    new BountyHunterQuestStartPhone(), 6));
+            }
         }
         else {
             nextAvailableDate = gameTimeManager.CurrentTime.Value.AddDays(Random.Range(3, 5));
-
+            isInJail = true;
             List<string> killWrongPersonMsg = new List<string>();
             killWrongPersonMsg.Add("Sad news. One man was reported killed by a bounty hunter. He was believed to be mistaken as the unknown creature according to one of our sources. Officers are looking into this incident.");
             string msg = killWrongPersonMsg[Random.Range(0, killWrongPersonMsg.Count)];

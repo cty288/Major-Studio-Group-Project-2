@@ -43,7 +43,7 @@ public class DailyBodyRadio : RadioEvent {
 
 
             DateTime currentTime = gameTimeManager.CurrentTime.Value;
-            int nextEventInterval = Random.Range(7,15);
+            int nextEventInterval = Random.Range(15,30);
 
 
             gameEventSystem.AddEvent(new DailyBodyRadio(

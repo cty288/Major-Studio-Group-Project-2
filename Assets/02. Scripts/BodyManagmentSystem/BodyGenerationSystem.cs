@@ -93,11 +93,11 @@ public class BodyGenerationSystem : AbstractSystem {
             else {
                 targetBody = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false);
             }
-            Debug.Log("Spawned a non-alien");
+           // Debug.Log("Spawned a non-alien");
         }
         else {
             targetBody = Aliens[Random.Range(0, Aliens.Count)].BodyInfo;
-            Debug.Log("Spawned an alien!");
+            //Debug.Log("Spawned an alien!");
         }
 
         int knockDoorTimeInterval = 3;

@@ -6,11 +6,20 @@ using UnityEngine;
 public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegisterEvent {
     public Action OnConversationComplete { get; set; }
     protected Speaker speaker;
+    protected TelephoneSystem telephoneSystem;
+    public Action OnTelephoneHangUp { get; set; }
+    public Action OnTelephoneStart { get; set; }
+
+    public TelephoneContact() {
+        telephoneSystem = this.GetSystem<TelephoneSystem>();
+    }
     public void Start() {
+        OnTelephoneStart?.Invoke();
         OnStart();
     }
 
     public void HangUp() {
+        OnTelephoneHangUp?.Invoke();
         OnConversationComplete = null;
         if (speaker.IsSpeaking) {
             speaker.Stop();

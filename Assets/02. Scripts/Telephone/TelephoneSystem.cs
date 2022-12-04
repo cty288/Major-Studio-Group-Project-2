@@ -109,7 +109,7 @@ public class TelephoneSystem : AbstractSystem {
 
     public TelephoneContact CurrentIncomingCallContact => currentIncomingCallContact;
     public void IncomingCall(TelephoneContact contact, int maxWaitTime) {
-        if ( (State.Value == TelephoneState.Idle || State.Value == TelephoneState.Dealing) && electricitySystem.HasElectricity()) {
+        if ( (State.Value == TelephoneState.Idle || State.Value == TelephoneState.Dealing) && electricitySystem.HasElectricity() && contact.OnDealt()) {
             currentIncomingCallContact = contact;
             State.Value = TelephoneState.IncomingCall;
 

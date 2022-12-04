@@ -26,7 +26,7 @@ public class RadioMessage {
 
 }
 public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
-    public int RandomRadioAverageTimeInterval = 30;
+    public int RandomRadioAverageTimeInterval = 50;
     private RadioRandomStuff() {
         Init();
     }

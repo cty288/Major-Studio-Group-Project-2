@@ -20,7 +20,10 @@ public class GameEventSystemUpdater : MonoBehaviour {
 public enum GameEventType {
     Radio,
     BodyGeneration,
-    General
+    General,
+    IncomingCall,
+    BountyHunterQuestClueNotification,
+    BountyHunterQuestClue
 }
 public class GameEventSystem : AbstractSystem {
 
@@ -132,6 +135,7 @@ public class GameEventSystem : AbstractSystem {
     }
 
     public void AddEvent(GameEvent ev) {
+        if (ev == null) return;
         TimeRange startTimeRange = ev.StartTimeRange;
         if (startTimeRange.EndTime < gameTimeManager.CurrentTime.Value) {
             ev.OnMissed();

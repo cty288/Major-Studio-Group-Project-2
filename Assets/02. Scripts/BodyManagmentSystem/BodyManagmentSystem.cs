@@ -34,6 +34,9 @@ public class BodyManagmentSystem : AbstractSystem {
     }
 
     private const int MaxBodyEveryDay = 3;
+
+    private List<BodyTimeInfo> nextDayDeternimedBodies = new List<BodyTimeInfo>();
+    
     protected override void OnInit() {
         this.RegisterEvent<OnNewDay>(OnNewDay);
     }
@@ -53,6 +56,15 @@ public class BodyManagmentSystem : AbstractSystem {
     public bool IsAlien(BodyInfo bodyInfo) {
         return Aliens.Exists(bodyTimeInfo => bodyTimeInfo.BodyInfo == bodyInfo);
     }*/
+
+    public void AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(BodyTimeInfo bodyTimeInfo) {
+        nextDayDeternimedBodies.Add(bodyTimeInfo);
+    }
+
+    public void AddToAllBodyTimeInfos(BodyTimeInfo bodyTimeInfo) {
+        allBodyTimeInfos.Add(bodyTimeInfo);
+    }
+
     private void OnNewDay(OnNewDay e) {
         foreach (BodyTimeInfo timeInfo in allBodyTimeInfos) {
             timeInfo.DayRemaining--;
@@ -68,7 +80,20 @@ public class BodyManagmentSystem : AbstractSystem {
         });
 
         List<BodyTimeInfo> newBodyInfos = new List<BodyTimeInfo>();
-        for (int i = 0; i < MaxBodyEveryDay; i++) {
+
+        while (nextDayDeternimedBodies.Count > 0 && newBodyInfos.Count < MaxBodyEveryDay) {
+            BodyTimeInfo bodyTimeInfo = nextDayDeternimedBodies[0];
+            nextDayDeternimedBodies.RemoveAt(0);
+            
+            if (!allBodyTimeInfos.Contains(bodyTimeInfo)) {
+                AddToAllBodyTimeInfos(bodyTimeInfo);
+            }
+          
+            newBodyInfos.Add(bodyTimeInfo);
+        }
+        
+        
+        for (int i = newBodyInfos.Count; i < MaxBodyEveryDay; i++) {
             BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false);
             BodyTimeInfo timeInfo = null;
             if (i == 0) {
@@ -76,7 +101,7 @@ public class BodyManagmentSystem : AbstractSystem {
             }else {
                 timeInfo = new BodyTimeInfo(Random.Range(0, 4), info);
             }
-            allBodyTimeInfos.Add(timeInfo);
+            AddToAllBodyTimeInfos(timeInfo);
             newBodyInfos.Add(timeInfo);
             Debug.Log($"New Body Info Generated! Height: {info.Height}, VoiceType: {info.VoiceType}.");
         }
