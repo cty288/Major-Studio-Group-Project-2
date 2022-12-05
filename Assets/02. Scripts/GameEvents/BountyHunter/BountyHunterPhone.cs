@@ -17,6 +17,7 @@ public class BountyHunterPhone : TelephoneContact {
    
     private GameEventSystem gameEventSystem;
     private bool talkedBefore = false;
+    private bool failedLastTime = false;
     private DateTime nextAvailableDate;
     private int provideCorrectInfoCount = 0;
     private bool isInJail = false;
@@ -40,11 +41,22 @@ public class BountyHunterPhone : TelephoneContact {
     protected override void OnStart() {
         isInJail = false;
         bountyHunterSystem.ContactedBountyHunter = true;
-        string welcome = "Howdy! I'm the Bounty Hunter! I can reward you foods if you give me correct information about those creatures! Do you have any information about them?";
+        List<string> welcomes = new List<string>();
+        welcomes.Add(
+            "Howdy! I'm the Bounty Hunter! I can reward you foods if you give me correct information about those creatures! Do you have any information about them?");
+        
         if (talkedBefore) {
-            welcome = "Hey my friend! What brought you here again? Do you have any information about those creatures?";
+            welcomes.Clear();
+            if (failedLastTime) {
+                welcomes.Add(
+                    "Hey! You almost killed me last time! Don't give me sources that you are not sure! I will give you one more chance -- do you have any REAL information about these creatures?");
+            }
+            else {
+                 welcomes.Add("Hey my friend! What brought you here again? Do you have any information about those creatures?");
+            }
+          
         }
-        speaker.Speak(welcome, mixer, OnWelcomeEnd);
+        speaker.Speak(welcomes[Random.Range(0, welcomes.Count)], mixer, OnWelcomeEnd);
     }
 
     private void OnWelcomeEnd() {
@@ -73,6 +85,7 @@ public class BountyHunterPhone : TelephoneContact {
         if (info.IsAlien) {
             nextAvailableDate = gameTimeManager.CurrentTime.Value.AddDays(1);
             talkedBefore = true;
+            failedLastTime = false;
             provideCorrectInfoCount++;
             if (provideCorrectInfoCount == 1) {
                 DateTime questStartTime = tomorrow.AddMinutes(Random.Range(30, 60));
@@ -86,8 +99,9 @@ public class BountyHunterPhone : TelephoneContact {
             isInJail = true;
             List<string> killWrongPersonMsg = new List<string>();
             killWrongPersonMsg.Add("Sad news. One man was reported killed by a bounty hunter. He was believed to be mistaken as the unknown creature according to one of our sources. Officers are looking into this incident.");
+            killWrongPersonMsg.Add("We have breaking news just came in. The police has found a dead male corpse at the riverbank this morning. A bounty hunter confessed to the police that he was responsible for this incident before the corpse was found.");
             string msg = killWrongPersonMsg[Random.Range(0, killWrongPersonMsg.Count)];
-
+            failedLastTime = true;
             int radioTimeInterval = Random.Range(30, 60);
             BountyHunterHuntWrongPersonRadio radio = new BountyHunterHuntWrongPersonRadio(
                 new TimeRange(tomorrow.AddMinutes(radioTimeInterval),
@@ -103,7 +117,7 @@ public class BountyHunterPhone : TelephoneContact {
         List<string> messages = new List<string>();
         messages.Add("Thank you partner! I will dig deeper into this. Once I find out the truth, I will reward you with foods!");
         messages.Add("Appreciate it buddy. I¡¯ll keep an eye on that person. I will reward you with foods once I find out the truth!");
-
+        messages.Add("Thank you citizen! Your cooperation will make our community a better place!");
         string message = messages[Random.Range(0, messages.Count)];
         speaker.Speak(message, mixer, OnEndingSpeak);
     }

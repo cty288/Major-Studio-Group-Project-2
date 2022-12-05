@@ -11,6 +11,8 @@ public static class AlienDescriptionFactory {
     private static bool inited = false;
 
     private static DescriptionFormatter formatter = new DescriptionFormatter();
+
+    public static DescriptionFormatter Formatter => formatter;
     public static void Init() {
         //RegisterRadioDescription(TestRadioDescription);
         RegisterRadioDescription(Radio0);

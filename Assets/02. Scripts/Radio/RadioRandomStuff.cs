@@ -99,7 +99,7 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
         string content = "Accroding to an informer, "
                          + GetRandomString("their child is missing. ", "her wallet got robbed. ",
                              "his pet dog is missing. ")
-                         + "We're not entirely sure yet that this was aliens did. But the possibility is extremely high.";
+                         + "We're not entirely sure yet that this was those creatures did. But the possibility is extremely high.";
         return new RadioMessage(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f), 1);
     }
 

@@ -1,15 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using Crosstales.RTVoice.Model.Enum;
+using MikroFramework.Architecture;
 using UnityEngine;
 using UnityEngine.Audio;
+using Random = UnityEngine.Random;
 
 public  class BountyHunterQuest1ClueNotification : BountyHunterQuestClueNotification {
     public BountyHunterQuest1ClueNotification(TimeRange startTimeRange, BountyHunterQuestClueNotificationContact notificationContact, int callWaitTime, DateTime clueHappenTime) 
         : base(startTimeRange, notificationContact, callWaitTime, clueHappenTime) {
     }
 
+    
     protected override BountyHunterQuestClueNotification GetSameEvent(TimeRange startTimeRange, TelephoneContact contact, int callWaitTime,
         DateTime clueHappenTime) {
         return new BountyHunterQuest1ClueNotification(startTimeRange, (BountyHunterQuestClueNotificationContact) contact,
@@ -24,7 +28,7 @@ public  class BountyHunterQuest1ClueNotification : BountyHunterQuestClueNotifica
     }
 
     protected override BountyHunterQuestClueEvent GetClueEvent(TimeRange happenTimeRange) {
-        return new BountyHunterQuest1ClueEvent(happenTimeRange);
+        return new BountyHunterQuest1ClueEvent(happenTimeRange, Random.Range(2, 11));
     }
 
    
@@ -33,8 +37,8 @@ public  class BountyHunterQuest1ClueNotification : BountyHunterQuestClueNotifica
 public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunterQuestClueNotificationContact
 {
     protected override void OnStart() {
-        string welcome = $"{ClueHappenTime} Hey! My friend! This is the bounty hunter! I don¡¯t know what kind of magic you have, but you have successfully helped me capture several aliens." +
-                         " Based on your recent achievements, I¡¯ve decided to give you a higher-level task.";
+        string welcome = $"Buddy, I got some clues about the time when a victim was killed by the creature we are looking for. At {ClueHappenTime.Hour}:{ClueHappenTime.Minute} pm," +
+                         $" pay attention to the flashlights outside your home. The number of flashlights will indicate which hour the victim died in PM. Good luck!";
      
         speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], OnSpeakEnd);
     }
@@ -52,35 +56,85 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
     }
 }
 
+public struct OnFlashlightFlash {
+
+}
+
 public class BountyHunterQuest1ClueEvent : BountyHunterQuestClueEvent {
-    public BountyHunterQuest1ClueEvent(TimeRange startTimeRange) : base(startTimeRange) {
+    private int flashlightTime;
+    private int flashedTime = 0;
+    
+    private float flashTimeInterval = 1f;
+    private float flashIntervalTimer = 0;
+    public BountyHunterQuest1ClueEvent(TimeRange startTimeRange, int flashlightTime) : base(startTimeRange) {
+        this.flashlightTime = flashlightTime;
     }
 
     public override void OnStart() {
-        Debug.Log("Clue Start!");
+        Debug.Log($"Clue Start! Flash Time: {flashedTime}");
+    }
+
+    private void Flash() {
+        this.SendEvent<OnFlashlightFlash>();
     }
 
     public override EventState OnUpdate() {
-        return EventState.End;
+        flashIntervalTimer += Time.deltaTime;
+        if (flashIntervalTimer >= flashTimeInterval) {
+            flashIntervalTimer = 0;
+            flashedTime++;
+            Flash();
+        }
+
+        return flashedTime >= flashlightTime ? EventState.End : EventState.Running;
     }
 
     protected override BountyHunterQuestClueInfoEvent GetClueInfoEvent(TimeRange happenTimeRange, bool isRealClue, DateTime startDate) {
         return new BountyHunterQuestClueInfoRadioEvent(happenTimeRange, "Bounty Hunter Quest Clue Radio", 1.2f,
-            Gender.FEMALE, null, isRealClue, startDate);
+            Gender.FEMALE, AudioMixerList.Singleton.AudioMixerGroups[1], isRealClue, startDate, flashlightTime);
     }
 }
 
 
 public class BountyHunterQuestClueInfoRadioEvent : BountyHunterQuestClueInfoEvent {
-    public BountyHunterQuestClueInfoRadioEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, bool isReal, DateTime startDate) : base(startTimeRange, speakContent, speakRate, speakGender, mixer, isReal, startDate) {
+    private int dieTime;
+    public BountyHunterQuestClueInfoRadioEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, bool isReal, DateTime startDate, int dieTime) : base(startTimeRange, speakContent, speakRate, speakGender, mixer, isReal, startDate) {
+        this.dieTime = dieTime;
+        BodyInfo info = this.GetSystem<BountyHunterSystem>().QuestBodyTimeInfo.BodyInfo;
+        this.speakContent = Radio(info, isReal);
     }
-
+    
     protected override void OnRadioStart() {
        
     }
 
+    private  string Radio(BodyInfo body, bool isReal) {
+        DescriptionFormatter.Reality = 1;
+        StringBuilder sb = new StringBuilder();
+
+        string name = "government official";
+        int time = dieTime;
+        if (!isReal) {
+            DescriptionFormatter.Reality = 0;
+            List<string> names = new List<string>() {"security guard", "truck driver", "citizen"};
+            name = names[Random.Range(0, names.Count)];
+            time = Random.Range(1, 12);
+            while (time == dieTime) {
+                time = Random.Range(1, 12);
+            }
+        }
+        
+        sb.AppendFormat("The speculation showed that a {1} died at {0} pm.", time, name);
+        sb.AppendFormat(AlienDescriptionFactory.Formatter,
+            " The CCTV captured his last image, {0:clothb}. In addition, {0:clothl}", body);
+        return sb.ToString();
+    }
+
+    
+
     protected override GameEvent GetSameEvent(TimeRange timeRange, bool isRealClue, DateTime dateTime) {
-        return new BountyHunterQuestClueInfoRadioEvent(timeRange, this.speakContent, this.speakRate, this.speakGender, this.mixer,
-            isRealClue, dateTime);
+        return new BountyHunterQuestClueInfoRadioEvent(timeRange, this.speakContent, this.speakRate, this.speakGender,
+            this.mixer,
+            isRealClue, dateTime, dieTime);
     }
 }
