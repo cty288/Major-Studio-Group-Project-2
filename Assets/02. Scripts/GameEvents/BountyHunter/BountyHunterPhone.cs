@@ -93,6 +93,12 @@ public class BountyHunterPhone : TelephoneContact {
                 gameEventSystem.AddEvent(new BountyHunterQuestStartEvent(new TimeRange(questStartTime, questEndTime),
                     new BountyHunterQuestStartPhone(), 6));
             }
+
+            if (info.ID == bountyHunterSystem.QuestBodyTimeInfo.BodyInfo.ID) {
+                bountyHunterSystem.QuestFinished = true;
+                Debug.Log("Correct Quest Info!!");
+            }
+            
         }
         else {
             nextAvailableDate = gameTimeManager.CurrentTime.Value.AddDays(Random.Range(3, 5));

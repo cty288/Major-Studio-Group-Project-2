@@ -35,13 +35,17 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
 
     private void OnOutsideBodyChanged(BodyInfo oldBody, BodyInfo body) {
         if (body == null) {
-            bodyViewController.Hide();
-            bodyViewController.onClickAlienBody -= OnOutsideBodyClicked;
-            
-            this.Delay(0.5f, () => {
-                Destroy(bodyViewController.gameObject);
+            if (bodyViewController) {
+                bodyViewController.Hide();
+                bodyViewController.onClickAlienBody -= OnOutsideBodyClicked;
+                this.Delay(0.5f, () => {
+                    Destroy(bodyViewController.gameObject);
+                    bodyViewController = null;
+                });
+            }
+            else {
                 bodyViewController = null;
-            });
+            }
         }
         else {
             

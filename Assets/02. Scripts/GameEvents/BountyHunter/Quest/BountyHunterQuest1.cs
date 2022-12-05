@@ -37,13 +37,29 @@ public  class BountyHunterQuest1ClueNotification : BountyHunterQuestClueNotifica
 public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunterQuestClueNotificationContact
 {
     protected override void OnStart() {
-        string welcome = $"Buddy, I got some clues about the time when a victim was killed by the creature we are looking for. At {ClueHappenTime.Hour}:{ClueHappenTime.Minute} pm," +
+        string hourIn12 = String.Format("{0: h}", ClueHappenTime);
+        string welcome = $"Buddy, I got some clues about the time when a victim was killed by the creature we are looking for. At {hourIn12}:{ClueHappenTime.Minute} pm," +
                          $" pay attention to the flashlights outside your home. The number of flashlights will indicate which hour the victim died in PM. Good luck!";
      
         speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], OnSpeakEnd);
     }
 
     private void OnSpeakEnd() {
+        BountyHunterSystem bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
+        if (!bountyHunterSystem.QuestBodyClueAllHappened) {
+            
+            DateTime nextStartTime = ClueHappenTime.AddDays(1);
+            nextStartTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day, Random.Range(22, 24),
+                Random.Range(10, 45), 0);
+            DateTime nextEndTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day,
+                23, 50, 0);
+
+            this.GetSystem<GameEventSystem>().AddEvent(new BountyHunterQuestAlienSpawnEvent(
+                new TimeRange(nextStartTime, nextEndTime),
+                bountyHunterSystem.QuestBodyTimeInfo.BodyInfo, Random.Range(2f, 4f), Random.Range(4, 8), 1));
+
+            Debug.Log("Target quest body will be spawned at " + nextStartTime);
+        }
         EndConversation();
     }
 
@@ -66,12 +82,24 @@ public class BountyHunterQuest1ClueEvent : BountyHunterQuestClueEvent {
     
     private float flashTimeInterval = 1f;
     private float flashIntervalTimer = 0;
+    
+    
     public BountyHunterQuest1ClueEvent(TimeRange startTimeRange, int flashlightTime) : base(startTimeRange) {
         this.flashlightTime = flashlightTime;
     }
 
     public override void OnStart() {
+        BountyHunterSystem bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
         Debug.Log($"Clue Start! Flash Time: {flashedTime}");
+        float chanceForNewspaperShowBody = Random.Range(0f, 1f);
+        if (!bountyHunterSystem.QuestBodyClueAllHappened) {
+            chanceForNewspaperShowBody = 1;
+        }
+        if (chanceForNewspaperShowBody > 0.6f) {
+            this.GetSystem<BodyManagmentSystem>()
+                .AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(bountyHunterSystem.QuestBodyTimeInfo);
+            Debug.Log("Tomorrow's Quest Body will be shown in newspaper!");
+        }
     }
 
     private void Flash() {
@@ -91,7 +119,7 @@ public class BountyHunterQuest1ClueEvent : BountyHunterQuestClueEvent {
 
     protected override BountyHunterQuestClueInfoEvent GetClueInfoEvent(TimeRange happenTimeRange, bool isRealClue, DateTime startDate) {
         return new BountyHunterQuestClueInfoRadioEvent(happenTimeRange, "Bounty Hunter Quest Clue Radio", 1.2f,
-            Gender.FEMALE, AudioMixerList.Singleton.AudioMixerGroups[1], isRealClue, startDate, flashlightTime);
+            Gender.MALE, AudioMixerList.Singleton.AudioMixerGroups[1], isRealClue, startDate, flashlightTime);
     }
 }
 

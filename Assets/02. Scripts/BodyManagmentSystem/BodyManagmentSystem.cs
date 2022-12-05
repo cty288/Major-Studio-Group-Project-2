@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Crosstales;
 using MikroFramework.Architecture;
 using UnityEngine;
 
@@ -36,7 +37,9 @@ public class BodyManagmentSystem : AbstractSystem {
     private const int MaxBodyEveryDay = 3;
 
     private List<BodyTimeInfo> nextDayDeternimedBodies = new List<BodyTimeInfo>();
-    
+    public bool IsInAllBodyTimeInfos(BodyInfo bodyInfo) {
+        return allBodyTimeInfos.FindIndex(bodyTimeInfo => bodyTimeInfo.BodyInfo.ID == bodyInfo.ID) != -1;
+    }
     protected override void OnInit() {
         this.RegisterEvent<OnNewDay>(OnNewDay);
     }
@@ -105,6 +108,7 @@ public class BodyManagmentSystem : AbstractSystem {
             newBodyInfos.Add(timeInfo);
             Debug.Log($"New Body Info Generated! Height: {info.Height}, VoiceType: {info.VoiceType}.");
         }
+        newBodyInfos.CTShuffle();
         //transform an alien
         BodyInfo selectedAlien = allBodyTimeInfos[Random.Range(0, allBodyTimeInfos.Count)].BodyInfo;
         selectedAlien.IsAlien = true;

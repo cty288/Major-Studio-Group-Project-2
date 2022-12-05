@@ -24,6 +24,7 @@ public class BountyHunterSystem : AbstractSystem {
     //线索内容每次都是不一样的（即使是同一个头的描述，地点可能也会不一样）
     //每个事件执行成功（线索已发出）后，第0-3天内会发送相关线索信息（分为正确和错误），且正确的线索信息一定是一样的，每条正确/错误事件至少间隔一天
     public bool QuestBodyClueAllHappened { get; set; } = false;
+    public bool QuestFinished { get; set; } = false;
     protected override void OnInit() {
         PhoneNumber = PhoneNumberGenor.GeneratePhoneNumber(6);
         gameTimeManager = this.GetSystem<GameTimeManager>();

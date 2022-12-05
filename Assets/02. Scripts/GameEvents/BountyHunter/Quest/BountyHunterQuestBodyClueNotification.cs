@@ -13,14 +13,16 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
     public override GameEventType GameEventType { get; } = GameEventType.BountyHunterQuestClueNotification;
     protected BountyHunterSystem bountyHunterSystem;
     protected BountyHunterQuestClueNotificationContact NotificationContact;
+    protected BodyManagmentSystem bodyManagmentSystem;
     public BountyHunterQuestClueNotification(TimeRange startTimeRange, BountyHunterQuestClueNotificationContact notificationContact, int callWaitTime, DateTime clueHappenTime) : base(startTimeRange, notificationContact, callWaitTime) {
+        bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
         this.bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
         notificationContact.ClueHappenTime = clueHappenTime;
         this.NotificationContact = notificationContact;
     }
 
     public override void OnStart() {
-        if (bountyHunterSystem.QuestBodyTimeInfo.DayRemaining <= 0) {
+        if (bountyHunterSystem.QuestBodyTimeInfo.DayRemaining <= 0 || bountyHunterSystem.QuestFinished) {
             onHangupOrFinish = true;
             Debug.Log("The Quests is end.");
             return;
@@ -72,7 +74,10 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
       
         gameEventSystem.AddEvent(GetClueEvent(new TimeRange(NotificationContact.ClueHappenTime)));
 
-        if (bountyHunterSystem.QuestBodyTimeInfo.DayRemaining <= 0) {
+        if (bountyHunterSystem.QuestBodyTimeInfo.DayRemaining <= 0 || bountyHunterSystem.QuestFinished)
+        {
+            onHangupOrFinish = true;
+            Debug.Log("The Quests is end.");
             return;
         }
         DateTime nextClueHappenTime = NotificationContact.ClueHappenTime.AddDays(1);

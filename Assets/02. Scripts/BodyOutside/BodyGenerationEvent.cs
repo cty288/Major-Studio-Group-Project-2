@@ -50,10 +50,11 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
             if (knockDoorCheckCoroutine != null) {
                 CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
                 knockDoorCheckCoroutine = null;
-                LoadCanvas.Singleton.LoadUntil(OnOpen, OnFinishOutsideBodyInteraction);
-                if (knockAudioSource) {
-                    knockAudioSource.Stop();
-                }
+              
+            }
+            LoadCanvas.Singleton.LoadUntil(OnOpen, OnFinishOutsideBodyInteraction);
+            if (knockAudioSource) {
+                knockAudioSource.Stop();
             }
         }
 
@@ -146,11 +147,13 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
         }
         onEnd?.Invoke();
         UnregisterListeners();
+        this.UnRegisterEvent<OnOutsideBodyClicked>(OnOutsideBodyClicked);
     }
 
     private void UnregisterListeners() {
         onEnd = null;
         onMissed = null;
+        
     }
 
     public override void OnMissed() {
