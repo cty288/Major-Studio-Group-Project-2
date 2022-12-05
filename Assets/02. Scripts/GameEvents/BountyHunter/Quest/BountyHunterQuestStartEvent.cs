@@ -41,7 +41,7 @@ public class BountyHunterQuestStartEvent : IncomingCallEvent{
         nextClueHappenTime = new DateTime(nextClueHappenTime.Year, nextClueHappenTime.Month, nextClueHappenTime.Day, 23, Random.Range(20, 56), 0);
 
         DateTime nextEventStartTime =
-            new DateTime(nextClueHappenTime.Year, nextClueHappenTime.Month, nextClueHappenTime.Day, 22, Random.Range(10, 40), 0);
+            new DateTime(nextClueHappenTime.Year, nextClueHappenTime.Month, nextClueHappenTime.Day, 22, Random.Range(5, 20), 0);
         DateTime nextEventEndTime = nextClueHappenTime.AddMinutes(-20);
 
         gameEventSystem.AddEvent(new BountyHunterQuest1ClueNotification(

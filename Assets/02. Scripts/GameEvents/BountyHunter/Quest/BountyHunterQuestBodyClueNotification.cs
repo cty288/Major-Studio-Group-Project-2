@@ -82,7 +82,7 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
         nextClueHappenTime = new DateTime(nextClueHappenTime.Year, nextClueHappenTime.Month, nextClueHappenTime.Day, 23, Random.Range(20, 56), 0);
 
         DateTime nextEventStartTime =
-            new DateTime(nextClueHappenTime.Year, nextClueHappenTime.Month, nextClueHappenTime.Day, 22, Random.Range(10, 40), 0);
+            new DateTime(nextClueHappenTime.Year, nextClueHappenTime.Month, nextClueHappenTime.Day, 22, Random.Range(5, 20), 0);
         DateTime nextEventEndTime = nextClueHappenTime.AddMinutes(-20);
         
       
@@ -103,7 +103,7 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
         DateTime tomorrowClueHappenTime = NotificationContact.ClueHappenTime.AddDays(1);
 
         DateTime tomorrowEventStartTime =
-            new DateTime(tomorrow.Year, tomorrow.Month, tomorrow.Day, 22, Random.Range(10, 40), 0);
+            new DateTime(tomorrow.Year, tomorrow.Month, tomorrow.Day, 22, Random.Range(5, 20), 0);
         DateTime tomorrowEventEndTime = tomorrowClueHappenTime.AddMinutes(-20);
 
         gameEventSystem.AddEvent(GetSameEvent(new TimeRange(tomorrowEventStartTime, tomorrowEventEndTime), NotificationContact, callWaitTime, tomorrowClueHappenTime));
@@ -215,7 +215,7 @@ public abstract class BountyHunterQuestClueInfoEvent : RadioEvent {
         if (nextStartTime > nextEventEndTime) {
             nextStartTime = currentTime.AddDays(1);
             nextStartTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day, 22,
-                Random.Range(10, 30), 0);
+                Random.Range(5, 20), 0);
             nextEventEndTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day, 23, 58, 0);
             
             gameEventSystem.AddEvent(GetSameEvent(new TimeRange(nextStartTime, nextEventEndTime), IsRealClue, startDate));
