@@ -38,6 +38,7 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
 {
     protected override void OnStart() {
         string hourIn12 = String.Format("{0: h}", ClueHappenTime);
+        
         string welcome = $"Buddy, I got some clues about the time when a victim was killed by the creature we are looking for. At {hourIn12}:{ClueHappenTime.Minute} pm," +
                          $" pay attention to the flashlights outside your home. The number of flashlights will indicate which hour the victim died in PM. Good luck!";
      
