@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using MikroFramework.Architecture;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -35,5 +36,6 @@ public class DogInRoom : AbstractMikroController<MainGame>, IPointerClickHandler
     {
         spriteRenderer.sprite = dogDeadSprite;
         this.GetSystem<DogSystem>().isDogAlive = false;
+        dogCanvas.transform.GetChild(0).GetComponent<TMP_Text>().text = "It is missing...";
     }
 }
