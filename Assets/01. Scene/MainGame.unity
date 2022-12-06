@@ -12252,6 +12252,16 @@ MonoBehaviour:
       NewspaperBodyPartDisplays:
         HumanTraitPartsPrefabs: []
         AlienOnlyPartsPrefabs: []
+  SpecialBodyPartPrefabs:
+    HeightSubCollections:
+    - ShadowBodyPartPrefabs:
+        HumanTraitPartsPrefabs:
+        - {fileID: 5931786737172396057, guid: 713e71ae36f00b44aa4c931483ad4527, type: 3}
+        AlienOnlyPartsPrefabs: []
+      NewspaperBodyPartDisplays:
+        HumanTraitPartsPrefabs:
+        - {fileID: 5931786737172396057, guid: 713e71ae36f00b44aa4c931483ad4527, type: 3}
+        AlienOnlyPartsPrefabs: []
 --- !u!4 &1170442370
 Transform:
   m_ObjectHideFlags: 0

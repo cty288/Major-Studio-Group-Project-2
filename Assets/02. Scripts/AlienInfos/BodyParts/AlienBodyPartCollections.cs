@@ -37,6 +37,7 @@ public class AlienBodyPartCollections : MonoPersistentMikroSingleton<AlienBodyPa
     public BodyPartCollection MainBodyPartPrefabs;
     public BodyPartCollection LegBodyPartPrefabs;
 
+    public BodyPartCollection SpecialBodyPartPrefabs;
 
     private void Start() {
         MainGame.Interface.GetUtility<ResLoader>();

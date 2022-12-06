@@ -30,8 +30,8 @@ public class BountyHunterQuest2Notification : BountyHunterQuestClueNotification 
         TimeRange newTimeRange = new TimeRange(happenTimeRange.StartTime, happenTimeRange.StartTime.AddMinutes(10));
         string location = BountyHunterQuestClueInfoRadioAreaEvent.GetRandomLocation();
         return new BountyHunterQuest2ClueEvent(newTimeRange,location,
-            BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false), Random.Range(2f, 4f),
-            Random.Range(4, 7), null, null);
+            BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false), Random.Range(1f, 3f),
+            Random.Range(2, 5), null, null);
     }
 }
 
@@ -147,7 +147,7 @@ public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
     {
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
 
-        if (gameStateModel.GameState.Value == GameState.End) {
+        if (gameStateModel.GameState.Value == GameState.End || (currentTime.Hour == 23 && currentTime.Minute >= 58)) {
             if (knockDoorCheckCoroutine != null) {
                 CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
                 knockDoorCheckCoroutine = null;

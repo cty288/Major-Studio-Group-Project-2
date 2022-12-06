@@ -89,7 +89,7 @@ public class BountyHunterPhone : TelephoneContact {
             talkedBefore = true;
             failedLastTime = false;
             provideCorrectInfoCount++;
-            if (provideCorrectInfoCount == 1) {
+            if (provideCorrectInfoCount == 1 && bountyHunterSystem.FalseClueCount <= bountyHunterSystem.MaxFalseClueCountForQuest) {
                 DateTime questStartTime = tomorrow.AddMinutes(Random.Range(30, 60));
                 DateTime questEndTime = new DateTime(questStartTime.Year, questStartTime.Month, questStartTime.Day, 23, 58, 0);
                 gameEventSystem.AddEvent(new BountyHunterQuestStartEvent(new TimeRange(questStartTime, questEndTime),
@@ -103,6 +103,7 @@ public class BountyHunterPhone : TelephoneContact {
             
         }
         else {
+            bountyHunterSystem.FalseClueCount++;
             nextAvailableDate = gameTimeManager.CurrentTime.Value.AddDays(Random.Range(3, 5));
             isInJail = true;
             List<string> killWrongPersonMsg = new List<string>();
@@ -128,6 +129,11 @@ public class BountyHunterPhone : TelephoneContact {
         messages.Add("Thank you citizen! Your cooperation will make our community a better place!");
         string message = messages[Random.Range(0, messages.Count)];
         speaker.Speak(message, mixer, OnEndingSpeak);
+
+
+        if (bountyHunterSystem.FalseClueCount >= bountyHunterSystem.FalseClueCountForPolice) {
+
+        }
     }
 
     private void OnEndingSpeak() {
