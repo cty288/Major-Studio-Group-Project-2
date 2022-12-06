@@ -121,13 +121,30 @@ public class Speaker :  AbstractMikroController<MainGame> {
         });
         AudioMixer.DOSetFloat("resonance", 10, time);
     }
-    
+    private string RemoveRichTextTags(string text) {
+        //find the first < and the first > and remove everything in between. Repeat until no more < or > are found.
+        int firstOpen = text.IndexOf("<");
+        int firstClose = text.IndexOf(">");
+        while (firstOpen != -1 && firstClose != -1)
+        {
+            text = text.Remove(firstOpen, firstClose - firstOpen + 1);
+            firstOpen = text.IndexOf("<");
+            firstClose = text.IndexOf(">");
+        }
+        return text;
+    }
     private void SpeakSentence(SentenceInfo text, float rate, float volumeMultiplier) {
         currentSentence = text;
         float volume = text.SpeakGender == Gender.MALE ? 0.5f : 0.8f;
         volume *= volumeMultiplier;
         audioSource.outputAudioMixerGroup = text.Mixer;
-        currentSpeachUID = Crosstales.RTVoice.Speaker.Instance.Speak(text.SentenceFragment, audioSource, Crosstales.RTVoice.Speaker.Instance.VoiceForGender(text.SpeakGender), true, rate,1, volume);
+
+        string processedSentence = text.SentenceFragment;
+        //remove all rich text tags and all texts in <>
+        processedSentence = RemoveRichTextTags(processedSentence);
+
+
+        currentSpeachUID = Crosstales.RTVoice.Speaker.Instance.Speak(processedSentence, audioSource, Crosstales.RTVoice.Speaker.Instance.VoiceForGender(text.SpeakGender), true, rate,1, volume);
         audioSource.volume = volume;
         if (subtitile) {
             subtitile.OnSpeakStart(text.SentenceFragment);
