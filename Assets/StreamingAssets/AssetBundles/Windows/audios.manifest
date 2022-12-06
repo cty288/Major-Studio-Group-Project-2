@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 704868139
+CRC: 2427427863
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 76921e493032614b6ae6d73bf2341702
+    Hash: 6afb3d37655800742730f21c35fe1bc3
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9a2ca7bdbd1871f7131daf57de908e0c
@@ -13,6 +13,7 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/04. Audios/telephone/incoming_call.ogg
 - Assets/04. Audios/Knocks/knock_5.mp3
 - Assets/04. Audios/Knocks/knock_7.wav
 - Assets/04. Audios/telephone/hang_out.ogg

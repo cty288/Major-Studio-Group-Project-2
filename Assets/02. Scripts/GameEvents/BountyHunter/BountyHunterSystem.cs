@@ -25,6 +25,10 @@ public class BountyHunterSystem : AbstractSystem {
     //每个事件执行成功（线索已发出）后，第0-3天内会发送相关线索信息（分为正确和错误），且正确的线索信息一定是一样的，每条正确/错误事件至少间隔一天
     public bool QuestBodyClueAllHappened { get; set; } = false;
     public bool QuestFinished { get; set; } = false;
+
+    public int FalseClueCount { get; set; } = 0;
+    public int MaxFalseClueCountForQuest = 3;
+    public int FalseClueCountForPolice = 5;
     protected override void OnInit() {
         PhoneNumber = PhoneNumberGenor.GeneratePhoneNumber(6);
         gameTimeManager = this.GetSystem<GameTimeManager>();

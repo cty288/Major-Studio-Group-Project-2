@@ -172,7 +172,7 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
     }
 
 
-    private IEnumerator KnockDoorCheck() {
+    protected virtual IEnumerator KnockDoorCheck() {
         bodyGenerationModel.CurrentOutsideBody.Value = bodyInfo;
         Debug.Log("Start Knock");
         
