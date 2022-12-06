@@ -23,7 +23,7 @@ public  class BountyHunterQuest1ClueNotification : BountyHunterQuestClueNotifica
     protected override BountyHunterQuestClueNotification GetNextEvent(TimeRange startTimeRange,  int callWaitTime,
         DateTime clueHappenTime) {
         Debug.Log("BountyHunterQuest1ClueNotification.GetNextEvent");
-        return new BountyHunterQuest1ClueNotification(startTimeRange, NotificationContact, callWaitTime,
+        return new BountyHunterQuest2Notification(startTimeRange, new BountyHunterQuest2ClueNotificationNotificationContact(), callWaitTime,
             clueHappenTime);
     }
 
@@ -38,10 +38,17 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
 {
     protected override void OnStart() {
         string hourIn12 = String.Format("{0: h}", ClueHappenTime);
+
+        bool alreadyNotified = this.GetSystem<BountyHunterSystem>().QuestBodyClueAllHappened;
         
-        string welcome = $"Buddy, I got some clues about the time when a victim was killed by the creature we are looking for. At {hourIn12}:{ClueHappenTime.Minute} pm," +
-                         $" pay attention to the flashlights outside your home. The number of flashlights will indicate which hour the victim died in PM. Good luck!";
-     
+        
+        string welcome = $"Buddy, I got some clues about the time when a victim was killed by the creature we are looking for. At <color=yellow>{hourIn12}:{ClueHappenTime.Minute} pm</color>," +
+                         $" pay attention to the flashlights outside your home. The number of flashlights will indicate which <color=yellow>hour</color> the victim died in PM. Good luck!";
+
+        if (alreadyNotified) {
+            welcome = $"Buddy, someone reported a new occurrence of that creature! At <color=yellow>{hourIn12}:{ClueHappenTime.Minute} pm</color>," +
+                      $" pay attention to the flashlights outside your home. As always, the number of flashlights will still indicate which <color=yellow>hour</color> in PM. Good luck!";
+        }
         speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], OnSpeakEnd);
     }
 
@@ -140,23 +147,36 @@ public class BountyHunterQuestClueInfoRadioEvent : BountyHunterQuestClueInfoEven
     private  string Radio(BodyInfo body, bool isReal) {
         DescriptionFormatter.Reality = 1;
         StringBuilder sb = new StringBuilder();
-
-        string name = "government official";
+        bool alreadyNotified = this.GetSystem<BountyHunterSystem>().QuestBodyClueAllHappened;
         int time = dieTime;
-        if (!isReal) {
+        string name = "government official";
+
+        if (!isReal)
+        {
             DescriptionFormatter.Reality = 0;
-            List<string> names = new List<string>() {"security guard", "truck driver", "citizen"};
+            List<string> names = new List<string>() { "security guard", "truck driver", "citizen" };
             name = names[Random.Range(0, names.Count)];
             time = Random.Range(1, 12);
-            while (time == dieTime) {
+            while (time == dieTime)
+            {
                 time = Random.Range(1, 12);
             }
         }
+
         
-        sb.AppendFormat("The speculation showed that a {1} died at {0} pm.", time, name);
-        sb.AppendFormat(AlienDescriptionFactory.Formatter,
-            " The CCTV captured his last image, {0:clothb}. In addition, {0:clothl}", body);
-        return sb.ToString();
+        if (!alreadyNotified) {
+            sb.AppendFormat("The speculation showed that a {1} died at {0} pm.", time, name);
+            sb.AppendFormat(AlienDescriptionFactory.Formatter,
+                " The CCTV captured his last image, {0:clothb}. In addition, {0:clothl}", body);
+            return sb.ToString();
+        }
+        else {
+            sb.AppendFormat("The creature who killed the {1} a few days ago was once again seen at {0} pm this afternoon.", time, name);
+            sb.AppendFormat(AlienDescriptionFactory.Formatter,
+                " The CCTV captured his last image. {0:clothb}. In addition, {0:clothl}", body);
+            return sb.ToString();
+        }
+       
     }
 
     

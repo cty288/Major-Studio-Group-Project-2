@@ -53,6 +53,8 @@ public class BountyHunterPhone : TelephoneContact {
             }
             else {
                  welcomes.Add("Hey my friend! What brought you here again? Do you have any information about those creatures?");
+                 welcomes.Add("Hey, this is the bounty hunter you¡¯ve been collaborating with. Do you have any information about those creatures?");
+                 welcomes.Add("Good job on taking down that thing! What new clues do you have today?");
             }
           
         }
