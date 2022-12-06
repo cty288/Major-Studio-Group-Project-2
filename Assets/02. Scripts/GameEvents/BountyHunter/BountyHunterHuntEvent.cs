@@ -32,7 +32,7 @@ public class BountyHunterHuntEvent : GameEvent{
         Debug.Log("Bounty Hunter Hunt Event. Is Alien: " + isAlien);
         if (isAlien) {
             this.SendEvent<OnBountyHunterKillCorrectAlien>(new OnBountyHunterKillCorrectAlien() {
-                FoodCount = Random.Range(2,5)
+                FoodCount = Random.Range(3,5)
             });
             //playerResourceSystem.AddFood(Random.Range(2, 5));
         }

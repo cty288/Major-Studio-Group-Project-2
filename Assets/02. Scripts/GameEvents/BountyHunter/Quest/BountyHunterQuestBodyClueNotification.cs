@@ -164,7 +164,7 @@ public abstract class BountyHunterQuestClueEvent : GameEvent {
         DateTime clueEndTime = new DateTime(clueHappenTime.Year, clueHappenTime.Month, clueHappenTime.Day,
             23, 59, 0);
         gameEventSystem.AddEvent(GetClueInfoEvent(new TimeRange(clueHappenTime, clueEndTime), isReal, currentTime));
-        Debug.Log("Clue Happen Time: " + clueHappenTime);
+        Debug.Log("Clue Radio will Happen at: " + clueHappenTime);
     }
     public override void OnMissed() {
         

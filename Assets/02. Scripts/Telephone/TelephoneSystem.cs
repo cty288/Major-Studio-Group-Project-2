@@ -154,6 +154,7 @@ public class TelephoneSystem : AbstractSystem {
                 UntilAction untilAction = UntilAction.Allocate(OnDealFailed(PhoneDealErrorType.NumberNotAvailable));
                 untilAction.OnEndedCallback += OnDealFailedCallback;
                 untilAction.Execute();
+                Contacts[dealingDigits].HangUp();
             }
             else {
                 StartCallConversation(Contacts[dealingDigits]);
