@@ -99,10 +99,19 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
         onClickPeepholeSpeakEnd = false;
         Speaker speaker = GameObject.Find("OutsideBodySpeaker").GetComponent<Speaker>();
         if (bodyInfo.IsAlien) {
-            speaker.Speak("Hahaha! I will kill you!", null, OnAlienClickedOutside);
+            List<string> messages = new List<string>() {
+                "Good day sir. But it's your time!",
+                "Haha! Your life ends today!!",
+            };
+            speaker.Speak(messages[Random.Range(0, messages.Count)], null, OnAlienClickedOutside);
         }
         else {
-            speaker.Speak("Hey, I brought you some foods! Take care!", null, OnDelivererClickedOutside);
+            List<string> messages = new List<string>() {
+                "Delivery service! Take care!",
+                "Here¡¯s the food for you today. Take care!",
+                "Hey, I brought you some foods! Take care!"
+            };
+            speaker.Speak(messages[Random.Range(0, messages.Count)], null, OnDelivererClickedOutside);
         }
         return () => onClickPeepholeSpeakEnd;
     }
