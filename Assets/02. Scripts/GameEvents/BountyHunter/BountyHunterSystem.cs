@@ -29,9 +29,17 @@ public class BountyHunterSystem : AbstractSystem {
     public int FalseClueCount { get; set; } = 0;
     public int MaxFalseClueCountForQuest = 3;
     public int FalseClueCountForPolice = 5;
+
+    public DateTime NextAvailableDate { get; set; }
+
+    public bool IsInJail { get; private set; }
+
+    
     protected override void OnInit() {
+      
         PhoneNumber = PhoneNumberGenor.GeneratePhoneNumber(6);
         gameTimeManager = this.GetSystem<GameTimeManager>();
+        NextAvailableDate = gameTimeManager.CurrentTime.Value;
         gameEventSystem = this.GetSystem<GameEventSystem>();
         telephoneSystem = this.GetSystem<TelephoneSystem>();
         this.RegisterEvent<OnNewDay>(OnNewDay);
@@ -42,13 +50,23 @@ public class BountyHunterSystem : AbstractSystem {
             BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true));
     }
 
+  
     private void OnNewDay(OnNewDay e) {
-        if (gameTimeManager.Day == 1)
-        {
+        if (gameTimeManager.Day == 1) {
             AddEvent();
+        }
+
+        if (gameTimeManager.CurrentTime.Value.Date >= NextAvailableDate) {
+            IsInJail = false;
         }
     }
 
+    public void GoToJail(int day) {
+        NextAvailableDate = NextAvailableDate.AddDays(day);
+        NextAvailableDate =
+            new DateTime(NextAvailableDate.Year, NextAvailableDate.Month, NextAvailableDate.Day, 22, 0, 0);
+        IsInJail = true;
+    }
    
 
     private void AddEvent() {

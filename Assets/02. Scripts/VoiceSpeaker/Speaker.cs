@@ -17,7 +17,8 @@ public class SentenceInfo {
     public Gender SpeakGender;
     public float volumeMultiplier;
     public AudioMixerGroup Mixer;
-    public SentenceInfo(string completeSentence, string sentenceFragment, AudioMixerGroup mixer, Action callback, float rate, Gender speakGender, float volumeMultiplier=1) {
+    public string SpeakName;
+    public SentenceInfo(string completeSentence, string sentenceFragment, string speakName,AudioMixerGroup mixer, Action callback, float rate, Gender speakGender, float volumeMultiplier=1) {
         this.CompleteSentence = completeSentence;
         this.SentenceFragment = sentenceFragment;
         this.Callback = callback;
@@ -25,6 +26,7 @@ public class SentenceInfo {
         this.SpeakGender = speakGender;
         this.volumeMultiplier = volumeMultiplier;
         this.Mixer = mixer;
+        this.SpeakName = speakName;
     }
 }
 
@@ -91,13 +93,13 @@ public class Speaker :  AbstractMikroController<MainGame> {
         }
     }
 
-    public void Speak(string sentence, AudioMixerGroup mixer, Action onEnd = null, float rate = 1f, float volumeMultiplier = 1f, Gender gender = Gender.MALE ) {
+    public void Speak(string sentence, AudioMixerGroup mixer, string speakName, Action onEnd = null, float rate = 1f, float volumeMultiplier = 1f, Gender gender = Gender.MALE ) {
         inited = true;
         IsSpeaking = true;
         bool needSpeak = sentenceQueues.Count == 0;
         List<string> splitedSentences = VoiceTextSpliter.Split(sentence);
         foreach (string splitedSentence in splitedSentences) {
-            sentenceQueues.Enqueue(new SentenceInfo(sentence, splitedSentence,  mixer, onEnd, rate, gender, volumeMultiplier));
+            sentenceQueues.Enqueue(new SentenceInfo(sentence, splitedSentence,speakName,  mixer, onEnd, rate, gender, volumeMultiplier));
         }
 
         if (needSpeak) {
@@ -147,7 +149,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
         currentSpeachUID = Crosstales.RTVoice.Speaker.Instance.Speak(processedSentence, audioSource, Crosstales.RTVoice.Speaker.Instance.VoiceForGender(text.SpeakGender), true, rate,1, volume);
         audioSource.volume = volume;
         if (subtitile) {
-            subtitile.OnSpeakStart(text.SentenceFragment);
+            subtitile.OnSpeakStart(text.SentenceFragment, text.SpeakName);
         }
      
     }
@@ -156,7 +158,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
         sentenceQueues.Clear();
         
         if (subtitile) {
-            subtitile.OnSpeakStart("");
+            subtitile.OnSpeakStart("","");
         }
         IsSpeaking = false;
         if (AudioMixer) {

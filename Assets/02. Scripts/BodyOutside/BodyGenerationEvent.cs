@@ -103,7 +103,7 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
                 "Good day sir. But it's your time!",
                 "Haha! Your life ends today!!",
             };
-            speaker.Speak(messages[Random.Range(0, messages.Count)], null, OnAlienClickedOutside);
+            speaker.Speak(messages[Random.Range(0, messages.Count)], null, "???", OnAlienClickedOutside);
         }
         else {
             List<string> messages = new List<string>() {
@@ -111,7 +111,7 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
                 "Here¡¯s the food for you today. Take care!",
                 "Hey, I brought you some foods! Take care!"
             };
-            speaker.Speak(messages[Random.Range(0, messages.Count)], null, OnDelivererClickedOutside);
+            speaker.Speak(messages[Random.Range(0, messages.Count)], null, "Deliver", OnDelivererClickedOutside);
         }
         return () => onClickPeepholeSpeakEnd;
     }
@@ -124,7 +124,7 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
         });
     }
 
-    private void OnAlienClickedOutside()
+    protected void OnAlienClickedOutside()
     {
         if (playerResourceSystem.HasEnoughResource<BulletGoods>(1) && playerResourceSystem.HasEnoughResource<GunResource>(1))
         {

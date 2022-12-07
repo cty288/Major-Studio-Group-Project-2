@@ -4,14 +4,14 @@ using MikroFramework.Architecture;
 using UnityEngine;
 
 public class BountyHunterQuestStartPhone : TelephoneContact {
-    protected BountyHunterPhone bountyHunterPhone;
+    protected BountyHunterSystem bountyHunterSystem;
+    
     public BountyHunterQuestStartPhone() {
         speaker = GameObject.Find("BountyHunterSpeaker").GetComponent<Speaker>();
-        bountyHunterPhone =
-            telephoneSystem.Contacts[this.GetSystem<BountyHunterSystem>().PhoneNumber] as BountyHunterPhone;
+        bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
     }
     public override bool OnDealt() {
-        return !bountyHunterPhone.IsInJail;
+        return !bountyHunterSystem.IsInJail;
     }
 
     protected override void OnStart() {
@@ -25,7 +25,7 @@ public class BountyHunterQuestStartPhone : TelephoneContact {
             "I have gathered some information about it, but I still don't know its physical characteristics. " +
             "I don't want my information to be leaked to other bounty hunters while I'm on the phone with you. So to keep it private, I'll keep you informed of the clues in various ways over the next few days. " +
             "Don't worry, I will call you ahead of time to let you know how I will deliver the message before I send you the lead.";        
-        speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], OnSpeakEnd, 1.1f);
+        speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], "Bounty Hunter", OnSpeakEnd, 1.1f);
     }
 
     private void OnSpeakEnd() {

@@ -49,7 +49,7 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
             welcome = $"Buddy, someone reported a new occurrence of that creature! At <color=yellow>{hourIn12}:{ClueHappenTime.Minute} pm</color>," +
                       $" pay attention to the flashlights outside your home. As always, the number of flashlights will still indicate which <color=yellow>hour</color> in PM. Good luck!";
         }
-        speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], OnSpeakEnd);
+        speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], "Bounty Hunter", OnSpeakEnd);
     }
 
     private void OnSpeakEnd() {

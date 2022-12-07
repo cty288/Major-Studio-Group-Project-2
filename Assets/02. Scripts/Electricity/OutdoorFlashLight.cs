@@ -39,7 +39,7 @@ public class OutdoorFlashLight : ElectricalApplicance
                     replies.Add("Holy! You¡¯ve got a SUN in your house?! Don't tell me you are some kind of giant light bulb alien!");
                     replies.Add("Cut it off, mister! Or I will call the officers!");
                     string reply = replies[UnityEngine.Random.Range(0, replies.Count)];
-                    speaker.Speak(reply, null, null, Random.Range(0.8f, 1.2f));
+                    speaker.Speak(reply, null, "",null,Random.Range(0.8f, 1.2f));
                 }
             }
             flashlight.DOFade(1, 0.1f);

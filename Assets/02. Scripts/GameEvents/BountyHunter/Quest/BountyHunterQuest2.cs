@@ -56,7 +56,7 @@ public class BountyHunterQuest2ClueNotificationNotificationContact : BountyHunte
                       $" I will let my friend to deliver you a note again about its <color=yellow>location</color>. Make sure there's no one outside your home when he arrives, otherwise he might be scared away.";
 
         }
-        speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], OnSpeakEnd);
+        speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], "Bounty Hunter", OnSpeakEnd);
     }
 
     protected override void OnHangUp() {
@@ -182,7 +182,7 @@ public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
             $"Hey. My boss want to tell you that the prey appeared in <color=yellow>{location}</color>."
         };
 
-        speaker.Speak(messages[Random.Range(0, messages.Count)], null, OnDelivererClickedOutside, 1, 1.3f);
+        speaker.Speak(messages[Random.Range(0, messages.Count)], null, "Bounty Hunter", OnDelivererClickedOutside, 1, 1.3f);
         
         return () => onClickPeepholeSpeakEnd;
     }

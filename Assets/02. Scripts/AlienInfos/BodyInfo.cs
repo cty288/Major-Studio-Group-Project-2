@@ -57,7 +57,7 @@ public class BodyInfo : ICanRegisterEvent {
 
     public HeightType Height;
 
-    
+    public bool IsDead = false;
     
 
     public BodyPartDisplayType DisplayType;
@@ -86,6 +86,7 @@ public class BodyInfo : ICanRegisterEvent {
 
     private void OnBodyInfoRemoved(OnBodyInfoRemoved e) {
         if (e.ID == ID) {
+            IsDead = true;
             UnregisterEvents();
         }
     }
