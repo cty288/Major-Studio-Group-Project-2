@@ -12,55 +12,36 @@ public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEven
     public override float TriggerChance { get; }
     protected AudioSource barkAudioSource;
 
-    public DogKnockEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float knockDoorTimeInterval, int knockTime, float eventTriggerChance, Action onEnd, Action onMissed, string overrideAudioClipName = null) : base(startTimeRange, bodyInfo, knockDoorTimeInterval, knockTime, eventTriggerChance, onEnd, onMissed, overrideAudioClipName) {
-        bodyGenerationModel = this.GetModel<BodyGenerationModel>();
-        this.bodyInfo = bodyInfo;
-        this.knockDoorTimeInterval = knockDoorTimeInterval;
-        this.knockTime = knockTime;
-        this.TriggerChance = eventTriggerChance;
-        this.onEnd = onEnd;
-        this.onMissed = onMissed;
-        this.overrideAudioClipName = overrideAudioClipName;
-        playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
+    public DogKnockEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float knockDoorTimeInterval, int knockTime, float eventTriggerChance, Action onEnd, Action onMissed) : base(startTimeRange, bodyInfo, knockDoorTimeInterval, knockTime, eventTriggerChance, onEnd, onMissed, null) {
+      
     }
     
-    public override EventState OnUpdate() {
-        DateTime currentTime = gameTimeManager.CurrentTime.Value;
-        
-        if ((currentTime.Hour == 23 && currentTime.Minute >= 58) || gameStateModel.GameState.Value == GameState.End) {
-            if (knockDoorCheckCoroutine != null) {
-                CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
-                knockDoorCheckCoroutine = null;
-            }
-            bodyGenerationModel.CurrentOutsideBody.Value = null;
-            OnNotOpen();
-            return EventState.End;
-        }
-
-        if (!started) {
-            if (bodyGenerationModel.CurrentOutsideBody.Value != null) {
-                OnNotOpen();
-                return EventState.End;
-            }
-            started = true;
-            knockDoorCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(DogBark());
-        }
-
-        return (bodyGenerationModel.CurrentOutsideBody.Value == null && !bodyGenerationModel.CurrentOutsideBodyConversationFinishing) ? EventState.End : EventState.Running;
-    }
-
+    
     protected virtual Func<bool> OnOpen() {
         onClickPeepholeSpeakEnd = false;
-        Speaker speaker = GameObject.Find("OutsideBodySpeaker").GetComponent<Speaker>(); 
-        //speaker.Speak("Bark! Bark!", null, OnDogCome);
-        //Dog Bark
         knockDoorCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(DogBark());
         return () => onClickPeepholeSpeakEnd;
     }
-    
-    private void OnDogCome() {
-        this.GetSystem<DogSystem>().SpawnDog();
+
+    private IEnumerator DogBark() {
+        bodyGenerationModel.CurrentOutsideBody.Value = bodyInfo;
+        
+        for (int i = 0; i < 2; i++)
+        {
+            string clipName = overrideAudioClipName;
+            if (String.IsNullOrEmpty(overrideAudioClipName))
+            {
+                clipName = $"dogBark_{Random.Range(1, 5)}";
+            }
+
+            barkAudioSource = AudioSystem.Singleton.Play2DSound(clipName, 1, false);
+            yield return new WaitForSeconds(barkAudioSource.clip.length + knockDoorTimeInterval);
+        }
+
+        bodyGenerationModel.CurrentOutsideBody.Value = null;
+        OnNotOpen();
     }
+
 
     protected override void OnNotOpen() {
         DateTime time = gameTimeManager.CurrentTime.Value;
@@ -75,22 +56,20 @@ public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEven
         base.OnNotOpen();
     }
 
-    private IEnumerator DogBark()
-    {
+
+    protected override IEnumerator KnockDoorCheck() {
         bodyGenerationModel.CurrentOutsideBody.Value = bodyInfo;
-        Debug.Log("Start Bark");
-        
+        Debug.Log("Start Knock");
+
         for (int i = 0; i < knockTime; i++) {
-            string clipName = overrideAudioClipName;
-            if (String.IsNullOrEmpty(overrideAudioClipName)) {
-                clipName = $"dogBark_{Random.Range(1, 5)}";
-            }
-           
-            barkAudioSource = AudioSystem.Singleton.Play2DSound(clipName, 1, false);
-            yield return new WaitForSeconds(barkAudioSource.clip.length + knockDoorTimeInterval);
+            string clipName =  $"dogBark_{Random.Range(1, 5)}";
+            knockAudioSource = AudioSystem.Singleton.Play2DSound(clipName, 1, false);
+            yield return new WaitForSeconds(knockAudioSource.clip.length + knockDoorTimeInterval);
         }
 
         bodyGenerationModel.CurrentOutsideBody.Value = null;
         OnNotOpen();
     }
+
+    
 }
