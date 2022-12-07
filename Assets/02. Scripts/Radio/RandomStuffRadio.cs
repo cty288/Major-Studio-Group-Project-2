@@ -14,7 +14,7 @@ public class RandomStuffRadio : RadioEvent {
     }
 
 
-    public override float TriggerChance { get; } = 1;
+    public override float TriggerChance { get; } = 0.4f;
     public override void OnEnd() {
         End();
     }

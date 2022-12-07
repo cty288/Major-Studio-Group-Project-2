@@ -57,8 +57,8 @@ public class ClothTagSweater : ClothTag
         get
         {
             return new List<string>() {
-                "We still don't know what's under the camouflage, a cream-white sweater that was worn by the victim.",
-                "We found black wool from where the victim was killed, and investigators speculate the victim was wearing a black sweater."
+                "We still don't know what's under the camouflage, <color=yellow>a cream-white sweater</color> that was worn by the victim.",
+                "We found black wool from where the victim was killed, and investigators speculate the victim was wearing a <color=yellow>black sweater</color>."
             };
         }
     }
@@ -68,7 +68,7 @@ public class ClothTagSweater : ClothTag
         get
         {
             return new List<string>() {
-                "For some reasons, the creature took all the outwears from the victim, including a grey wool coat and a cotton jacket.",
+                "For some reasons, the creature took all the outwears from the victim, including a <color=yellow>grey wool coat and a cotton jacket</color>.",
                 "We have not been able to find any information relating to the victim's top clothing."
             };
         }
@@ -83,8 +83,8 @@ public class ClothTagCottonVest : ClothTag
         get
         {
             return new List<string>() {
-                "For some reasons, the creature took all the outwears from the victim, including a grey wool coat and a cotton jacket.",
-                "A friend of the victim provided us with photos showing the man wearing a red cotton vest before he was killed."
+                "For some reasons, the creature took all the outwears from the victim, including a <color=yellow>grey wool coat and a cotton jacket</color>.",
+                "A friend of the victim provided us with photos showing the man wearing a <color=yellow>red cotton vest</color> before he was killed."
             };
         }
     }
@@ -94,7 +94,7 @@ public class ClothTagCottonVest : ClothTag
         get
         {
             return new List<string>() {
-                "According to the witness, the creature was wearing a yellow scarf.",
+                "According to the witness, the creature was wearing a <color=yellow>yellow scarf</color>.",
                 "We have not been able to find any information relating to the victim's top clothing."
             };
         }
@@ -109,7 +109,7 @@ public class ClothTagLongDress : ClothTag
         {
             return new List<string>() {
                 "The police suspects that this creature is sensitive to chill, as it took away all of the victim's outwear.",
-                "Some reports showed that the victim's trench coat was taken by a mysterious suspect.",
+                "Some reports showed that the victim's <color=yellow>trench coat</color> was taken by a mysterious suspect.",
             };
         }
     }
