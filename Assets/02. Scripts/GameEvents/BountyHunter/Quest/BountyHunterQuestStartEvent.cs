@@ -5,11 +5,21 @@ using MikroFramework.Architecture;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class BountyHunterQuestStartEvent : IncomingCallEvent{
+public class BountyHunterQuestStartEvent : IncomingCallEvent {
+    protected BountyHunterSystem bountyHunterSystem;
     public BountyHunterQuestStartEvent(TimeRange startTimeRange, TelephoneContact contact, int callWaitTime) : base(startTimeRange, contact, callWaitTime) {
+        bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
     }
 
-    public override float TriggerChance { get; } = 1;
+    public override float TriggerChance {
+        get {
+            if (bountyHunterSystem.IsInJail) {
+                return 0;
+            }
+            return 1;
+        }
+    }
+
     public override void OnMissed() {
         OnMissedOrHangUp();
     }

@@ -76,6 +76,7 @@ public class BodyManagmentSystem : AbstractSystem {
         allBodyTimeInfos.RemoveAll(timeInfo => {
             if (timeInfo.DayRemaining <= 0) {
                 this.SendEvent<OnBodyInfoRemoved>(new OnBodyInfoRemoved() {ID = timeInfo.BodyInfo.ID});
+                timeInfo.BodyInfo.IsDead = true;
                 return true;
             }
 

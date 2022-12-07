@@ -97,7 +97,7 @@ public class MerchantPhone : TelephoneContact {
     protected override void OnStart() {
         string welcome = "Hello, here is the best underground merchant in MK Town! The following list is the items sold today, press the corresponding number to buy: ";
         welcome += GetSellListSentence();
-        speaker.Speak(welcome, mixer,OnWelcomeSpeakFinished);
+        speaker.Speak(welcome, mixer,"???", OnWelcomeSpeakFinished);
     }
 
     private void OnWelcomeSpeakFinished() {
@@ -107,7 +107,7 @@ public class MerchantPhone : TelephoneContact {
     private void OnDialDigit(OnDialDigit e) {
         this.UnRegisterEvent<OnDialDigit>(OnDialDigit);
         if (e.Digit == 9) {
-            speaker.Speak(GetSellListSentence(), mixer, OnWelcomeSpeakFinished);
+            speaker.Speak(GetSellListSentence(), mixer,"Merchant", OnWelcomeSpeakFinished);
         }
         else {
             int index = e.Digit - 1;
@@ -135,7 +135,7 @@ public class MerchantPhone : TelephoneContact {
                     gameEventSystem.AddEvent(new GetResourceEvent(new BulletGoods(),1 ,new TimeRange(currentTime)));
                 }
             }
-            speaker.Speak(reply, mixer, OnWelcomeSpeakFinished);
+            speaker.Speak(reply, mixer, "Merchant", OnWelcomeSpeakFinished);
         }
     }
 

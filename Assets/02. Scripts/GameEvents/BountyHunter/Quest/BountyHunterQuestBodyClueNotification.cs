@@ -123,15 +123,14 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
 public abstract class BountyHunterQuestClueNotificationContact : TelephoneContact {
     public DateTime ClueHappenTime { get; set; }
 
-    protected BountyHunterPhone bountyHunterPhone;
+    protected BountyHunterSystem bountyHunterSystem;
 
     public BountyHunterQuestClueNotificationContact() {
         speaker = GameObject.Find("BountyHunterSpeaker").GetComponent<Speaker>();
-        bountyHunterPhone =
-            telephoneSystem.Contacts[this.GetSystem<BountyHunterSystem>().PhoneNumber] as BountyHunterPhone;
+        bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
     }
     public override bool OnDealt() {
-        return !bountyHunterPhone.IsInJail;
+        return !bountyHunterSystem.IsInJail;
     }
 }
 //情报发送的事件

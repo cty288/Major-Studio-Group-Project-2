@@ -30,13 +30,18 @@ public class BountyHunterHuntEvent : GameEvent{
 
     public override EventState OnUpdate() {
         Debug.Log("Bounty Hunter Hunt Event. Is Alien: " + isAlien);
-        if (isAlien) {
-            this.SendEvent<OnBountyHunterKillCorrectAlien>(new OnBountyHunterKillCorrectAlien() {
-                FoodCount = Random.Range(3,5)
-            });
-            //playerResourceSystem.AddFood(Random.Range(2, 5));
+        if (!bodyInfo.IsDead) {
+            if (isAlien) {
+                this.SendEvent<OnBountyHunterKillCorrectAlien>(new OnBountyHunterKillCorrectAlien() {
+                    FoodCount = Random.Range(3, 5)
+                });
+                //playerResourceSystem.AddFood(Random.Range(2, 5));
+            }
+            bodyManagmentSystem.RemoveBodyInfo(bodyInfo);
+            bodyInfo.IsDead = true;
         }
-        bodyManagmentSystem.RemoveBodyInfo(bodyInfo);
+       
+      
         return EventState.End;
     }
 

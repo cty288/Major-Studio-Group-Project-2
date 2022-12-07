@@ -74,7 +74,7 @@ public class TelephoneViewController : ElectricalApplicance, IPointerClickHandle
                 break;
         }
 
-        speaker.Speak(speakText, null,null, 1f, 1.5f);
+        speaker.Speak(speakText, null,"",null, 1f, 1.5f);
         return () => !speaker.IsSpeaking;
     }
 

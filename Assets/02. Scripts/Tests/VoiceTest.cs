@@ -12,8 +12,8 @@ public class VoiceTest : MonoBehaviour {
     public string VoiceName;
     public Speaker speaker;
     public void Speak() {
-       
-        speaker.Speak(text.text, null);
+
+        speaker.Speak(text.text, null, "");
         speaker.Corrupt(5, () => {
             speaker.Stop();
         });

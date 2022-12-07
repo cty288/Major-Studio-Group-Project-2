@@ -11,7 +11,10 @@ public class Subtitle : MonoBehaviour {
         text = GetComponent<TMP_Text>();
     }
     
-    public void OnSpeakStart(string s) {
-        text.text = s;
+    public void OnSpeakStart(string s, string speakName) {
+        text.text = $"{speakName}: {s}";
+        if (String.IsNullOrEmpty(speakName)) {
+            text.text = s;
+        }
     }
 }

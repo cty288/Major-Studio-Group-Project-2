@@ -15,7 +15,7 @@ public class TestIncomingCallContact : TelephoneContact {
     protected override void OnStart() {
        
         string welcome = "Howdy! I'm the Bounty Hunter! I can reward you foods if you give me correct information about those creatures! Do you have any information about them?";
-        speaker.Speak(welcome,null, Finish);
+        speaker.Speak(welcome,null, "Bounty Hunter", Finish);
     }
 
     private void Finish() {

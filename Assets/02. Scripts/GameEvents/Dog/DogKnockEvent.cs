@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEvent{
     public override GameEventType GameEventType { get; } = GameEventType.BodyGeneration;
     public override float TriggerChance { get; }
-    protected AudioSource barkAudioSource;
+
 
     public DogKnockEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float knockDoorTimeInterval, int knockTime, float eventTriggerChance, Action onEnd, Action onMissed) : base(startTimeRange, bodyInfo, knockDoorTimeInterval, knockTime, eventTriggerChance, onEnd, onMissed, null) {
       
@@ -19,27 +19,12 @@ public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEven
     
     protected virtual Func<bool> OnOpen() {
         onClickPeepholeSpeakEnd = false;
-        knockDoorCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(DogBark());
+        this.GetSystem<ITimeSystem>().AddDelayTask(AudioSystem.Singleton.Play2DSound("dogBark_4", 1, false).clip.length, OnOpenFinish);
         return () => onClickPeepholeSpeakEnd;
     }
 
-    private IEnumerator DogBark() {
-        bodyGenerationModel.CurrentOutsideBody.Value = bodyInfo;
-        
-        for (int i = 0; i < 2; i++)
-        {
-            string clipName = overrideAudioClipName;
-            if (String.IsNullOrEmpty(overrideAudioClipName))
-            {
-                clipName = $"dogBark_{Random.Range(1, 5)}";
-            }
-
-            barkAudioSource = AudioSystem.Singleton.Play2DSound(clipName, 1, false);
-            yield return new WaitForSeconds(barkAudioSource.clip.length + knockDoorTimeInterval);
-        }
-
-        bodyGenerationModel.CurrentOutsideBody.Value = null;
-        OnNotOpen();
+    private void OnOpenFinish() {
+        onClickPeepholeSpeakEnd = true;
     }
 
 

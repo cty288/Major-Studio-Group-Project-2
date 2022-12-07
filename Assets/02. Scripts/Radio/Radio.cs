@@ -159,7 +159,7 @@ public class Radio : ElectricalApplicance
                 }
 
                
-                speaker.Speak(speakText, mixer, OnSpeakerStop, speakRate, 1f, speakGender);
+                speaker.Speak(speakText, mixer, "Radio", OnSpeakerStop, speakRate, 1f, speakGender);
             }
         });
     }
