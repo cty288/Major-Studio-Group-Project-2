@@ -20,7 +20,7 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
             height);
         AlienBodyPartInfo head = AlienBodyPartCollections.Singleton.SpecialBodyPartPrefabs.HeightSubCollections[0]
             .ShadowBodyPartPrefabs.HumanTraitPartsPrefabs[0].GetComponent<AlienBodyPartInfo>();
-
+      
         return BodyInfo.GetBodyInfo(leg, body, head, height, Gender.MALE, BodyPartDisplayType.Shadow, false);
 
     }
