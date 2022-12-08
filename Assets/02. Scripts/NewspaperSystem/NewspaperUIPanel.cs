@@ -81,7 +81,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
             }
             else {
                 symbolImages[i].sprite = symbols[1];
-                hintText.text = "This person is missing.";
+                hintText.text = "We are not sure if they are dead or not.";
             }
 
             
