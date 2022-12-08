@@ -20,8 +20,8 @@ public class HairCutTagHorseShit : HaircutTag
         {
             return new List<string>()
             {
-                "Its hair style, as the witness describes, is ridiculous.",
-                "Its hair is very messy."
+                "Its hair style, as the witness describes, is <color=yellow>ridiculous</color>.",
+                "Its hair is very <color=yellow>messy</color>."
             };
         }
     }
@@ -32,7 +32,7 @@ public class HairCutTagHorseShit : HaircutTag
         {
             return new List<string>()
             {
-                "It wore its hair in a high ponytail, as the security camera can tell.",
+                "It wore its hair in a <color=yellow>high ponytail</color>, as the security camera can tell.",
                 "We don't have information of its head yet."
             };
         }
@@ -47,8 +47,8 @@ public class HairCutTagBuzzCut : HaircutTag
         {
             return new List<string>()
             {
-                "According to the security camera, the convict's hair is short.",
-                "Its hair is short, about half inch."
+                "According to the security camera, the convict's hair is <color=yellow>short</color>.",
+                "Its hair is <color=yellow>short, about half inch</color>."
             };
         }
     }
@@ -59,7 +59,7 @@ public class HairCutTagBuzzCut : HaircutTag
         {
             return new List<string>()
             {
-                "Its hair is wavy.",
+                "Its hair is <color=yellow>wavy</color>.",
                 "We don't have information of its head yet."
             };
         }
@@ -74,8 +74,8 @@ public class HairCutTagMiddleScore : HaircutTag
         {
             return new List<string>()
             {
-                "The convict has an Asian style haircut.",
-                "Its hairstyle is center parted."
+                "The convict has an <color=yellow>Asian style haircut</color>.",
+                "Its hairstyle is <color=yellow>center parted</color>."
             };
         }
     }
@@ -86,7 +86,7 @@ public class HairCutTagMiddleScore : HaircutTag
         {
             return new List<string>()
             {
-                "It has a black, long hair.",
+                "It has a <color=yellow>black, long hair</color>.",
                 "We don't have information of its head yet."
             };
         }
@@ -101,8 +101,8 @@ public class HairCutTagPonyTail : HaircutTag
         {
             return new List<string>()
             {
-                "Its hair is in a high ponytail, as the security camera can tell.",
-                "Its hair was tied back."
+                "Its hair is in <color=yellow>a high ponytail</color>, as the security camera can tell.",
+                "Its hair was <color=yellow>tied back<color>."
             };
         }
     }
@@ -113,7 +113,7 @@ public class HairCutTagPonyTail : HaircutTag
         {
             return new List<string>()
             {
-                "Its hair style, as the witness describes, is ridiculous.",
+                "Its hair style, as the witness describes, is <color=yellow>ridiculous</color>.",
                 "We don't have information of its head yet."
             };
         }
@@ -128,8 +128,8 @@ public class HairCutTagLongBlackHair : HaircutTag
         {
             return new List<string>()
             {
-                "Its hair is long and black, as the security camera can tell.",
-                "Its long hair hangs down its back."
+                "Its hair is <color=yellow>long and black</color>, as the security camera can tell.",
+                "Its <color=yellow>long hair</color> hangs down its back."
             };
         }
     }
@@ -140,7 +140,7 @@ public class HairCutTagLongBlackHair : HaircutTag
         {
             return new List<string>()
             {
-                "Its hair style, as the witness describes, is ridiculous.",
+                "Its hair style, as the witness describes, is <color=yellow>ridiculous</color>.",
                 "We don't have information of its head yet."
             };
         }
