@@ -20,6 +20,7 @@ public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEven
     protected virtual Func<bool> OnOpen() {
         onClickPeepholeSpeakEnd = false;
         this.GetSystem<ITimeSystem>().AddDelayTask(AudioSystem.Singleton.Play2DSound("dogBark_4", 1, false).clip.length, OnOpenFinish);
+        LoadCanvas.Singleton.ShowMessage("You adopted this lonely dog.");
         return () => onClickPeepholeSpeakEnd;
     }
 

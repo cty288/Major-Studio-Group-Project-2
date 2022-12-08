@@ -68,7 +68,7 @@ public class BodyGenerationSystem : AbstractSystem {
         DateTime dogStartTime = gameTimeManager.CurrentTime.Value.AddDays(eventStartDay);
         int hour =  Random.Range(22, 24);
         int minute = Random.Range(20, 40);
-
+        
         dogStartTime = new DateTime(dogStartTime.Year, dogStartTime.Month, dogStartTime.Day, hour, minute, 0);
 
         DateTime dogEventEndTime = dogStartTime.AddMinutes(Random.Range(20, 40));
@@ -76,7 +76,7 @@ public class BodyGenerationSystem : AbstractSystem {
         gameEventSystem.AddEvent(new DogKnockEvent(
             new TimeRange(dogStartTime, dogEventEndTime), targetBody, knockDoorTimeInterval,
             knockTime,
-            knockDoorChance, null, null));
+            1, null, null));
     }
     
     private void SpawnAlienOrDeliverBody() {
