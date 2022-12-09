@@ -26,6 +26,7 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
     protected PlayerResourceSystem playerResourceSystem;
     protected ITimeSystem timeSystem;
     protected AudioSource knockAudioSource;
+    
     public BodyGenerationEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float knockDoorTimeInterval, int knockTime, float eventTriggerChance,
         Action onEnd, Action onMissed, string overrideAudioClipName = null) : base(startTimeRange) {
         bodyGenerationModel = this.GetModel<BodyGenerationModel>();
@@ -118,16 +119,29 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
 
     private void OnDelivererClickedOutside() {
         this.GetSystem<PlayerResourceSystem>().AddFood(Random.Range(1, 3));
-        this.SendEvent<OnShowFood>();
-        timeSystem.AddDelayTask(4.5f, () => {
+       // this.SendEvent<OnShowFood>();
+        timeSystem.AddDelayTask(1f, () => {
             onClickPeepholeSpeakEnd = true;
         });
     }
 
-    protected void OnAlienClickedOutside()
-    {
-        if (playerResourceSystem.HasEnoughResource<BulletGoods>(1) && playerResourceSystem.HasEnoughResource<GunResource>(1))
-        {
+    protected void OnAlienClickedOutside() {
+        DogSystem dogSystem = this.GetSystem<DogSystem>();
+        
+        
+        if (dogSystem.HaveDog && dogSystem.isDogAlive) {
+            float clipLength = AudioSystem.Singleton.Play2DSound("dogBark_4").clip.length;
+            timeSystem.AddDelayTask(clipLength, () => {
+                LoadCanvas.Singleton.ShowMessage("Your friend is gone...");
+                dogSystem.KillDog();
+                timeSystem.AddDelayTask(2f, () => {
+                    LoadCanvas.Singleton.HideMessage();
+                    timeSystem.AddDelayTask(1f, () => {
+                        onClickPeepholeSpeakEnd = true;
+                    });                    
+                });
+            });
+        } else if (playerResourceSystem.HasEnoughResource<BulletGoods>(1) && playerResourceSystem.HasEnoughResource<GunResource>(1)) {
             playerResourceSystem.RemoveResource<BulletGoods>(1);
             float clipLength = AudioSystem.Singleton.Play2DSound("gun_fire").clip.length;
 
@@ -140,9 +154,7 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
                     });
                 });
             });
-        }
-        else
-        {
+        }else {
             DieCanvas.Singleton.Show("You are killed by the creature!");
             this.GetModel<GameStateModel>().GameState.Value = GameState.End;
             this.GetSystem<BodyGenerationSystem>().StopCurrentBody();

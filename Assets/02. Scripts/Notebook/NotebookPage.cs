@@ -30,7 +30,7 @@ public class NotebookPage : DraggableItems {
 
     }
 
-    public void SetContent(string content) {
+    public void SetContent(string content, DateTime time) {
         pageContentString = content;
         //get the first line of the content
         string firstLine = content.Split('\n')[0];
@@ -39,6 +39,16 @@ public class NotebookPage : DraggableItems {
         if (firstLine.Length > 12) {
             first12Chars += "...";
         }
+
+        string prefix = time.ToString("MM/dd");
+        if (String.IsNullOrEmpty(content)) {
+            first12Chars = "Empty Note";
+        }
+        else
+        {
+            first12Chars = prefix + ": " + first12Chars;
+        }
+        
         pageContentText.text = first12Chars;
 
     }

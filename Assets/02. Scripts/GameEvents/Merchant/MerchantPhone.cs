@@ -28,7 +28,7 @@ public abstract class MerchantGoods: IPlayerResource {
 }
 
 public class BulletGoods : MerchantGoods {
-    public override int BaseFoodPerUnit { get; } = 4;
+    public override int BaseFoodPerUnit { get; } = 3;
    
     public override void RefreshFoodPerUnit() {
         FoodPerUnit = Random.Range(BaseFoodPerUnit - 1, BaseFoodPerUnit + 2);
@@ -96,16 +96,23 @@ public class MerchantPhone : TelephoneContact {
 
     protected override void OnStart() {
         string welcome = "Hello, here is the best underground merchant in MK Town! The following list is the items sold today, press the corresponding number to buy: ";
-        welcome += GetSellListSentence();
-        speaker.Speak(welcome, mixer,"???", OnWelcomeSpeakFinished);
+        speaker.Speak(welcome, mixer, "???", OnWelcomeSpeakFinished);
+        
+       
     }
 
-    private void OnWelcomeSpeakFinished() {
+    private void OnWelcomeSpeakFinished(){
+       
         this.RegisterEvent<OnDialDigit>(OnDialDigit);
+        string welcome = GetSellListSentence();
+        speaker.Speak(welcome, mixer, "Merchant", null);
     }
 
     private void OnDialDigit(OnDialDigit e) {
         this.UnRegisterEvent<OnDialDigit>(OnDialDigit);
+        if (speaker.IsSpeaking) {
+            speaker.Stop();
+        }
         if (e.Digit == 9) {
             speaker.Speak(GetSellListSentence(), mixer,"Merchant", OnWelcomeSpeakFinished);
         }
@@ -118,12 +125,12 @@ public class MerchantPhone : TelephoneContact {
                 MerchantGoods goods = todayGoods[index];
                 if (goods.FoodPerUnit >= playerResourceSystem.FoodCount) {
                     reply =
-                        "You don't have enough food to purchase this item. Please try again or press 9 to repeat the list.";
+                        "You don't have enough food to purchase this item!";
                 }
                 else {
                     playerResourceSystem.RemoveFood(goods.FoodPerUnit);
                     List<string> replies = new List<string>();
-                    replies.Add("Thanks for your order. The item will be delivered to you tomorrow. You can continue shopping or press 9 to repeat the list.");
+                    replies.Add("Thanks for your order. The item will be delivered to you tomorrow. ");
                     replies.Add("There you go, sir! You¡¯ve made the right decision! It will be delivered tomorrow. Good luck!");
                     reply = replies[Random.Range(0, replies.Count)];
 
@@ -135,8 +142,12 @@ public class MerchantPhone : TelephoneContact {
                     gameEventSystem.AddEvent(new GetResourceEvent(new BulletGoods(),1 ,new TimeRange(currentTime)));
                 }
             }
-            speaker.Speak(reply, mixer, "Merchant", OnWelcomeSpeakFinished);
+            speaker.Speak(reply, mixer, "Merchant", OnMerchantSpeakEnd);
         }
+    }
+
+    private void OnMerchantSpeakEnd() {
+        EndConversation();
     }
 
     protected string GetSellListSentence() {
@@ -158,7 +169,10 @@ public class MerchantPhone : TelephoneContact {
     }
 
     private void StopSpeaking() {
-        speaker.Stop();
+        if (speaker.IsSpeaking) {
+            speaker.Stop();
+        }
+        
         this.UnRegisterEvent<OnDialDigit>(OnDialDigit);
     }
 }

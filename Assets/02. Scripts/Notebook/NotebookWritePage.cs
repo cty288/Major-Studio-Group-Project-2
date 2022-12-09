@@ -3,17 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using DG.Tweening;
+using MikroFramework.Architecture;
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class NotebookDragger : MonoBehaviour, IDragHandler, IEndDragHandler {
+public class NotebookDragger : AbstractMikroController<MainGame>, IDragHandler, IEndDragHandler {
     private Vector2 initialPosition;
     public Transform Parent;
     public Action OnTear;
+    
     private void Awake() {
+        
         initialPosition = transform.parent.parent.parent.position;
     }
 
@@ -34,11 +37,11 @@ public class NotebookDragger : MonoBehaviour, IDragHandler, IEndDragHandler {
         }
     }
 }
-public class NotebookWritePage : MonoBehaviour
+public class NotebookWritePage : AbstractMikroController<MainGame>
 {
     public TMP_InputField inputField;
     public string noteString;
-
+    private GameTimeManager gameTimeManager;
     [SerializeField] private Table table;
     [SerializeField] private GameObject noteOnTablePagePrefab;
 
@@ -47,8 +50,8 @@ public class NotebookWritePage : MonoBehaviour
     {
         inputField.caretColor = Color.clear;
         inputField.onValueChanged.AddListener(OnInputFieldValueChang);
-      
-        
+        gameTimeManager = this.GetSystem<GameTimeManager>();
+
     }
 
     private void Start() {
@@ -66,7 +69,7 @@ public class NotebookWritePage : MonoBehaviour
 
     private void OnPageTear() {
         NotebookPage page = table.SpawnItem(noteOnTablePagePrefab).GetComponent<NotebookPage>();
-        page.SetContent(inputField.text);
+        page.SetContent(inputField.text, gameTimeManager.CurrentTime.Value);
         
         noteString = "";
         inputField.text = "";

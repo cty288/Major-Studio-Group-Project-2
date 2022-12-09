@@ -48,12 +48,12 @@ public class BountyHunterQuest2ClueNotificationNotificationContact : BountyHunte
         string welcome =
             $"Hey friend, I hope you got some clues. I have gathered more information about the <color=yellow>location</color> of a dead body killed by the creature we are looking for." +
             $" Between <color=yellow>{hourIn12_1}:{ClueHappenTime.Minute} and {hourIn12_1}:{ClueHappenTime.Minute+10} pm</color>," +
-            $" someone will deliver a note to you. Make sure there's no one outside your home when he arrives, otherwise he might be scared away.";
+            $" someone will deliver a note to you. Make sure there's no one outside your home when he arrives, otherwise he might be scared away. Call me back when you find out that guy!";
 
         if (alreadyNotified) {
             welcome = $"Hey friend, someone reported to me that they saw that creature again this morning." +
                       $" Between <color=yellow>{hourIn12_1}:{ClueHappenTime.Minute} and {hourIn12_1}:{ClueHappenTime.Minute + 10} pm</color>," +
-                      $" I will let my friend to deliver you a note again about its <color=yellow>location</color>. Make sure there's no one outside your home when he arrives, otherwise he might be scared away.";
+                      $" I will let my friend to deliver you a note again about its <color=yellow>location</color>. Make sure there's no one outside your home when he arrives, otherwise he might be scared away. Call me back when you find out that guy!";
 
         }
         speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], "Bounty Hunter", OnSpeakEnd);

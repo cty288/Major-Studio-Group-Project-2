@@ -151,10 +151,9 @@ public class TelephoneSystem : AbstractSystem {
                     yield return new WaitForSeconds(3f);
                 }
                 dealWaitCoroutine = null;
-                UntilAction untilAction = UntilAction.Allocate(OnDealFailed(PhoneDealErrorType.NumberNotAvailable));
-                untilAction.OnEndedCallback += OnDealFailedCallback;
-                untilAction.Execute();
+                OnDealFailed?.Invoke(PhoneDealErrorType.NumberNotExists);
                 Contacts[dealingDigits].HangUp();
+                OnDealFailedCallback();
             }
             else {
                 StartCallConversation(Contacts[dealingDigits]);
@@ -163,13 +162,12 @@ public class TelephoneSystem : AbstractSystem {
         }
         else {
             if (OnDealFailed == null) {
-                OnDealFailedCallback();
+                //OnDealFailedCallback();
             }else {
                 dealWaitCoroutine = null;
-                UntilAction untilAction = UntilAction.Allocate(OnDealFailed(PhoneDealErrorType.NumberNotExists));
-                untilAction.OnEndedCallback += OnDealFailedCallback;
-                untilAction.Execute();
+                OnDealFailed?.Invoke(PhoneDealErrorType.NumberNotExists);
             }
+            OnDealFailedCallback();
         }
         ClearDigits();
     }

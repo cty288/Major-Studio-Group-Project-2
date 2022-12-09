@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using MikroFramework.Architecture;
 using UnityEngine;
 
-public class Cheater : AbstractMikroController<MainGame>
-{
+public class Cheater : AbstractMikroController<MainGame> {
+    public bool enable = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +13,10 @@ public class Cheater : AbstractMikroController<MainGame>
 
     // Update is called once per frame
     void Update() {
-        if (!Application.isEditor) {
+        if (Input.GetKeyDown(KeyCode.F1)) {
+            enable = !enable;
+        }
+        if (!enable) {
             return;
         }
 

@@ -97,8 +97,8 @@
     },
     {
       "AssetName": "mftest",
-      "MD5": "c49c505fb7d20c63fc239a81588fb917",
-      "FileSize": 1043.28223,
+      "MD5": "10871f3c51118b1714a66e98177ea1a8",
+      "FileSize": 1028.24707,
       "assetDatas": [
         {
           "Name": "War loop",
@@ -197,7 +197,7 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "97e3f2a42b903e293b2ce2cb5079f0ca",
+      "MD5": "3b1005e8929783cc57c385dd15824f6f",
       "FileSize": 1.76074219,
       "assetDatas": []
     },

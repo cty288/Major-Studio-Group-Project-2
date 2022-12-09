@@ -46,7 +46,7 @@ public class BountyHunterSystem : AbstractSystem {
         telephoneSystem.AddContact(PhoneNumber, new BountyHunterPhone());
         Debug.Log("BountyHunterPhone: " + PhoneNumber);
         
-        QuestBodyTimeInfo = new BodyTimeInfo(Random.Range(10, 15),
+        QuestBodyTimeInfo = new BodyTimeInfo(Random.Range(20, 30),
             BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true));
     }
 
@@ -73,11 +73,11 @@ public class BountyHunterSystem : AbstractSystem {
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
         
         DateTime nextEventTime = new DateTime(currentTime.Year, currentTime.Month,
-            currentTime.Day, Random.Range(22, 24), Random.Range(10, 60), 0);
+            currentTime.Day, Random.Range(22, 24), Random.Range(10, 40), 0);
         Debug.Log("Next Event Time: " + nextEventTime);
 
         gameEventSystem.AddEvent(new BountyHunterAdEvent(
-            new TimeRange(nextEventTime, nextEventTime + new TimeSpan(0, 0, Random.Range(10, 30), 0, 0)),
+            new TimeRange(nextEventTime, nextEventTime + new TimeSpan(0, 0, Random.Range(30, 50), 0, 0)),
             BountyHunterAdEvent.GetRandomAD(), 1, Gender.MALE, AudioMixerList.Singleton.AudioMixerGroups[0], 1));
     }
 }

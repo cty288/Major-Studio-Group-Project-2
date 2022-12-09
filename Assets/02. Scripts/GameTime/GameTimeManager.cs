@@ -33,7 +33,7 @@ public class GameTimeManager : AbstractSystem, ISystem {
         day++;
         beforeEndOfTodayEvent = null;
         OnDayStart?.Invoke(day);
-        this.GetSystem<ITimeSystem>().AddDelayTask(3f, () => {
+        this.GetSystem<ITimeSystem>().AddDelayTask(2f, () => {
             if (gameStateModel.GameState != GameState.End) {
                 this.GetModel<GameSceneModel>().GameScene.Value = GameScene.MainGame;
                 
@@ -44,7 +44,7 @@ public class GameTimeManager : AbstractSystem, ISystem {
                 {
                     Date = CurrentTime.Value
                 });
-                this.GetSystem<ITimeSystem>().AddDelayTask(5f, StartTimer);
+                this.GetSystem<ITimeSystem>().AddDelayTask(3f, StartTimer);
             }
         });
     }

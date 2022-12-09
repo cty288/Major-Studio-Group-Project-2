@@ -47,10 +47,10 @@ public class DescriptionFormatter : IFormatProvider, ICustomFormatter {
 
     public static string GetHeightDescriptions(BodyInfo body, float reality) {
         List<string> shortDescriptions = new List<string>() {
-            "The victim is short in size."
+            "The victim is short."
         };
         List<string> highDescription = new List<string>() {
-            "The victim has a relatively large size."
+            "The victim has a relatively large body figure."
         };
 
         List<string> targetList = body.Height == HeightType.Short ? shortDescriptions : highDescription;

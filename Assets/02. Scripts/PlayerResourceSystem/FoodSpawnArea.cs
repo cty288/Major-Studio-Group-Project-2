@@ -5,6 +5,7 @@ using System.Linq;
 using Crosstales;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
+using TMPro;
 using UnityEngine;
 
 public class FoodSpawnArea : AbstractMikroController<MainGame> {
@@ -13,16 +14,19 @@ public class FoodSpawnArea : AbstractMikroController<MainGame> {
     private List<SpriteRenderer> foodRenderers = new List<SpriteRenderer>();
 
     private PlayerResourceSystem playerResourceSystem;
+
+    private TMP_Text foodText;
     private void Awake() {
         playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
         playerResourceSystem.FoodCount.RegisterOnValueChaned(OnFoodNumberChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
         foodRenderers = GetComponentsInChildren<SpriteRenderer>(true).ToList();
-
+        foodText = transform.Find("FoodAreaHint/Text").GetComponent<TMP_Text>();
         OnFoodNumberChanged(0, playerResourceSystem.FoodCount.Value);
     }
 
     private void OnFoodNumberChanged(int oldNumber, int foodNumber) {
+        foodText.text = $"Foods: {foodNumber}/8";
         if (foodNumber > oldNumber) {
             int extraFoodNumber = foodNumber - oldNumber;
             List<SpriteRenderer> disabledRenderers = foodRenderers.FindAll(r => !r.gameObject.activeInHierarchy);

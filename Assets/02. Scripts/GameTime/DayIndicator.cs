@@ -26,8 +26,8 @@ public class DayIndicator : AbstractMikroController<MainGame> {
         this.GetSystem<GameTimeManager>().OnDayStart += OnDayStart;
         this.GetSystem<GameTimeManager>().NextDay();
        lastFoodCount = playerResourceSystem.FoodCount.Value;
-        SetFoodCount(lastFoodCount);
-        this.RegisterEvent<OnShowFood>(OnShowFood).UnRegisterWhenGameObjectDestroyed(gameObject);
+        //SetFoodCount(lastFoodCount);
+        //this.RegisterEvent<OnShowFood>(OnShowFood).UnRegisterWhenGameObjectDestroyed(gameObject);
     }
 
     private void OnShowFood(OnShowFood obj) {
@@ -42,7 +42,6 @@ public class DayIndicator : AbstractMikroController<MainGame> {
     private void SetFoodCount(int count) {
         for (int i = 0; i < foodImages.Count; i++) {
             foodImages[i].enabled = i < count;
-            
         }
     }
 
@@ -95,7 +94,7 @@ public class DayIndicator : AbstractMikroController<MainGame> {
     }
 
     private void OnShowFoodIndicator() {
-        PlayFoodCountAnimation();
+       // PlayFoodCountAnimation();
     }
     
 }

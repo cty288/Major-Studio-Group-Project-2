@@ -77,11 +77,11 @@ public class NewspaperUIPanel : OpenableUIPanel {
             TMP_Text hintText = symbolImages[i].GetComponentInChildren<TMP_Text>(true);
             if (info.DayRemaining == 3) {
                 symbolImages[i].sprite = symbols[0];
-                hintText.text = "This person is dead.";
+                hintText.text = "This person died today.";
             }
             else {
                 symbolImages[i].sprite = symbols[1];
-                hintText.text = "We are not sure if they are dead or not.";
+                hintText.text = "Not sure whether they are dead.";
             }
 
             

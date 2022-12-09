@@ -74,7 +74,7 @@ public class HairCutTagMiddleScore : HaircutTag
         {
             return new List<string>()
             {
-                "The convict has an <color=yellow>Asian style haircut</color>.",
+                "The convict has a <color=yellow>middle part haircut</color>.",
                 "Its hairstyle is <color=yellow>center parted</color>."
             };
         }
