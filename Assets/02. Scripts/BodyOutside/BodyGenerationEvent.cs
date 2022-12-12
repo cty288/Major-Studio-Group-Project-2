@@ -100,13 +100,18 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
         onClickPeepholeSpeakEnd = false;
         Speaker speaker = GameObject.Find("OutsideBodySpeaker").GetComponent<Speaker>();
         if (bodyInfo.IsAlien) {
+            LoadCanvas.Singleton.ShowImage(0, 0.2f);
             List<string> messages = new List<string>() {
-                "Good day sir. But it's your time!",
-                "Haha! Your life ends today!!",
+                "goOD dAy sIR. buT iT'S yOuR tiME!",
+                "hI, Hi! iT IS yOur tiMe!",
+                "I nEeD yOU cLotHEs!",
+                "YOur bRaIN iS MiNE!",
+                "YOuR TimE IS oVeR!"
             };
-            speaker.Speak(messages[Random.Range(0, messages.Count)], null, "???", OnAlienClickedOutside);
+            speaker.Speak(messages[Random.Range(0, messages.Count)], AudioMixerList.Singleton.AudioMixerGroups[4], "???", OnAlienClickedOutside);
         }
         else {
+            LoadCanvas.Singleton.ShowImage(1, 0.2f);
             List<string> messages = new List<string>() {
                 "Delivery service! Take care!",
                 "Here¡¯s the food for you today. Take care!",
@@ -122,6 +127,7 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
        // this.SendEvent<OnShowFood>();
         timeSystem.AddDelayTask(1f, () => {
             onClickPeepholeSpeakEnd = true;
+            LoadCanvas.Singleton.HideImage(0.5f);
         });
     }
 
@@ -132,6 +138,8 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
         if (dogSystem.HaveDog && dogSystem.isDogAlive) {
             float clipLength = AudioSystem.Singleton.Play2DSound("dogBark_4").clip.length;
             timeSystem.AddDelayTask(clipLength, () => {
+                LoadCanvas.Singleton.HideImage(1f);
+                AudioSystem.Singleton.Play2DSound("dog_die");
                 LoadCanvas.Singleton.ShowMessage("Your friend is gone...");
                 dogSystem.KillDog();
                 timeSystem.AddDelayTask(2f, () => {
@@ -146,6 +154,7 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
             float clipLength = AudioSystem.Singleton.Play2DSound("gun_fire").clip.length;
 
             timeSystem.AddDelayTask(1f, () => {
+                LoadCanvas.Singleton.HideImage(1f);
                 LoadCanvas.Singleton.ShowMessage("You shot the creature and it fleed.\n\nBullet - 1");
                 timeSystem.AddDelayTask(2f, () => {
                     LoadCanvas.Singleton.HideMessage();
@@ -155,6 +164,7 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
                 });
             });
         }else {
+            LoadCanvas.Singleton.HideImage(1f);
             DieCanvas.Singleton.Show("You are killed by the creature!");
             this.GetModel<GameStateModel>().GameState.Value = GameState.End;
             this.GetSystem<BodyGenerationSystem>().StopCurrentBody();

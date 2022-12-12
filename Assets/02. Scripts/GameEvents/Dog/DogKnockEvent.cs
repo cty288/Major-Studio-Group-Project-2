@@ -65,7 +65,7 @@ public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEven
         Debug.Log("Start Knock");
 
         for (int i = 0; i < knockTime; i++) {
-            string clipName =  $"dogBark_{Random.Range(1, 5)}";
+            string clipName =  $"dog_outside_door_{Random.Range(1, 4)}";
             knockAudioSource = AudioSystem.Singleton.Play2DSound(clipName, 1, false);
             yield return new WaitForSeconds(knockAudioSource.clip.length + knockDoorTimeInterval);
         }

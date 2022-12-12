@@ -102,10 +102,12 @@ public class BountyHunterPhone : TelephoneContact {
               
                 failedLastTime = false;
                 provideCorrectInfoCount++;
+                DateTime questStartTime = tomorrow.AddMinutes(Random.Range(30, 60));
+                DateTime questEndTime = new DateTime(questStartTime.Year, questStartTime.Month, questStartTime.Day, 23, 58, 0);
+                
                 if (provideCorrectInfoCount == 1 && bountyHunterSystem.FalseClueCount <= bountyHunterSystem.MaxFalseClueCountForQuest)
                 {
-                    DateTime questStartTime = tomorrow.AddMinutes(Random.Range(30, 60));
-                    DateTime questEndTime = new DateTime(questStartTime.Year, questStartTime.Month, questStartTime.Day, 23, 58, 0);
+                   
                     gameEventSystem.AddEvent(new BountyHunterQuestStartEvent(new TimeRange(questStartTime, questEndTime),
                         new BountyHunterQuestStartPhone(), 6));
                 }
@@ -113,7 +115,11 @@ public class BountyHunterPhone : TelephoneContact {
                 if (info.ID == bountyHunterSystem.QuestBodyTimeInfo.BodyInfo.ID)
                 {
                     bountyHunterSystem.QuestFinished = true;
-                    Debug.Log("Correct Quest Info!!");
+                    Debug.Log("Correct Quest Info!! Call will start at " + questStartTime);
+                    gameEventSystem.AddEvent(new BountyHunterQuestFinishPhoneEvent(
+                        new TimeRange(questStartTime, questEndTime),
+                        new BountyHunterQuestFinishContact(), 6));
+
                 }
 
             }

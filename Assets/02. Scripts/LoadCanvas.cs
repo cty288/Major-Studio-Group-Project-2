@@ -16,11 +16,14 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
     private TMP_Text message;
 
     [SerializeField] private List<Camera> scenesToCameras = new List<Camera>();
+    [SerializeField] private List<Sprite> imageSprites = new List<Sprite>();
+    private Image image;
     private void Awake() {
         gameTimeManager = this.GetSystem<GameTimeManager>();
         bg = transform.Find("BG").GetComponent<Image>();
         message = transform.Find("Message").GetComponent<TMP_Text>();
         this.GetModel<GameSceneModel>().GameScene.RegisterOnValueChaned(OnGameSceneChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
+        image = transform.Find("Image").GetComponent<Image>();
     }
 
     private void OnGameSceneChanged(GameScene scene) {
@@ -60,6 +63,26 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
         });
     }
 
+    public void Load(Action onScreenBlack) {
+        bg.raycastTarget = true;
+        gameTimeManager.LockDayEnd.Retain();
+        bg.DOFade(1, 0.5f).OnComplete(() => {
+            onScreenBlack?.Invoke();
+        });
+    }
+
+    public void StopLoad(Action onScreenRecover)
+    {
+        bg.raycastTarget = false;
+        gameTimeManager.LockDayEnd.Release();
+        bg.DOFade(0, 0.5f).OnComplete(() =>
+        {
+            onScreenRecover?.Invoke();
+        });
+    }
+
+
+
     public void LoadUntil(Func<Func<bool>> onScreenBlack, Action onScreenRecover) {
         gameTimeManager.LockDayEnd.Retain();
         bg.raycastTarget = true;
@@ -85,6 +108,15 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
 
     public void HideMessage() {
         this.message.DOFade(0, 1f);
+    }
+
+    public void ShowImage(int imageIndex, float duration) {
+        image.sprite = imageSprites[imageIndex];
+        image.DOFade(1, duration);
+    }
+
+    public void HideImage(float duration) {
+        image.DOFade(0, duration);
     }
 
     public IArchitecture GetArchitecture() {

@@ -45,7 +45,11 @@ public class MerchantNoteUIPanel : OpenableUIPanel {
         images.ForEach((image => image.DOFade(0, 0.5f)));
         texts.ForEach((text => text.DOFade(0, 0.5f)));
         this.Delay(0.5f, () => {
-            panel.SetActive(false);
+            if (this) {
+                {
+                    panel.SetActive(false);
+                }
+            }
         });
     }
 

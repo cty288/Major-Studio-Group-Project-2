@@ -23,8 +23,13 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
     }
 
     public void Show(string dieReason) {
+        Show("You Died!", dieReason);
+    }
+
+    public void Show(string title, string dieReason) {
         transform.Find("Panel").gameObject.SetActive(true);
         transform.Find("Panel/DieReason").GetComponent<TMP_Text>().text = dieReason;
+        transform.Find("Panel/DieText").GetComponent<TMP_Text>().text = title;
     }
     public IArchitecture GetArchitecture() {
         return MainGame.Interface;

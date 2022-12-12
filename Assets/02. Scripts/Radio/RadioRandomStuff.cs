@@ -66,6 +66,9 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
         RegisterRadioMessages(Message_Christian_Church);
         RegisterRadioMessages(Message_Research);
         RegisterRadioMessages(Message_Military);
+        RegisterRadioMessages(Message_Mayor);
+        RegisterRadioMessages(Message_Suply);
+        RegisterRadioMessages(Message_Newspaper);
 
         radioMessageCopies.AddRange(_radioMessages);
     }
@@ -129,7 +132,7 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
     private RadioMessage Message_Hacked()
     {
         string content = "This is us. For human. Surrender then live. Otherwise, die.";
-        return new RadioMessage(content, 0.5f, Gender.MALE, 1f, 1);
+        return new RadioMessage(content, 0.5f, Gender.MALE, 1f, 4);
     }
 
     private RadioMessage Message_Military()
@@ -153,6 +156,25 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
         string content =
             "According to research, this mysterious creature have only a slight advantage over humans in terms of bodily functions. If you have a firearm in your home, make sure it is always ready to use.";
         return new RadioMessage(content, 1.2f, Gender.MALE, 1f, 1);
+    }
+
+    private RadioMessage Message_Mayor() {
+        string content =
+            "The mayor held a press conference yesterday. He reiterate the urgent need to surpress recent infiltrations attempts. The government is dispatching more forces and couriers into the area";
+        return new RadioMessage(content, 1.2f, Gender.MALE, 0.5f, 1);
+    }
+
+    private RadioMessage Message_Suply() {
+        string content =
+            "If you are running low on your supplies during quarantine, no worries! The government along with many private organizations are providing you the most stable delivery service you can count on.";
+        return new RadioMessage(content, 1.2f, Gender.MALE, 0.8f, 1);
+    }
+
+    private RadioMessage Message_Newspaper()
+    {
+        string content =
+            "Anxious about the infiltration in your area? Read the town newspaper everyday to get the information that can keep you and your loved ones safe!";
+        return new RadioMessage(content, 1.2f, Gender.MALE, 0.8f, 1);
     }
 
     private RadioMessage Message_KFCVMe50() {
