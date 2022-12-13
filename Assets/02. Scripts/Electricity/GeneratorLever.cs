@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using MikroFramework.Architecture;
+using MikroFramework.AudioKit;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -30,9 +31,15 @@ public class GeneratorLever : AbstractMikroController<MainGame>, IPointerEnterHa
         if(Input.GetMouseButtonUp(0))
         {
             isWorking = false;
+            if (rotatingAudio)
+            {
+                AudioSystem.Singleton.StopSound(rotatingAudio);
+                rotatingAudio = null;
+            }
         }
     }
 
+    private AudioSource rotatingAudio;
     private void SetDraggedRotation(PointerEventData eventData)
     {        
         z0 = this.transform.eulerAngles.z;
@@ -47,6 +54,17 @@ public class GeneratorLever : AbstractMikroController<MainGame>, IPointerEnterHa
             realAngle = 360 - realAngle;
         }
 
+        if (realAngle >= 0.5f) {
+            if (!rotatingAudio) {
+                rotatingAudio = AudioSystem.Singleton.Play2DSound("motor_gear_loop", 2f, true);
+            }
+        }
+        else {
+            if (rotatingAudio) {
+                AudioSystem.Singleton.StopSound(rotatingAudio);
+                rotatingAudio = null;
+            }
+        }
         this.GetSystem<ElectricitySystem>().AddElectricity(effeciency * realAngle * Time.deltaTime);
         Debug.Log(this.GetSystem<ElectricitySystem>().Electricity.Value);
         isWorking = true;

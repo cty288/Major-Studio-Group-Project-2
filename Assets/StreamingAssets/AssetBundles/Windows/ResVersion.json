@@ -3,8 +3,8 @@
   "ABMD5List": [
     {
       "AssetName": "aliens",
-      "MD5": "496fc1ab9ac1bff2dc046ac2bfa3bf2a",
-      "FileSize": 138.757813,
+      "MD5": "e03939beeb84fa7c2fc67e3ce12e54fd",
+      "FileSize": 141.988281,
       "assetDatas": [
         {
           "Name": "AlienBody",
@@ -35,9 +35,69 @@
     },
     {
       "AssetName": "audios",
-      "MD5": "ddda5e97cdd9b48dd68282374d6850f1",
-      "FileSize": 532.286133,
+      "MD5": "aa91a45d146117e6ca1dbd75aa97a604",
+      "FileSize": 1493.0,
       "assetDatas": [
+        {
+          "Name": "dogBark_1",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "dogBark_2",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "dogBark_3",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "dogBark_4",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "dog_attack",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "dog_die",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "dog_outside_door_1",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "dog_outside_door_2",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "dog_outside_door_3",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "dog_usual_1",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "dog_usual_2",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "motor_gear_loop",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
         {
           "Name": "gun_fire",
           "OwnerBundleName": "audios",
@@ -75,6 +135,21 @@
         },
         {
           "Name": "knock_7",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "Newspaper SOUND EFFECT - Reading Newspaper Flipping Newspaper SOUND-[AudioTrimmer",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "pick_up_newspaper",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "put_down_newspaper",
           "OwnerBundleName": "audios",
           "AssetType": "UnityEngine.AudioClip"
         },
@@ -197,7 +272,7 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "3b1005e8929783cc57c385dd15824f6f",
+      "MD5": "5fc41542bdf83039a279e1bd044e54b6",
       "FileSize": 1.76074219,
       "assetDatas": []
     },

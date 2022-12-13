@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using MikroFramework;
 using MikroFramework.Architecture;
+using MikroFramework.AudioKit;
 using MikroFramework.Event;
 using UnityEngine;
 using UnityEngine.UI;
@@ -53,7 +54,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
     public void Show(Newspaper news) {
         dateText.text = news.dateString;
         panel.gameObject.SetActive(true);
-
+        AudioSystem.Singleton.Play2DSound("pick_up_newspaper");
         if (lastNewspaper == news && savedSpawnedImages.Count > 0) {
             return;
         }
@@ -62,6 +63,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
             GameObject.Destroy(image.gameObject);
         }
 
+        
 
         for (int i = 0; i < news.timeInfos.Count; i++) {
             BodyTimeInfo info = news.timeInfos[i];
@@ -101,5 +103,6 @@ public class NewspaperUIPanel : OpenableUIPanel {
         this.Delay(0.5f, () => {
             panel.gameObject.SetActive(false);
         });
+        AudioSystem.Singleton.Play2DSound("put_down_newspaper");
     }
 }

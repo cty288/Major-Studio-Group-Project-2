@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2427427863
+CRC: 3159268077
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6afb3d37655800742730f21c35fe1bc3
+    Hash: 5a5ad7ea7545a024f592003a3155e93c
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9a2ca7bdbd1871f7131daf57de908e0c
@@ -15,13 +15,29 @@ SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/04. Audios/telephone/incoming_call.ogg
 - Assets/04. Audios/Knocks/knock_5.mp3
+- Assets/04. Audios/Dog/dogBark_1.wav
+- Assets/04. Audios/Electricity/motor_gear_loop.mp3
+- Assets/04. Audios/Dog/New/dog_die.mp3
+- Assets/04. Audios/Dog/dogBark_2.wav
+- Assets/04. Audios/Dog/dogBark_4.wav
+- Assets/04. Audios/Dog/New/dog_usual_1.mp3
 - Assets/04. Audios/Knocks/knock_7.wav
 - Assets/04. Audios/telephone/hang_out.ogg
+- Assets/04. Audios/Newspaper/pick_up_newspaper.wav
+- Assets/04. Audios/Dog/New/dog_outside_door_1.mp3
+- Assets/04. Audios/Newspaper/Newspaper SOUND EFFECT - Reading Newspaper Flipping
+  Newspaper SOUND-[AudioTrimmer.com].mp3
+- Assets/04. Audios/Newspaper/put_down_newspaper.mp3
+- Assets/04. Audios/Dog/New/dog_usual_2.mp3
+- Assets/04. Audios/Dog/New/dog_outside_door_2.mp3
 - Assets/04. Audios/Gun/gun_fire.wav
 - Assets/04. Audios/Knocks/knock_2.ogg
+- Assets/04. Audios/Dog/New/dog_outside_door_3.mp3
+- Assets/04. Audios/Dog/New/dog_attack.mp3
 - Assets/04. Audios/telephone/phone_dialing.ogg
 - Assets/04. Audios/Knocks/knock_3.ogg
 - Assets/04. Audios/Knocks/knock_6.mp3
+- Assets/04. Audios/Dog/dogBark_3.wav
 - Assets/04. Audios/Knocks/knock_1.ogg
 - Assets/04. Audios/Knocks/knock_4.mp3
 Dependencies: []

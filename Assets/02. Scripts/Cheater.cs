@@ -47,7 +47,7 @@ public class Cheater : AbstractMikroController<MainGame> {
         }
 
         if (Input.GetKeyDown(KeyCode.I)) {
-            this.GetSystem<TelephoneSystem>().IncomingCall(new TestIncomingCallContact(), 3);
+           // this.GetSystem<TelephoneSystem>().IncomingCall(new TestIncomingCallContact(), 3);
         }
 
         if (Input.GetKeyDown(KeyCode.B)) {
