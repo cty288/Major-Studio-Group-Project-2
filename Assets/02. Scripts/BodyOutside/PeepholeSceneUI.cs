@@ -15,6 +15,7 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
     private ElectricitySystem electricitySystem;
     private TMP_Text indicateText;
     private GameObject panelObj;
+    public OutdoorFlashLight flashlight;
     private void Awake() {
         gameSceneModel = this.GetModel<GameSceneModel>();
         panelObj = transform.Find("Panel").gameObject;
@@ -41,7 +42,12 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
     }
 
     private void Update() {
-        if (electricitySystem.Electricity.Value < 0.9f) {
+        
+        if (flashlight.flashed)
+        {
+            indicateText.text = "Flash is cooling down";
+        }
+        else if (electricitySystem.Electricity.Value < 0.9f) {
             indicateText.text = "Not enough electricity";
         }
         else {

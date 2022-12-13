@@ -5770,6 +5770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2695c720035ef4549bbeeb840d0719dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flashed: 0
   speaker: {fileID: 1833682519}
   peepholeSceneUI: {fileID: 2147042050}
 --- !u!1 &439130473
@@ -23198,3 +23199,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f50f8a5b85b19e478a1c97034f4b9a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flashlight: {fileID: 437468774}
