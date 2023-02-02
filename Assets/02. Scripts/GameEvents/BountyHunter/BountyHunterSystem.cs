@@ -19,10 +19,10 @@ public class BountyHunterSystem : AbstractSystem {
 
     public BodyTimeInfo QuestBodyTimeInfo { get; private set; }
 
-    //��������û��ȫ��͸¶�����������¼�������1���ᷢ����һ���¼�����ʧ�ܣ����������͸¶�¼�֮ǰ�����ٴη���
-    //������ȫ��͸¶�����������¼�������2-3���ᷢ����һ���¼�����ʧ�ܣ����������͸¶�¼�֮ǰ�����ٴη���
-    //��������ÿ�ζ��ǲ�һ���ģ���ʹ��ͬһ��ͷ���������ص����Ҳ�᲻һ����
-    //ÿ���¼�ִ�гɹ��������ѷ������󣬵�0-3���ڻᷢ�����������Ϣ����Ϊ��ȷ�ʹ��󣩣�����ȷ��������Ϣһ����һ���ģ�ÿ����ȷ/�����¼����ټ��һ��
+    //当线索还没有全部透露：发送线索事件结束后，1天后会发送下一个事件；若失败，则会在线索透露事件之前尝试再次发送
+    //当线索全部透露：发送线索事件结束后，2-3天后会发送下一个事件；若失败，则会在线索透露事件之前尝试再次发送
+    //线索内容每次都是不一样的（即使是同一个头的描述，地点可能也会不一样）
+    //每个事件执行成功（线索已发出）后，第0-3天内会发送相关线索信息（分为正确和错误），且正确的线索信息一定是一样的，每条正确/错误事件至少间隔一天
     public bool QuestBodyClueAllHappened { get; set; } = false;
     public bool QuestFinished { get; set; } = false;
 

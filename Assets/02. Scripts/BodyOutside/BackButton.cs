@@ -12,8 +12,7 @@ public class BackButton : MonoMikroSingleton<BackButton>, IController {
     private Button button;
     private Image image;
 
-    [SerializeField] private List<Camera> sceneCameras;
-    [SerializeField] private Camera mainCamera;
+    
 
     private TMP_Text hintText;
     private void Awake() {

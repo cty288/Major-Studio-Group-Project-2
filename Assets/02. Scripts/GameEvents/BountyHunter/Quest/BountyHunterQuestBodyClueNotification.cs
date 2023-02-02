@@ -8,7 +8,7 @@ using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 
-//Çé±¨ÌáÊ¾µÄµç»°ÊÂ¼ş
+//æƒ…æŠ¥æç¤ºçš„ç”µè¯äº‹ä»¶
 public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
     public override GameEventType GameEventType { get; } = GameEventType.BountyHunterQuestClueNotification;
     protected BountyHunterSystem bountyHunterSystem;
@@ -119,7 +119,7 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
 
     protected abstract BountyHunterQuestClueEvent GetClueEvent(TimeRange happenTimeRange);
 }
-//Çé±¨ÌáÊ¾µÄµç»°
+//æƒ…æŠ¥æç¤ºçš„ç”µè¯
 public abstract class BountyHunterQuestClueNotificationContact : TelephoneContact {
     public DateTime ClueHappenTime { get; set; }
 
@@ -133,7 +133,7 @@ public abstract class BountyHunterQuestClueNotificationContact : TelephoneContac
         return !bountyHunterSystem.IsInJail;
     }
 }
-//Çé±¨·¢ËÍµÄÊÂ¼ş
+//æƒ…æŠ¥å‘é€çš„äº‹ä»¶
 public abstract class BountyHunterQuestClueEvent : GameEvent {
     protected BountyHunterQuestClueEvent(TimeRange startTimeRange) : base(startTimeRange) {
         
@@ -173,7 +173,7 @@ public abstract class BountyHunterQuestClueEvent : GameEvent {
         DateTime startDate);
 }
 
-//Ïà¹ØÇé±¨µÄÊÕÒô»úÄÚÈİ
+//ç›¸å…³æƒ…æŠ¥çš„æ”¶éŸ³æœºå†…å®¹
 public abstract class BountyHunterQuestClueInfoEvent : RadioEvent {
     protected bool IsRealClue { get; set; }
     protected DateTime startDate;

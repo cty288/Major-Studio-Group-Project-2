@@ -13,37 +13,36 @@ public class NotebookPanel : OpenableUIPanel
 {
     
     private GameObject panel;
-    private Button backButton;
+
   
     protected override void Awake() {
         base.Awake();
         panel = transform.Find("Panel").gameObject;
-        backButton = panel.transform.Find("BackButton").GetComponent<Button>();
-        backButton.onClick.AddListener(OnBackButtonClicked);
+  
     }
     public override void OnDayEnd()
     {
-        Hide();
+        Hide(0.5f);
     }
     
     private void OnBackButtonClicked() {
-        Hide();
+        Hide(0.5f);
     }    
-    public override void Show() {
+    public override void OnShow(float time) {
         panel.gameObject.SetActive(true);
         if (GetComponentInChildren<TMP_SelectionCaret>(true)) {
             GetComponentInChildren<TMP_SelectionCaret>(true).raycastTarget = true;
         }
     }
 
-    public override void Hide() {
-        panel.gameObject.GetComponent<Animator>().CrossFade("Stop", 0.5f);
+    public override void OnHide(float time) {
+        panel.gameObject.GetComponent<Animator>().CrossFade("Stop", time);
         if (GetComponentInChildren<TMP_SelectionCaret>(true))
         {
             GetComponentInChildren<TMP_SelectionCaret>(true).raycastTarget = false;
         }
 
-        this.Delay(0.5f, () => {
+        this.Delay(time, () => {
             panel.gameObject.SetActive(false);
         });
     }

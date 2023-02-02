@@ -7,6 +7,6 @@ using UnityEngine.EventSystems;
 public class NotebookViewController : AbstractMikroController<MainGame>, IPointerClickHandler{
     [SerializeField] private OpenableUIPanel panel;
     public void OnPointerClick(PointerEventData eventData) {
-        panel.Show();
+        panel.Show(0.5f);
     }
 }

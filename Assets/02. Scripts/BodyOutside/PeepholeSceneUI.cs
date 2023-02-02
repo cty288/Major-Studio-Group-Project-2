@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
@@ -9,6 +10,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PeepholeSceneUI : AbstractMikroController<MainGame> {
+    
+    //protected List<Collider2D> colliders = new List<Collider2D>();
     private Button lightButton;
     public Action OnLightButtonPressed = () => { };
     private GameSceneModel gameSceneModel;
@@ -26,12 +29,12 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
             .UnRegisterWhenGameObjectDestroyed(gameObject);
         electricitySystem = this.GetSystem<ElectricitySystem>();
         indicateText = panelObj.transform.Find("IndicateText").GetComponent<TMP_Text>();
+        //colliders = GetComponents<Collider2D>().ToList();
     }
 
     private void OnGameSceneChanged(GameScene scene) {
         this.Delay(0.5f, () => {
-            if (scene == GameScene.Peephole)
-            {
+            if (scene == GameScene.Peephole) {
                 panelObj.SetActive(true);
             }
             else
@@ -53,6 +56,8 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
         else {
             indicateText.text = "";
         }
+        
+        
     }
 
     private void OnLightPressed() {

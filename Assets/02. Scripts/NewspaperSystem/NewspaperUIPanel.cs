@@ -13,26 +13,30 @@ public class NewspaperUIPanel : OpenableUIPanel {
   
     private GameObject panel;
     private TMP_Text dateText;
-
-    private Button backButton;
+    protected GameObject outOfDateText;
+   
 
     [SerializeField] private List<RawImage> imageContainers = new List<RawImage>();
     private List<GameObject> savedSpawnedImages = new List<GameObject>();
     private Newspaper lastNewspaper = null;
     [SerializeField] private List<Image> symbolImages = new List<Image>();
     [SerializeField] private List<Sprite> symbols = new List<Sprite>();
-
+    private GameTimeManager gameTimeManager;
+    
     protected Newspaper news;
     public override void OnDayEnd() {
-        Hide();
+        Hide(0.5f);
+        
     }
 
     protected override void Awake() {
         base.Awake();
         panel = transform.Find("Panel").gameObject;
-        backButton = panel.transform.Find("BackButton").GetComponent<Button>();
+        //backButton = panel.transform.Find("BackButton").GetComponent<Button>();
         dateText = panel.transform.Find("DateText").GetComponent<TMP_Text>();
-        backButton.onClick.AddListener(OnBackButtonClicked);
+        //backButton.onClick.AddListener(OnBackButtonClicked);
+        gameTimeManager = this.GetSystem<GameTimeManager>();
+        outOfDateText = panel.transform.Find("OutOfDateText").gameObject;
         this.RegisterEvent<OnNewspaperUIPanelOpened>(OnNewspaperUIPanelOpened)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
     }
@@ -48,12 +52,17 @@ public class NewspaperUIPanel : OpenableUIPanel {
     }
 
     private void OnBackButtonClicked() {
-        Hide();
+        Hide(0.5f);
     }    
 
     public void Show(Newspaper news) {
+        outOfDateText.SetActive(gameTimeManager.CurrentTime.Value.Day - news.date.Day >= 3);
+        
         dateText.text = news.dateString;
         panel.gameObject.SetActive(true);
+        this.Delay(0.5f, () => {
+            isShow = true;
+        });
         AudioSystem.Singleton.Play2DSound("pick_up_newspaper");
         if (lastNewspaper == news && savedSpawnedImages.Count > 0) {
             return;
@@ -94,13 +103,13 @@ public class NewspaperUIPanel : OpenableUIPanel {
         lastNewspaper = news;
     }
 
-    public override void Show() {
+    public override void OnShow(float time) {
         Show(news);
     }
 
-    public override void Hide() {
-        panel.gameObject.GetComponent<Animator>().CrossFade("Stop", 0.5f);
-        this.Delay(0.5f, () => {
+    public override void OnHide(float time) {
+        panel.gameObject.GetComponent<Animator>().CrossFade("Stop", time);
+        this.Delay(time, () => {
             panel.gameObject.SetActive(false);
         });
         AudioSystem.Singleton.Play2DSound("put_down_newspaper");

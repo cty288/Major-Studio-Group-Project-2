@@ -86,7 +86,7 @@ public class TelephoneViewController : ElectricalApplicance, IPointerClickHandle
         if (!electricitySystem.HasElectricity()) {
             return;
         }
-        panel.Show();
+        panel.Show(0.5f);
         if (telephoneSystem.CurrentIncomingCallContact != null) {
             telephoneSystem.ReceiveIncomingCall();
         }

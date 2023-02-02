@@ -16,7 +16,7 @@ public class MerchantNoteUIPanel : OpenableUIPanel {
     private GameObject panel;
     private TMP_Text phoneNumberText;
     private MerchantSystem merchantSystem;
-    private Button backButton;
+
     protected override void Awake() {
         base.Awake();
         this.RegisterEvent<OnMerchantNoteUIPanelOpened>(OnMerchantNoteUIPanelOpened).UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -25,26 +25,25 @@ public class MerchantNoteUIPanel : OpenableUIPanel {
         merchantSystem = this.GetSystem<MerchantSystem>();
         phoneNumberText = transform.Find("Panel/Paper/PhoneNumberText").GetComponent<TMP_Text>();
         panel = transform.Find("Panel").gameObject;
-        backButton = panel.transform.Find("BackButton").GetComponent<Button>();
-        backButton.onClick.AddListener(Hide);
-        Hide();
+
+        Hide(0.5f);
     }
 
     private void OnMerchantNoteUIPanelOpened(OnMerchantNoteUIPanelOpened e) {
-        Show();
+        Show(0.5f);
     }
 
-    public override void Show() {
+    public override void OnShow(float time) {
         phoneNumberText.text = merchantSystem.PhoneNumber;
         panel.SetActive(true);
-        images.ForEach((image => image.DOFade(1, 0.5f)));
-        texts.ForEach((text => text.DOFade(1, 0.5f)));
+        images.ForEach((image => image.DOFade(1, time)));
+        texts.ForEach((text => text.DOFade(1, time)));
     }
 
-    public override void Hide() {
-        images.ForEach((image => image.DOFade(0, 0.5f)));
-        texts.ForEach((text => text.DOFade(0, 0.5f)));
-        this.Delay(0.5f, () => {
+    public override void OnHide(float time) {
+        images.ForEach((image => image.DOFade(0, time)));
+        texts.ForEach((text => text.DOFade(0, time)));
+        this.Delay(time, () => {
             if (this) {
                 {
                     panel.SetActive(false);
@@ -54,7 +53,7 @@ public class MerchantNoteUIPanel : OpenableUIPanel {
     }
 
     public override void OnDayEnd() {
-        Hide();
+        Hide(0.5f);
     }
 
    

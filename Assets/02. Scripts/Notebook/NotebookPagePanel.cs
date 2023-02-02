@@ -13,30 +13,29 @@ public class NotebookPagePanel : OpenableUIPanel {
    
     protected TMP_Text pageText;
     private GameObject panel;
-    private Button backButton;
+
    
 
     public override void OnDayEnd()
     {
-        Hide();
+        Hide(0.5f);
     }
     
     private void OnBackButtonClicked() {
-        Hide();
+        Hide(0.5f);
     }    
 
     protected override void Awake() {
         base.Awake();
         panel = transform.Find("Panel").gameObject;
-        backButton = panel.transform.Find("BackButton").GetComponent<Button>();
-        backButton.onClick.AddListener(OnBackButtonClicked);
+
         pageText = transform.Find("Panel/NotebookWritePage/Text").GetComponent<TMP_Text>();
         this.RegisterEvent<OnNotePanelOpened>(OnNotePanelOpened).UnRegisterWhenGameObjectDestroyed(gameObject);
     }
 
     private void OnNotePanelOpened(OnNotePanelOpened e) {
         SetContent(e.Content);
-        Show();
+        Show(0.5f);
     }
 
 
@@ -45,14 +44,14 @@ public class NotebookPagePanel : OpenableUIPanel {
         this.content = content;
     }
     
-    public override void Show() {
+    public override void OnShow(float time) {
         panel.gameObject.SetActive(true);
         pageText.text = content;
     }
 
-    public override void Hide() {
-        panel.gameObject.GetComponent<Animator>().CrossFade("Stop", 0.5f);
-        this.Delay(0.5f, () => {
+    public override void OnHide(float time) {
+        panel.gameObject.GetComponent<Animator>().CrossFade("Stop", time);
+        this.Delay(time, () => {
             panel.gameObject.SetActive(false);
         });
     }
