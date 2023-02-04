@@ -64,7 +64,7 @@ public class DescriptionFormatter : IFormatProvider, ICustomFormatter {
 
     public static string GetByTag<T>(BodyInfo body, float reality) where T : class, IAlienTag {
         if (body.CheckContainTags<T>(out List<T> t)) {
-            return t[Random.Range(0, t.Count)].GetRandomDescription(IsReal(reality));
+            return t[Random.Range(0, t.Count)].GetRandomRadioDescription(IsReal(reality));
         }
 
         return String.Empty;
@@ -73,7 +73,7 @@ public class DescriptionFormatter : IFormatProvider, ICustomFormatter {
     public static string GetByTag<T>(AlienBodyPartInfo bodyPart, float reality) where T : class, IAlienTag {
         var allTags = bodyPart.Tags.FindAll(x => x is T);
         if (allTags.Count > 0) {
-            return ((T) allTags[Random.Range(0, allTags.Count)]).GetRandomDescription(IsReal(reality));
+            return ((T) allTags[Random.Range(0, allTags.Count)]).GetRandomRadioDescription(IsReal(reality));
         }
         return String.Empty;
     }

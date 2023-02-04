@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
@@ -95,14 +97,43 @@ public class NewspaperUIPanel : OpenableUIPanel {
                 hintText.text = "Not sure whether they are dead.";
             }
 
-            
-            
+            imageContainers[i].GetComponent<BountyHuntingSelector>().SetHintText(GetShortDescription(bodyInfo));
+
         }
 
 
         lastNewspaper = news;
     }
 
+    public string GetShortDescription(BodyInfo bodyInfo) {
+        List<IAlienTag> tags = new List<IAlienTag>();
+        
+        bodyInfo.HeadInfoPrefab.Tags.ForEach((alienTag => {
+            List<string> shortDescriptions = alienTag.GetShortDescriptions();
+            if(shortDescriptions.Count > 0 && !string.IsNullOrEmpty(shortDescriptions[0])) {
+                tags.Add(alienTag);
+            }
+        }));
+        
+        bodyInfo.MainBodyInfoPrefab.Tags.ForEach((alienTag => {
+            List<string> shortDescriptions = alienTag.GetShortDescriptions();
+            if(shortDescriptions.Count > 0 && !string.IsNullOrEmpty(shortDescriptions[0])) {
+                tags.Add(alienTag);
+            }
+        }));
+        
+        
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < tags.Count; i++) {
+            if (i == 2) {
+                break;
+            }
+            if (i == 0) stringBuilder.Append(tags[i].GetShortDescriptions()[0]);
+            else stringBuilder.Append("\n").Append(tags[i].GetShortDescriptions()[0]);
+        }
+
+        return stringBuilder.ToString();
+    }
     public override void OnShow(float time) {
         Show(news);
     }

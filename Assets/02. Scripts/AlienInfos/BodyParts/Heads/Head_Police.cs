@@ -10,24 +10,21 @@ public class Head_Police : AlienBodyPartInfo {
 }
 
 public class PoliceHairTag : HaircutTag {
-    public override List<string> RealDescriptions
-    {
-        get
-        {
-            return new List<string>() {
-                "Police"
-            };
-        }
+    public override string GetRandomRadioDescription(out bool isReal) {
+        isReal = true;
+        return "Police Hair";
     }
 
-    public override List<string> FakeDescriptions
-    {
-        get
-        {
-            return new List<string>()
-            {
-                "Police"
-            };
-        }
+    public override string GetRandomRadioDescription(bool isReal) {
+        return "Police Hair";
     }
+
+    public override List<string> GetShortDescriptions() {
+        return new List<string> {
+            "police hair"
+        };
+    }
+    
+
+    public override string TagName { get; } = "Police Hair";
 }

@@ -39,10 +39,10 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
             }
 
             if (scene == GameScene.MainGame) {
-                BackButton.Singleton.Hide();
+                //BackButton.Singleton.Hide();
             }
             else {
-                BackButton.Singleton.Show();
+               // BackButton.Singleton.Show();
             }
            
         }, null);

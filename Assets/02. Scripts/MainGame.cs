@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.BodyManagmentSystem;
 using MikroFramework.Architecture;
 using MikroFramework.ResKit;
 using MikroFramework.TimeSystem;
@@ -25,6 +26,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<GameSceneModel>(new GameSceneModel());
         this.RegisterModel<RadioModel>(new RadioModel());
         this.RegisterModel<BodyGenerationModel>(new BodyGenerationModel());
+        this.RegisterModel<BodyTagInfoModel>(new BodyTagInfoModel());
 
     }
 

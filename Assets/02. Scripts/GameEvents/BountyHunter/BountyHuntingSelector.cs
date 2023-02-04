@@ -15,7 +15,7 @@ public struct OnBodyHuntingSelect {
 [RequireComponent(typeof(MouseHoverOutline))]
 public class BountyHuntingSelector : AbstractMikroController<MainGame>, IPointerClickHandler, ICanSendEvent {
     [SerializeField] private TMP_Text hintText;
-    private string hintTextOriginal = "";
+    public string hintTextOriginal = "";
 
     private IHaveBodyInfo bodyInfo;
 
@@ -37,6 +37,11 @@ public class BountyHuntingSelector : AbstractMikroController<MainGame>, IPointer
         else {
             hintText.text = hintTextOriginal;
         }
+    }
+    
+    public void SetHintText(string text) {
+        hintText.text = text;
+        hintTextOriginal = text;
     }
 
     public void OnPointerClick(PointerEventData eventData) {

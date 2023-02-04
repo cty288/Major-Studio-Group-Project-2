@@ -2,6 +2,7 @@ using MikroFramework.ResKit;
 using MikroFramework.Singletons;
 using System;
 using System.Collections.Generic;
+using _02._Scripts.BodyManagmentSystem;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -40,6 +41,7 @@ public class AlienBodyPartCollections : MonoPersistentMikroSingleton<AlienBodyPa
     public BodyPartCollection SpecialBodyPartPrefabs;
 
     private void Start() {
+        MainGame.Interface.GetModel<BodyTagInfoModel>().LoadInfo();
         MainGame.Interface.GetUtility<ResLoader>();
     }
 
