@@ -10,7 +10,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
-public class NewspaperViewController : DraggableItems, IPointerEnterHandler, IPointerExitHandler {
+public struct OnNewspaperThrown {
+    public Newspaper Newspaper;
+}
+public class NewspaperViewController : DraggableItems, IPointerEnterHandler, IPointerExitHandler, ICanSendEvent {
     private GameObject indicateCanvas;
     private GameObject dateCanvas;
     private List<SpriteRenderer> renderers = new List<SpriteRenderer>();
@@ -69,7 +72,9 @@ public class NewspaperViewController : DraggableItems, IPointerEnterHandler, IPo
     }
 
     public override void OnThrownToRubbishBin() {
-        
+        this.SendEvent<OnNewspaperThrown>(new OnNewspaperThrown() {
+            Newspaper = news
+        });
     }
 
 

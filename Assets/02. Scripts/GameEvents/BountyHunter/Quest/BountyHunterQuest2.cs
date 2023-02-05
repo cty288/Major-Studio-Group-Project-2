@@ -138,7 +138,7 @@ public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
 
 
     private void OnFinishOutsideBodyInteraction() {
-        BackButton.Singleton.OnBackButtonClicked();
+        this.GetModel<GameSceneModel>().GameScene.Value = GameScene.MainGame;
         this.GetSystem<BodyGenerationSystem>().StopCurrentBody();
     }
 

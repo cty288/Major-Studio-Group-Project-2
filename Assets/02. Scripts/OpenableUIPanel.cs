@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 
 public abstract class OpenableUIPanel : AbstractMikroController<MainGame> {
     protected List<Collider2D> colliders = new List<Collider2D>();
-
+    protected Canvas canvas;
     protected bool isShow = false;
     public void Show(float time) {
         OnShow(time);
@@ -32,6 +32,7 @@ public abstract class OpenableUIPanel : AbstractMikroController<MainGame> {
     protected virtual void Awake() {
         this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
         colliders = GetComponents<Collider2D>().ToList();
+        canvas = GetComponentInParent<Canvas>();
     }
 
     private void OnNewDay(OnNewDay obj) {
@@ -41,7 +42,11 @@ public abstract class OpenableUIPanel : AbstractMikroController<MainGame> {
     protected virtual void Update() {
         if (Input.GetMouseButtonDown(0)) {
             Vector2 mousePos = Input.mousePosition;
-                
+            
+            if(canvas.renderMode == RenderMode.ScreenSpaceCamera) {
+                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            }
+           
                 
             bool mouseClickPanel = colliders.Any(c => c.OverlapPoint(mousePos));
 

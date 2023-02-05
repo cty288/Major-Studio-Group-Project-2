@@ -7,7 +7,7 @@ using MikroFramework.Singletons;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+/*
 public class BackButton : MonoMikroSingleton<BackButton>, IController {
     private Button button;
     private Image image;
@@ -51,4 +51,4 @@ public class BackButton : MonoMikroSingleton<BackButton>, IController {
     public IArchitecture GetArchitecture() {
         return MainGame.Interface;
     }
-}
+}*/

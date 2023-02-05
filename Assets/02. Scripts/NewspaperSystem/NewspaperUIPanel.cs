@@ -16,6 +16,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
     private GameObject panel;
     private TMP_Text dateText;
     protected GameObject outOfDateText;
+    
    
 
     [SerializeField] private List<RawImage> imageContainers = new List<RawImage>();
@@ -26,6 +27,16 @@ public class NewspaperUIPanel : OpenableUIPanel {
     private GameTimeManager gameTimeManager;
     
     protected Newspaper news;
+
+    protected Dictionary<Newspaper, GameObject> newspaperMarkers = new Dictionary<Newspaper, GameObject>();
+
+    protected GameObject currentMarker = null;
+    protected LineRenderer currentLineRenderer = null;
+    [SerializeField] private GameObject lineRendererPrefab;
+    
+    protected Collider2D markerArea;
+    protected Vector2 lastMarkerPosition;
+    
     public override void OnDayEnd() {
         Hide(0.5f);
         
@@ -39,8 +50,18 @@ public class NewspaperUIPanel : OpenableUIPanel {
         //backButton.onClick.AddListener(OnBackButtonClicked);
         gameTimeManager = this.GetSystem<GameTimeManager>();
         outOfDateText = panel.transform.Find("OutOfDateText").gameObject;
+        markerArea = panel.transform.Find("MarkerArea").GetComponent<Collider2D>();
         this.RegisterEvent<OnNewspaperUIPanelOpened>(OnNewspaperUIPanelOpened)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnNewspaperThrown>(OnNewspaperThrown)
+            .UnRegisterWhenGameObjectDestroyed(gameObject);
+    }
+
+    private void OnNewspaperThrown(OnNewspaperThrown e) {
+        if(newspaperMarkers.ContainsKey(e.Newspaper)) {
+            Destroy(newspaperMarkers[e.Newspaper]);
+            newspaperMarkers.Remove(e.Newspaper);
+        }
     }
 
     private void OnNewspaperUIPanelOpened(OnNewspaperUIPanelOpened e) {
@@ -58,6 +79,11 @@ public class NewspaperUIPanel : OpenableUIPanel {
     }    
 
     public void Show(Newspaper news) {
+        colliders.ForEach((collider2D => {
+            collider2D.enabled = true;
+        } ));
+        currentMarker = null;
+        
         outOfDateText.SetActive(gameTimeManager.CurrentTime.Value.Day - news.date.Day >= 3);
         
         dateText.text = news.dateString;
@@ -66,6 +92,19 @@ public class NewspaperUIPanel : OpenableUIPanel {
             isShow = true;
         });
         AudioSystem.Singleton.Play2DSound("pick_up_newspaper");
+        
+        if (!newspaperMarkers.ContainsKey(news)) {
+            LineRenderer marker = new GameObject("NewspaperMarker").AddComponent<LineRenderer>();
+            marker.transform.SetParent(panel.transform);
+            newspaperMarkers.Add(news, marker.gameObject);
+           
+        }
+
+        lastMarkerPosition = Vector2.zero;
+        currentMarker = newspaperMarkers[news];
+        currentMarker.SetActive(true);
+        
+        
         if (lastNewspaper == news && savedSpawnedImages.Count > 0) {
             return;
         }
@@ -103,6 +142,38 @@ public class NewspaperUIPanel : OpenableUIPanel {
 
 
         lastNewspaper = news;
+    }
+
+
+    protected override void Update() {
+        base.Update();
+        if (panel.activeInHierarchy && currentMarker) {
+            if (Input.GetMouseButtonDown(0)) {
+                currentLineRenderer = Instantiate(lineRendererPrefab, currentMarker.transform).GetComponent<LineRenderer>();
+            }
+            
+            if (Input.GetMouseButton(0)) {
+                Vector2 mousePosWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                
+                Debug.Log("MousePosWorld: " + mousePosWorld + " MarkerArea: " + markerArea.bounds + "MousePos: " + Input.mousePosition);
+                if(Vector2.Distance(lastMarkerPosition, Input.mousePosition) > 1) {
+                    //check if the mouse is in the marker area. The canvas is screen space camera
+                    Vector3 mousePosWorldFixed = new Vector3(mousePosWorld.x, mousePosWorld.y,
+                        markerArea.bounds.center.z);
+
+                    if (markerArea.bounds.Contains(mousePosWorldFixed)) {
+                        var positionCount = currentLineRenderer.positionCount;
+                        positionCount++;
+                        currentLineRenderer.positionCount = positionCount;
+                        Vector3 targetPos = new Vector3(mousePosWorld.x, mousePosWorld.y, -15);
+                        currentLineRenderer.SetPosition(positionCount - 1, targetPos);
+                    }
+                    
+                    lastMarkerPosition = Input.mousePosition;
+                    
+                }
+            }
+        }
     }
 
     public string GetShortDescription(BodyInfo bodyInfo) {
@@ -144,5 +215,13 @@ public class NewspaperUIPanel : OpenableUIPanel {
             panel.gameObject.SetActive(false);
         });
         AudioSystem.Singleton.Play2DSound("put_down_newspaper");
+        if (currentMarker) {
+            currentMarker.SetActive(false);
+        }
+
+        currentLineRenderer = null; 
+        colliders.ForEach((collider2D => {
+            collider2D.enabled = false;
+        } ));
     }
 }

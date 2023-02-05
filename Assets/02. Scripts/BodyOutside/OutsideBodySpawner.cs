@@ -76,7 +76,7 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
         }
         bodyGenerationModel.CurrentOutsideBodyConversationFinishing = true;
         
-        BackButton.Singleton.Hide();
+        //BackButton.Singleton.Hide();
         
         this.SendEvent<OnOutsideBodyClicked>(new OnOutsideBodyClicked() {BodyInfo = bodyViewController.BodyInfo});
         

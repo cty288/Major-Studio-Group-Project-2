@@ -63,7 +63,7 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
     }
 
     private void OnFinishOutsideBodyInteraction() {
-        BackButton.Singleton.OnBackButtonClicked();
+        this.GetModel<GameSceneModel>().GameScene.Value = GameScene.MainGame;
         this.GetSystem<BodyGenerationSystem>().StopCurrentBody();
     }
 
@@ -114,7 +114,7 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
             LoadCanvas.Singleton.ShowImage(1, 0.2f);
             List<string> messages = new List<string>() {
                 "Delivery service! Take care!",
-                "Here¡¯s the food for you today. Take care!",
+                "Hereï¿½ï¿½s the food for you today. Take care!",
                 "Hey, I brought you some foods! Take care!"
             };
             speaker.Speak(messages[Random.Range(0, messages.Count)], null, "Deliver", OnDelivererClickedOutside);
