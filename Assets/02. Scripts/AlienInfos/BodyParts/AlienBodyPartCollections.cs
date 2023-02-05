@@ -2,6 +2,7 @@ using MikroFramework.ResKit;
 using MikroFramework.Singletons;
 using System;
 using System.Collections.Generic;
+using _02._Scripts.AlienInfos.Tags.Base;
 using _02._Scripts.BodyManagmentSystem;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -81,12 +82,12 @@ public class AlienBodyPartCollections : MonoPersistentMikroSingleton<AlienBodyPa
     }
     
 
-    public AlienBodyPartInfo GetRandomBodyPartInfo(BodyPartDisplayType displayType, BodyPartType bodyPartType, bool isAlien, HeightType height) {
+    public AlienBodyPartInfo GetRandomBodyPartInfo(BodyPartDisplayType displayType, BodyPartType bodyPartType, bool isAlien, HeightType height, bool isDinstinct) {
       
         BodyPartCollection collection = GetBodyPartCollectionByBodyType(bodyPartType);
         BodyPartHeightSubCollection subCollection = TryGetBodyPartHeightSubCollection(collection, height);
         BodyPartDisplays targetDisplays = GetBodyPartDisplayByType(subCollection, displayType);
-        return GetRandomBodyPartInfo(targetDisplays, isAlien);
+        return GetRandomBodyPartInfo(targetDisplays, isAlien, isDinstinct);
     }
 
 
@@ -138,12 +139,19 @@ public class AlienBodyPartCollections : MonoPersistentMikroSingleton<AlienBodyPa
         return null;
     }
    
-    private AlienBodyPartInfo GetRandomBodyPartInfo(BodyPartDisplays targetDisplays, bool isAlien) {
+    private AlienBodyPartInfo GetRandomBodyPartInfo(BodyPartDisplays targetDisplays, bool isAlien, bool isDistinct) {
         List<GameObject> targetList = new List<GameObject>(targetDisplays.HumanTraitPartsPrefabs);
         if (isAlien) {
             targetList.AddRange(targetDisplays.AlienOnlyPartsPrefabs);
         }
 
+
+        if (isDistinct) {
+            targetList = targetList.FindAll((obj) => {
+                return obj.GetComponent<AlienBodyPartInfo>().Tags.Exists((alienTag => alienTag is DistinctiveTag));
+            });
+        }
+        
         AlienBodyPartInfo info = targetList[Random.Range(0, targetList.Count)].GetComponent<AlienBodyPartInfo>();
         info.IsAlienOnly = targetDisplays.AlienOnlyPartsPrefabs.Contains(info.gameObject);
         return info;

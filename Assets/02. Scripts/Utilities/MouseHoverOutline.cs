@@ -53,6 +53,15 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
+        if (!string.IsNullOrEmpty(SubtitleHightlightedTextDragger.CurrentDraggedText)) {
+            StopHovering();
+            return;
+        }
+
+        StartHovering();
+    }
+
+    public void StartHovering(bool onlyChangeMaterial = false) {
         if (outlineMaterial) {
             if (spriteRenderer) {
                 spriteRenderer.material = outlineMaterial;
@@ -64,6 +73,10 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
         }
        
         isHovering = true;
+
+        if (onlyChangeMaterial) {
+            return;
+        }
         if (moveToTopWhenHovering) {
             transform.SetAsLastSibling();
         }
@@ -72,7 +85,7 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
         }
     }
 
-    public void OnPointerExit(PointerEventData eventData) {
+    public void StopHovering() {
         if (outlineMaterial) {
             if (spriteRenderer) {
                 spriteRenderer.material = defaultMaterial;
@@ -87,5 +100,8 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
         {
             followingObject.SetActive(false);
         }
+    }
+    public void OnPointerExit(PointerEventData eventData) {
+        StopHovering();
     }
 }

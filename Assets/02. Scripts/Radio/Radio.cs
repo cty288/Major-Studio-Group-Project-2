@@ -10,6 +10,7 @@ using MikroFramework.Event;
 using MikroFramework.Architecture;
 using MikroFramework;
 using MikroFramework.AudioKit;
+using MikroFramework.Singletons;
 using MikroFramework.Utilities;
 using UnityEngine.Audio;
 using Random = UnityEngine.Random;
@@ -186,7 +187,7 @@ public class Radio : ElectricalApplicance
         for (int i = 0; i < unrelatedBodyInfoCountWithDay.Evaluate(day); i++) {
             if (Random.Range(0, 2) < 1) {
                 descriptionDatas.Add(
-                    new AlienDescriptionData(BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false),
+                    new AlienDescriptionData(BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, false),
                         radioReality));
             }
             else {
@@ -244,5 +245,8 @@ public class Radio : ElectricalApplicance
         radioModel.IsSpeaking = false;
         radioOpenAudioSource.DOFade(0, 1f);
         transform.DOKill(true);
+     
     }
+
+   
 }

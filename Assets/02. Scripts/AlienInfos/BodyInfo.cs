@@ -105,15 +105,32 @@ public class BodyInfo : ICanRegisterEvent {
 
     #region Static
     
-    public static BodyInfo GetRandomBodyInfo(BodyPartDisplayType displayType, bool isAlien, string builtBodyOverriddenPrefabName = "") {
+    public static BodyInfo GetRandomBodyInfo(BodyPartDisplayType displayType, bool isAlien, 
+        bool needDistinctive, string builtBodyOverriddenPrefabName = "") {
         Gender[] voiceValues = (Gender[]) Enum.GetValues(typeof(Gender));
         HeightType height = Random.Range(0, 2) == 0 ? HeightType.Short : HeightType.Tall;
         Gender gender = voiceValues[Random.Range(0, voiceValues.Length)];
+        
+        int bodyPartTypeEnumLength = Enum.GetValues(typeof(BodyPartType)).Length;
+        List<AlienBodyPartInfo> allBodyPartInfos = new List<AlienBodyPartInfo>(3);
 
-        AlienBodyPartInfo leg = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, BodyPartType.Legs, isAlien, height);
-        AlienBodyPartInfo body = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo( displayType, BodyPartType.Body, isAlien, height);
-        AlienBodyPartInfo head = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, BodyPartType.Head, isAlien, height);
-        return GetBodyInfo(leg, body, head, height, gender, displayType, isAlien, builtBodyOverriddenPrefabName);
+        int distinctBodyPartCount = needDistinctive ? Random.Range(1, 4) : 0;
+        List<int> distinctBodyPartIndexes = new List<int>();
+        for (int i = 0; i < distinctBodyPartCount; i++) {
+            int distinctBodyPartIndex = Random.Range(0, bodyPartTypeEnumLength);
+            while (distinctBodyPartIndexes.Contains(distinctBodyPartIndex)) {
+                distinctBodyPartIndex = Random.Range(0, bodyPartTypeEnumLength);
+            }
+            distinctBodyPartIndexes.Add(distinctBodyPartIndex);
+        }
+        
+        for (int i = 0; i < bodyPartTypeEnumLength; i++) {
+            bool isDistinct = distinctBodyPartIndexes.Contains(i);
+            AlienBodyPartInfo part = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, (BodyPartType)i, isAlien, height,isDistinct);
+            allBodyPartInfos.Add(part);
+        }
+        
+        return GetBodyInfo(allBodyPartInfos[2], allBodyPartInfos[1], allBodyPartInfos[0], height, gender, displayType, isAlien, builtBodyOverriddenPrefabName);
     }
 
     public static BodyInfo GetBodyInfo(AlienBodyPartInfo leg, AlienBodyPartInfo body, AlienBodyPartInfo head,
@@ -125,7 +142,7 @@ public class BodyInfo : ICanRegisterEvent {
         return info;
     }
 
-    public static BodyInfo GetBodyInfoOpposite(BodyInfo original, float bodyPartOppositeChance, float heightOppositeChance, bool originalIsAlien, string builtBodyOverriddenPrefabName = "") {
+    public static BodyInfo GetBodyInfoOpposite(BodyInfo original, float bodyPartOppositeChance, float heightOppositeChance, bool originalIsAlien, bool isDistinct, string builtBodyOverriddenPrefabName = "") {
         AlienBodyPartInfo headInfoPrefab = original.HeadInfoPrefab;
         AlienBodyPartInfo mainBodyPartInfoPrefab = original.MainBodyInfoPrefab;
         AlienBodyPartInfo legInfoPreab = original.LegInfoPreab;
@@ -134,11 +151,11 @@ public class BodyInfo : ICanRegisterEvent {
         bool heightOpposite = heightOppositeChance >= Random.Range(0f, 1f);
        
         
-        legInfoPreab = GetOpposite(original.DisplayType, original.LegInfoPreab, BodyPartType.Legs, height, originalIsAlien, heightOpposite, bodyPartOppositeChance);
+        legInfoPreab = GetOpposite(original.DisplayType, original.LegInfoPreab, BodyPartType.Legs, height, originalIsAlien, heightOpposite, bodyPartOppositeChance, isDistinct);
         mainBodyPartInfoPrefab = GetOpposite(original.DisplayType, original.MainBodyInfoPrefab, BodyPartType.Body,
-            height, originalIsAlien, heightOpposite, bodyPartOppositeChance);
+            height, originalIsAlien, heightOpposite, bodyPartOppositeChance, isDistinct);
         headInfoPrefab = GetOpposite(original.DisplayType, original.HeadInfoPrefab, BodyPartType.Head, height,
-            originalIsAlien, heightOpposite, bodyPartOppositeChance);
+            originalIsAlien, heightOpposite, bodyPartOppositeChance, isDistinct);
 
 
 
@@ -173,10 +190,10 @@ public class BodyInfo : ICanRegisterEvent {
     }
     
     private static AlienBodyPartInfo GetOpposite(BodyPartDisplayType displayType, AlienBodyPartInfo original, BodyPartType bodyPartType,  HeightType height, bool originalIsAlien, bool changeHeight,
-        float changeToOppositeChance) {
+        float changeToOppositeChance, bool isDistinct) {
         if (originalIsAlien) {
             if (original.IsAlienOnly) {
-                return AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, bodyPartType, false, height);
+                return AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, bodyPartType, false, height, isDistinct);
             }else {
                // if (Random.Range(0f, 1f) < oppositeChance) {
                    AlienBodyPartInfo heightReflectedBodyPartInfo = original;
@@ -198,7 +215,7 @@ public class BodyInfo : ICanRegisterEvent {
                        }else {
                            return AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, bodyPartType,
                                false,
-                               targetHeight);
+                               targetHeight, isDistinct);
                        }
                    }
                    //}
@@ -228,7 +245,7 @@ public class BodyInfo : ICanRegisterEvent {
                     {
                     return AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(displayType, bodyPartType,
                         true,
-                        targetHeight);
+                        targetHeight, isDistinct);
                 }
                 }
                 // }

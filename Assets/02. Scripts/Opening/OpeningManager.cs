@@ -28,6 +28,7 @@ public class OpeningManager : MonoBehaviour {
             canSkipHint.SetActive(true);
             canSkip = true;
         });
+        
     }
 
     private void Update() {

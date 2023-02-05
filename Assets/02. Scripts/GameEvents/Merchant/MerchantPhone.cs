@@ -131,7 +131,7 @@ public class MerchantPhone : TelephoneContact {
                     playerResourceSystem.RemoveFood(goods.FoodPerUnit);
                     List<string> replies = new List<string>();
                     replies.Add("Thanks for your order. The item will be delivered to you tomorrow. ");
-                    replies.Add("There you go, sir! You¡¯ve made the right decision! It will be delivered tomorrow. Good luck!");
+                    replies.Add("There you go, sir! Youâ€™ve made the right decision! It will be delivered tomorrow. Good luck!");
                     reply = replies[Random.Range(0, replies.Count)];
 
 

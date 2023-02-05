@@ -25,7 +25,9 @@ public class DayIndicator : AbstractMikroController<MainGame> {
         animator = GetComponent<Animator>();
         this.GetSystem<GameTimeManager>().OnDayStart += OnDayStart;
         this.GetSystem<GameTimeManager>().NextDay();
-       lastFoodCount = playerResourceSystem.FoodCount.Value;
+        lastFoodCount = playerResourceSystem.FoodCount.Value;
+        
+        
         //SetFoodCount(lastFoodCount);
         //this.RegisterEvent<OnShowFood>(OnShowFood).UnRegisterWhenGameObjectDestroyed(gameObject);
     }

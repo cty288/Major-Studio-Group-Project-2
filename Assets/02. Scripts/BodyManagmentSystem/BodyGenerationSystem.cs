@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
 using MikroFramework.BindableProperty;
+using MikroFramework.Event;
 using MikroFramework.TimeSystem;
 using UniRx.InternalUtil;
 
 using UnityEngine;
 using Random = UnityEngine.Random;
+
 
 public class BodyGenerationSystem : AbstractSystem {
     //private BodyInfo todayAlien;
@@ -45,8 +47,11 @@ public class BodyGenerationSystem : AbstractSystem {
         bodyGenerationModel = this.GetModel<BodyGenerationModel>();
         gameTimeManager = this.GetSystem<GameTimeManager>();
 
+        
     }
-    
+
+  
+
     private void OnEndOfDay(int day) {
         dayNum = day;
         if (day >= 2) {
@@ -58,6 +63,8 @@ public class BodyGenerationSystem : AbstractSystem {
             this.GetSystem<ITimeSystem>().AddDelayTask(knockWaitTimeSinceDayStart, SpawnAlienOrDeliverBody);
             
         }
+        
+     
     }
 
   
@@ -71,10 +78,11 @@ public class BodyGenerationSystem : AbstractSystem {
         
         if (Random.Range(0f, 1f) <= nonAlienChance || dayNum==1 || Aliens.Count==0) {
             if (Random.Range(0f, 1f) <= 0.5f && Aliens.Count > 0) {
-                targetBody = BodyInfo.GetBodyInfoOpposite(Aliens[Random.Range(0, Aliens.Count)].BodyInfo, 0.7f, 0.8f, true);
+                targetBody = BodyInfo.GetBodyInfoOpposite(Aliens[Random.Range(0, Aliens.Count)].BodyInfo, 0.7f, 0.8f, true,
+                    false);
             }
             else {
-                targetBody = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false);
+                targetBody = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false,false);
             }
            // Debug.Log("Spawned a non-alien");
         }

@@ -18,8 +18,8 @@ public class DailyBodyRadio : RadioEvent {
 
         private Coroutine radioCorruptCheckCoroutine;
          public DailyBodyRadio(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer) : base(startTimeRange, speakContent, speakRate, speakGender, mixer) {
-
-        }
+             
+         }
 
         public override float TriggerChance { get; } = 1;
         public override void OnEnd() {

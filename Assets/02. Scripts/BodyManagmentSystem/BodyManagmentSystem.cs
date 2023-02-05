@@ -98,7 +98,7 @@ public class BodyManagmentSystem : AbstractSystem {
         
         
         for (int i = newBodyInfos.Count; i < MaxBodyEveryDay; i++) {
-            BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false);
+            BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, true);
             BodyTimeInfo timeInfo = null;
             if (i == 0) {
                 timeInfo = new BodyTimeInfo(3, info);

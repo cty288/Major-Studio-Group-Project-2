@@ -111,10 +111,11 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
             speaker.Speak(messages[Random.Range(0, messages.Count)], AudioMixerList.Singleton.AudioMixerGroups[4], "???", OnAlienClickedOutside);
         }
         else {
+            
             LoadCanvas.Singleton.ShowImage(1, 0.2f);
             List<string> messages = new List<string>() {
                 "Delivery service! Take care!",
-                "Here��s the food for you today. Take care!",
+                "Here's the food for you today. Take care!",
                 "Hey, I brought you some foods! Take care!"
             };
             speaker.Speak(messages[Random.Range(0, messages.Count)], null, "Deliver", OnDelivererClickedOutside);

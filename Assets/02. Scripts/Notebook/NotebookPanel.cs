@@ -13,12 +13,16 @@ public class NotebookPanel : OpenableUIPanel
 {
     
     private GameObject panel;
+    private NotebookWritePage notebookWritePage;
 
-  
     protected override void Awake() {
         base.Awake();
         panel = transform.Find("Panel").gameObject;
-  
+        notebookWritePage = GetComponentInChildren<NotebookWritePage>(true);
+        panel.gameObject.SetActive(true);
+        this.Delay(0.1f, () => {
+            panel.gameObject.SetActive(false);
+        });
     }
     public override void OnDayEnd()
     {
@@ -47,6 +51,14 @@ public class NotebookPanel : OpenableUIPanel
         });
     }
 
+    public void TryWriteText(string text) {
+        notebookWritePage.TryWriteNewLine(text);
+    }
+
+
+    public bool CanWriteNewLine() {
+        return notebookWritePage.CanAddNewLine();
+    }
     //生成page
     
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-//·´Éä»ñÈ¡ËùÓĞ¼Ì³Ğ´ËÀàµÄÀà
+//åå°„è·å–æ‰€æœ‰ç»§æ‰¿æ­¤ç±»çš„ç±»
 
 public enum BodyPartType {
     Head,

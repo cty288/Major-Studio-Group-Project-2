@@ -46,12 +46,15 @@ public class NotebookWritePage : AbstractMikroController<MainGame>
     [SerializeField] private GameObject noteOnTablePagePrefab;
 
     [SerializeField] private GameObject followingObject;
+    
+    private bool inited = false;
     private void Awake()
     {
+        inited = true;
         inputField.caretColor = Color.clear;
         inputField.onValueChanged.AddListener(OnInputFieldValueChang);
         gameTimeManager = this.GetSystem<GameTimeManager>();
-
+        
     }
 
     private void Start() {
@@ -62,9 +65,6 @@ public class NotebookWritePage : AbstractMikroController<MainGame>
         outline.followingObjectIsUI = true;
         outline.followingObject = followingObject;
         dragger.OnTear += OnPageTear;
-        
-        
-        
     }
 
     private void OnPageTear() {
@@ -94,9 +94,26 @@ public class NotebookWritePage : AbstractMikroController<MainGame>
         else {
             inputField.text = inputInfo;
         }
-        
-
         noteString = inputField.text;
+    }
+    
+    public void TryWriteNewLine(string content) {
+        if (!inited) {
+            Awake();
+        }
+        if (inputField.textComponent.textInfo.lineCount + 1 > inputField.lineLimit) {
+            return;
+        }
+
+        if (inputField.text.Length > 0) {
+            inputField.text += "\n";
+        }
+        
+        inputField.text += content;
+    }
+    
+    public bool CanAddNewLine() {
+        return inputField.textComponent.textInfo.lineCount + 1 <= inputField.lineLimit;
     }
 
     public static int GetLineNumber(string text)

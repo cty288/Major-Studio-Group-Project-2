@@ -61,7 +61,7 @@ public class BountyHunterAdEvent : RadioEvent {
 
         //make a new string that has a space between every character
         string spacedPhoneNumber = string.Join(" ", phoneNumber.ToCharArray());
-        
+        spacedPhoneNumber = "<color=yellow>" + spacedPhoneNumber + "</color>";
 
         List<string> ads = new List<string>();
         ads.Add(

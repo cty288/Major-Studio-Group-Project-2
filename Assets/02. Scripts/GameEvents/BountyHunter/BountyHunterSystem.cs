@@ -47,7 +47,7 @@ public class BountyHunterSystem : AbstractSystem {
         Debug.Log("BountyHunterPhone: " + PhoneNumber);
         
         QuestBodyTimeInfo = new BodyTimeInfo(Random.Range(20, 30),
-            BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true));
+            BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true, true));
     }
 
   

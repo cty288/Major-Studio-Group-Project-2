@@ -29,7 +29,7 @@ public class Cheater : AbstractMikroController<MainGame> {
         }
 
         if (Input.GetKeyDown(KeyCode.A)) {
-            BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true);
+            BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true, false);
             this.GetSystem<BodyManagmentSystem>().AddToAllBodyTimeInfos(new BodyTimeInfo(3, info));
             this.GetModel<BodyGenerationModel>().CurrentOutsideBody.Value = info;
         }

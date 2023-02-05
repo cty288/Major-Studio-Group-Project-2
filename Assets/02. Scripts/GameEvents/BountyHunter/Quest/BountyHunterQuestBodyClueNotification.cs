@@ -119,6 +119,15 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
 
     protected abstract BountyHunterQuestClueEvent GetClueEvent(TimeRange happenTimeRange);
 }
+
+
+
+
+
+
+
+
+
 //情报提示的电话
 public abstract class BountyHunterQuestClueNotificationContact : TelephoneContact {
     public DateTime ClueHappenTime { get; set; }
@@ -133,6 +142,11 @@ public abstract class BountyHunterQuestClueNotificationContact : TelephoneContac
         return !bountyHunterSystem.IsInJail;
     }
 }
+
+
+
+
+
 //情报发送的事件
 public abstract class BountyHunterQuestClueEvent : GameEvent {
     protected BountyHunterQuestClueEvent(TimeRange startTimeRange) : base(startTimeRange) {
@@ -172,6 +186,17 @@ public abstract class BountyHunterQuestClueEvent : GameEvent {
     protected abstract BountyHunterQuestClueInfoEvent GetClueInfoEvent(TimeRange happenTimeRange, bool isRealClue,
         DateTime startDate);
 }
+
+
+
+
+
+
+
+
+
+
+
 
 //相关情报的收音机内容
 public abstract class BountyHunterQuestClueInfoEvent : RadioEvent {
