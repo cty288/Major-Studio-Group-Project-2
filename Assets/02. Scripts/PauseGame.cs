@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using MikroFramework.Architecture;
+using Crosstales.RTVoice;
 
 public class PauseGame : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class PauseGame : MonoBehaviour
     public Sprite Spr_Resume;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +22,8 @@ public class PauseGame : MonoBehaviour
         PausePanel = GameObject.Find("PausePanel");
         PauseBtn = GameObject.Find("Btn_Pause");
         PausePanel.SetActive(false);
-    }
+        
+   }
 
     // Update is called once per frame
     void Update()
@@ -58,11 +62,13 @@ public class PauseGame : MonoBehaviour
         {
             Time.timeScale = 0;
             PauseBtn.GetComponent<Image>().sprite = Spr_Resume;
+            Crosstales.RTVoice.Speaker.Instance.Pause();
         }
         else
         {
             Time.timeScale = 1;
             PauseBtn.GetComponent<Image>().sprite = Spr_Pause;
+            Crosstales.RTVoice.Speaker.Instance.UnPause();
         }
         PausePanel.SetActive(isPause);
     }
