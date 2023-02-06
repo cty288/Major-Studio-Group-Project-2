@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class TestCode : MonoBehaviour
 {
-    public LineRenderer lineRenderer;
-    private List<Vector3> points = new List<Vector3>();
+    
+    
     private bool isMouseDown = false;
     private Vector2 min = Vector2.positiveInfinity;
     private Vector2 max = Vector2.negativeInfinity;
@@ -16,8 +16,7 @@ public class TestCode : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             isMouseDown = true;
-            lineRenderer.positionCount = 0;
-            points.Clear();
+          
             min = Vector2.positiveInfinity;
             max = Vector2.negativeInfinity;
         }
@@ -30,10 +29,9 @@ public class TestCode : MonoBehaviour
         {
             Vector2 mousePosition = Input.mousePosition;
             Vector2 worldPosition = camera.ScreenToWorldPoint(mousePosition);
-            Vector3 position = new Vector3(worldPosition.x, worldPosition.y, -10);
-            points.Add(position);
-            lineRenderer.positionCount = points.Count;
-            lineRenderer.SetPositions(points.ToArray());
+          
+           
+           
  
             min.x = Mathf.Min(min.x, worldPosition.x);
             min.y = Mathf.Min(min.y, worldPosition.y);
@@ -48,26 +46,11 @@ public class TestCode : MonoBehaviour
  
     public void SaveScreen()
     {
-        Vector2[] screenPoints = new Vector2[points.Count];
-        for (int i = 0; i < points.Count; i++)
-        {
-            screenPoints[i] = camera.WorldToScreenPoint(points[i]);
-        }
- 
-        min = Vector2.positiveInfinity;
-        max = Vector2.negativeInfinity;
-        foreach (Vector2 screenPoint in screenPoints)
-        {
-            min.x = Mathf.Min(min.x, screenPoint.x);
-            min.y = Mathf.Min(min.y, screenPoint.y);
-            max.x = Mathf.Max(max.x, screenPoint.x);
-            max.y = Mathf.Max(max.y, screenPoint.y);
-        }
- 
         int width = (int)(max.x - min.x);
         int height = (int)(max.y - min.y);
         
         Texture2D texture = new Texture2D(width, height, TextureFormat.RGB24, false);
+        RenderTexture rt = new RenderTexture(width, height, 24);
         
         
         Color[] colors = new Color[width * height];
@@ -76,18 +59,12 @@ public class TestCode : MonoBehaviour
             for (int x = 0; x < width; x++)
             {
                 Vector2 point = new Vector2(x + min.x, y + min.y);
-                if (IsPointInPolygon(point, screenPoints))
-                {
-                    colors[y * width + x] = GetPixel(camera.targetTexture, point);
-                }
-                else
-                {
-                    colors[y * width + x] = Color.clear;
-                }
+                colors[y * width + x] = GetPixel(camera.targetTexture, point);
             }
         }
         texture.SetPixels(colors);
         texture.Apply();
+        
         byte[] bytes = texture.EncodeToPNG();
         File.WriteAllBytes(Application.dataPath + "/screenshot.png", bytes);
     }

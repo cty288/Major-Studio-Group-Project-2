@@ -40,6 +40,7 @@ public abstract class AbstractAlienTag : IAlienTag {
         CheckInit();
         List<string> targetList = isReal ? bodyTagInfoModel.GetRealRadioDescription(TagName) : 
             bodyTagInfoModel.GetFakeRadioDescription(TagName);
+        if(targetList == null || targetList.Count == 0) return "";
         return targetList[Random.Range(0, targetList.Count)];
     }
 

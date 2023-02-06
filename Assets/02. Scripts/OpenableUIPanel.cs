@@ -31,7 +31,7 @@ public abstract class OpenableUIPanel : AbstractMikroController<MainGame> {
 
     protected virtual void Awake() {
         this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
-        colliders = GetComponents<Collider2D>().ToList();
+        colliders = GetComponentsInChildren<Collider2D>(true).ToList();
         canvas = GetComponentInParent<Canvas>();
     }
 
