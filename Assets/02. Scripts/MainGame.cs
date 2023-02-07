@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class MainGame : Architecture<MainGame> {
     protected override void Init() {
+        
         this.RegisterExtensibleUtility<ResLoader>(ResLoader.Allocate());
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>(new GameTimeManager());
@@ -28,6 +29,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<BodyGenerationModel>(new BodyGenerationModel());
         this.RegisterModel<BodyTagInfoModel>(new BodyTagInfoModel());
 
+        
     }
 
    

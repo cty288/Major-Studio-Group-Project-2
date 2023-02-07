@@ -6,4 +6,5 @@ using UnityEngine.Audio;
 
 public class AudioMixerList : MonoMikroSingleton<AudioMixerList> {
     public List<AudioMixerGroup> AudioMixerGroups = new List<AudioMixerGroup>();
+    public List<AudioMixerGroup> AlienVoiceGroups = new List<AudioMixerGroup>();
 }

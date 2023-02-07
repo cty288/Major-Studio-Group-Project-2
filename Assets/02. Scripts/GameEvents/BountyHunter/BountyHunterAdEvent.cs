@@ -9,7 +9,9 @@ using Random = UnityEngine.Random;
 public class BountyHunterAdEvent : RadioEvent {
     private BountyHunterSystem bountyHunterSystem;
     private TelephoneSystem telephoneSystem;
+    [field: ES3Serializable]
     private string phoneNumber;
+    [field: ES3Serializable]
     private float triggerChance;
    public BountyHunterAdEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, float triggerChance) : base(startTimeRange, speakContent, speakRate, speakGender, mixer) {
         //this.TriggerChance = triggerChance;

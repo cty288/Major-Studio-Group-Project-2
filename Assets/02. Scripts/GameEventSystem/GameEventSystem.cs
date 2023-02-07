@@ -26,16 +26,16 @@ public enum GameEventType {
     BountyHunterQuestClue
 }
 public class GameEventSystem : AbstractSystem {
-
+    [field: ES3Serializable]
     public Dictionary<DateTime, List<GameEvent>> EventDict { get; } = new Dictionary<DateTime, List<GameEvent>>();
-
+    [field: ES3Serializable]
     public Dictionary<GameEventType, List<GameEvent>> AllPossibleEvents = new Dictionary<GameEventType, List<GameEvent>>();
     
 
     private GameTimeManager gameTimeManager;
 
     private GameEventSystemUpdater updater;
-
+    [field: ES3Serializable]
     private Dictionary<GameEventType, GameEvent> currentEvents = new Dictionary<GameEventType, GameEvent>();
 
     private Array gameEventTypeValues = Enum.GetValues(typeof(GameEventType));

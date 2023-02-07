@@ -10,18 +10,26 @@ using Random = UnityEngine.Random;
 
 public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
     public override GameEventType GameEventType { get; } = GameEventType.BodyGeneration;
+    [field: ES3Serializable]
     public override float TriggerChance { get; }
 
     protected BodyGenerationModel bodyGenerationModel;
 
     protected Coroutine knockDoorCheckCoroutine;
+    [field: ES3Serializable]
     protected BodyInfo bodyInfo;
+    [field: ES3Serializable]
     protected float knockDoorTimeInterval;
+    [field: ES3Serializable]
     protected int knockTime;
     protected Action onEnd;
     protected Action onMissed;
+    
+    [field: ES3Serializable]
     protected bool started = false;
+    [field: ES3Serializable]
     protected string overrideAudioClipName;
+    [field: ES3Serializable]
     protected bool onClickPeepholeSpeakEnd = false;
     protected PlayerResourceSystem playerResourceSystem;
     protected ITimeSystem timeSystem;
@@ -37,7 +45,7 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
         this.onEnd = onEnd;
         this.onMissed = onMissed;
         this.overrideAudioClipName = overrideAudioClipName;
-
+        
         playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
         timeSystem = this.GetSystem<ITimeSystem>();
     }

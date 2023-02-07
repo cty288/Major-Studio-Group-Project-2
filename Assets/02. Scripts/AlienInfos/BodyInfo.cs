@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _02._Scripts.AlienInfos.Tags.Base;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 
@@ -24,7 +25,8 @@ public class BodyInfo : ICanRegisterEvent {
     public List<AlienBodyPartInfo> AllBodyInfoPrefabs = new List<AlienBodyPartInfo>();
 
 
-    public Gender VoiceType;
+
+    public IVoiceTag VoiceTag = null;
     public bool CheckContainTag<T>(out T tag) where T : class, IAlienTag {
         tag = null;
         bool hasTags = CheckContainTags(out List<T> tags);
@@ -35,6 +37,7 @@ public class BodyInfo : ICanRegisterEvent {
     }
 
     public bool CheckContainTags<T>(out List<T> tags) where T : IAlienTag {
+        
         List<T> allTags = new List<T>();
         foreach (var bodyInfo in AllBodyInfoPrefabs) {
             foreach (IAlienTag tag in bodyInfo.Tags) {

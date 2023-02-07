@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using MikroFramework.Architecture;
 using NHibernate.Mapping;
 using Polyglot;
@@ -33,7 +34,14 @@ namespace _02._Scripts.BodyManagmentSystem {
 				return tagDescriptions[tag].FakeRadioDescription;
 			}
 			else {
-				return null;
+				var result=  tagDescriptions.Values.Where((description =>
+					description.RealRadioDescription != null && description.RealRadioDescription.Count > 0)).ToList();
+				
+				List<string> fakeDescriptions = new List<string>();
+				foreach (var tagDescription in result) {
+					fakeDescriptions.AddRange(tagDescription.FakeRadioDescription);
+				}
+				return fakeDescriptions;
 			}
 		}
 		

@@ -20,6 +20,11 @@ public class VoiceTest : MonoBehaviour {
 
 
     }
+
+    private void OnApplicationQuit() {
+        ES3.Save("arch", MainGame.Interface);
+        ES3.Save("Event", MainGame.Interface.GetSystem<GameEventSystem>());
+    }
 }
 
 

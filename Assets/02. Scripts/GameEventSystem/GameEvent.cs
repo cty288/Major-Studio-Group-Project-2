@@ -14,7 +14,9 @@ public enum EventState {
 }
 
 public class TimeRange {
+    [field: ES3Serializable]
     public DateTime StartTime { get; set; }
+    [field: ES3Serializable]
     public DateTime EndTime { get; set; }
 
     public TimeRange(DateTime startTime, DateTime endTime) {
@@ -30,13 +32,17 @@ public class TimeRange {
 
 
 public abstract class GameEvent: ICanGetSystem, ICanGetModel, ICanSendEvent, ICanRegisterEvent {
+    
     public abstract GameEventType GameEventType { get; }
+    [field: ES3Serializable]
     public EventState EventState { get; set; } = EventState.NotStart;
+    
     public abstract float TriggerChance { get; }
     //public abstract Func<bool> TriggerCondition { get; }
 
     protected GameTimeManager gameTimeManager;
 
+    [field: ES3Serializable]
     public TimeRange StartTimeRange { get; }
 
     protected GameEventSystem gameEventSystem;
