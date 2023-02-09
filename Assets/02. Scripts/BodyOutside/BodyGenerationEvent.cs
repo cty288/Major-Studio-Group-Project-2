@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.AlienInfos.Tags.Base;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
 using MikroFramework.TimeSystem;
@@ -16,35 +17,33 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
     protected BodyGenerationModel bodyGenerationModel;
 
     protected Coroutine knockDoorCheckCoroutine;
+    protected Coroutine nestedKnockDoorCheckCoroutine;
+    
+    
     [field: ES3Serializable]
     protected BodyInfo bodyInfo;
-    [field: ES3Serializable]
-    protected float knockDoorTimeInterval;
-    [field: ES3Serializable]
-    protected int knockTime;
+    
     protected Action onEnd;
     protected Action onMissed;
     
     [field: ES3Serializable]
     protected bool started = false;
-    [field: ES3Serializable]
-    protected string overrideAudioClipName;
+   
     [field: ES3Serializable]
     protected bool onClickPeepholeSpeakEnd = false;
     protected PlayerResourceSystem playerResourceSystem;
     protected ITimeSystem timeSystem;
-    protected AudioSource knockAudioSource;
+  
     
-    public BodyGenerationEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float knockDoorTimeInterval, int knockTime, float eventTriggerChance,
-        Action onEnd, Action onMissed, string overrideAudioClipName = null) : base(startTimeRange) {
+    public BodyGenerationEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float eventTriggerChance,
+        Action onEnd, Action onMissed) : base(startTimeRange) {
+        
         bodyGenerationModel = this.GetModel<BodyGenerationModel>();
         this.bodyInfo = bodyInfo;
-        this.knockDoorTimeInterval = knockDoorTimeInterval;
-        this.knockTime = knockTime;
         this.TriggerChance = eventTriggerChance;
         this.onEnd = onEnd;
         this.onMissed = onMissed;
-        this.overrideAudioClipName = overrideAudioClipName;
+       
         
         playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
         timeSystem = this.GetSystem<ITimeSystem>();
@@ -59,12 +58,15 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
             if (knockDoorCheckCoroutine != null) {
                 CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
                 knockDoorCheckCoroutine = null;
-              
             }
+            
+            if (nestedKnockDoorCheckCoroutine != null) {
+                CoroutineRunner.Singleton.StopCoroutine(nestedKnockDoorCheckCoroutine);
+                nestedKnockDoorCheckCoroutine = null;
+            }
+            
             LoadCanvas.Singleton.LoadUntil(OnOpen, OnFinishOutsideBodyInteraction);
-            if (knockAudioSource) {
-                knockAudioSource.Stop();
-            }
+            bodyInfo.KnockBehavior?.OnStopKnock();
         }
 
         this.UnRegisterEvent<OnOutsideBodyClicked>(OnOutsideBodyClicked);
@@ -82,6 +84,11 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
             if (knockDoorCheckCoroutine != null) {
                 CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
                 knockDoorCheckCoroutine = null;
+            }
+            
+            if (nestedKnockDoorCheckCoroutine != null) {
+                CoroutineRunner.Singleton.StopCoroutine(nestedKnockDoorCheckCoroutine);
+                nestedKnockDoorCheckCoroutine = null;
             }
             bodyGenerationModel.CurrentOutsideBody.Value = null;
             OnNotOpen();
@@ -126,7 +133,13 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
                 "Here's the food for you today. Take care!",
                 "Hey, I brought you some foods! Take care!"
             };
-            speaker.Speak(messages[Random.Range(0, messages.Count)], null, "Deliver", OnDelivererClickedOutside);
+
+            IVoiceTag voiceTag = bodyInfo.VoiceTag;
+
+            speaker.Speak(messages[Random.Range(0, messages.Count)],
+                AudioMixerList.Singleton.AlienVoiceGroups[bodyInfo.VoiceTag.VoiceIndex],
+                "Deliver", OnDelivererClickedOutside,
+                voiceTag.VoiceSpeed, 1, voiceTag.VoiceType);
         }
         return () => onClickPeepholeSpeakEnd;
     }
@@ -185,6 +198,13 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
             CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
             knockDoorCheckCoroutine = null;
         }
+        
+        if (nestedKnockDoorCheckCoroutine != null) {
+            CoroutineRunner.Singleton.StopCoroutine(nestedKnockDoorCheckCoroutine);
+            nestedKnockDoorCheckCoroutine = null;
+        }
+        
+        
         onEnd?.Invoke();
         UnregisterListeners();
         this.UnRegisterEvent<OnOutsideBodyClicked>(OnOutsideBodyClicked);
@@ -204,20 +224,16 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
 
 
     protected virtual IEnumerator KnockDoorCheck() {
+        Speaker speaker = GameObject.Find("OutsideBodySpeaker").GetComponent<Speaker>();
         bodyGenerationModel.CurrentOutsideBody.Value = bodyInfo;
-        Debug.Log("Start Knock");
+      
+        nestedKnockDoorCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(bodyInfo.KnockBehavior?.OnKnockDoor(speaker,
+            bodyInfo.VoiceTag));
+        yield return nestedKnockDoorCheckCoroutine;
         
-        for (int i = 0; i < knockTime; i++) {
-            string clipName = overrideAudioClipName;
-            if (String.IsNullOrEmpty(overrideAudioClipName)) {
-                 clipName = $"knock_{Random.Range(1, 8)}";
-            }
-           
-            knockAudioSource = AudioSystem.Singleton.Play2DSound(clipName, 1, false);
-            yield return new WaitForSeconds(knockAudioSource.clip.length + knockDoorTimeInterval);
-        }
-
+        knockDoorCheckCoroutine = null;
         bodyGenerationModel.CurrentOutsideBody.Value = null;
+        bodyInfo.KnockBehavior?.OnStopKnock();
         OnNotOpen();
     }
 }

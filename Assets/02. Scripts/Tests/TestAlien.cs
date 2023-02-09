@@ -9,9 +9,9 @@ public class TestAlien : AbstractMikroController<MainGame>
 {
     private void Start()
     {
-        Debug.Log(AlienDescriptionFactory.GetRadioDescription(BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, false), 1));
-        Debug.Log(AlienDescriptionFactory.GetRadioDescription(BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true, false), 0.5f));
-
+        //Debug.Log(AlienDescriptionFactory.GetRadioDescription(BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, false), 1));
+       // Debug.Log(AlienDescriptionFactory.GetRadioDescription(BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true, false), 0.5f));
+        /*
 
         this.Delay(1f, () =>
         {
@@ -31,6 +31,6 @@ public class TestAlien : AbstractMikroController<MainGame>
             BodyInfo news2 = BodyInfo.GetBodyInfoForDisplay(info2, BodyPartDisplayType.Newspaper);
             GameObject o4 = AlienBody.BuildNewspaperAlienBody(news2, 1);
             o4.transform.position = new Vector3(30, 0, 0);
-        });
+        });*/
     }
 }

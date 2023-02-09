@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using MikroFramework.BindableProperty;
@@ -45,9 +46,11 @@ public class BountyHunterSystem : AbstractSystem {
         this.RegisterEvent<OnNewDay>(OnNewDay);
         telephoneSystem.AddContact(PhoneNumber, new BountyHunterPhone());
         Debug.Log("BountyHunterPhone: " + PhoneNumber);
-        
+
         QuestBodyTimeInfo = new BodyTimeInfo(Random.Range(20, 30),
-            BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true, true));
+            BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true, true,
+                new NormalKnockBehavior(3, Random.Range(3, 7), new List<string>() { })));
+        
     }
 
   

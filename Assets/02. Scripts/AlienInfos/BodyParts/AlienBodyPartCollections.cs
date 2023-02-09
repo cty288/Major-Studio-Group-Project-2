@@ -42,7 +42,7 @@ public class AlienBodyPartCollections : MonoPersistentMikroSingleton<AlienBodyPa
     public BodyPartCollection SpecialBodyPartPrefabs;
 
     private void Start() {
-        MainGame.Interface.GetModel<BodyTagInfoModel>().LoadInfo();
+        //MainGame.Interface.GetModel<BodyTagInfoModel>().LoadInfo();
         MainGame.Interface.GetUtility<ResLoader>();
     }
 

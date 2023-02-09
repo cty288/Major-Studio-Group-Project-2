@@ -44,10 +44,11 @@ public class DogSystem : AbstractSystem
 
     private void SpawnDog(int eventStartDay)
     {
-        BodyInfo targetBody = DogKnockEvent.GenerateDog();
-
         int knockDoorTimeInterval = 3;
         int knockTime = Random.Range(6, 9);
+        BodyInfo targetBody = DogKnockEvent.GenerateDog(knockDoorTimeInterval, knockTime);
+
+       
         DateTime dogStartTime = gameTimeManager.CurrentTime.Value.AddDays(eventStartDay);
         int hour = Random.Range(22, 24);
         int minute = Random.Range(20, 40);
@@ -58,8 +59,7 @@ public class DogSystem : AbstractSystem
 
         Debug.Log("Dog Event Start Time: " + dogStartTime);
         gameEventSystem.AddEvent(new DogKnockEvent(
-            new TimeRange(dogStartTime, dogEventEndTime), targetBody, knockDoorTimeInterval,
-            knockTime,
+            new TimeRange(dogStartTime, dogEventEndTime), targetBody,
             1, null, null));
     }
 

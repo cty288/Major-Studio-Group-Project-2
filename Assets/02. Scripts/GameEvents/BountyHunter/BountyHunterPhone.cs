@@ -163,8 +163,7 @@ public class BountyHunterPhone : TelephoneContact {
             DateTime policeEventStartTime = tomorrow.AddMinutes(Random.Range(30, 60));
             DateTime policeEventEndTime = policeEventStartTime.AddMinutes(Random.Range(20, 40));
             gameEventSystem.AddEvent(new PoliceGenerateEvent(new TimeRange(policeEventStartTime, policeEventEndTime),
-                PoliceGenerateEvent.GeneratePolice(),
-                3, Random.Range(5, 9), 0.8f, null, null));
+                PoliceGenerateEvent.GeneratePolice(), 0.8f, null, null));
         }
     }
 

@@ -14,12 +14,14 @@ using TMPro;
 public class NewspaperUIPanel : OpenableUIPanel {
   
     private GameObject panel;
+    
     private TMP_Text dateText;
     protected GameObject outOfDateText;
     
    
 
     [SerializeField] private List<RawImage> imageContainers = new List<RawImage>();
+    
     private List<GameObject> savedSpawnedImages = new List<GameObject>();
     private Newspaper lastNewspaper = null;
     [SerializeField] private List<Image> symbolImages = new List<Image>();
@@ -27,10 +29,14 @@ public class NewspaperUIPanel : OpenableUIPanel {
     private GameTimeManager gameTimeManager;
     
     protected Newspaper news;
+    
+    [ES3Serializable]
+    protected Dictionary<string, GameObject> newspaperMarkers = new Dictionary<string, GameObject>();
 
-    protected Dictionary<Newspaper, GameObject> newspaperMarkers = new Dictionary<Newspaper, GameObject>();
-
-    protected GameObject currentMarker = null;
+    [SerializeField] private GameObject newspaperMarkerPrefab;
+    
+    
+    protected NewspaperMarker currentMarker = null;
     protected LineRenderer currentLineRenderer = null;
     [SerializeField] private GameObject lineRendererPrefab;
     
@@ -58,10 +64,12 @@ public class NewspaperUIPanel : OpenableUIPanel {
     }
 
     private void OnNewspaperThrown(OnNewspaperThrown e) {
-        if(newspaperMarkers.ContainsKey(e.Newspaper)) {
-            Destroy(newspaperMarkers[e.Newspaper]);
-            newspaperMarkers.Remove(e.Newspaper);
+        if(newspaperMarkers.ContainsKey(e.Newspaper.guid)) {
+            Destroy(newspaperMarkers[e.Newspaper.guid].gameObject);
+            newspaperMarkers.Remove(e.Newspaper.guid);
         }
+        
+        
     }
 
     private void OnNewspaperUIPanelOpened(OnNewspaperUIPanelOpened e) {
@@ -93,16 +101,15 @@ public class NewspaperUIPanel : OpenableUIPanel {
         });
         AudioSystem.Singleton.Play2DSound("pick_up_newspaper");
         
-        if (!newspaperMarkers.ContainsKey(news)) {
-            LineRenderer marker = new GameObject("NewspaperMarker").AddComponent<LineRenderer>();
-            marker.transform.SetParent(panel.transform);
-            newspaperMarkers.Add(news, marker.gameObject);
-           
+        if (!newspaperMarkers.ContainsKey(news.guid)) {
+            GameObject marker = Instantiate(newspaperMarkerPrefab, panel.transform);
+            newspaperMarkers.Add(news.guid, marker);
         }
 
         lastMarkerPosition = Vector2.zero;
-        currentMarker = newspaperMarkers[news];
-        currentMarker.SetActive(true);
+        currentMarker = newspaperMarkers[news.guid].GetComponent<NewspaperMarker>();
+        
+        currentMarker.gameObject.SetActive(true);
         
         
         if (lastNewspaper == news && savedSpawnedImages.Count > 0) {
@@ -149,7 +156,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
         base.Update();
         if (panel.activeInHierarchy && currentMarker) {
             if (Input.GetMouseButtonDown(0)) {
-                currentLineRenderer = Instantiate(lineRendererPrefab, currentMarker.transform).GetComponent<LineRenderer>();
+                currentLineRenderer = currentMarker.AddMarker();
             }
             
             if (Input.GetMouseButton(0)) {
@@ -162,11 +169,8 @@ public class NewspaperUIPanel : OpenableUIPanel {
                         markerArea.bounds.center.z);
 
                     if (markerArea.bounds.Contains(mousePosWorldFixed)) {
-                        var positionCount = currentLineRenderer.positionCount;
-                        positionCount++;
-                        currentLineRenderer.positionCount = positionCount;
-                        Vector3 targetPos = new Vector3(mousePosWorld.x, mousePosWorld.y, -15);
-                        currentLineRenderer.SetPosition(positionCount - 1, targetPos);
+                        currentMarker.AddMarkerPosition(currentLineRenderer,
+                            new Vector3(mousePosWorld.x, mousePosWorld.y, -15));
                     }
                     
                     lastMarkerPosition = Input.mousePosition;
@@ -220,7 +224,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
         });
         AudioSystem.Singleton.Play2DSound("put_down_newspaper");
         if (currentMarker) {
-            currentMarker.SetActive(false);
+            currentMarker.gameObject.SetActive(false);
         }
 
         currentLineRenderer = null; 

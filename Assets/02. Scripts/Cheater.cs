@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using MikroFramework.Architecture;
 using UnityEngine;
 
@@ -29,7 +30,9 @@ public class Cheater : AbstractMikroController<MainGame> {
         }
 
         if (Input.GetKeyDown(KeyCode.A)) {
-            BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true, false);
+            BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true, false,
+                new NormalKnockBehavior(3, Random.Range(3, 7), null));
+            
             this.GetSystem<BodyManagmentSystem>().AddToAllBodyTimeInfos(new BodyTimeInfo(3, info));
             this.GetModel<BodyGenerationModel>().CurrentOutsideBody.Value = info;
         }

@@ -17,7 +17,7 @@ namespace _02._Scripts.BodyManagmentSystem {
 		protected Dictionary<string, TagDescription> tagDescriptions = new Dictionary<string, TagDescription>();
 
 		protected override void OnInit() {
-			
+			LoadInfo();
 		}
 		
 		public List<string> GetRealRadioDescription(string tag) {
@@ -64,7 +64,7 @@ namespace _02._Scripts.BodyManagmentSystem {
 			while (enumerator.MoveNext()) {
 				
 			}
-			Debug.Log("result: " + result);
+			//Debug.Log("result: " + result);
 			OnDownloadSheet(result);
 		}
 		

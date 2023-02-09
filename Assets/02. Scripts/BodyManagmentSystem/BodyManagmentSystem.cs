@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using Crosstales;
 using MikroFramework.Architecture;
 using UnityEngine;
@@ -98,7 +99,9 @@ public class BodyManagmentSystem : AbstractSystem {
         
         
         for (int i = newBodyInfos.Count; i < MaxBodyEveryDay; i++) {
-            BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, true);
+            BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, true,
+                new NormalKnockBehavior(3, Random.Range(3, 7), null));
+            
             BodyTimeInfo timeInfo = null;
             if (i == 0) {
                 timeInfo = new BodyTimeInfo(3, info);
@@ -107,7 +110,7 @@ public class BodyManagmentSystem : AbstractSystem {
             }
             AddToAllBodyTimeInfos(timeInfo);
             newBodyInfos.Add(timeInfo);
-            Debug.Log($"New Body Info Generated! Height: {info.Height}, VoiceType: {info.VoiceType}.");
+            //Debug.Log($"New Body Info Generated! Height: {info.Height}, VoiceType: {info.VoiceType}.");
         }
         newBodyInfos.CTShuffle();
         //transform an alien

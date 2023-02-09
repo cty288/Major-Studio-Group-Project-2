@@ -1,14 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.AlienInfos.Tags.Base;
+using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class PoliceGenerateEvent : BodyGenerationEvent {
-    public PoliceGenerateEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float knockDoorTimeInterval, int knockTime, float eventTriggerChance, Action onEnd, Action onMissed, string overrideAudioClipName = null) :
-        base(startTimeRange, bodyInfo, knockDoorTimeInterval, knockTime, eventTriggerChance, onEnd, onMissed, overrideAudioClipName) {
+    public PoliceGenerateEvent(TimeRange startTimeRange, BodyInfo bodyInfo,float eventTriggerChance, Action onEnd, Action onMissed) :
+        base(startTimeRange, bodyInfo, eventTriggerChance, onEnd, onMissed) {
         Debug.Log("A police event is generated. The time is between " + startTimeRange.StartTime + " and " + startTimeRange.EndTime);
     }
 
@@ -21,7 +23,8 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
         AlienBodyPartInfo head = AlienBodyPartCollections.Singleton.SpecialBodyPartPrefabs.HeightSubCollections[0]
             .ShadowBodyPartPrefabs.HumanTraitPartsPrefabs[0].GetComponent<AlienBodyPartInfo>();
       
-        return BodyInfo.GetBodyInfo(leg, body, head, height, Gender.MALE, BodyPartDisplayType.Shadow, false);
+        return BodyInfo.GetBodyInfo(leg, body, head, height, new VoiceTag(1),
+            new NormalKnockBehavior(3, Random.Range(3,7), new List<string>(){}),BodyPartDisplayType.Shadow, false);
 
     }
 
@@ -40,8 +43,7 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
         DateTime policeEventStartTime = new DateTime(tomorrow.Year, tomorrow.Month, tomorrow.Day, 22, Random.Range(30,50), 0);
         DateTime policeEventEndTime = policeEventStartTime.AddMinutes(Random.Range(20, 40));
         gameEventSystem.AddEvent(new PoliceGenerateEvent(new TimeRange(policeEventStartTime, policeEventEndTime),
-            PoliceGenerateEvent.GeneratePolice(),
-            3, Random.Range(5, 9), 0.8f, null, null));
+            PoliceGenerateEvent.GeneratePolice(), 0.8f, null, null));
     }
 
     protected override Func<bool> OnOpen() {

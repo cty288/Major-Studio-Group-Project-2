@@ -64,7 +64,7 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
 
             this.GetSystem<GameEventSystem>().AddEvent(new BountyHunterQuestAlienSpawnEvent(
                 new TimeRange(nextStartTime, nextEndTime),
-                bountyHunterSystem.QuestBodyTimeInfo.BodyInfo, Random.Range(2f, 4f), Random.Range(4, 8), 1));
+                bountyHunterSystem.QuestBodyTimeInfo.BodyInfo, 1));
 
             Debug.Log("Target quest body will be spawned at " + nextStartTime);
         }

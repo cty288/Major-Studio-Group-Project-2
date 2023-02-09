@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.AlienInfos.Tags.Base;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,7 +42,17 @@ public class OutdoorFlashLight : ElectricalApplicance
                     replies.Add("Holy! You��ve got a SUN in your house?! Don't tell me you are some kind of giant light bulb alien!");
                     replies.Add("Cut it off, mister! Or I will call the officers!");
                     string reply = replies[UnityEngine.Random.Range(0, replies.Count)];
-                    speaker.Speak(reply, null, "",null,Random.Range(0.8f, 1.2f));
+
+                    IVoiceTag voiceTag = bodyGenerationModel.CurrentOutsideBody.Value.VoiceTag;
+                    if (voiceTag != null) {
+                        speaker.Speak(reply, AudioMixerList.Singleton.AlienVoiceGroups[voiceTag.VoiceIndex],
+                            "",null,voiceTag.VoiceSpeed,1f,
+                            voiceTag.VoiceType);
+                    }
+                    else {
+                        speaker.Speak(reply, null, "",null,Random.Range(0.8f, 1.2f));
+                    }
+                    
                 }
             }
             StartCoroutine(FlashCoolDown());

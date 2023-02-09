@@ -31,6 +31,14 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
         if (image) {
             defaultMaterial = image.material;
         }
+        
+       
+    }
+
+    private void Start() {
+        if (spriteRenderer) {
+            spriteRenderer.material = defaultMaterial;
+        }
        
     }
 

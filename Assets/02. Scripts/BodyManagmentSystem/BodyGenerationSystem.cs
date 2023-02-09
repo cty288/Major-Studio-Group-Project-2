@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
 using MikroFramework.BindableProperty;
@@ -82,7 +83,8 @@ public class BodyGenerationSystem : AbstractSystem {
                     false);
             }
             else {
-                targetBody = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false,false);
+                targetBody = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, false,
+                    new NormalKnockBehavior(3, Random.Range(4, 7), null));
             }
            // Debug.Log("Spawned a non-alien");
         }
@@ -96,8 +98,7 @@ public class BodyGenerationSystem : AbstractSystem {
         DateTime currentTime = gameTimeManager.CurrentTime;
 
         gameEventSystem.AddEvent(new BodyGenerationEvent(
-            new TimeRange(currentTime + new TimeSpan(0, knockDoorCheckTimeInterval, 0)), targetBody, knockDoorTimeInterval,
-            knockTime,
+            new TimeRange(currentTime + new TimeSpan(0, knockDoorCheckTimeInterval, 0)), targetBody,
             knockDoorChance, SpawnAlienOrDeliverBody, SpawnAlienOrDeliverBody));
     }
 

@@ -28,6 +28,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<RadioModel>(new RadioModel());
         this.RegisterModel<BodyGenerationModel>(new BodyGenerationModel());
         this.RegisterModel<BodyTagInfoModel>(new BodyTagInfoModel());
+        this.RegisterModel<BodyKnockPhraseModel>(new BodyKnockPhraseModel());
 
         
     }

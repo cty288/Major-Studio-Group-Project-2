@@ -7,8 +7,8 @@ using Random = UnityEngine.Random;
 
 public class BountyHunterQuestAlienSpawnEvent : BodyGenerationEvent {
     private BodyManagmentSystem bodyManagmentSystem;
-    public BountyHunterQuestAlienSpawnEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float knockDoorTimeInterval, int knockTime, float eventTriggerChance, string overrideAudioClipName = null) :
-        base(startTimeRange, bodyInfo, knockDoorTimeInterval, knockTime, eventTriggerChance, null, null, overrideAudioClipName) {
+    public BountyHunterQuestAlienSpawnEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float eventTriggerChance) :
+        base(startTimeRange, bodyInfo, eventTriggerChance, null, null) {
         bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
     }
 
@@ -37,7 +37,7 @@ public class BountyHunterQuestAlienSpawnEvent : BodyGenerationEvent {
         DateTime nextEndTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day,
             23, 50, 0);
         gameEventSystem.AddEvent(new BountyHunterQuestAlienSpawnEvent(new TimeRange(nextStartTime, nextEndTime),
-            bodyInfo, knockDoorTimeInterval, knockTime, 1));
+            bodyInfo, 1));
     }
 
     public override void OnMissed() {

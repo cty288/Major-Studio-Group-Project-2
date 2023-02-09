@@ -24,6 +24,8 @@ public class NewspaperViewController : DraggableItems, IPointerEnterHandler, IPo
 
     private SpriteRenderer selfRenderer;
     [SerializeField] private List<Sprite> sprites;
+    
+    
     protected override void Awake() {
         base.Awake();
         renderers = GetComponentsInChildren<SpriteRenderer>(true).ToList();

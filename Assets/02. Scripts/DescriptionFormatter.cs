@@ -42,7 +42,10 @@ public class DescriptionFormatter : IFormatProvider, ICustomFormatter {
     }
 
     private string GetVoiceDescription(BodyInfo body, float reality) {
-        return "";
+        if (body.VoiceTag != null) {
+            return body.VoiceTag.GetRandomRadioDescription(Random.Range(0f, 1f) < reality);
+        }
+        return "It's voice is unclear.";
     }
 
     public static string GetHeightDescriptions(BodyInfo body, float reality) {

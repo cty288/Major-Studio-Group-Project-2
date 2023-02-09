@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7359730058643278246}
   - component: {fileID: 705781351578937490}
   - component: {fileID: 1308145805}
+  - component: {fileID: 4042527819960552514}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -122,6 +123,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4042527819960552514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342480417609438534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveLayer: 0
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 1
+  saveChildren: 0
+  componentsToSave:
+  - {fileID: 6476036034993967982}
 --- !u!1 &2009331050094908393
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,6 +154,7 @@ GameObject:
   - component: {fileID: 8603860161494603145}
   - component: {fileID: 4681274676205467631}
   - component: {fileID: 3748106950719525245}
+  - component: {fileID: -2022191346559222247}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -257,6 +279,25 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &-2022191346559222247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009331050094908393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveLayer: 1
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 0
+  saveChildren: 0
+  componentsToSave: []
 --- !u!1 &2572655590815050440
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +309,7 @@ GameObject:
   - component: {fileID: 5291203515592159639}
   - component: {fileID: 99396346070038781}
   - component: {fileID: 262119877976785609}
+  - component: {fileID: -3139135681549172806}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -392,6 +434,25 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &-3139135681549172806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2572655590815050440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveLayer: 1
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 0
+  saveChildren: 0
+  componentsToSave: []
 --- !u!1 &3067820477577640098
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,6 +465,7 @@ GameObject:
   - component: {fileID: 837140277354646876}
   - component: {fileID: 7903528495308189418}
   - component: {fileID: 5194309642794753770}
+  - component: {fileID: -9031874587184981775}
   m_Layer: 5
   m_Name: DateCanvas
   m_TagString: Untagged
@@ -493,6 +555,26 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &-9031874587184981775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3067820477577640098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveLayer: 1
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 0
+  saveChildren: 0
+  componentsToSave:
+  - {fileID: 837140277354646876}
 --- !u!1 &5994661374104180637
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,6 +621,8 @@ GameObject:
   - component: {fileID: 568059110899102865}
   - component: {fileID: 675421095696004646}
   - component: {fileID: 5205350388830810417}
+  - component: {fileID: -2390449182240085978}
+  - component: {fileID: -3294170875686683250}
   m_Layer: 0
   m_Name: Newspaper
   m_TagString: Untagged
@@ -673,3 +757,87 @@ MonoBehaviour:
   outlineMaterial: {fileID: 2100000, guid: 5a6db85ebb9466f4b90af9ebdd3c4fdc, type: 2}
   followingObject: {fileID: 3067820477577640098}
   followingObjectIsUI: 0
+  moveToTopWhenHovering: 0
+--- !u!114 &-2390449182240085978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8808066566453010615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabId: 7848460051587400296
+  localRefs:
+    _Keys:
+    - {fileID: 8808066566453010615}
+    - {fileID: 2363856228534968737}
+    - {fileID: 3388428711052507194}
+    - {fileID: 11500000, guid: 5b4a75c0ad6a1574ca1a0b3566c7a90d, type: 3}
+    - {fileID: 21300000, guid: ef1575a0337303945add7ccce80118f4, type: 3}
+    - {fileID: 2800000, guid: ef1575a0337303945add7ccce80118f4, type: 3}
+    - {fileID: 21300000, guid: d774cc6dd697936488c2787d924ad213, type: 3}
+    - {fileID: 2800000, guid: d774cc6dd697936488c2787d924ad213, type: 3}
+    - {fileID: 21300000, guid: 24cf3a1784849294385431d59b07b71c, type: 3}
+    - {fileID: 2800000, guid: 24cf3a1784849294385431d59b07b71c, type: 3}
+    - {fileID: 568059110899102865}
+    - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    - {fileID: 4800000, guid: e260cfa7296ee7642b167f1eb5be5023, type: 3}
+    - {fileID: 675421095696004646}
+    - {fileID: 5205350388830810417}
+    - {fileID: 11500000, guid: 260b52fa4b43b9d4296254fbde67bf60, type: 3}
+    - {fileID: 2100000, guid: 5a6db85ebb9466f4b90af9ebdd3c4fdc, type: 2}
+    - {fileID: 4800000, guid: 62505ee61d20098489c6f861ed25cce1, type: 3}
+    - {fileID: 2800000, guid: 35f23c48db908de47a926c4bb1831818, type: 3}
+    - {fileID: 3067820477577640098}
+    - {fileID: 4838716828870836026}
+    - {fileID: 837140277354646876}
+    - {fileID: 7903528495308189418}
+    - {fileID: 5194309642794753770}
+    - {fileID: 2009331050094908393}
+    - {fileID: 8603860161494603145}
+    - {fileID: 4681274676205467631}
+    - {fileID: 3748106950719525245}
+    - {fileID: -2390449182240085978}
+    - {fileID: 5994661374104180637}
+    - {fileID: 8425789279444396188}
+    - {fileID: 1342480417609438534}
+    - {fileID: 3675480365565302081}
+    - {fileID: 6476036034993967982}
+    - {fileID: 7359730058643278246}
+    - {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+    - {fileID: 705781351578937490}
+    - {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+    - {fileID: 1308145805}
+    - {fileID: 2572655590815050440}
+    - {fileID: 5291203515592159639}
+    - {fileID: 99396346070038781}
+    - {fileID: 262119877976785609}
+    - {fileID: 0}
+    _Values: c1e61002d12b205489446a578f5f2c17001897faf341bf77329339efff4dd167351a551cc83f206ea01e106099bbed37d1328042430f877f2798cf3df231542a17d28caab548e03e08d766edaedfee128070c031cd13aa45a1d4f4306fe27c2f8cc5b538d1bc7d78aebec59456662f06791e427e8fdda329832eb375c2ef5115559579749426e33bf248830e4e16ee3ba5eea88e25fabe6998204a5df7f84a41934f1714205c6551c4f88f289e4e876cc1872f2cb83c0f4f55e3dd73db85441592c5a19e2d035b0253fac92c6b96cb1aa9b79d6fc81d8856bf3840c3800e894a3ca495d9ace93e3c1ccd7f4cfac34515aff7ca24e8d44d4f4ef7def5c3988244707ef0c600f16d6df7da8b959dd55003f22a7278d9ae32110e1a744af4b6867c4b3adb7bd37e155f9ac7d1f1b7484d23b91efd67daf6943db4212be599479d3facf01f274e342974ebec21ed23bea55698676d2946e15e41e7b2c3a883c2586f
+--- !u!114 &-3294170875686683250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8808066566453010615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveLayer: 1
+  saveTag: 1
+  saveName: 1
+  saveHideFlags: 1
+  saveActive: 1
+  saveChildren: 0
+  componentsToSave:
+  - {fileID: 2363856228534968737}
+  - {fileID: 675421095696004646}
+  - {fileID: 568059110899102865}
+  - {fileID: 3388428711052507194}

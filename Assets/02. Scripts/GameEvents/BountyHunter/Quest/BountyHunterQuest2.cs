@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.ActionKit;
 using MikroFramework.Architecture;
@@ -18,6 +19,7 @@ public class BountyHunterQuest2Notification : BountyHunterQuestClueNotification 
 
     protected override BountyHunterQuestClueNotification GetSameEvent(TimeRange startTimeRange, TelephoneContact contact, int callWaitTime,
         DateTime clueHappenTime) {
+        
         return new BountyHunterQuest2Notification(startTimeRange, (BountyHunterQuest2ClueNotificationNotificationContact) contact, callWaitTime, clueHappenTime);
     }
 
@@ -30,8 +32,9 @@ public class BountyHunterQuest2Notification : BountyHunterQuestClueNotification 
         TimeRange newTimeRange = new TimeRange(happenTimeRange.StartTime, happenTimeRange.StartTime.AddMinutes(10));
         string location = BountyHunterQuestClueInfoRadioAreaEvent.GetRandomLocation();
         return new BountyHunterQuest2ClueEvent(newTimeRange,location,
-            BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, false), Random.Range(1f, 3f),
-            Random.Range(2, 5), null, null);
+            BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, false,
+                new NormalKnockBehavior(Random.Range(1,3), UnityEngine.Random.Range(3,6),
+                    new List<string>(){})), null, null);
     }
 }
 
@@ -84,31 +87,31 @@ public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
     protected BodyGenerationModel bodyGenerationModel;
 
     protected Coroutine knockDoorCheckCoroutine;
+    protected Coroutine nestedKnockDoorCheckCoroutine;
+    
     protected BodyInfo bodyInfo;
-    protected float knockDoorTimeInterval;
-    protected int knockTime;
+  
     protected Action onEnd;
     protected Action onMissed;
     protected bool started = false;
-    protected string overrideAudioClipName;
+   
     protected bool onClickPeepholeSpeakEnd = false;
-    protected PlayerResourceSystem playerResourceSystem;
+  
     protected ITimeSystem timeSystem;
     protected AudioSource knockAudioSource;
-    public BountyHunterQuest2ClueEvent(TimeRange startTimeRange, string location, BodyInfo bodyInfo, float knockDoorTimeInterval, int knockTime,
-        Action onEnd, Action onMissed, string overrideAudioClipName = null) : base(startTimeRange) {
+    
+    public BountyHunterQuest2ClueEvent(TimeRange startTimeRange, string location, BodyInfo bodyInfo, 
+        Action onEnd, Action onMissed) : base(startTimeRange) {
         this.location = location;
 
         bodyGenerationModel = this.GetModel<BodyGenerationModel>();
         this.bodyInfo = bodyInfo;
-        this.knockDoorTimeInterval = knockDoorTimeInterval;
-        this.knockTime = knockTime;
-      
+       
         this.onEnd = onEnd;
         this.onMissed = onMissed;
-        this.overrideAudioClipName = overrideAudioClipName;
+       
 
-        playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
+       
         timeSystem = this.GetSystem<ITimeSystem>();
     }
 
@@ -123,8 +126,14 @@ public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
             if (knockDoorCheckCoroutine != null) {
                 CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
                 knockDoorCheckCoroutine = null;
-
             }
+            
+            if (nestedKnockDoorCheckCoroutine != null) {
+                CoroutineRunner.Singleton.StopCoroutine(nestedKnockDoorCheckCoroutine);
+                nestedKnockDoorCheckCoroutine = null;
+            }
+            
+            
             LoadCanvas.Singleton.LoadUntil(OnOpen, OnFinishOutsideBodyInteraction);
             if (knockAudioSource)
             {
@@ -152,6 +161,11 @@ public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
                 CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
                 knockDoorCheckCoroutine = null;
             }
+            if (nestedKnockDoorCheckCoroutine != null) {
+                CoroutineRunner.Singleton.StopCoroutine(nestedKnockDoorCheckCoroutine);
+                nestedKnockDoorCheckCoroutine = null;
+            }
+            
             bodyGenerationModel.CurrentOutsideBody.Value = null;
             OnNotOpen();
             return EventState.End;
@@ -200,6 +214,11 @@ public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
             CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
             knockDoorCheckCoroutine = null;
         }
+        
+        if (nestedKnockDoorCheckCoroutine != null) {
+            CoroutineRunner.Singleton.StopCoroutine(nestedKnockDoorCheckCoroutine);
+            nestedKnockDoorCheckCoroutine = null;
+        }
         onEnd?.Invoke();
         UnregisterListeners();
         this.UnRegisterEvent<OnOutsideBodyClicked>(OnOutsideBodyClicked);
@@ -220,22 +239,17 @@ public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
     }
 
     private IEnumerator KnockDoorCheck() {
+        
+        Speaker speaker = GameObject.Find("OutsideBodySpeaker").GetComponent<Speaker>();
         bodyGenerationModel.CurrentOutsideBody.Value = bodyInfo;
-        Debug.Log("Start Knock");
-
-        for (int i = 0; i < knockTime; i++)
-        {
-            string clipName = overrideAudioClipName;
-            if (String.IsNullOrEmpty(overrideAudioClipName))
-            {
-                clipName = $"knock_{Random.Range(1, 8)}";
-            }
-
-            knockAudioSource = AudioSystem.Singleton.Play2DSound(clipName, 1, false);
-            yield return new WaitForSeconds(knockAudioSource.clip.length + knockDoorTimeInterval);
-        }
-
+      
+        nestedKnockDoorCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(bodyInfo.KnockBehavior?.OnKnockDoor(speaker,
+            bodyInfo.VoiceTag));
+        yield return nestedKnockDoorCheckCoroutine;
+        
+        knockDoorCheckCoroutine = null;
         bodyGenerationModel.CurrentOutsideBody.Value = null;
+        bodyInfo.KnockBehavior?.OnStopKnock();
         OnNotOpen();
     }
 

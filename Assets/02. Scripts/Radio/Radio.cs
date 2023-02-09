@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using Crosstales;
 using Crosstales.RTVoice.Model.Enum;
 using DG.Tweening;
@@ -42,7 +43,7 @@ public class Radio : ElectricalApplicance
     private AudioSource radioOpenAudioSource;
     [SerializeField] private AnimationCurve radioRealityCurve;
     [SerializeField] private AnimationCurve unrelatedBodyInfoCountWithDay;
-    [SerializeField] private AnimationCurve realAlienDescriptionRepeatTimeWithDay;
+    //[SerializeField] private AnimationCurve realAlienDescriptionRepeatTimeWithDay;
 
     [SerializeField] protected AudioMixerGroup radioNormalBroadcaseAudioMixerGroup;
    
@@ -167,9 +168,9 @@ public class Radio : ElectricalApplicance
 
     private void ConstructDescriptionDatas(List<AlienDescriptionData> descriptionDatas, float radioReality, int day) {
 
-        BodyInfo todayAlien = null;
+        List<BodyInfo> todayAliens = null;
         if (bodyManagmentSystem.Aliens.Count > 0) {
-            todayAlien = bodyManagmentSystem.Aliens[Random.Range(0, bodyManagmentSystem.Aliens.Count)].BodyInfo;
+            todayAliens = bodyManagmentSystem.Aliens.Select((info => info.BodyInfo)).ToList();
         }
           
 
@@ -177,9 +178,9 @@ public class Radio : ElectricalApplicance
             bodyManagmentSystem.allBodyTimeInfos.Select((info => info.BodyInfo)).ToList();
 
         allPossibleBodyInfos.CTShuffle();
-        if (todayAlien != null) {
-            for (int i = 0; i < realAlienDescriptionRepeatTimeWithDay.Evaluate(day); i++) {
-                descriptionDatas.Add(new AlienDescriptionData(todayAlien, radioReality));
+        if (todayAliens != null) {
+            foreach (BodyInfo bodyInfo in allPossibleBodyInfos) {
+                descriptionDatas.Add(new AlienDescriptionData(bodyInfo, radioReality));
             }
         }
        
@@ -187,7 +188,9 @@ public class Radio : ElectricalApplicance
         for (int i = 0; i < unrelatedBodyInfoCountWithDay.Evaluate(day); i++) {
             if (Random.Range(0, 2) < 1) {
                 descriptionDatas.Add(
-                    new AlienDescriptionData(BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, false),
+                    new AlienDescriptionData(BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, false,
+                            new NormalKnockBehavior(3, Random.Range(3,7),
+                                null)),
                         radioReality));
             }
             else {
