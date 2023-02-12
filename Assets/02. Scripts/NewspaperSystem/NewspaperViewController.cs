@@ -10,17 +10,17 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
-public struct OnNewspaperThrown {
-    public Newspaper Newspaper;
-}
+
 public class NewspaperViewController : DraggableItems, IPointerEnterHandler, IPointerExitHandler, ICanSendEvent {
     private GameObject indicateCanvas;
     private GameObject dateCanvas;
     private List<SpriteRenderer> renderers = new List<SpriteRenderer>();
-   
-
-    private Newspaper news;
+    
+    
+    [ES3Serializable]
+    private string newsID;
     private NewspaperSystem newspaperSystem;
+    private NewspaperModel NewspaperModel;
 
     private SpriteRenderer selfRenderer;
     [SerializeField] private List<Sprite> sprites;
@@ -34,11 +34,15 @@ public class NewspaperViewController : DraggableItems, IPointerEnterHandler, IPo
         dateCanvas = transform.Find("CanvasParent/DateCanvas").gameObject;
         indicateCanvas.SetActive(false);
         dateCanvas.SetActive(false);
+        
         newspaperSystem = this.GetSystem<NewspaperSystem>();
+        NewspaperModel = this.GetModel<NewspaperModel>();
         selfRenderer = GetComponent<SpriteRenderer>();
 
         Sprite sprite = sprites[Random.Range(0, sprites.Count)];
         selfRenderer.sprite = sprite;
+
+        SetLayer(1000);
     }
 
     public void StartIndicateTodayNewspaper() {
@@ -58,7 +62,7 @@ public class NewspaperViewController : DraggableItems, IPointerEnterHandler, IPo
     }
 
     public void SetContent(Newspaper news) {
-        this.news = news;
+        this.newsID = news.guid;
     }
 
 
@@ -68,24 +72,24 @@ public class NewspaperViewController : DraggableItems, IPointerEnterHandler, IPo
         Debug.Log("OnClick");
         this.Delay(0.1f, () => {
             if (this) {
-                this.SendCommand<OpenNewspaperUIPanelCommand>(new OpenNewspaperUIPanelCommand(news, true));
+                this.SendCommand<OpenNewspaperUIPanelCommand>(new OpenNewspaperUIPanelCommand(
+                    NewspaperModel.GetNewspaper(newsID), true));
             }
         });
     }
 
     public override void OnThrownToRubbishBin() {
-        this.SendEvent<OnNewspaperThrown>(new OnNewspaperThrown() {
-            Newspaper = news
-        });
+        NewspaperModel.DeleteNewspaper(newsID);
     }
 
 
     //private bool mouseOnNewspaper = false;
-    public void OnPointerEnter(PointerEventData eventData)
-    {
+    public void OnPointerEnter(PointerEventData eventData) {
         dateCanvas.SetActive(true);
-        news.dateString = news.date.Month.ToString() + "/" + news.date.Day.ToString() + "'s Newspaper";
-        dateCanvas.transform.GetChild(0).GetComponent<TMP_Text>().text = news.dateString;
+        Newspaper newspaper = NewspaperModel.GetNewspaper(newsID);
+        
+        newspaper.dateString = newspaper.date.Month.ToString() + "/" + newspaper.date.Day.ToString() + "'s Newspaper";
+        dateCanvas.transform.GetChild(0).GetComponent<TMP_Text>().text = newspaper.dateString;
         //mouseOnNewspaper = true;
     }
 

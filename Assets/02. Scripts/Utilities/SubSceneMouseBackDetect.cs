@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MikroFramework.Architecture;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SubSceneMouseBackDetect : AbstractMikroController<MainGame>
 {
@@ -22,6 +23,10 @@ public class SubSceneMouseBackDetect : AbstractMikroController<MainGame>
 
     private void Update() {
         if (Input.GetMouseButtonDown(0)) {
+            if(EventSystem.current.IsPointerOverGameObject()) {
+                return;
+            }
+            
             Vector2 mousePos = Input.mousePosition;
             if (!isUI) {
                 mousePos = Camera.main.ScreenToWorldPoint(mousePos);

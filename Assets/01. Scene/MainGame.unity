@@ -2059,6 +2059,111 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92413342}
   m_CullTransparentMesh: 1
+--- !u!21 &94899399
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!1 &97261984
 GameObject:
   m_ObjectHideFlags: 0
@@ -2143,6 +2248,46 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &108394299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 108394300}
+  m_Layer: 5
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &108394300
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108394299}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2098639705}
+  - {fileID: 421050036}
+  - {fileID: 658511717}
+  - {fileID: 965454892}
+  m_Father: {fileID: 556336014}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &110835984
 GameObject:
   m_ObjectHideFlags: 0
@@ -5402,7 +5547,217 @@ Material:
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
+--- !u!21 &257275261
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!21 &260347753
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
+--- !u!21 &261110654
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -8983,6 +9338,141 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 418355499}
   m_CullTransparentMesh: 1
+--- !u!1 &421050033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 421050036}
+  - component: {fileID: 421050035}
+  - component: {fileID: 421050034}
+  m_Layer: 5
+  m_Name: PauseText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &421050034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421050033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: PAUSED
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
+  m_sharedMaterial: {fileID: 1724549828375453005, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 96
+  m_fontSizeBase: 96
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: -2.248703, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &421050035
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421050033}
+  m_CullTransparentMesh: 1
+--- !u!224 &421050036
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421050033}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 108394300}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 479.0406, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &422025692
 GameObject:
   m_ObjectHideFlags: 0
@@ -9064,6 +9554,111 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2109293739318193759, guid: 40c690d1d81315649ac6330ead4b09b6, type: 3}
   m_PrefabInstance: {fileID: 38946798}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &424279813
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!1001 &425563770
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11305,7 +11900,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.298828
+  orthographic size: 4.8348055
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -11841,6 +12436,68 @@ Material:
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
+--- !u!1 &556336011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 556336014}
+  - component: {fileID: 556336013}
+  - component: {fileID: 556336012}
+  m_Layer: 5
+  m_Name: PausePanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &556336012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556336011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada9d9d99b1008344815ddb25c5118bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spr_Pause: {fileID: 21300000, guid: 038ff2e0a7dd84041acb5171bfc48648, type: 3}
+  Spr_Resume: {fileID: 21300000, guid: 794c652b0fa53474aae6adee7d1a4fa4, type: 3}
+--- !u!222 &556336013
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556336011}
+  m_CullTransparentMesh: 1
+--- !u!224 &556336014
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556336011}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 108394300}
+  - {fileID: 994631215}
+  m_Father: {fileID: 1158121040}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &574240992
 GameObject:
   m_ObjectHideFlags: 0
@@ -13302,6 +13959,140 @@ Material:
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
+--- !u!1 &658511713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 658511717}
+  - component: {fileID: 658511716}
+  - component: {fileID: 658511715}
+  - component: {fileID: 658511714}
+  m_Layer: 5
+  m_Name: Btn_Resume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &658511714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658511713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 658511715}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PauseGame, Assembly-CSharp
+        m_MethodName: Resume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &658511715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658511713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &658511716
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658511713}
+  m_CullTransparentMesh: 1
+--- !u!224 &658511717
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658511713}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1510220687}
+  m_Father: {fileID: 108394300}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 120}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &668684765
 GameObject:
   m_ObjectHideFlags: 0
@@ -13543,6 +14334,111 @@ Material:
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
 --- !u!21 &668918417
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
+--- !u!21 &669503098
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -14264,6 +15160,111 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 5110097570942028419, guid: 19951498cd4d11644b38a53868fe4014, type: 3}
   m_PrefabInstance: {fileID: 425563770}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &723014165
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!1 &725172281
 GameObject:
   m_ObjectHideFlags: 0
@@ -14947,6 +15948,111 @@ PolygonCollider2D:
       - {x: 5.5, y: -0.09375}
       - {x: 5.875, y: 0.03125}
       - {x: 5.875, y: 1.21875}
+--- !u!21 &753500769
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!21 &770115158
 Material:
   serializedVersion: 8
@@ -17469,6 +18575,111 @@ Material:
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
+--- !u!21 &899417311
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!1 &903502561
 GameObject:
   m_ObjectHideFlags: 0
@@ -17934,6 +19145,111 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_TargetDisplay: 0
+--- !u!21 &909508213
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!21 &926921711
 Material:
   serializedVersion: 8
@@ -19118,6 +20434,140 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &965454888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 965454892}
+  - component: {fileID: 965454891}
+  - component: {fileID: 965454890}
+  - component: {fileID: 965454889}
+  m_Layer: 5
+  m_Name: Btn_Quit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &965454889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965454888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 965454890}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PauseGame, Assembly-CSharp
+        m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &965454890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965454888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &965454891
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965454888}
+  m_CullTransparentMesh: 1
+--- !u!224 &965454892
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965454888}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1455229806}
+  m_Father: {fileID: 108394300}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -5}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!21 &968225644
 Material:
   serializedVersion: 8
@@ -19735,6 +21185,127 @@ Transform:
   m_Father: {fileID: 1797325394}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &994631211
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 994631215}
+  - component: {fileID: 994631214}
+  - component: {fileID: 994631213}
+  - component: {fileID: 994631212}
+  m_Layer: 5
+  m_Name: PauseButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &994631212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994631211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 994631213}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &994631213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994631211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 038ff2e0a7dd84041acb5171bfc48648, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &994631214
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994631211}
+  m_CullTransparentMesh: 1
+--- !u!224 &994631215
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994631211}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 556336014}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -50}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!21 &1010903314
 Material:
   serializedVersion: 8
@@ -21302,7 +22873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: 19e189d6-f20b-44ba-bdd3-d424ad1c4de5
   saveEvent: 1
-  loadEvent: 0
+  loadEvent: 1
   settings:
     _location: 4
     path: SaveFile.es3
@@ -21344,7 +22915,7 @@ MonoBehaviour:
   - {fileID: 114505951537352942, guid: 70654ecf1f4da46128155e50b0509888, type: 3}
   - {fileID: -2390449182240085978, guid: 0f91e3d6dd41a5948a82b79bb5bc8561, type: 3}
   idRef:
-    _Keys: 9b6b9879522525787d8ed12716f09c42e98fc099e84ad446aa2b8424c24d7d3f1e4a7ccc0273e0154762341d0ef0af7f0d61c53c76299a1a40dfcf27a001b5350b1045616d68445c70d6df4b7ff154477c05312412b9b547e6978c23a3b97544aefe291e3610ec5ae4973460b6b065313417ab9bd090233bc58c4604f568002ab5db0781e48d826b1ad6417a84549034335bef8c0ed9741cdceee4c257f0504b67a15325561cb3596abf7e06b056491a1d7b3650588d382567eba6f6a8bf132987f5e125a8b68b4e0f49f6cd577bcd3138ffdfd226a0a325682d8b41c3a9022a2d587259c7903d2c06845ea184067d14e18b40561fbffc19ad44712abd32ed47b4de5e00f78c96593e4c265500ba5662b077603869ab0a14568c060c0167ea2c9717eda5a77c1d550c18e72d6758e60dee0e7a46d2b5de082cb5aa7b6c5da4593752bee9cdb0ba335a0a438193377b02a7f9fa10e131fe1e38e5d15d2698c2528c729b45e930253dadb913378da38b63ce522a8c9c6b8768af234f1820a2f33e47f0f5219b3519291f3764281dc6902371348fd36e36b62016cd0bf27fc2a209c6d57f7e98adff673900abd3d0b086186cd476abcd385211c62ac896bef3565c6aa59db8b8ee741f33f79a6d8ae25039acdca0acc6b22901d76e47921a97562d5707692a13cd5f7e5f5777d69ee487577b02439a9403224884641fb5591dfb646093e97c86dad92183deb390c4ad9c0de7ef0d1cdaf1c15a29b1ae77ed14d87c52db3631ce03de5fd7dde84ab06d7c29c9129c482a173e51aabb59c776aef168b72fe3a0e3cddb1cef52ba03f688554335854000b121a66a1a878612a917e928ec7f01df511c0c05c97fa628a3c4a433119d91f06ef0b728d74dba6a54eec506c31c0f8a75ca6a18793a37317b7ec7561eadfef37a07450338264a602888a54845ac6487b41abd46ce8688cb467a525416114da7efd18c356113c29c14cb400121801331e6bf5d3795bad90c818642422c0ab4e9c501a716389a25a058203167c88aabc567216e55b4163caaaa98b6242f808ff5e8a8c322d8d5967f1a016f748971d40b3208a94d88f56324c1ad3e2eb0b531274fd8af1f397662c347128f4a86b1341c6dc256362bdd6ef2459e607a14c52ed03296c36221f4d1bba6e605667a5261ef86de3e135ffafc726abcda272a23507d1b40e81c75963e619412dd101d2b9268ffafff357ae4d0d26cc9332132061b35c87c7e44c6819be3e25f584be313706ab0bcd827dc79fbc98fea4f54631d308df7a747665728d27eb51de719747b4980c6622e1221bdedbd87b82b50d1ef80c52fcb5475a5293f2671a9230660155414a0ce8e3a4c42aeb59505ed0eabdd523a62de163f3140db105eab7c35e1f45d726316af6082448512e3611f613d30d24efb5e697dfe1545e1aa9e9960c6789689625f726a2ef2b81e59035c6d9fc32cd127d1c63fa3258cb12e32491cab25d85bf8a9c423be677cee1787d604b8d742e772c73868c12919c22d3ec360c42b8dccd4ff8a0a02f67070b14ba91b4f876a0574318e1bec6f9ace9002f5032cdd2aecfa0a3047614ce86837a9190cd23411b4a9c9d46d9d71b8449a599a03ed7345d321bc2143a8dd983ee608ac43568dfc5bf0415a0bb3974f8852ebad451914aa541012d17055540ccc3196865a1efb9a2855f6f42dcf5021896d98f16b8add57fab3005468a193f964cb7225481fa96b565184ef22207c86c0f0470212ba87bdacc073581e500387c2fc90625cd526943cd264e50f3386e5d079eba6586f1855bc4b867855aeb3f9b202d2d9701a2a9516dc3ee51d6dcc7a3a8d87a464a3d1cdeb1ae0584e53c072e095cdf3046056b74f55907c51fd72291801b3e336575e0e3104ee56057d1b3be433fb7760268a25c82faaf133b2e1125848c0b205a4a938f3db24094e5343338e349f7a0205360d8972e5f8526cdbe3e501ae4e3ece4087dd336a3b4a6c8b8a13899c0151a3eaabee4dd66c41b1e65fb607ef505b0c0a400be862306f8da7e219a51a370924cbbee9fd9f0f082db972e6350dad7cc4d0f781a30a97061b1a60a5f3529b341e69923b31665e6bfc38df2fef4a3965aca0aa2adc4a9a2e64c4051800b5fc7eaa593633858eb42a2e627cdbeac6f66554c55194fcc6112ccf64d86c61466a463c60da48806dea3956d4593fc675182abb6a6cc606907b1b470902e966218c74333de8b45ec0193d5075152ee0ae0c58b4524d09265cc055e5be908a70d49f779e31f376729c3406522e76907b4d3b09165b3514d4824e71fe3dd0a0308ecd7b296133ed5d7d34181d475b54d350d0687d795f34f64cb41ce38273b06cd5363d61fbbadc80296767d9e30973d806614e0f391da9ee027222ac160adb0984ac48f0e24a31f55216592039f225a9d70b161c3d415a0d20d45e899789973443705d70ad7b0944cfa64423c489b40f4c797b2221f746c6065530f21457a13781da23366a69a8aceaa514e586374996204f3ce1f146aac548dc69584b172f78050d5b6152148649ded8377be32b4c3e9ec7129d6c40bac4d0a1118eff4f61d3759b166c6c5517cb2a7a03e8f1d11ee370d4468304cce545c72031f426f7498f7763064715e0d149af4738e843d2d3fe832e002c69223157492e5bb4dcdc5bcdcf8c5f56d765f851a6902bbd93cc889af33077ab078a07656aa26ebcc37ada735dfa18488c82d9e2c9507a26081115e9480958f3ab4f3abb7b0615ca09c272d449471a731bc0f18ea96a7458052e6e7cb75804ced3ce1fac34d3327b93f026f9215a233f0878fbf6041862ea3c6d3e568b6e7e9f38c057e899393d488e77fbb8437a3654f4d08cc0a2f2374594ca90396b2311da8d773f9efdc45a30c54c9773e2555ac337934b5bfa3e40d40862839c36894d4e7729ba44452a572f755bfb565bc362c18fad8f0191922a3447946964be4105c401b6034765ea079e15852ea9c56979bc00bcd41ce7b120f7ab1173256b44124a9e40a8ee38565b5a5ad2e9e93e2b064ef1519bfe93162328e73de84220ef23b66358582aba082d3cc89052c7e3003c89d5455ec28ddc4b74273cc44a34c638a753fd696abfa710a7fe4d7ed4a303441affa092246e9e43c05b33ae09338707ffa8548c19682d35d3cb483cbfa1892e23f7dd49d5595d16f140a90e8cf9077477457c7df8905e4f2e953fa7d99e7c611b9d75eeaac2ce57fa9481a5eec33d34d4bdb3051e06266c988e1b4019b63c53c447292a6ef61e39a9f48569ae7e7f1388f778c722f08e43582de0a69a13c636ddec19f2898a7b20c73da1777d571623453f0be0d8bad1434444723e9a7275128e66658df880f84dd56220a38eb14733fcc2c7376aa30671dea5c9f732c3a8543971fa1c425be33ac9a74ac4248b2d097559bd2854c1573193289361b6107f67f48a95e349d50f57a5010011eeca966a2d2c94737e2f5676e636509410bb0f2627b2b8af211153496915ce56c169203792298ee2a4f3e6231ff303ed7b84b8150f26c75e7cba741b26b5f4969e004b50a977fe19d2d27d1966236fd2f29a321ca347b7645e3e444c6256441101af7b1e3f534403869f423ba9aec5a029470d7383d8f25748e6f21843b448837193e7169e8e1145de36a342770df2f3fc1a891a4ad094d9a2d26725465d473be8c6ac3b6924c148a6adad4d35b0cd56d8e5145e3e63cd4127c1b871f5368b3c7dde2a4f9f49a2df242d3e097ee20f52a0bdfe2b72a57a4b93ee63586b4f526f2171d056857eb68f43343a11dc3c40f62ef4ee4ccb4852dca6891c72acfa74d4dbcee7104d9a28e18b719059207490a95292d6603e9e3a6ac3adfd0e9a29e349c0663555255143c81dcfd73c265402e4e53a3b19ddec69c36c82b25f64e6b99e71b867453e3acda3d69f7d0d7677446faa182860eec925acd0f9c25e9fe465361539cb2145b759549367bc7b6a7739e3c621097cf0e573c522ebea448990be44fb4bdc504365b361727df3557a5fe9b8cc59da7cdce927fbac90442fa29ecc02a977801e6417d8d32b9411730fe2c07e2a5dee2eb742691124e0a32c571dfceeb6090002dfcb1ce332ada76ffb9aedcad0c504434f62b399f191064545fbd6b76e00d504e2be9f5f400afb086406e8760c26a46f19b93e19bd9af36f2e9d61c82810fe063a1716eed95afc5aa244cb145770c76ba0469fb5c2bc474735d07121943bce54f91dc40aef4a6973b6987779cedf18619b339890504c37085e5db909e8dbc522141f1b39acbc7b5423d300d5ba318715e8d3bcc7d35fa453194496b2fc8ca46fa2669a513b204b2148bc4cdcb3f23c2d2a5bdfeae102b172c56f52f0522e5069d16eccab68ca2638879a7f1712c8a026f99724a89471af5b170c15ab733c7476f34953de4017695fcb588d837e377a731179f8bb09a8d55e408f3c8a1f2d534b26080a5c1b7f671f2ec573edff32da1f6f5d4312cbcf7f4a75f41ed053f47e6204425d752d1e57701ee871bbca17a07397a306828e99e80978ab2ef062c88d38b9ef0dbe70afb3734a4bce4cbec5ea73959139afedfcd461d5991227b3b72d188b55fe24f61dfd46577accda6835c83d96a25bd08edd4a4ac36f9309c1da2602871829eb3cf196776b0ca68cd00606602f2b6eefa3a375520cb4e765b00607315e30acb0f423ff5b0ce33c9a84d71a4298cd256993c8a02a71832077f6ce397214d82d9f59566b0cd5ed057920ef2834665a321c1e616127d1d63e7003876425e25151a3fb456312c7ce6b593cd8f66154abee6463e2ac4c8af9317de805f75baed5a48dbf33d02009e0aaaf09f7150620223b518a37773b0261d30a881e0533c5c6ab673368a27884f0a47cc803bc6ee52b5ec5c9a5d01a4ddf8f2007dba81525888b2f5d83c578c5b4d57bdbf40304e1bed9a33fbf956a6a3ae5ac277e8e56b870a8c08772ef670e29ffea30aac141e3943f480105d6650ddf6768968d6045da803c95b4bc835452bf6bea3f54c51304d86f434128a742480eb3a80b87d0638a440faf6e2c8d2711eb9ac071c0a5481b536c6ffda4874dd9fadcc2702b5f35ef08748464748228b6b7ceaa71182f074c047247e49e9a2e34a2298baf3548198b64ae793429ac59d143b946d6dddc0d29e3766bb8185173a3a250c24af6787f914bca293856c323a9e7e7d7a71ffb5639e34a6d534b2e72133b1cd7796fa425cb3ad721a705462d1f53149f00281b7c580603d1bf1a2c46e3a8ea02c513561774f2f292b825503fd688b2ffc8718d151f9f7f726bd2661b99e2c101e4bc9833a92b2b0d3589c4324b3b58b833d3f1711cd5226492c9825e8cd7f9d6644f5b6d21e5a9f49d9a4a69da4cbda72b1e4e6dd3321cb9defdc672ae8a805e8feece65693968b2d5032c7f7547c02079d6756e7773fccecc5e701dac1ca2271ba9f91382a7c10e4a636830fa63bc69c35a0627eced2afc1463ce38aa865df1a6539a1ebf2b5dde677b47130cccd569a2075a51167b3b2d7efdfe1dda89b8d0c15ad64cffdaaa98fc27bf70a717f0488e64954de0af07218fc89d3ed3bffb213d89ad4e0a779438a23dab11bccb87670cb68f740c954e8f9e07233979e86bbc22e1ad2fc53f5206f9cdf05dfd0922a5affbb5754f6f15a83a1db003535bb08ba96734261f57a2cd63897a257b537357d536167ccc0af46d08aa951df05559557e7b06643f49865859e8122716c4dd716ef82775722dbe9e73c61d36124022f2d0da58014d0f198cb0be234b1c1b82cd88078b082fe4c8ac3aa5d70499429565f5fb0710e221dba121653a31500a82574350ae0ab51a21b5a2043b58c7ebd90dac77bf211372ea662ce9e76be00603bbd8d0b7496c754f2425ad92211a7d25ca74d27b26b59ebc2f9ab82133ce4a2b63fe7f7f09cc6f87de381cb93efbf37f55f14e1f4d812970778ce6e34cace3a8257dd1dc6601e301fbb4631267e67d34a639cc427ed4221ad70f096a4dac2c75e33b2144342f1aa82bafe5fd1e17085c0a1b8a8578dbd9afa448fba908874bb17712d0d306c269d653756d2d1024fbc007ac5f3222a6fcbd14d0e87d2a3c4f4d05698bcf18249c337b9f26126c536037bb434e4b19812ce2f071172855e70118261f28a6503627d5b66c513e330f29c070b1c1e6759b6787966dc0893b3a766a61f113b37cfa770f94dbfe7a2c6b16e14757b8a457e98d8bb8a00fe3759e9af1e2bca0250476446928d07b5164ed5b0183a1d1927dd213497f9f6c1c166b6608bef268900bc5192eedb0847963200f33baf1a02c34f88c4b30155a5b09d9ad42958c6c8e5513f240775c5b33567452a16fc79dda35c72b3999e29f0a1f7638150341e3d772637759019f4b2863a80b5c9804342e3ad30dcf6133f4724cfd5fec947036986f7b2e0d5043d9957a03d6f2d742721b400ada313414753f6dfbf30100c7422b215c33e22ad921090788aba1a3fe65f66f85d261b497327b04f0a04b36da964245031434765546192ae438bdbf17e26b6a036e7a655b1f4670afe71a796c40e21e131959ed66933b3eb936d05f75bced0ccb1fcb93e423161ccfc3263c609397231bdcadfe897e046fcdc452dab119046c2cd852b28bb1c53530761ea36cfedd256153ba67f0107c4a233bc61fd03b6b18c892118840e597691877ce135f6102345e8786a2a162843c569cd5c777e5066b1dc9242512aa1b4615db81972070567bc20582a73df246640ed533a40fd0f23272623028852847085d33723a1e12e41bb9a5fa8e9da1d20ff176cc172140a94416b0d941c0d20a67bf79047065808320bb4e5db5ca80cf123540380e5c2fe6622448dc92c75da518656db3e95abc8b6ff4ab5dd3e2f379697fec76010b19c37193a24d1ca4f1595daa45515dcce5b877b6c81bb0d2137f2fcf7311b3d3a6237d312456b76f6ecb02aeffd5625de363655b11482ccb8bbc7f241d4d31dfa5890222d32da88f01074702e7a12d161e724d2988a63ea1084d5a97296badde65dc5477277ccfeff40b590a012eb22ce99641919a5a674cc7a42922883fb86cb525630a4da43e9b423c1d6dffb85cc9ff787ebfac3d79c044a0508453ae67b452ec5424344286712a232dd878fb4d0f47602110c17719f39f233954ab3d110f5c2d19136380fd41feef6b77efafc7c011a03cf48c57f3dad3603ca88425e397cbc27a4be13aabc662e010d20ca203f05c79410c011d83053a3e3ffcbbaa4227f32c54d3cb8321280a8a6fac4621ce305c4c4b0be3d796ad3f750f105c953985906b707ac20a2068b7f63312fe75fe8fbd6f040616038da0713767094eafbcdad52067a0427b7232dd840889f811b4977de7333365c0636b06ef15fa72171a07395918e222622ec71dc81b9b0c04a76083d07aca1c0fc06a7b2c59329079c0c56a003c512995b9df15fa51d22337a0fdb84b7c4392e5244919825db14303c95bf7a905f4bfa9c912e8654adf416d714c33a978ba0382cc7a230c6babf2089c1131f537ce3dad3d0e826a592d9a4607ab10101b1484f1a88b237417cc157405f1025c0fc85a5bf07a94963c932306ea95ece8430223b096239dc255c99672f90d65682ac1c92ff993ff6a57e5d1ea98e3757e20d2cef8eb4d0dcd2a69fa47eff870b52c442454a1e31e290347a74eae4cd58d3d1593cbdb5d53784cfb05618d465a4f5579e8ac41de23c24ba5f431f55c7b776d6d09db64a4d9cf679da0a5debd9bbc5f085bca9cd7b4a00ed17f8152856da87f8df3fa5035b4fa61e6ba2180375ef609c82d13ff4e25692055156cdaa7821d0a492551c9a16c29549f974ae36ddf282f778a8a5759a9314d5d1afa20481fba6464e9c8edf2d29734a8989f4825794c35c364aecdf38a9b0c569e6b8672090b41ae51807ce9c5c35bf455fff2497a721bcec4e2acce8757274fbb44903d1ea6618c5e9ad3f9d04c78280ada9d8ba9c32e1087b7ad275e72265bfa1113d5e4e5569bb935bd8a98c4055a8f62e00aa1ff5b17ab94881fb5072ffb507d67e39f852204089f7076b9a353512c056af5b17002f96d2981796e7551c164c2391a5c2207ea7a1bedbe902d3050e837f3af9c39533f80918a8afb5669924eaf12f7693853b1f3aa8f33a23f693ff9d062a568005d62e9876511536e19d1845a70e11b3846de755b5db937781f4005367c3447f0294d5173e0f19d640461c3bdaf47ce8723c08983300da3a46762a7a5168aea4d7594312290a85754401056fbf579c8d77283ec44553c40e455ad0c4299437b8f4c11321b16abf77b68ccbcdf495851122a8018949da6f8382beb871d64eb44036b39501bb9523e397968ac8a80619afd011f6d185c0f2df3096b46013214df5378ba7410073559d840df1a36f96db8ca4f8a1b84585c5f7b65442524983f6c8e47fffd3812750a337946593a2a63ed7723f0af43cf9c532b59f9aac310353f0172731106940e223a6c50fd9fb59aa5c93063b7566fd7415452d86df4df31bb5179a65249ad191deb11eaaf809eb475be521e6c8b12698eb632bcb46c7c171a9e6cac2510485c1b177e5e98a6783d0cf961afa1fe9e4764e333097b69cd89672804b1120d719a8909397cf590fecad18f375332d447e7c24b47bd23c01f4eb60a0a70a22a50196afb37ac382252d4e5693714cd84a96d1ee374a2ab4c8937151432006571d859c0e218379c9caf9ff8735c8df70b8132619d7179605191e18dff6adc0fadc6a9be6f53ea6cdf0abb92145739ef162f20966561c8ff5ef86e51363c9d068bafa63905317848683a7d6d49184cfac9d1a32e8b728cf102569f891a6635a3a6c11ec4fd01151a4827d2d41c354877ac74876598356d01db4bc8506e122e016f21140a377803374476199c5f600f379e16368fee2ff58eace2174ec73aac3655d4443e4953ae2476bfa90e4e0a613b5900ef854861ecc0d37aa1aa9e4b7109234ff234a44c82f2c55a06add9032249bcad5737d526edf4e8846bcfb2037bd4d04ccd61036a21597d1eb45c986699d65757eef1f458e04a3de61c28b751a5c9e031dc8d357b4c26cdb1b5f4db4a74b1156b87a5ea6b36d7937cdbe3b2085ed38614839876270bd20ac72342a22cda778c94ecb33600208a974cdf4ea8698c3bac1e9139390c293c775ab0b18f0bcc985e9ba9e2e355637a0b06ffd5b8422aa1525eefc1be134f6642d6d56f4f2d19a31878ac4413575857bb172d320d527ccb7baefb1104732bde20a2ed30ef1a720449b9832abf1ba60fad5f1502d707615b30e16eaa094bd8c8ec4e126a6453466adf00a441092cb331e9afb9df092d49d8bd6dfff2543804011d45c28ff6108dff5b7f1d28531eaefbd0c33ea66e08bfbf98ea28d15237c01804a65f4eef41d806dd467c75f0719315038227e13845ad24c00523adbf0216ee14c737d77434b10916049057595013633a755271680933680c5ec9096b279cc11910a6c1956b76c7cdcf08c22a55348f0d408db54f5b7af46a3034ea955961115ead8f96092cfaa5ff8aa399006f3eb6935917abb4198e426a4ea99bc9605d26301921d7e56186e13932b4daff13f4da6eeb7eee700c3b87c42dffa82a5ddc9e2d7c68e74e66d232dff8e4e6ce67437d42830ab5de4b68c22066ec489d2ef568f1acf8838324d72b434f31970e53ba5ceb8265a75326c1e1e52b08b552192ff1fb830bdd9041fa1eacdf728f1a00308be0b7cce06c4d15cbec169e581c2127d680dc6d6ea069ed2c8846fa74b430381b03832b64b2105e4898d6caa6df5ffd75f9b7ef089262d4b63560a8daad5f18bb4eb95c9f4d3c24707e24d5ca9f6df318bc909294df30775e518bd1ae987c65c7127a0a664463c236927e896e8c0a17c86c901e1dcd549c7f43fd4ec26b2d09fb889ddc19785a5c1fcd5c0160a61b14a45d66e4d7657d9566df8b2346157b5f3f8a711a10d201501234fe50715204daa1ed0de02dee326bf5cebd07fc825d3548ba41ea1835248aa0e92d5d98d206461c9a3accdda474d143f8dabdeb054c6c6e36f848efe63e6cc89681171b8f2edc38fbdb6943d6575cba9058e0a5987459c93d109d264235fd2731fcb8dca34ab3cafd85ef29e251bb716371a171a1119ff5d8b221816f490b39276f8b2def7fe9baf3555ce19c301913aad43d2f6b6e36bda23cfc0fd735c7b870d6aeae221661e288e67e4cb47f6df766f22964f324cfb9a549d02c7b261e41e4eaae8c216af1943520b752ec15f7dd31fa561af42bad9507f508d94572a251fb40cf61d205e82f1d4166ec237cce9052f3fb80cf024eb93e18842b6216b13d819aa954b96af5d4ecd8024d3a40728b2778875277207e070ce9dd467f44cd06f3a36dbd2621b64217309258fa650c815806fb1570044c5ee35db830725155a8a50940dead4c9af9d13596584d250da7dd5bed78481d77f7570fdac86919b568dbe9b3f1242ed30c6b01443a6d5cac096b600dce3e2360877f3836bc266362eb802d7d63721b82af87e00c46d94f66b463d05d080b7ba6fe892b71ecf8171af761a645bf210e83791c42a9e0cf19ad309dea20f6c06b0a04798026b85669b770fa04a780945a945553d6254e2539d29082beb0f20910483362beb95f173bcf868b38e5cb722d9b427d754a969144df3faf953697b8567a0abb741ed6a10ca170e2d93b3d1e7f211193863dc5e6069bf62dffc657021a020cebba1cfaad0040e06b1f9dcc7663ff1d192040f8a305393b8af8d4f174068e0225b8d62663256492c71d3106a467926e011c8edca406500f7d1e8f4bd3315572aca0f12e3a2580c17b2c403ec93197228b43f291956a58d4f7195c7e4a5099068d5c4dbaa764cd2464b0a72eb97028504a4d28e9db190716481c3621c9020dccc647cc267e51cbf077cd2de5c2797297bf523767867de2a65536728a2d12ef66a4db6772a400d2f88338710dec13d9c18dcee01c395b464929727bb5c455e1762039bf19ee00f3be803ee34d0b0f6d97a24f03a0cd0aa1ff951e4831851c352e1ae82d25d240d38dc09e9d773f073f1a06e31275527d432bd9beaf0c493f396409b53323e146c5622290606ba818c16220d1d45ef540dd9c2b59ff91ef39bd7e29fe7e0bc41b39bf1faf52c11c50d3f1fd4cec776a685a49d996f788473374e8d4e242aa9933d9c4f56c825a6c1a80db2cf18e3c2533166d5bcbced1db508714c39512c5f27d8b3025b06dd7eb01debf171c5c55a5373d5f074ffa9afe55a046f3961e022c44325583409e295f3f7ea55772160853224705a74d425d7c0f32cf50b3ca8220256d2db04e26192a1300c8cca0f2716c68f3d150195bdf026f89f0eaa091f74510944d6bf105d82d0003d38b26e2229475f5a15ef683708f4dc6f624c32420de27668c00bef0474e7c9f666b7d25facd557aa0530f67b172042347d5f14c96231d0c9c3faade297b3bf1db96e9dc0d7233d731b77c32303f4b19fbe0381c3fc8367776763ec588cc5be57000bdb8a31f142a5ee5e4205815255df4c4d90ab3582fa4cc736597336e4d655b98c2308193421bf50dbe5ae316318d9ce1d1c4f25030e72fe514cf45825ecd32497bf1d756259e7e0bff3ee97578e4a4d8fa519d89720b67aa5f67a7122a8d500fd86565c064f3076f42fd506f01b96df7741e7db06abcbb865981b68c466fca747007b1217d1b8bf7b5d2b98b45f9a819d49f864909ff866bde13e619576b492bcc2301056b8e75589385fa97033041512acf61e5177e959072e3006e34719f49888dbe2106517a9ceb21237004ee67add295ef870a9debb2718f6c7771062321e5b10f75711f4bd854c5faf65bdc737c84ad63607de9c0da868e6d6a420ef21a02fd75ad20f23bb249163344691df269e4100d3b697d60318d1503ff724be49d48ea07a665c75c77e916aa941b0644a481d64e521a2f84869d431f0a0a3b2594fbd08c532599cfaa6c8425802e34e9772ea18163046d7ce69a7ef6dd58ae93dbc4c170136e98c91aa6f9bf9f5305b4d12c9638ab463f6f72ab5946595c0fad410eb644923cd509c66a9c09fd2de5c661cc37f51019c2defdcf1c403851239502a0fe16e3476ea0c792e58d251863d7b227b93ce015bee824a55eb65553d65f555d0c8fe555054a9e83875a931d997eaf5442c47a5e8ae81de90ec116494b746944e282252b0fa2dd9061a271187c420cdf07001164d9b4d22471fc4643cdab31043c28ff16a67cb9601816022ca6c99aaf3109af4a63041d9755499d0aea21c4b6706ddb5343f58684b9717c3db1a5c93b96f6753cfce7a1370a68c110e73cb5c62446623711b893c37cd46e0e781fb704ed275e2069fe4576335cb62535759d7cbbb61807080129dd62b1bf2f56b0af291fc6fd0e9cd52f238bd86b4a026df7f272ebca2ec8410314017e4248c2ea331bf41fba6d798fe1e586f57b1e938b240a463242417cde61dec3e80c1c6c189d5e5ab0a92127656b02cdb0b52d3a1b7d8aa5c7fe71580d5fea4223557084c5529e92da7942364631ab9d450e2b948e19de6696c15a192b064d50bfdf0310fa85920353bf156b3f40140655f0621c8b7dd13d33d712fc0747411f386c0bdaca4367355ed018b1d18cd8aa52ac6fe497ce3abef13923237295fb0c7ef65cac4beed199589742469ae09458019756a527da49f8593634046744c2c9d40c33db2f84f5417d087400730adcee5a3424f7135fcca7bfab5216bad5009c5a0b1aa8136f88858c9822314f4a6b64122356cedf4723cb272565dbd70afc5209115a81da7cfd364255697c3d9b57753fee026880cc42ed17b17fef09635d9794753a9f5a147669d9e075752158727432101ac60d93d13dce6d687303f1d320072e18c961f6cf54656b7160a9323441c0f5201b7e23a42846772fecac0265e80c546ef33f3ad629e06f2b790531e601a1a934f812ed9f2bd3417eebc7bc0068d15a6b015ed87e0434b50512b0e1d287a1ce4a02ce6cd61eb5431ffebcc0f09d6f944aa1631b5d36d4cf3b5ce88c7af16ff6746af8fdc9c1cf754ce5477fb78c3a975de4698d1443d47e28625786c9d737d1703bb3795a8e347670da6778ef5518af6880e95d5afc0bb73e76262a19553f23528af182273ec33151f31d3bdc5b8fd349a91d4ac1942c6d456bb7d1b45f90c5188bcb79469ad6a742b80c4d1a46939906078b3e8c761b1848a1386d096b1a4e62a8ddae70ea73502e8af8855e8678740152d7add45238a26eb430a561699ed72ca5508e971bd6e479dc6c176ea176cf19ae6fb7936d7a0f1e801d231b19b19828304dfc28f9f4e37bf433f8e52133cd3c628cb3fae643be2abe90e8c706006c72fbc0c0ac8559e0468c3ca039822afd4cea5f7da565920f13712d187522547e0b5f951f1e0b863e446efa6eaaa385a7168d34dda683c70c68b0ac3b57416a231f455367e7b5e4a864dfc7ec9ffe4548092bd118118828776788b76d5e4be602281f8ef0f7ec8fcc5674867bb54c539809f54482138235a76dcbce5ffe7649183b36ea7e8faaaee26406c19e01adc21b23b08896f99c105a54c9a13d4411353242604914c92dd74b479fe2e7bb2b56e572ea82aeffe012d846bb2c3af68f62ac3a0c1e9d09291bae782c22a445d760d71f86b05a8e8632624e90327ca5edbd293c36adc74af3ef9b312cc92c41926d901a055a7d3fbc3ac12644b066a367ab99154be07a8428211375b47445afa05c1f215d9e5e6cbf158005135ef9bd7707367f31168d73e8144325be3c2ca27af3b13c0e3062d06d03e71a0c73e78ee1896a687b4be44706403a185155480bd8db07112e615b8f98d6481ef934c87d2418b747be07160586c88a7e64d5990c1b635538ab762f245aa02c36b6c9e80454edb76094b8707f2b05e244facb2e2730d34c067ebe3880dc459e1c251faf431f7ad6518dfaa0d4d3d5645b6b15e1d931ab997717ee8696b436834ee6ac5ab44ada9b7f0b2365c9cc87cd53dd6b130ed887b2797ac8a6f1fe92f93c831112d8854fef6e7962e45411634470decc8bdfb56dd95e071ed2ed7f738178d5d6b8448a0a322d5b829476a35d6822f3e82f35e1260e10eb70d2677d02ef131da380c45400192c67a17bcc279d456387f4e068a3b75951c8a72ffbdd9aab5d8e586db821d3880bfea4637c5d24c84d2c6ee088218770644b2f8dfc30150900b327c030cf72be4c6dd56afe53ddf3139083d9b485cc810618f7910eb9732418659dcf7b1a06e3612d2c1c4c1c71116cc3869352c3ab847fa8c618d7e1b0921f067c9b0f5391d269673b8758af35e976f801b5cc1f2eab461850d253ed0b802340c3ad66f3df3f324dd54601cd22d121af8fcfe2655e3f34d81d09fd418184714355668c1db09628be1780b61855873bdf0b5ca1c361421d84783d11e93d733552d44522895d3f000759dcb12176e32da6441e3525e2ae5a697bf75b8d7ac07ea34b07ed9aa9c47fcd5b9b6a8591fb04a49449d1a456a56ed91546f2991c8c749a5d556c7ed0c74ef6629736b8bc2a2881f2b7f831eeda05f076138563d2e61717ef2fd8c370792d320437f91123d81dea1d728bd385a5547cb0a20b1bb24e247c801fc88d52640e6ce42b3526d31732630965baa0a5bc6db625a3ec3191ee7f4aec826efbef7067b863f7b8b0db7b50c7d46e251808c4213d8c7eb2f6514025f7abec3951a8377366028dfb638ae16ea1f3b406ff1397514f5b547791dda16723d1ae5cc7b4a170f41e41ea8537414dab0f53ea0546251d149a89acfcaf0576a0d9276e247a5855962412e1d1adcc79635e337d76489e22556e8f9ec1b19244e634b454f02cd625995680d5a7f81066ce0f4a9e7b870056c5fbe64a15466b1c6e3238f99edf96713658e51fc7c97b5ba2d62e4e980b376d350b8ff5468c10213d62bc26cef6fb53a7bb6923a2e08f717642a83e171d8362fbcac3924fa02b3d69075c2a85a22a54dbdbf454745a10159a007e03e4d10a1f22a6d4fbcd97fc46195845647c9b131894039cc3d6d0125f465108b0ded8a63aee83f62132d1797229c5c4e4ea546600139a6817923209519575b57b8f4b680d018089065b0d196583f064eef4d28b0e14f762bb8f7158208d47b5a787f502235db7e36aca5fa40581039b8296f8456601c49087ad249d72d9aa94a3c3c1ec71ee414aabb6f5d9746498c36df324487a73e358b47a762f37e68e6ee034ffbd40e9d68e27bc0ee30962fbdcea9fcf814c9de6ce2096c708658f7d3ad87806c063a9fba9354c90c87e399ee98aace629160c22424e319da921ce28b63a49bb8169bb4040a3254bff0de3b018072281467559ae1a65b6f16a0c51886723da8e357ee47f30945a7a0f3e223530e2b6b1435091d41f655fe34d362bcbae621b24cd71e79624a250b21a2b43a6bd7e3f77aa5f4416b4afae9add00ce0595703353dc4702a2c84dd5e6a122450cdc46d930094ddfb159cd2783e07e8bdb8fa9b775a06a7dfb7f1ec008ca5e8b6e965e4169d862fb489181f90f207f3fb63d05a908952f958e36224e1473281905a86ae6c03f0bb3f2ae6ee31e706dda005c7746d0077e2698354ccd49eb104445650048749a7d88cd466449fcec4c005b02b18e159116f3d96e800974276a069db1298471b64f9adaef7889a3342a5416b48eb9c67d5828830cdd1ce478135a23a254b53c3770a4b316b325188d4f5cbb2bdfd64adb32e5f5ffff9a26cc499e242d52ba76201620bbcc9323ce81100a43c727f0a7150f496f6fbf3d37d5348060514a46df0a1b64ebff6de990aa4c88f009a8a05aa609f1e1f5b4f89f2658910113c27d37c917b11c7324587c0727e643b7d1be812a2547b8a79b16aadc3ac4a7dbe87de7cf5126f2f783e681b075daceceb4e8559a10d6ed0835de652d5c0751a04e5fe056017465aacb8aa63e3797e3891b866edd6ff334ee7021668c3e3b6575c7dd002b4424cf3f82aace862f512f610524ed2a742f0f5c2af2e5df240f16f910e3f9ea680fcef6b72e5ac43e9f83d342c1334056f1676e013c12784b7451804bb5a8a4292a7d9d17a1b81473a5aa3a793ad63832865885012344ba51a7fb5fb88585a527e75442e9d388f3196a72f2e78e50eb6a37e2bec2656a20591d503527341c52311fe57db80fea944674f9ec92294794081a367e5d391c3d50769ccc8252cbe54ce03ef88b315c854c4e78355e56b2832b43d2f201610a083c23ce2dabb7179858149f7368401f3976bccaacb1529ca72720f7c524bde7ae2a36bc67632fd99437dfdd72f626eb6b62cfb45dc87e81d6486e2b3b85669b736da0b9fe78b56b9712e9daeac0e1ab4f4aeb83c7e9b2c26a093813c1bff31b565baca1743762148f31f76210d126f976066cd1d58ea888204cedd4789430fd0d0d13880fcaa416f449535c100037a59632c3b37d376d97eb27dd9feff5f8a76025272ffd106ffd8b73048b8ca71c1af70f90b452e75867135f6a8202f679a1250e43f5113901d7a514af3982a47a920a20f6425618b91553675c986c16df94664b61c84206dc39b167299e604146152c188c79cc065f07c26f541d4e9ba71b46641f06e19944dd1a03ab3788f85027b36fe5f65f018d2f8c06e4d192992d3d63478896602abdb6ef58f4a8a605692a7733c49939f010b0b3429bc2bba48d76c702e86e8a59328f5e28c9bf36dfa166d66b9ad6f84bc2b5ff44edf9a86ade9a7036c9f417da0f3f8023468659408ba3087bb267bb8c27a7981e86fa51b5b3407a6182905cca353f5a484deac200080fa23da93bd0e2a949175253d9fe6459691b0cf2fdb695830bad24cb24d36535c5953f0a0cc6a4a6188e52635a740339642f23ac65ea020a68d200141d1e4cbe09a9406662e2f01e535c340341884599fbce5216462c9dab5d30011ebb9d87dba9f63025e38e79b5cbeb263a7a73f505e13e7255b0faad0c7a8514a0a4e220dcd0b1569266b08a1f5d827b838ac2b791de3e5dcf96c9af8f17196b260f91552a3d09023578c92429aa3e43eca77189777c0c5befa16cd1f160c96340980ed8cc42b7662721868173153c7274ab163b879cf56453b04fb1db88ae6c6ed97413b7eaec71060bd9be1210e60883aa1c5ba96bfd3fd89092cdcad60a14837502a1ed6eed0b4a3adba800a0ce77fb5fdc6aad722b0ecda86e9cae11771c7ddd42fc18041a5235523bb50815ef324f2401909bd9da4a9e75dd00e8116c06d36dbc94d0abb8241f3c1e84ac4b2a22ad2b2e6998c95a6c59044bf9ce25fa4dc0fa19dfc9840160c20a293e1b02ea4a5fbe4a250e282f753d020593f160fd62b0aad0399feec31afe74741e02ce884da03eec5b574e33345441b6bcdf14fd2333fe8ea797916939f190d54f623dee7095aa1740834bee6c1bd05507fdfd8e6253fb9b895242d97cd9f988fd02fc5046b68cdfef9b5c58460783c3ea3c717875b8ef6530c4ce441768e49428b941ef223bbaad6da2052f3d28b5e8c8f2977c12b67d59e790dcf7467cb3fc880804e236694da8ebfabd2359e86c9491c65c5c416114dd3da486037e25d48ba7c608f938dd64cf3a32208b6fa42b50dee6de641980090db063ae6e1ac3a6e7b0447c0f15f0157e7e44aacb6374591981adc17f5def4c4e889a141434acfa74fbf3188112133c2fcac9d08e198e27d35d166c7a7cc76c01063fde9c7fbcf9286f9145910d85175124fdff1816c7748b98f27435192e0546a311304d4d6b9955db2f37c722174dd9aea0b7304db6b634900603d239f3c77acb326f702c85a1c53a7c6b80571e7625059d0d8b1a207f8715f0aba512f09387d524b7156a88271e6c0fcd710f9b214454abb118194bb030666f52b47eae8e198ad2483927d9a79fc7d500996226d66e5789a8f53f694a44659e06e37929f4c2b060480e5fa087e43c493ca624f053a5a66e3849689126d59c4bb97c4d27406e3e75031c7d8b35829956b2917d53f5e56fd1e31775b940a158cf4591057652ac62c0abf76b82693df12f19435db27927597e98262e866fa117fb0390263a8e046b2b1976619d58b07b0dcfb20135950153f90d5a279207f05b17991255b38c37c1632c054c9929b9b4fa89e6169c2dec5368c81a028a3cf35f5b46925b7d87f8dbe0e93269e31f62da3f8c5f00b27721ae3fe47f3d7e4fd1101082384780dfed14a72aea56e75bd0e27fca487f79cc28bce7cf626cb349c762cb0a62281c36ed8179401d024f1a9078a8659213
+    _Keys: 9b6b9879522525787d8ed12716f09c42e98fc099e84ad446aa2b8424c24d7d3f1e4a7ccc0273e0154762341d0ef0af7f0d61c53c76299a1a40dfcf27a001b5350b1045616d68445c70d6df4b7ff154477c05312412b9b547e6978c23a3b97544aefe291e3610ec5ae4973460b6b065313417ab9bd090233bc58c4604f568002ab5db0781e48d826b1ad6417a84549034335bef8c0ed9741cdceee4c257f0504b67a15325561cb3596abf7e06b056491a1d7b3650588d382567eba6f6a8bf132987f5e125a8b68b4e0f49f6cd577bcd3138ffdfd226a0a325682d8b41c3a9022a2d587259c7903d2c06845ea184067d14e18b40561fbffc19ad44712abd32ed47b4de5e00f78c96593e4c265500ba5662b077603869ab0a14568c060c0167ea2c9717eda5a77c1d550c18e72d6758e60dee0e7a46d2b5de082cb5aa7b6c5da4593752bee9cdb0ba335a0a438193377b02a7f9fa10e131fe1e38e5d15d2698c2528c729b45e930253dadb913378da38b63ce522a8c9c6b8768af234f1820a2f33e47f0f5219b3519291f3764281dc6902371348fd36e36b62016cd0bf27fc2a209c6d57f7e98adff673900abd3d0b086186cd476abcd385211c62ac896bef3565c6aa59db8b8ee741f33f79a6d8ae25039acdca0acc6b22901d76e47921a97562d5707692a13cd5f7e5f5777d69ee487577b02439a9403224884641fb5591dfb646093e97c86dad92183deb390c4ad9c0de7ef0d1cdaf1c15a29b1ae77ed14d87c52db3631ce03de5fd7dde84ab06d7c29c9129c482a173e51aabb59c776aef168b72fe3a0e3cddb1cef52ba03f688554335854000b121a66a1a878612a917e928ec7f01df511c0c05c97fa628a3c4a433119d91f06ef0b728d74dba6a54eec506c31c0f8a75ca6a18793a37317b7ec7561eadfef37a07450338264a602888a54845ac6487b41abd46ce8688cb467a525416114da7efd18c356113c29c14cb400121801331e6bf5d3795bad90c818642422c0ab4e9c501a716389a25a058203167c88aabc567216e55b4163caaaa98b6242f808ff5e8a8c322d8d5967f1a016f748971d40b3208a94d88f56324c1ad3e2eb0b531274fd8af1f397662c347128f4a86b1341c6dc256362bdd6ef2459e607a14c52ed03296c36221f4d1bba6e605667a5261ef86de3e135ffafc726abcda272a23507d1b40e81c75963e619412dd101d2b9268ffafff357ae4d0d26cc9332132061b35c87c7e44c6819be3e25f584be313706ab0bcd827dc79fbc98fea4f54631d308df7a747665728d27eb51de719747b4980c6622e1221bdedbd87b82b50d1ef80c52fcb5475a5293f2671a9230660155414a0ce8e3a4c42aeb59505ed0eabdd523a62de163f3140db105eab7c35e1f45d726316af6082448512e3611f613d30d24efb5e697dfe1545e1aa9e9960c6789689625f726a2ef2b81e59035c6d9fc32cd127d1c63fa3258cb12e32491cab25d85bf8a9c423be677cee1787d604b8d742e772c73868c12919c22d3ec360c42b8dccd4ff8a0a02f67070b14ba91b4f876a0574318e1bec6f9ace9002f5032cdd2aecfa0a3047614ce86837a9190cd23411b4a9c9d46d9d71b8449a599a03ed7345d321bc2143a8dd983ee608ac43568dfc5bf0415a0bb3974f8852ebad451914aa541012d17055540ccc3196865a1efb9a2855f6f42dcf5021896d98f16b8add57fab3005468a193f964cb7225481fa96b565184ef22207c86c0f0470212ba87bdacc073581e500387c2fc90625cd526943cd264e50f3386e5d079eba6586f1855bc4b867855aeb3f9b202d2d9701a2a9516dc3ee51d6dcc7a3a8d87a464a3d1cdeb1ae0584e53c072e095cdf3046056b74f55907c51fd72291801b3e336575e0e3104ee56057d1b3be433fb7760268a25c82faaf133b2e1125848c0b205a4a938f3db24094e5343338e349f7a0205360d8972e5f8526cdbe3e501ae4e3ece4087dd336a3b4a6c8b8a13899c0151a3eaabee4dd66c41b1e65fb607ef505b0c0a400be862306f8da7e219a51a370924cbbee9fd9f0f082db972e6350dad7cc4d0f781a30a97061b1a60a5f3529b341e69923b31665e6bfc38df2fef4a3965aca0aa2adc4a9a2e64c4051800b5fc7eaa593633858eb42a2e627cdbeac6f66554c55194fcc6112ccf64d86c61466a463c60da48806dea3956d4593fc675182abb6a6cc606907b1b470902e966218c74333de8b45ec0193d5075152ee0ae0c58b4524d09265cc055e5be908a70d49f779e31f376729c3406522e76907b4d3b09165b3514d4824e71fe3dd0a0308ecd7b296133ed5d7d34181d475b54d350d0687d795f34f64cb41ce38273b06cd5363d61fbbadc80296767d9e30973d806614e0f391da9ee027222ac160adb0984ac48f0e24a31f55216592039f225a9d70b161c3d415a0d20d45e899789973443705d70ad7b0944cfa64423c489b40f4c797b2221f746c6065530f21457a13781da23366a69a8aceaa514e586374996204f3ce1f146aac548dc69584b172f78050d5b6152148649ded8377be32b4c3e9ec7129d6c40bac4d0a1118eff4f61d3759b166c6c5517cb2a7a03e8f1d11ee370d4468304cce545c72031f426f7498f7763064715e0d149af4738e843d2d3fe832e002c69223157492e5bb4dcdc5bcdcf8c5f56d765f851a6902bbd93cc889af33077ab078a07656aa26ebcc37ada735dfa18488c82d9e2c9507a26081115e9480958f3ab4f3abb7b0615ca09c272d449471a731bc0f18ea96a7458052e6e7cb75804ced3ce1fac34d3327b93f026f9215a233f0878fbf6041862ea3c6d3e568b6e7e9f38c057e899393d488e77fbb8437a3654f4d08cc0a2f2374594ca90396b2311da8d773f9efdc45a30c54c9773e2555ac337934b5bfa3e40d40862839c36894d4e7729ba44452a572f755bfb565bc362c18fad8f0191922a3447946964be4105c401b6034765ea079e15852ea9c56979bc00bcd41ce7b120f7ab1173256b44124a9e40a8ee38565b5a5ad2e9e93e2b064ef1519bfe93162328e73de84220ef23b66358582aba082d3cc89052c7e3003c89d5455ec28ddc4b74273cc44a34c638a753fd696abfa710a7fe4d7ed4a303441affa092246e9e43c05b33ae09338707ffa8548c19682d35d3cb483cbfa1892e23f7dd49d5595d16f140a90e8cf9077477457c7df8905e4f2e953fa7d99e7c611b9d75eeaac2ce57fa9481a5eec33d34d4bdb3051e06266c988e1b4019b63c53c447292a6ef61e39a9f48569ae7e7f1388f778c722f08e43582de0a69a13c636ddec19f2898a7b20c73da1777d571623453f0be0d8bad1434444723e9a7275128e66658df880f84dd56220a38eb14733fcc2c7376aa30671dea5c9f732c3a8543971fa1c425be33ac9a74ac4248b2d097559bd2854c1573193289361b6107f67f48a95e349d50f57a5010011eeca966a2d2c94737e2f5676e636509410bb0f2627b2b8af211153496915ce56c169203792298ee2a4f3e6231ff303ed7b84b8150f26c75e7cba741b26b5f4969e004b50a977fe19d2d27d1966236fd2f29a321ca347b7645e3e444c6256441101af7b1e3f534403869f423ba9aec5a029470d7383d8f25748e6f21843b448837193e7169e8e1145de36a342770df2f3fc1a891a4ad094d9a2d26725465d473be8c6ac3b6924c148a6adad4d35b0cd56d8e5145e3e63cd4127c1b871f5368b3c7dde2a4f9f49a2df242d3e097ee20f52a0bdfe2b72a57a4b93ee63586b4f526f2171d056857eb68f43343a11dc3c40f62ef4ee4ccb4852dca6891c72acfa74d4dbcee7104d9a28e18b719059207490a95292d6603e9e3a6ac3adfd0e9a29e349c0663555255143c81dcfd73c265402e4e53a3b19ddec69c36c82b25f64e6b99e71b867453e3acda3d69f7d0d7677446faa182860eec925acd0f9c25e9fe465361539cb2145b759549367bc7b6a7739e3c621097cf0e573c522ebea448990be44fb4bdc504365b361727df3557a5fe9b8cc59da7cdce927fbac90442fa29ecc02a977801e6417d8d32b9411730fe2c07e2a5dee2eb742691124e0a32c571dfceeb6090002dfcb1ce332ada76ffb9aedcad0c504434f62b399f191064545fbd6b76e00d504e2be9f5f400afb086406e8760c26a46f19b93e19bd9af36f2e9d61c82810fe063a1716eed95afc5aa244cb145770c76ba0469fb5c2bc474735d07121943bce54f91dc40aef4a6973b6987779cedf18619b339890504c37085e5db909e8dbc522141f1b39acbc7b5423d300d5ba318715e8d3bcc7d35fa453194496b2fc8ca46fa2669a513b204b2148bc4cdcb3f23c2d2a5bdfeae102b172c56f52f0522e5069d16eccab68ca2638879a7f1712c8a026f99724a89471af5b170c15ab733c7476f34953de4017695fcb588d837e377a731179f8bb09a8d55e408f3c8a1f2d534b26080a5c1b7f671f2ec573edff32da1f6f5d4312cbcf7f4a75f41ed053f47e6204425d752d1e57701ee871bbca17a07397a306828e99e80978ab2ef062c88d38b9ef0dbe70afb3734a4bce4cbec5ea73959139afedfcd461d5991227b3b72d188b55fe24f61dfd46577accda6835c83d96a25bd08edd4a4ac36f9309c1da2602871829eb3cf196776b0ca68cd00606602f2b6eefa3a375520cb4e765b00607315e30acb0f423ff5b0ce33c9a84d71a4298cd256993c8a02a71832077f6ce397214d82d9f59566b0cd5ed057920ef2834665a321c1e616127d1d63e7003876425e25151a3fb456312c7ce6b593cd8f66154abee6463e2ac4c8af9317de805f75baed5a48dbf33d02009e0aaaf09f7150620223b518a37773b0261d30a881e0533c5c6ab673368a27884f0a47cc803bc6ee52b5ec5c9a5d01a4ddf8f2007dba81525888b2f5d83c578c5b4d57bdbf40304e1bed9a33fbf956a6a3ae5ac277e8e56b870a8c08772ef670e29ffea30aac141e3943f480105d6650ddf6768968d6045da803c95b4bc835452bf6bea3f54c51304d86f434128a742480eb3a80b87d0638a440faf6e2c8d2711eb9ac071c0a5481b536c6ffda4874dd9fadcc2702b5f35ef08748464748228b6b7ceaa71182f074c047247e49e9a2e34a2298baf3548198b64ae793429ac59d143b946d6dddc0d29e3766bb8185173a3a250c24af6787f914bca293856c323a9e7e7d7a71ffb5639e34a6d534b2e72133b1cd7796fa425cb3ad721a705462d1f53149f00281b7c580603d1bf1a2c46e3a8ea02c513561774f2f292b825503fd688b2ffc8718d151f9f7f726bd2661b99e2c101e4bc9833a92b2b0d3589c4324b3b58b833d3f1711cd5226492c9825e8cd7f9d6644f5b6d21e5a9f49d9a4a69da4cbda72b1e4e6dd3321cb9defdc672ae8a805e8feece65693968b2d5032c7f7547c02079d6756e7773fccecc5e701dac1ca2271ba9f91382a7c10e4a636830fa63bc69c35a0627eced2afc1463ce38aa865df1a6539a1ebf2b5dde677b47130cccd569a2075a51167b3b2d7efdfe1dda89b8d0c15ad64cffdaaa98fc27bf70a717f0488e64954de0af07218fc89d3ed3bffb213d89ad4e0a779438a23dab11bccb87670cb68f740c954e8f9e07233979e86bbc22e1ad2fc53f5206f9cdf05dfd0922a5affbb5754f6f15a83a1db003535bb08ba96734261f57a2cd63897a257b537357d536167ccc0af46d08aa951df05559557e7b06643f49865859e8122716c4dd716ef82775722dbe9e73c61d36124022f2d0da58014d0f198cb0be234b1c1b82cd88078b082fe4c8ac3aa5d70499429565f5fb0710e221dba121653a31500a82574350ae0ab51a21b5a2043b58c7ebd90dac77bf211372ea662ce9e76be00603bbd8d0b7496c754f2425ad92211a7d25ca74d27b26b59ebc2f9ab82133ce4a2b63fe7f7f09cc6f87de381cb93efbf37f55f14e1f4d812970778ce6e34cace3a8257dd1dc6601e301fbb4631267e67d34a639cc427ed4221ad70f096a4dac2c75e33b2144342f1aa82bafe5fd1e17085c0a1b8a8578dbd9afa448fba908874bb17712d0d306c269d653756d2d1024fbc007ac5f3222a6fcbd14d0e87d2a3c4f4d05698bcf18249c337b9f26126c536037bb434e4b19812ce2f071172855e70118261f28a6503627d5b66c513e330f29c070b1c1e6759b6787966dc0893b3a766a61f113b37cfa770f94dbfe7a2c6b16e14757b8a457e98d8bb8a00fe3759e9af1e2bca0250476446928d07b5164ed5b0183a1d1927dd213497f9f6c1c166b6608bef268900bc5192eedb0847963200f33baf1a02c34f88c4b30155a5b09d9ad42958c6c8e5513f240775c5b33567452a16fc79dda35c72b3999e29f0a1f7638150341e3d772637759019f4b2863a80b5c9804342e3ad30dcf6133f4724cfd5fec947036986f7b2e0d5043d9957a03d6f2d742721b400ada313414753f6dfbf30100c7422b215c33e22ad921090788aba1a3fe65f66f85d261b497327b04f0a04b36da964245031434765546192ae438bdbf17e26b6a036e7a655b1f4670afe71a796c40e21e131959ed66933b3eb936d05f75bced0ccb1fcb93e423161ccfc3263c609397231bdcadfe897e046fcdc452dab119046c2cd852b28bb1c53530761ea36cfedd256153ba67f0107c4a233bc61fd03b6b18c892118840e597691877ce135f6102345e8786a2a162843c569cd5c777e5066b1dc9242512aa1b4615db81972070567bc20582a73df246640ed533a40fd0f23272623028852847085d33723a1e12e41bb9a5fa8e9da1d20ff176cc172140a94416b0d941c0d20a67bf79047065808320bb4e5db5ca80cf123540380e5c2fe6622448dc92c75da518656db3e95abc8b6ff4ab5dd3e2f379697fec76010b19c37193a24d1ca4f1595daa45515dcce5b877b6c81bb0d2137f2fcf7311b3d3a6237d312456b76f6ecb02aeffd5625de363655b11482ccb8bbc7f241d4d31dfa5890222d32da88f01074702e7a12d161e724d2988a63ea1084d5a97296badde65dc5477277ccfeff40b590a012eb22ce99641919a5a674cc7a42922883fb86cb525630a4da43e9b423c1d6dffb85cc9ff787ebfac3d79c044a0508453ae67b452ec5424344286712a232dd878fb4d0f47602110c17719f39f233954ab3d110f5c2d19136380fd41feef6b77efafc7c011a03cf48c57f3dad3603ca88425e397cbc27a4be13aabc662e010d20ca203f05c79410c011d83053a3e3ffcbbaa4227f32c54d3cb8321280a8a6fac4621ce305c4c4b0be3d796ad3f750f105c953985906b707ac20a2068b7f63312fe75fe8fbd6f040616038da0713767094eafbcdad52067a0427b7232dd840889f811b4977de7333365c0636b06ef15fa72171a07395918e222622ec71dc81b9b0c04a76083d07aca1c0fc06a7b2c59329079c0c56a003c512995b9df15fa51d22337a0fdb84b7c4392e5244919825db14303c95bf7a905f4bfa9c912e8654adf416d714c33a978ba0382cc7a230c6babf2089c1131f537ce3dad3d0e826a592d9a4607ab10101b1484f1a88b237417cc157405f1025c0fc85a5bf07a94963c932306ea95ece8430223b096239dc255c99672f90d65682ac1c92ff993ff6a57e5d1ea98e3757e20d2cef8eb4d0dcd2a69fa47eff870b52c442454a1e31e290347a74eae4cd58d3d1593cbdb5d53784cfb05618d465a4f5579e8ac41de23c24ba5f431f55c7b776d6d09db64a4d9cf679da0a5debd9bbc5f085bca9cd7b4a00ed17f8152856da87f8df3fa5035b4fa61e6ba2180375ef609c82d13ff4e25692055156cdaa7821d0a492551c9a16c29549f974ae36ddf282f778a8a5759a9314d5d1afa20481fba6464e9c8edf2d29734a8989f4825794c35c364aecdf38a9b0c569e6b8672090b41ae51807ce9c5c35bf455fff2497a721bcec4e2acce8757274fbb44903d1ea6618c5e9ad3f9d04c78280ada9d8ba9c32e1087b7ad275e72265bfa1113d5e4e5569bb935bd8a98c4055a8f62e00aa1ff5b17ab94881fb5072ffb507d67e39f852204089f7076b9a353512c056af5b17002f96d2981796e7551c164c2391a5c2207ea7a1bedbe902d3050e837f3af9c39533f80918a8afb5669924eaf12f7693853b1f3aa8f33a23f693ff9d062a568005d62e9876511536e19d1845a70e11b3846de755b5db937781f4005367c3447f0294d5173e0f19d640461c3bdaf47ce8723c08983300da3a46762a7a5168aea4d7594312290a85754401056fbf579c8d77283ec44553c40e455ad0c4299437b8f4c11321b16abf77b68ccbcdf495851122a8018949da6f8382beb871d64eb44036b39501bb9523e397968ac8a80619afd011f6d185c0f2df3096b46013214df5378ba7410073559d840df1a36f96db8ca4f8a1b84585c5f7b65442524983f6c8e47fffd3812750a337946593a2a63ed7723f0af43cf9c532b59f9aac310353f0172731106940e223a6c50fd9fb59aa5c93063b7566fd7415452d86df4df31bb5179a65249ad191deb11eaaf809eb475be521e6c8b12698eb632bcb46c7c171a9e6cac2510485c1b177e5e98a6783d0cf961afa1fe9e4764e333097b69cd89672804b1120d719a8909397cf590fecad18f375332d447e7c24b47bd23c01f4eb60a0a70a22a50196afb37ac382252d4e5693714cd84a96d1ee374a2ab4c8937151432006571d859c0e218379c9caf9ff8735c8df70b8132619d7179605191e18dff6adc0fadc6a9be6f53ea6cdf0abb92145739ef162f20966561c8ff5ef86e51363c9d068bafa63905317848683a7d6d49184cfac9d1a32e8b728cf102569f891a6635a3a6c11ec4fd01151a4827d2d41c354877ac74876598356d01db4bc8506e122e016f21140a377803374476199c5f600f379e16368fee2ff58eace2174ec73aac3655d4443e4953ae2476bfa90e4e0a613b5900ef854861ecc0d37aa1aa9e4b7109234ff234a44c82f2c55a06add9032249bcad5737d526edf4e8846bcfb2037bd4d04ccd61036a21597d1eb45c986699d65757eef1f458e04a3de61c28b751a5c9e031dc8d357b4c26cdb1b5f4db4a74b1156b87a5ea6b36d7937cdbe3b2085ed38614839876270bd20ac72342a22cda778c94ecb33600208a974cdf4ea8698c3bac1e9139390c293c775ab0b18f0bcc985e9ba9e2e355637a0b06ffd5b8422aa1525eefc1be134f6642d6d56f4f2d19a31878ac4413575857bb172d320d527ccb7baefb1104732bde20a2ed30ef1a720449b9832abf1ba60fad5f1502d707615b30e16eaa094bd8c8ec4e126a6453466adf00a441092cb331e9afb9df092d49d8bd6dfff2543804011d45c28ff6108dff5b7f1d28531eaefbd0c33ea66e08bfbf98ea28d15237c01804a65f4eef41d806dd467c75f0719315038227e13845ad24c00523adbf0216ee14c737d77434b10916049057595013633a755271680933680c5ec9096b279cc11910a6c1956b76c7cdcf08c22a55348f0d408db54f5b7af46a3034ea955961115ead8f96092cfaa5ff8aa399006f3eb6935917abb4198e426a4ea99bc9605d26301921d7e56186e13932b4daff13f4da6eeb7eee700c3b87c42dffa82a5ddc9e2d7c68e74e66d232dff8e4e6ce67437d42830ab5de4b68c22066ec489d2ef568f1acf8838324d72b434f31970e53ba5ceb8265a75326c1e1e52b08b552192ff1fb830bdd9041fa1eacdf728f1a00308be0b7cce06c4d15cbec169e581c2127d680dc6d6ea069ed2c8846fa74b430381b03832b64b2105e4898d6caa6df5ffd75f9b7ef089262d4b63560a8daad5f18bb4eb95c9f4d3c24707e24d5ca9f6df318bc909294df30775e518bd1ae987c65c7127a0a664463c236927e896e8c0a17c86c901e1dcd549c7f43fd4ec26b2d09fb889ddc19785a5c1fcd5c0160a61b14a45d66e4d7657d9566df8b2346157b5f3f8a711a10d201501234fe50715204daa1ed0de02dee326bf5cebd07fc825d3548ba41ea1835248aa0e92d5d98d206461c9a3accdda474d143f8dabdeb054c6c6e36f848efe63e6cc89681171b8f2edc38fbdb6943d6575cba9058e0a5987459c93d109d264235fd2731fcb8dca34ab3cafd85ef29e251bb716371a171a1119ff5d8b221816f490b39276f8b2def7fe9baf3555ce19c301913aad43d2f6b6e36bda23cfc0fd735c7b870d6aeae221661e288e67e4cb47f6df766f22964f324cfb9a549d02c7b261e41e4eaae8c216af1943520b752ec15f7dd31fa561af42bad9507f508d94572a251fb40cf61d205e82f1d4166ec237cce9052f3fb80cf024eb93e18842b6216b13d819aa954b96af5d4ecd8024d3a40728b2778875277207e070ce9dd467f44cd06f3a36dbd2621b64217309258fa650c815806fb1570044c5ee35db830725155a8a50940dead4c9af9d13596584d250da7dd5bed78481d77f7570fdac86919b568dbe9b3f1242ed30c6b01443a6d5cac096b600dce3e2360877f3836bc266362eb802d7d63721b82af87e00c46d94f66b463d05d080b7ba6fe892b71ecf8171af761a645bf210e83791c42a9e0cf19ad309dea20f6c06b0a04798026b85669b770fa04a780945a945553d6254e2539d29082beb0f20910483362beb95f173bcf868b38e5cb722d9b427d754a969144df3faf953697b8567a0abb741ed6a10ca170e2d93b3d1e7f211193863dc5e6069bf62dffc657021a020cebba1cfaad0040e06b1f9dcc7663ff1d192040f8a305393b8af8d4f174068e0225b8d62663256492c71d3106a467926e011c8edca406500f7d1e8f4bd3315572aca0f12e3a2580c17b2c403ec93197228b43f291956a58d4f7195c7e4a5099068d5c4dbaa764cd2464b0a72eb97028504a4d28e9db190716481c3621c9020dccc647cc267e51cbf077cd2de5c2797297bf523767867de2a65536728a2d12ef66a4db6772a400d2f88338710dec13d9c18dcee01c395b464929727bb5c455e1762039bf19ee00f3be803ee34d0b0f6d97a24f03a0cd0aa1ff951e4831851c352e1ae82d25d240d38dc09e9d773f073f1a06e31275527d432bd9beaf0c493f396409b53323e146c5622290606ba818c16220d1d45ef540dd9c2b59ff91ef39bd7e29fe7e0bc41b39bf1faf52c11c50d3f1fd4cec776a685a49d996f788473374e8d4e242aa9933d9c4f56c825a6c1a80db2cf18e3c2533166d5bcbced1db508714c39512c5f27d8b3025b06dd7eb01debf171c5c55a5373d5f074ffa9afe55a046f3961e022c44325583409e295f3f7ea55772160853224705a74d425d7c0f32cf50b3ca8220256d2db04e26192a1300c8cca0f2716c68f3d150195bdf026f89f0eaa091f74510944d6bf105d82d0003d38b26e2229475f5a15ef683708f4dc6f624c32420de27668c00bef0474e7c9f666b7d25facd557aa0530f67b172042347d5f14c96231d0c9c3faade297b3bf1db96e9dc0d7233d731b77c32303f4b19fbe0381c3fc8367776763ec588cc5be57000bdb8a31f142a5ee5e4205815255df4c4d90ab3582fa4cc736597336e4d655b98c2308193421bf50dbe5ae316318d9ce1d1c4f25030e72fe514cf45825ecd32497bf1d756259e7e0bff3ee97578e4a4d8fa519d89720b67aa5f67a7122a8d500fd86565c064f3076f42fd506f01b96df7741e7db06abcbb865981b68c466fca747007b1217d1b8bf7b5d2b98b45f9a819d49f864909ff866bde13e619576b492bcc2301056b8e75589385fa97033041512acf61e5177e959072e3006e34719f49888dbe2106517a9ceb21237004ee67add295ef870a9debb2718f6c7771062321e5b10f75711f4bd854c5faf65bdc737c84ad63607de9c0da868e6d6a420ef21a02fd75ad20f23bb249163344691df269e4100d3b697d60318d1503ff724be49d48ea07a665c75c77e916aa941b0644a481d64e521a2f84869d431f0a0a3b2594fbd08c532599cfaa6c8425802e34e9772ea18163046d7ce69a7ef6dd58ae93dbc4c170136e98c91aa6f9bf9f5305b4d12c9638ab463f6f72ab5946595c0fad410eb644923cd509c66a9c09fd2de5c661cc37f51019c2defdcf1c403851239502a0fe16e3476ea0c792e58d251863d7b227b93ce015bee824a55eb65553d65f555d0c8fe555054a9e83875a931d997eaf5442c47a5e8ae81de90ec116494b746944e282252b0fa2dd9061a271187c420cdf07001164d9b4d22471fc4643cdab31043c28ff16a67cb9601816022ca6c99aaf3109af4a63041d9755499d0aea21c4b6706ddb5343f58684b9717c3db1a5c93b96f6753cfce7a1370a68c110e73cb5c62446623711b893c37cd46e0e781fb704ed275e2069fe4576335cb62535759d7cbbb61807080129dd62b1bf2f56b0af291fc6fd0e9cd52f238bd86b4a026df7f272ebca2ec8410314017e4248c2ea331bf41fba6d798fe1e586f57b1e938b240a463242417cde61dec3e80c1c6c189d5e5ab0a92127656b02cdb0b52d3a1b7d8aa5c7fe71580d5fea4223557084c5529e92da7942364631ab9d450e2b948e19de6696c15a192b064d50bfdf0310fa85920353bf156b3f40140655f0621c8b7dd13d33d712fc0747411f386c0bdaca4367355ed018b1d18cd8aa52ac6fe497ce3abef13923237295fb0c7ef65cac4beed199589742469ae09458019756a527da49f8593634046744c2c9d40c33db2f84f5417d087400730adcee5a3424f7135fcca7bfab5216bad5009c5a0b1aa8136f88858c9822314f4a6b64122356cedf4723cb272565dbd70afc5209115a81da7cfd364255697c3d9b57753fee026880cc42ed17b17fef09635d9794753a9f5a147669d9e075752158727432101ac60d93d13dce6d687303f1d320072e18c961f6cf54656b7160a9323441c0f5201b7e23a42846772fecac0265e80c546ef33f3ad629e06f2b790531e601a1a934f812ed9f2bd3417eebc7bc0068d15a6b015ed87e0434b50512b0e1d287a1ce4a02ce6cd61eb5431ffebcc0f09d6f944aa1631b5d36d4cf3b5ce88c7af16ff6746af8fdc9c1cf754ce5477fb78c3a975de4698d1443d47e28625786c9d737d1703bb3795a8e347670da6778ef5518af6880e95d5afc0bb73e76262a19553f23528af182273ec33151f31d3bdc5b8fd349a91d4ac1942c6d456bb7d1b45f90c5188bcb79469ad6a742b80c4d1a46939906078b3e8c761b1848a1386d096b1a4e62a8ddae70ea73502e8af8855e8678740152d7add45238a26eb430a561699ed72ca5508e971bd6e479dc6c176ea176cf19ae6fb7936d7a0f1e801d231b19b19828304dfc28f9f4e37bf433f8e52133cd3c628cb3fae643be2abe90e8c706006c72fbc0c0ac8559e0468c3ca039822afd4cea5f7da565920f13712d187522547e0b5f951f1e0b863e446efa6eaaa385a7168d34dda683c70c68b0ac3b57416a231f455367e7b5e4a864dfc7ec9ffe4548092bd118118828776788b76d5e4be602281f8ef0f7ec8fcc5674867bb54c539809f54482138235a76dcbce5ffe7649183b36ea7e8faaaee26406c19e01adc21b23b08896f99c105a54c9a13d4411353242604914c92dd74b479fe2e7bb2b56e572ea82aeffe012d846bb2c3af68f62ac3a0c1e9d09291bae782c22a445d760d71f86b05a8e8632624e90327ca5edbd293c36adc74af3ef9b312cc92c41926d901a055a7d3fbc3ac12644b066a367ab99154be07a8428211375b47445afa05c1f215d9e5e6cbf158005135ef9bd7707367f31168d73e8144325be3c2ca27af3b13c0e3062d06d03e71a0c73e78ee1896a687b4be44706403a185155480bd8db07112e615b8f98d6481ef934c87d2418b747be07160586c88a7e64d5990c1b635538ab762f245aa02c36b6c9e80454edb76094b8707f2b05e244facb2e2730d34c067ebe3880dc459e1c251faf431f7ad6518dfaa0d4d3d5645b6b15e1d931ab997717ee8696b436834ee6ac5ab44ada9b7f0b2365c9cc87cd53dd6b130ed887b2797ac8a6f1fe92f93c831112d8854fef6e7962e45411634470decc8bdfb56dd95e071ed2ed7f738178d5d6b8448a0a322d5b829476a35d6822f3e82f35e1260e10eb70d2677d02ef131da380c45400192c67a17bcc279d456387f4e068a3b75951c8a72ffbdd9aab5d8e586db821d3880bfea4637c5d24c84d2c6ee088218770644b2f8dfc30150900b327c030cf72be4c6dd56afe53ddf3139083d9b485cc810618f7910eb9732418659dcf7b1a06e3612d2c1c4c1c71116cc3869352c3ab847fa8c618d7e1b0921f067c9b0f5391d269673b8758af35e976f801b5cc1f2eab461850d253ed0b802340c3ad66f3df3f324dd54601cd22d121af8fcfe2655e3f34d81d09fd418184714355668c1db09628be1780b61855873bdf0b5ca1c361421d84783d11e93d733552d44522895d3f000759dcb12176e32da6441e3525e2ae5a697bf75b8d7ac07ea34b07ed9aa9c47fcd5b9b6a8591fb04a49449d1a456a56ed91546f2991c8c749a5d556c7ed0c74ef6629736b8bc2a2881f2b7f831eeda05f076138563d2e61717ef2fd8c370792d320437f91123d81dea1d728bd385a5547cb0a20b1bb24e247c801fc88d52640e6ce42b3526d31732630965baa0a5bc6db625a3ec3191ee7f4aec826efbef7067b863f7b8b0db7b50c7d46e251808c4213d8c7eb2f6514025f7abec3951a8377366028dfb638ae16ea1f3b406ff1397514f5b547791dda16723d1ae5cc7b4a170f41e41ea8537414dab0f53ea0546251d149a89acfcaf0576a0d9276e247a5855962412e1d1adcc79635e337d76489e22556e8f9ec1b19244e634b454f02cd625995680d5a7f81066ce0f4a9e7b870056c5fbe64a15466b1c6e3238f99edf96713658e51fc7c97b5ba2d62e4e980b376d350b8ff5468c10213d62bc26cef6fb53a7bb6923a2e08f717642a83e171d8362fbcac3924fa02b3d69075c2a85a22a54dbdbf454745a10159a007e03e4d10a1f22a6d4fbcd97fc46195845647c9b131894039cc3d6d0125f465108b0ded8a63aee83f62132d1797229c5c4e4ea546600139a6817923209519575b57b8f4b680d018089065b0d196583f064eef4d28b0e14f762bb8f7158208d47b5a787f502235db7e36aca5fa40581039b8296f8456601c49087ad249d72d9aa94a3c3c1ec71ee414aabb6f5d9746498c36df324487a73e358b47a762f37e68e6ee034ffbd40e9d68e27bc0ee30962fbdcea9fcf814c9de6ce2096c708658f7d3ad87806c063a9fba9354c90c87e399ee98aace629160c22424e319da921ce28b63a49bb8169bb4040a3254bff0de3b018072281467559ae1a65b6f16a0c51886723da8e357ee47f30945a7a0f3e223530e2b6b1435091d41f655fe34d362bcbae621b24cd71e79624a250b21a2b43a6bd7e3f77aa5f4416b4afae9add00ce0595703353dc4702a2c84dd5e6a122450cdc46d930094ddfb159cd2783e07e8bdb8fa9b775a06a7dfb7f1ec008ca5e8b6e965e4169d862fb489181f90f207f3fb63d05a908952f958e36224e1473281905a86ae6c03f0bb3f2ae6ee31e706dda005c7746d0077e2698354ccd49eb104445650048749a7d88cd466449fcec4c005b02b18e159116f3d96e800974276a069db1298471b64f9adaef7889a3342a5416b48eb9c67d5828830cdd1ce478135a23a254b53c3770a4b316b325188d4f5cbb2bdfd64adb32e5f5ffff9a26cc499e242d52ba76201620bbcc9323ce81100a43c727f0a7150f496f6fbf3d37d5348060514a46df0a1b64ebff6de990aa4c88f009a8a05aa609f1e1f5b4f89f2658910113c27d37c917b11c7324587c0727e643b7d1be812a2547b8a79b16aadc3ac4a7dbe87de7cf5126f2f783e681b075daceceb4e8559a10d6ed0835de652d5c0751a04e5fe056017465aacb8aa63e3797e3891b866edd6ff334ee7021668c3e3b6575c7dd002b4424cf3f82aace862f512f610524ed2a742f0f5c2af2e5df240f16f910e3f9ea680fcef6b72e5ac43e9f83d342c1334056f1676e013c12784b7451804bb5a8a4292a7d9d17a1b81473a5aa3a793ad63832865885012344ba51a7fb5fb88585a527e75442e9d388f3196a72f2e78e50eb6a37e2bec2656a20591d503527341c52311fe57db80fea944674f9ec92294794081a367e5d391c3d50769ccc8252cbe54ce03ef88b315c854c4e78355e56b2832b43d2f201610a083c23ce2dabb7179858149f7368401f3976bccaacb1529ca72720f7c524bde7ae2a36bc67632fd99437dfdd72f626eb6b62cfb45dc87e81d6486e2b3b85669b736da0b9fe78b56b9712e9daeac0e1ab4f4aeb83c7e9b2c26a093813c1bff31b565baca1743762148f31f76210d126f976066cd1d58ea888204cedd4789430fd0d0d13880fcaa416f449535c100037a59632c3b37d376d97eb27dd9feff5f8a76025272ffd106ffd8b73048b8ca71c1af70f90b452e75867135f6a8202f679a1250e43f5113901d7a514af3982a47a920a20f6425618b91553675c986c16df94664b61c84206dc39b167299e604146152c188c79cc065f07c26f541d4e9ba71b46641f06e19944dd1a03ab3788f85027b36fe5f65f018d2f8c06e4d192992d3d63478896602abdb6ef58f4a8a605692a7733c49939f010b0b3429bc2bba48d76c702e86e8a59328f5e28c9bf36dfa166d66b9ad6f84bc2b5ff44edf9a86ade9a7036c9f417da0f3f8023468659408ba3087bb267bb8c27a7981e86fa51b5b3407a6182905cca353f5a484deac200080fa23da93bd0e2a949175253d9fe6459691b0cf2fdb695830bad24cb24d36535c5953f0a0cc6a4a6188e52635a740339642f23ac65ea020a68d200141d1e4cbe09a9406662e2f01e535c340341884599fbce5216462c9dab5d30011ebb9d87dba9f63025e38e79b5cbeb263a7a73f505e13e7255b0faad0c7a8514a0a4e220dcd0b1569266b08a1f5d827b838ac2b791de3e5dcf96c9af8f17196b260f91552a3d09023578c92429aa3e43eca77189777c0c5befa16cd1f160c96340980ed8cc42b7662721868173153c7274ab163b879cf56453b04fb1db88ae6c6ed97413b7eaec71060bd9be1210e60883aa1c5ba96bfd3fd89092cdcad60a14837502a1ed6eed0b4a3adba800a0ce77fb5fdc6aad722b0ecda86e9cae11771c7ddd42fc18041a5235523bb50815ef324f2401909bd9da4a9e75dd00e8116c06d36dbc94d0abb8241f3c1e84ac4b2a22ad2b2e6998c95a6c59044bf9ce25fa4dc0fa19dfc9840160c20a293e1b02ea4a5fbe4a250e282f753d020593f160fd62b0aad0399feec31afe74741e02ce884da03eec5b574e33345441b6bcdf14fd2333fe8ea797916939f190d54f623dee7095aa1740834bee6c1bd05507fdfd8e6253fb9b895242d97cd9f988fd02fc5046b68cdfef9b5c58460783c3ea3c717875b8ef6530c4ce441768e49428b941ef223bbaad6da2052f3d28b5e8c8f2977c12b67d59e790dcf7467cb3fc880804e236694da8ebfabd2359e86c9491c65c5c416114dd3da486037e25d48ba7c608f938dd64cf3a32208b6fa42b50dee6de641980090db063ae6e1ac3a6e7b0447c0f15f0157e7e44aacb6374591981adc17f5def4c4e889a141434acfa74fbf3188112133c2fcac9d08e198e27d35d166c7a7cc76c01063fde9c7fbcf9286f9145910d85175124fdff1816c7748b98f27435192e0546a311304d4d6b9955db2f37c722174dd9aea0b7304db6b634900603d239f3c77acb326f702c85a1c53a7c6b80571e7625059d0d8b1a207f8715f0aba512f09387d524b7156a88271e6c0fcd710f9b214454abb118194bb030666f52b47eae8e198ad2483927d9a79fc7d500996226d66e5789a8f53f694a44659e06e37929f4c2b060480e5fa087e43c493ca624f053a5a66e3849689126d59c4bb97c4d27406e3e75031c7d8b35829956b2917d53f5e56fd1e31775b940a158cf4591057652ac62c0abf76b82693df12f19435db27927597e98262e866fa117fb0390263a8e046b2b1976619d58b07b0dcfb20135950153f90d5a279207f05b17991255b38c37c1632c054c9929b9b4fa89e6169c2dec5368c81a028a3cf35f5b46925b7d87f8dbe0e93269e31f62da3f8c5f00b27721ae3fe47f3d7e4fd1101082384780dfed14a72aea56e75bd0e27fca487f79cc28bce7cf626c1c36ed8179401d024f1a9078a8659213656b9c0ce357b13bd0aca77f5f47d158b9f8c25d328f3161e587fba3269d352ea95a3dc901b8ae2ecff28e40976ead51c6df23a113b3367dd06c885ea46d5531888628faf5f7a9715a0e72bfff0f3553cbb221b8866ce50adc3f066ad0b0753d48c0b71046b25b42776ab7fbbe89823fc9cbd6a871f1471c5fe2e1490ec15e097b50f74038b9651857de401cb4e94b53bdc6a105d9cccc57789b6f2994a55139c8c17f6e914106109b42ae6d4fd498482f3407d46363e3507c5f3762b5c37b4e8d0753f26addc17cbf919f1b7b39a64c33b757c8ad269c2ba5d0e9f17969c629c75ffb56288bb20c097b6b0bfd00344afa7b6992e4bb04676a284d9af3d0035636891d24ca028b40979b41ce456fd15b9b9ff7fd0033447d9b9d3eaf27b3ff3988eabf79e1a6ea03fa56d77f032d5326075601ab26faaa68ce9bc068413a67496485b9a54fa88542760509a9f53c7e36f064b67db5ab5f72bfa954ba1a7d3e4111721c7719078a5123bbcadf0fff8c6edc0875df5ca54c600f39f4894978bc76b66d9e1acaab54424c45d51184d56776dce8f93194d31e344a07733a3c6d1e5dc86954f753883716eeb7e71a7c82d7777dcd418a595f2d2994208d9c900d767cf7ca3a6e810ad57e22c46fb536276d689abfd73a8ee43a1f1bc7aa0db59dbd7e62d13663e1cf7648c5e681ff5c065c52fce7e64b21dcc31db76ac4599dedd115e4fa13e65173693dc16b1d6326db514ebd47e33dfa39927a2538b8ff45b2f956
     _Values:
     - {fileID: 519420028}
     - {fileID: 519420032}
@@ -22962,9 +24533,76 @@ MonoBehaviour:
     - {fileID: 1789605198}
     - {fileID: 1829519785}
     - {fileID: 840725570}
-    - {fileID: 0}
     - {fileID: 2136783228}
     - {fileID: 644775634}
+    - {fileID: 899417311}
+    - {fileID: 2102957089}
+    - {fileID: 556336011}
+    - {fileID: 556336014}
+    - {fileID: 556336013}
+    - {fileID: 556336012}
+    - {fileID: 11500000, guid: ada9d9d99b1008344815ddb25c5118bf, type: 3}
+    - {fileID: 21300000, guid: 038ff2e0a7dd84041acb5171bfc48648, type: 3}
+    - {fileID: 2800000, guid: 038ff2e0a7dd84041acb5171bfc48648, type: 3}
+    - {fileID: 21300000, guid: 794c652b0fa53474aae6adee7d1a4fa4, type: 3}
+    - {fileID: 2800000, guid: 794c652b0fa53474aae6adee7d1a4fa4, type: 3}
+    - {fileID: 108394299}
+    - {fileID: 108394300}
+    - {fileID: 2098639702}
+    - {fileID: 2098639705}
+    - {fileID: 2098639704}
+    - {fileID: 2098639703}
+    - {fileID: 10906, guid: 0000000000000000f000000000000000, type: 0}
+    - {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+    - {fileID: 421050033}
+    - {fileID: 421050036}
+    - {fileID: 421050035}
+    - {fileID: 421050034}
+    - {fileID: 658511713}
+    - {fileID: 658511717}
+    - {fileID: 658511716}
+    - {fileID: 658511715}
+    - {fileID: 658511714}
+    - {fileID: 1510220684}
+    - {fileID: 1510220687}
+    - {fileID: 1510220686}
+    - {fileID: 1510220685}
+    - {fileID: 965454888}
+    - {fileID: 965454892}
+    - {fileID: 965454891}
+    - {fileID: 965454890}
+    - {fileID: 965454889}
+    - {fileID: 1455229803}
+    - {fileID: 1455229806}
+    - {fileID: 1455229805}
+    - {fileID: 1455229804}
+    - {fileID: 994631211}
+    - {fileID: 994631215}
+    - {fileID: 994631214}
+    - {fileID: 994631213}
+    - {fileID: 994631212}
+    - {fileID: 1741972188}
+    - {fileID: 1830093296}
+    - {fileID: 909508213}
+    - {fileID: 2008170744}
+    - {fileID: 2098639706}
+    - {fileID: 1953936022}
+    - {fileID: 424279813}
+    - {fileID: 1170446996}
+    - {fileID: 1572529675}
+    - {fileID: 723014165}
+    - {fileID: 1208131154}
+    - {fileID: 261110654}
+    - {fileID: 1464207910}
+    - {fileID: 257275261}
+    - {fileID: 753500769}
+    - {fileID: 669503098}
+    - {fileID: 94899399}
+    - {fileID: 1184837471}
+    - {fileID: 1586820092}
+    - {fileID: 0}
+    - {fileID: 1225913848}
+    - {fileID: 1967033193}
 --- !u!4 &1101752834
 Transform:
   m_ObjectHideFlags: 0
@@ -24112,6 +25750,7 @@ RectTransform:
   - {fileID: 152153916}
   - {fileID: 2147042049}
   - {fileID: 1153456473}
+  - {fileID: 556336014}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -24576,6 +26215,111 @@ Transform:
   m_Father: {fileID: 838034533}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &1170446996
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!1 &1177023584
 GameObject:
   m_ObjectHideFlags: 0
@@ -24734,6 +26478,111 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!21 &1184837471
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!21 &1188751086
 Material:
   serializedVersion: 8
@@ -25320,6 +27169,111 @@ Material:
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
+--- !u!21 &1208131154
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!1 &1212984949
 GameObject:
   m_ObjectHideFlags: 0
@@ -25353,6 +27307,111 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!21 &1215265207
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
+--- !u!21 &1225913848
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -28766,6 +30825,246 @@ PolygonCollider2D:
       - {x: -4.65625, y: -2.71875}
       - {x: 4.65625, y: -2.71875}
       - {x: 4.65625, y: 2.71875}
+--- !u!1 &1455229803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1455229806}
+  - component: {fileID: 1455229805}
+  - component: {fileID: 1455229804}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1455229804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455229803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: QUIT
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
+  m_sharedMaterial: {fileID: 1724549828375453005, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 24
+  m_fontSizeBase: 24
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1455229805
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455229803}
+  m_CullTransparentMesh: 1
+--- !u!224 &1455229806
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455229803}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 965454892}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!21 &1464207910
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!1 &1464929964
 GameObject:
   m_ObjectHideFlags: 0
@@ -29109,7 +31408,6 @@ GameObject:
   - component: {fileID: 1498393001}
   - component: {fileID: 1498393002}
   - component: {fileID: 1498393005}
-  - component: {fileID: 1498393006}
   m_Layer: 5
   m_Name: NewspaperReadPanel
   m_TagString: Untagged
@@ -29176,27 +31474,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 0}
---- !u!114 &1498393006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1498393000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  saveLayer: 1
-  saveTag: 1
-  saveName: 1
-  saveHideFlags: 1
-  saveActive: 1
-  saveChildren: 0
-  componentsToSave:
-  - {fileID: 1498393002}
-  - {fileID: 1498393001}
 --- !u!1 &1499898032
 GameObject:
   m_ObjectHideFlags: 0
@@ -29437,6 +31714,141 @@ Material:
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
+--- !u!1 &1510220684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1510220687}
+  - component: {fileID: 1510220686}
+  - component: {fileID: 1510220685}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1510220685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510220684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: RESUME
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
+  m_sharedMaterial: {fileID: 1724549828375453005, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 24
+  m_fontSizeBase: 24
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1510220686
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510220684}
+  m_CullTransparentMesh: 1
+--- !u!224 &1510220687
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510220684}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 658511717}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!21 &1516784570
 Material:
   serializedVersion: 8
@@ -30557,6 +32969,111 @@ MonoBehaviour:
   m_Spacing: {x: 12.6, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!21 &1572529675
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!21 &1577867778
 Material:
   serializedVersion: 8
@@ -30996,6 +33513,111 @@ Material:
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
 --- !u!21 &1585579305
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
+--- !u!21 &1586820092
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -34483,6 +37105,111 @@ Material:
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
+--- !u!21 &1741972188
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!1 &1747967965
 GameObject:
   m_ObjectHideFlags: 0
@@ -37031,6 +39758,111 @@ Material:
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
+--- !u!21 &1830093296
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!21 &1830137962
 Material:
   serializedVersion: 8
@@ -39106,6 +41938,111 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_TargetDisplay: 0
+--- !u!21 &1953936022
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!1 &1957676947
 GameObject:
   m_ObjectHideFlags: 0
@@ -39387,6 +42324,111 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba9d15b8f215ce74889d65fe5df307a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!21 &1967033193
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!1 &1982097157
 GameObject:
   m_ObjectHideFlags: 0
@@ -39740,6 +42782,111 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f326e85c4d47a45ba80923707d3ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!21 &2008170744
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!1 &2010933660
 GameObject:
   m_ObjectHideFlags: 0
@@ -41269,6 +44416,232 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2098639702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2098639705}
+  - component: {fileID: 2098639704}
+  - component: {fileID: 2098639703}
+  - component: {fileID: 2098639706}
+  m_Layer: 5
+  m_Name: BG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2098639703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098639702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2098639704
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098639702}
+  m_CullTransparentMesh: 1
+--- !u!224 &2098639705
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098639702}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 108394300}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2098639706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098639702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 2098639703}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!21 &2102957089
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ScareEmAway Atlas Material + LiberationSans SDF Atlas (Instance)
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient: 0.5
+    - _Bevel: 0.5
+    - _BevelClamp: 0
+    - _BevelOffset: 0
+    - _BevelRoundness: 0
+    - _BevelWidth: 0
+    - _BumpFace: 0
+    - _BumpOutline: 0
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Diffuse: 0.5
+    - _FaceDilate: 0
+    - _FaceUVSpeedX: 0
+    - _FaceUVSpeedY: 0
+    - _GlowInner: 0.05
+    - _GlowOffset: 0
+    - _GlowOuter: 0.05
+    - _GlowPower: 0.75
+    - _GradientScale: 10
+    - _LightAngle: 3.1416
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineUVSpeedX: 0
+    - _OutlineUVSpeedY: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _Reflectivity: 10
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.73125
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _SpecularPower: 2
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!21 &2106695146
 Material:
   serializedVersion: 8

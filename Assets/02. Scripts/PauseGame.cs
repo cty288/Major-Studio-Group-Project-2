@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,39 +6,35 @@ using UnityEngine.UI;
 using MikroFramework.Architecture;
 using Crosstales.RTVoice;
 
-public class PauseGame : MonoBehaviour
-{
-    [SerializeField] bool isPause = false;
-    [SerializeField] GameObject PausePanel;
-    [SerializeField] GameObject PauseBtn;
-    public Sprite Spr_Pause;
-    public Sprite Spr_Resume;
+public class PauseGame : MonoBehaviour {
+    protected bool isPause = false;
+    protected GameObject PausePanel;
+    protected GameObject PauseBtn;
+    [SerializeField] protected Sprite Spr_Pause;
+    [SerializeField] protected Sprite Spr_Resume;
 
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        isPause = false;
-        PausePanel = GameObject.Find("PausePanel");
-        PauseBtn = GameObject.Find("Btn_Pause");
-        PausePanel.SetActive(false);
+    private void Awake() {
+        PausePanel = transform.Find("Panel").gameObject;
+        PauseBtn = transform.Find("PauseButton").gameObject;
         
-   }
-
-    // Update is called once per frame
-    void Update()
-    {
+        PauseBtn.GetComponent<Button>().onClick.AddListener(OnPauseButtonClicked);
         
+        PausePanel.transform.Find("BG").GetComponent<Button>().onClick.AddListener(OnPausePanelClicked);
     }
 
-    public void Resume()
-    {
-        Debug.Log("Resume");
-        isPause = false;
-        PausePanel.SetActive(isPause);
-        Time.timeScale = 1;
+    private void OnPausePanelClicked() {
+        if (isPause) {
+            Btn_Pause();
+        }
     }
+
+    private void OnPauseButtonClicked() {
+        Btn_Pause();
+    }
+    
+    
+
+   
 
     public void Quit()
     {
@@ -45,16 +42,7 @@ public class PauseGame : MonoBehaviour
         Application.Quit();
     }
 
-    public void Restart()
-    {
-        //Do we need a restart button?
-    }
-
-    public void MainNenu()
-    {
-        //Return Main Menu or something
-    }
-
+  
     public void Btn_Pause()
     {
         isPause = !isPause;

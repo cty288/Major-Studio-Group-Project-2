@@ -15,6 +15,7 @@ namespace MikroFramework.BindableProperty
             this.value = defaultValue;
         }
 
+        [ES3Serializable]
         [SerializeField]
         private T value = default(T);
 

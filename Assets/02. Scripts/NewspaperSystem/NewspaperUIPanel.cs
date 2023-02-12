@@ -30,7 +30,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
     
     protected Newspaper news;
     
-    [ES3Serializable]
+    //[ES3Serializable]
     protected Dictionary<string, GameObject> newspaperMarkers = new Dictionary<string, GameObject>();
 
     [SerializeField] private GameObject newspaperMarkerPrefab;
@@ -42,6 +42,8 @@ public class NewspaperUIPanel : OpenableUIPanel {
     
     protected Collider2D markerArea;
     protected Vector2 lastMarkerPosition;
+    protected NewspaperModel newspaperModel;
+    
     
     public override void OnDayEnd() {
         Hide(0.5f);
@@ -57,20 +59,13 @@ public class NewspaperUIPanel : OpenableUIPanel {
         gameTimeManager = this.GetSystem<GameTimeManager>();
         outOfDateText = panel.transform.Find("OutOfDateText").gameObject;
         markerArea = panel.transform.Find("MarkerArea").GetComponent<Collider2D>();
+        newspaperModel = this.GetModel<NewspaperModel>();
         this.RegisterEvent<OnNewspaperUIPanelOpened>(OnNewspaperUIPanelOpened)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
-        this.RegisterEvent<OnNewspaperThrown>(OnNewspaperThrown)
-            .UnRegisterWhenGameObjectDestroyed(gameObject);
+      
     }
 
-    private void OnNewspaperThrown(OnNewspaperThrown e) {
-        if(newspaperMarkers.ContainsKey(e.Newspaper.guid)) {
-            Destroy(newspaperMarkers[e.Newspaper.guid].gameObject);
-            newspaperMarkers.Remove(e.Newspaper.guid);
-        }
-        
-        
-    }
+    
 
     private void OnNewspaperUIPanelOpened(OnNewspaperUIPanelOpened e) {
         if (e.IsOpen) {
@@ -84,8 +79,23 @@ public class NewspaperUIPanel : OpenableUIPanel {
 
     private void OnBackButtonClicked() {
         Hide(0.5f);
-    }    
+    }
 
+    private GameObject CreateNewspaperMarker(Newspaper news) {
+        NewspaperMarker marker = Instantiate(newspaperMarkerPrefab, panel.transform)
+            .GetComponent<NewspaperMarker>();
+
+        if (news.markerPositions.Count > 0) {
+            for (int i = 0; i < news.markerPositions.Count; i++) {
+                LineRenderer renderer = marker.AddMarker();
+                renderer.positionCount = news.markerPositions[i].Count;
+                renderer.SetPositions(news.markerPositions[i].ToArray());
+            }
+        }
+
+        return marker.gameObject;
+    }
+    
     public void Show(Newspaper news) {
         colliders.ForEach((collider2D => {
             collider2D.enabled = true;
@@ -102,7 +112,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
         AudioSystem.Singleton.Play2DSound("pick_up_newspaper");
         
         if (!newspaperMarkers.ContainsKey(news.guid)) {
-            GameObject marker = Instantiate(newspaperMarkerPrefab, panel.transform);
+            GameObject marker = CreateNewspaperMarker(news);
             newspaperMarkers.Add(news.guid, marker);
         }
 
@@ -169,13 +179,19 @@ public class NewspaperUIPanel : OpenableUIPanel {
                         markerArea.bounds.center.z);
 
                     if (markerArea.bounds.Contains(mousePosWorldFixed)) {
-                        currentMarker.AddMarkerPosition(currentLineRenderer,
-                            new Vector3(mousePosWorld.x, mousePosWorld.y, -15));
+                        Vector3 mousePos = new Vector3(mousePosWorld.x, mousePosWorld.y, -15);
+                        currentMarker.AddMarkerPosition(currentLineRenderer, mousePos);
+                        
                     }
                     
                     lastMarkerPosition = Input.mousePosition;
                     
                 }
+            }
+            
+            if (Input.GetMouseButtonUp(0)) {
+                List<Vector3> positions = currentMarker.GetCurrentMarkerPositions();
+                newspaperModel.MarkNewspaper(news, positions);
             }
         }
     }

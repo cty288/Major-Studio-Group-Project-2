@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("indicateCanvas", "dateCanvas", "renderers", "news", "newspaperSystem", "selfRenderer", "sprites", "dragStartPos", "tableBounds", "pointerDownTime", "CurrentDroppingItem", "Container", "canDrag", "enabled", "name")]
+	[ES3PropertiesAttribute("newsID", "sprites", "tableBounds", "CurrentDroppingItem", "Container", "canDrag", "enabled", "name")]
 	public class ES3UserType_NewspaperViewController : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -16,16 +16,9 @@ namespace ES3Types
 		{
 			var instance = (NewspaperViewController)obj;
 			
-			writer.WritePrivateFieldByRef("indicateCanvas", instance);
-			writer.WritePrivateFieldByRef("dateCanvas", instance);
-			writer.WritePrivateField("renderers", instance);
-			writer.WritePrivateField("news", instance);
-			writer.WritePrivateField("newspaperSystem", instance);
-			writer.WritePrivateFieldByRef("selfRenderer", instance);
+			writer.WritePrivateField("newsID", instance);
 			writer.WritePrivateField("sprites", instance);
-			writer.WritePrivateField("dragStartPos", instance);
 			writer.WritePrivateField("tableBounds", instance);
-			writer.WritePrivateField("pointerDownTime", instance);
 			writer.WritePropertyByRef("CurrentDroppingItem", NewspaperViewController.CurrentDroppingItem);
 			writer.WritePropertyByRef("Container", instance.Container);
 			writer.WritePrivateField("canDrag", instance);
@@ -40,35 +33,14 @@ namespace ES3Types
 				switch(propertyName)
 				{
 					
-					case "indicateCanvas":
-					instance = (NewspaperViewController)reader.SetPrivateField("indicateCanvas", reader.Read<UnityEngine.GameObject>(), instance);
-					break;
-					case "dateCanvas":
-					instance = (NewspaperViewController)reader.SetPrivateField("dateCanvas", reader.Read<UnityEngine.GameObject>(), instance);
-					break;
-					case "renderers":
-					instance = (NewspaperViewController)reader.SetPrivateField("renderers", reader.Read<System.Collections.Generic.List<UnityEngine.SpriteRenderer>>(), instance);
-					break;
-					case "news":
-					instance = (NewspaperViewController)reader.SetPrivateField("news", reader.Read<Newspaper>(), instance);
-					break;
-					case "newspaperSystem":
-					instance = (NewspaperViewController)reader.SetPrivateField("newspaperSystem", reader.Read<NewspaperSystem>(), instance);
-					break;
-					case "selfRenderer":
-					instance = (NewspaperViewController)reader.SetPrivateField("selfRenderer", reader.Read<UnityEngine.SpriteRenderer>(), instance);
+					case "newsID":
+					instance = (NewspaperViewController)reader.SetPrivateField("newsID", reader.Read<System.String>(), instance);
 					break;
 					case "sprites":
 					instance = (NewspaperViewController)reader.SetPrivateField("sprites", reader.Read<System.Collections.Generic.List<UnityEngine.Sprite>>(), instance);
 					break;
-					case "dragStartPos":
-					instance = (NewspaperViewController)reader.SetPrivateField("dragStartPos", reader.Read<UnityEngine.Vector2>(), instance);
-					break;
 					case "tableBounds":
 					instance = (NewspaperViewController)reader.SetPrivateField("tableBounds", reader.Read<UnityEngine.Bounds>(), instance);
-					break;
-					case "pointerDownTime":
-					instance = (NewspaperViewController)reader.SetPrivateField("pointerDownTime", reader.Read<System.DateTime>(), instance);
 					break;
 					case "CurrentDroppingItem":
 						NewspaperViewController.CurrentDroppingItem = reader.Read<DraggableItems>();

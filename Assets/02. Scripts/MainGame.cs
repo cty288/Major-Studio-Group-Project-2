@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.GameTime;
 using MikroFramework.Architecture;
 using MikroFramework.ResKit;
 using MikroFramework.TimeSystem;
 using UnityEngine;
 
 public class MainGame : Architecture<MainGame> {
+
+    protected List<AbstractSavableModel> savableModels = new List<AbstractSavableModel>();
     protected override void Init() {
         
         this.RegisterExtensibleUtility<ResLoader>(ResLoader.Allocate());
@@ -23,14 +26,37 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<ElectricitySystem>(new ElectricitySystem());
         this.RegisterSystem<DogSystem>(new DogSystem());
         
-        this.RegisterModel<GameStateModel>(new GameStateModel());
-        this.RegisterModel<GameSceneModel>(new GameSceneModel());
-        this.RegisterModel<RadioModel>(new RadioModel());
-        this.RegisterModel<BodyGenerationModel>(new BodyGenerationModel());
-        this.RegisterModel<BodyTagInfoModel>(new BodyTagInfoModel());
-        this.RegisterModel<BodyKnockPhraseModel>(new BodyKnockPhraseModel());
+        this.RegisterModel<GameStateModel>();
+        this.RegisterModel<GameSceneModel>();
+        this.RegisterModel<RadioModel>();
+        this.RegisterModel<BodyGenerationModel>();
+        this.RegisterModel<BodyTagInfoModel>();
+        this.RegisterModel<BodyKnockPhraseModel>();
+        this.RegisterModel<NewspaperModel>();
+        this.RegisterModel<GameTimeModel>();
 
         
+    }
+    
+    protected void RegisterModel<T>() where T : class, IModel, new() {
+        T model = null;
+        if (typeof(T).IsSubclassOf(typeof(AbstractSavableModel))) {
+            model = ES3.Load<AbstractSavableModel>("Model_" + typeof(T).Name, "models.es3", new T() as AbstractSavableModel) as T;
+            savableModels.Add(model as AbstractSavableModel);
+        }
+        else {
+            model = new T();
+        }
+       
+        this.RegisterModel<T>(model);
+    }
+
+    public void SaveGame() {
+        foreach (AbstractSavableModel savableModel in savableModels) {
+            savableModel.Save();
+            
+        }
+        ES3AutoSaveMgr.Current.Save();
     }
 
    

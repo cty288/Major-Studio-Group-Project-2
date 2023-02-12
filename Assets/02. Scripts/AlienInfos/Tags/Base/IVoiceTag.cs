@@ -57,7 +57,7 @@ namespace _02._Scripts.AlienInfos.Tags.Base {
 			List<string> voiceList = new List<string>();
 			switch (index) {
 				case 0:
-					voiceList.AddRange(new []{"fast voice", "normal voice", "slow voice"});
+					voiceList.AddRange(new []{"fast speed", "normal speed", "slow speed"});
 					break;
 				case 1:
 					voiceList.AddRange(new []{"fast", "normal", "slow"});
