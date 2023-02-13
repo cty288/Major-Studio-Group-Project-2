@@ -3,8 +3,8 @@
   "ABMD5List": [
     {
       "AssetName": "aliens",
-      "MD5": "e03939beeb84fa7c2fc67e3ce12e54fd",
-      "FileSize": 141.988281,
+      "MD5": "4f91d80a42ffc7f7a1db9f449be74a3c",
+      "FileSize": 147.785156,
       "assetDatas": [
         {
           "Name": "AlienBody",
@@ -171,6 +171,18 @@
       ]
     },
     {
+      "AssetName": "general",
+      "MD5": "f9c6a059f781518daa01fe6c3fd0b794",
+      "FileSize": 136.224609,
+      "assetDatas": [
+        {
+          "Name": "DraggedText",
+          "OwnerBundleName": "general",
+          "AssetType": "UnityEngine.GameObject"
+        }
+      ]
+    },
+    {
       "AssetName": "mftest",
       "MD5": "10871f3c51118b1714a66e98177ea1a8",
       "FileSize": 1028.24707,
@@ -272,8 +284,8 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "5fc41542bdf83039a279e1bd044e54b6",
-      "FileSize": 1.76074219,
+      "MD5": "6b126a98288d6895ac63fed6f2a56f8e",
+      "FileSize": 1.79296875,
       "assetDatas": []
     },
     {
