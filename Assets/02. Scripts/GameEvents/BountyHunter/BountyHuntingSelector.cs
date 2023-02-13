@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public struct OnBodyHuntingSelect {
-    public BodyInfo bodyInfo;
+    public List<BodyInfo> bodyInfos;
 }
 
 
@@ -46,7 +46,7 @@ public class BountyHuntingSelector : AbstractMikroController<MainGame>, IPointer
 
     public void OnPointerClick(PointerEventData eventData) {
         this.SendEvent<OnBodyHuntingSelect>(new OnBodyHuntingSelect() {
-            bodyInfo = bodyInfo.BodyInfo
+            bodyInfos = bodyInfo.BodyInfos
         });
     }
 }

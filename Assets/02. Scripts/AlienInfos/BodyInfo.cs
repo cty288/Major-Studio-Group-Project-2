@@ -30,7 +30,17 @@ public class BodyInfo : ICanRegisterEvent {
     public IVoiceTag VoiceTag = null;
 
     public IKnockBehavior KnockBehavior = null;
-    
+    public override bool Equals(object obj) {
+        // If parameter is null return false.
+        if (obj == null) {
+            return false;
+        }
+        if (obj is BodyInfo) {
+            return ID == ((BodyInfo) obj).ID;
+        }
+        return false;
+    }
+
     public bool CheckContainTag<T>(out T tag) where T : class, IAlienTag {
         tag = null;
         bool hasTags = CheckContainTags(out List<T> tags);
@@ -119,7 +129,7 @@ public class BodyInfo : ICanRegisterEvent {
         bool needDistinctive, IKnockBehavior knockBehavior, string builtBodyOverriddenPrefabName = "") {
         Gender[] voiceValues = (Gender[]) Enum.GetValues(typeof(Gender));
         HeightType height = Random.Range(0, 2) == 0 ? HeightType.Short : HeightType.Tall;
-        Gender gender = voiceValues[Random.Range(0, voiceValues.Length)];
+        //Gender gender = voiceValues[Random.Range(0, voiceValues.Length)];
         
         int bodyPartTypeEnumLength = Enum.GetValues(typeof(BodyPartType)).Length;
         List<AlienBodyPartInfo> allBodyPartInfos = new List<AlienBodyPartInfo>(3);

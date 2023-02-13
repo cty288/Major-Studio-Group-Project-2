@@ -54,7 +54,7 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
     }
 
     private void OnOutsideBodyClicked(OnOutsideBodyClicked e) {
-        if (e.BodyInfo == bodyInfo) {
+        if (e.BodyInfo.ID == bodyInfo.ID) {
             if (knockDoorCheckCoroutine != null) {
                 CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
                 knockDoorCheckCoroutine = null;

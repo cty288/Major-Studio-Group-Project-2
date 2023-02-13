@@ -10,6 +10,8 @@ using UnityEngine;
 public class MainGame : Architecture<MainGame> {
 
     protected List<AbstractSavableModel> savableModels = new List<AbstractSavableModel>();
+    
+    protected const bool IsSave = true;
     protected override void Init() {
         
         this.RegisterExtensibleUtility<ResLoader>(ResLoader.Allocate());
@@ -34,13 +36,14 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<BodyKnockPhraseModel>();
         this.RegisterModel<NewspaperModel>();
         this.RegisterModel<GameTimeModel>();
+        this.RegisterModel<BodyModel>();
 
         
     }
     
     protected void RegisterModel<T>() where T : class, IModel, new() {
         T model = null;
-        if (typeof(T).IsSubclassOf(typeof(AbstractSavableModel))) {
+        if (typeof(T).IsSubclassOf(typeof(AbstractSavableModel)) && IsSave) {
             model = ES3.Load<AbstractSavableModel>("Model_" + typeof(T).Name, "models.es3", new T() as AbstractSavableModel) as T;
             savableModels.Add(model as AbstractSavableModel);
         }
@@ -52,6 +55,9 @@ public class MainGame : Architecture<MainGame> {
     }
 
     public void SaveGame() {
+        if (!IsSave) {
+            return;
+        }
         foreach (AbstractSavableModel savableModel in savableModels) {
             savableModel.Save();
             

@@ -12,60 +12,78 @@ public class SubtitleHightlightedTextDragger : AbstractMikroController<MainGame>
 	private TMP_Text currentDraggedText;
     private ICanHaveDroppedTexts lastReceiver;
     RaycastHit2D[] raycastResults = new RaycastHit2D[5];
-
+    private TMP_Text hintTmpText;
+    
     public static string CurrentDraggedText { get; private set; } = null;
 	private void Awake() {
 		text = GetComponent<TMP_Text>();
 	}
 
 	private void Update() {
-        if (Input.GetMouseButtonDown(0)) {
-            var wordIndex = TMP_TextUtilities.FindIntersectingWord(text, Input.mousePosition, null);
-            if (wordIndex != -1) {
-                Debug.Log("Index: " + wordIndex);
-                // string rawText = text.textInfo.wordInfo[wordIndex].GetWord();
-                List<string> allRichTexts = GetRichTexts();
+        
+        var wordIndex = TMP_TextUtilities.FindIntersectingWord(text, Input.mousePosition, null);
+        string targetText = "";
+        
+        if (wordIndex != -1) {
+            List<string> allRichTexts = GetRichTexts();
                 
-                if (allRichTexts.Count > 0) {
-                    string clickedWord = text.textInfo.wordInfo[wordIndex].GetWord();
+            if (allRichTexts.Count > 0) {
+                string clickedWord = text.textInfo.wordInfo[wordIndex].GetWord();
                     
-                    List<string> clickedWordNeighbours = GetNeighbours(wordIndex);
+                List<string> clickedWordNeighbours = GetNeighbours(wordIndex);
 
-                    //find all rich texts that contain the clicked word
-                    List<string> richTexts = allRichTexts.FindAll(richText => richText.Contains(clickedWord));
-                    if (richTexts.Count == 0) {
-                        return;
-                    }
-                    string targetText = richTexts[0];
+                //find all rich texts that contain the clicked word
+                List<string> richTexts = allRichTexts.FindAll(richText => richText.Contains(clickedWord));
+                if (richTexts.Count == 0) {
+                    return;
+                }
+                targetText = richTexts[0];
                     
                     
-                    if(richTexts.Count > 1) {
-                        clickedWordNeighbours.Add(clickedWord);
-                        //find the rich text that contains the most of the clicked word's neighbours
-                        int max = 0;
-                        foreach (string richText in richTexts) {
-                            int count = 0;
-                            foreach (string neighbour in clickedWordNeighbours) {
-                                if (richText.Contains(neighbour)) {
-                                    count++;
-                                }
-                            }
-
-                            if (count > max) {
-                                max = count;
-                                targetText = richText;
+                if(richTexts.Count > 1) {
+                    clickedWordNeighbours.Add(clickedWord);
+                    //find the rich text that contains the most of the clicked word's neighbours
+                    int max = 0;
+                    foreach (string richText in richTexts) {
+                        int count = 0;
+                        foreach (string neighbour in clickedWordNeighbours) {
+                            if (richText.Contains(neighbour)) {
+                                count++;
                             }
                         }
-                    }
-                    
-                    Debug.Log("Target text: " + targetText);
-                    if(!string.IsNullOrEmpty(targetText)) {
-                        currentDraggedText = CreateDraggedText(targetText);
-                        lastReceiver = null;
-                        CurrentDraggedText = targetText;
+
+                        if (count > max) {
+                            max = count;
+                            targetText = richText;
+                        }
                     }
                 }
+            }
                 
+        }
+        
+        
+        if (wordIndex != -1 && !string.IsNullOrEmpty(targetText) && !targetText.Equals(CurrentDraggedText)) {
+            if (!hintTmpText) {
+                hintTmpText = CreateDraggedText("Drag to the notebook \nto quick-record", new Color(0.7f, 0.7f, 0.7f, 1f));
+                hintTmpText.fontSize = 16;
+            }
+            hintTmpText.transform.position = Input.mousePosition + Vector3.up * 30;
+        }
+        else {
+            if(hintTmpText) {
+                Destroy(hintTmpText.gameObject);
+                hintTmpText = null;
+            }
+        }
+        
+        if (Input.GetMouseButtonDown(0)) {
+            if (wordIndex != -1) {
+                if(!string.IsNullOrEmpty(targetText)) {
+                    currentDraggedText = CreateDraggedText(targetText, Color.yellow);
+                    lastReceiver = null;
+                    CurrentDraggedText = targetText;
+                }
             }
             
         }
@@ -115,12 +133,12 @@ public class SubtitleHightlightedTextDragger : AbstractMikroController<MainGame>
         SubtitleHightlightedTextDragger.CurrentDraggedText = null;
     }
 
-    private TMP_Text CreateDraggedText(string targetText) {
+    private TMP_Text CreateDraggedText(string targetText, Color color) {
         TMP_Text spawnedText = GameObject
             .Instantiate(this.GetUtility<ResLoader>().LoadSync<GameObject>("general", "DraggedText"))
             .GetComponent<TMP_Text>();
         spawnedText.fontSize = text.fontSize;
-        spawnedText.color = Color.yellow;
+        spawnedText.color = color;
         spawnedText.text = targetText;
         spawnedText.transform.SetParent(text.transform.parent);
         spawnedText.transform.SetAsLastSibling();

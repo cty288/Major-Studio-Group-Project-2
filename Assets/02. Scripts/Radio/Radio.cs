@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
+using _02._Scripts.BodyManagmentSystem;
 using Crosstales;
 using Crosstales.RTVoice.Model.Enum;
 using DG.Tweening;
@@ -49,7 +50,7 @@ public class Radio : ElectricalApplicance
    
 
     private BodyGenerationSystem bodyGenerationSystem;
-    private BodyManagmentSystem bodyManagmentSystem;
+    private BodyModel bodyModel;
    
     private GameTimeManager gameTimeManager;
     private RadioModel radioModel;
@@ -59,7 +60,7 @@ public class Radio : ElectricalApplicance
         base.Awake();
         radioOpenAudioSource = GetComponent<AudioSource>();
         bodyGenerationSystem = this.GetSystem<BodyGenerationSystem>();
-        bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
+        bodyModel = this.GetModel<BodyModel>();
         gameTimeManager = this.GetSystem<GameTimeManager>();
 
         this.RegisterEvent<OnRadioEnd>(OnRadioEnd).UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -169,13 +170,13 @@ public class Radio : ElectricalApplicance
     private void ConstructDescriptionDatas(List<AlienDescriptionData> descriptionDatas, float radioReality, int day) {
 
         List<BodyInfo> todayAliens = null;
-        if (bodyManagmentSystem.Aliens.Count > 0) {
-            todayAliens = bodyManagmentSystem.Aliens.Select((info => info.BodyInfo)).ToList();
+        if (bodyModel.Aliens.Count > 0) {
+            todayAliens = bodyModel.Aliens.Select((info => info.BodyInfo)).ToList();
         }
           
 
         List<BodyInfo> allPossibleBodyInfos =
-            bodyManagmentSystem.allBodyTimeInfos.Select((info => info.BodyInfo)).ToList();
+            bodyModel.allBodyTimeInfos.Select((info => info.BodyInfo)).ToList();
 
         allPossibleBodyInfos.CTShuffle();
         if (todayAliens != null) {

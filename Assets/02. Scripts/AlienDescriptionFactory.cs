@@ -15,12 +15,12 @@ public static class AlienDescriptionFactory {
     public static DescriptionFormatter Formatter => formatter;
     public static void Init() {
         //RegisterRadioDescription(TestRadioDescription);
-        //RegisterRadioDescription(Radio0);
-        //RegisterRadioDescription(Radio1);
-        //RegisterRadioDescription(Radio2);
+        RegisterRadioDescription(Radio0);
+        RegisterRadioDescription(Radio1);
+        RegisterRadioDescription(Radio2);
         RegisterRadioDescription(Radio3);
-       /// RegisterRadioDescription(Radio4);
-        //RegisterRadioDescription(Radio5);
+        RegisterRadioDescription(Radio4);
+        RegisterRadioDescription(Radio5);
     }
 
     public static string GetRadioDescription(BodyInfo bodyInfo, float reality) {

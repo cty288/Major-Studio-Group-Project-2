@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _02._Scripts.BodyManagmentSystem;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using UnityEngine;
@@ -12,36 +13,52 @@ public struct OnBountyHunterKillCorrectAlien {
     public int FoodCount;
 }
 public class BountyHunterHuntEvent : GameEvent{
-    private BodyManagmentSystem bodyManagmentSystem;
+    private BodyModel bodyModel;
     private PlayerResourceSystem playerResourceSystem;
-    private BodyInfo bodyInfo;
-    private bool isAlien;
+    [ES3Serializable]
+    private List<BodyInfo> bodyInfos;
+    //private bool isAlien;
     public override GameEventType GameEventType { get; } = GameEventType.General;
     public override float TriggerChance { get; } = 1;
-    public BountyHunterHuntEvent(TimeRange startTimeRange, BodyInfo bodyInfo) : base(startTimeRange) {
-        bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
+    public BountyHunterHuntEvent(TimeRange startTimeRange, List<BodyInfo> infos) : base(startTimeRange) {
+        bodyModel = this.GetModel<BodyModel>();
         playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
-        this.bodyInfo = bodyInfo;
-        this.isAlien = bodyInfo.IsAlien;
+        this.bodyInfos = infos;
     }
     public override void OnStart() {
         
     }
 
     public override EventState OnUpdate() {
-        Debug.Log("Bounty Hunter Hunt Event. Is Alien: " + isAlien);
-        if (!bodyInfo.IsDead) {
-            if (isAlien) {
-                this.SendEvent<OnBountyHunterKillCorrectAlien>(new OnBountyHunterKillCorrectAlien() {
-                    FoodCount = Random.Range(3, 5)
-                });
-                //playerResourceSystem.AddFood(Random.Range(2, 5));
+
+        bool killAlien = false;
+        bool killGood = false;
+        foreach (BodyInfo bodyInfo in bodyInfos) {
+            if (bodyInfo == null) {
+                continue;
             }
-            bodyManagmentSystem.RemoveBodyInfo(bodyInfo);
-            bodyInfo.IsDead = true;
+            BodyInfo updatedInfo = bodyModel.GetBodyInfoByID(bodyInfo.ID);
+            if (updatedInfo != null) {
+                if (!updatedInfo.IsDead) {
+                    bodyModel.RemoveBodyInfo(updatedInfo);
+                    updatedInfo.IsDead = true;
+                    
+                    if (updatedInfo.IsAlien) {
+                        killAlien = true;
+                    }
+                    else {
+                        killGood = true;
+                    }
+                }
+            }
         }
-       
-      
+
+        if (killAlien && !killGood) {
+            this.SendEvent<OnBountyHunterKillCorrectAlien>(new OnBountyHunterKillCorrectAlien() {
+                FoodCount = Random.Range(3, 5)
+            });
+        }
+
         return EventState.End;
     }
 

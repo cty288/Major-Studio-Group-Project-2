@@ -1,19 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.BodyManagmentSystem;
 using MikroFramework.Architecture;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class BountyHunterQuestAlienSpawnEvent : BodyGenerationEvent {
-    private BodyManagmentSystem bodyManagmentSystem;
+    private BodyModel bodyModel;
     public BountyHunterQuestAlienSpawnEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float eventTriggerChance) :
         base(startTimeRange, bodyInfo, eventTriggerChance, null, null) {
-        bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
+        bodyModel = this.GetModel<BodyModel>();
     }
 
     public override EventState OnUpdate() {
-        if (bodyManagmentSystem.IsInAllBodyTimeInfos(bodyInfo)) {
+        if (bodyModel.IsInAllBodyTimeInfos(bodyInfo)) {
             return base.OnUpdate();
         }
         Debug.Log("Bounty Hunter Quest: The body is already dead");
@@ -26,7 +27,7 @@ public class BountyHunterQuestAlienSpawnEvent : BodyGenerationEvent {
     }
 
     private void SpawnNextTime() {
-        if (!bodyManagmentSystem.IsInAllBodyTimeInfos(bodyInfo)) {
+        if (!bodyModel.IsInAllBodyTimeInfos(bodyInfo)) {
             Debug.Log("Bounty Hunter Quest: The body is already dead");
             return;
         }

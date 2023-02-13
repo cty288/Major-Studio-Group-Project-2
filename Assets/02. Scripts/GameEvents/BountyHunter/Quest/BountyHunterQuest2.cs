@@ -121,7 +121,7 @@ public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
     }
 
     private void OnOutsideBodyClicked(OnOutsideBodyClicked e) {
-        if (e.BodyInfo == bodyInfo)
+        if (e.BodyInfo.Equals(bodyInfo))
         {
             if (knockDoorCheckCoroutine != null) {
                 CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);

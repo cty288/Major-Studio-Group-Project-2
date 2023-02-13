@@ -3,18 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using MikroFramework.Singletons;
+using NHibernate.Mapping;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 using Action = Antlr.Runtime.Misc.Action;
 
+[ES3Serializable]
 public class CropInfo {
+    [ES3Serializable]
     private Texture2D outputTexture;
-    private List<GameObject> allGameObjectsCropped;
+    [ES3Serializable]
+    private List<BodyInfo> storedBodyInfoId;
     
-    public CropInfo(Texture2D outputTexture, List<GameObject> allGameObjectsCropped) {
+    public CropInfo(Texture2D outputTexture, List<BodyInfo> storedBodyInfoId) {
         this.outputTexture = outputTexture;
-        this.allGameObjectsCropped = allGameObjectsCropped;
+        this.storedBodyInfoId = storedBodyInfoId;
     }
 }
 public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCropper> {
@@ -178,9 +182,9 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
             //OutputRawImage.rectTransform.sizeDelta = new Vector2(300, 300 / aspectRatio);
             
             //get all game objects in rect
-            List<GameObject> gameObjects = GetGameObjectsInRect(rect);
-            foreach (GameObject o in gameObjects) {
-                Debug.Log("Crop: " + o.name);
+            List<BodyInfo> gameObjects = GetBodyInfosInRect(rect);
+            foreach (BodyInfo o in gameObjects) {
+                Debug.Log("Crop: " + o.ID);
             }
             
             OnCropFinished?.Invoke(new CropInfo(cutImage, gameObjects));
@@ -198,14 +202,23 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
  
 // Use it like this:
 
-    private List<GameObject> GetGameObjectsInRect(Rect area) {
+    private List<BodyInfo> GetBodyInfosInRect(Rect area) {
         //get all game objects in rect
-        List<GameObject> gameObjects = new List<GameObject>();
+        List<BodyInfo> bodyInfos = new List<BodyInfo>();
+        HashSet<long> existingIDs = new HashSet<long>();
+
         foreach (GameObject go in FindObjectsOfType(typeof(GameObject)) as GameObject[]) {
             if (area.Contains(Camera.main.WorldToScreenPoint(go.transform.position))) {
-                gameObjects.Add(go);
+                if(go.TryGetComponent<IHaveBodyInfo>(out var bodyInfo)) {
+                    foreach (BodyInfo info in bodyInfo.BodyInfos) {
+                        if (!existingIDs.Contains(info.ID)) {
+                            bodyInfos.Add(info);
+                            existingIDs.Add(info.ID);
+                        }
+                    }
+                }
             }
         }
-        return gameObjects;
+        return bodyInfos;
     }
 }

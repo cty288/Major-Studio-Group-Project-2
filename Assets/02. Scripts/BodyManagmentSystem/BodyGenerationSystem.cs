@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
+using _02._Scripts.BodyManagmentSystem;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
 using MikroFramework.BindableProperty;
@@ -32,6 +33,7 @@ public class BodyGenerationSystem : AbstractSystem {
     private float knockWaitTimeSinceDayStart = 60f;
     
     //private Coroutine knockDoorCheckCoroutine;
+    private BodyModel bodyModel;
     private BodyGenerationModel bodyGenerationModel;
     protected override void OnInit() {
         gameEventSystem = this.GetSystem<GameEventSystem>();
@@ -46,8 +48,9 @@ public class BodyGenerationSystem : AbstractSystem {
         //this.RegisterEvent<OnNewBodyInfoGenerated>(OnNewBodyInfoGenerated);
         bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
         bodyGenerationModel = this.GetModel<BodyGenerationModel>();
+       
         gameTimeManager = this.GetSystem<GameTimeManager>();
-
+        bodyModel = this.GetModel<BodyModel>();
         
     }
 
@@ -71,8 +74,8 @@ public class BodyGenerationSystem : AbstractSystem {
   
     
     private void SpawnAlienOrDeliverBody() {
-        List<BodyTimeInfo> Aliens = bodyManagmentSystem.Aliens;
-        List<BodyTimeInfo> Humans = bodyManagmentSystem.Humans;
+        List<BodyTimeInfo> Aliens = bodyModel.Aliens;
+        List<BodyTimeInfo> Humans = bodyModel.Humans;
         
         BodyInfo targetBody;
        

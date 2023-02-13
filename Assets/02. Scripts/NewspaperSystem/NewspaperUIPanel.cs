@@ -141,7 +141,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
             Camera camera = spawnedBody.GetComponentInChildren<Camera>();
             RenderTexture renderTexture = camera.targetTexture;
             imageContainers[i].texture = renderTexture;
-            imageContainers[i].GetComponent<IHaveBodyInfo>().BodyInfo = bodyInfo;
+            imageContainers[i].GetComponent<IHaveBodyInfo>().BodyInfos = new List<BodyInfo>(){bodyInfo};
 
             TMP_Text hintText = symbolImages[i].GetComponentInChildren<TMP_Text>(true);
             if (info.DayRemaining == 3) {
@@ -191,7 +191,10 @@ public class NewspaperUIPanel : OpenableUIPanel {
             
             if (Input.GetMouseButtonUp(0)) {
                 List<Vector3> positions = currentMarker.GetCurrentMarkerPositions();
-                newspaperModel.MarkNewspaper(news, positions);
+                if (positions.Count > 0) {
+                    newspaperModel.MarkNewspaper(news, positions);
+                }
+                
             }
         }
     }

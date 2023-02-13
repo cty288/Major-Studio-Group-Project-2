@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using _02._Scripts.BodyManagmentSystem;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using UnityEngine;
@@ -104,7 +105,7 @@ public class BountyHunterQuest1ClueEvent : BountyHunterQuestClueEvent {
             chanceForNewspaperShowBody = 1;
         }
         if (chanceForNewspaperShowBody > 0.6f) {
-            this.GetSystem<BodyManagmentSystem>()
+            this.GetModel<BodyModel>()
                 .AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(bountyHunterSystem.QuestBodyTimeInfo);
             Debug.Log("Tomorrow's Quest Body will be shown in newspaper!");
         }

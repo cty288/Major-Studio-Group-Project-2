@@ -92,7 +92,10 @@ namespace _02._Scripts.AlienInfos.Tags.Base {
 			string voiceDescriptionStringWithSpeed = string.Format(speedDescription, voiceParam);
 
 			var detailDescriptions = bodyTagInfoModel.GetRealRadioDescription($"Voice_Type_{index}");
-			string detailDescription = detailDescriptions[Random.Range(0, detailDescriptions.Count)];
+
+			string detailDescription = detailDescriptions.Count > 0
+				? detailDescriptions[Random.Range(0, detailDescriptions.Count)]
+				: "";
 			return voiceDescriptionString + voiceDescriptionStringWithSpeed + detailDescription;
 		}
 

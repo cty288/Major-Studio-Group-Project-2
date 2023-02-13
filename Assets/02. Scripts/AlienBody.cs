@@ -12,12 +12,12 @@ using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
 public interface IHaveBodyInfo {
-    public BodyInfo BodyInfo { get; set; }
+    public List<BodyInfo> BodyInfos { get; set; }
 }
 
 public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler, IHaveBodyInfo, ICanSendEvent {
 
-    public BodyInfo BodyInfo { get; set; }
+    public List<BodyInfo> BodyInfos { get; set; } = new List<BodyInfo>();
 
     private Transform tallSpawnPosition;
     private Transform shortSpawnPosition;
@@ -78,7 +78,7 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
             }
         }
 
-        alienBody.BodyInfo = info;
+        alienBody.BodyInfos = new List<BodyInfo>() {info};
         alienBody.OnBuilt();
         return bodyInstance;
     }
@@ -123,7 +123,7 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
             }
             layer++;
         }
-        alienBody.BodyInfo = info;
+        alienBody.BodyInfos = new List<BodyInfo>(){info};
         alienBody.OnBuilt();
         return bodyInstance;
     }
@@ -134,7 +134,6 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
         onClickAlienBody?.Invoke();
     }
 
-    
 
     
 }

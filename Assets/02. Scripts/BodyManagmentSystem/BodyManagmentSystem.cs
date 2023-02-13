@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
+using _02._Scripts.BodyManagmentSystem;
 using Crosstales;
 using MikroFramework.Architecture;
 using UnityEngine;
@@ -17,81 +18,58 @@ public class BodyTimeInfo {
 
 public struct OnNewBodyInfoGenerated {
     public List<BodyTimeInfo> BodyTimeInfos;
-    public List<BodyTimeInfo> Aliens;
+    
 }
 
 public class BodyManagmentSystem : AbstractSystem {
-    public List<BodyTimeInfo> allBodyTimeInfos = new List<BodyTimeInfo>();
-
-    public List<BodyTimeInfo> Aliens {
-        get {
-            return allBodyTimeInfos.FindAll(bodyTimeInfo => bodyTimeInfo.BodyInfo.IsAlien);
-        }
-    }
-
-    public List<BodyTimeInfo> Humans {
-        get {
-            return allBodyTimeInfos.FindAll(bodyTimeInfo => !bodyTimeInfo.BodyInfo.IsAlien);
-        }
-    }
+    
+    private BodyModel bodyModel;
+    
 
     private const int MaxBodyEveryDay = 3;
 
-    private List<BodyTimeInfo> nextDayDeternimedBodies = new List<BodyTimeInfo>();
-    public bool IsInAllBodyTimeInfos(BodyInfo bodyInfo) {
-        return allBodyTimeInfos.FindIndex(bodyTimeInfo => bodyTimeInfo.BodyInfo.ID == bodyInfo.ID) != -1;
-    }
+    
+
+    
     protected override void OnInit() {
         this.RegisterEvent<OnNewDay>(OnNewDay);
+        bodyModel = this.GetModel<BodyModel>();
     }
 
-    public void RemoveBodyInfo(BodyInfo bodyInfo) {
-        allBodyTimeInfos.RemoveAll(bodyTimeInfo => {
-
-            if (bodyTimeInfo.BodyInfo.ID == bodyInfo.ID) {
-                this.SendEvent<OnBodyInfoRemoved>(new OnBodyInfoRemoved() {ID = bodyTimeInfo.BodyInfo.ID});
-                return true;
-            }
-
-            return false;
-        });
-    }
+    
     /*
     public bool IsAlien(BodyInfo bodyInfo) {
         return Aliens.Exists(bodyTimeInfo => bodyTimeInfo.BodyInfo == bodyInfo);
     }*/
 
-    public void AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(BodyTimeInfo bodyTimeInfo) {
-        nextDayDeternimedBodies.Add(bodyTimeInfo);
-    }
-
-    public void AddToAllBodyTimeInfos(BodyTimeInfo bodyTimeInfo) {
-        allBodyTimeInfos.Add(bodyTimeInfo);
-    }
-
+    
     private void OnNewDay(OnNewDay e) {
-        foreach (BodyTimeInfo timeInfo in allBodyTimeInfos) {
+        foreach (BodyTimeInfo timeInfo in bodyModel.allBodyTimeInfos) {
             timeInfo.DayRemaining--;
         }
-
-        allBodyTimeInfos.RemoveAll(timeInfo => {
-            if (timeInfo.DayRemaining <= 0) {
-                this.SendEvent<OnBodyInfoRemoved>(new OnBodyInfoRemoved() {ID = timeInfo.BodyInfo.ID});
-                timeInfo.BodyInfo.IsDead = true;
-                return true;
+        
+        
+        HashSet<BodyTimeInfo> removeSet = new HashSet<BodyTimeInfo>();
+        foreach (BodyTimeInfo bodyTimeInfo in bodyModel.allBodyTimeInfos) {
+            if (bodyTimeInfo.DayRemaining <= 0) {
+                removeSet.Add(bodyTimeInfo);
+               
             }
-
-            return false;
-        });
+        }
+       
+        foreach (BodyTimeInfo bodyTimeInfo in removeSet) {
+            bodyModel.RemoveBodyInfo(bodyTimeInfo.BodyInfo);
+            bodyTimeInfo.BodyInfo.IsDead = true;
+        }
 
         List<BodyTimeInfo> newBodyInfos = new List<BodyTimeInfo>();
 
-        while (nextDayDeternimedBodies.Count > 0 && newBodyInfos.Count < MaxBodyEveryDay) {
-            BodyTimeInfo bodyTimeInfo = nextDayDeternimedBodies[0];
-            nextDayDeternimedBodies.RemoveAt(0);
+        while (bodyModel.NextDayDeternimedBodies.Count > 0 && newBodyInfos.Count < MaxBodyEveryDay) {
+            BodyTimeInfo bodyTimeInfo = bodyModel.NextDayDeternimedBodies[0];
+            bodyModel.NextDayDeternimedBodies.RemoveAt(0);
             
-            if (!allBodyTimeInfos.Contains(bodyTimeInfo)) {
-                AddToAllBodyTimeInfos(bodyTimeInfo);
+            if (!bodyModel.allBodyTimeInfos.Contains(bodyTimeInfo)) {
+                bodyModel.AddToAllBodyTimeInfos(bodyTimeInfo);
             }
           
             newBodyInfos.Add(bodyTimeInfo);
@@ -108,18 +86,17 @@ public class BodyManagmentSystem : AbstractSystem {
             }else {
                 timeInfo = new BodyTimeInfo(Random.Range(0, 4), info);
             }
-            AddToAllBodyTimeInfos(timeInfo);
+            bodyModel.AddToAllBodyTimeInfos(timeInfo);
             newBodyInfos.Add(timeInfo);
             //Debug.Log($"New Body Info Generated! Height: {info.Height}, VoiceType: {info.VoiceType}.");
         }
         newBodyInfos.CTShuffle();
         //transform an alien
-        BodyInfo selectedAlien = allBodyTimeInfos[Random.Range(0, allBodyTimeInfos.Count)].BodyInfo;
+        BodyInfo selectedAlien = bodyModel.allBodyTimeInfos[Random.Range(0, bodyModel.allBodyTimeInfos.Count)].BodyInfo;
         selectedAlien.IsAlien = true;
         this.SendEvent<OnBodyInfoBecomeAlien>(new OnBodyInfoBecomeAlien() {ID = selectedAlien.ID});
         this.SendEvent<OnNewBodyInfoGenerated>(new OnNewBodyInfoGenerated() {
             BodyTimeInfos = newBodyInfos,
-            Aliens = Aliens
         });
 
     }

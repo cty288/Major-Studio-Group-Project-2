@@ -78,7 +78,7 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
         
         //BackButton.Singleton.Hide();
         
-        this.SendEvent<OnOutsideBodyClicked>(new OnOutsideBodyClicked() {BodyInfo = bodyViewController.BodyInfo});
+        this.SendEvent<OnOutsideBodyClicked>(new OnOutsideBodyClicked() {BodyInfo = bodyViewController.BodyInfos[0]});
         
     }
 

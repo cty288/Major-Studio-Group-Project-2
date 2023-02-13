@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.BodyManagmentSystem;
 using MikroFramework.Architecture;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -43,7 +44,7 @@ public class BountyHunterQuestStartEvent : IncomingCallEvent {
     }
 
     protected override void OnComplete() {
-        this.GetSystem<BodyManagmentSystem>().AddToAllBodyTimeInfos(this.GetSystem<BountyHunterSystem>().QuestBodyTimeInfo);
+        this.GetModel<BodyModel>().AddToAllBodyTimeInfos(this.GetSystem<BountyHunterSystem>().QuestBodyTimeInfo);
 
 
         DateTime nextClueHappenTime = gameTimeManager.CurrentTime.Value.AddDays(1);
