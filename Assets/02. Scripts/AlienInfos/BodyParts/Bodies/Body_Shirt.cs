@@ -6,7 +6,8 @@ using UnityEngine;
 public class Body_Shirt : AlienBodyPartInfo
 {
     public override List<IAlienTag> Tags { get; } = new List<IAlienTag>() {
-        new ClothTagShirt(), new FatTag(FatType.Thin),
+        new ClothTagShirt(), 
+        new FatTag(FatType.Thin),
         new DistinctiveTag()
     };
     public override BodyPartType BodyPartType { get; } = BodyPartType.Body;

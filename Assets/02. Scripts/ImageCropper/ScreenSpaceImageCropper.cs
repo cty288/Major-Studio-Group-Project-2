@@ -13,9 +13,13 @@ using Action = Antlr.Runtime.Misc.Action;
 public class CropInfo {
     [ES3Serializable]
     private Texture2D outputTexture;
+
+    public Texture2D OutputTexture => outputTexture;
     [ES3Serializable]
     private List<BodyInfo> storedBodyInfoId;
-    
+
+    public List<BodyInfo> StoredBodyInfoId => storedBodyInfoId;
+
     public CropInfo(Texture2D outputTexture, List<BodyInfo> storedBodyInfoId) {
         this.outputTexture = outputTexture;
         this.storedBodyInfoId = storedBodyInfoId;
@@ -40,12 +44,17 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
     private RawImage OutputRawImage;
     [SerializeField]
     private bool isCropping = false;
-    
+
+    public bool IsCropping => isCropping;
+
     [SerializeField] 
     private List<Camera> supportedCameras = new List<Camera>();
     
+    
     private Action OnCropCancelled;
     private Action<CropInfo> OnCropFinished;
+    public Action OnStartCrop;
+    public Action OnEndCrop;
     private void Awake() {
         RenderPipelineManager.endCameraRendering += RenderPipelineManager_endCameraRendering;
     }
@@ -62,6 +71,7 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
         this.OnCropCancelled = onCanceled;
         this.OnCropFinished = onFinished;
         isCropping = true;
+        OnStartCrop?.Invoke();
     }
 
     void Update() {
@@ -91,6 +101,7 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
     private void ResetEvents() {
         OnCropCancelled = null;
         OnCropFinished = null;
+        isCropping = false;
     }
     //»æÖÆ¿òÑ¡  
     void OnPostRender()
@@ -188,9 +199,11 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
             }
             
             OnCropFinished?.Invoke(new CropInfo(cutImage, gameObjects));
+            OnEndCrop?.Invoke();
         }
         else {
             OnCropCancelled?.Invoke();
+            OnEndCrop?.Invoke();
         }
         ResetEvents();
         

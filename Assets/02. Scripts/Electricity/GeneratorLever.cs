@@ -36,6 +36,7 @@ public class GeneratorLever : AbstractMikroController<MainGame>, IPointerEnterHa
                 AudioSystem.Singleton.StopSound(rotatingAudio);
                 rotatingAudio = null;
             }
+            
         }
     }
 
@@ -79,6 +80,7 @@ public class GeneratorLever : AbstractMikroController<MainGame>, IPointerEnterHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        
         isPreparingWorking = false;
     }
 }
