@@ -28,6 +28,8 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<ElectricitySystem>(new ElectricitySystem());
         this.RegisterSystem<DogSystem>(new DogSystem());
         
+        
+        this.RegisterModel<PlayerControlModel>();
         this.RegisterModel<GameStateModel>();
         this.RegisterModel<GameSceneModel>();
         this.RegisterModel<RadioModel>();
@@ -37,6 +39,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<NewspaperModel>();
         this.RegisterModel<GameTimeModel>();
         this.RegisterModel<BodyModel>();
+        
 
         
     }

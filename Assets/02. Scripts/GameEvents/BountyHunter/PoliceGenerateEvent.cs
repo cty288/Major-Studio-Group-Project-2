@@ -16,12 +16,12 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
 
     public static BodyInfo GeneratePolice() {
         HeightType height = Random.Range(0, 2) == 0 ? HeightType.Short : HeightType.Tall;
-        AlienBodyPartInfo body = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartDisplayType.Shadow, BodyPartType.Body, false,
+        BodyPartPrefabInfo body = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartDisplayType.Shadow, BodyPartType.Body, false,
             height, false);
-        AlienBodyPartInfo leg = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartDisplayType.Shadow, BodyPartType.Legs, false,
+        BodyPartPrefabInfo leg = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartDisplayType.Shadow, BodyPartType.Legs, false,
             height, false);
-        AlienBodyPartInfo head = AlienBodyPartCollections.Singleton.SpecialBodyPartPrefabs.HeightSubCollections[0]
-            .ShadowBodyPartPrefabs.HumanTraitPartsPrefabs[0].GetComponent<AlienBodyPartInfo>();
+        BodyPartPrefabInfo head = AlienBodyPartCollections.Singleton.SpecialBodyPartPrefabs.HeightSubCollections[0]
+            .ShadowBodyPartPrefabs.HumanTraitPartsPrefabs[0].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
       
         return BodyInfo.GetBodyInfo(leg, body, head, height, new VoiceTag(1),
             new NormalKnockBehavior(3, Random.Range(3,7), new List<string>(){}),BodyPartDisplayType.Shadow, false);

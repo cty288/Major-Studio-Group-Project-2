@@ -9,6 +9,7 @@ namespace MikroFramework.IOC
 {
     public class IOCContainer:IIOCContainer {
         private HashSet<Type> registeredType = new HashSet<Type>();
+        
 
         private Dictionary<Type, object> instances = new Dictionary<Type, object>();
 

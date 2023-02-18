@@ -62,15 +62,20 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
         GameObject bodyInstance = GameObject.Instantiate(body);
         AlienBodyPartInfo lastInfo = null;
         AlienBody alienBody = bodyInstance.GetComponent<AlienBody>();
-        foreach (AlienBodyPartInfo partInfo in info.AllBodyInfoPrefabs) {
+        foreach (BodyPartPrefabInfo partInfo in info.AllBodyInfoPrefabs) {
+            if (partInfo == null) {
+                continue;
+            }
             Vector2 position = Vector2.zero;
             if (lastInfo != null) {
                 position = lastInfo.JointPoint.position;
             }
 
-            if (partInfo) {
-                GameObject spawnedBodyPart = Instantiate(partInfo.gameObject, position, Quaternion.identity, bodyInstance.transform);
+            if (partInfo.BodyPartInfo) {
+                GameObject spawnedBodyPart = Instantiate(partInfo.BodyPartInfo.gameObject, position, Quaternion.identity, bodyInstance.transform);
                 lastInfo = spawnedBodyPart.GetComponent<AlienBodyPartInfo>();
+                lastInfo.Init(partInfo);
+                
                 if (hide) {
                     spawnedBodyPart.GetComponentsInChildren<SpriteRenderer>(true).ToList()
                         .ForEach(s => s.color = new Color(1, 1, 1, 0));
@@ -99,8 +104,11 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
 
         AlienBodyPartInfo lastInfo = null;
 
-        int layer = 1;
-        foreach (AlienBodyPartInfo partInfo in info.AllBodyInfoPrefabs) {
+       // int layer = 1;
+        foreach (BodyPartPrefabInfo partInfo in info.AllBodyInfoPrefabs) {
+            if (partInfo == null) {
+                continue;
+            }
             Vector2 position = Vector2.zero;
             if (lastInfo != null) {
                 position = lastInfo.JointPoint.position;
@@ -112,16 +120,15 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
                 }
             }
 
-            if (partInfo)
-            {
-                GameObject spawnedBodyPart = Instantiate(partInfo.gameObject, position, Quaternion.identity, bodyInstance.transform);
-                spawnedBodyPart.GetComponentInChildren<SpriteRenderer>().sortingOrder = layer;
+            if (partInfo.BodyPartInfo) {
+                GameObject spawnedBodyPart = Instantiate(partInfo.BodyPartInfo.gameObject, position, Quaternion.identity, bodyInstance.transform);
+                //spawnedBodyPart.GetComponentInChildren<SpriteRenderer>().sortingOrder = layer;
+                spawnedBodyPart.GetComponent<AlienBodyPartInfo>().Init(partInfo);
                 
-               
                 
                 lastInfo = spawnedBodyPart.GetComponent<AlienBodyPartInfo>();
             }
-            layer++;
+            //layer++;
         }
         alienBody.BodyInfos = new List<BodyInfo>(){info};
         alienBody.OnBuilt();

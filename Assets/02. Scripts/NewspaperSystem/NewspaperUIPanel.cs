@@ -43,8 +43,8 @@ public class NewspaperUIPanel : OpenableUIPanel {
     protected Collider2D markerArea;
     protected Vector2 lastMarkerPosition;
     protected NewspaperModel newspaperModel;
-    
-    
+
+    protected PlayerControlModel playerControl;
     public override void OnDayEnd() {
         Hide(0.5f);
         
@@ -62,7 +62,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
         newspaperModel = this.GetModel<NewspaperModel>();
         this.RegisterEvent<OnNewspaperUIPanelOpened>(OnNewspaperUIPanelOpened)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
-      
+        playerControl = this.GetModel<PlayerControlModel>();
     }
 
     
@@ -164,6 +164,9 @@ public class NewspaperUIPanel : OpenableUIPanel {
 
     protected override void Update() {
         base.Update();
+        if (playerControl.ControlType.Value != PlayerControlType.Normal) {
+            return;
+        }
         if (panel.activeInHierarchy && currentMarker) {
             if (Input.GetMouseButtonDown(0)) {
                 currentLineRenderer = currentMarker.AddMarker();

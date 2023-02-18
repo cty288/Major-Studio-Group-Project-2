@@ -36,8 +36,8 @@ public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEven
 
     public static BodyInfo GenerateDog(float knockDoorTimeInterval, int knockTime) {
         HeightType height =HeightType.Short;
-        AlienBodyPartInfo leg = AlienBodyPartCollections.Singleton.SpecialBodyPartPrefabs.HeightSubCollections[1]
-            .ShadowBodyPartPrefabs.HumanTraitPartsPrefabs[0].GetComponent<AlienBodyPartInfo>();
+        BodyPartPrefabInfo leg = AlienBodyPartCollections.Singleton.SpecialBodyPartPrefabs.HeightSubCollections[1]
+            .ShadowBodyPartPrefabs.HumanTraitPartsPrefabs[0].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
 
         return BodyInfo.GetBodyInfo(leg, null, null, height, null,
             new DogKnockBehavior(knockDoorTimeInterval, knockTime, null), BodyPartDisplayType.Shadow, false);

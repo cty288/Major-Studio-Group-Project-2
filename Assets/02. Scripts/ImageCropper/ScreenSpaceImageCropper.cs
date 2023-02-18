@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using MikroFramework.Architecture;
 using MikroFramework.Singletons;
 using NHibernate.Mapping;
 using UnityEngine;
@@ -25,9 +26,13 @@ public class CropInfo {
         this.storedBodyInfoId = storedBodyInfoId;
     }
 }
-public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCropper> {
+public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCropper>, IController {
     [SerializeField]
     private Color rColor = Color.green;
+    
+    [SerializeField]
+    private Color unavailableColor = Color.red;
+    
     [SerializeField]
     private Vector3 start = Vector3.zero;
     [SerializeField]
@@ -54,9 +59,13 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
     private Action OnCropCancelled;
     private Action<CropInfo> OnCropFinished;
     public Action OnStartCrop;
+    public Action OnDragMouse;
     public Action OnEndCrop;
+    
+    protected PlayerControlModel playerControlModel;
     private void Awake() {
         RenderPipelineManager.endCameraRendering += RenderPipelineManager_endCameraRendering;
+        playerControlModel = this.GetModel<PlayerControlModel>();
     }
     
     
@@ -71,6 +80,7 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
         this.OnCropCancelled = onCanceled;
         this.OnCropFinished = onFinished;
         isCropping = true;
+        playerControlModel.ControlType.Value = PlayerControlType.Screenshot;
         OnStartCrop?.Invoke();
     }
 
@@ -83,6 +93,7 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
         {
             drawFlag = true;
             start = Input.mousePosition;
+            OnDragMouse?.Invoke();
         }
         //Ãß∆ Û±Í◊Ûº¸Ω· ¯ΩÿÕº
         if (Input.GetMouseButtonUp(0) && drawFlag)
@@ -94,6 +105,8 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
         if (Input.GetMouseButtonDown(1)) {
             drawFlag = false;
             OnCropCancelled?.Invoke();
+            OnEndCrop?.Invoke();
+            OnCropCancelled?.Invoke();
             ResetEvents();
         }
     }
@@ -102,6 +115,7 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
         OnCropCancelled = null;
         OnCropFinished = null;
         isCropping = false;
+        playerControlModel.ControlType.Value = PlayerControlType.Normal;
     }
     //ªÊ÷∆øÚ—°  
     void OnPostRender()
@@ -109,11 +123,39 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
         if (drawFlag) {
             //draw a rectangle, with some transparency
             end = Input.mousePosition;
+            
+            //make sure it is a square
+            float width = Mathf.Abs(start.x - end.x);
+            float height = Mathf.Abs(start.y - end.y);
+            float size = Mathf.Min(width, height);
+            //change end to be the correct size
+            if (start.x < end.x) {
+                end.x = start.x + size;
+            }
+            else {
+                end.x = start.x - size;
+            }
+            if (start.y < end.y) {
+                end.y = start.y + size;
+            }
+            else {
+                end.y = start.y - size;
+            }
+            
+            
+            
             GL.PushMatrix();
             rMat.SetPass(0);
             GL.LoadOrtho();
             GL.Begin(GL.QUADS);
             GL.Color(rColor);
+            
+            //if the rectangle is too small or the ratio is too large, draw it in red
+            if (Mathf.Abs(end.x - start.x) < 100 || Mathf.Abs(end.y - start.y) < 100 || Mathf.Abs((end.x - start.x) / (end.y - start.y)) > 3) {
+               
+                GL.Color(unavailableColor);
+            }
+            
             GL.Vertex3(start.x / Screen.width, start.y / Screen.height, 0);
             GL.Vertex3(start.x / Screen.width, end.y / Screen.height, 0);
             GL.Vertex3(end.x / Screen.width, end.y / Screen.height, 0);
@@ -124,6 +166,12 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
     }
 
     IEnumerator CutImage() {
+        if (Mathf.Abs(end.x - start.x) < 100 || Mathf.Abs(end.y - start.y) < 100 || Mathf.Abs((end.x - start.x) / (end.y - start.y)) > 3) {
+               
+            OnCropCancelled?.Invoke();
+            OnEndCrop?.Invoke();
+            ResetEvents();
+        }
 
         string date = System.DateTime.Now.ToString("yyyyMMddHHmmss");
         //Õº∆¨¥Û–°    
@@ -233,5 +281,9 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
             }
         }
         return bodyInfos;
+    }
+
+    public IArchitecture GetArchitecture() {
+        return MainGame.Interface;
     }
 }

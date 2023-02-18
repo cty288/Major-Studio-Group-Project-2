@@ -37,6 +37,8 @@ public class DescriptionFormatter : IFormatProvider, ICustomFormatter {
                 return GetHeightDescriptions(body, Reality);
             case "voice":
                 return GetVoiceDescription(body, Reality);
+            case "acc":
+                return GetByTag<IAccessoryTag>(body, Reality);
         }
         return String.Empty;
     }
@@ -73,7 +75,7 @@ public class DescriptionFormatter : IFormatProvider, ICustomFormatter {
         return String.Empty;
     }
 
-    public static string GetByTag<T>(AlienBodyPartInfo bodyPart, float reality) where T : class, IAlienTag {
+    public static string GetByTag<T>(BodyPartPrefabInfo bodyPart, float reality) where T : class, IAlienTag {
         var allTags = bodyPart.Tags.FindAll(x => x is T);
         if (allTags.Count > 0) {
             return ((T) allTags[Random.Range(0, allTags.Count)]).GetRandomRadioDescription(IsReal(reality));

@@ -20,6 +20,8 @@ public class BountyHuntingSelector : AbstractMikroController<MainGame>, IPointer
     private IHaveBodyInfo bodyInfo;
 
     private BountyHunterSystem bountyHunterSystem;
+
+    private PlayerControlModel playerControlModel;
     private void Awake() {
         hintTextOriginal = hintText.text;
         bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
@@ -28,6 +30,8 @@ public class BountyHuntingSelector : AbstractMikroController<MainGame>, IPointer
         if (bodyInfo == null) {
             throw new Exception("BountyHuntingSelector gameobject must have a IHaveBodyInfo component");
         }
+
+        playerControlModel = this.GetModel<PlayerControlModel>();
     }
 
     private void OnBountyHuntingChanged(bool isHunting) {
@@ -45,6 +49,9 @@ public class BountyHuntingSelector : AbstractMikroController<MainGame>, IPointer
     }
 
     public void OnPointerClick(PointerEventData eventData) {
+        if (playerControlModel.ControlType.Value != PlayerControlType.Normal) {
+            return;
+        }
         this.SendEvent<OnBodyHuntingSelect>(new OnBodyHuntingSelect() {
             bodyInfos = bodyInfo.BodyInfos
         });

@@ -65,7 +65,7 @@ public static class AlienDescriptionFactory {
         StringBuilder sb = new StringBuilder();
 
         sb.AppendFormat("Welcome back, we have some updated information about the dead body we found this morning.");
-        sb.AppendFormat(formatter, "According to our source, {0:height} and it is also believed that, {0:clothb}", body);
+        sb.AppendFormat(formatter, "According to our source, {0:acc} and it is also believed that, {0:clothb}", body);
         return sb.ToString();
     }
 
@@ -86,7 +86,7 @@ public static class AlienDescriptionFactory {
         StringBuilder sb = new StringBuilder();
 
         sb.AppendFormat("This just in. A resident was reported misssing since yesterday morning.");
-        sb.AppendFormat(formatter, "{0:voice} Other sources have shown what it was wearing. {0:clothb} {0:clothl}", body);
+        sb.AppendFormat(formatter, "{0:voice} Other sources have shown what it was wearing. {0:acc} {0:clothl}", body);
         return sb.ToString();
     }
 
@@ -96,7 +96,7 @@ public static class AlienDescriptionFactory {
         StringBuilder sb = new StringBuilder();
 
         sb.AppendFormat("From recent reports, a resident went missing since two days ago.");
-        sb.AppendFormat(formatter, "{0:hair} and {0:voice} In addition, {0:clothl}", body);
+        sb.AppendFormat(formatter, "{0:hair} and {0:acc} In addition, {0:clothl}", body);
         sb.AppendFormat("Please be aware of those who have the similar traits.");
         return sb.ToString();
     }

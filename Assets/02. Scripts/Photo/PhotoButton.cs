@@ -11,19 +11,30 @@ public class PhotoButton : AbstractMikroController<MainGame>, IPointerClickHandl
 		ScreenSpaceImageCropper.Singleton.OnStartCrop += OnStartCrop;
 		ScreenSpaceImageCropper.Singleton.OnEndCrop += OnEndCrop;
 		controlHintObj = transform.Find("ControlHint").gameObject;
+		ScreenSpaceImageCropper.Singleton.OnDragMouse += OnDragMouse;
+		
+	}
+	
+
+	
+	private void OnDragMouse() {
+		this.gameObject.SetActive(false);
 	}
 
 	private void OnEndCrop() {
+		this.gameObject.SetActive(true);
 		controlHintObj.SetActive(false);
 	}
 
 	private void OnStartCrop() {
+		this.gameObject.SetActive(true);
 		controlHintObj.SetActive(true);
 	}
 
 	private void OnDestroy() {
 		ScreenSpaceImageCropper.Singleton.OnStartCrop -= OnStartCrop;
 		ScreenSpaceImageCropper.Singleton.OnEndCrop -= OnEndCrop;
+		ScreenSpaceImageCropper.Singleton.OnDragMouse -= OnDragMouse;
 	}
 
 	public void OnPointerClick(PointerEventData eventData) {

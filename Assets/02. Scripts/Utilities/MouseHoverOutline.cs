@@ -1,13 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MikroFramework.Architecture;
+using MikroFramework.Event;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider2D))]
-public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ICanGetModel {
     [SerializeField] private Material outlineMaterial;
     private SpriteRenderer spriteRenderer;
     private MaskableGraphic image;
@@ -17,6 +19,8 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
     [SerializeField] public GameObject followingObject;
     [SerializeField] public bool followingObjectIsUI = false;
     [SerializeField] private bool moveToTopWhenHovering = false;
+    
+    private PlayerControlModel playerControlModel;
     private void Awake() {
         if (outlineMaterial) {
             outlineMaterial = Material.Instantiate(outlineMaterial);
@@ -31,7 +35,22 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
         if (image) {
             defaultMaterial = image.material;
         }
-        
+
+        playerControlModel = this.GetModel<PlayerControlModel>();
+        playerControlModel.ControlType.RegisterOnValueChaned(OnControlChanged)
+            .UnRegisterWhenGameObjectDestroyed(gameObject);
+
+
+
+    }
+
+    private void OnControlChanged(PlayerControlType controlType) {
+        if (controlType == PlayerControlType.Screenshot) {
+            StopHovering();
+        }
+    }
+
+    private void OnDestroy() {
        
     }
 
@@ -61,6 +80,9 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
+        if (playerControlModel.ControlType.Value != PlayerControlType.Normal) {
+            return;
+        }
         if (!string.IsNullOrEmpty(SubtitleHightlightedTextDragger.CurrentDraggedText)) {
             StopHovering();
             return;
@@ -111,5 +133,9 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
     }
     public void OnPointerExit(PointerEventData eventData) {
         StopHovering();
+    }
+
+    public IArchitecture GetArchitecture() {
+        return MainGame.Interface;
     }
 }
