@@ -154,7 +154,8 @@ public abstract class AlienBodyPartInfo : MonoBehaviour {
 
 	    BodyPartPrefabInfo subprefabInfo = prefabInfo.SubBodyPartInfo;
 
-	    GameObject spawnedBodyPart = Instantiate(subprefabInfo.BodyPartInfo.gameObject, JointPoint.transform);
+	    GameObject spawnedBodyPart = Instantiate(subprefabInfo.BodyPartInfo.gameObject, JointPoint.transform.position, Quaternion.identity, transform.parent);
+	    spawnedBodyPart.transform.localScale = transform.localScale;
 	    spawnedBodyPart.GetComponent<AlienBodyPartInfo>().Init(subprefabInfo);
     }
 

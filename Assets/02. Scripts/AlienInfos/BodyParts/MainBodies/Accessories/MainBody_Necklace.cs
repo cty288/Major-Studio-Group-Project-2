@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MainBody_Necklace : AlienBodyPartInfo {
 	public override List<IAlienTag> SelfTags { get; } = new List<IAlienTag>() {
-		new DistinctiveTag(),
+		//new DistinctiveTag(),
 		new AccessoryTag_Necklace()
 	};
 	public override BodyPartType BodyPartType { get; }

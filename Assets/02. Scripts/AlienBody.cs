@@ -127,18 +127,23 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
                 continue;
             }
             Vector2 position = Vector2.zero;
+            Vector3 scale = Vector3.one;
             if (lastInfo != null) {
                 position = lastInfo.JointPoint.position;
+                scale = lastInfo.transform.localScale;
             }else {
                 if (info.Height == HeightType.Short) {
                     position = alienBody.shortSpawnPosition.position;
+                    scale = alienBody.shortSpawnPosition.localScale;
                 }else {
                     position = alienBody.tallSpawnPosition.position;
+                    scale = alienBody.tallSpawnPosition.localScale;
                 }
             }
 
             if (partInfo.BodyPartInfo) {
                 GameObject spawnedBodyPart = Instantiate(partInfo.BodyPartInfo.gameObject, position, Quaternion.identity, bodyInstance.transform);
+                spawnedBodyPart.transform.localScale = scale;
                 //spawnedBodyPart.GetComponentInChildren<SpriteRenderer>().sortingOrder = layer;
                 spawnedBodyPart.GetComponent<AlienBodyPartInfo>().Init(partInfo);
                 
