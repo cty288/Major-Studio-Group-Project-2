@@ -82,7 +82,8 @@ MonoBehaviour:
   IsAlienOnly: 0
   SubBodyPartCollectionIndex: 0
   IsTall: 0
-  IsNewspaper: 0
+  IsNewspaper: 1
+  eyes: []
 --- !u!1 &8629229016352763781
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +156,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 10
   m_Sprite: {fileID: 359961525, guid: 0fc0f47e594059e4aaa867e6ce9fc50f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

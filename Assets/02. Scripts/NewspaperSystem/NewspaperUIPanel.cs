@@ -208,17 +208,26 @@ public class NewspaperUIPanel : OpenableUIPanel {
 
         foreach (IAlienTag alienTag in bodyInfo.HeadInfoPrefab.Tags) {
             List<string> shortDescriptions = alienTag.GetShortDescriptions();
-            if(shortDescriptions?.Count > 0 && !string.IsNullOrEmpty(shortDescriptions[0])) {
-                tags.Add(alienTag);
-                break;
+            for(int i = 0; i < shortDescriptions?.Count; i++) {
+                if (i == 2) {
+                    break;
+                }
+                if(!string.IsNullOrEmpty(shortDescriptions[i])) {
+                    tags.Add(alienTag);
+                }
             }
         }
         
         foreach (IAlienTag alienTag in bodyInfo.MainBodyInfoPrefab.Tags) {
             List<string> shortDescriptions = alienTag.GetShortDescriptions();
-            if(shortDescriptions?.Count > 0 && !string.IsNullOrEmpty(shortDescriptions[0])) {
-                tags.Add(alienTag);
-                break;
+            
+            for(int i = 0; i < shortDescriptions?.Count; i++) {
+                if (i == 2) {
+                    break;
+                }
+                if(!string.IsNullOrEmpty(shortDescriptions[i])) {
+                    tags.Add(alienTag);
+                }
             }
         }
         
@@ -226,7 +235,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
         
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < tags.Count; i++) {
-            if (i == 2) {
+            if (i == 4) {
                 break;
             }
             if (i == 0) stringBuilder.Append(tags[i].GetShortDescriptions()[0]);

@@ -15,8 +15,9 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
     private BodyGenerationSystem bodyGenerationSystem;
     private PlayerResourceSystem playerResourceSystem;
     private BodyManagmentSystem bodyManagmentSystem;
+    private ElectricitySystem electricitySystem;
   
-
+    [SerializeField] private PeepholeSceneUI peepholeSceneUI;
     //private bool speakEnd = false;
     private bool todaysAlienIsVeryLarge = false;
     private void Awake() {
@@ -24,9 +25,35 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
         bodyGenerationSystem = this.GetSystem<BodyGenerationSystem>();
         playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
         bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
+        electricitySystem = this.GetSystem<ElectricitySystem>();
         bodyGenerationModel.CurrentOutsideBody.RegisterOnValueChaned(OnOutsideBodyChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
         this.GetSystem<GameTimeManager>().OnDayStart += OnDayStart;
+        peepholeSceneUI.OnLightButtonPressed += OpenFlashLight;
+    }
+
+    private void OpenFlashLight() {
+        if (this.electricitySystem.Electricity.Value <= 0.9f) {
+            return;
+        }
+        if (bodyViewController) {
+            AlienBody alienBody = bodyViewController;
+            alienBody.ShowColor(0.2f);
+            AlienBodyPartInfo[] allBodyParts = alienBody.GetComponentsInChildren<AlienBodyPartInfo>(true);
+
+            foreach (AlienBodyPartInfo bodyPartInfo in allBodyParts) {
+                bodyPartInfo.OnFlashStart(0.2f);
+            }
+            
+            this.Delay(0.5f, () => {
+                if (alienBody) {
+                    foreach (AlienBodyPartInfo bodyPartInfo in allBodyParts) {
+                        bodyPartInfo.OnFlashStop(0.2f);
+                    }
+                    alienBody.HideColor(0.2f);
+                }
+            });
+        }
     }
 
     private void OnDayStart(int obj) {

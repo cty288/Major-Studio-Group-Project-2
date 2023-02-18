@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using NHibernate.Mapping;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 //反射获取所有继承此类的类
 
@@ -17,6 +20,8 @@ public enum BodyPartType {
 public class BodyPartPrefabInfo {
 	[ES3Serializable]
 	private GameObject prefab;
+	
+	[ES3Serializable]
 	public BodyPartPrefabInfo SubBodyPartInfo;
 	
 	[ES3NonSerializable]
@@ -48,6 +53,10 @@ public class BodyPartPrefabInfo {
 		}
 
 		BodyPartCollection accessoryCollection = AlienBodyPartCollections.Singleton.AccessoryCollections[info.SubBodyPartCollectionIndex];
+
+		if (accessoryCollection.HeightSubCollections.Count == 0) {
+			return;
+		}
 		bool isTall = info.IsTall;
 		bool isNews = info.IsNewspaper;
 		BodyPartHeightSubCollection subCollection = AlienBodyPartCollections.Singleton.TryGetBodyPartHeightSubCollection(accessoryCollection,
@@ -94,9 +103,49 @@ public abstract class AlienBodyPartInfo : MonoBehaviour {
     public bool IsTall;
     public bool IsNewspaper;
 
+    protected SpriteRenderer spriteRenderer;
+
     public BodyPartPrefabInfo GetBodyPartPrefabInfo() {
 	    return new BodyPartPrefabInfo(this.gameObject);
 	}
+
+    protected virtual void Awake() {
+	    Transform sprite = transform.Find("Sprite");
+	    if(sprite != null) {
+		    spriteRenderer = sprite.GetComponent<SpriteRenderer>();
+	    }
+    }
+    
+    public void HideInstantly() {
+	    if(spriteRenderer != null) {
+		    spriteRenderer.color = new Color(0, 0, 0, 0);
+	    }
+	}
+    
+    public void Appear(float duration) {
+	    if(spriteRenderer != null) {
+		    spriteRenderer.DOFade(1, duration);
+	    }
+	}
+
+    public void Disappear(float duration) {
+	    if (spriteRenderer != null) {
+		    spriteRenderer.DOFade(0, duration);
+	    }
+    }
+
+    public void ShowColor(float duration, Color color) {
+	    if (spriteRenderer != null) {
+		    spriteRenderer.DOColor(color, duration);
+	    }
+    }
+    
+    public void HideColor(float duration) {
+	    if (spriteRenderer != null) {
+		    spriteRenderer.DOColor(Color.black, duration);
+	    }
+	}
+
 
     public void Init(BodyPartPrefabInfo prefabInfo) {
 	    if(prefabInfo.SubBodyPartInfo == null) {
@@ -109,8 +158,47 @@ public abstract class AlienBodyPartInfo : MonoBehaviour {
 	    spawnedBodyPart.GetComponent<AlienBodyPartInfo>().Init(subprefabInfo);
     }
 
+    public virtual void OnFlashStart(float fadeTime) {
+	    
+    }
+    
+    public virtual void OnFlashStop(float fadeTime) {
+	    
+    }
+
 	
 
+}
+
+public abstract class HeadBodyPartInfo : AlienBodyPartInfo {
+	[SerializeField] private List<SpriteRenderer> eyes = new List<SpriteRenderer>();
+
+	protected override void Awake() {
+		base.Awake();
+		ShowEyesInstant();
+	}
+
+	public override void OnFlashStart(float fadeTime) {
+		base.OnFlashStart(fadeTime);
+		foreach (SpriteRenderer eye in eyes) {
+			eye.DOFade(0, fadeTime);
+		}
+	}
+	
+	public override void OnFlashStop(float fadeTime) {
+		base.OnFlashStop(fadeTime);
+		foreach (SpriteRenderer eye in eyes) {
+			eye.DOFade(1, fadeTime);
+		}
+	}
+
+	private void ShowEyesInstant() {
+		foreach (var eye in eyes) {
+			var color = eye.color;
+			color = new Color(color.r, color.g, color.b, 1);
+			eye.color = color;
+		}
+	}
 }
 
 

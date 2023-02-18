@@ -148,12 +148,18 @@ public class AlienBodyPartCollections : MonoPersistentMikroSingleton<AlienBodyPa
             targetList.AddRange(targetDisplays.AlienOnlyPartsPrefabs);
         }
 
-
+        var oldTargetList = targetList;
         if (isDistinct) {
             targetList = targetList.FindAll((obj) => {
                 return obj.GetComponent<AlienBodyPartInfo>().SelfTags.Exists((alienTag => alienTag is DistinctiveTag));
             });
+            if (targetList.Count == 0) {
+                targetList = oldTargetList;
+            }
         }
+        
+        
+        
         
         BodyPartPrefabInfo info = targetList[Random.Range(0, targetList.Count)].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
         //info.IsAlienOnly = targetDisplays.AlienOnlyPartsPrefabs.Contains(info.gameObject);

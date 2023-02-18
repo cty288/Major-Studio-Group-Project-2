@@ -7,12 +7,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
+using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
 
 public class OutdoorFlashLight : ElectricalApplicance
 {
     public bool flashed; 
-    private SpriteRenderer flashlight;
+    private Light2D flashlight;
     private BodyGenerationModel bodyGenerationModel;
     [SerializeField] private Speaker speaker;
     [SerializeField] private PeepholeSceneUI peepholeSceneUI;
@@ -23,7 +24,7 @@ public class OutdoorFlashLight : ElectricalApplicance
     }
 
     void Start() {
-        flashlight = this.GetComponent<SpriteRenderer>();
+        flashlight = this.GetComponent<Light2D>();
         peepholeSceneUI.OnLightButtonPressed += OpenFlashLight;
         flashed = false;
     }
@@ -56,16 +57,16 @@ public class OutdoorFlashLight : ElectricalApplicance
                 }
             }
             StartCoroutine(FlashCoolDown());
-            flashed = true;
-            flashlight.DOFade(1, 0.1f);
-            flashlight.DOFade(0, 0.1f).SetDelay(0.3f);
+           // flashed = false;
+            DOTween.To(() => flashlight.intensity, x => flashlight.intensity = x, 5, 0.2f);
+            DOTween.To(() => flashlight.intensity, x => flashlight.intensity = x, 1, 0.2f).SetDelay(0.3f);
             this.electricitySystem.UseElectricity(0.9f);
         }
     }
 
     IEnumerator FlashCoolDown()
     {
-        yield return new WaitForSeconds(Random.Range(60, 120));
+        yield return new WaitForSeconds(1);
         flashed = false;
         yield return null;
     }

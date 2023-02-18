@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: -1175001637, guid: 0fc0f47e594059e4aaa867e6ce9fc50f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   IsAlienOnly: 0
   SubBodyPartCollectionIndex: 1
   IsTall: 0
-  IsNewspaper: 0
+  IsNewspaper: 1
 --- !u!1 &4343699133076060330
 GameObject:
   m_ObjectHideFlags: 0

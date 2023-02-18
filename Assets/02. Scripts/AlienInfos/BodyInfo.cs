@@ -131,7 +131,7 @@ public class BodyInfo : ICanRegisterEvent {
         HeightType height = Random.Range(0, 2) == 0 ? HeightType.Short : HeightType.Tall;
         //Gender gender = voiceValues[Random.Range(0, voiceValues.Length)];
         
-        int bodyPartTypeEnumLength = Enum.GetValues(typeof(BodyPartType)).Length;
+        int bodyPartTypeEnumLength = Enum.GetValues(typeof(BodyPartType)).Length-1;
         List<BodyPartPrefabInfo> allBodyPartInfos = new List<BodyPartPrefabInfo>(3);
 
         int distinctBodyPartCount = needDistinctive ? Random.Range(1, 4) : 0;

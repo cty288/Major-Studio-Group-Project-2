@@ -13,3 +13,13 @@ public class AccessoryTag_Sunglasses : AccessoryTag {
 public class AccessoryTag_Necklace : AccessoryTag {
 	public override string TagName { get; } = "Bodywear_Necklace";
 }
+
+public class AccessoryTag_Beret : AccessoryTag {
+	public override string TagName { get; } = "Headwear_Beret";
+}
+
+public class ClothTagScarf : AccessoryTag {
+	[field: ES3Serializable]
+	public override string TagName { get; } = "Cloth_Scarf";
+}
+

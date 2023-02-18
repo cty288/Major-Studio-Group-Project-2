@@ -39,10 +39,6 @@ public class ClothTagWatch : ClothTag {
     public override string TagName { get; } = "Watch";
 }
 
-public class ClothTagScarf : ClothTag {
-    [field: ES3Serializable]
-    public override string TagName { get; } = "Cloth_Scarf";
-}
 
 #endregion
 

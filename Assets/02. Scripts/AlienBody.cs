@@ -6,6 +6,7 @@ using DG.Tweening;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
+using MikroFramework.Extensions;
 using MikroFramework.ResKit;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -29,14 +30,13 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
     private BountyHunterSystem bountyHunterSystem;
 
     
-    
+    private List<AlienBodyPartInfo> alienBodyPartInfos = new List<AlienBodyPartInfo>();
 
-    
     protected virtual void Awake() {
         tallSpawnPosition = transform.Find("TallSpawnPosition");
         shortSpawnPosition = transform.Find("LowSpawnPosition");
         bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
-      
+        
     }
 
     public void OnBuilt() {
@@ -44,14 +44,27 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
     }
 
     public void Hide() {
-        foreach (SpriteRenderer spriteRenderer in spriteRenderers) {
-            spriteRenderer.DOFade(0, 0.5f);
+        foreach (AlienBodyPartInfo info in alienBodyPartInfos) {
+            info.Disappear(0.5f);
         }
+        
     }
 
     public void Show() {
-        foreach (SpriteRenderer spriteRenderer in spriteRenderers) {
-            spriteRenderer.DOFade(1, 0.5f);
+        foreach (AlienBodyPartInfo info in alienBodyPartInfos) {
+            info.Appear(0.5f);
+        }
+    }
+
+    public void ShowColor(float fadeTime) {
+        foreach (AlienBodyPartInfo info in alienBodyPartInfos) {
+            info.ShowColor(fadeTime, Color.white);
+        }
+    }
+
+    public void HideColor(float fadeTime) {
+        foreach (AlienBodyPartInfo info in alienBodyPartInfos) {
+            info.HideColor(fadeTime);
         }
     }
 
@@ -76,14 +89,18 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
                 lastInfo = spawnedBodyPart.GetComponent<AlienBodyPartInfo>();
                 lastInfo.Init(partInfo);
                 
-                if (hide) {
-                    spawnedBodyPart.GetComponentsInChildren<SpriteRenderer>(true).ToList()
-                        .ForEach(s => s.color = new Color(1, 1, 1, 0));
-                }
+                
+            }
+            
+        }
+        alienBody.alienBodyPartInfos = bodyInstance.GetComponentsInChildren<AlienBodyPartInfo>(true).ToList();
+        if (hide) {
+            foreach (AlienBodyPartInfo bodyInfo in alienBody.alienBodyPartInfos) {
+                bodyInfo.HideInstantly();
             }
         }
-
         alienBody.BodyInfos = new List<BodyInfo>() {info};
+       
         alienBody.OnBuilt();
         return bodyInstance;
     }
@@ -131,6 +148,7 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
             //layer++;
         }
         alienBody.BodyInfos = new List<BodyInfo>(){info};
+        alienBody.alienBodyPartInfos = bodyInstance.GetComponentsInChildren<AlienBodyPartInfo>(true).ToList();
         alienBody.OnBuilt();
         return bodyInstance;
     }

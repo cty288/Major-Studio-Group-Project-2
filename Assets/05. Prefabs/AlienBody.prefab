@@ -224,6 +224,7 @@ MonoBehaviour:
   outlineMaterial: {fileID: 0}
   followingObject: {fileID: 7669932490035817638}
   followingObjectIsUI: 0
+  moveToTopWhenHovering: 0
 --- !u!114 &8969456685576946037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,7 +298,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &767131846724863089
 MonoBehaviour:
