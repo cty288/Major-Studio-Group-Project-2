@@ -19,6 +19,9 @@ public class NewspaperMarker : MonoBehaviour {
     }
     
     public List<Vector3> GetCurrentMarkerPositions() {
+        if (markerPositions.Count == 0) {
+            return null;
+        }
         return markerPositions[markerPositions.Count - 1];
     }
 

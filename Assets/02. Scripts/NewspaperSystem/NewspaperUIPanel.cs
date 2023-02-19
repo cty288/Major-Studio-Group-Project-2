@@ -194,7 +194,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
             
             if (Input.GetMouseButtonUp(0)) {
                 List<Vector3> positions = currentMarker.GetCurrentMarkerPositions();
-                if (positions.Count > 0) {
+                if (positions!=null && positions.Count > 0) {
                     newspaperModel.MarkNewspaper(news, positions);
                 }
                 
