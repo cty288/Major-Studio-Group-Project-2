@@ -8,7 +8,8 @@
 		[Header(General Settings)]
 		[MaterialToggle] _OutlineEnabled ("Outline Enabled", Float) = 1
 		[MaterialToggle] _ConnectedAlpha ("Connected Alpha", Float) = 0
-        [HideInInspector] _AlphaThreshold ("Alpha clean", Range (0, 1)) = 0
+	    _AlphaThreshold ("Alpha clean", Range (0, 1)) = 0
+    	
         _Thickness ("Width (Max recommended 100)", float) = 10
 		[KeywordEnum(Solid, Gradient, Image)] _OutlineMode("Outline mode", Float) = 0
 		[KeywordEnum(Contour, Frame)] _OutlineShape("Outline shape", Float) = 0
@@ -77,7 +78,7 @@
             fixed _OutlineShape;
             fixed _OutlinePosition;
             fixed _OutlineMode;
-
+			
 			fixed4 _SolidOutline;
 
 			fixed4 _GradientOutline1;
@@ -236,7 +237,7 @@
 						if(_OutlineShape == 0) // contour
 						{
 							if(
-								((_OutlinePosition != 2 && _OutlineShape == 1) && c.a != 0 &&  // inside and frame
+								((_OutlinePosition != 2 && _OutlineShape == 1) && c.a >= _AlphaThreshold &&  // inside and frame
 									(
 										IN.texcoord.y + thicknessY > 1 || 
 										IN.texcoord.y - thicknessY < 0 || 
@@ -246,7 +247,7 @@
 									)
 								)
 								||
-								((_OutlinePosition == 2 || _OutlineShape != 1) && c.a == 0 &&   // outside or contour
+								((_OutlinePosition == 2 || _OutlineShape != 1) && c.a <= _AlphaThreshold &&   // outside or contour
 									CheckOriginalSpriteTexture(IN.texcoord, false)
 								)
 							)
@@ -401,7 +402,7 @@
 					}
 					else if(_OutlineShape == 0 && _Thickness > 0) // Contour
 					{
-						if((_OutlinePosition != 2 && _OutlineShape == 1) && c.a != 0 && // inside and frame
+						if((_OutlinePosition != 2 && _OutlineShape == 1) && c.a >= _AlphaThreshold && // inside and frame
 							(
 								IN.texcoord.y + thicknessY > 1 ||
 								IN.texcoord.y - thicknessY < 0 ||
@@ -413,7 +414,7 @@
 						{
 							return outlineC;
 						}
-						else if((_OutlinePosition == 2 || _OutlineShape != 1) && c.a == 0 && // outside orcontour
+						else if((_OutlinePosition == 2 || _OutlineShape != 1) && c.a < _AlphaThreshold && // outside orcontour
 								(
 									CheckOriginalSpriteTexture(IN.texcoord, false)
 								)

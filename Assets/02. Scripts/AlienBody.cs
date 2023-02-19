@@ -47,7 +47,7 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
         foreach (AlienBodyPartInfo info in alienBodyPartInfos) {
             info.Disappear(0.5f);
         }
-        
+
     }
 
     public void Show() {

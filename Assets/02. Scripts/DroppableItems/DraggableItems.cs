@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 
 public abstract class DraggableItems : AbstractMikroController<MainGame>, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler{
     private Vector2 dragStartPos;
+    [ES3Serializable]
     private Bounds tableBounds;
 
     private DateTime pointerDownTime;

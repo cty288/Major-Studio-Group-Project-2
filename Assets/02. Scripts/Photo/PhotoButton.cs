@@ -7,12 +7,13 @@ using UnityEngine.EventSystems;
 
 public class PhotoButton : AbstractMikroController<MainGame>, IPointerClickHandler {
 	private GameObject controlHintObj;
+	private PhotoSaveModel photoSaveModel;
 	private void Awake() {
 		ScreenSpaceImageCropper.Singleton.OnStartCrop += OnStartCrop;
 		ScreenSpaceImageCropper.Singleton.OnEndCrop += OnEndCrop;
 		controlHintObj = transform.Find("ControlHint").gameObject;
 		ScreenSpaceImageCropper.Singleton.OnDragMouse += OnDragMouse;
-		
+		photoSaveModel = this.GetModel<PhotoSaveModel>();
 	}
 	
 
@@ -47,5 +48,6 @@ public class PhotoButton : AbstractMikroController<MainGame>, IPointerClickHandl
 
 	private void OnFinishCropping(CropInfo info) {
 		//info.
+		photoSaveModel.SavePhoto(info);
 	}
 }

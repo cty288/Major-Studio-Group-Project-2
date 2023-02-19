@@ -8,7 +8,16 @@ public abstract class AbstractSavableModel : AbstractModel{
 		
 	}
 
-	public  void Save() {
+	public void Save() {
 		ES3.Save("Model_" + this.GetType().Name, this, "models.es3");
+		OnSave();
+	}
+	
+	public virtual void OnLoad() {
+		
+	}
+	
+	public virtual void OnSave() {
+		
 	}
 }

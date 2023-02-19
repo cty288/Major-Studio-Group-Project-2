@@ -6,11 +6,13 @@ using MikroFramework.Event;
 using MikroFramework.ResKit;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Random = UnityEngine.Random;
 
 public class Table :  AbstractDroppableItemContainerViewController {
     [SerializeField] private GameObject newspaperPrefab;
     [SerializeField] private GameObject bountyHunterGiftPrefab;
-  
+    [SerializeField] private List<GameObject> photoPrefabList;
+
     private NewspaperViewController todayNewspaper;
     
 
@@ -20,6 +22,12 @@ public class Table :  AbstractDroppableItemContainerViewController {
         this.RegisterEvent<OnNewspaperGenerated>(OnNewspaperGenerated).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<SpawnTableItemEvent>(OnSpawnItem).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnBountyHunterKillCorrectAlien>(OnBountyHunterKillCorrectAlien).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnNewPhotoTaken>(OnNewPhotoTaken).UnRegisterWhenGameObjectDestroyed(gameObject);
+    }
+
+    private void OnNewPhotoTaken(OnNewPhotoTaken e) {
+        GameObject photo = SpawnItem(photoPrefabList[Random.Range(0, photoPrefabList.Count)]);
+        photo.GetComponent<PhotoOnTable>().SetPhotoID(e.CropInfo.ID);
     }
 
     private void OnBountyHunterKillCorrectAlien(OnBountyHunterKillCorrectAlien e) {

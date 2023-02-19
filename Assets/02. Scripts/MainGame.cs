@@ -39,15 +39,17 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<NewspaperModel>();
         this.RegisterModel<GameTimeModel>();
         this.RegisterModel<BodyModel>();
-        
+        this.RegisterModel<PhotoSaveModel>();
 
         
     }
     
     protected void RegisterModel<T>() where T : class, IModel, new() {
         T model = null;
+        
         if (typeof(T).IsSubclassOf(typeof(AbstractSavableModel)) && IsSave) {
             model = ES3.Load<AbstractSavableModel>("Model_" + typeof(T).Name, "models.es3", new T() as AbstractSavableModel) as T;
+            (model as AbstractSavableModel)?.OnLoad();
             savableModels.Add(model as AbstractSavableModel);
         }
         else {

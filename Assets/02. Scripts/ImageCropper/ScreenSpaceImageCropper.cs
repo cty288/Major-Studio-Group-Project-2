@@ -13,17 +13,36 @@ using Action = Antlr.Runtime.Misc.Action;
 [ES3Serializable]
 public class CropInfo {
     [ES3Serializable]
-    private Texture2D outputTexture;
+    private byte[] outputTexture;
 
-    public Texture2D OutputTexture => outputTexture;
+    public byte[] OutputTexture => outputTexture;
     [ES3Serializable]
     private List<BodyInfo> storedBodyInfoId;
+    
+    [ES3Serializable]
+    private int width;
+
+    public int Width => width;
+    [ES3Serializable]
+    private int height;
+
+    public int Height => height;
+
 
     public List<BodyInfo> StoredBodyInfoId => storedBodyInfoId;
 
+    [field: ES3Serializable]
+    public string ID { get;}
     public CropInfo(Texture2D outputTexture, List<BodyInfo> storedBodyInfoId) {
-        this.outputTexture = outputTexture;
+        this.outputTexture = outputTexture.GetRawTextureData();
+        this.width = outputTexture.width;
+        this.height = outputTexture.height;
         this.storedBodyInfoId = storedBodyInfoId;
+        ID = Guid.NewGuid().ToString();
+    }
+    
+    public CropInfo() {
+        
     }
 }
 public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCropper>, IController {
@@ -83,6 +102,7 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
         playerControlModel.ControlType.Value = PlayerControlType.Screenshot;
         OnStartCrop?.Invoke();
     }
+    
 
     void Update() {
         if (!isCropping) {

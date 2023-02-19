@@ -47,8 +47,8 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 1395, y: 344, z: 633, w: 747}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -143,13 +143,13 @@ TextureImporter:
       name: New Notebook - Photo 2_0
       rect:
         serializedVersion: 2
-        x: 1266
-        y: 287
-        width: 396
-        height: 302
+        x: 1246
+        y: 251
+        width: 437
+        height: 358
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 109, y: 88, z: 82, w: 104}
+      border: {x: 159, y: 88, z: 135, w: 104}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -164,7 +164,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
