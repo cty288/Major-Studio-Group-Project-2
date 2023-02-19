@@ -9,3 +9,7 @@ public class HairTag_Afro : HaircutTag {
 public class HairTag_TwinBraids : HaircutTag {
 	public override string TagName { get; } = "Hair_TwinBraids";
 }
+
+public class HairTag_DoublePony : HaircutTag {
+	public override string TagName { get; } = "Hair_Doublepony";
+}

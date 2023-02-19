@@ -161,27 +161,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Set_3_1
-      rect:
-        serializedVersion: 2
-        x: 340
-        y: 780
-        width: 115
-        height: 125
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6bc509dcfe53e594288754c2de83b5b5
-      internalID: -2077276802
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Set_3_2
       rect:
         serializedVersion: 2

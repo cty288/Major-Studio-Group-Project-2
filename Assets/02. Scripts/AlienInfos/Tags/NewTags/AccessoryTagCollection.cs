@@ -19,7 +19,14 @@ public class AccessoryTag_Beret : AccessoryTag {
 }
 
 public class ClothTagScarf : AccessoryTag {
-	[field: ES3Serializable]
+	
 	public override string TagName { get; } = "Cloth_Scarf";
 }
+
+public class AccessoryTag_TeddyBear : AccessoryTag {
+	
+	public override string TagName { get; } = "Bodywear_Bear";
+}
+
+
 
