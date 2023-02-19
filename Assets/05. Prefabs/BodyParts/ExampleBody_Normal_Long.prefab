@@ -397,6 +397,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Head_DoublePony
       objectReference: {fileID: 0}
+    - target: {fileID: 9051798957158563920, guid: 3b3d2dfce01861749947d7a22518076a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b3d2dfce01861749947d7a22518076a, type: 3}
 --- !u!1001 &2435639585531483931
@@ -547,6 +551,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scarf_Long (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3994471963849947185, guid: abfd1a4b5cba0fc47b9478a4613198c5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4082554694340119176, guid: abfd1a4b5cba0fc47b9478a4613198c5, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -603,6 +611,10 @@ PrefabInstance:
     - target: {fileID: 3994471963849947185, guid: cef6b253129f6f246afbab5f39a0a767, type: 3}
       propertyPath: m_Name
       value: Scarf_Long
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994471963849947185, guid: cef6b253129f6f246afbab5f39a0a767, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4082554694340119176, guid: cef6b253129f6f246afbab5f39a0a767, type: 3}
       propertyPath: m_RootOrder

@@ -349,27 +349,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Set_14_10
-      rect:
-        serializedVersion: 2
-        x: 835
-        y: 55
-        width: 170
-        height: 375
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 08e287894fa8b7d4c9672afb91d0e292
-      internalID: -1213122559
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -390,7 +369,6 @@ TextureImporter:
       Set_14_6: 1222515986
       Set_14_9: 1522487931
       Set_14_2: 1233972969
-      Set_14_10: -1213122559
       Set_14_8: -198324365
   spritePackingTag: 
   pSDRemoveMatte: 0
