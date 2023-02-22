@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.GameEvents.BountyHunter;
+using _02._Scripts.GameEvents.Merchant;
 using MikroFramework.Architecture;
 using TMPro;
 using UnityEngine;
@@ -15,6 +16,6 @@ public class DebugPanel : AbstractMikroController<MainGame> {
 
 	private void Start() {
 		bountyHunterNumber.text = "Bounty Hunter Number: " + this.GetModel<BountyHunterModel>().PhoneNumber;
-		merchantNumber.text = "Merchant Number: " + this.GetSystem<MerchantSystem>().PhoneNumber;
+		merchantNumber.text = "Merchant Number: " + this.GetModel<MerchantModel>().PhoneNumber;
 	}
 }

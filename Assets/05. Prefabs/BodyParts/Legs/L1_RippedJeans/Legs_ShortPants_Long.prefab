@@ -124,6 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4765117181526495087}
+  - component: {fileID: 5574578982502355108}
   - component: {fileID: -690148147829161317}
   m_Layer: 0
   m_Name: Legs_ShortPants_Long
@@ -149,6 +150,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5574578982502355108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4747785536886524387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43d5f0e52546b4c4f940ab135b99872a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JointPoint: {fileID: 7315007751789383284}
+  OppositeTraitBodyParts: []
+  IsAlienOnly: 0
+  SubBodyPartCollectionIndex: 2
+  IsTall: 1
+  IsNewspaper: 0
 --- !u!114 &-690148147829161317
 MonoBehaviour:
   m_ObjectHideFlags: 0

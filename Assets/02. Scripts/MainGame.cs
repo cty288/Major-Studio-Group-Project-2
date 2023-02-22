@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.GameEvents.BountyHunter;
+using _02._Scripts.GameEvents.Merchant;
 using _02._Scripts.GameTime;
 using MikroFramework.Architecture;
 using MikroFramework.ResKit;
@@ -33,6 +34,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<PhotoSaveModel>();
         this.RegisterModel<PlayerResourceModel>();
         this.RegisterModel<BountyHunterModel>();
+        this.RegisterModel<MerchantModel>();
 
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();
@@ -93,6 +95,14 @@ public class MainGame : Architecture<MainGame> {
             savableSystem.Save();
         }
         ES3AutoSaveMgr.Current.Save();
+    }
+    
+    public void ClearSave() {
+        
+        ES3.DeleteFile("models.es3");
+        ES3.DeleteFile("systems.es3");
+        ES3.DeleteFile("photos");
+        ES3.DeleteFile("SaveFile.es3");
     }
 
    

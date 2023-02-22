@@ -27,6 +27,13 @@ public class BountyHunterHuntEvent : GameEvent{
         playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
         this.bodyInfos = infos;
     }
+
+    public BountyHunterHuntEvent() : base() {
+        bodyModel = this.GetModel<BodyModel>();
+        playerResourceSystem = this.GetSystem<PlayerResourceSystem>((system => {
+            playerResourceSystem = system as PlayerResourceSystem;
+        } ));
+    }
     public override void OnStart() {
         
     }

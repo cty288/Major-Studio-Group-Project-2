@@ -21,7 +21,9 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
     
     protected BodyManagmentSystem bodyManagmentSystem;
     public BountyHunterQuestClueNotification(TimeRange startTimeRange, BountyHunterQuestClueNotificationContact notificationContact, int callWaitTime, DateTime clueHappenTime) : base(startTimeRange, notificationContact, callWaitTime) {
-        bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
+        bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>((system => {
+            bodyManagmentSystem = system;
+        } ));
         this.bountyHunterModel = this.GetModel<BountyHunterModel>();
         notificationContact.ClueHappenTime = clueHappenTime;
         //Contact = NotificationContact as BountyHunterQuestClueNotificationContact;
@@ -29,7 +31,9 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
     
     public BountyHunterQuestClueNotification():base() {
         this.bountyHunterModel = this.GetModel<BountyHunterModel>();
-        bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
+        bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>((system => {
+            system = bodyManagmentSystem;
+        } ));
         
     }
 

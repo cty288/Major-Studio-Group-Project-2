@@ -4,11 +4,17 @@ using MikroFramework.Architecture;
 using UnityEngine;
 
 public class GetResourceEvent : GameEvent {
+    [field: ES3Serializable]
     private IPlayerResource resource;
+    [field: ES3Serializable]
     private int count = 1;
     public GetResourceEvent(IPlayerResource resource, int count, TimeRange startTimeRange) : base(startTimeRange) {
         this.resource = resource;
         this.count = count;
+    }
+
+    public GetResourceEvent() {
+        
     }
 
     [field: ES3Serializable]

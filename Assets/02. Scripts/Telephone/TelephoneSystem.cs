@@ -33,7 +33,8 @@ public enum PhoneDealErrorType {
     NumberNotExists,
     NumberNotAvailable,
 }
-public class TelephoneSystem : AbstractSystem {
+public class TelephoneSystem : AbstractSavableSystem {
+    [field: ES3Serializable]
     public BindableProperty<TelephoneState> State { get; private set; } =
         new BindableProperty<TelephoneState>(TelephoneState.Idle);
 
@@ -53,11 +54,14 @@ public class TelephoneSystem : AbstractSystem {
 
     public Action OnPickUp { get; set; }
 
+    [field: ES3Serializable]
     public Dictionary<string, TelephoneContact> Contacts { get; } = new Dictionary<string, TelephoneContact>();
 
     private Coroutine dealWaitCoroutine;
     private Coroutine incomingCallCoroutine;
     private ElectricitySystem electricitySystem;
+    
+    [field: ES3Serializable]
     public BindableProperty<TelephoneContact> CurrentTalkingContact { get; } =
         new BindableProperty<TelephoneContact>();
     protected override void OnInit() {
@@ -65,7 +69,10 @@ public class TelephoneSystem : AbstractSystem {
         gameTimeManager.OnDayStart += OnDayEnd;
         updater = new GameObject("TelephoneSystemUpdater").AddComponent<TelephoneSystemUpdater>();
         updater.OnUpdate += Update;
-        electricitySystem = this.GetSystem<ElectricitySystem>();
+        electricitySystem = this.GetSystem<ElectricitySystem>((system => {
+            electricitySystem = system;
+        } ));
+        
         State.RegisterOnValueChaned(OnStateChanged);
     }
 

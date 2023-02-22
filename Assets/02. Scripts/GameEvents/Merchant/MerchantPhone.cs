@@ -48,23 +48,31 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
    
     private GameTimeManager gameTimeManager;
     private PlayerResourceModel playerResourceModel;
+    
+    [ES3Serializable]
     private float dailyAvailability = 0.7f;
+    [ES3Serializable]
     private bool isTodayAvailable = true;
-
+   
     private List<MerchantGoods> GoodsList = new List<MerchantGoods>() {new BulletGoods()};
+    [ES3Serializable]
     private int dailyGoodsCount = 1;
-
+    [ES3Serializable]
     private List<MerchantGoods> todayGoods = new List<MerchantGoods>();
 
     private AudioMixerGroup mixer;
     public MerchantPhone() {
         speaker = GameObject.Find("MerchantSpeaker").GetComponent<Speaker>();
-        gameTimeManager = this.GetSystem<GameTimeManager>();
+        gameTimeManager = this.GetSystem<GameTimeManager>((manager => {
+            gameTimeManager = manager;
+        } ));
         playerResourceModel = this.GetModel<PlayerResourceModel>();
-        gameEventSystem = this.GetSystem<GameEventSystem>();
+        gameEventSystem = this.GetSystem<GameEventSystem>((system => {
+            gameEventSystem = system;
+        } ));
         this.mixer = speaker.GetComponent<AudioSource>().outputAudioMixerGroup;
         gameTimeManager.OnDayStart += OnDayStart;
-        RefreshAvailability();
+        
         RefreshDailyGoods();
         
     }
@@ -130,7 +138,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
                 else {
                     playerResourceModel.RemoveFood(goods.FoodPerUnit);
                     List<string> replies = new List<string>();
-                    replies.Add("Thanks for your order. The item will be delivered to you tomorrow. ");
+                    replies.Add("Thanks for your order. The item will be delivered to you tomorrow.");
                     replies.Add("There you go, sir! You’ve made the right decision! It will be delivered tomorrow. Good luck!");
                     reply = replies[Random.Range(0, replies.Count)];
 

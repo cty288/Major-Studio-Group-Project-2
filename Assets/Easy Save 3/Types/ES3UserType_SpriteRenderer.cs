@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("sprite", "color", "flipX", "enabled", "shadowCastingMode", "receiveShadows", "motionVectorGenerationMode", "lightProbeUsage", "reflectionProbeUsage", "sortingLayerName", "sortingLayerID", "sortingOrder", "lightProbeProxyVolumeOverride", "probeAnchor", "lightmapIndex", "realtimeLightmapIndex", "lightmapScaleOffset", "realtimeLightmapScaleOffset", "materials", "material", "sharedMaterial", "sharedMaterials")]
+	[ES3PropertiesAttribute("sprite", "flipX", "enabled", "shadowCastingMode", "receiveShadows", "motionVectorGenerationMode", "lightProbeUsage", "reflectionProbeUsage", "sortingLayerName", "sortingLayerID", "sortingOrder", "lightProbeProxyVolumeOverride", "probeAnchor", "lightmapIndex", "realtimeLightmapIndex", "lightmapScaleOffset", "realtimeLightmapScaleOffset", "materials", "material", "sharedMaterial", "sharedMaterials")]
 	public class ES3UserType_SpriteRenderer : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -17,14 +17,13 @@ namespace ES3Types
 			var instance = (UnityEngine.SpriteRenderer)obj;
 			
 			writer.WritePropertyByRef("sprite", instance.sprite);
-			writer.WriteProperty("color", instance.color, ES3Type_Color.Instance);
 			writer.WriteProperty("flipX", instance.flipX, ES3Type_bool.Instance);
 			writer.WriteProperty("enabled", instance.enabled, ES3Type_bool.Instance);
-			writer.WriteProperty("shadowCastingMode", instance.shadowCastingMode, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(UnityEngine.Rendering.ShadowCastingMode)));
+			writer.WriteProperty("shadowCastingMode", instance.shadowCastingMode, ES3Type_enum.Instance);
 			writer.WriteProperty("receiveShadows", instance.receiveShadows, ES3Type_bool.Instance);
-			writer.WriteProperty("motionVectorGenerationMode", instance.motionVectorGenerationMode, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(UnityEngine.MotionVectorGenerationMode)));
-			writer.WriteProperty("lightProbeUsage", instance.lightProbeUsage, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(UnityEngine.Rendering.LightProbeUsage)));
-			writer.WriteProperty("reflectionProbeUsage", instance.reflectionProbeUsage, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(UnityEngine.Rendering.ReflectionProbeUsage)));
+			writer.WriteProperty("motionVectorGenerationMode", instance.motionVectorGenerationMode, ES3Type_enum.Instance);
+			writer.WriteProperty("lightProbeUsage", instance.lightProbeUsage, ES3Type_enum.Instance);
+			writer.WriteProperty("reflectionProbeUsage", instance.reflectionProbeUsage, ES3Type_enum.Instance);
 			writer.WriteProperty("sortingLayerName", instance.sortingLayerName, ES3Type_string.Instance);
 			writer.WriteProperty("sortingLayerID", instance.sortingLayerID, ES3Type_int.Instance);
 			writer.WriteProperty("sortingOrder", instance.sortingOrder, ES3Type_int.Instance);
@@ -51,9 +50,6 @@ namespace ES3Types
 					case "sprite":
 						instance.sprite = reader.Read<UnityEngine.Sprite>(ES3Type_Sprite.Instance);
 						break;
-					case "color":
-						instance.color = reader.Read<UnityEngine.Color>(ES3Type_Color.Instance);
-						break;
 					case "flipX":
 						instance.flipX = reader.Read<System.Boolean>(ES3Type_bool.Instance);
 						break;
@@ -61,19 +57,19 @@ namespace ES3Types
 						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
 						break;
 					case "shadowCastingMode":
-						instance.shadowCastingMode = reader.Read<UnityEngine.Rendering.ShadowCastingMode>();
+						instance.shadowCastingMode = reader.Read<UnityEngine.Rendering.ShadowCastingMode>(ES3Type_enum.Instance);
 						break;
 					case "receiveShadows":
 						instance.receiveShadows = reader.Read<System.Boolean>(ES3Type_bool.Instance);
 						break;
 					case "motionVectorGenerationMode":
-						instance.motionVectorGenerationMode = reader.Read<UnityEngine.MotionVectorGenerationMode>();
+						instance.motionVectorGenerationMode = reader.Read<UnityEngine.MotionVectorGenerationMode>(ES3Type_enum.Instance);
 						break;
 					case "lightProbeUsage":
-						instance.lightProbeUsage = reader.Read<UnityEngine.Rendering.LightProbeUsage>();
+						instance.lightProbeUsage = reader.Read<UnityEngine.Rendering.LightProbeUsage>(ES3Type_enum.Instance);
 						break;
 					case "reflectionProbeUsage":
-						instance.reflectionProbeUsage = reader.Read<UnityEngine.Rendering.ReflectionProbeUsage>();
+						instance.reflectionProbeUsage = reader.Read<UnityEngine.Rendering.ReflectionProbeUsage>(ES3Type_enum.Instance);
 						break;
 					case "sortingLayerName":
 						instance.sortingLayerName = reader.Read<System.String>(ES3Type_string.Instance);

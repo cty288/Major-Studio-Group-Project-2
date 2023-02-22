@@ -1,14 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.GameEvents.Merchant;
 using MikroFramework.Architecture;
 using Random = UnityEngine.Random;
 
 public class MerchantSystem : AbstractSystem {
-    private string phoneNumber;
 
-    public string PhoneNumber => phoneNumber;
-    private int phoneNumberGenerationDate;
+    private MerchantModel merchantModel;
     private GameTimeManager gameTimeManager;
     private GameEventSystem gameEventSystem;
     private TelephoneSystem telephoneSystem;
@@ -16,18 +15,19 @@ public class MerchantSystem : AbstractSystem {
         gameTimeManager = this.GetSystem<GameTimeManager>();
         gameEventSystem = this.GetSystem<GameEventSystem>();
         telephoneSystem = this.GetSystem<TelephoneSystem>();
+        merchantModel = this.GetModel<MerchantModel>();
         
-        phoneNumber = PhoneNumberGenor.GeneratePhoneNumber(7);
-        phoneNumberGenerationDate = Random.Range(2, 5);
-
-        AddMerchantPhoneNumebrEvent();
-
-        telephoneSystem.AddContact(phoneNumber, new MerchantPhone());
+        if(String.IsNullOrEmpty(merchantModel.PhoneNumber)) {
+            merchantModel.PhoneNumber =  PhoneNumberGenor.GeneratePhoneNumber(7);
+            merchantModel.PhoneNumberGenerationDate = Random.Range(2, 5);
+            telephoneSystem.AddContact(merchantModel.PhoneNumber, new MerchantPhone());
+            AddMerchantPhoneNumebrEvent();
+        }
     }
 
     private void AddMerchantPhoneNumebrEvent() {
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
-        currentTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day + phoneNumberGenerationDate, 22,
+        currentTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day + merchantModel.PhoneNumberGenerationDate, 22,
             0, 0);
         gameEventSystem.AddEvent(new MerchantPhoneNumberEvent(new TimeRange(currentTime)));
     }

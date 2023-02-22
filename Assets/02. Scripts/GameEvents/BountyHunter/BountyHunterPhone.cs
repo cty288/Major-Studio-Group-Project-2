@@ -37,7 +37,9 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
     }
     public BountyHunterPhone() {
         speaker = GameObject.Find("BountyHunterSpeaker").GetComponent<Speaker>();
-        bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
+        bountyHunterSystem = this.GetSystem<BountyHunterSystem>(system => {
+            bountyHunterSystem= system;
+        } );
         gameTimeManager = this.GetSystem<GameTimeManager>();
         this.mixer = speaker.GetComponent<AudioSource>().outputAudioMixerGroup;
         gameEventSystem = this.GetSystem<GameEventSystem>();

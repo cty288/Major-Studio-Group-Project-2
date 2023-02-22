@@ -53,7 +53,7 @@ public class BountyHunterAdEvent : RadioEvent {
 
     private void OnStopOrMissed() {
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
-        int nextDayInterval = bountyHunterModel.ContactedBountyHunter ? 1 : 3;
+        int nextDayInterval = bountyHunterModel.ContactedBountyHunter ? 1 : 5;
 
         DateTime nextEventDay = currentTime.AddDays(nextDayInterval);
         DateTime nextEventTime = new DateTime(nextEventDay.Year, nextEventDay.Month,

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _02._Scripts.GameEvents.Merchant;
 using DG.Tweening;
 using MikroFramework;
 using MikroFramework.Architecture;
@@ -15,7 +16,7 @@ public class MerchantNoteUIPanel : OpenableUIPanel {
     private List<TMP_Text> texts;
     private GameObject panel;
     private TMP_Text phoneNumberText;
-    private MerchantSystem merchantSystem;
+    private MerchantModel merchantModel;
     
     private Dictionary<Image, float> imageAlpha = new Dictionary<Image, float>();
 
@@ -24,7 +25,7 @@ public class MerchantNoteUIPanel : OpenableUIPanel {
         this.RegisterEvent<OnMerchantNoteUIPanelOpened>(OnMerchantNoteUIPanelOpened).UnRegisterWhenGameObjectDestroyed(gameObject);
         images = GetComponentsInChildren<Image>(true).ToList();
         texts = GetComponentsInChildren<TMP_Text>(true).ToList();
-        merchantSystem = this.GetSystem<MerchantSystem>();
+        merchantModel = this.GetModel<MerchantModel>();
         phoneNumberText = transform.Find("Panel/Paper/PhoneNumberText").GetComponent<TMP_Text>();
         panel = transform.Find("Panel").gameObject;
 
@@ -39,7 +40,7 @@ public class MerchantNoteUIPanel : OpenableUIPanel {
     }
 
     public override void OnShow(float time) {
-        phoneNumberText.text = merchantSystem.PhoneNumber;
+        phoneNumberText.text = merchantModel.PhoneNumber;
         panel.SetActive(true);
         images.ForEach((image => image.DOFade( imageAlpha.ContainsKey(image)? imageAlpha[image]: 1 , time)));
         texts.ForEach((text => text.DOFade(1, time)));

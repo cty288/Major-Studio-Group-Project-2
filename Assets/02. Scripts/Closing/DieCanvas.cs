@@ -17,7 +17,9 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
     }
 
     private void OnRestartButtonClicked() {
+        (MainGame.Interface as MainGame).ClearSave();
         Architecture<MainGame>.ResetArchitecture();
+        
         //MainGame.Interface.ResetArchitecture();
         SceneManager.LoadScene("Opening");
     }
