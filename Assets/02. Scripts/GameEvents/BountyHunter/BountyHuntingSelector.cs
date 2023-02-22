@@ -25,17 +25,18 @@ public class BountyHuntingSelector : AbstractMikroController<MainGame>, IPointer
     private void Awake() {
         hintTextOriginal = hintText.text;
         bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
-        bountyHunterSystem.IsBountyHunting.RegisterWithInitValue(OnBountyHuntingChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
+        playerControlModel = this.GetModel<PlayerControlModel>();
+        playerControlModel.ControlType.RegisterWithInitValue(OnBountyHuntingChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
         bodyInfo = GetComponent<IHaveBodyInfo>();
         if (bodyInfo == null) {
             throw new Exception("BountyHuntingSelector gameobject must have a IHaveBodyInfo component");
         }
 
-        playerControlModel = this.GetModel<PlayerControlModel>();
+        //playerControlModel = this.GetModel<PlayerControlModel>();
     }
 
-    private void OnBountyHuntingChanged(bool isHunting) {
-        if (isHunting) {
+    private void OnBountyHuntingChanged(PlayerControlType controlType) {
+        if (controlType == PlayerControlType.BountyHunting) {
             hintText.text = "Report to the Bounty Hunter";
         }
         else {
@@ -44,12 +45,15 @@ public class BountyHuntingSelector : AbstractMikroController<MainGame>, IPointer
     }
     
     public void SetHintText(string text) {
-        hintText.text = text;
+        if (playerControlModel.ControlType.Value != PlayerControlType.BountyHunting) {
+            hintText.text = text;
+        }
+        
         hintTextOriginal = text;
     }
 
     public void OnPointerClick(PointerEventData eventData) {
-        if (playerControlModel.ControlType.Value != PlayerControlType.Normal) {
+        if (playerControlModel.ControlType.Value != PlayerControlType.BountyHunting) {
             return;
         }
         this.SendEvent<OnBodyHuntingSelect>(new OnBodyHuntingSelect() {

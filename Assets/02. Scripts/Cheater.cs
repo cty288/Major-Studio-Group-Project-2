@@ -23,7 +23,7 @@ public class Cheater : AbstractMikroController<MainGame> {
         }
 
         if (Input.GetKeyDown(KeyCode.F)) {
-            this.GetSystem<PlayerResourceSystem>().AddFood(1);
+            this.GetModel<PlayerResourceModel>().AddFood(1);
         }
 
         if (Input.GetKeyDown(KeyCode.E)) {
@@ -55,7 +55,7 @@ public class Cheater : AbstractMikroController<MainGame> {
         }
 
         if (Input.GetKeyDown(KeyCode.B)) {
-            this.GetSystem<PlayerResourceSystem>().AddResource(new BulletGoods(), 1);
+            this.GetModel<PlayerResourceModel>().AddResource(new BulletGoods(), 1);
         }
     }
 }

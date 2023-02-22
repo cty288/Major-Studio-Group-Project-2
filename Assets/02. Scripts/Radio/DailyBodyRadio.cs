@@ -20,7 +20,9 @@ public class DailyBodyRadio : RadioEvent {
          public DailyBodyRadio(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer) : base(startTimeRange, speakContent, speakRate, speakGender, mixer) {
              
          }
-
+         
+         public DailyBodyRadio(): base(){}
+         [field: ES3Serializable]
         public override float TriggerChance { get; } = 1;
         public override void OnEnd() {
             if (radioCorruptCheckCoroutine != null) {

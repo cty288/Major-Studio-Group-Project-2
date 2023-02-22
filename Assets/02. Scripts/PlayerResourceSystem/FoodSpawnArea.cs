@@ -13,16 +13,17 @@ public class FoodSpawnArea : AbstractMikroController<MainGame> {
 
     private List<SpriteRenderer> foodRenderers = new List<SpriteRenderer>();
 
-    private PlayerResourceSystem playerResourceSystem;
+    private PlayerResourceModel playerResourceModel;
 
     private TMP_Text foodText;
     private void Awake() {
-        playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
-        playerResourceSystem.FoodCount.RegisterOnValueChaned(OnFoodNumberChanged)
+        playerResourceModel = this.GetModel<PlayerResourceModel>();
+       
+        playerResourceModel.FoodCount.RegisterOnValueChaned(OnFoodNumberChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
         foodRenderers = GetComponentsInChildren<SpriteRenderer>(true).ToList();
         foodText = transform.Find("FoodAreaHint/Text").GetComponent<TMP_Text>();
-        OnFoodNumberChanged(0, playerResourceSystem.FoodCount.Value);
+        OnFoodNumberChanged(0, playerResourceModel.FoodCount.Value);
     }
 
     private void OnFoodNumberChanged(int oldNumber, int foodNumber) {

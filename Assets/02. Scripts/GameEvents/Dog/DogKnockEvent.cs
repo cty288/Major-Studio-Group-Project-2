@@ -13,11 +13,15 @@ public struct OnDogGet {
 
 }
 public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEvent{
+    [field: ES3Serializable]
     public override GameEventType GameEventType { get; } = GameEventType.BodyGeneration;
+    [field: ES3Serializable]
     public override float TriggerChance { get; } = 1;
 
     public DogKnockEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float eventTriggerChance, Action onEnd, Action onMissed) : base(startTimeRange, bodyInfo, eventTriggerChance, onEnd, onMissed) {
     }
+    
+    public DogKnockEvent(): base(){}
     
     
     protected override Func<bool> OnOpen() {

@@ -13,7 +13,8 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
         base(startTimeRange, bodyInfo, eventTriggerChance, onEnd, onMissed) {
         Debug.Log("A police event is generated. The time is between " + startTimeRange.StartTime + " and " + startTimeRange.EndTime);
     }
-
+    
+    public PoliceGenerateEvent(){}
     public static BodyInfo GeneratePolice() {
         HeightType height = Random.Range(0, 2) == 0 ? HeightType.Short : HeightType.Tall;
         BodyPartPrefabInfo body = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartDisplayType.Shadow, BodyPartType.Body, false,

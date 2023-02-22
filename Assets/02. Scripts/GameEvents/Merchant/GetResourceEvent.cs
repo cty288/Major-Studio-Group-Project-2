@@ -11,14 +11,16 @@ public class GetResourceEvent : GameEvent {
         this.count = count;
     }
 
+    [field: ES3Serializable]
     public override GameEventType GameEventType { get; } = GameEventType.General;
+    [field: ES3Serializable]
     public override float TriggerChance { get; } = 1;
     public override void OnStart() {
         
     }
 
     public override EventState OnUpdate() {
-        this.GetSystem<PlayerResourceSystem>().AddResource(resource, count);
+        this.GetModel<PlayerResourceModel>().AddResource(resource, count);
         Debug.Log("Get Resource");
         return EventState.End;
     }

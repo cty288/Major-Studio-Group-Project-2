@@ -7,28 +7,41 @@ using TMPro;
 using UnityEngine;
 
 public class GunViewController : AbstractMikroController<MainGame> {
-    private PlayerResourceSystem playerResourceSystem;
+    private PlayerResourceModel playerResourceModel;
     private TMP_Text infoText;
     
     [SerializeField] private List<GameObject> bullets = new List<GameObject>();
     
     private void Awake() {
         infoText = transform.Find("Canvas/InfoText").GetComponent<TMP_Text>();
-        playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
+        playerResourceModel = this.GetModel<PlayerResourceModel>();
+
+        
         this.RegisterEvent<OnPlayerResourceNumberChanged>(OnResourceNumberChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
+    }
+
+    private void Start() {
+        int bulletCount = playerResourceModel.GetResourceCount<BulletGoods>();
+        UpdateBullets(bulletCount);
     }
 
     private void OnResourceNumberChanged(OnPlayerResourceNumberChanged e) {
         if (e.GoodsInfo.Type == typeof(BulletGoods)) {
             int count = e.GoodsInfo.Count;
-            for (int i = 0; i < bullets.Count; i++) {
-                bullets[i].SetActive(i < count);
-            }
-
-            infoText.text = $"{count}/6 Bullets";
+            UpdateBullets(count);
         }
     }
+
+    private void UpdateBullets(int count) {
+        for (int i = 0; i < bullets.Count; i++) {
+            bullets[i].SetActive(i < count);
+        }
+
+        infoText.text = $"{count}/6 Bullets";
+    }
+    
+    
 
     
 }

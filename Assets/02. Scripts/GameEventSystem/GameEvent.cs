@@ -34,6 +34,8 @@ public class TimeRange {
 public abstract class GameEvent: ICanGetSystem, ICanGetModel, ICanSendEvent, ICanRegisterEvent {
     
     public abstract GameEventType GameEventType { get; }
+    
+    
     [field: ES3Serializable]
     public EventState EventState { get; set; } = EventState.NotStart;
     
@@ -47,9 +49,12 @@ public abstract class GameEvent: ICanGetSystem, ICanGetModel, ICanSendEvent, ICa
 
     protected GameEventSystem gameEventSystem;
     protected GameStateModel gameStateModel;
-    public GameEvent(TimeRange startTimeRange) {
-        gameTimeManager = this.GetSystem<GameTimeManager>();
+    public GameEvent(TimeRange startTimeRange): this() {
         this.StartTimeRange = startTimeRange;
+    }
+
+    public GameEvent() {
+        gameTimeManager = this.GetSystem<GameTimeManager>();
         gameEventSystem = this.GetSystem<GameEventSystem>();
         gameStateModel = this.GetModel<GameStateModel>();
     }

@@ -59,8 +59,7 @@ public class DescriptionFormatter : IFormatProvider, ICustomFormatter {
         };
 
         List<string> targetList = body.Height == HeightType.Short ? shortDescriptions : highDescription;
-        if (Random.Range(0f, 1f) > reality)
-        {
+        if (Random.Range(0f, 1f) > reality) {
             targetList = targetList == shortDescriptions ? highDescription : shortDescriptions;
         }
 
@@ -68,8 +67,17 @@ public class DescriptionFormatter : IFormatProvider, ICustomFormatter {
     }
 
     public static string GetByTag<T>(BodyInfo body, float reality) where T : class, IAlienTag {
-        if (body.CheckContainTags<T>(out List<T> t)) {
-            return t[Random.Range(0, t.Count)].GetRandomRadioDescription(IsReal(reality));
+        if (body.CheckContainTags<T>(out List<T> allTags)) {
+            if (allTags.Count > 0) {
+                string result = ((T)allTags[Random.Range(0, allTags.Count)]).GetRandomRadioDescription(IsReal(reality));
+                int tryCount = 0;
+                while (string.IsNullOrEmpty(result) && allTags.Count > 0 && tryCount < 100) {
+                    result = ((T)allTags[Random.Range(0, allTags.Count)]).GetRandomRadioDescription(IsReal(reality));
+                    tryCount++;
+
+                }
+            }
+            return String.Empty; 
         }
 
         return String.Empty;
@@ -78,7 +86,14 @@ public class DescriptionFormatter : IFormatProvider, ICustomFormatter {
     public static string GetByTag<T>(BodyPartPrefabInfo bodyPart, float reality) where T : class, IAlienTag {
         var allTags = bodyPart.Tags.FindAll(x => x is T);
         if (allTags.Count > 0) {
-            return ((T) allTags[Random.Range(0, allTags.Count)]).GetRandomRadioDescription(IsReal(reality));
+            string result = ((T)allTags[Random.Range(0, allTags.Count)]).GetRandomRadioDescription(IsReal(reality));
+            int tryCount = 0;
+            while (string.IsNullOrEmpty(result) && allTags.Count > 0 && tryCount < 100) {
+                result = ((T)allTags[Random.Range(0, allTags.Count)]).GetRandomRadioDescription(IsReal(reality));
+                tryCount++;
+
+            }
+            return result;
         }
         return String.Empty;
     }

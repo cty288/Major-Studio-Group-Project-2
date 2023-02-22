@@ -4,12 +4,12 @@ using MikroFramework.Architecture;
 using UnityEngine;
 
 public class BountyHunterGiftViewController : DraggableItems {
-    private PlayerResourceSystem playerResourceSystem;
+    private PlayerResourceModel playerResourceModel;
     public int FoodCount = 1;
     protected override void Awake() {
         base.Awake();
-        playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
-        
+        // = this.GetSystem<PlayerResourceSystem>();
+        playerResourceModel = this.GetModel<PlayerResourceModel>();
     }
 
     
@@ -19,11 +19,11 @@ public class BountyHunterGiftViewController : DraggableItems {
     }
 
     protected override void OnClick() {
-        playerResourceSystem.AddFood(FoodCount);
+        playerResourceModel.AddFood(FoodCount);
         GameObject.Destroy(gameObject);
     }
 
     public override void OnThrownToRubbishBin() {
-       
+        Destroy(gameObject);
     }
 }

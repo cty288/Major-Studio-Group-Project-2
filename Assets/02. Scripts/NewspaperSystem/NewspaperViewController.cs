@@ -80,6 +80,7 @@ public class NewspaperViewController : DraggableItems, IPointerEnterHandler, IPo
 
     public override void OnThrownToRubbishBin() {
         NewspaperModel.DeleteNewspaper(newsID);
+        Destroy(gameObject);
     }
 
 

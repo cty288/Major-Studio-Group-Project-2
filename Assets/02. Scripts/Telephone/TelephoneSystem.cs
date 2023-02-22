@@ -151,7 +151,7 @@ public class TelephoneSystem : AbstractSystem {
                     yield return new WaitForSeconds(3f);
                 }
                 dealWaitCoroutine = null;
-                OnDealFailed?.Invoke(PhoneDealErrorType.NumberNotExists);
+                OnDealFailed?.Invoke(PhoneDealErrorType.NumberNotAvailable);
                 Contacts[dealingDigits].HangUp();
                 OnDealFailedCallback();
             }

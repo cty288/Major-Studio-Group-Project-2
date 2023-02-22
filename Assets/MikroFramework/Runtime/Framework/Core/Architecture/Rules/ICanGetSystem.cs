@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -11,9 +12,9 @@ namespace MikroFramework.Architecture
 
     public static class CanGetSystemExtension
     {
-        public static T GetSystem<T>(this ICanGetSystem self) where T : class, ISystem
+        public static T GetSystem<T>(this ICanGetSystem self, Action<T> delayedResult = null) where T : class, ISystem
         {
-            return self.GetArchitecture().GetSystem<T>();
+            return self.GetArchitecture().GetSystem<T>(delayedResult);
         }
     }
     

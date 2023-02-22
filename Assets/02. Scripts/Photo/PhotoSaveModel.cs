@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using MikroFramework.Architecture;
+using MikroFramework.BindableProperty;
 using UnityEngine;
 
 public struct OnNewPhotoTaken {
@@ -8,6 +9,9 @@ public struct OnNewPhotoTaken {
 }
 public class PhotoSaveModel : AbstractSavableModel {
     protected Dictionary<string, CropInfo> photoInfos;
+
+    [field: ES3Serializable]
+    public BindableProperty<bool> HasCamera { get; protected set; } = new BindableProperty<bool>(true);
     
     public override void OnLoad() {
         base.OnLoad();

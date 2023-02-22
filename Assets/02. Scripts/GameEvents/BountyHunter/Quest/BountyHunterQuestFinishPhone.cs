@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 public class BountyHunterQuestFinishPhoneEvent: IncomingCallEvent {
     public BountyHunterQuestFinishPhoneEvent(TimeRange startTimeRange, TelephoneContact notificationContact, int callWaitTime) : base(startTimeRange, notificationContact, callWaitTime) {
     }
-
+    [field: ES3Serializable]
     public override float TriggerChance { get; } = 1;
     public override void OnMissed() {
         OnMissedOrHangUp();

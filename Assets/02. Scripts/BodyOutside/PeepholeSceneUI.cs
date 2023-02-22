@@ -19,6 +19,9 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
     private TMP_Text indicateText;
     private GameObject panelObj;
     public OutdoorFlashLight flashlight;
+    
+    private List<Collider2D> selfColliders;
+    
     private void Awake() {
         gameSceneModel = this.GetModel<GameSceneModel>();
         panelObj = transform.Find("Panel").gameObject;
@@ -29,6 +32,7 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
             .UnRegisterWhenGameObjectDestroyed(gameObject);
         electricitySystem = this.GetSystem<ElectricitySystem>();
         indicateText = panelObj.transform.Find("IndicateText").GetComponent<TMP_Text>();
+        selfColliders = GetComponents<Collider2D>().ToList();
         //colliders = GetComponents<Collider2D>().ToList();
     }
 
@@ -36,10 +40,12 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
         this.Delay(0.5f, () => {
             if (scene == GameScene.Peephole) {
                 panelObj.SetActive(true);
+                selfColliders.ForEach(c => c.enabled = true);
             }
             else
             {
                 panelObj.SetActive(false);
+                selfColliders.ForEach(c => c.enabled = false);
             }
         });
     }

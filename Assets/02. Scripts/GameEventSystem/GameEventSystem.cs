@@ -25,20 +25,45 @@ public enum GameEventType {
     BountyHunterQuestClueNotification,
     BountyHunterQuestClue
 }
-public class GameEventSystem : AbstractSystem {
-    [field: ES3Serializable]
-    public Dictionary<DateTime, List<GameEvent>> EventDict { get; } = new Dictionary<DateTime, List<GameEvent>>();
-    [field: ES3Serializable]
-    public Dictionary<GameEventType, List<GameEvent>> AllPossibleEvents = new Dictionary<GameEventType, List<GameEvent>>();
+public class GameEventSystem : AbstractSavableSystem {
+    //[field: ES3Serializable]
+    //[ES3NonSerializable]
+    public Dictionary<DateTime, List<GameEvent>> EventDict { get; private set; } = new Dictionary<DateTime, List<GameEvent>>();
+    //[field: ES3Serializable]
+    //[ES3NonSerializable]
+    public Dictionary<GameEventType, List<GameEvent>> AllPossibleEvents { get; private set; } = new Dictionary<GameEventType, List<GameEvent>>();
     
 
     private GameTimeManager gameTimeManager;
 
     private GameEventSystemUpdater updater;
-    [field: ES3Serializable]
+    
+    
+    //[field: ES3Serializable]
     private Dictionary<GameEventType, GameEvent> currentEvents = new Dictionary<GameEventType, GameEvent>();
 
     private Array gameEventTypeValues = Enum.GetValues(typeof(GameEventType));
+
+    public override void OnSave() {
+        base.OnSave();
+        
+        ES3.Save("eventDict", EventDict, "systems.es3");
+        ES3.Save("currentEvents", currentEvents, "systems.es3");
+        ES3.Save("allPossibleEvents", AllPossibleEvents, "systems.es3");
+    }
+
+    public override void OnLoad() {
+        base.OnLoad();
+        if (!ES3.FileExists("systems.es3")) {
+            return;
+        }
+        EventDict = ES3.Load<Dictionary<DateTime, List<GameEvent>>>("eventDict", "systems.es3");
+        currentEvents = ES3.Load<Dictionary<GameEventType, GameEvent>>("currentEvents", "systems.es3");
+        AllPossibleEvents = ES3.Load<Dictionary<GameEventType, List<GameEvent>>>("allPossibleEvents", "systems.es3");
+        
+    }
+
+
     protected override void OnInit() {
         gameTimeManager = this.GetSystem<GameTimeManager>();
         gameTimeManager.CurrentTime.RegisterOnValueChaned(OnTimeChanged);
@@ -48,8 +73,13 @@ public class GameEventSystem : AbstractSystem {
 
         //GameEventType[] eventTypes = Enum.GetValues(typeof(GameEventType)).Cast<GameEventType>().ToArray();
         foreach (object value in gameEventTypeValues) {
-            currentEvents.Add((GameEventType) value, null);
-            AllPossibleEvents.Add((GameEventType) value, new List<GameEvent>());
+            if (!currentEvents.ContainsKey((GameEventType) value)) {
+                currentEvents.Add((GameEventType) value, null);
+            }
+
+            if (!AllPossibleEvents.ContainsKey((GameEventType) value)) {
+                AllPossibleEvents.Add((GameEventType) value, new List<GameEvent>());
+            }
         }
     }
 
@@ -102,20 +132,7 @@ public class GameEventSystem : AbstractSystem {
                 return false;
             }));
         }
-        /*
-        foreach (var evs in EventDict.Values) {
-            evs.RemoveAll(ev => {
-                if (ev.StartTimeRange.EndTime < newTime) {
-                    if (!removedEvents.Contains(ev))
-                        ev.OnMissed();
-                    return true;
-                }
-                return false;
-            });
-        }*/
-        
-
-        
+      
         
       
         

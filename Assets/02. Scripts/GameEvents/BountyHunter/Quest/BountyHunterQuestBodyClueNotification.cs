@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.GameEvents.BountyHunter;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using UnityEngine;
@@ -9,20 +10,32 @@ using Random = UnityEngine.Random;
 
 
 //情报提示的电话事件
+[ES3Serializable]
 public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
+    [field: ES3Serializable]
     public override GameEventType GameEventType { get; } = GameEventType.BountyHunterQuestClueNotification;
-    protected BountyHunterSystem bountyHunterSystem;
-    protected BountyHunterQuestClueNotificationContact NotificationContact;
+    protected BountyHunterModel bountyHunterModel;
+    
+   
+  
+    
     protected BodyManagmentSystem bodyManagmentSystem;
     public BountyHunterQuestClueNotification(TimeRange startTimeRange, BountyHunterQuestClueNotificationContact notificationContact, int callWaitTime, DateTime clueHappenTime) : base(startTimeRange, notificationContact, callWaitTime) {
         bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
-        this.bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
+        this.bountyHunterModel = this.GetModel<BountyHunterModel>();
         notificationContact.ClueHappenTime = clueHappenTime;
-        this.NotificationContact = notificationContact;
+        //Contact = NotificationContact as BountyHunterQuestClueNotificationContact;
+    }
+    
+    public BountyHunterQuestClueNotification():base() {
+        this.bountyHunterModel = this.GetModel<BountyHunterModel>();
+        bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
+        
     }
 
     public override void OnStart() {
-        if (bountyHunterSystem.QuestBodyTimeInfo.DayRemaining <= 0 || bountyHunterSystem.QuestFinished) {
+        BountyHunterQuestClueNotificationContact Contact = NotificationContact as BountyHunterQuestClueNotificationContact;
+        if (bountyHunterModel.QuestBodyTimeInfo.DayRemaining <= 0 || bountyHunterModel.QuestFinished) {
             onHangupOrFinish = true;
             Debug.Log("The Quests is end.");
             return;
@@ -34,31 +47,38 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
     }
 
     protected override void OnConversationStart() {
+        BountyHunterQuestClueNotificationContact Contact = NotificationContact as BountyHunterQuestClueNotificationContact;
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
 
-        int timeDifference = (NotificationContact.ClueHappenTime - currentTime).Minutes;
+        int timeDifference = (Contact.ClueHappenTime - currentTime).Minutes;
         if (timeDifference <= 0) {
             NotificationContact.HangUp();
             return;
         }
 
         if (timeDifference <= 20) {
-            if (NotificationContact.ClueHappenTime.AddMinutes(20).Date == currentTime.Date) {
-                NotificationContact.ClueHappenTime = NotificationContact.ClueHappenTime.AddMinutes(20);
+            if (Contact.ClueHappenTime.AddMinutes(20).Date == currentTime.Date) {
+                Contact.ClueHappenTime = Contact.ClueHappenTime.AddMinutes(20);
             }
         }
 
-        Debug.Log($"Conversation Start. Clue Happen Time: {NotificationContact.ClueHappenTime}");
+        Debug.Log($"Conversation Start. Clue Happen Time: {Contact.ClueHappenTime}");
        
     }
 
-    public override float TriggerChance { get; } = 1;
+    public override float TriggerChance {
+        get {
+            return 1;
+        }
+    }
+
     public override void OnMissed() {
+        BountyHunterQuestClueNotificationContact Contact = NotificationContact as BountyHunterQuestClueNotificationContact;
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
-        if (currentTime < NotificationContact.ClueHappenTime.AddMinutes(-20)) {
+        if (currentTime < Contact.ClueHappenTime.AddMinutes(-20)) {
             TimeRange timeRange =
                 new TimeRange(this.StartTimeRange.StartTime.AddMinutes(1), this.StartTimeRange.EndTime);
-            gameEventSystem.AddEvent(GetSameEvent(timeRange, NotificationContact, callWaitTime, NotificationContact.ClueHappenTime));
+            gameEventSystem.AddEvent(GetSameEvent(timeRange, NotificationContact, callWaitTime, Contact.ClueHappenTime));
             Debug.Log("Conversation Missed. Will retry then");            
         }
         else {
@@ -71,18 +91,18 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
         int callWaitTime, DateTime clueHappenTime);
 
     protected override void OnComplete() {
-      
-        gameEventSystem.AddEvent(GetClueEvent(new TimeRange(NotificationContact.ClueHappenTime)));
+        BountyHunterQuestClueNotificationContact Contact = NotificationContact as BountyHunterQuestClueNotificationContact;
+        gameEventSystem.AddEvent(GetClueEvent(new TimeRange(Contact.ClueHappenTime)));
 
-        if (bountyHunterSystem.QuestBodyTimeInfo.DayRemaining <= 0 || bountyHunterSystem.QuestFinished)
+        if (bountyHunterModel.QuestBodyTimeInfo.DayRemaining <= 0 || bountyHunterModel.QuestFinished)
         {
             onHangupOrFinish = true;
             Debug.Log("The Quests is end.");
             return;
         }
-        DateTime nextClueHappenTime = NotificationContact.ClueHappenTime.AddDays(1);
-        if (bountyHunterSystem.QuestBodyClueAllHappened) {
-            nextClueHappenTime = NotificationContact.ClueHappenTime.AddDays(Random.Range(2, 4));
+        DateTime nextClueHappenTime = Contact.ClueHappenTime.AddDays(1);
+        if (bountyHunterModel.QuestBodyClueAllHappened) {
+            nextClueHappenTime = Contact.ClueHappenTime.AddDays(Random.Range(2, 4));
         }
         nextClueHappenTime = new DateTime(nextClueHappenTime.Year, nextClueHappenTime.Month, nextClueHappenTime.Day, 23, Random.Range(20, 56), 0);
 
@@ -96,7 +116,7 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
     }
 
     protected override void OnHangUp() {
-        if (bountyHunterSystem.QuestBodyTimeInfo.DayRemaining <= 0) {
+        if (bountyHunterModel.QuestBodyTimeInfo.DayRemaining <= 0) {
             return;
         }
         SendSameEventTomorrow();
@@ -104,8 +124,9 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
     }
 
     private void SendSameEventTomorrow() {
+        BountyHunterQuestClueNotificationContact Contact = NotificationContact as BountyHunterQuestClueNotificationContact;
         DateTime tomorrow = gameTimeManager.CurrentTime.Value.AddDays(1);
-        DateTime tomorrowClueHappenTime = NotificationContact.ClueHappenTime.AddDays(1);
+        DateTime tomorrowClueHappenTime = Contact.ClueHappenTime.AddDays(1);
 
         DateTime tomorrowEventStartTime =
             new DateTime(tomorrow.Year, tomorrow.Month, tomorrow.Day, 22, Random.Range(5, 20), 0);
@@ -129,17 +150,21 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
 
 
 //情报提示的电话
-public abstract class BountyHunterQuestClueNotificationContact : TelephoneContact {
+[ES3Serializable]
+public abstract class BountyHunterQuestClueNotificationContact : TelephoneContact, ICanGetModel {
+    [field: ES3Serializable]
     public DateTime ClueHappenTime { get; set; }
 
-    protected BountyHunterSystem bountyHunterSystem;
+    protected BountyHunterModel bountyHunterModel;
 
-    public BountyHunterQuestClueNotificationContact() {
+    public BountyHunterQuestClueNotificationContact(): base() {
         speaker = GameObject.Find("BountyHunterSpeaker").GetComponent<Speaker>();
-        bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
+        bountyHunterModel = this.GetModel<BountyHunterModel>();
     }
+
+   
     public override bool OnDealt() {
-        return !bountyHunterSystem.IsInJail;
+        return !bountyHunterModel.IsInJail;
     }
 }
 
@@ -152,8 +177,9 @@ public abstract class BountyHunterQuestClueEvent : GameEvent {
     protected BountyHunterQuestClueEvent(TimeRange startTimeRange) : base(startTimeRange) {
         
     }
-
+    [field: ES3Serializable]
     public override GameEventType GameEventType { get; } = GameEventType.BountyHunterQuestClue;
+    [field: ES3Serializable]
     public override float TriggerChance { get; } = 1;
   
 
@@ -200,12 +226,16 @@ public abstract class BountyHunterQuestClueEvent : GameEvent {
 
 //相关情报的收音机内容
 public abstract class BountyHunterQuestClueInfoEvent : RadioEvent {
+    [field: ES3Serializable]
     protected bool IsRealClue { get; set; }
+    [field: ES3Serializable]
     protected DateTime startDate;
     public BountyHunterQuestClueInfoEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, bool isReal, DateTime startDate) : base(startTimeRange, speakContent, speakRate, speakGender, mixer) {
         this.IsRealClue = isReal;
         this.startDate = startDate;
     }
+    
+    public BountyHunterQuestClueInfoEvent(): base(){}
 
     public override float TriggerChance {
         get {

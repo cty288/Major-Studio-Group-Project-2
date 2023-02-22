@@ -17,6 +17,7 @@ using MikroFramework.Utilities;
 using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
+[ES3Serializable]
 public class AlienDescriptionData {
     public BodyInfo BodyInfo;
     public float Reality;
@@ -24,6 +25,10 @@ public class AlienDescriptionData {
     public AlienDescriptionData(BodyInfo bodyInfo, float reality) {
         this.BodyInfo = bodyInfo;
         this.Reality = reality;
+    }
+
+    public AlienDescriptionData() {
+        
     }
 }
 

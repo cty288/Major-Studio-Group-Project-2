@@ -13,7 +13,12 @@ public class RandomStuffRadio : RadioEvent {
         }
     }
 
-
+    public RandomStuffRadio() : base() {
+        if (mixer == null) {
+            this.mixer = AudioMixerList.Singleton.AudioMixerGroups[1];
+        }
+    }
+    [field: ES3Serializable]
     public override float TriggerChance { get; } = 0.4f;
     public override void OnEnd() {
         End();

@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 
 
 public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
+    [field: ES3Serializable]
     public override GameEventType GameEventType { get; } = GameEventType.BodyGeneration;
     [field: ES3Serializable]
     public override float TriggerChance { get; }
@@ -31,7 +32,7 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
    
     [field: ES3Serializable]
     protected bool onClickPeepholeSpeakEnd = false;
-    protected PlayerResourceSystem playerResourceSystem;
+    protected PlayerResourceModel playerResourceModel;
     protected ITimeSystem timeSystem;
   
     
@@ -45,7 +46,13 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
         this.onMissed = onMissed;
        
         
-        playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
+        playerResourceModel = this.GetModel<PlayerResourceModel>();
+        timeSystem = this.GetSystem<ITimeSystem>();
+    }
+
+    public BodyGenerationEvent() : base() {
+        bodyGenerationModel = this.GetModel<BodyGenerationModel>();
+        playerResourceModel = this.GetModel<PlayerResourceModel>();
         timeSystem = this.GetSystem<ITimeSystem>();
     }
 
@@ -145,7 +152,7 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
     }
 
     private void OnDelivererClickedOutside() {
-        this.GetSystem<PlayerResourceSystem>().AddFood(Random.Range(1, 3));
+        this.GetModel<PlayerResourceModel>().AddFood(Random.Range(1, 3));
        // this.SendEvent<OnShowFood>();
         timeSystem.AddDelayTask(1f, () => {
             onClickPeepholeSpeakEnd = true;
@@ -171,8 +178,8 @@ public  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegisterEvent {
                     });                    
                 });
             });
-        } else if (playerResourceSystem.HasEnoughResource<BulletGoods>(1) && playerResourceSystem.HasEnoughResource<GunResource>(1)) {
-            playerResourceSystem.RemoveResource<BulletGoods>(1);
+        } else if (playerResourceModel.HasEnoughResource<BulletGoods>(1) && playerResourceModel.HasEnoughResource<GunResource>(1)) {
+            playerResourceModel.RemoveResource<BulletGoods>(1);
             float clipLength = AudioSystem.Singleton.Play2DSound("gun_fire").clip.length;
 
             timeSystem.AddDelayTask(1f, () => {

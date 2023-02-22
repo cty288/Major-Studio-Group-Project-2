@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
+using _02._Scripts.GameEvents.BountyHunter;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.ActionKit;
 using MikroFramework.Architecture;
@@ -13,9 +14,13 @@ using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 
+
+[ES3Serializable]
 public class BountyHunterQuest2Notification : BountyHunterQuestClueNotification {
     public BountyHunterQuest2Notification(TimeRange startTimeRange, BountyHunterQuestClueNotificationContact notificationContact, int callWaitTime, DateTime clueHappenTime) : base(startTimeRange, notificationContact, callWaitTime, clueHappenTime) {
     }
+    
+    public BountyHunterQuest2Notification(): base(){}
 
     protected override BountyHunterQuestClueNotification GetSameEvent(TimeRange startTimeRange, TelephoneContact contact, int callWaitTime,
         DateTime clueHappenTime) {
@@ -39,6 +44,7 @@ public class BountyHunterQuest2Notification : BountyHunterQuestClueNotification 
 }
 
 public class BountyHunterQuest2ClueNotificationNotificationContact : BountyHunterQuestClueNotificationContact {
+    public BountyHunterQuest2ClueNotificationNotificationContact(){}
     protected override void OnStart() {
         if (ClueHappenTime.Hour == 23 && ClueHappenTime.Minute >= 50) {
             ClueHappenTime = new DateTime(ClueHappenTime.Year, ClueHappenTime.Month, ClueHappenTime.Day, 23,
@@ -46,7 +52,7 @@ public class BountyHunterQuest2ClueNotificationNotificationContact : BountyHunte
         }
         string hourIn12_1 = String.Format("{0: h}", ClueHappenTime);
 
-        bool alreadyNotified = this.GetSystem<BountyHunterSystem>().QuestBodyClueAllHappened;
+        bool alreadyNotified = this.GetModel<BountyHunterModel>().QuestBodyClueAllHappened;
 
         string welcome =
             $"Hey friend, I hope you got some clues. I have gathered more information about the <color=yellow>location</color> of a dead body killed by the creature we are looking for." +
@@ -71,7 +77,7 @@ public class BountyHunterQuest2ClueNotificationNotificationContact : BountyHunte
     }
 
     private void OnSpeakEnd() {
-        this.GetSystem<BountyHunterSystem>().QuestBodyClueAllHappened = true;
+        this.GetModel<BountyHunterModel>().QuestBodyClueAllHappened = true;
         EndConversation();
     }
 }
@@ -80,6 +86,7 @@ public class BountyHunterQuest2ClueNotificationNotificationContact : BountyHunte
 
 public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
 {
+    [field: ES3Serializable]
     public override GameEventType GameEventType { get; } = GameEventType.BodyGeneration;
     private string location;
 
@@ -265,17 +272,21 @@ public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
 
 
 public class BountyHunterQuestClueInfoRadioAreaEvent : BountyHunterQuestClueInfoEvent {
+    [ES3Serializable]
     private string location;
     public BountyHunterQuestClueInfoRadioAreaEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, bool isReal, DateTime startDate, string location) : 
         base(startTimeRange, speakContent, speakRate, speakGender, mixer, isReal, startDate) {
         this.location = location;
-        BodyInfo info = this.GetSystem<BountyHunterSystem>().QuestBodyTimeInfo.BodyInfo;
+        BodyInfo info = this.GetModel<BountyHunterModel>().QuestBodyTimeInfo.BodyInfo;
         this.speakContent = Radio(info, isReal);
     }
 
-    protected override void OnRadioStart()
-    {
+    public BountyHunterQuestClueInfoRadioAreaEvent() : base() {
+       
+    }
 
+    protected override void OnRadioStart() {
+       
     }
 
     private string Radio(BodyInfo body, bool isReal)
@@ -285,7 +296,7 @@ public class BountyHunterQuestClueInfoRadioAreaEvent : BountyHunterQuestClueInfo
 
         string name = "government official";
         string location = this.location;
-        bool alreadyNotified = this.GetSystem<BountyHunterSystem>().QuestBodyClueAllHappened;
+        bool alreadyNotified = this.GetModel<BountyHunterModel>().QuestBodyClueAllHappened;
 
      
         if (!isReal)

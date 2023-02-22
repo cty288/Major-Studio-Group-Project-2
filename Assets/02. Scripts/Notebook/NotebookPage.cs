@@ -58,7 +58,7 @@ public class NotebookPage : DraggableItems {
     }
 
     public override void OnThrownToRubbishBin() {
-        
+        Destroy(gameObject);
     }
 
    

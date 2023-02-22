@@ -31,6 +31,9 @@ namespace MikroFramework.Architecture
         private List<ISystem> systems = new List<ISystem>();
 
         public static Action<T> OnRegisterPatch = architecture => { };
+        
+        private Dictionary<Type, Action<ISystem>> delayedSystemPointers = new Dictionary<Type, Action<ISystem>>();
+            
         private static void ValidateArchitecture()
         {
             if (architecture == null)
@@ -47,6 +50,10 @@ namespace MikroFramework.Architecture
                 foreach (var architectureSystem in architecture.systems)
                 {
                     architectureSystem.Init();
+                    if(architecture.delayedSystemPointers.ContainsKey(architectureSystem.GetType())) {
+                        architecture.delayedSystemPointers[architectureSystem.GetType()](architectureSystem);
+                        architecture.delayedSystemPointers.Remove(architectureSystem.GetType());
+                    }
                 }
 
                 architecture.models.Clear();
@@ -91,13 +98,15 @@ namespace MikroFramework.Architecture
             system.SetArchitecture(this);
             container.RegisterInstance<T>(system);
 
-            if (!inited)
-            {
+            if (!inited) {
                 systems.Add(system);
             }
-            else
-            {
+            else {
                 system.Init();
+                if(delayedSystemPointers.ContainsKey(typeof(T))) {
+                    delayedSystemPointers[typeof(T)](system);
+                    delayedSystemPointers.Remove(typeof(T));
+                }
             }
         }
 
@@ -124,8 +133,21 @@ namespace MikroFramework.Architecture
 
         }
 
-        public T GetSystem<T>() where T : class, ISystem {
-            return container.GetInstance<T>();
+        public T GetSystem<T>(Action<T> onDelayed = null) where T : class, ISystem {
+            T result = container.GetInstance<T>();
+            if (result == null) {
+                if(delayedSystemPointers.ContainsKey(typeof(T))) {
+                    delayedSystemPointers[typeof(T)] += (system) => {
+                        onDelayed?.Invoke(system as T);
+                    };
+                }
+                else {
+                    delayedSystemPointers.Add(typeof(T), (system) => {
+                        onDelayed?.Invoke(system as T);
+                    });
+                }
+            }
+            return result;
         }
 
         private ITypeEventSystem typeEventSystem = new TypeEventSystem();

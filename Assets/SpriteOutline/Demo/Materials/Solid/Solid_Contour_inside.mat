@@ -70,7 +70,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaCount: 3
-    - _AlphaThreshold: 0
+    - _AlphaThreshold: 1
     - _Angle: 45
     - _BumpScale: 1
     - _ConnectedAlpha: 0

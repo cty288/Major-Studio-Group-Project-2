@@ -3,17 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.GameEvents.BountyHunter;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using UnityEngine;
 using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
+[ES3Serializable]
 public  class BountyHunterQuest1ClueNotification : BountyHunterQuestClueNotification {
     public BountyHunterQuest1ClueNotification(TimeRange startTimeRange, BountyHunterQuestClueNotificationContact notificationContact, int callWaitTime, DateTime clueHappenTime) 
         : base(startTimeRange, notificationContact, callWaitTime, clueHappenTime) {
     }
 
+    public BountyHunterQuest1ClueNotification(): base(){}
     
     protected override BountyHunterQuestClueNotification GetSameEvent(TimeRange startTimeRange, TelephoneContact contact, int callWaitTime,
         DateTime clueHappenTime) {
@@ -40,7 +43,7 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
     protected override void OnStart() {
         string hourIn12 = String.Format("{0: h}", ClueHappenTime);
 
-        bool alreadyNotified = this.GetSystem<BountyHunterSystem>().QuestBodyClueAllHappened;
+        bool alreadyNotified = this.GetModel<BountyHunterModel>().QuestBodyClueAllHappened;
         
         
         string welcome = $"Buddy, I got some clues about the time when a victim was killed by the creature we are looking for. At <color=yellow>{hourIn12}:{ClueHappenTime.Minute} pm</color>," +
@@ -52,10 +55,12 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
         }
         speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], "Bounty Hunter", OnSpeakEnd);
     }
+    
+    public BountyHunterQuest1ClueNotificationNotificationContact(): base(){}
 
     private void OnSpeakEnd() {
-        BountyHunterSystem bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
-        if (!bountyHunterSystem.QuestBodyClueAllHappened) {
+        BountyHunterModel bountyHunterModel = this.GetModel<BountyHunterModel>();
+        if (!bountyHunterModel.QuestBodyClueAllHappened) {
             
             DateTime nextStartTime = ClueHappenTime.AddDays(1);
             nextStartTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day, Random.Range(22, 24),
@@ -65,7 +70,7 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
 
             this.GetSystem<GameEventSystem>().AddEvent(new BountyHunterQuestAlienSpawnEvent(
                 new TimeRange(nextStartTime, nextEndTime),
-                bountyHunterSystem.QuestBodyTimeInfo.BodyInfo, 1));
+                bountyHunterModel.QuestBodyTimeInfo.BodyInfo, 1));
 
             Debug.Log("Target quest body will be spawned at " + nextStartTime);
         }
@@ -98,15 +103,15 @@ public class BountyHunterQuest1ClueEvent : BountyHunterQuestClueEvent {
     }
 
     public override void OnStart() {
-        BountyHunterSystem bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
+        BountyHunterModel bountyHunterModel = this.GetModel<BountyHunterModel>();
         Debug.Log($"Clue Start! Flash Time: {flashedTime}");
         float chanceForNewspaperShowBody = Random.Range(0f, 1f);
-        if (!bountyHunterSystem.QuestBodyClueAllHappened) {
+        if (!bountyHunterModel.QuestBodyClueAllHappened) {
             chanceForNewspaperShowBody = 1;
         }
         if (chanceForNewspaperShowBody > 0.6f) {
             this.GetModel<BodyModel>()
-                .AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(bountyHunterSystem.QuestBodyTimeInfo);
+                .AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(bountyHunterModel.QuestBodyTimeInfo);
             Debug.Log("Tomorrow's Quest Body will be shown in newspaper!");
         }
     }
@@ -134,11 +139,16 @@ public class BountyHunterQuest1ClueEvent : BountyHunterQuestClueEvent {
 
 
 public class BountyHunterQuestClueInfoRadioEvent : BountyHunterQuestClueInfoEvent {
+    [ES3Serializable]
     private int dieTime;
     public BountyHunterQuestClueInfoRadioEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, bool isReal, DateTime startDate, int dieTime) : base(startTimeRange, speakContent, speakRate, speakGender, mixer, isReal, startDate) {
         this.dieTime = dieTime;
-        BodyInfo info = this.GetSystem<BountyHunterSystem>().QuestBodyTimeInfo.BodyInfo;
+        BodyInfo info = this.GetModel<BountyHunterModel>().QuestBodyTimeInfo.BodyInfo;
         this.speakContent = Radio(info, isReal);
+    }
+
+    public BountyHunterQuestClueInfoRadioEvent(): base() {
+        
     }
     
     protected override void OnRadioStart() {
@@ -148,7 +158,7 @@ public class BountyHunterQuestClueInfoRadioEvent : BountyHunterQuestClueInfoEven
     private  string Radio(BodyInfo body, bool isReal) {
         DescriptionFormatter.Reality = 1;
         StringBuilder sb = new StringBuilder();
-        bool alreadyNotified = this.GetSystem<BountyHunterSystem>().QuestBodyClueAllHappened;
+        bool alreadyNotified = this.GetModel<BountyHunterModel>().QuestBodyClueAllHappened;
         int time = dieTime;
         string name = "government official";
 

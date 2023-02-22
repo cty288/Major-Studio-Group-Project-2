@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.GameEvents.BountyHunter;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using UnityEngine;
@@ -11,6 +12,7 @@ using Random = UnityEngine.Random;
 
 public class BountyHunterPhone : TelephoneContact, ICanGetModel {
     private BountyHunterSystem bountyHunterSystem;
+    private BountyHunterModel bountyHunterModel;
    
     
     private GameTimeManager gameTimeManager;
@@ -27,9 +29,11 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
     private BodyModel bodyModel;
     
     private bool lastPersonDead = false;
+    
+    private PlayerControlModel playerControlModel;
     public bool GetAvailable() {
         
-        return bountyHunterSystem.NextAvailableDate.Date <= gameTimeManager.CurrentTime.Value.Date;
+        return bountyHunterModel.NextAvailableDate.Date <= gameTimeManager.CurrentTime.Value.Date;
     }
     public BountyHunterPhone() {
         speaker = GameObject.Find("BountyHunterSpeaker").GetComponent<Speaker>();
@@ -38,16 +42,17 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
         this.mixer = speaker.GetComponent<AudioSource>().outputAudioMixerGroup;
         gameEventSystem = this.GetSystem<GameEventSystem>();
         bodyModel = this.GetModel<BodyModel>();
-        
+        playerControlModel = this.GetModel<PlayerControlModel>();
+        bountyHunterModel = this.GetModel<BountyHunterModel>();
     }
     public override bool OnDealt() {
-        return gameTimeManager.CurrentTime.Value.Date >= bountyHunterSystem.NextAvailableDate.Date;
+        return gameTimeManager.CurrentTime.Value.Date >= bountyHunterModel.NextAvailableDate.Date;
     }
 
     protected override void OnStart() {
        
         bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
-        bountyHunterSystem.ContactedBountyHunter = true;
+        bountyHunterModel.ContactedBountyHunter = true;
         List<string> welcomes = new List<string>();
         welcomes.Add(
             "Howdy! I'm the Bounty Hunter! I can reward you foods if you give me correct information about those creatures! Do you have any information about them?");
@@ -75,7 +80,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
     }
 
     private void OnWelcomeEnd() {
-        bountyHunterSystem.IsBountyHunting.Value = true;
+        playerControlModel.ControlType.Value = PlayerControlType.BountyHunting;
         TopScreenHintText.Singleton.Show(
             "Please select any information related to the unknown creatures to report to the bounty hunter.\n\nPossible information includes: figure outside / newspaper photos");
         this.RegisterEvent<OnBodyHuntingSelect>(OnBodyHuntingSelect);
@@ -89,7 +94,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
             CoroutineRunner.Singleton.StopCoroutine(waitingForInteractionCoroutine);
             waitingForInteractionCoroutine = null;
         }
-        bountyHunterSystem.IsBountyHunting.Value = false;
+        playerControlModel.ControlType.Value = PlayerControlType.Normal;
         TopScreenHintText.Singleton.Hide();
 
         //remove this body from the manager no matter what
@@ -124,9 +129,9 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
                 if (info.IsAlien) {
                     killAliens = true;
                     
-                    if (info.ID == bountyHunterSystem.QuestBodyTimeInfo.BodyInfo.ID)
+                    if (info.ID == bountyHunterModel.QuestBodyTimeInfo.BodyInfo.ID)
                     {
-                        bountyHunterSystem.QuestFinished = true;
+                        bountyHunterModel.QuestFinished = true;
                         Debug.Log("Correct Quest Info!! Call will start at " + questStartTime);
                         gameEventSystem.AddEvent(new BountyHunterQuestFinishPhoneEvent(
                             new TimeRange(questStartTime, questEndTime),
@@ -146,12 +151,12 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
            
         if (killAliens && !killGoodPeople) {
 
-            bountyHunterSystem.NextAvailableDate = gameTimeManager.CurrentTime.Value.AddDays(1);
+            bountyHunterModel.NextAvailableDate = gameTimeManager.CurrentTime.Value.AddDays(1);
           
             failedLastTime = false;
             provideCorrectInfoCount++;
             
-            if (provideCorrectInfoCount == 1 && bountyHunterSystem.FalseClueCount <= bountyHunterSystem.MaxFalseClueCountForQuest) {
+            if (provideCorrectInfoCount == 1 && bountyHunterModel.FalseClueCount <= bountyHunterModel.MaxFalseClueCountForQuest) {
                
                 gameEventSystem.AddEvent(new BountyHunterQuestStartEvent(new TimeRange(questStartTime, questEndTime),
                     new BountyHunterQuestStartPhone(), 6));
@@ -159,7 +164,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
             
 
         }else if(killGoodPeople) {
-            bountyHunterSystem.FalseClueCount++;
+            bountyHunterModel.FalseClueCount++;
             bountyHunterSystem.GoToJail(Random.Range(3, 5));
           
             List<string> killWrongPersonMsg = new List<string>();
@@ -190,7 +195,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
         speaker.Speak(message, mixer, "Bounty Hunter", OnEndingSpeak);
 
 
-        if (bountyHunterSystem.FalseClueCount >= bountyHunterSystem.FalseClueCountForPolice) {
+        if (bountyHunterModel.FalseClueCount >= bountyHunterModel.FalseClueCountForPolice) {
             
             DateTime policeEventStartTime = tomorrow.AddMinutes(Random.Range(30, 60));
             DateTime policeEventEndTime = policeEventStartTime.AddMinutes(Random.Range(20, 40));
@@ -206,7 +211,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
     private IEnumerator WaitingInteraction() {
         while (true) {
             yield return new WaitForSeconds(30);
-            if (bountyHunterSystem.IsBountyHunting.Value) {
+            if (playerControlModel.ControlType.Value == PlayerControlType.BountyHunting) {
                 string noInfo = "Don't waste my time! Tell me something about the creatures!";
                 speaker.Speak(noInfo, mixer, "Bounty Hunter", null);
             }
@@ -222,7 +227,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
     }
 
     private void End() {
-        bountyHunterSystem.IsBountyHunting.Value = false;
+        playerControlModel.ControlType.Value = PlayerControlType.Normal;
         TopScreenHintText.Singleton.Hide();
         this.UnRegisterEvent<OnBodyHuntingSelect>(OnBodyHuntingSelect);
         if (waitingForInteractionCoroutine != null) {

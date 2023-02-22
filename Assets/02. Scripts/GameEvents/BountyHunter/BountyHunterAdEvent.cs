@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.GameEvents.BountyHunter;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 public class BountyHunterAdEvent : RadioEvent {
-    private BountyHunterSystem bountyHunterSystem;
+    private BountyHunterModel bountyHunterModel;
     private TelephoneSystem telephoneSystem;
     [field: ES3Serializable]
     private string phoneNumber;
@@ -16,12 +17,21 @@ public class BountyHunterAdEvent : RadioEvent {
    public BountyHunterAdEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, float triggerChance) : base(startTimeRange, speakContent, speakRate, speakGender, mixer) {
         //this.TriggerChance = triggerChance;
         telephoneSystem = this.GetSystem<TelephoneSystem>();
-        bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
+        bountyHunterModel = this.GetModel<BountyHunterModel>();
         gameTimeManager = this.GetSystem<GameTimeManager>();
-        phoneNumber = bountyHunterSystem.PhoneNumber;
+        
+        phoneNumber = bountyHunterModel.PhoneNumber;
         this.triggerChance = triggerChance;
+       
    }
 
+   public BountyHunterAdEvent() : base() {
+       telephoneSystem = this.GetSystem<TelephoneSystem>(res => {
+           telephoneSystem = res;
+       });
+       bountyHunterModel = this.GetModel<BountyHunterModel>();
+       gameTimeManager = this.GetSystem<GameTimeManager>();
+   }
    public override float TriggerChance {
        get {
             BountyHunterPhone phone = telephoneSystem.Contacts[phoneNumber] as BountyHunterPhone;
@@ -43,7 +53,7 @@ public class BountyHunterAdEvent : RadioEvent {
 
     private void OnStopOrMissed() {
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
-        int nextDayInterval = bountyHunterSystem.ContactedBountyHunter ? 1 : 3;
+        int nextDayInterval = bountyHunterModel.ContactedBountyHunter ? 1 : 3;
 
         DateTime nextEventDay = currentTime.AddDays(nextDayInterval);
         DateTime nextEventTime = new DateTime(nextEventDay.Year, nextEventDay.Month,
@@ -58,8 +68,8 @@ public class BountyHunterAdEvent : RadioEvent {
     }
 
     public static string GetRandomAD() {
-        BountyHunterSystem bountyHunterSystem = MainGame.Interface.GetSystem<BountyHunterSystem>();
-        string phoneNumber = bountyHunterSystem.PhoneNumber;
+        BountyHunterModel bountyHunterModel = MainGame.Interface.GetModel<BountyHunterModel>();
+        string phoneNumber = bountyHunterModel.PhoneNumber;
 
         //make a new string that has a space between every character
         string spacedPhoneNumber = string.Join(" ", phoneNumber.ToCharArray());

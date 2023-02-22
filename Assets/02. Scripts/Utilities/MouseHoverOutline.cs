@@ -80,7 +80,7 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        if (playerControlModel.ControlType.Value != PlayerControlType.Normal) {
+        if (playerControlModel.ControlType.Value == PlayerControlType.Screenshot) {
             return;
         }
         if (!string.IsNullOrEmpty(SubtitleHightlightedTextDragger.CurrentDraggedText)) {

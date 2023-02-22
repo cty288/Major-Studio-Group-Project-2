@@ -23,7 +23,7 @@ public class MerchantNoteOnTableViewController : DraggableItems {
     }
 
     public override void OnThrownToRubbishBin() {
-        
+        Destroy(gameObject);
     }
 }
 

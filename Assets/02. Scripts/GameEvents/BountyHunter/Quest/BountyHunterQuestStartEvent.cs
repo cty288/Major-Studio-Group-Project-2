@@ -2,19 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.GameEvents.BountyHunter;
 using MikroFramework.Architecture;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class BountyHunterQuestStartEvent : IncomingCallEvent {
-    protected BountyHunterSystem bountyHunterSystem;
+    protected BountyHunterModel bountyHunterModel;
     public BountyHunterQuestStartEvent(TimeRange startTimeRange, TelephoneContact contact, int callWaitTime) : base(startTimeRange, contact, callWaitTime) {
-        bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
+        bountyHunterModel = this.GetModel<BountyHunterModel>();
+    }
+
+    public BountyHunterQuestStartEvent(): base() {
+        bountyHunterModel = this.GetModel<BountyHunterModel>();
     }
 
     public override float TriggerChance {
         get {
-            if (bountyHunterSystem.IsInJail) {
+            if (bountyHunterModel.IsInJail) {
                 return 0;
             }
             return 1;
@@ -44,7 +49,7 @@ public class BountyHunterQuestStartEvent : IncomingCallEvent {
     }
 
     protected override void OnComplete() {
-        this.GetModel<BodyModel>().AddToAllBodyTimeInfos(this.GetSystem<BountyHunterSystem>().QuestBodyTimeInfo);
+        this.GetModel<BodyModel>().AddToAllBodyTimeInfos(this.GetModel<BountyHunterModel>().QuestBodyTimeInfo);
 
 
         DateTime nextClueHappenTime = gameTimeManager.CurrentTime.Value.AddDays(1);

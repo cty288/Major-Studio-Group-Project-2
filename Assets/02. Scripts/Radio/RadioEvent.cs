@@ -18,23 +18,34 @@ public struct OnRadioStart {
     public AudioMixerGroup mixer;
 }
 public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
+    [field: ES3Serializable]
     public override GameEventType GameEventType { get; } = GameEventType.Radio;
     
     protected RadioModel radioModel;
 
+    [ES3Serializable]
     protected string speakContent;
+    [ES3Serializable]
     protected float speakRate;
+    [ES3Serializable]
     protected Gender speakGender;
+    [ES3Serializable]
     protected AudioMixerGroup mixer;
 
     protected bool started = false;
     protected RadioEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer) : base(startTimeRange) {
         radioModel = this.GetModel<RadioModel>();
         gameStateModel = this.GetModel<GameStateModel>();
+        
         this.speakContent = speakContent;
         this.speakRate = speakRate;
         this.speakGender = speakGender;
         this.mixer = mixer;
+    }
+
+    public RadioEvent(): base() {
+        radioModel = this.GetModel<RadioModel>();
+        gameStateModel = this.GetModel<GameStateModel>();
     }
 
     public override void OnStart() {

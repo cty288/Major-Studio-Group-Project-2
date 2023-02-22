@@ -17,18 +17,27 @@ public class TelephonePanel : OpenableUIPanel {
     private TelephoneSystem telephoneSystem;
     private EventTrigger phonecallEventTrigger;
     private TMP_Text pickupText;
+    private PlayerControlModel playerControlModel;
     protected override void Awake() {
         base.Awake();
         panel = transform.Find("Panel").gameObject;
 
         telephoneSystem = this.GetSystem<TelephoneSystem>();
         bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
-        bountyHunterSystem.IsBountyHunting.RegisterOnValueChaned(OnBountyHuntingChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
+        playerControlModel = this.GetModel<PlayerControlModel>();
+        playerControlModel.ControlType.RegisterOnValueChaned(OnPlayerControlTypeChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
+       // bountyHunterSystem.IsBountyHunting.RegisterOnValueChaned(OnBountyHuntingChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
         telephoneSystem.State.RegisterOnValueChaned(OnTelephoneSystemStateChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
         phonecallEventTrigger = panel.transform.Find("Phone").GetComponent<EventTrigger>();
         pickupText = phonecallEventTrigger.transform.Find("Text").GetComponent<TMP_Text>();
         phonecallEventTrigger.GetComponent<Image>().alphaHitTestMinimumThreshold = 1;
         phonecallEventTrigger.triggers[0].callback.AddListener(OnPhoneCallClicked);
+    }
+
+    private void OnPlayerControlTypeChanged(PlayerControlType oldControlType, PlayerControlType newControlType) {
+        if (newControlType == PlayerControlType.BountyHunting) {
+            Hide(0.5f);            
+        }
     }
 
     private void OnPhoneCallClicked(BaseEventData e) {
@@ -47,12 +56,6 @@ public class TelephonePanel : OpenableUIPanel {
         }
     }
 
-    private void OnBountyHuntingChanged(bool isHunting) {
-        if (isHunting) {
-          
-            Hide(0.5f);            
-        }
-    }
 
     private void OnTelephoneSystemStateChanged(TelephoneState state) {
         if (state == TelephoneState.Idle || state == TelephoneState.Dealing || state == TelephoneState.IncomingCall) {

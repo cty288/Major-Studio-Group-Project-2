@@ -13,12 +13,13 @@ public class SubSceneMouseBackDetect : AbstractMikroController<MainGame>
     private GameSceneModel gameSceneModel;
     [SerializeField] private GameScene gameScene;
     [SerializeField] private bool isUI = true;
-    
+    private PlayerControlModel playerControlModel;
     
     private void Awake() {
         gameSceneModel = this.GetModel<GameSceneModel>();
         colliders = GetComponents<Collider2D>().ToList();
         colliders.AddRange(additionalColliders);
+        playerControlModel = this.GetModel<PlayerControlModel>();
     }
 
     private void Update() {
@@ -26,7 +27,10 @@ public class SubSceneMouseBackDetect : AbstractMikroController<MainGame>
             if(EventSystem.current.IsPointerOverGameObject()) {
                 return;
             }
-            
+
+            if (playerControlModel.ControlType.Value != PlayerControlType.Normal) {
+                return;
+            }
             Vector2 mousePos = Input.mousePosition;
             if (!isUI) {
                 mousePos = Camera.main.ScreenToWorldPoint(mousePos);

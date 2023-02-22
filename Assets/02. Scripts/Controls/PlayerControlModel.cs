@@ -6,7 +6,8 @@ using UnityEngine;
 
 public enum PlayerControlType {
 	Normal,
-	Screenshot
+	Screenshot,
+	BountyHunting
 }
 public class PlayerControlModel : AbstractModel {
 	public BindableProperty<PlayerControlType> ControlType = new BindableProperty<PlayerControlType>(global::PlayerControlType.Normal);

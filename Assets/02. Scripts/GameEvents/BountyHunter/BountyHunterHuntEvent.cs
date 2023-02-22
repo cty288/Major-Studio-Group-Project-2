@@ -18,7 +18,9 @@ public class BountyHunterHuntEvent : GameEvent{
     [ES3Serializable]
     private List<BodyInfo> bodyInfos;
     //private bool isAlien;
+    [field: ES3Serializable]
     public override GameEventType GameEventType { get; } = GameEventType.General;
+    [field: ES3Serializable]
     public override float TriggerChance { get; } = 1;
     public BountyHunterHuntEvent(TimeRange startTimeRange, List<BodyInfo> infos) : base(startTimeRange) {
         bodyModel = this.GetModel<BodyModel>();
@@ -74,7 +76,9 @@ public class BountyHunterHuntEvent : GameEvent{
 public class BountyHunterHuntWrongPersonRadio : RadioEvent {
     public BountyHunterHuntWrongPersonRadio(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer) : base(startTimeRange, speakContent, speakRate, speakGender, mixer) {
     }
-
+    
+    public BountyHunterHuntWrongPersonRadio(): base(){}
+    [field: ES3Serializable]
     public override float TriggerChance { get; } = 1;
     public override void OnEnd() {
      

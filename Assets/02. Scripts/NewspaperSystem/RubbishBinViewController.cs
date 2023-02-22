@@ -34,8 +34,8 @@ public class RubbishBinViewController : AbstractMikroController<MainGame> {
                 if (draggingItem) {
                    
                     StopHighlight();
-                    draggingItem.OnThrownToRubbishBin();
-                    Destroy(draggingItem.gameObject);
+                    draggingItem.OnThrown();
+                    
                     DraggableItems.CurrentDroppingItem = null;
                     draggingItem = null;
                 }

@@ -13,6 +13,10 @@ public class BountyHunterQuestAlienSpawnEvent : BodyGenerationEvent {
         bodyModel = this.GetModel<BodyModel>();
     }
 
+    public BountyHunterQuestAlienSpawnEvent() : base() {
+        bodyModel = this.GetModel<BodyModel>();
+    }
+
     public override EventState OnUpdate() {
         if (bodyModel.IsInAllBodyTimeInfos(bodyInfo)) {
             return base.OnUpdate();

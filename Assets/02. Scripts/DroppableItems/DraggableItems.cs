@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using MikroFramework;
 using MikroFramework.Architecture;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -19,9 +20,18 @@ public abstract class DraggableItems : AbstractMikroController<MainGame>, IDragH
 
     [SerializeField] private bool canDrag = true;
 
+    [ES3NonSerializable]
+    public Action<DraggableItems> OnThrownToTrashBin;
+    
+    private PlayerControlModel playerControlModel;
+
     protected virtual void Awake() {
+        playerControlModel = this.GetModel<PlayerControlModel>();
+    }
+
+    protected virtual void Start() {
         if (Container != null) {
-            Container.JoinCollider(GetComponent<Collider2D>());
+            Container.AddItem(this);
         }
     }
 
@@ -33,6 +43,10 @@ public abstract class DraggableItems : AbstractMikroController<MainGame>, IDragH
         if (!canDrag) {
             return;
         }
+        if (playerControlModel.ControlType.Value == PlayerControlType.Screenshot) {
+            return;
+        }
+        
         var pos = Camera.main.ScreenToWorldPoint(eventData.position);
         pos.z = 0;
         transform.position = pos;
@@ -42,6 +56,11 @@ public abstract class DraggableItems : AbstractMikroController<MainGame>, IDragH
         if (!canDrag) {
             return;
         }
+
+        if (playerControlModel.ControlType.Value == PlayerControlType.Screenshot) {
+            return;
+        }
+            
 
         if (Container) {
             SetLayer(Container.CurrentMaxLayer++);
@@ -54,11 +73,17 @@ public abstract class DraggableItems : AbstractMikroController<MainGame>, IDragH
         if (!canDrag) {
             return;
         }
-        var pos = transform.position;
-        if (!tableBounds.Contains(pos))
-        {
-            transform.DOMove(dragStartPos, 0.5f);
+        if (playerControlModel.ControlType.Value == PlayerControlType.Screenshot) {
+            return;
         }
+        
+        var pos = transform.position;
+        this.Delay(0.05f, () => {
+            if (!tableBounds.Contains(pos) && Container) {
+                transform.DOMove(dragStartPos, 0.5f);
+            }
+        });
+        
 
         CurrentDroppingItem = null;
     }
@@ -77,6 +102,17 @@ public abstract class DraggableItems : AbstractMikroController<MainGame>, IDragH
     public abstract  void SetLayer(int layer);
 
     protected abstract void OnClick();
+    
+    public virtual void OnAddedToContainer(AbstractDroppableItemContainerViewController container) {
+       
+    }
+
+    public void OnThrown() {
+        OnThrownToTrashBin?.Invoke(this);
+        Container = null;
+        OnThrownToRubbishBin();
+        
+    }
 
     public abstract void OnThrownToRubbishBin();
 }

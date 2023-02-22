@@ -16,6 +16,8 @@ public class MerchantNoteUIPanel : OpenableUIPanel {
     private GameObject panel;
     private TMP_Text phoneNumberText;
     private MerchantSystem merchantSystem;
+    
+    private Dictionary<Image, float> imageAlpha = new Dictionary<Image, float>();
 
     protected override void Awake() {
         base.Awake();
@@ -26,6 +28,9 @@ public class MerchantNoteUIPanel : OpenableUIPanel {
         phoneNumberText = transform.Find("Panel/Paper/PhoneNumberText").GetComponent<TMP_Text>();
         panel = transform.Find("Panel").gameObject;
 
+        foreach (Image image in images) {
+            imageAlpha.Add(image, image.color.a);
+        }
         Hide(0.5f);
     }
 
@@ -36,7 +41,7 @@ public class MerchantNoteUIPanel : OpenableUIPanel {
     public override void OnShow(float time) {
         phoneNumberText.text = merchantSystem.PhoneNumber;
         panel.SetActive(true);
-        images.ForEach((image => image.DOFade(1, time)));
+        images.ForEach((image => image.DOFade( imageAlpha.ContainsKey(image)? imageAlpha[image]: 1 , time)));
         texts.ForEach((text => text.DOFade(1, time)));
     }
 

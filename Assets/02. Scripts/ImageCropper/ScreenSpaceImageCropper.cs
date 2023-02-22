@@ -138,9 +138,11 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
         playerControlModel.ControlType.Value = PlayerControlType.Normal;
     }
     //绘制框选  
+    
     void OnPostRender()
     { 
         if (drawFlag) {
+           
             //draw a rectangle, with some transparency
             end = Input.mousePosition;
             
@@ -194,6 +196,13 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
         }
 
         string date = System.DateTime.Now.ToString("yyyyMMddHHmmss");
+        //if start or end is outside the screen, clamp it
+        start.x = Mathf.Clamp(start.x, 0, Screen.width);
+        start.y = Mathf.Clamp(start.y, 0, Screen.height);
+        end.x = Mathf.Clamp(end.x, 0, Screen.width);
+        end.y = Mathf.Clamp(end.y, 0, Screen.height);
+        
+        
         //图片大小    
         if (end.x > start.x && start.y > end.y) {
             cutImage = new Texture2D((int) (end.x - start.x), (int) (start.y - end.y), TextureFormat.RGB24, true);

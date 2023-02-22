@@ -17,8 +17,7 @@ public class AbstractDroppableItemContainerViewController : AbstractMikroControl
 
     protected HashSet<Collider2D> spawnedColliders = new HashSet<Collider2D>();
 
-    protected virtual  void Awake()
-    {
+    protected virtual void Awake() {
         collider = GetComponent<Collider2D>();
         resLoader = this.GetUtility<ResLoader>();
         playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
@@ -45,16 +44,26 @@ public class AbstractDroppableItemContainerViewController : AbstractMikroControl
 
         DraggableItems obj = Instantiate(prefab, position, Quaternion.identity).GetComponent<DraggableItems>();
 
+        AddItem(obj);
+        return obj.gameObject;
+    }
+
+    public void AddItem(DraggableItems obj) {
         obj.SetLayer(CurrentMaxLayer++);
         obj.SetBounds(collider.bounds);
         obj.Container = this;
+        obj.OnThrownToTrashBin += OnItemThrownToTrashBin;
 
         if (CurrentMaxLayer > 100) {
             CurrentMaxLayer = 2;
         }
 
         spawnedColliders.Add(obj.GetComponent<Collider2D>());
-        return obj.gameObject;
+        obj.OnAddedToContainer(this);
     }
-   
+
+    private void OnItemThrownToTrashBin(DraggableItems obj) { 
+        obj.OnThrownToTrashBin -= OnItemThrownToTrashBin;
+        spawnedColliders.Remove(obj.GetComponent<Collider2D>());
+    }
 }

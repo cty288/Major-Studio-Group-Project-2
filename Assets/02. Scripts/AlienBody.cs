@@ -27,16 +27,16 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
 
     public Action onClickAlienBody;
 
-    private BountyHunterSystem bountyHunterSystem;
+    //private BountyHunterSystem bountyHunterSystem;
+    private PlayerControlModel playerControlModel;
 
-    
     private List<AlienBodyPartInfo> alienBodyPartInfos = new List<AlienBodyPartInfo>();
 
     protected virtual void Awake() {
         tallSpawnPosition = transform.Find("TallSpawnPosition");
         shortSpawnPosition = transform.Find("LowSpawnPosition");
-        bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
-        
+       // bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
+        playerControlModel = this.GetModel<PlayerControlModel>();
     }
 
     public void OnBuilt() {
@@ -158,7 +158,7 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
         return bodyInstance;
     }
     public void OnPointerClick(PointerEventData eventData) {
-        if (bountyHunterSystem.IsBountyHunting) {
+        if (playerControlModel.ControlType.Value == PlayerControlType.BountyHunting) {
             return;
         }
         onClickAlienBody?.Invoke();

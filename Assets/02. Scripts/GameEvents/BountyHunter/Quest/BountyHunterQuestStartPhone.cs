@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.GameEvents.BountyHunter;
 using MikroFramework.Architecture;
 using UnityEngine;
 
-public class BountyHunterQuestStartPhone : TelephoneContact {
-    protected BountyHunterSystem bountyHunterSystem;
+public class BountyHunterQuestStartPhone : TelephoneContact, ICanGetModel {
+    protected BountyHunterModel bountyHunterModel;
     
     public BountyHunterQuestStartPhone() {
         speaker = GameObject.Find("BountyHunterSpeaker").GetComponent<Speaker>();
-        bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
+        bountyHunterModel = this.GetModel<BountyHunterModel>();
     }
     public override bool OnDealt() {
-        return !bountyHunterSystem.IsInJail;
+        return !bountyHunterModel.IsInJail;
     }
 
     protected override void OnStart() {

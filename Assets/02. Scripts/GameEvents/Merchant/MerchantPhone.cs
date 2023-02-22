@@ -43,11 +43,11 @@ public class BulletGoods : MerchantGoods {
     public override string PrefabName { get; } = "Bullet";
     public override int MaxCount { get; } = 6;
 }
-public class MerchantPhone : TelephoneContact {
+public class MerchantPhone : TelephoneContact, ICanGetModel {
     protected GameEventSystem gameEventSystem;    
    
     private GameTimeManager gameTimeManager;
-    private PlayerResourceSystem playerResourceSystem;
+    private PlayerResourceModel playerResourceModel;
     private float dailyAvailability = 0.7f;
     private bool isTodayAvailable = true;
 
@@ -60,7 +60,7 @@ public class MerchantPhone : TelephoneContact {
     public MerchantPhone() {
         speaker = GameObject.Find("MerchantSpeaker").GetComponent<Speaker>();
         gameTimeManager = this.GetSystem<GameTimeManager>();
-        playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
+        playerResourceModel = this.GetModel<PlayerResourceModel>();
         gameEventSystem = this.GetSystem<GameEventSystem>();
         this.mixer = speaker.GetComponent<AudioSource>().outputAudioMixerGroup;
         gameTimeManager.OnDayStart += OnDayStart;
@@ -83,7 +83,7 @@ public class MerchantPhone : TelephoneContact {
         goodsListCopy.CTShuffle();
         todayGoods.Clear();
         for (int i = 0; i < dailyGoodsCount; i++) {
-            if (goodsListCopy[i].MaxCount > playerResourceSystem.GetResourceCount(goodsListCopy[i].GetType())) {
+            if (goodsListCopy[i].MaxCount > playerResourceModel.GetResourceCount(goodsListCopy[i].GetType())) {
                 todayGoods.Add(goodsListCopy[i]);
                 goodsListCopy[i].RefreshFoodPerUnit();
             }
@@ -123,12 +123,12 @@ public class MerchantPhone : TelephoneContact {
                  reply = "The number you dialed is invalid. Please try again or press 9 to repeat the list.";
             }else {
                 MerchantGoods goods = todayGoods[index];
-                if (goods.FoodPerUnit >= playerResourceSystem.FoodCount) {
+                if (goods.FoodPerUnit >= playerResourceModel.FoodCount) {
                     reply =
                         "You don't have enough food to purchase this item!";
                 }
                 else {
-                    playerResourceSystem.RemoveFood(goods.FoodPerUnit);
+                    playerResourceModel.RemoveFood(goods.FoodPerUnit);
                     List<string> replies = new List<string>();
                     replies.Add("Thanks for your order. The item will be delivered to you tomorrow. ");
                     replies.Add("There you go, sir! You’ve made the right decision! It will be delivered tomorrow. Good luck!");

@@ -63,7 +63,7 @@ namespace MikroFramework.Architecture
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        T GetSystem<T>() where T : class, ISystem;
+        T GetSystem<T>(Action<T> onDelayed = null) where T : class, ISystem;
 
         /// <summary>
         /// Send a Type event

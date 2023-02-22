@@ -5,20 +5,34 @@ using UnityEngine;
 
 public abstract class IncomingCallEvent : GameEvent {
     protected TelephoneSystem telephoneSystem;
+    [ES3Serializable]
     protected TelephoneContact NotificationContact;
+    [ES3Serializable]
     protected int callWaitTime;
     protected IncomingCallEvent(TimeRange startTimeRange, TelephoneContact notificationContact, int callWaitTime) : base(startTimeRange) {
-        telephoneSystem = this.GetSystem<TelephoneSystem>();
+        telephoneSystem = this.GetSystem<TelephoneSystem>(sys => {
+            telephoneSystem = sys;
+        });
         this.NotificationContact = notificationContact;
         this.callWaitTime = callWaitTime;
     }
 
+    public IncomingCallEvent(): base() {
+        telephoneSystem = this.GetSystem<TelephoneSystem>(sys => {
+            telephoneSystem = sys;
+        });
+    }
+    [field: ES3Serializable]
     public override GameEventType GameEventType { get; } = GameEventType.IncomingCall;
+    [ES3Serializable]
     protected bool onHangupOrFinish = false;
     public override void OnStart() {
         NotificationContact.OnConversationComplete += OnFinishConversation;
         NotificationContact.OnTelephoneHangUp += OnConversationHangUp;
         NotificationContact.OnTelephoneStart += OnConversationStart;
+      //  if (telephoneSystem == null) {
+           // telephoneSystem = this.GetSystem<TelephoneSystem>();
+       // }
         telephoneSystem.IncomingCall(NotificationContact, callWaitTime);
     }
 
