@@ -38,7 +38,8 @@ public class NewspaperViewController : DraggableItems, IPointerEnterHandler, IPo
         newspaperSystem = this.GetSystem<NewspaperSystem>();
         NewspaperModel = this.GetModel<NewspaperModel>();
         selfRenderer = GetComponent<SpriteRenderer>();
-
+        
+       
         Sprite sprite = sprites[Random.Range(0, sprites.Count)];
         selfRenderer.sprite = sprite;
 

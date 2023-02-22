@@ -1,20 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using _02._Scripts.BodyManagmentSystem;
 using MikroFramework.Architecture;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Cheater : AbstractMikroController<MainGame> {
     public bool enable = false;
     // Start is called before the first frame update
-    void Start()
-    {
-        
+    void Start() {
+      
     }
 
     // Update is called once per frame
     void Update() {
+
+        if (Input.GetKeyDown(KeyCode.P)) {
+            DateTime time = this.GetSystem<GameTimeManager>().CurrentTime.Value;
+            this.GetSystem<GameEventSystem>().AddEvent(new ExampleEvent(new TimeRange(time, time.AddMinutes(10))));
+        }
+        
         if (Input.GetKeyDown(KeyCode.F1)) {
             enable = !enable;
         }
