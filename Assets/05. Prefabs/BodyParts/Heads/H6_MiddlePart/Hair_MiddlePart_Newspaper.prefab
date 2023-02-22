@@ -95,10 +95,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430d762be9f17b544ae1ab93d5dcbfe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JointPoint: {fileID: 0}
+  JointPoint: {fileID: 8010571713435997227}
   OppositeTraitBodyParts: []
   IsAlienOnly: 0
   SubBodyPartCollectionIndex: 0
   IsTall: 0
   IsNewspaper: 1
   eyes: []
+--- !u!4 &8010571713435997227 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 457122622025592377, guid: 28b5d05e604576a4dbce459c2fa3f003, type: 3}
+  m_PrefabInstance: {fileID: 7598489642513758738}
+  m_PrefabAsset: {fileID: 0}
