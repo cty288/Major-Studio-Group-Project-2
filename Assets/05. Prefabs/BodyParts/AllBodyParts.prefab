@@ -1,0 +1,272 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3766219429023597449
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3766219429023597451}
+  - component: {fileID: 3766219429023597448}
+  m_Layer: 0
+  m_Name: AllBodyParts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3766219429023597451
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3766219429023597449}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -606, y: -451, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3766219429023597448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3766219429023597449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c948863e536a3c4799cb65d9aaf7ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HeadBodyPartPrefabs:
+    HeightSubCollections:
+    - ShadowBodyPartPrefabs:
+        HumanTraitPartsPrefabs:
+        - {fileID: 5931786737172396057, guid: 9a6be3e2fcec66b4a9ed605b17d078c6, type: 3}
+        - {fileID: 9051798957158563920, guid: 0f010c9645c14384cb9f32ba4bc71edf, type: 3}
+        - {fileID: 9051798957158563920, guid: 3b3d2dfce01861749947d7a22518076a, type: 3}
+        - {fileID: 9051798957158563920, guid: 92313d1d9d5b1f241a53654d6947d2da, type: 3}
+        - {fileID: 9051798957158563920, guid: 3fa53968981fa3046b39381957d7fe2d, type: 3}
+        - {fileID: 9051798957158563920, guid: 677f8e6853c6c114faf7851fd9d78eeb, type: 3}
+        - {fileID: 9051798957158563920, guid: cc273236e4261a642a04672f97d90700, type: 3}
+        - {fileID: 9051798957158563920, guid: 283f993594ad9414cae18d28a89d6ff5, type: 3}
+        - {fileID: 9051798957158563920, guid: fd33abd5df532c3478108b42c5c14d94, type: 3}
+        - {fileID: 9051798957158563920, guid: 4d64a5173a26c2c48b16b69a8d28595f, type: 3}
+        - {fileID: 9051798957158563920, guid: 53ea68239252c6547bb3781793244a5e, type: 3}
+        - {fileID: 9051798957158563920, guid: e6299f510d5ec1d4c9442a5c94419f96, type: 3}
+        - {fileID: 9051798957158563920, guid: 529dec5cf904d4343946bfdd6cc6cad9, type: 3}
+        - {fileID: 9051798957158563920, guid: 213e092c5a51f8b46b745ed00d3ca372, type: 3}
+        - {fileID: 9051798957158563920, guid: 8a19c042515db1b4ab75f5234e1f7daf, type: 3}
+        AlienOnlyPartsPrefabs: []
+      NewspaperBodyPartDisplays:
+        HumanTraitPartsPrefabs:
+        - {fileID: 7468180551992119365, guid: 28b5d05e604576a4dbce459c2fa3f003, type: 3}
+        - {fileID: 1069337414838577751, guid: 90b8bd6844cde334ba01e96c0698ba74, type: 3}
+        - {fileID: 1069337414838577751, guid: 022309ad2ac67104590d68f794fca56c, type: 3}
+        - {fileID: 1069337414838577751, guid: d1ac8bf5c61380c42a36f2094cfd824a, type: 3}
+        - {fileID: 1069337414838577751, guid: 00f91bc6a7cbac84daffc1c2d2b5d270, type: 3}
+        - {fileID: 1069337414838577751, guid: a440ba02c3ea6ec4f88e943a03a8ed5e, type: 3}
+        - {fileID: 1069337414838577751, guid: cf6e027a7f78ed7499289a5c230bf4ba, type: 3}
+        - {fileID: 1069337414838577751, guid: 2f1a0990babbb6840ae2c85bcfa2bc92, type: 3}
+        - {fileID: 1069337414838577751, guid: 2dc78ff8d4b20af43bd77b6b320209fa, type: 3}
+        - {fileID: 1069337414838577751, guid: 6c3c798773a616b428b5d48b529382a3, type: 3}
+        - {fileID: 1069337414838577751, guid: d53992e7ce32382438e214b810a5ae5e, type: 3}
+        - {fileID: 1069337414838577751, guid: a1b3342b3c6b1a84b87c80ef08abadad, type: 3}
+        - {fileID: 1069337414838577751, guid: 439088d62ea84604f9e6c946467d688f, type: 3}
+        - {fileID: 1069337414838577751, guid: a63e3cd87036ec64dafa75b55d0b799b, type: 3}
+        - {fileID: 1069337414838577751, guid: adb7e3e03d89125438ff27088b47bf5e, type: 3}
+        AlienOnlyPartsPrefabs: []
+  MainBodyPartPrefabs:
+    HeightSubCollections:
+    - ShadowBodyPartPrefabs:
+        HumanTraitPartsPrefabs:
+        - {fileID: 3439861939956597253, guid: 5f10fd27e6a6d6941bce9a07d78bcd24, type: 3}
+        - {fileID: 7573485161236525713, guid: 28473ba76519d304682c5888b51e07d9, type: 3}
+        - {fileID: 3439861939956597253, guid: 640b3b4dfaacd0c4abc91a4a6ba98256, type: 3}
+        - {fileID: 3439861939956597253, guid: 1d51e913d5d20e7479a4fb0ed2681bc1, type: 3}
+        - {fileID: 3439861939956597253, guid: f274869b1b6d6f64fac825a91b13c3e0, type: 3}
+        - {fileID: 3439861939956597253, guid: 23c02ab17779f9045bd14ee9cbe7ba55, type: 3}
+        - {fileID: 3439861939956597253, guid: afe7349658f55fe40bfeb75dad69edce, type: 3}
+        - {fileID: 3439861939956597253, guid: aa24d896cb30eab47886fdc9638c28ec, type: 3}
+        - {fileID: 3439861939956597253, guid: a4d3fdaba69b78b4a9dfc9bad8849e67, type: 3}
+        - {fileID: 3439861939956597253, guid: 0c327e4bd52a48b4a9a4502869e1e9b0, type: 3}
+        - {fileID: 3439861939956597253, guid: c283f869e6b5277438f92af05d2739d5, type: 3}
+        - {fileID: 3439861939956597253, guid: 377e3778a5a56ac478e0901b30d4d0ce, type: 3}
+        - {fileID: 3439861939956597253, guid: c74fccf4914be0f4490fc26967a2cfaf, type: 3}
+        - {fileID: 3439861939956597253, guid: 5efbe9786f79b0744b0e64431eaf959e, type: 3}
+        - {fileID: 3439861939956597253, guid: 1216bd7de8eb8d349ac011f520c49dfd, type: 3}
+        AlienOnlyPartsPrefabs: []
+      NewspaperBodyPartDisplays:
+        HumanTraitPartsPrefabs:
+        - {fileID: 1996451079729072781, guid: c1d724de9ffabcb42be72c370d4e3c21, type: 3}
+        - {fileID: 4475478680112177413, guid: 7af3b17d3152a614585162416492c3dd, type: 3}
+        - {fileID: 1996451079729072781, guid: f7e5863f4225b8e43b4aa4e9f9390586, type: 3}
+        - {fileID: 1996451079729072781, guid: b01d52fa53571614a9e1db37f95199a0, type: 3}
+        - {fileID: 1996451079729072781, guid: f6087550b72c76d4a9acaa5dd5c4f3f1, type: 3}
+        - {fileID: 1996451079729072781, guid: 1ceb9124f26fcf14ca2a7dad47a9082b, type: 3}
+        - {fileID: 1996451079729072781, guid: 85308c843c91a3e4599b735901953976, type: 3}
+        - {fileID: 1996451079729072781, guid: 055c37f8700dfd1499093f408eb3d9e9, type: 3}
+        - {fileID: 1996451079729072781, guid: 5e0091b4728656641a5cfc75456969c5, type: 3}
+        - {fileID: 1996451079729072781, guid: 498f755348f138c439f5c0dab6e01ed7, type: 3}
+        - {fileID: 1996451079729072781, guid: 08f273de430fa3347aebeb6231d76444, type: 3}
+        - {fileID: 1996451079729072781, guid: 893e56606b1a53444a732f208c57aae5, type: 3}
+        - {fileID: 1996451079729072781, guid: 8bd25f7a868fc28439b811434b74ffcd, type: 3}
+        - {fileID: 1996451079729072781, guid: 30687c5cfc046524db453bef74c3be71, type: 3}
+        - {fileID: 1996451079729072781, guid: 194cf21891588834d9a229703a7cfafd, type: 3}
+        AlienOnlyPartsPrefabs: []
+    - ShadowBodyPartPrefabs:
+        HumanTraitPartsPrefabs:
+        - {fileID: 3439861939956597253, guid: 70449e9227eb67944bf0aa294a13fe50, type: 3}
+        - {fileID: 9029016383933960883, guid: d5b397bcd75d25c40bf77d57eda7d970, type: 3}
+        - {fileID: 3439861939956597253, guid: 7eba29bc438040c4bb185ce382a91217, type: 3}
+        - {fileID: 3439861939956597253, guid: 31311ad8cd74acc4ca1f2877604e36b3, type: 3}
+        - {fileID: 3439861939956597253, guid: 99423822062ab1943918526bea37df58, type: 3}
+        - {fileID: 3439861939956597253, guid: fe63a46ad8d0f2640896b1d420bcf3b8, type: 3}
+        - {fileID: 3439861939956597253, guid: a8cb055ba302fa24f8d1eb9f34ebdcfd, type: 3}
+        - {fileID: 3439861939956597253, guid: 627464d4e0891e448b4e2850f763357d, type: 3}
+        - {fileID: 3439861939956597253, guid: 62b0af1faf657524198945664eddc44b, type: 3}
+        - {fileID: 3439861939956597253, guid: be5716a55bb85fb4dacd72fd1d22919f, type: 3}
+        - {fileID: 3439861939956597253, guid: e1122ac21f16a46499565459904ea188, type: 3}
+        - {fileID: 3439861939956597253, guid: 413cb4bc301319348a74cd33d3c79963, type: 3}
+        - {fileID: 3439861939956597253, guid: bd155517b6cf0e14db6db2cf98bb9777, type: 3}
+        - {fileID: 3439861939956597253, guid: f57acfacc97a071488cb02fad07274f1, type: 3}
+        - {fileID: 3439861939956597253, guid: e8af83949a761574c8dbb9123633de8d, type: 3}
+        AlienOnlyPartsPrefabs: []
+      NewspaperBodyPartDisplays:
+        HumanTraitPartsPrefabs:
+        - {fileID: 1996451079729072781, guid: c1d724de9ffabcb42be72c370d4e3c21, type: 3}
+        - {fileID: 4475478680112177413, guid: 7af3b17d3152a614585162416492c3dd, type: 3}
+        - {fileID: 1996451079729072781, guid: f7e5863f4225b8e43b4aa4e9f9390586, type: 3}
+        - {fileID: 1996451079729072781, guid: b01d52fa53571614a9e1db37f95199a0, type: 3}
+        - {fileID: 1996451079729072781, guid: f6087550b72c76d4a9acaa5dd5c4f3f1, type: 3}
+        - {fileID: 1996451079729072781, guid: 1ceb9124f26fcf14ca2a7dad47a9082b, type: 3}
+        - {fileID: 1996451079729072781, guid: 85308c843c91a3e4599b735901953976, type: 3}
+        - {fileID: 1996451079729072781, guid: 055c37f8700dfd1499093f408eb3d9e9, type: 3}
+        - {fileID: 1996451079729072781, guid: 5e0091b4728656641a5cfc75456969c5, type: 3}
+        - {fileID: 1996451079729072781, guid: 498f755348f138c439f5c0dab6e01ed7, type: 3}
+        - {fileID: 1996451079729072781, guid: 08f273de430fa3347aebeb6231d76444, type: 3}
+        - {fileID: 1996451079729072781, guid: 893e56606b1a53444a732f208c57aae5, type: 3}
+        - {fileID: 1996451079729072781, guid: 8bd25f7a868fc28439b811434b74ffcd, type: 3}
+        - {fileID: 1996451079729072781, guid: 30687c5cfc046524db453bef74c3be71, type: 3}
+        - {fileID: 1996451079729072781, guid: 194cf21891588834d9a229703a7cfafd, type: 3}
+        AlienOnlyPartsPrefabs: []
+  LegBodyPartPrefabs:
+    HeightSubCollections:
+    - ShadowBodyPartPrefabs:
+        HumanTraitPartsPrefabs:
+        - {fileID: 4747785536886524387, guid: 5d0c67fcf2755e54c88cb6e9851777c6, type: 3}
+        - {fileID: 4887527568547673036, guid: bcb8f348de40c324eaf2d0a4be434ef6, type: 3}
+        - {fileID: 4747785536886524387, guid: e04f20c0c6f984e438a4a74d254998a2, type: 3}
+        - {fileID: 4747785536886524387, guid: 928f09e83c71beb498092ff423c32e61, type: 3}
+        - {fileID: 4747785536886524387, guid: 6497846c439d52f4e9a4523330b1a995, type: 3}
+        - {fileID: 4747785536886524387, guid: ec33568b8736a6d4fa35bf63c0bae82b, type: 3}
+        - {fileID: 4747785536886524387, guid: e1e43e62f3a2a554e9380c83aec96242, type: 3}
+        - {fileID: 4747785536886524387, guid: 9599b071f9d0a4d418de5ff9c3f1d8c3, type: 3}
+        - {fileID: 4747785536886524387, guid: c33a6a828982c6c49b8cfa3b401cc3c2, type: 3}
+        - {fileID: 4747785536886524387, guid: e0b104d02d642cc40a771a94b3d28f08, type: 3}
+        - {fileID: 4747785536886524387, guid: 376ec1b386971c54da5c7eeb4a31d353, type: 3}
+        - {fileID: 4747785536886524387, guid: 3b995caa822a954438d5c2770decd87a, type: 3}
+        - {fileID: 4747785536886524387, guid: c84d3ca385885d546bc502d8ccf59d93, type: 3}
+        - {fileID: 4747785536886524387, guid: e975bc77058b28142862bf0705e93c51, type: 3}
+        - {fileID: 4747785536886524387, guid: 3001a4198cd2db44a8d70029e772303b, type: 3}
+        AlienOnlyPartsPrefabs: []
+      NewspaperBodyPartDisplays:
+        HumanTraitPartsPrefabs: []
+        AlienOnlyPartsPrefabs: []
+    - ShadowBodyPartPrefabs:
+        HumanTraitPartsPrefabs:
+        - {fileID: 4747785536886524387, guid: 643c72c4c8543514982baa15ea1f2482, type: 3}
+        - {fileID: 6132339656795604948, guid: 9a8d5eaecf4a3fc4a90dd71bba278b64, type: 3}
+        - {fileID: 4747785536886524387, guid: f5fda14b0605883459046aa983935a72, type: 3}
+        - {fileID: 4747785536886524387, guid: 07394f7ca45f305439799a72d491fdba, type: 3}
+        - {fileID: 4747785536886524387, guid: 418a8ed05df6870489511835134a4b2c, type: 3}
+        - {fileID: 4747785536886524387, guid: 404d70d7acce7874f90f407af0426d11, type: 3}
+        - {fileID: 4747785536886524387, guid: c4588926578274b4da24a4b3b719b8e8, type: 3}
+        - {fileID: 4747785536886524387, guid: 6b9959fd40ce7914fbf5201c69fdfb83, type: 3}
+        - {fileID: 4747785536886524387, guid: 2f718b189c7962b44bca9972ac8b6c17, type: 3}
+        - {fileID: 4747785536886524387, guid: 32a9d07518ec3d7489cedce6c74f1ae3, type: 3}
+        - {fileID: 4747785536886524387, guid: 86e030ccd4e307349b206a71634fab23, type: 3}
+        - {fileID: 4747785536886524387, guid: 4daa2bcb9a624aa4885fb3483082927e, type: 3}
+        - {fileID: 4747785536886524387, guid: ca03c9f85698989448de70fe83fbbe05, type: 3}
+        - {fileID: 4747785536886524387, guid: ca190e3c130b3224f8e4291ba62afd44, type: 3}
+        - {fileID: 4747785536886524387, guid: 3c135afdeb512b648bea28efe5c069fd, type: 3}
+        AlienOnlyPartsPrefabs: []
+      NewspaperBodyPartDisplays:
+        HumanTraitPartsPrefabs: []
+        AlienOnlyPartsPrefabs: []
+  SpecialBodyPartPrefabs:
+    HeightSubCollections:
+    - ShadowBodyPartPrefabs:
+        HumanTraitPartsPrefabs:
+        - {fileID: 5931786737172396057, guid: 713e71ae36f00b44aa4c931483ad4527, type: 3}
+        AlienOnlyPartsPrefabs: []
+      NewspaperBodyPartDisplays:
+        HumanTraitPartsPrefabs:
+        - {fileID: 5931786737172396057, guid: 713e71ae36f00b44aa4c931483ad4527, type: 3}
+        AlienOnlyPartsPrefabs: []
+    - ShadowBodyPartPrefabs:
+        HumanTraitPartsPrefabs:
+        - {fileID: 4747785536886524387, guid: 1701d68e2c47641188d63293e7bea53c, type: 3}
+        AlienOnlyPartsPrefabs: []
+      NewspaperBodyPartDisplays:
+        HumanTraitPartsPrefabs:
+        - {fileID: 4747785536886524387, guid: 1701d68e2c47641188d63293e7bea53c, type: 3}
+        AlienOnlyPartsPrefabs: []
+  AccessoryCollections:
+  - HeightSubCollections:
+    - ShadowBodyPartPrefabs:
+        HumanTraitPartsPrefabs:
+        - {fileID: 5931786737172396057, guid: 96b7a616215bcb749a535c203acce071, type: 3}
+        - {fileID: 1019703426632852218, guid: f703372bca1804741a9624a4b6425fbb, type: 3}
+        - {fileID: 5931786737172396057, guid: ee79bb29b9c60b549ae67a02ce7e413c, type: 3}
+        - {fileID: 5931786737172396057, guid: 1cc5ad9e6fcdc1a46a16e909a4ffba67, type: 3}
+        - {fileID: 5931786737172396057, guid: 71b914df65ae0f24bbb8cdf7e35336ce, type: 3}
+        - {fileID: 5931786737172396057, guid: 1d966813c2a5797448636829f7ba8a09, type: 3}
+        - {fileID: 5931786737172396057, guid: 858e3294e3641f949afde41ce7874a68, type: 3}
+        - {fileID: 5931786737172396057, guid: a339112ccfb98474eaedebcfff47e24f, type: 3}
+        - {fileID: 5931786737172396057, guid: ed5a68cee1ad2184da15cc6664e7b82c, type: 3}
+        AlienOnlyPartsPrefabs: []
+      NewspaperBodyPartDisplays:
+        HumanTraitPartsPrefabs:
+        - {fileID: 7468180551992119365, guid: 433239eddce78a640b005da6031aed3a, type: 3}
+        - {fileID: 6362455538644116571, guid: 8fbbcbf705fbfd44c83575e316d36ffc, type: 3}
+        - {fileID: 7468180551992119365, guid: 1d4d04de566718346846884944db0d6d, type: 3}
+        - {fileID: 7468180551992119365, guid: de714245e0835e24f8373c86ebb8dc8d, type: 3}
+        - {fileID: 7468180551992119365, guid: 14ebc147d661eb245a497c348aae4ffc, type: 3}
+        - {fileID: 7468180551992119365, guid: 8c5e8c85fc29dcd4b98673e3dd3f1ad8, type: 3}
+        - {fileID: 7468180551992119365, guid: 14062005057532e40a740652ec1611be, type: 3}
+        - {fileID: 7468180551992119365, guid: 6697a8f2136062e47b4ef23d723973d2, type: 3}
+        - {fileID: 7468180551992119365, guid: ad2055844631af0468bf624122a75706, type: 3}
+        AlienOnlyPartsPrefabs: []
+  - HeightSubCollections:
+    - ShadowBodyPartPrefabs:
+        HumanTraitPartsPrefabs:
+        - {fileID: 5931786737172396057, guid: 73af301955a7580489c51f68760227eb, type: 3}
+        - {fileID: 3994471963849947185, guid: cef6b253129f6f246afbab5f39a0a767, type: 3}
+        - {fileID: 3994471963849947185, guid: abfd1a4b5cba0fc47b9478a4613198c5, type: 3}
+        AlienOnlyPartsPrefabs: []
+      NewspaperBodyPartDisplays:
+        HumanTraitPartsPrefabs:
+        - {fileID: 7468180551992119365, guid: 4da6c6bf15c120d42b4343e0d2297d79, type: 3}
+        - {fileID: 4102329598039623712, guid: c817d46efa99a604bb093d18ac9fe52a, type: 3}
+        - {fileID: 4102329598039623712, guid: 5f4c715078c9ef4449ab912e04ba3cdc, type: 3}
+        AlienOnlyPartsPrefabs: []
+    - ShadowBodyPartPrefabs:
+        HumanTraitPartsPrefabs:
+        - {fileID: 5931786737172396057, guid: 495735b1a7c31e8439b3780b4dbd6b31, type: 3}
+        - {fileID: 5460102642252594794, guid: ad25d18afe3fdce41b619909842a766a, type: 3}
+        - {fileID: 5460102642252594794, guid: 570c26bacec1e6149a61464c12fa4419, type: 3}
+        AlienOnlyPartsPrefabs: []
+      NewspaperBodyPartDisplays:
+        HumanTraitPartsPrefabs:
+        - {fileID: 7468180551992119365, guid: 4da6c6bf15c120d42b4343e0d2297d79, type: 3}
+        - {fileID: 4102329598039623712, guid: c817d46efa99a604bb093d18ac9fe52a, type: 3}
+        - {fileID: 4102329598039623712, guid: 5f4c715078c9ef4449ab912e04ba3cdc, type: 3}
+        AlienOnlyPartsPrefabs: []
+  - HeightSubCollections: []
