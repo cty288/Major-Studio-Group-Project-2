@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _02._Scripts.Electricity;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
@@ -15,7 +16,7 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
     private Button lightButton;
     public Action OnLightButtonPressed = () => { };
     private GameSceneModel gameSceneModel;
-    private ElectricitySystem electricitySystem;
+    private ElectricityModel electricityModel;
     private TMP_Text indicateText;
     private GameObject panelObj;
     public OutdoorFlashLight flashlight;
@@ -30,7 +31,7 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
         lightButton.GetComponent<Image>().alphaHitTestMinimumThreshold = 1;
         gameSceneModel.GameScene.RegisterWithInitValue(OnGameSceneChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
-        electricitySystem = this.GetSystem<ElectricitySystem>();
+        electricityModel = this.GetModel<ElectricityModel>();
         indicateText = panelObj.transform.Find("IndicateText").GetComponent<TMP_Text>();
         selfColliders = GetComponents<Collider2D>().ToList();
         //colliders = GetComponents<Collider2D>().ToList();
@@ -56,7 +57,7 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
         {
             indicateText.text = "Flash is cooling down";
         }
-        else if (electricitySystem.Electricity.Value < 0.9f) {
+        else if (electricityModel.Electricity.Value < 0.9f) {
             indicateText.text = "Not enough electricity";
         }
         else {

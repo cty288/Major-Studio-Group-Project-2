@@ -128,7 +128,7 @@ public class Radio : ElectricalApplicance
     }
 
     private void OnRadioStart(OnRadioStart e) {
-        if (!electricitySystem.HasElectricity()) {
+        if (!electricityModel.HasElectricity()) {
             return;
         }
         RadioSpeak(e.speakContent, e.speakRate, e.speakGender, e.mixer);

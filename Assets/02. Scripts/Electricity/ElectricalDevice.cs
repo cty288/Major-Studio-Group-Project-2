@@ -9,7 +9,7 @@ public class ElectricalDevice : ElectricalApplicance
 
     private void Start()
     {
-        enabled = this.electricitySystem.Electricity.Value > 0;
+        enabled = this.electricityModel.Electricity.Value > 0;
     }
 
     protected override void OnNoElectricity()

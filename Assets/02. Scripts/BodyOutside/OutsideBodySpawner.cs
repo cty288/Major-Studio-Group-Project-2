@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.Electricity;
 using DG.Tweening;
 using MikroFramework;
 using MikroFramework.Architecture;
@@ -15,7 +16,7 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
     private BodyGenerationSystem bodyGenerationSystem;
     private PlayerResourceSystem playerResourceSystem;
     private BodyManagmentSystem bodyManagmentSystem;
-    private ElectricitySystem electricitySystem;
+    private ElectricityModel electricityModel;
   
     [SerializeField] private PeepholeSceneUI peepholeSceneUI;
     //private bool speakEnd = false;
@@ -25,7 +26,7 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
         bodyGenerationSystem = this.GetSystem<BodyGenerationSystem>();
         playerResourceSystem = this.GetSystem<PlayerResourceSystem>();
         bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
-        electricitySystem = this.GetSystem<ElectricitySystem>();
+        electricityModel = this.GetModel<ElectricityModel>();
         bodyGenerationModel.CurrentOutsideBody.RegisterOnValueChaned(OnOutsideBodyChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
         this.GetSystem<GameTimeManager>().OnDayStart += OnDayStart;
@@ -33,7 +34,7 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
     }
 
     private void OpenFlashLight() {
-        if (this.electricitySystem.Electricity.Value <= 0.9f) {
+        if (this.electricityModel.Electricity.Value <= 0.9f) {
             return;
         }
         if (bodyViewController) {

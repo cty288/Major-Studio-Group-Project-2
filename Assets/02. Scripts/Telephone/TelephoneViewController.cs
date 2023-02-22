@@ -52,7 +52,7 @@ public class TelephoneViewController : ElectricalApplicance, IPointerClickHandle
     }
 
     private void OnHangUp() {
-        if (electricitySystem.HasElectricity()) {
+        if (electricityModel.HasElectricity()) {
             AudioSystem.Singleton.Play2DSound("hang_out");
         }
       
@@ -83,7 +83,7 @@ public class TelephoneViewController : ElectricalApplicance, IPointerClickHandle
     }
 
     public void OnPointerClick(PointerEventData eventData) {
-        if (!electricitySystem.HasElectricity()) {
+        if (!electricityModel.HasElectricity()) {
             return;
         }
         panel.Show(0.5f);

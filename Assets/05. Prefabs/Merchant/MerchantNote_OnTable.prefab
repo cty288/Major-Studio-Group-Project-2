@@ -249,6 +249,8 @@ GameObject:
   - component: {fileID: 6832777257798680915}
   - component: {fileID: 848627053231911443}
   - component: {fileID: 6768477015936805582}
+  - component: {fileID: 6452509403570691549}
+  - component: {fileID: -4949096967733859497}
   m_Layer: 0
   m_Name: MerchantNote_OnTable
   m_TagString: Untagged
@@ -339,6 +341,7 @@ MonoBehaviour:
   outlineMaterial: {fileID: 2100000, guid: 5a6db85ebb9466f4b90af9ebdd3c4fdc, type: 2}
   followingObject: {fileID: 3072241307074590263}
   followingObjectIsUI: 0
+  moveToTopWhenHovering: 0
 --- !u!114 &848627053231911443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,3 +385,64 @@ PolygonCollider2D:
       - {x: -0.46875, y: -0.25}
       - {x: 0.46875, y: -0.25}
       - {x: 0.46875, y: 0.25}
+--- !u!114 &6452509403570691549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6114853706820401901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabId: 8652133123992427973
+  localRefs:
+    _Keys:
+    - {fileID: 6114853706820401901}
+    - {fileID: 7950152140325585876}
+    - {fileID: 5483532384981873946}
+    - {fileID: -601271954, guid: 044a530235196464cb6e5537eb3a598f, type: 3}
+    - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    - {fileID: 4800000, guid: e260cfa7296ee7642b167f1eb5be5023, type: 3}
+    - {fileID: 6832777257798680915}
+    - {fileID: 11500000, guid: 260b52fa4b43b9d4296254fbde67bf60, type: 3}
+    - {fileID: 2100000, guid: 5a6db85ebb9466f4b90af9ebdd3c4fdc, type: 2}
+    - {fileID: 4800000, guid: 62505ee61d20098489c6f861ed25cce1, type: 3}
+    - {fileID: 2800000, guid: 35f23c48db908de47a926c4bb1831818, type: 3}
+    - {fileID: 3072241307074590263}
+    - {fileID: 3880088960037120104}
+    - {fileID: 4875929371801732706}
+    - {fileID: 9172651221523186694}
+    - {fileID: 9147227772391433051}
+    - {fileID: 5043236492484088083}
+    - {fileID: 5877441918299889498}
+    - {fileID: 5545624732805615956}
+    - {fileID: 6289889916362625969}
+    - {fileID: 848627053231911443}
+    - {fileID: 11500000, guid: 87c65c5e09617a04a94b2353cea1eccf, type: 3}
+    - {fileID: 6768477015936805582}
+    - {fileID: 6452509403570691549}
+    _Values: f3c81602ba4a9241058583f826c63d414b16fc61b9b42a5bfa6a8f4feae9db2ee0d9ebc964a95b21863651a9f23c1f7326c978ad768cce3e9eba0950bb43561a56aa27ff4ef95a0b8ee2237c9d7e9643b4e4d5de8fd1486c59d698e14c542342e037ff9d631fc21e24843b58b04adb1b524c059f1835a97b9e45a7db6dc4a71dfb99a42b82cb592c5a0cfdecf25fe30e05836fffb07cd5568e84001d77e6b05f23e1a1e95a4f667af3d9460b37bd883d6399e0f034a7ce766ffa9dfdca3bb472
+--- !u!114 &-4949096967733859497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6114853706820401901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveLayer: 0
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 1
+  saveActive: 1
+  saveChildren: 0
+  componentsToSave:
+  - {fileID: 7950152140325585876}
+  - {fileID: 848627053231911443}

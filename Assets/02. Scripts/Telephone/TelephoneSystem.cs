@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.Electricity;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
@@ -59,7 +60,7 @@ public class TelephoneSystem : AbstractSavableSystem {
 
     private Coroutine dealWaitCoroutine;
     private Coroutine incomingCallCoroutine;
-    private ElectricitySystem electricitySystem;
+    private ElectricityModel electricityModel;
     
     [field: ES3Serializable]
     public BindableProperty<TelephoneContact> CurrentTalkingContact { get; } =
@@ -69,10 +70,8 @@ public class TelephoneSystem : AbstractSavableSystem {
         gameTimeManager.OnDayStart += OnDayEnd;
         updater = new GameObject("TelephoneSystemUpdater").AddComponent<TelephoneSystemUpdater>();
         updater.OnUpdate += Update;
-        electricitySystem = this.GetSystem<ElectricitySystem>((system => {
-            electricitySystem = system;
-        } ));
-        
+        electricityModel = this.GetModel<ElectricityModel>();
+
         State.RegisterOnValueChaned(OnStateChanged);
     }
 
@@ -116,7 +115,7 @@ public class TelephoneSystem : AbstractSavableSystem {
 
     public TelephoneContact CurrentIncomingCallContact => currentIncomingCallContact;
     public void IncomingCall(TelephoneContact contact, int maxWaitTime) {
-        if ( (State.Value == TelephoneState.Idle || State.Value == TelephoneState.Dealing) && electricitySystem.HasElectricity() && contact.OnDealt()) {
+        if ( (State.Value == TelephoneState.Idle || State.Value == TelephoneState.Dealing) && electricityModel.HasElectricity() && contact.OnDealt()) {
             currentIncomingCallContact = contact;
             State.Value = TelephoneState.IncomingCall;
 

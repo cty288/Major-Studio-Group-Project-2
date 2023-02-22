@@ -11,7 +11,7 @@ public class PowerGeneratorViewController : ElectricalApplicance, IPointerClickH
     protected override void Awake() {
         base.Awake();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        electricitySystem.Electricity.RegisterWithInitValue(OnElectricityChanged)
+        electricityModel.Electricity.RegisterWithInitValue(OnElectricityChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
        
     }

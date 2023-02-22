@@ -17,7 +17,7 @@ public class HouseLight : ElectricalApplicance
 
     void SetLightIntensity()
     {
-        houseLight.intensity = 0.25f + 1.5f * this.electricitySystem.Electricity.Value;
+        houseLight.intensity = 0.25f + 1.5f * this.electricityModel.Electricity.Value;
     }
     
     protected override void OnNoElectricity()

@@ -17,10 +17,11 @@ public class OutdoorFlashLight : ElectricalApplicance
     private BodyGenerationModel bodyGenerationModel;
     [SerializeField] private Speaker speaker;
     [SerializeField] private PeepholeSceneUI peepholeSceneUI;
+    protected ElectricitySystem electricitySystem;
     protected override void Awake() {
         base.Awake();
         bodyGenerationModel = this.GetModel<BodyGenerationModel>();
-      
+        electricitySystem = this.GetSystem<ElectricitySystem>();
     }
 
     void Start() {
@@ -32,7 +33,7 @@ public class OutdoorFlashLight : ElectricalApplicance
    
     void OpenFlashLight()
     {
-        if (this.electricitySystem.Electricity.Value > 0.9f && flashed == false) {
+        if (this.electricityModel.Electricity.Value > 0.9f && flashed == false) {
             if (bodyGenerationModel.CurrentOutsideBody.Value != null) {
                 if (bodyGenerationModel.CurrentOutsideBody.Value.IsAlien) {
                     bodyGenerationModel.CurrentOutsideBody.Value = null;

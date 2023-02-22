@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.Electricity;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
 using UnityEngine;
@@ -67,7 +68,7 @@ public class GeneratorLever : AbstractMikroController<MainGame>, IPointerEnterHa
             }
         }
         this.GetSystem<ElectricitySystem>().AddElectricity(effeciency * realAngle * Time.deltaTime);
-        Debug.Log(this.GetSystem<ElectricitySystem>().Electricity.Value);
+        //Debug.Log(this.GetModel<ElectricityModel>().Electricity.Value);
         isWorking = true;
         z1 = z0;
     }

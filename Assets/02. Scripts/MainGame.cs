@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.Electricity;
 using _02._Scripts.GameEvents.BountyHunter;
 using _02._Scripts.GameEvents.Merchant;
 using _02._Scripts.GameTime;
@@ -35,6 +36,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<PlayerResourceModel>();
         this.RegisterModel<BountyHunterModel>();
         this.RegisterModel<MerchantModel>();
+        this.RegisterModel<ElectricityModel>();
 
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();

@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.Electricity;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
 using UnityEngine;
 
 public abstract class ElectricalApplicance : AbstractMikroController<MainGame> {
-    protected ElectricitySystem electricitySystem;
+    protected ElectricityModel electricityModel;
     protected Transform noElectricityCanvas;
     protected virtual void Awake() {
-        electricitySystem = this.GetSystem<ElectricitySystem>();
+        electricityModel = this.GetModel<ElectricityModel>();
         this.RegisterEvent<OnNoElectricity>(OnNoElectricity).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnElectricityRecovered>(OnElectricityRecovered).UnRegisterWhenGameObjectDestroyed(gameObject);
         
