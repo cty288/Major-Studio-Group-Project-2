@@ -15,6 +15,7 @@ using MikroFramework.AudioKit;
 using MikroFramework.Singletons;
 using MikroFramework.Utilities;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
 [ES3Serializable]
@@ -40,18 +41,19 @@ public class RadioRC : SimpleRC {
     }
 }
 
-public class Radio : ElectricalApplicance
+public class Radio : ElectricalApplicance, IPointerClickHandler
 {
     public Speaker speaker;
     
     public BodyInfo targetAlien;
 
-    private AudioSource radioOpenAudioSource;
+    private AudioSource radioNoiseAudioSource;
     [SerializeField] private AnimationCurve radioRealityCurve;
     [SerializeField] private AnimationCurve unrelatedBodyInfoCountWithDay;
     //[SerializeField] private AnimationCurve realAlienDescriptionRepeatTimeWithDay;
 
     [SerializeField] protected AudioMixerGroup radioNormalBroadcaseAudioMixerGroup;
+    [SerializeField] private OpenableUIPanel panel;
    
 
     private BodyGenerationSystem bodyGenerationSystem;
@@ -61,9 +63,15 @@ public class Radio : ElectricalApplicance
     private RadioModel radioModel;
 
     private RadioRC lowSoundLock = new RadioRC();
+
+    protected float NoiseVolume {
+        get {
+            return 1 - radioModel.Volume;
+        }
+    }
     protected override void Awake() {
         base.Awake();
-        radioOpenAudioSource = GetComponent<AudioSource>();
+        radioNoiseAudioSource = GetComponent<AudioSource>();
         bodyGenerationSystem = this.GetSystem<BodyGenerationSystem>();
         bodyModel = this.GetModel<BodyModel>();
         gameTimeManager = this.GetSystem<GameTimeManager>();
@@ -74,15 +82,50 @@ public class Radio : ElectricalApplicance
         this.GetSystem<TelephoneSystem>().State.RegisterOnValueChaned(OnTelephoneStateChange).UnRegisterWhenGameObjectDestroyed(gameObject);
         radioModel = this.GetModel<RadioModel>();
         lowSoundLock.OnRefCleared += OnLowSoundReleased;
+        
+        radioModel.Volume.RegisterWithInitValue(OnVolumeChange).UnRegisterWhenGameObjectDestroyed(gameObject);
 
+    }
+
+    private void OnVolumeChange(float volume) {
+        radioNoiseAudioSource.volume = 1 - volume;
+        UpdateSpeakerVolume(true);
+    }
+
+    private void UpdateSpeakerVolume(bool isInstant) {
+        if (!electricityModel.HasElectricity()) {
+            return;
+        }
+        if (!isInstant) {
+            if (lowSoundLock.RefCount > 0) {
+                speaker.AudioMixer.DOSetFloat("volume", -45* (1/radioModel.Volume), 1f);
+                radioNoiseAudioSource.DOFade(0.1f * NoiseVolume, 1f);
+            }
+            else {
+                radioNoiseAudioSource.DOFade(NoiseVolume, 1f);
+                speaker.AudioMixer.DOSetFloat("volume", -20 * (1/radioModel.Volume), 1f);
+            }
+        }
+        else {
+            if (lowSoundLock.RefCount > 0) {
+                speaker.AudioMixer.SetFloat("volume", -45 * (1/radioModel.Volume));
+                radioNoiseAudioSource.volume = 0.1f * NoiseVolume;
+            }
+            else {
+                speaker.AudioMixer.SetFloat("volume", -20 * (1/radioModel.Volume));
+                radioNoiseAudioSource.volume = NoiseVolume;
+            }
+        }
+        
     }
 
     protected override void OnNoElectricity() {
         StopRadio(false);
+        radioNoiseAudioSource.volume = 0;
     }
 
     protected override void OnElectricityRecovered() {
-        
+        UpdateSpeakerVolume(false);
     }
 
     private void OnDestroy() {
@@ -90,8 +133,7 @@ public class Radio : ElectricalApplicance
     }
 
     private void OnLowSoundReleased() {
-        radioOpenAudioSource.DOFade(0.02f, 1f);
-        speaker.AudioMixer.DOSetFloat("volume", -20, 1f);
+        UpdateSpeakerVolume(false);
     }
 
     private void OnGameSceneChanged(GameScene arg1, GameScene scene) {
@@ -101,8 +143,7 @@ public class Radio : ElectricalApplicance
         }
         else {
             lowSoundLock.Retain();
-            speaker.AudioMixer.DOSetFloat("volume", -45, 1f);
-            radioOpenAudioSource.DOFade(0.01f, 1f);
+            UpdateSpeakerVolume(false);
         }
     }
 
@@ -111,8 +152,7 @@ public class Radio : ElectricalApplicance
             (newState == TelephoneState.IncomingCall || newState == TelephoneState.Waiting ||
              newState == TelephoneState.Talking)) {
             lowSoundLock.Retain();
-            speaker.AudioMixer.DOSetFloat("volume", -45, 1f);
-            radioOpenAudioSource.DOFade(0.01f, 1f);
+            UpdateSpeakerVolume(false);
         }
         else if ((oldState == TelephoneState.IncomingCall || oldState == TelephoneState.Waiting ||
                  oldState == TelephoneState.Talking) &&
@@ -137,7 +177,7 @@ public class Radio : ElectricalApplicance
     }
 
     private void OnRadioEnd(OnRadioEnd e) {
-        StopRadio(true);
+        StopRadio(false);
         
     }
 
@@ -155,21 +195,11 @@ public class Radio : ElectricalApplicance
 
 
     private void RadioSpeak(string speakText, float speakRate, Gender speakGender, AudioMixerGroup mixer) {
-        if (lowSoundLock.RefCount == 0) {
-            radioOpenAudioSource.DOFade(0.06f, 1f);
-        }
+        
         radioModel.IsSpeaking = true;
-      
-        this.Delay(1 + Random.Range(2f, 5f), () => {
-            if (this) {
-                if (lowSoundLock.RefCount == 0) {
-                    radioOpenAudioSource.DOFade(0.02f, 1f);
-                }
-
-               
-                speaker.Speak(speakText, mixer, "Radio", OnSpeakerStop, speakRate, 1f, speakGender);
-            }
-        });
+        if (this) {
+            speaker.Speak(speakText, mixer, "Radio", OnSpeakerStop, speakRate, 1f, speakGender);
+        }
     }
 
     private void ConstructDescriptionDatas(List<AlienDescriptionData> descriptionDatas, float radioReality, int day) {
@@ -252,10 +282,12 @@ public class Radio : ElectricalApplicance
 
     private void OnSpeakerStop() {
         radioModel.IsSpeaking = false;
-        radioOpenAudioSource.DOFade(0, 1f);
         transform.DOKill(true);
      
     }
 
-   
+
+    public void OnPointerClick(PointerEventData eventData) {
+        panel.Show(0.5f);
+    }
 }

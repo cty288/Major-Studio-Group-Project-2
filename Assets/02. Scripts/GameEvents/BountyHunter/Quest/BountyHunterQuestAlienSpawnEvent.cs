@@ -2,14 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.BodyOutside;
 using MikroFramework.Architecture;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class BountyHunterQuestAlienSpawnEvent : BodyGenerationEvent {
+public class BountyHunterQuestAlienSpawnEvent : DailyKnockEvent {
     private BodyModel bodyModel;
     public BountyHunterQuestAlienSpawnEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float eventTriggerChance) :
-        base(startTimeRange, bodyInfo, eventTriggerChance, null, null) {
+        base(startTimeRange, bodyInfo, eventTriggerChance) {
         bodyModel = this.GetModel<BodyModel>();
     }
 
@@ -25,10 +26,7 @@ public class BountyHunterQuestAlienSpawnEvent : BodyGenerationEvent {
         return EventState.End;
     }
 
-    public override void OnEnd() {
-        base.OnEnd();
-        SpawnNextTime();
-    }
+    
 
     private void SpawnNextTime() {
         if (!bodyModel.IsInAllBodyTimeInfos(bodyInfo)) {
@@ -46,8 +44,10 @@ public class BountyHunterQuestAlienSpawnEvent : BodyGenerationEvent {
     }
 
     public override void OnMissed() {
-        base.OnMissed();
         SpawnNextTime();
     }
-    
+
+    public override void OnEventEnd() {
+        SpawnNextTime();
+    }
 }

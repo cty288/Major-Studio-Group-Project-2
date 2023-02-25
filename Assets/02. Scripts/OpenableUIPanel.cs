@@ -45,7 +45,7 @@ public abstract class OpenableUIPanel : AbstractMikroController<MainGame> {
         ScreenSpaceImageCropper.Singleton.OnEndCrop+=OnEndCrop;
     }
 
-    private void OnDestroy() {
+    protected virtual void OnDestroy() {
         ScreenSpaceImageCropper.Singleton.OnStartCrop-=OnStartCrop;
         ScreenSpaceImageCropper.Singleton.OnEndCrop-=OnEndCrop;
     }

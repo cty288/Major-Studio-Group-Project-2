@@ -81,7 +81,7 @@ public class BountyHunterHuntEvent : GameEvent{
 }
 
 public class BountyHunterHuntWrongPersonRadio : RadioEvent {
-    public BountyHunterHuntWrongPersonRadio(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer) : base(startTimeRange, speakContent, speakRate, speakGender, mixer) {
+    public BountyHunterHuntWrongPersonRadio(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer) : base(startTimeRange, speakContent, speakRate, speakGender, mixer, RadioChannel.DeadNews ) {
     }
     
     public BountyHunterHuntWrongPersonRadio(): base(){}

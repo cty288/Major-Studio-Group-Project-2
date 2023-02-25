@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 
 public class PoliceGenerateEvent : BodyGenerationEvent {
     public PoliceGenerateEvent(TimeRange startTimeRange, BodyInfo bodyInfo,float eventTriggerChance, Action onEnd, Action onMissed) :
-        base(startTimeRange, bodyInfo, eventTriggerChance, onEnd, onMissed) {
+        base(startTimeRange, bodyInfo, eventTriggerChance) {
         Debug.Log("A police event is generated. The time is between " + startTimeRange.StartTime + " and " + startTimeRange.EndTime);
     }
     
@@ -30,7 +30,6 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
     }
 
     public override void OnMissed() {
-        base.OnMissed();
         OnMissedOrNotOpen();
     }
 
@@ -57,6 +56,10 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
             "Apologies and thank you for your cooperation.";
         speaker.Speak(message, AudioMixerList.Singleton.AudioMixerGroups[3], "???", OnFinishSpeak, 1.15f, 1.2f);
         return () => onClickPeepholeSpeakEnd;
+    }
+
+    public override void OnEventEnd() {
+        
     }
 
     private void OnFinishSpeak() {

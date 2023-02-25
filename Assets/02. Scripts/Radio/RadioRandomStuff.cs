@@ -15,12 +15,14 @@ public class RadioMessage {
     public Gender Gender;
     public int MixerIndex;
     public float TriggerChance;
-    public RadioMessage(string Content, float speakSpeed, Gender gender, float triggerChance, int mixerIndex = 1) {
+    public RadioChannel Channel;
+    public RadioMessage(string Content, float speakSpeed, Gender gender, float triggerChance, RadioChannel radioChannel, int mixerIndex = 1) {
         this.Content = Content;
         this.SpeakSpeed = speakSpeed;
         this.Gender = gender;
         this.MixerIndex = mixerIndex;
         this.TriggerChance = triggerChance;
+        this.Channel = radioChannel;
     }
 
 
@@ -94,7 +96,7 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
         string singer = singers[Random.Range(0, singers.Count)];
         string songName = songNames[Random.Range(0, songNames.Count)];
         string content = $"The newest album from our beloved singer {singer}, \"{songName}\" is now available on the market. Please support our local artists!";
-        return new RadioMessage(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f), 1);
+        return new RadioMessage(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f), RadioChannel.GeneralNews,1);
     }
     
     private RadioMessage Message_Missing_Something()
@@ -103,7 +105,7 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
                          + GetRandomString("their child is missing. ", "her wallet got robbed. ",
                              "his pet dog is missing. ")
                          + "We're not entirely sure yet that this was those creatures did. But the possibility is extremely high.";
-        return new RadioMessage(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f), 1);
+        return new RadioMessage(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f),RadioChannel.GeneralNews, 1);
     }
 
     private RadioMessage Message_Weather_Report()
@@ -115,7 +117,7 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
                          + " Fahrenheit. Also, tomorrow day will be a "
                          +GetRandomString("rainy", "windy", "cloudy", "sunny", "snowy")
                          + " day.";
-        return new RadioMessage(content, Random.Range(0.8f, 1.2f), Gender.FEMALE, Random.Range(0.2f, 0.8f), 1);
+        return new RadioMessage(content, Random.Range(0.8f, 1.2f), Gender.FEMALE, Random.Range(0.2f, 0.8f), RadioChannel.GeneralNews,1);
     }
 
     private RadioMessage Message_Announcement_Of_President()
@@ -126,13 +128,13 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
                              "Troops are maintaining order in our vital cities.",
                              "He fought an creature and won.",
                              "He is forcing Congress to pass the bill. He claimed that we have run out of time to hesitate.");
-        return new RadioMessage(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f), 1);
+        return new RadioMessage(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f),RadioChannel.GeneralNews, 1);
     }
 
     private RadioMessage Message_Hacked()
     {
         string content = "This is us. For human. Surrender then live. Otherwise, die.";
-        return new RadioMessage(content, 0.5f, Gender.MALE, 1f, 4);
+        return new RadioMessage(content, 0.5f, Gender.MALE, 1f, RadioChannel.GeneralNews,4);
     }
 
     private RadioMessage Message_Military()
@@ -141,40 +143,40 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
             "Residents! This is Colonel Sanders! On behalf of the military, I request you not to go out in the middle of the night! ";
         content += "these creatures can camouflage as humans! You are likely to be in danger if you go out late at night. ";
         content += "We will often repeat this message to ensure safety of everyone.";
-        return new RadioMessage(content, 1f, Gender.MALE, 1f, 1);
+        return new RadioMessage(content, 1f, Gender.MALE, 1f, RadioChannel.GeneralNews,1);
     }
 
     private RadioMessage Message_Christian_Church()
     {
         string content =
             "Children! And all terrified people! I am the priest of the local church. Do not be afraid. We are praying together during this difficult time!";
-        return new RadioMessage(content, 0.9f, Gender.MALE, 1f, 1);
+        return new RadioMessage(content, 0.9f, Gender.MALE, 1f, RadioChannel.GeneralNews,1);
     }
 
     private RadioMessage Message_Research()
     {
         string content =
             "According to research, this mysterious creature have only a slight advantage over humans in terms of bodily functions. If you have a firearm in your home, make sure it is always ready to use.";
-        return new RadioMessage(content, 1.2f, Gender.MALE, 1f, 1);
+        return new RadioMessage(content, 1.2f, Gender.MALE, 1f, RadioChannel.GeneralNews,1);
     }
 
     private RadioMessage Message_Mayor() {
         string content =
             "The mayor held a press conference yesterday. He reiterate the urgent need to surpress recent infiltrations attempts. The government is dispatching more forces and couriers into the area";
-        return new RadioMessage(content, 1.2f, Gender.MALE, 0.5f, 1);
+        return new RadioMessage(content, 1.2f, Gender.MALE, 0.5f, RadioChannel.GeneralNews,1);
     }
 
     private RadioMessage Message_Suply() {
         string content =
             "If you are running low on your supplies during quarantine, no worries! The government along with many private organizations are providing you the most stable delivery service you can count on.";
-        return new RadioMessage(content, 1.2f, Gender.MALE, 0.8f, 1);
+        return new RadioMessage(content, 1.2f, Gender.MALE, 0.8f,RadioChannel.GeneralNews, 1);
     }
 
     private RadioMessage Message_Newspaper()
     {
         string content =
             "Anxious about the infiltration in your area? Read the town newspaper everyday to get the information that can keep you and your loved ones safe!";
-        return new RadioMessage(content, 1.2f, Gender.MALE, 0.8f, 1);
+        return new RadioMessage(content, 1.2f, Gender.MALE, 0.8f, RadioChannel.GeneralNews,1);
     }
 
     private RadioMessage Message_KFCVMe50() {
@@ -185,7 +187,7 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
         }
 
         string content = "Crazy Thursday is back! Call 233333 to get a V50 combo for half price!";
-        return new RadioMessage(content, 1.2f, Gender.MALE, chance, 1);
+        return new RadioMessage(content, 1.2f, Gender.MALE, chance, RadioChannel.GeneralNews,1);
     }
     private void RegisterRadioMessages(Antlr.Runtime.Misc.Func<RadioMessage> message) {
         _radioMessages.Add(message);

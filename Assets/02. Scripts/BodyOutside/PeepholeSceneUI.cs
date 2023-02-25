@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _02._Scripts.Electricity;
+using DG.Tweening;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
@@ -15,6 +16,7 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
     //protected List<Collider2D> colliders = new List<Collider2D>();
     private Button lightButton;
     public Action OnLightButtonPressed = () => { };
+    public Action OnLightStopped = () => { };
     private GameSceneModel gameSceneModel;
     private ElectricityModel electricityModel;
     private TMP_Text indicateText;
@@ -22,7 +24,8 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
     public OutdoorFlashLight flashlight;
     
     private List<Collider2D> selfColliders;
-    
+    protected ElectricitySystem electricitySystem;
+    public bool flashed; 
     private void Awake() {
         gameSceneModel = this.GetModel<GameSceneModel>();
         panelObj = transform.Find("Panel").gameObject;
@@ -34,6 +37,7 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
         electricityModel = this.GetModel<ElectricityModel>();
         indicateText = panelObj.transform.Find("IndicateText").GetComponent<TMP_Text>();
         selfColliders = GetComponents<Collider2D>().ToList();
+        electricitySystem = this.GetSystem<ElectricitySystem>();
         //colliders = GetComponents<Collider2D>().ToList();
     }
 
@@ -53,11 +57,11 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
 
     private void Update() {
         
-        if (flashlight.flashed)
+        if (flashed)
         {
-            indicateText.text = "Flash is cooling down";
+            indicateText.text = "";
         }
-        else if (electricityModel.Electricity.Value < 0.9f) {
+        else if (electricityModel.Electricity.Value < 0.2f) {
             indicateText.text = "Not enough electricity";
         }
         else {
@@ -68,6 +72,20 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
     }
 
     private void OnLightPressed() {
-        OnLightButtonPressed?.Invoke();
+       
+        
+        if (this.electricityModel.Electricity.Value > 0.2f && flashed == false) {
+            OnLightButtonPressed?.Invoke();
+            StartCoroutine(FlashCoolDown());
+            flashed = true;
+            this.electricitySystem.UseElectricity(0.2f);
+        }
+    }
+    
+    IEnumerator FlashCoolDown()
+    {
+        yield return new WaitForSeconds(5);
+        flashed = false;
+        OnLightStopped?.Invoke();
     }
 }

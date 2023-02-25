@@ -21,6 +21,8 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
     [SerializeField] private PeepholeSceneUI peepholeSceneUI;
     //private bool speakEnd = false;
     private bool todaysAlienIsVeryLarge = false;
+    private bool isFlashOn = false;
+  
     private void Awake() {
         bodyGenerationModel = this.GetModel<BodyGenerationModel>();
         bodyGenerationSystem = this.GetSystem<BodyGenerationSystem>();
@@ -31,16 +33,33 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
             .UnRegisterWhenGameObjectDestroyed(gameObject);
         this.GetSystem<GameTimeManager>().OnDayStart += OnDayStart;
         peepholeSceneUI.OnLightButtonPressed += OpenFlashLight;
+        peepholeSceneUI.OnLightStopped += OnCloseFlashLight;
 
       
     }
 
-    
+    private void OnCloseFlashLight() {
+        if (bodyViewController) {
+            AlienBodyPartInfo[] allBodyParts = bodyViewController.GetComponentsInChildren<AlienBodyPartInfo>(true);
+            bodyViewController.HideColor(0.2f);
+            foreach (AlienBodyPartInfo bodyPartInfo in allBodyParts) {
+                bodyPartInfo.OnFlashStop(0.2f);
+            }
+            bodyViewController.HideColor(0.2f);
+        }
+        isFlashOn = false;
+    }
+
 
     private void OpenFlashLight() {
-        if (this.electricityModel.Electricity.Value <= 0.9f) {
+        if (this.electricityModel.Electricity.Value <= 0.2f) {
             return;
         }
+        ShowCurrentBodyColor();
+        isFlashOn = true;
+    }
+
+    private void ShowCurrentBodyColor() {
         if (bodyViewController) {
             AlienBody alienBody = bodyViewController;
             alienBody.ShowColor(0.2f);
@@ -50,16 +69,9 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
                 bodyPartInfo.OnFlashStart(0.2f);
             }
             
-            this.Delay(0.5f, () => {
-                if (alienBody) {
-                    foreach (AlienBodyPartInfo bodyPartInfo in allBodyParts) {
-                        bodyPartInfo.OnFlashStop(0.2f);
-                    }
-                    alienBody.HideColor(0.2f);
-                }
-            });
         }
     }
+   
 
     private void OnDayStart(int obj) {
         todaysAlienIsVeryLarge = Random.value < 0.1f;
@@ -79,6 +91,7 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
             else {
                 bodyViewController = null;
             }
+           
         }
         else {
             
@@ -98,6 +111,9 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
                 }
             }
             bodyViewController.Show();
+            if (isFlashOn) {
+                ShowCurrentBodyColor();
+            }
             bodyViewController.onClickAlienBody += OnOutsideBodyClicked;
         }
     }
@@ -114,7 +130,10 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
         
     }
 
- 
+    private void OnDestroy() {
+        peepholeSceneUI.OnLightButtonPressed -= OpenFlashLight;
+        peepholeSceneUI.OnLightStopped -= OnCloseFlashLight;
+    }
 }
 
 

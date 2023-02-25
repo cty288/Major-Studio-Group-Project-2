@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using _02._Scripts.AlienInfos.Tags.Base;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
@@ -205,7 +206,10 @@ public class NewspaperUIPanel : OpenableUIPanel {
     
     public string GetShortDescription(BodyInfo bodyInfo) {
         List<IAlienTag> tags = new List<IAlienTag>();
-
+        
+       
+        
+        
         foreach (IAlienTag alienTag in bodyInfo.HeadInfoPrefab.Tags) {
             List<string> shortDescriptions = alienTag.GetShortDescriptions();
             for(int i = 0; i < shortDescriptions?.Count; i++) {
@@ -229,6 +233,13 @@ public class NewspaperUIPanel : OpenableUIPanel {
                     tags.Add(alienTag);
                 }
             }
+        }
+        
+        //only show distinctive tag short description if possible
+        if (tags.Exists(alienTag => alienTag is DistinctiveTag && alienTag.GetShortDescriptions().Count > 0 &&
+                                    !String.IsNullOrEmpty(alienTag.GetShortDescriptions()[0]))) {
+            tags = tags.FindAll(alienTag => alienTag is DistinctiveTag && alienTag.GetShortDescriptions().Count > 0 &&
+                                            !String.IsNullOrEmpty(alienTag.GetShortDescriptions()[0]));
         }
         
         

@@ -19,7 +19,7 @@ public struct OnRadioStart {
 }
 public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
     [field: ES3Serializable]
-    public override GameEventType GameEventType { get; } = GameEventType.Radio;
+    public override GameEventType GameEventType { get; } = GameEventType.Radio_News;
     
     protected RadioModel radioModel;
 
@@ -31,9 +31,14 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
     protected Gender speakGender;
     [ES3Serializable]
     protected AudioMixerGroup mixer;
+    [ES3Serializable]
+    protected RadioChannel channel;
 
     protected bool started = false;
-    protected RadioEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer) : base(startTimeRange) {
+    protected bool ended = false;
+    
+    protected RadioEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer,
+        RadioChannel channel) : base(startTimeRange) {
         radioModel = this.GetModel<RadioModel>();
         gameStateModel = this.GetModel<GameStateModel>();
         
@@ -41,6 +46,7 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
         this.speakRate = speakRate;
         this.speakGender = speakGender;
         this.mixer = mixer;
+        this.channel = channel;
     }
 
     public RadioEvent(): base() {
@@ -49,10 +55,15 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
     }
 
     public override void OnStart() {
-       
+       radioModel.CurrentChannel.RegisterOnValueChaned(OnRadioChannelChanged);
     }
 
+   
+
     public override EventState OnUpdate() {
+        if (radioModel.CurrentChannel != channel && !started) {
+            return EventState.Missed;
+        }
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
         if ((currentTime.Hour == 23 && currentTime.Minute >= 50) || gameStateModel.GameState.Value == GameState.End) {
             EndRadio();
@@ -70,13 +81,21 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
             OnRadioStart();
         }
 
-        return radioModel.IsSpeaking ? EventState.Running : EventState.End;
+        return (radioModel.IsSpeaking && !ended) ? EventState.Running : EventState.End;
     }
 
     protected abstract void OnRadioStart();
 
     protected void EndRadio() {
+        ended = true;
         this.SendEvent<OnRadioEnd>();
+        radioModel.CurrentChannel.UnRegisterOnValueChanged(OnRadioChannelChanged);
+    }
+
+    private void OnRadioChannelChanged(RadioChannel channel) {
+        if(this.channel != channel) {
+            EndRadio();
+        }
     }
 }
 

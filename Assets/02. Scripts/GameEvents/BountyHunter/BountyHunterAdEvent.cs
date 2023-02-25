@@ -14,7 +14,7 @@ public class BountyHunterAdEvent : RadioEvent {
     private string phoneNumber;
     [field: ES3Serializable]
     private float triggerChance;
-   public BountyHunterAdEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, float triggerChance) : base(startTimeRange, speakContent, speakRate, speakGender, mixer) {
+   public BountyHunterAdEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, float triggerChance) : base(startTimeRange, speakContent, speakRate, speakGender, mixer, RadioChannel.GeneralNews) {
         //this.TriggerChance = triggerChance;
         telephoneSystem = this.GetSystem<TelephoneSystem>();
         bountyHunterModel = this.GetModel<BountyHunterModel>();

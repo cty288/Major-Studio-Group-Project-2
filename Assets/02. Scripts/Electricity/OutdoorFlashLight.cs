@@ -12,73 +12,73 @@ using Random = UnityEngine.Random;
 
 public class OutdoorFlashLight : ElectricalApplicance
 {
-    public bool flashed; 
+   
     private Light2D flashlight;
     private BodyGenerationModel bodyGenerationModel;
     [SerializeField] private Speaker speaker;
     [SerializeField] private PeepholeSceneUI peepholeSceneUI;
-    protected ElectricitySystem electricitySystem;
+    
     protected override void Awake() {
         base.Awake();
         bodyGenerationModel = this.GetModel<BodyGenerationModel>();
-        electricitySystem = this.GetSystem<ElectricitySystem>();
+       
     }
 
     void Start() {
         flashlight = this.GetComponent<Light2D>();
         peepholeSceneUI.OnLightButtonPressed += OpenFlashLight;
-        flashed = false;
+        peepholeSceneUI.OnLightStopped += OnCloseFlashLight;
     }
-    
-   
+
+    private void OnDestroy() {
+        peepholeSceneUI.OnLightButtonPressed -= OpenFlashLight;
+        peepholeSceneUI.OnLightStopped -= OnCloseFlashLight;
+    }
+
+    private void OnCloseFlashLight() {
+        DOTween.To(() => flashlight.intensity, x => flashlight.intensity = x, 1, 0.2f);
+    }
+
+
     void OpenFlashLight()
     {
-        if (this.electricityModel.Electricity.Value > 0.9f && flashed == false) {
-            if (bodyGenerationModel.CurrentOutsideBody.Value != null) {
-                if (bodyGenerationModel.CurrentOutsideBody.Value.IsAlien) {
-                    bodyGenerationModel.CurrentOutsideBody.Value = null;
+        if (bodyGenerationModel.CurrentOutsideBody.Value != null) {
+            if (bodyGenerationModel.CurrentOutsideBody.Value.IsAlien) {
+                bodyGenerationModel.CurrentOutsideBody.Value = null;
+            }
+            else {
+                List<string> replies = new List<string>();
+                replies.Add("Hey! Da fuck are you doing?! Stop pointing that stupid light at me!");
+                replies.Add("Holy! You've got a SUN in your house?! Don't tell me you are some kind of giant light bulb alien!");
+                replies.Add("Cut it off, mister! Or I will call the officers!");
+                string reply = replies[UnityEngine.Random.Range(0, replies.Count)];
+
+                IVoiceTag voiceTag = bodyGenerationModel.CurrentOutsideBody.Value.VoiceTag;
+                if (voiceTag != null) {
+                    speaker.Speak(reply, AudioMixerList.Singleton.AlienVoiceGroups[voiceTag.VoiceIndex],
+                        "",null,voiceTag.VoiceSpeed,1f,
+                        voiceTag.VoiceType);
                 }
                 else {
-                    List<string> replies = new List<string>();
-                    replies.Add("Hey! Da fuck are you doing?! Stop pointing that stupid light at me!");
-                    replies.Add("Holy! You��ve got a SUN in your house?! Don't tell me you are some kind of giant light bulb alien!");
-                    replies.Add("Cut it off, mister! Or I will call the officers!");
-                    string reply = replies[UnityEngine.Random.Range(0, replies.Count)];
-
-                    IVoiceTag voiceTag = bodyGenerationModel.CurrentOutsideBody.Value.VoiceTag;
-                    if (voiceTag != null) {
-                        speaker.Speak(reply, AudioMixerList.Singleton.AlienVoiceGroups[voiceTag.VoiceIndex],
-                            "",null,voiceTag.VoiceSpeed,1f,
-                            voiceTag.VoiceType);
-                    }
-                    else {
-                        speaker.Speak(reply, null, "",null,Random.Range(0.8f, 1.2f));
-                    }
-                    
+                    speaker.Speak(reply, null, "",null,Random.Range(0.8f, 1.2f));
                 }
+                    
             }
-            StartCoroutine(FlashCoolDown());
-           // flashed = false;
-            DOTween.To(() => flashlight.intensity, x => flashlight.intensity = x, 5, 0.2f);
-            DOTween.To(() => flashlight.intensity, x => flashlight.intensity = x, 1, 0.2f).SetDelay(0.3f);
-            this.electricitySystem.UseElectricity(0.9f);
         }
+       
+        DOTween.To(() => flashlight.intensity, x => flashlight.intensity = x, 5, 0.2f);
+       
+       
     }
 
-    IEnumerator FlashCoolDown()
-    {
-        yield return new WaitForSeconds(1);
-        flashed = false;
-        yield return null;
-    }
+   
 
     protected override void OnNoElectricity()
     {
         
     }
 
-    protected override void OnElectricityRecovered()
-    {
+    protected override void OnElectricityRecovered() {
         
     }
 }

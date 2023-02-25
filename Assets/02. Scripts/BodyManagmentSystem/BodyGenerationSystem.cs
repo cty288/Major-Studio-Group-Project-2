@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.BodyOutside;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
 using MikroFramework.BindableProperty;
@@ -73,7 +74,7 @@ public class BodyGenerationSystem : AbstractSystem {
 
   
     
-    private void SpawnAlienOrDeliverBody() {
+    public void SpawnAlienOrDeliverBody() {
         List<BodyTimeInfo> Aliens = bodyModel.Aliens;
         List<BodyTimeInfo> Humans = bodyModel.Humans;
         
@@ -100,9 +101,9 @@ public class BodyGenerationSystem : AbstractSystem {
         int knockTime = Random.Range(6, 9);
         DateTime currentTime = gameTimeManager.CurrentTime;
 
-        gameEventSystem.AddEvent(new BodyGenerationEvent(
+        gameEventSystem.AddEvent(new DailyKnockEvent(
             new TimeRange(currentTime + new TimeSpan(0, knockDoorCheckTimeInterval, 0)), targetBody,
-            knockDoorChance, SpawnAlienOrDeliverBody, SpawnAlienOrDeliverBody));
+            knockDoorChance));
     }
 
     public void StopCurrentBody() {

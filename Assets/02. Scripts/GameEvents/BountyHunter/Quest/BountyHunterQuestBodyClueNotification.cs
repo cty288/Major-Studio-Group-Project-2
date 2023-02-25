@@ -234,7 +234,7 @@ public abstract class BountyHunterQuestClueInfoEvent : RadioEvent {
     protected bool IsRealClue { get; set; }
     [field: ES3Serializable]
     protected DateTime startDate;
-    public BountyHunterQuestClueInfoEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, bool isReal, DateTime startDate) : base(startTimeRange, speakContent, speakRate, speakGender, mixer) {
+    public BountyHunterQuestClueInfoEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, bool isReal, DateTime startDate) : base(startTimeRange, speakContent, speakRate, speakGender, mixer, RadioChannel.DeadNews) {
         this.IsRealClue = isReal;
         this.startDate = startDate;
     }

@@ -60,7 +60,7 @@ public class DogSystem : AbstractSystem
         Debug.Log("Dog Event Start Time: " + dogStartTime);
         gameEventSystem.AddEvent(new DogKnockEvent(
             new TimeRange(dogStartTime, dogEventEndTime), targetBody,
-            1, null, null));
+            1));
     }
 
    

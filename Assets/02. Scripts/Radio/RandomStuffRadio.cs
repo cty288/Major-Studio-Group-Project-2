@@ -7,10 +7,13 @@ using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 public class RandomStuffRadio : RadioEvent {
-    public RandomStuffRadio(TimeRange startTimeRange, RadioMessage message) : base(startTimeRange, message.Content, message.SpeakSpeed, message.Gender, AudioMixerList.Singleton.AudioMixerGroups[message.MixerIndex]) {
+    public RandomStuffRadio(TimeRange startTimeRange, RadioMessage message) :
+        base(startTimeRange, message.Content, message.SpeakSpeed, message.Gender, AudioMixerList.Singleton.AudioMixerGroups[message.MixerIndex], RadioChannel.GeneralNews ) {
         if (mixer == null) {
             this.mixer = AudioMixerList.Singleton.AudioMixerGroups[1];
         }
+
+        channel = message.Channel;
     }
 
     public RandomStuffRadio() : base() {
@@ -19,7 +22,7 @@ public class RandomStuffRadio : RadioEvent {
         }
     }
     [field: ES3Serializable]
-    public override float TriggerChance { get; } = 0.4f;
+    public override float TriggerChance { get; } = 0.8f;
     public override void OnEnd() {
         End();
     }

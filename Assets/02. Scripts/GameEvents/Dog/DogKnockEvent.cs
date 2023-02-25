@@ -18,7 +18,11 @@ public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEven
     [field: ES3Serializable]
     public override float TriggerChance { get; } = 1;
 
-    public DogKnockEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float eventTriggerChance, Action onEnd, Action onMissed) : base(startTimeRange, bodyInfo, eventTriggerChance, onEnd, onMissed) {
+    public override void OnMissed() {
+        
+    }
+
+    public DogKnockEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float eventTriggerChance) : base(startTimeRange, bodyInfo, eventTriggerChance) {
     }
     
     public DogKnockEvent(): base(){}
@@ -31,6 +35,10 @@ public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEven
         LoadCanvas.Singleton.ShowMessage("You adopted this lonely dog.");
         this.SendEvent<OnDogGet>();
         return () => onClickPeepholeSpeakEnd;
+    }
+
+    public override void OnEventEnd() {
+      
     }
 
     private void OnOpenFinish() {
@@ -54,7 +62,7 @@ public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEven
         nextKnockStart = new DateTime(nextKnockStart.Year, nextKnockStart.Month, nextKnockStart.Day, Random.Range(22,24), Random.Range(0, 60), 0);
         DateTime nextKnockEnd = nextKnockStart.AddMinutes(30);
 
-        gameEventSystem.AddEvent(new DogKnockEvent(new TimeRange(nextKnockStart, nextKnockEnd), this.bodyInfo, this.TriggerChance, this.onEnd, this.onMissed));
+        gameEventSystem.AddEvent(new DogKnockEvent(new TimeRange(nextKnockStart, nextKnockEnd), this.bodyInfo, this.TriggerChance));
         
         base.OnNotOpen();
     }

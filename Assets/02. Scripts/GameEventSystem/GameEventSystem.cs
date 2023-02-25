@@ -18,7 +18,7 @@ public class GameEventSystemUpdater : MonoBehaviour {
 }
 
 public enum GameEventType {
-    Radio,
+    Radio_News,
     BodyGeneration,
     General,
     IncomingCall,
@@ -99,6 +99,9 @@ public class GameEventSystem : AbstractSavableSystem {
                     currentEvent.End();
                     currentEvents[eventType] = null;
                     // AllPossibleEvents.Remove(currentEvent);
+                }else if (eventState == EventState.Missed) {
+                    currentEvent.Miss();
+                    currentEvents[eventType] = null;
                 }
             }
 
@@ -112,7 +115,7 @@ public class GameEventSystem : AbstractSavableSystem {
                         ev.Start();
                     }
                     else {
-                        ev.OnMissed();
+                        ev.Miss();
                     }
                 }
             }
@@ -125,7 +128,7 @@ public class GameEventSystem : AbstractSavableSystem {
         foreach (List<GameEvent> events in AllPossibleEvents.Values) {
             events.RemoveAll((ev => {
                 if (ev.StartTimeRange.EndTime < newTime) {
-                    ev.OnMissed();
+                    ev.Miss();
                     removedEvents.Add(ev);
                     return true;
                 }
@@ -155,7 +158,7 @@ public class GameEventSystem : AbstractSavableSystem {
         if (ev == null) return;
         TimeRange startTimeRange = ev.StartTimeRange;
         if (startTimeRange.EndTime < gameTimeManager.CurrentTime.Value) {
-            ev.OnMissed();
+            ev.Miss();
             return;
         }
 

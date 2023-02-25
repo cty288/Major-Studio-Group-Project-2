@@ -10,7 +10,8 @@ using UnityEngine;
 public enum EventState {
     NotStart,
     Running,
-    End
+    End,
+    Missed
 }
 
 public class TimeRange {
@@ -49,6 +50,9 @@ public abstract class GameEvent: ICanGetSystem, ICanGetModel, ICanSendEvent, ICa
 
     protected GameEventSystem gameEventSystem;
     protected GameStateModel gameStateModel;
+
+    [field: ES3Serializable]
+    public bool LockedTime = false;
     public GameEvent(TimeRange startTimeRange): this() {
         this.StartTimeRange = startTimeRange;
     }
@@ -61,6 +65,7 @@ public abstract class GameEvent: ICanGetSystem, ICanGetModel, ICanSendEvent, ICa
 
     public void Start() {
         gameTimeManager.LockDayEnd.Retain();
+        LockedTime = true;
         OnStart();
     }
 
@@ -69,8 +74,18 @@ public abstract class GameEvent: ICanGetSystem, ICanGetModel, ICanSendEvent, ICa
     }
 
     public void End() {
-        gameTimeManager.LockDayEnd.Release();
+        if (LockedTime) {
+            gameTimeManager.LockDayEnd.Release();
+        }
+       
         OnEnd();
+    }
+
+    public void Miss() {
+        if (LockedTime) {
+            gameTimeManager.LockDayEnd.Release();
+        }
+        OnMissed();
     }
     
     public abstract void OnStart();
