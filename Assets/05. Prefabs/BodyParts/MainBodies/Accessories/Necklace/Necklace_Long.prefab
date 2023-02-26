@@ -134,7 +134,7 @@ MonoBehaviour:
   OppositeTraitBodyParts: []
   IsAlienOnly: 0
   SubBodyPartCollectionIndex: -1
-  IsTall: 0
+  IsTall: 1
   IsNewspaper: 0
 --- !u!1 &8476560001455966782
 GameObject:

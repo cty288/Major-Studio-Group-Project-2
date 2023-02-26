@@ -82,7 +82,7 @@ MonoBehaviour:
   IsAlienOnly: 0
   SubBodyPartCollectionIndex: -1
   IsTall: 0
-  IsNewspaper: 0
+  IsNewspaper: 1
 --- !u!1 &8629229016352763781
 GameObject:
   m_ObjectHideFlags: 0

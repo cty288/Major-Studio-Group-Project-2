@@ -67,5 +67,22 @@ public class AccessoryTag_TeddyBear : AccessoryTag {
 	public override string TagName { get; } = "Bodywear_Bear";
 }
 
+public class AccessoryTag_BowTie : AccessoryTag
+{
+
+	public override string TagName { get; } = "Bodywear_BowTie";
+}
+
+public class AccessoryTag_Tie : AccessoryTag
+{
+
+	public override string TagName { get; } = "Bodywear_Tie";
+}
+
+public class AccessoryTag_Basketball : AccessoryTag
+{
+
+	public override string TagName { get; } = "Bodywear_Basketball";
+}
 
 
