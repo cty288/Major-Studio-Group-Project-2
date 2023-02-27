@@ -221,10 +221,18 @@ MonoBehaviour:
     - ShadowBodyPartPrefabs:
         HumanTraitPartsPrefabs:
         - {fileID: 4747785536886524387, guid: 1701d68e2c47641188d63293e7bea53c, type: 3}
+        - {fileID: 4747785536886524387, guid: 1c5fc6a0ea2551b46b352a1c5399c711, type: 3}
+        - {fileID: 4747785536886524387, guid: a8a66c5c3ced11b43b9483ba8228dac2, type: 3}
+        - {fileID: 4747785536886524387, guid: 5248423c8aca5f242ad62d3b8809cae1, type: 3}
+        - {fileID: 4747785536886524387, guid: 08faae6f9dd965b4b966b24e085d1a58, type: 3}
         AlienOnlyPartsPrefabs: []
       NewspaperBodyPartDisplays:
         HumanTraitPartsPrefabs:
         - {fileID: 4747785536886524387, guid: 1701d68e2c47641188d63293e7bea53c, type: 3}
+        - {fileID: 4747785536886524387, guid: 9679ff38c598d404e9cd88bd63cbc651, type: 3}
+        - {fileID: 4747785536886524387, guid: 7da35b6fbf157754192d3b3e1ecb589a, type: 3}
+        - {fileID: 4747785536886524387, guid: d687c12d1abdb1f458cfb84617b4d9ff, type: 3}
+        - {fileID: 4747785536886524387, guid: 895fe39ba9c61144b9cc0c0254c4d2c1, type: 3}
         AlienOnlyPartsPrefabs: []
   AccessoryCollections:
   - HeightSubCollections:
