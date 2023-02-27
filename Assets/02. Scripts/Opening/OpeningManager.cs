@@ -20,7 +20,13 @@ public class OpeningManager : MonoBehaviour {
         " The government has issued orders to encourage our courageous residents to report any susspicious activities. The area is also locked down until we have fully cleared the potential threats to our civilization." +
         " Be sure that you listen to the local government radio and read the newspaper at your doorstep everyday. We will update our citizens with recent incidents and their locations. Please be cautious or stay away from dangerous areas. <color=yellow>Radio may sometimes be inaccurate, as we are trying to broadcast every latest incidents to our audience. Newspaper is the most accurate source since we carefully select the actual scenes that has been thoroughly investigated.</color>" +
         " If you come across anyone acting strangely or suspiciously, do not hesitate to report the case to us. In case of emergency, you may use lethal force, but be sure to carefully consider your decision before acting.";
+
+    private void Awake() {
+        canSkip = false;
+    }
+
     private void Start() {
+        canSkip = false;
         ImageEffectController.Singleton.DisableAllFeatures();
         speaker.Speak(content, mixer, "Radio", OnFinished, rate);
         this.Delay(3f, () => {

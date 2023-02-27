@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4636302235920327266}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.003, z: 0}
+  m_LocalPosition: {x: -0.040999997, y: 1.003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7275f9bdd9e41064fbdaccdd0422b672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JointPoint: {fileID: 0}
+  JointPoint: {fileID: 457122622025592377}
   OppositeTraitBodyParts: []
   IsAlienOnly: 0
   SubBodyPartCollectionIndex: -1
@@ -108,7 +108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8629229016352763781}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.042, y: 0.927, z: 0}
+  m_LocalPosition: {x: 0.001, y: 0.927, z: 0}
   m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_ConstrainProportionsScale: 0
   m_Children: []
