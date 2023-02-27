@@ -14,12 +14,23 @@ public class DogFoodViewController : AbstractMikroController<MainGame> {
     private TMP_Text infoText;
 
     private Coroutine dogEnvSoundCoroutine = null;
+    
+    private DogModel dogModel;
     private void Awake() {
         this.RegisterEvent<OnDogGet>(OnDogGet).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnDogDie>(OnDogDie).UnRegisterWhenGameObjectDestroyed(gameObject);
+        dogModel = this.GetModel<DogModel>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         infoText = transform.Find("Canvas/Text").GetComponent<TMP_Text>();
         gameObject.SetActive(false);
+    }
+
+    private void Start() {
+        if (dogModel.isDogAlive && dogModel.HaveDog) {
+            dogEnvSoundCoroutine = StartCoroutine(DogEnvSound());
+        }else if (!dogModel.isDogAlive) {
+            infoText.text = "My friend is gone...";
+        }
     }
 
     private void OnDogDie(OnDogDie e) {

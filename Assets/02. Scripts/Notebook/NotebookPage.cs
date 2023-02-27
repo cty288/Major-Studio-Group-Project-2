@@ -15,11 +15,13 @@ public class NotebookPage : DraggableItems {
     
     private GameObject pageCanvas;
     private TMP_Text pageContentText;
+    [ES3Serializable]
     private string pageContentString;
     private List<SpriteRenderer> renderers = new List<SpriteRenderer>();
+    [ES3Serializable]
+    private string first12Chars;
 
-    
-   
+
 
     protected override void Awake() {
         base.Awake();
@@ -27,15 +29,28 @@ public class NotebookPage : DraggableItems {
         pageCanvas = transform.Find("PageCanvas").gameObject;
         pageContentText = pageCanvas.transform.Find("Text").GetComponent<TMP_Text>();
         pageCanvas.SetActive(false);
-
+        
     }
+
+    protected override void Start() {
+        base.Start();
+        
+        this.Delay(0.1f, () => {
+            if(!String.IsNullOrEmpty(first12Chars)) {
+                pageContentText.text = first12Chars;
+            }
+        });
+        
+    }
+
+    
 
     public void SetContent(string content, DateTime time) {
         pageContentString = content;
         //get the first line of the content
         string firstLine = content.Split('\n')[0];
         //get the first 12 characters of the first line
-        string first12Chars = firstLine.Substring(0, Math.Min(firstLine.Length, 12));
+        first12Chars = firstLine.Substring(0, Math.Min(firstLine.Length, 12));
         if (firstLine.Length > 12) {
             first12Chars += "...";
         }

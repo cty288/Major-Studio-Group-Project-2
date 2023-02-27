@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8135244911705309531}
   - component: {fileID: 8135244911705309528}
   - component: {fileID: 1667565489247098057}
+  - component: {fileID: -2621030475732044777}
+  - component: {fileID: 521176721353937196}
   m_Layer: 0
   m_Name: BountyHunterGift
   m_TagString: Untagged
@@ -103,6 +105,7 @@ MonoBehaviour:
   outlineMaterial: {fileID: 2100000, guid: 5a6db85ebb9466f4b90af9ebdd3c4fdc, type: 2}
   followingObject: {fileID: 8135244913040155082}
   followingObjectIsUI: 0
+  moveToTopWhenHovering: 0
 --- !u!114 &8135244911705309528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +150,71 @@ PolygonCollider2D:
       - {x: -1.3125, y: -1.1875}
       - {x: 1.3125, y: -1.1875}
       - {x: 1.3125, y: 1.1875}
+--- !u!114 &-2621030475732044777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8135244911705309529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabId: 4932066375524610608
+  localRefs:
+    _Keys:
+    - {fileID: 8135244911705309529}
+    - {fileID: 8135244911705309532}
+    - {fileID: 8135244911705309533}
+    - {fileID: -1489624297, guid: cdf38818679239b47b94e926bc1ea41b, type: 3}
+    - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    - {fileID: 4800000, guid: e260cfa7296ee7642b167f1eb5be5023, type: 3}
+    - {fileID: 8135244911705309531}
+    - {fileID: 11500000, guid: 260b52fa4b43b9d4296254fbde67bf60, type: 3}
+    - {fileID: 2100000, guid: 5a6db85ebb9466f4b90af9ebdd3c4fdc, type: 2}
+    - {fileID: 4800000, guid: 62505ee61d20098489c6f861ed25cce1, type: 3}
+    - {fileID: 2800000, guid: 35f23c48db908de47a926c4bb1831818, type: 3}
+    - {fileID: 8135244913040155082}
+    - {fileID: 8135244913040155086}
+    - {fileID: 8135244913040155087}
+    - {fileID: 8135244913040155084}
+    - {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+    - {fileID: 8135244913040155085}
+    - {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+    - {fileID: 8135244913027082783}
+    - {fileID: 8135244913027082782}
+    - {fileID: 8135244913027082768}
+    - {fileID: 8135244913027082769}
+    - {fileID: 0}
+    - {fileID: 8135244911705309528}
+    - {fileID: 11500000, guid: 809c3817b3487c04da8eefc37692de24, type: 3}
+    - {fileID: 1667565489247098057}
+    - {fileID: -2621030475732044777}
+    _Values: 21796f5ac3590b08a5e4ff1ce0c9d5283f20d2dab6c9bc4a61253634dd600a6615907a13466cc3606786cb82487c3c00d31e6901dee89856be25fa9d23d72a442566f8afb03e1e2ea28d8bcf02c6fe1cea3561bff608872c07dca9de8dd9c3715c86a8af74ecb111c3685b938b98a67bdce94b118a95b22e12db572b6ac05f36ca1a2b896fae90027caf7ca09be5476f352d02a48eb1e60e3ad79d999485a67bc792c9716c1d0c2e584995db19119209dd70b12ac7ed073f331cc2464c29960155f8d9081bd60218df2bb4bae3f40a4a6ba676cd230db935
+--- !u!114 &521176721353937196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8135244911705309529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveLayer: 0
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 1
+  saveActive: 1
+  saveChildren: 0
+  componentsToSave:
+  - {fileID: 8135244911705309532}
+  - {fileID: 8135244911705309528}
+  - {fileID: 8135244911705309533}
 --- !u!1 &8135244913027082783
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +362,7 @@ GameObject:
   - component: {fileID: 8135244913040155087}
   - component: {fileID: 8135244913040155084}
   - component: {fileID: 8135244913040155085}
+  - component: {fileID: -2836600360576222587}
   m_Layer: 5
   m_Name: Canvas (1)
   m_TagString: Untagged
@@ -383,3 +452,23 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &-2836600360576222587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8135244913040155082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveLayer: 0
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 0
+  saveChildren: 0
+  componentsToSave:
+  - {fileID: 8135244913040155087}

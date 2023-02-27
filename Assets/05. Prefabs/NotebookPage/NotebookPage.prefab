@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 837140277354646876}
   - component: {fileID: 7903528495308189418}
   - component: {fileID: 5194309642794753770}
+  - component: {fileID: -7520770842229796447}
   m_Layer: 5
   m_Name: PageCanvas
   m_TagString: Untagged
@@ -236,6 +237,26 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &-7520770842229796447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3067820477577640098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveLayer: 1
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 0
+  saveChildren: 0
+  componentsToSave:
+  - {fileID: 837140277354646876}
 --- !u!1 &8808066566453010615
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,6 +270,8 @@ GameObject:
   - component: {fileID: 675421095696004646}
   - component: {fileID: 5205350388830810417}
   - component: {fileID: 3188441659553498513}
+  - component: {fileID: 4753723801550573094}
+  - component: {fileID: 6247900320504359023}
   m_Layer: 0
   m_Name: NotebookPage
   m_TagString: Untagged
@@ -365,6 +388,7 @@ MonoBehaviour:
   outlineMaterial: {fileID: 2100000, guid: 5a6db85ebb9466f4b90af9ebdd3c4fdc, type: 2}
   followingObject: {fileID: 3067820477577640098}
   followingObjectIsUI: 0
+  moveToTopWhenHovering: 0
 --- !u!114 &3188441659553498513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,3 +403,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Container: {fileID: 0}
   canDrag: 1
+--- !u!114 &4753723801550573094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8808066566453010615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabId: 1939086813649129150
+  localRefs:
+    _Keys:
+    - {fileID: 8808066566453010615}
+    - {fileID: 2363856228534968737}
+    - {fileID: 568059110899102865}
+    - {fileID: 1965806150, guid: 606edfd2e96c04e42a4fec81fd9b4992, type: 3}
+    - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    - {fileID: 4800000, guid: e260cfa7296ee7642b167f1eb5be5023, type: 3}
+    - {fileID: 675421095696004646}
+    - {fileID: 5205350388830810417}
+    - {fileID: 11500000, guid: 260b52fa4b43b9d4296254fbde67bf60, type: 3}
+    - {fileID: 2100000, guid: 5a6db85ebb9466f4b90af9ebdd3c4fdc, type: 2}
+    - {fileID: 4800000, guid: 62505ee61d20098489c6f861ed25cce1, type: 3}
+    - {fileID: 2800000, guid: 35f23c48db908de47a926c4bb1831818, type: 3}
+    - {fileID: 3067820477577640098}
+    - {fileID: 4838716828870836026}
+    - {fileID: 837140277354646876}
+    - {fileID: 7903528495308189418}
+    - {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+    - {fileID: 5194309642794753770}
+    - {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+    - {fileID: 2009331050094908393}
+    - {fileID: 8603860161494603145}
+    - {fileID: 4681274676205467631}
+    - {fileID: 3748106950719525245}
+    - {fileID: 0}
+    - {fileID: 3188441659553498513}
+    - {fileID: 11500000, guid: 603e58df444a94c25b4e17410ed8ebfa, type: 3}
+    - {fileID: 4753723801550573094}
+    _Values: 9cc8eba18dcbcd12fb448b6e53079e0129bef7941a51b34ef18ffd8870b5660c06acd4ab557a412c0b609b3c0b262449af31c2700e54004bec636ee237aa7c4e56688cff23b5a85c00249f7becf05a366cb337a278d61a59ae1fc0f20b5ff4601bb3185c65dbda65da1f6feab4855e24bea4778472dad67eb2cdadfb0a4aaf5f34914bd7d3611002e800a0c728022f46da9126a609873a678e9d7c9746040e337ee43567e770ed0a76695567d221a46f6f10d1b426254c44859215f8c070817e7630f6d55d3f3749251e861180e9b877139651beacc7746c
+--- !u!114 &6247900320504359023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8808066566453010615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveLayer: 0
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 1
+  saveActive: 1
+  saveChildren: 0
+  componentsToSave:
+  - {fileID: 2363856228534968737}
+  - {fileID: 3188441659553498513}
+  - {fileID: 568059110899102865}

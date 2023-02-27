@@ -37,7 +37,8 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<BountyHunterModel>();
         this.RegisterModel<MerchantModel>();
         this.RegisterModel<ElectricityModel>();
-
+        this.RegisterModel<DogModel>();
+        
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();
         this.RegisterSystem<GameEventSystem>();

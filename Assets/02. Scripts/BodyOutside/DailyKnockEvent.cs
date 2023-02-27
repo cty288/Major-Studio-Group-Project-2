@@ -68,8 +68,10 @@ namespace _02._Scripts.BodyOutside {
 	    }
 
 	    protected void OnAlienClickedOutside() {
-	        DogSystem dogSystem = this.GetSystem<DogSystem>();
-	        if (dogSystem.HaveDog && dogSystem.isDogAlive) {
+		    DogModel dogModel = this.GetModel<DogModel>();
+		    DogSystem dogSystem = this.GetSystem<DogSystem>();
+		    
+	        if (dogModel.HaveDog && dogModel.isDogAlive) {
 	            float clipLength = AudioSystem.Singleton.Play2DSound("dogBark_4").clip.length;
 	            timeSystem.AddDelayTask(clipLength, () => {
 	                LoadCanvas.Singleton.HideImage(1f);

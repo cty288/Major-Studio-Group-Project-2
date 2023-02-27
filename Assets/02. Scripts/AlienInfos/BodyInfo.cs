@@ -54,7 +54,7 @@ public class BodyInfo : ICanRegisterEvent {
         
         List<T> allTags = new List<T>();
         foreach (var bodyInfo in AllBodyInfoPrefabs) {
-            foreach (IAlienTag tag in bodyInfo.Tags) {
+            foreach (IAlienTag tag in bodyInfo.AllTags) {
                 if (tag is T t) {
                     allTags.Add(t);
                 }

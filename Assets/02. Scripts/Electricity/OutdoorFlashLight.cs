@@ -44,25 +44,27 @@ public class OutdoorFlashLight : ElectricalApplicance
     {
         if (bodyGenerationModel.CurrentOutsideBody.Value != null) {
             if (bodyGenerationModel.CurrentOutsideBody.Value.IsAlien) {
-                bodyGenerationModel.CurrentOutsideBody.Value = null;
+                //bodyGenerationModel.CurrentOutsideBody.Value = null;
             }
             else {
-                List<string> replies = new List<string>();
-                replies.Add("Hey! Da fuck are you doing?! Stop pointing that stupid light at me!");
-                replies.Add("Holy! You've got a SUN in your house?! Don't tell me you are some kind of giant light bulb alien!");
-                replies.Add("Cut it off, mister! Or I will call the officers!");
-                string reply = replies[UnityEngine.Random.Range(0, replies.Count)];
+                bool speak = Random.Range(0, 100) <= 40;
+                if (speak) {
+                    List<string> replies = new List<string>();
+                    replies.Add("Hey! Da fuck are you doing?! Stop pointing that stupid light at me!");
+                    replies.Add("Holy! You've got a SUN in your house?! Don't tell me you are some kind of giant light bulb alien!");
+                    replies.Add("Cut it off, mister! Or I will call the officers!");
+                    string reply = replies[UnityEngine.Random.Range(0, replies.Count)];
 
-                IVoiceTag voiceTag = bodyGenerationModel.CurrentOutsideBody.Value.VoiceTag;
-                if (voiceTag != null) {
-                    speaker.Speak(reply, AudioMixerList.Singleton.AlienVoiceGroups[voiceTag.VoiceIndex],
-                        "",null,voiceTag.VoiceSpeed,1f,
-                        voiceTag.VoiceType);
+                    IVoiceTag voiceTag = bodyGenerationModel.CurrentOutsideBody.Value.VoiceTag;
+                    if (voiceTag != null) {
+                        speaker.Speak(reply, AudioMixerList.Singleton.AlienVoiceGroups[voiceTag.VoiceIndex],
+                            "",null,voiceTag.VoiceSpeed,1f,
+                            voiceTag.VoiceType);
+                    }
+                    else {
+                        speaker.Speak(reply, null, "",null,Random.Range(0.8f, 1.2f));
+                    }
                 }
-                else {
-                    speaker.Speak(reply, null, "",null,Random.Range(0.8f, 1.2f));
-                }
-                    
             }
         }
        

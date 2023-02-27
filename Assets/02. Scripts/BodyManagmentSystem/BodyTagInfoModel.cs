@@ -21,6 +21,7 @@ namespace _02._Scripts.BodyManagmentSystem {
 		}
 		
 		public List<string> GetRealRadioDescription(string tag) {
+			tag = tag.ToLower();
 			if (tagDescriptions.ContainsKey(tag)) {
 				return tagDescriptions[tag].RealRadioDescription;
 			}
@@ -30,6 +31,7 @@ namespace _02._Scripts.BodyManagmentSystem {
 		}
 		
 		public List<string> GetFakeRadioDescription(string tag) {
+			tag = tag.ToLower();
 			if (tagDescriptions.ContainsKey(tag)) {
 				return tagDescriptions[tag].FakeRadioDescription;
 			}
@@ -46,6 +48,7 @@ namespace _02._Scripts.BodyManagmentSystem {
 		}
 		
 		public List<string> GetShortDescriptions(string tag) {
+			tag = tag.ToLower();
 			if (tagDescriptions.ContainsKey(tag)) {
 				return tagDescriptions[tag].ShortDescription;
 			}
@@ -77,15 +80,15 @@ namespace _02._Scripts.BodyManagmentSystem {
 
               
                 int startRow = 1;
-                string currentTag = rows[startRow][0];
+                string currentTag = rows[startRow][0].ToLower();
                 TagDescription currentTagDescription = new TagDescription();
                 tagDescriptions.Add(currentTag, currentTagDescription);
                 
                 for (int i = startRow; i < rows.Count; i++) {
 					List<string> row = rows[i];
 					if (row.Count > 0) {
-						if (!string.IsNullOrEmpty(row[0]) && row[0] != currentTag) {
-							currentTag = row[0];
+						if (!string.IsNullOrEmpty(row[0].ToLower()) && row[0].ToLower() != currentTag) {
+							currentTag = row[0].ToLower();
 							currentTagDescription = new TagDescription();
 							tagDescriptions.Add(currentTag, currentTagDescription);
 						}

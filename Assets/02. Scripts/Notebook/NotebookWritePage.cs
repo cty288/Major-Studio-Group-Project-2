@@ -40,6 +40,7 @@ public class NotebookDragger : AbstractMikroController<MainGame>, IDragHandler, 
 public class NotebookWritePage : AbstractMikroController<MainGame>
 {
     public TMP_InputField inputField;
+    
     public string noteString;
     private GameTimeManager gameTimeManager;
     [SerializeField] private Table table;

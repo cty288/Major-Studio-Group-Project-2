@@ -38,6 +38,14 @@ public class BodyPartPrefabInfo {
 		}
 	}
 
+	public List<BodyPartPrefabInfo> GetSubBodyPartInfos() {
+		List<BodyPartPrefabInfo> infos = new List<BodyPartPrefabInfo>() {this};
+		if (SubBodyPartInfo != null) {
+			infos.AddRange(SubBodyPartInfo.GetSubBodyPartInfos());
+		}
+		return infos;
+	}
+
 	public BodyPartPrefabInfo(){}
 
 	public BodyPartPrefabInfo(GameObject prefab) {
@@ -70,7 +78,7 @@ public class BodyPartPrefabInfo {
 			infos.HumanTraitPartsPrefabs[Random.Range(0, infos.HumanTraitPartsPrefabs.Count)].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
 	}
 
-	public List<IAlienTag> Tags {
+	public List<IAlienTag> AllTags {
 		get {
 			if(tags == null) {
 				tags = new List<IAlienTag>();
@@ -82,6 +90,12 @@ public class BodyPartPrefabInfo {
 				}
 			}
 			return tags;
+		}
+	}
+	
+	public List<IAlienTag> SelfTags {
+		get {
+			return BodyPartInfo.SelfTags;
 		}
 	}
 }

@@ -13,20 +13,21 @@ public class DogSystem : AbstractSystem
 {
     private GameTimeManager gameTimeManager;
     private GameEventSystem gameEventSystem;
-    public bool isDogAlive { get; private set; } = true;
-    public bool HaveDog { get; private set; } = false;
-  
-    
+    private DogModel dogModel;
+
+
     protected override void OnInit() {
         gameTimeManager = this.GetSystem<GameTimeManager>();
         gameEventSystem = this.GetSystem<GameEventSystem>();
+        dogModel = this.GetModel<DogModel>();
+        
         gameTimeManager.OnDayStart += OnEndOfDay;
-        isDogAlive = true;
+        
         this.RegisterEvent<OnDogGet>(OnGetDog);
     }
 
     private void OnGetDog(OnDogGet e) {
-        HaveDog = true;
+        dogModel.HaveDog = true;
     }
 
     private void OnEndOfDay(int day) {
@@ -36,8 +37,8 @@ public class DogSystem : AbstractSystem
     }
 
     public void KillDog() {
-        if (HaveDog) {
-            isDogAlive = false;
+        if (dogModel.HaveDog) {
+            dogModel.isDogAlive = false;
             this.SendEvent<OnDogDie>();
         }
     }

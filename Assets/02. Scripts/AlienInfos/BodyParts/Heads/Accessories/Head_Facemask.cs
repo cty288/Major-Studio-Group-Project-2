@@ -7,7 +7,7 @@ public class Head_Facemask : AlienBodyPartInfo {
 	//Need Hot-Update Sheet Discription
 	public override List<IAlienTag> SelfTags { get; } = new List<IAlienTag>() {
 		new AccessoryTag_Facemask(),
-		//new DistinctiveTag()
+		new DistinctiveTag()
 	};
 	public override BodyPartType BodyPartType { get; } = BodyPartType.Accessory;
 }

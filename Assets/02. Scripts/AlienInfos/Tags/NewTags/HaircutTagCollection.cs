@@ -11,17 +11,17 @@ public class HairTag_TwinBraids : HaircutTag {
 }
 
 public class HairTag_DoublePony : HaircutTag {
-	public override string TagName { get; } = "Hair_Doublepony";
+	public override string TagName { get; } = "Hair_DoublePony";
 }
 
 public class HairTag_Fingerwaves : HaircutTag
 {
-	public override string TagName { get; } = "Hair_Fingerwaves";
+	public override string TagName { get; } = "Hair_FingerWaves";
 }
 
 public class HairTag_Victoryrolls : HaircutTag
 {
-	public override string TagName { get; } = "Hair_Victoryrolls";
+	public override string TagName { get; } = "Hair_VictoryRolls";
 }
 
 public class HairTag_MiddlePart : HaircutTag

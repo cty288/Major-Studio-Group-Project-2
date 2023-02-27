@@ -206,51 +206,85 @@ public class NewspaperUIPanel : OpenableUIPanel {
     
     public string GetShortDescription(BodyInfo bodyInfo) {
         List<IAlienTag> tags = new List<IAlienTag>();
+
+
+        List<BodyPartPrefabInfo> bodyPartPrefabInfos = new List<BodyPartPrefabInfo>();
+        bodyPartPrefabInfos.AddRange(bodyInfo.HeadInfoPrefab.GetSubBodyPartInfos());
+        bodyPartPrefabInfos.AddRange(bodyInfo.MainBodyInfoPrefab.GetSubBodyPartInfos());
         
+        
+        List<BodyPartPrefabInfo> distinctiveBodyParts = bodyPartPrefabInfos.FindAll((bodyPartPrefabInfo => {
+            if (bodyPartPrefabInfo.SelfTags == null) {
+                return false;
+            }
+            return bodyPartPrefabInfo.SelfTags.Exists((alienTag => alienTag is DistinctiveTag));
+        }));
+        
+        
+        if (distinctiveBodyParts.Count > 0) {
+            foreach (BodyPartPrefabInfo distinctiveBodyPart in distinctiveBodyParts) {
+                foreach (IAlienTag selfTag in distinctiveBodyPart.SelfTags) {
+                    if (selfTag.GetShortDescriptions()?.Count > 0) {
+                        tags.Add(selfTag);
+                    }
+                }
+            }
+        }
+        else {
+            int temp = 0;
+            for (int i = 0; i < bodyInfo.HeadInfoPrefab.AllTags.Count; i++) {
+                if (temp == 2) {
+                    break;
+                }
+                IAlienTag alienTag = bodyInfo.HeadInfoPrefab.AllTags[i];
+                List<string> shortDescriptions = alienTag.GetShortDescriptions();
+                if (shortDescriptions?.Count > 0) {
+                    tags.Add(alienTag);
+                    temp++;
+                }
+            }
+
+            
+            temp = 0;
+            
+            for (int i = 0; i < bodyInfo.MainBodyInfoPrefab.AllTags.Count; i++) {
+                if (temp == 2) {
+                    break;
+                }
+                IAlienTag alienTag = bodyInfo.MainBodyInfoPrefab.AllTags[i];
+                List<string> shortDescriptions = alienTag.GetShortDescriptions();
+                if (shortDescriptions?.Count > 0) {
+                    tags.Add(alienTag);
+                    temp++;
+                }
+            }
+        }
+
        
         
         
-        foreach (IAlienTag alienTag in bodyInfo.HeadInfoPrefab.Tags) {
-            List<string> shortDescriptions = alienTag.GetShortDescriptions();
-            for(int i = 0; i < shortDescriptions?.Count; i++) {
-                if (i == 2) {
-                    break;
-                }
-                if(!string.IsNullOrEmpty(shortDescriptions[i])) {
-                    tags.Add(alienTag);
-                }
-            }
-        }
-        
-        foreach (IAlienTag alienTag in bodyInfo.MainBodyInfoPrefab.Tags) {
-            List<string> shortDescriptions = alienTag.GetShortDescriptions();
-            
-            for(int i = 0; i < shortDescriptions?.Count; i++) {
-                if (i == 2) {
-                    break;
-                }
-                if(!string.IsNullOrEmpty(shortDescriptions[i])) {
-                    tags.Add(alienTag);
-                }
-            }
-        }
         
         //only show distinctive tag short description if possible
-        if (tags.Exists(alienTag => alienTag is DistinctiveTag && alienTag.GetShortDescriptions().Count > 0 &&
-                                    !String.IsNullOrEmpty(alienTag.GetShortDescriptions()[0]))) {
-            tags = tags.FindAll(alienTag => alienTag is DistinctiveTag && alienTag.GetShortDescriptions().Count > 0 &&
-                                            !String.IsNullOrEmpty(alienTag.GetShortDescriptions()[0]));
-        }
+       
         
         
         
         StringBuilder stringBuilder = new StringBuilder();
+        int addedCount = 0;
         for (int i = 0; i < tags.Count; i++) {
-            if (i == 4) {
+            if (addedCount == 4) {
                 break;
             }
-            if (i == 0) stringBuilder.Append(tags[i].GetShortDescriptions()[0]);
-            else stringBuilder.Append("\n").Append(tags[i].GetShortDescriptions()[0]);
+            string shortDescription = tags[i].GetShortDescriptions()[0];
+            if(!String.IsNullOrEmpty(shortDescription)) {
+                if (addedCount == 0) {
+                    stringBuilder.Append(shortDescription);
+                }
+                else {
+                    stringBuilder.Append("\n").Append(shortDescription);
+                }
+                addedCount++;
+            }
         }
 
         return stringBuilder.ToString();

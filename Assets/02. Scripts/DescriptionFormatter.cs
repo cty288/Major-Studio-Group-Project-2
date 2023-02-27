@@ -84,7 +84,7 @@ public class DescriptionFormatter : IFormatProvider, ICustomFormatter {
     }
 
     public static string GetByTag<T>(BodyPartPrefabInfo bodyPart, float reality) where T : class, IAlienTag {
-        var allTags = bodyPart.Tags.FindAll(x => x is T);
+        var allTags = bodyPart.AllTags.FindAll(x => x is T);
         if (allTags.Count > 0) {
             string result = ((T)allTags[Random.Range(0, allTags.Count)]).GetRandomRadioDescription(IsReal(reality));
             int tryCount = 0;

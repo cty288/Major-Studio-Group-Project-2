@@ -41,7 +41,7 @@ MonoBehaviour:
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1
   addAllPrefabsToManager: 1
-  collectDependenciesDepth: 4
+  collectDependenciesDepth: 6
   logDebugInfo: 0
   logWarnings: 1
   logErrors: 1

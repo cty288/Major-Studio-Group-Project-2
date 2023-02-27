@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Head_DetectiveHat : AlienBodyPartInfo {
 	public override List<IAlienTag> SelfTags { get; } = new List<IAlienTag>() {
-		//new DistinctiveTag(),
+		new DistinctiveTag(),
 		new AccessoryTag_DetectiveHat()
 	};
 	public override BodyPartType BodyPartType { get; } = BodyPartType.Accessory;
