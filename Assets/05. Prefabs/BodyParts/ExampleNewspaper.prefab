@@ -1119,5 +1119,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scarf_Newspaper
       objectReference: {fileID: 0}
+    - target: {fileID: 4102329598039623712, guid: c817d46efa99a604bb093d18ac9fe52a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c817d46efa99a604bb093d18ac9fe52a, type: 3}

@@ -70,3 +70,8 @@ public class LegsTag_Naked : ClothTag
 {
 	public override string TagName { get; } = "Cloth_Naked";
 }
+
+public class LegsTag_GreyTrousers : ClothTag
+{
+	public override string TagName { get; } = "Cloth_GreyTrousers";
+}

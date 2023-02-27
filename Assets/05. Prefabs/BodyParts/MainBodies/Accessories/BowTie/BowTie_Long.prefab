@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 1268279, guid: 0fc0f47e594059e4aaa867e6ce9fc50f, type: 3}
+  m_Sprite: {fileID: 81818475, guid: f78ab09ec42b3174d8335f2972893e0b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -93,9 +93,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6743826356703840928}
-  - component: {fileID: -4320458130483187950}
+  - component: {fileID: 1953966463953101326}
   m_Layer: 0
-  m_Name: Necklace_Long
+  m_Name: BowTie_Long
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,7 +118,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-4320458130483187950
+--- !u!114 &1953966463953101326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5931786737172396057}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30a77a3097874434f8dd5fe0023e6843, type: 3}
+  m_Script: {fileID: 11500000, guid: 7275f9bdd9e41064fbdaccdd0422b672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   JointPoint: {fileID: 3723835475242337893}

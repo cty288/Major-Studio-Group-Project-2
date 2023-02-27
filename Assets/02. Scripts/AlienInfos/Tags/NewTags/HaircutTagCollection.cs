@@ -73,3 +73,8 @@ public class HairTag_BuzzCut : HaircutTag
 {
 	public override string TagName { get; } = "Hair_BuzzCut";
 }
+
+public class HairTag_GreyMiddlePart : HaircutTag
+{
+	public override string TagName { get; } = "Hair_GreyMiddlePart";
+}

@@ -71,3 +71,8 @@ public class MainBodyTag_Bra : ClothTag
 {
 	public override string TagName { get; } = "Cloth_Bra";
 }
+
+public class MainBodyTag_BlackLongSleeve : ClothTag
+{
+	public override string TagName { get; } = "Cloth_BlackLongSleeve";
+}
