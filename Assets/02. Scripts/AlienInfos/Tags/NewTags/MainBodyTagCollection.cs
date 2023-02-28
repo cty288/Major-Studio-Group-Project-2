@@ -14,12 +14,12 @@ public class MainBodyTag_Chiffonblouse : ClothTag
 
 public class MainBodyTag_Kimono : ClothTag
 {
-	public override string TagName { get; } = "Cloth_Kimono";
+	public override string TagName { get; } = "Cloth_KimonoTop";
 }
 
 public class MainBodyTag_CottonVest : ClothTag
 {
-	public override string TagName { get; } = "Cloth_CottonVest";
+	public override string TagName { get; } = "Cloth_Vest";
 }
 
 public class MainBodyTag_PoloShirt : ClothTag
@@ -59,7 +59,7 @@ public class MainBodyTag_ButtonedShirt : ClothTag
 
 public class MainBodyTag_KnotButtonShirt : ClothTag
 {
-	public override string TagName { get; } = "Cloth_KnotButtonShirt";
+	public override string TagName { get; } = "Cloth_ChineseShirt";
 }
 
 public class MainBodyTag_DetectiveSuit : ClothTag

@@ -15,7 +15,9 @@ public abstract class OpenableUIPanel : AbstractMikroController<MainGame> {
     protected List<Collider2D> colliders = new List<Collider2D>();
     protected Canvas canvas;
     protected bool isShow = false;
-    
+
+    public bool IsShow => isShow;
+
     protected SimpleRC canBack = new SimpleRC();
     
     [SerializeField] private GameObject useCameraMask;
@@ -79,10 +81,14 @@ public abstract class OpenableUIPanel : AbstractMikroController<MainGame> {
                 
             bool mouseClickPanel = colliders.Any(c => c.OverlapPoint(mousePos));
 
-            if (!mouseClickPanel && isShow) {
+            if (!mouseClickPanel && isShow && AdditionMouseExitCheck()) {
                 Hide(0.5f);
             }
         }
+    }
+
+    public virtual bool AdditionMouseExitCheck() {
+        return true;
     }
     
 

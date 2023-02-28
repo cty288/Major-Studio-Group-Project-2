@@ -76,6 +76,8 @@ public class DescriptionFormatter : IFormatProvider, ICustomFormatter {
                     tryCount++;
 
                 }
+
+                return result;
             }
             return String.Empty; 
         }

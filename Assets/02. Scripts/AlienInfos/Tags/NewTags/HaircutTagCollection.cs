@@ -26,7 +26,7 @@ public class HairTag_Victoryrolls : HaircutTag
 
 public class HairTag_MiddlePart : HaircutTag
 {
-	public override string TagName { get; } = "Hair_MiddlePart";
+	public override string TagName { get; } = "Hair_ShortMiddlePart";
 }
 
 public class HairTag_Dreadlocksshort : HaircutTag

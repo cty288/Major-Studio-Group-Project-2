@@ -2,7 +2,7 @@
     
 }
 
-public abstract class AccessoryTag : AbstractAlienTag, IClothTag {
+public abstract class AccessoryTag : AbstractAlienTag, IAccessoryTag {
 }
 
 //Head
@@ -54,7 +54,7 @@ public class AccessoryTag_DetectiveHat : AccessoryTag
 //Body
 public class ClothTagScarf : AccessoryTag {
 	
-	public override string TagName { get; } = "Cloth_Scarf";
+	public override string TagName { get; } = "Bodywear_Scarf";
 }
 
 public class AccessoryTag_Necklace : AccessoryTag
@@ -64,7 +64,7 @@ public class AccessoryTag_Necklace : AccessoryTag
 
 public class AccessoryTag_TeddyBear : AccessoryTag {
 	
-	public override string TagName { get; } = "Bodywear_Bear";
+	public override string TagName { get; } = "Bodywear_TeddyBear";
 }
 
 public class AccessoryTag_BowTie : AccessoryTag

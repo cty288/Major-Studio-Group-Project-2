@@ -1,6 +1,6 @@
 ﻿
 	public class LegsTag_RippedJeans: ClothTag {
-		public override string TagName { get; } = "Cloth_Jeans";
+		public override string TagName { get; } = "Cloth_LongRippedJeans";
 	}
 	
 	public class LegsTag_MidiSkirt: ClothTag {
@@ -13,17 +13,17 @@ public class LegsTag_ShortSkirt : ClothTag
 }
 public class LegsTag_KimonoLongSkirt : ClothTag
 {
-	public override string TagName { get; } = "Cloth_KimonoLongSkirt";
+	public override string TagName { get; } = "Cloth_LongKimonoSkirt";
 }
 
 public class LegsTag_DarkLongPants : ClothTag
 {
-	public override string TagName { get; } = "Cloth_DarkLongPants";
+	public override string TagName { get; } = "Cloth_DarkLongShorts";
 }
 
 public class LegsTag_RippedShortJeans : ClothTag
 {
-	public override string TagName { get; } = "Cloth_RippedShortJeans";
+	public override string TagName { get; } = "Cloth_ShortRippedJeans";
 }
 
 public class LegsTag_Baggypants : ClothTag
@@ -68,7 +68,7 @@ public class LegsTag_WhitePants : ClothTag
 
 public class LegsTag_Naked : ClothTag
 {
-	public override string TagName { get; } = "Cloth_Naked";
+	public override string TagName { get; } = "Cloth_NakedBottom";
 }
 
 public class LegsTag_GreyTrousers : ClothTag

@@ -5,6 +5,7 @@ using _02._Scripts.Electricity;
 using _02._Scripts.GameEvents.BountyHunter;
 using _02._Scripts.GameEvents.Merchant;
 using _02._Scripts.GameTime;
+using _02._Scripts.Notebook;
 using MikroFramework.Architecture;
 using MikroFramework.ResKit;
 using MikroFramework.TimeSystem;
@@ -38,6 +39,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<MerchantModel>();
         this.RegisterModel<ElectricityModel>();
         this.RegisterModel<DogModel>();
+        this.RegisterModel<NotebookModel>();
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();

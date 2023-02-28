@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using _02._Scripts.Notebook;
 using MikroFramework.Architecture;
 using MikroFramework.ResKit;
 using TMPro;
@@ -10,7 +11,7 @@ using UnityEngine;
 public class SubtitleHightlightedTextDragger : AbstractMikroController<MainGame> {
 	private TMP_Text text;
 	private TMP_Text currentDraggedText;
-    private ICanHaveDroppedTexts lastReceiver;
+    private ICanHaveDroppableItems lastReceiver;
     RaycastHit2D[] raycastResults = new RaycastHit2D[5];
     private TMP_Text hintTmpText;
     
@@ -99,17 +100,17 @@ public class SubtitleHightlightedTextDragger : AbstractMikroController<MainGame>
                 if (size > 0) {
                     for (int i = 0; i < size; i++) {
                         RaycastHit2D hit = raycastResults[i];
-                        var canHaveDroppedText = hit.collider.GetComponent<ICanHaveDroppedTexts>();
+                        var canHaveDroppedText = hit.collider.GetComponent<ICanHaveDroppableItems>();
                         if (canHaveDroppedText != null) {
                             if(lastReceiver==null || lastReceiver != canHaveDroppedText) {
-                                canHaveDroppedText.OnEnter(currentDraggedText.text);
+                                canHaveDroppedText.OnEnter(currentDraggedText.GetComponent<IDroppable>());
                                 lastReceiver = canHaveDroppedText;
                                 break;
                             }
                         }
                     }
                 }else {
-                    lastReceiver?.OnExit(currentDraggedText.text);
+                    lastReceiver?.OnExit(currentDraggedText.GetComponent<IDroppable>());
                     lastReceiver = null;
                 }
                 
@@ -118,7 +119,7 @@ public class SubtitleHightlightedTextDragger : AbstractMikroController<MainGame>
         
         if(Input.GetMouseButtonUp(0)) {
             if(lastReceiver!=null) {
-                lastReceiver.OnDrop(currentDraggedText.text);
+                lastReceiver.OnDrop(currentDraggedText.GetComponent<IDroppable>());
             }
             
             lastReceiver = null;
@@ -135,14 +136,9 @@ public class SubtitleHightlightedTextDragger : AbstractMikroController<MainGame>
 
     private TMP_Text CreateDraggedText(string targetText, Color color) {
         TMP_Text spawnedText = GameObject
-            .Instantiate(this.GetUtility<ResLoader>().LoadSync<GameObject>("general", "DraggedText"))
+            .Instantiate(this.GetUtility<ResLoader>().LoadSync<GameObject>("general", "DraggedText"), transform)
             .GetComponent<TMP_Text>();
-        spawnedText.fontSize = text.fontSize;
-        spawnedText.color = color;
-        spawnedText.text = targetText;
-        spawnedText.transform.SetParent(text.transform.parent);
-        spawnedText.transform.SetAsLastSibling();
-        spawnedText.transform.position = Input.mousePosition;
+        spawnedText.GetComponent<DroppableTexts>().SetContent(targetText, color);
         return spawnedText;
     }
 

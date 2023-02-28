@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _02._Scripts.Notebook;
 using DG.Tweening;
 using MikroFramework;
 using MikroFramework.Architecture;
@@ -37,6 +38,8 @@ public class RadioUIPanel : OpenableUIPanel
     
     
     
+    
+    
     protected override void Awake() {
         base.Awake();
         images = GetComponentsInChildren<Image>(true).ToList();
@@ -48,8 +51,7 @@ public class RadioUIPanel : OpenableUIPanel
         channelNameText = panel.Find("Radio/ChannelNameText").GetComponent<TMP_Text>();
         
         radioModel.InitializeChannelRanges(radioChannalRanges);
-        
-        
+       
         foreach (var image in images) {
             imageAlpha.Add(image, image.color.a);
         }
@@ -137,4 +139,5 @@ public class RadioUIPanel : OpenableUIPanel
     }
 
 
+   
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8800230263532740259}
   - component: {fileID: 5186815351869364546}
   - component: {fileID: 2089143743651288016}
+  - component: {fileID: 1457662149323508518}
   m_Layer: 5
   m_Name: DraggedText
   m_TagString: Untagged
@@ -150,3 +151,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &1457662149323508518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195289753123544207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 650910a5192c6bc419d61e4a3b7fe274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contentUIPrefab: {fileID: 4008376364144513638, guid: d709b49aef022d3489bd7d51a05f9bfe, type: 3}
