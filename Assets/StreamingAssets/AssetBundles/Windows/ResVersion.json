@@ -3,8 +3,8 @@
   "ABMD5List": [
     {
       "AssetName": "aliens",
-      "MD5": "68716a8a30b3608721343ac2617fb6b4",
-      "FileSize": 343.18457,
+      "MD5": "e5d8ccdcbc3ea890e9201d72cddfc92a",
+      "FileSize": 458.830078,
       "assetDatas": [
         {
           "Name": "AlienBody",
@@ -187,8 +187,8 @@
     },
     {
       "AssetName": "general",
-      "MD5": "f9c6a059f781518daa01fe6c3fd0b794",
-      "FileSize": 136.224609,
+      "MD5": "d557475a881174af1654d9dcb63b07a0",
+      "FileSize": 327.357422,
       "assetDatas": [
         {
           "Name": "DraggedText",
@@ -199,8 +199,8 @@
     },
     {
       "AssetName": "mftest",
-      "MD5": "c49c505fb7d20c63fc239a81588fb917",
-      "FileSize": 1043.28223,
+      "MD5": "1a9606d92fda878f843b5f4feae843e9",
+      "FileSize": 1046.833,
       "assetDatas": [
         {
           "Name": "War loop",
@@ -299,7 +299,7 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "f2ce5db0ff5e671f294be004e89a6afe",
+      "MD5": "eed95a4c6afe6d2aa3ad3aba21670016",
       "FileSize": 1.79296875,
       "assetDatas": []
     },

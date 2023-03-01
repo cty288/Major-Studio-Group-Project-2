@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 247378997
+CRC: 999036626
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a78efff5c3787e53bea03d2b87ef133b
+    Hash: 94d6466e53ff933ced2afe2291b4e1d8
   TypeTreeHash:
     serializedVersion: 2
-    Hash: b657ba7529d21102d8c078eab296b681
+    Hash: d650b38859ebe7a5ea740a5f5b0ef698
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -17,21 +17,41 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 61
+  Script: {instanceID: 0}
 - Class: 114
-  Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 650910a5192c6bc419d61e4a3b7fe274, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 260b52fa4b43b9d4296254fbde67bf60, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: de2630132d4b21a49b264738263ebf9d, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
+  Script: {instanceID: 0}
+- Class: 213
   Script: {instanceID: 0}
 - Class: 222
   Script: {instanceID: 0}
 - Class: 224
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers:
+- AssemblyName: EasySave3
+  ClassName: ES3Internal.ES3RefIdDictionary
 - AssemblyName: Unity.TextMeshPro
   ClassName: TMPro.FaceInfo_Legacy
 - AssemblyName: Unity.TextMeshPro
@@ -48,6 +68,8 @@ SerializeReferenceClassIdentifiers:
   ClassName: TMPro.VertexGradient
 - AssemblyName: UnityEngine.CoreModule
   ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.RectOffset
 - AssemblyName: UnityEngine.TextCoreFontEngineModule
   ClassName: UnityEngine.TextCore.FaceInfo
 - AssemblyName: UnityEngine.TextCoreFontEngineModule
