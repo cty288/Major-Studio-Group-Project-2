@@ -66,9 +66,10 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
         }
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
         if ((currentTime.Hour == 23 && currentTime.Minute >= 50) || gameStateModel.GameState.Value == GameState.End) {
-            EndRadio();
-            return EventState.End;
+            //EndRadio();
+            //return EventState.End;
         }
+        
 
         if (!started) {
             started = true;

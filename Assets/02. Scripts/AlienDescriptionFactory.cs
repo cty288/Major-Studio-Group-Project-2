@@ -15,12 +15,12 @@ public static class AlienDescriptionFactory {
     public static DescriptionFormatter Formatter => formatter;
     public static void Init() {
         //RegisterRadioDescription(TestRadioDescription);
-        //RegisterRadioDescription(Radio0);
+        RegisterRadioDescription(Radio0);
         RegisterRadioDescription(Radio1);
-        //RegisterRadioDescription(Radio2);
-        //RegisterRadioDescription(Radio3);
-        //RegisterRadioDescription(Radio4);
-        //RegisterRadioDescription(Radio5);
+        RegisterRadioDescription(Radio2);
+        RegisterRadioDescription(Radio3);
+        RegisterRadioDescription(Radio4);
+        RegisterRadioDescription(Radio5);
     }
 
     public static string GetRadioDescription(BodyInfo bodyInfo, float reality) {
@@ -30,7 +30,7 @@ public static class AlienDescriptionFactory {
 
        
         // bodyInfo = BodyInfo.GetRandomBodyInfo();
-        return RadioDescriptions[Random.Range(0, RadioDescriptions.Count)](bodyInfo, reality);
+        return RadioDescriptions[Random.Range(0, RadioDescriptions.Count)](bodyInfo, reality).TrimEnd();
     }
 
     public static void RegisterRadioDescription(Func<BodyInfo, float, string> description) {
