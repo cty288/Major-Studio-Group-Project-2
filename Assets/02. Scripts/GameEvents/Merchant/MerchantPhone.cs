@@ -9,9 +9,15 @@ using Random = UnityEngine.Random;
 
 public interface IPlayerResource {
     public string PrefabName { get; }
-
     public int MaxCount { get; }
+    
 }
+
+
+
+
+
+
 public abstract class MerchantGoods: IPlayerResource {
 
     public abstract int BaseFoodPerUnit { get; }
@@ -26,6 +32,9 @@ public abstract class MerchantGoods: IPlayerResource {
     public abstract string PrefabName { get; }
     public abstract int MaxCount { get; }
 }
+
+
+
 
 public class BulletGoods : MerchantGoods {
     public override int BaseFoodPerUnit { get; } = 3;
@@ -43,6 +52,10 @@ public class BulletGoods : MerchantGoods {
     public override string PrefabName { get; } = "Bullet";
     public override int MaxCount { get; } = 6;
 }
+
+
+
+
 public class MerchantPhone : TelephoneContact, ICanGetModel {
     protected GameEventSystem gameEventSystem;    
    

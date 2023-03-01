@@ -17,5 +17,7 @@ namespace _02._Scripts.Notebook {
 	
 	public interface IDroppable {
 		public DroppableInfo GetDroppableInfo();
+		
+		public void OnDropped();
 	}
 }

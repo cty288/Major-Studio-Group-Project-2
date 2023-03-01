@@ -8,13 +8,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class NotebookViewController : AbstractMikroController<MainGame>, IPointerClickHandler, ICanHaveDroppableItems{
+public class NotebookViewController : AbstractCanHaveDroppableItems, IPointerClickHandler, ICanHaveDroppableItems{
     [SerializeField] private OpenableUIPanel panel;
     private MouseHoverOutline mouseHoverOutline;
     [SerializeField] private TMP_Text droppingText;
     protected GameTimeModel gameTimeModel;
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         mouseHoverOutline = GetComponent<MouseHoverOutline>();
         gameTimeModel = this.GetModel<GameTimeModel>();
     }
@@ -24,7 +25,7 @@ public class NotebookViewController : AbstractMikroController<MainGame>, IPointe
     }
 
     
-    public void OnEnter(IDroppable content) {
+    public override void OnEnter(IDroppable content) {
         mouseHoverOutline.StartHovering(true);
         droppingText.gameObject.SetActive(true);
         NotebookPanel notebookPanel = panel as NotebookPanel;
@@ -32,12 +33,12 @@ public class NotebookViewController : AbstractMikroController<MainGame>, IPointe
        
     }
 
-    public void OnExit(IDroppable content) {
+    public override void OnExit(IDroppable content) {
         mouseHoverOutline.StopHovering();
         droppingText.gameObject.SetActive(false);
     }
 
-    public void OnDrop(IDroppable content) {
+    public override void OnDrop(IDroppable content) {
         NotebookPanel notebookPanel = panel as NotebookPanel;
 
         notebookPanel.AddContent(gameTimeModel.CurrentTime.Value, content.GetDroppableInfo(), !panel.IsShow);

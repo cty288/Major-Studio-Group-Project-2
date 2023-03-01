@@ -34,9 +34,14 @@ public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEven
         this.GetSystem<ITimeSystem>().AddDelayTask(AudioSystem.Singleton.Play2DSound("dogBark_4", 1, false).clip.length, OnOpenFinish);
         LoadCanvas.Singleton.ShowMessage("You adopted this lonely dog.");
         this.SendEvent<OnDogGet>();
-        return () => onClickPeepholeSpeakEnd;
+        return OnPeepholeSpeakEnd;
     }
 
+    protected bool OnPeepholeSpeakEnd() {
+        return onClickPeepholeSpeakEnd;
+    }
+    
+    
     public override void OnEventEnd() {
       
     }
@@ -48,10 +53,14 @@ public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEven
 
     public static BodyInfo GenerateDog(float knockDoorTimeInterval, int knockTime) {
         HeightType height =HeightType.Short;
-        BodyPartPrefabInfo leg = AlienBodyPartCollections.Singleton.SpecialBodyPartPrefabs.HeightSubCollections[1]
-            .ShadowBodyPartPrefabs.HumanTraitPartsPrefabs[0].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
+        List<GameObject> dogs = AlienBodyPartCollections.Singleton.SpecialBodyPartPrefabs.HeightSubCollections[1]
+            .ShadowBodyPartPrefabs.HumanTraitPartsPrefabs;//.GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
 
-        return BodyInfo.GetBodyInfo(leg, null, null, height, null,
+
+        BodyPartPrefabInfo dog = dogs[Random.Range(0, dogs.Count)].GetComponent<AlienBodyPartInfo>()
+            .GetBodyPartPrefabInfo();
+        
+        return BodyInfo.GetBodyInfo(null, null, dog, height, null,
             new DogKnockBehavior(knockDoorTimeInterval, knockTime, null), BodyPartDisplayType.Shadow, false);
 
     }

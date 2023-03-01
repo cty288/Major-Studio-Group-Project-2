@@ -32,7 +32,6 @@ public class PlayerResourceSystem : AbstractSystem {
         if (!playerResourceModel.HasEnoughResource<GunResource>(1)) {
             playerResourceModel.AddResource(new GunResource(), 1);
         }
-       
     }
 
    

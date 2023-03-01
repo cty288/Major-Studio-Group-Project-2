@@ -58,4 +58,8 @@ public class DroppableTexts : MonoBehaviour, IDroppable {
 	public DroppableInfo GetDroppableInfo() {
 		return new DroppableTextInfo(text.text, contentUIPrefab);
 	}
+
+	public void OnDropped() {
+		Destroy(gameObject);
+	}
 }

@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.Notebook;
 using MikroFramework.Architecture;
 using NHibernate.Mapping;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PhotoOnTable : DraggableItems, IHaveBodyInfo {
+public class PhotoOnTable : DraggableItems, IHaveBodyInfo, IDroppable {
 	
 	protected SpriteRenderer spriteRenderer;
 	protected Canvas containerCanvas;
@@ -79,7 +80,14 @@ public class PhotoOnTable : DraggableItems, IHaveBodyInfo {
 		Destroy(gameObject);
 	}
 
-	
+
+	public DroppableInfo GetDroppableInfo() {
+		return null;
+	}
+
+	public void OnDropped() {
+		Destroy(gameObject);
+	}
 }
 
 public struct OnPhotoOpened {

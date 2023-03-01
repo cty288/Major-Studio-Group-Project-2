@@ -17,7 +17,8 @@ public class DailyBodyRadio : RadioEvent {
 
 
         private Coroutine radioCorruptCheckCoroutine;
-         public DailyBodyRadio(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer) : base(startTimeRange, speakContent, speakRate, speakGender, mixer,
+         public DailyBodyRadio(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer) :
+             base(startTimeRange, speakContent, speakRate, speakGender, mixer,
              RadioChannel.DeadNews) {
              
          }
