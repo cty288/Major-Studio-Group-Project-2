@@ -13,5 +13,7 @@ namespace _02._Scripts.GameTime {
 			
 			Day++;
 		}
+		
+		
 	}
 }

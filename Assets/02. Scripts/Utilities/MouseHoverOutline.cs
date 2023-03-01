@@ -13,6 +13,8 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
     [SerializeField] private Material outlineMaterial;
     private SpriteRenderer spriteRenderer;
     private MaskableGraphic image;
+
+    [SerializeField] private MaskableGraphic overriddeImage;
     
     private Material defaultMaterial;
     private bool isHovering = false;
@@ -21,13 +23,22 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
     [SerializeField] private bool moveToTopWhenHovering = false;
     
     private PlayerControlModel playerControlModel;
+    private OpenableUIPanel parentPanel;
     private void Awake() {
         if (outlineMaterial) {
             outlineMaterial = Material.Instantiate(outlineMaterial);
         }
+
+        parentPanel = this.GetComponentInParent<OpenableUIPanel>(true);
+        if (parentPanel) {
+            parentPanel.IsShow.RegisterOnValueChaned(OnShowValueChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
+        }
        
         spriteRenderer = GetComponent<SpriteRenderer>();
         image = GetComponent<MaskableGraphic>();
+        if (overriddeImage) {
+            image = overriddeImage;
+        }
         if (spriteRenderer) {
             defaultMaterial = spriteRenderer.material;
         }
@@ -44,6 +55,25 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     }
 
+    private void OnShowValueChanged(bool isShow) {
+        if (!isShow) {
+            if (outlineMaterial) {
+                if (spriteRenderer) {
+                    spriteRenderer.material = defaultMaterial;
+                }
+                if (image)
+                {
+                    image.material = defaultMaterial;
+                }
+            }
+        }
+        else {
+            if (isHovering) {
+                StartHovering();
+            }
+        }
+    }
+
     private void OnControlChanged(PlayerControlType controlType) {
         if (controlType == PlayerControlType.Screenshot) {
             StopHovering();
@@ -55,7 +85,7 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
     }
 
     private void Start() {
-        if (spriteRenderer) {
+        if (spriteRenderer && defaultMaterial) {
             spriteRenderer.material = defaultMaterial;
         }
        
@@ -92,7 +122,7 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
     }
 
     public void StartHovering(bool onlyChangeMaterial = false) {
-        if (outlineMaterial) {
+        if (outlineMaterial && (parentPanel == null || parentPanel.IsShow.Value)) {
             if (spriteRenderer) {
                 spriteRenderer.material = outlineMaterial;
             }

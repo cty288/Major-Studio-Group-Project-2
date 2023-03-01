@@ -67,7 +67,7 @@ public class SubtitleHightlightedTextDragger : AbstractMikroController<MainGame>
         if (wordIndex != -1 && !string.IsNullOrEmpty(targetText) && !targetText.Equals(CurrentDraggedText)) {
             if (!hintTmpText) {
                 hintTmpText = CreateDraggedText("Drag to the notebook \nto quick-record", new Color(0.7f, 0.7f, 0.7f, 1f));
-                hintTmpText.fontSize = 16;
+                hintTmpText.fontSize = 20;
             }
             hintTmpText.transform.position = Input.mousePosition + Vector3.up * 30;
         }

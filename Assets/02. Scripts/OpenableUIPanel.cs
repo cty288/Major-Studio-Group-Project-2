@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MikroFramework;
 using MikroFramework.Architecture;
+using MikroFramework.BindableProperty;
 using MikroFramework.Event;
 using MikroFramework.Utilities;
 using UnityEngine;
@@ -14,9 +15,9 @@ using UnityEngine.EventSystems;
 public abstract class OpenableUIPanel : AbstractMikroController<MainGame> {
     protected List<Collider2D> colliders = new List<Collider2D>();
     protected Canvas canvas;
-    protected bool isShow = false;
+    protected BindableProperty<bool> isShow = new BindableProperty<bool>(false);
 
-    public bool IsShow => isShow;
+    public BindableProperty<bool> IsShow => isShow;
 
     protected SimpleRC canBack = new SimpleRC();
     
@@ -25,7 +26,7 @@ public abstract class OpenableUIPanel : AbstractMikroController<MainGame> {
     public void Show(float time) {
         OnShow(time);
         this.Delay(time, () => {
-            isShow = true;
+            isShow.Value = true;
         });
     }
 
@@ -33,7 +34,7 @@ public abstract class OpenableUIPanel : AbstractMikroController<MainGame> {
 
     public void Hide(float time) {
         OnHide(time);
-        isShow = false;
+        isShow.Value = false;
     }
 
     public abstract void OnHide(float time);

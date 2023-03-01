@@ -108,7 +108,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
         dateText.text = news.dateString;
         panel.gameObject.SetActive(true);
         this.Delay(0.5f, () => {
-            isShow = true;
+            isShow.Value = true;
         });
         AudioSystem.Singleton.Play2DSound("pick_up_newspaper");
         
