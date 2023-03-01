@@ -11,6 +11,8 @@ public interface IPlayerResource {
     public string PrefabName { get; }
 
     public int MaxCount { get; }
+
+
 }
 public abstract class MerchantGoods: IPlayerResource {
 

@@ -7,6 +7,7 @@ using UnityEngine;
 public enum RadioChannel {
     DeadNews,
     GeneralNews,
+    FoodNews,
     None
 }
 public class RadioModel : AbstractSavableModel {
