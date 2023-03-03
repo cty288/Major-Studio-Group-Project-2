@@ -79,7 +79,7 @@ public abstract class DraggableItems : AbstractMikroController<MainGame>, IDragH
         
         var pos = transform.position;
         this.Delay(0.05f, () => {
-            if (!tableBounds.Contains(pos) && Container) {
+            if (!tableBounds.Contains(pos) && Container && this) {
                 transform.DOMove(dragStartPos, 0.5f);
             }
         });

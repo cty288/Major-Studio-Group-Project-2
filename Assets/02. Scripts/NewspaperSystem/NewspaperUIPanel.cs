@@ -37,7 +37,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
     [SerializeField] private GameObject newspaperMarkerPrefab;
     
     
-    protected NewspaperMarker currentMarker = null;
+    protected ScreenSpaceCameraMarker CurrentScreenSpaceCameraMarker = null;
     protected LineRenderer currentLineRenderer = null;
     [SerializeField] private GameObject lineRendererPrefab;
     
@@ -83,25 +83,25 @@ public class NewspaperUIPanel : OpenableUIPanel {
     }
 
     private GameObject CreateNewspaperMarker(Newspaper news) {
-        NewspaperMarker marker = Instantiate(newspaperMarkerPrefab, panel.transform)
-            .GetComponent<NewspaperMarker>();
+        ScreenSpaceCameraMarker screenSpaceCameraMarker = Instantiate(newspaperMarkerPrefab, panel.transform)
+            .GetComponent<ScreenSpaceCameraMarker>();
 
         if (news.markerPositions.Count > 0) {
             for (int i = 0; i < news.markerPositions.Count; i++) {
-                LineRenderer renderer = marker.AddMarker();
+                LineRenderer renderer = screenSpaceCameraMarker.AddMarker();
                 renderer.positionCount = news.markerPositions[i].Count;
                 renderer.SetPositions(news.markerPositions[i].ToArray());
             }
         }
 
-        return marker.gameObject;
+        return screenSpaceCameraMarker.gameObject;
     }
     
     public void Show(Newspaper news) {
         colliders.ForEach((collider2D => {
             collider2D.enabled = true;
         } ));
-        currentMarker = null;
+        CurrentScreenSpaceCameraMarker = null;
         
         outOfDateText.SetActive(gameTimeManager.CurrentTime.Value.Day - news.date.Day >= 3);
         
@@ -118,9 +118,9 @@ public class NewspaperUIPanel : OpenableUIPanel {
         }
 
         lastMarkerPosition = Vector2.zero;
-        currentMarker = newspaperMarkers[news.guid].GetComponent<NewspaperMarker>();
+        CurrentScreenSpaceCameraMarker = newspaperMarkers[news.guid].GetComponent<ScreenSpaceCameraMarker>();
         
-        currentMarker.gameObject.SetActive(true);
+        CurrentScreenSpaceCameraMarker.gameObject.SetActive(true);
         
         
         if (lastNewspaper == news && savedSpawnedImages.Count > 0) {
@@ -168,9 +168,9 @@ public class NewspaperUIPanel : OpenableUIPanel {
         if (playerControl.ControlType.Value != PlayerControlType.Normal) {
             return;
         }
-        if (panel.activeInHierarchy && currentMarker) {
+        if (panel.activeInHierarchy && CurrentScreenSpaceCameraMarker) {
             if (Input.GetMouseButtonDown(0)) {
-                currentLineRenderer = currentMarker.AddMarker();
+                currentLineRenderer = CurrentScreenSpaceCameraMarker.AddMarker();
             }
             
             if (Input.GetMouseButton(0)) {
@@ -184,7 +184,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
 
                     if (markerArea.bounds.Contains(mousePosWorldFixed)) {
                         Vector3 mousePos = new Vector3(mousePosWorld.x, mousePosWorld.y, -15);
-                        currentMarker.AddMarkerPosition(currentLineRenderer, mousePos);
+                        CurrentScreenSpaceCameraMarker.AddMarkerPosition(currentLineRenderer, mousePos);
                         
                     }
                     
@@ -194,7 +194,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
             }
             
             if (Input.GetMouseButtonUp(0)) {
-                List<Vector3> positions = currentMarker.GetCurrentMarkerPositions();
+                List<Vector3> positions = CurrentScreenSpaceCameraMarker.GetCurrentMarkerPositions();
                 if (positions!=null && positions.Count > 0) {
                     newspaperModel.MarkNewspaper(news, positions);
                 }
@@ -299,8 +299,8 @@ public class NewspaperUIPanel : OpenableUIPanel {
             panel.gameObject.SetActive(false);
         });
         AudioSystem.Singleton.Play2DSound("put_down_newspaper");
-        if (currentMarker) {
-            currentMarker.gameObject.SetActive(false);
+        if (CurrentScreenSpaceCameraMarker) {
+            CurrentScreenSpaceCameraMarker.gameObject.SetActive(false);
         }
 
         currentLineRenderer = null; 

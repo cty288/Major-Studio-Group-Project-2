@@ -21,6 +21,8 @@ public class PhotoPanelUI : OpenableUIPanel {
 	private IHaveBodyInfo bodyInfoContainer;
 	
 	private Dictionary<Image, float> imageAlpha = new Dictionary<Image, float>();
+	
+	public static bool IsOpen { get; private set; }
 
 	protected override void Awake() {
 		base.Awake();
@@ -53,6 +55,7 @@ public class PhotoPanelUI : OpenableUIPanel {
 		images.ForEach((image => image.DOFade(imageAlpha[image], time)));
 		texts.ForEach((text => text.DOFade(1, time)));
 		rawImages.ForEach((rawImage => rawImage.DOFade(1, time)));
+		IsOpen = true;
 	}
 
 	public override void OnHide(float time) {
@@ -65,7 +68,9 @@ public class PhotoPanelUI : OpenableUIPanel {
 					photoPanel.gameObject.SetActive(false);
 				}
 			}
+			IsOpen = false;
 		});
+		
 	}
 
 	public override void OnDayEnd() {

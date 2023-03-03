@@ -23,6 +23,7 @@ public class PhotoOnTable : DraggableItems, IHaveBodyInfo, IDroppable {
 	protected PlayerControlModel playerControlModel;
 	
 	[ES3Serializable] protected bool opened = false;
+	[SerializeField] protected GameObject photoInNotebookPrefab;
 	
 	protected override void Awake() {
 		base.Awake();
@@ -82,7 +83,7 @@ public class PhotoOnTable : DraggableItems, IHaveBodyInfo, IDroppable {
 
 
 	public DroppableInfo GetDroppableInfo() {
-		return null;
+		return new NotebookPhotoDroppableInfo(photoInNotebookPrefab, savedPhotoID);
 	}
 
 	public void OnDropped() {

@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3562611488397065612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6540911932692019368}
+  - component: {fileID: 1037946200903051161}
+  - component: {fileID: -8101145837629383673}
+  - component: {fileID: 6920788652040814699}
+  m_Layer: 5
+  m_Name: NotebookMarkerParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6540911932692019368
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562611488397065612}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1037946200903051161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562611488397065612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edc52736b4c7b794d81d6100dfa4bb46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  markerPrefab: {fileID: 2981298900139068528, guid: 8b764ab2ed047e548a5d75cd806d908b, type: 3}
+  isLocalSpace: 1
+--- !u!114 &-8101145837629383673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562611488397065612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c1b5c009bba4fe6a64bec8a3fe948e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canDrag: 0
+--- !u!114 &6920788652040814699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562611488397065612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabId: 1420922189921719195
+  localRefs:
+    _Keys:
+    - {fileID: 3562611488397065612}
+    - {fileID: 6540911932692019368}
+    - {fileID: 1037946200903051161}
+    - {fileID: 11500000, guid: edc52736b4c7b794d81d6100dfa4bb46, type: 3}
+    - {fileID: 2981298900139068528, guid: 8b764ab2ed047e548a5d75cd806d908b, type: 3}
+    - {fileID: 2981298900139068529, guid: 8b764ab2ed047e548a5d75cd806d908b, type: 3}
+    - {fileID: 2981298900139068542, guid: 8b764ab2ed047e548a5d75cd806d908b, type: 3}
+    - {fileID: 2100000, guid: 021cd01618a9b4d45a8348b53ec0c37c, type: 2}
+    - {fileID: 10755, guid: 0000000000000000f000000000000000, type: 0}
+    - {fileID: -8101145837629383673}
+    - {fileID: 11500000, guid: 4c1b5c009bba4fe6a64bec8a3fe948e9, type: 3}
+    - {fileID: 6920788652040814699}
+    _Values: bddc8e00c8b4b123bed15853b91ab26183c7878ce9528a244a71b44668432e651db689b588315a4df1ecaf5b9ce1337f615f92fba845fd0e67b2b657006aba7a5d0d8f8f5b98155193c6822afe1a3e67c2cb1af64ecd4263b3971b3be8b14d7a

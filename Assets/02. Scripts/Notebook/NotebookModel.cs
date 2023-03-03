@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MikroFramework.Architecture;
 
 namespace _02._Scripts.Notebook {
+
+	public struct OnNoteDeleted {
+		
+	}
 	public class NotebookModel : AbstractSavableModel {
 		[field: ES3Serializable]
 		public Dictionary<DateTime, List<DroppableInfo>> Notes { get; private set; } = new Dictionary<DateTime, List<DroppableInfo>>();
@@ -18,6 +23,13 @@ namespace _02._Scripts.Notebook {
 				if (!Notes.ContainsKey(LastOpened)) {
 					Notes.Add(LastOpened, new List<DroppableInfo>());
 				}
+			}
+		}
+		
+		public void RemoveNotes(DateTime date) {
+			if (Notes.ContainsKey(date)) {
+				Notes.Remove(date);
+				this.SendEvent<OnNoteDeleted>();
 			}
 		}
 		

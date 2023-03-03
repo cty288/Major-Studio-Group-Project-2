@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.Notebook;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
 using MikroFramework.ResKit;
@@ -12,7 +13,9 @@ public class Table :  AbstractDroppableItemContainerViewController {
     [SerializeField] private GameObject newspaperPrefab;
     [SerializeField] private GameObject bountyHunterGiftPrefab;
     [SerializeField] private List<GameObject> photoPrefabList;
-
+    [SerializeField] private List<GameObject> crumbledPaperList;
+    
+    
     private NewspaperViewController todayNewspaper;
     
 
@@ -23,6 +26,11 @@ public class Table :  AbstractDroppableItemContainerViewController {
         this.RegisterEvent<SpawnTableItemEvent>(OnSpawnItem).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnBountyHunterKillCorrectAlien>(OnBountyHunterKillCorrectAlien).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNewPhotoTaken>(OnNewPhotoTaken).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnNoteDeleted>(OnNoteDeleted).UnRegisterWhenGameObjectDestroyed(gameObject);
+    }
+
+    private void OnNoteDeleted(OnNoteDeleted obj) {
+        GameObject litter = SpawnItem(crumbledPaperList[Random.Range(0, crumbledPaperList.Count)]);
     }
 
     private void OnNewPhotoTaken(OnNewPhotoTaken e) {

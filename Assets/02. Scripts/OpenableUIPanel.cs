@@ -71,6 +71,8 @@ public abstract class OpenableUIPanel : AbstractMikroController<MainGame> {
         OnDayEnd();
     }
 
+
+    [SerializeField] private float hideTime = 0.5f;
     protected virtual void Update() {
         if (Input.GetMouseButtonDown(0) && canBack.RefCount<=0) {
             Vector2 mousePos = Input.mousePosition;
@@ -83,7 +85,7 @@ public abstract class OpenableUIPanel : AbstractMikroController<MainGame> {
             bool mouseClickPanel = colliders.Any(c => c.OverlapPoint(mousePos));
 
             if (!mouseClickPanel && isShow && AdditionMouseExitCheck()) {
-                Hide(0.5f);
+                Hide(hideTime);
             }
         }
     }

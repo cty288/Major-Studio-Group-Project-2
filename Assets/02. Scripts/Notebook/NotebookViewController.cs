@@ -21,7 +21,7 @@ public class NotebookViewController : AbstractCanHaveDroppableItems, IPointerCli
     }
 
     public void OnPointerClick(PointerEventData eventData) {
-        panel.Show(0.5f);
+        panel.Show(0.2f);
     }
 
     

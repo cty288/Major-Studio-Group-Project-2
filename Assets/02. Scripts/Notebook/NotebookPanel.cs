@@ -36,8 +36,12 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
     
     [SerializeField] private TMP_Text droppingText;
     [SerializeField] private GameObject writtenTextPrefab;
+    [SerializeField] private GameObject markerPrefab;
 
     protected NotebookWrittenText currentWritingText = null;
+    protected  NotebookMarker currentMarker = null;
+    protected NotebookWritePage notebookWritePage;
+    protected RectTransform markerPanel;
     protected override void Awake() {
         base.Awake();
         panel = transform.Find("Panel").gameObject;
@@ -45,13 +49,16 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         leftPageSpace = panel.transform.Find("NotebookContent/Left").GetComponent<Collider2D>();
         rightPageSpace = panel.transform.Find("NotebookContent/Right").GetComponent<Collider2D>();
         contentPanel = panel.transform.Find("NotebookContent/MainContentPanel").GetComponent<RectTransform>();
+        markerPanel = panel.transform.Find("NotebookContent/MarkerPanel").GetComponent<RectTransform>();
         dateText = panel.transform.Find("NotebookContent/DateText").GetComponent<TMP_Text>();
 
         lastPageButton = panel.transform.Find("LastPage").GetComponent<Button>();
         nextPageButton = panel.transform.Find("NextPage").GetComponent<Button>();
         
+        
         this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
         selfCollider = GetComponent<Collider2D>();
+        notebookWritePage = GetComponentInChildren<NotebookWritePage>(true);
         gameTimeModel = this.GetModel<GameTimeModel>();
         panel.gameObject.SetActive(true);
         this.Delay(0.1f, () => {
@@ -66,6 +73,17 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         
         lastPageButton.onClick.AddListener(OnLastPageButtonClicked);
         nextPageButton.onClick.AddListener(OnNextPageButtonClicked);
+        notebookWritePage.OnTear += OnTear;
+    }
+
+    
+
+    protected override void OnDestroy() {
+        base.OnDestroy();
+        lastPageButton.onClick.RemoveListener(OnLastPageButtonClicked);
+        nextPageButton.onClick.RemoveListener(OnNextPageButtonClicked);
+        notebookWritePage.OnTear -= OnTear;
+        
     }
 
     private void OnNextPageButtonClicked() {
@@ -94,6 +112,24 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
             notebookModel.UpdateLastOpened(nextTime);
         }
     }
+    
+    private void OnTear() {
+        DateTime lastNoteBookOpenTime = notebookModel.LastOpened;
+        if(lastNoteBookOpenTime == DateTime.MinValue) {
+            lastNoteBookOpenTime = gameTimeModel.CurrentTime.Value.Date;
+        }
+
+        notebookModel.RemoveNotes(lastNoteBookOpenTime);
+        DestroyAllContents();
+
+        DateTime next = lastNoteBookOpenTime;
+        if (notebookModel.HasPreviousNotes(lastNoteBookOpenTime, out DateTime nextTime)) {
+           next = nextTime;
+        }
+        notebookModel.UpdateLastOpened(nextTime);
+        LoadContent(next, false);
+    }
+
 
     private void OnNewDay(OnNewDay e) {
         notebookModel.UpdateLastOpened(e.Date, true);
@@ -190,40 +226,109 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
             panel.gameObject.SetActive(false);
         });
         selfCollider.enabled = false;
+
+        if (currentMarker != null) {
+            currentMarker.StopDraw();
+            currentMarker = null;
+        }
     }
 
     private void DestroyAllContents() {
         foreach (Transform child in contentPanel) {
             Destroy(child.gameObject);
         }
+
+        foreach (Transform child in markerPanel) {
+            Destroy(child.gameObject);
+        }
     }
 
     
-    private Vector3 lastMousePosition;
+    private Vector3 lastMouseDownPosition;
+    protected bool lastMouseDownInMarkerPanel = false;
+    protected bool CheckMouseOnEmptySpace() {
+       
+        Vector3 mousePos = Input.mousePosition;
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        mousePos = new Vector3(mousePos.x, mousePos.y, 0);
+        
+        //bool mouseClickPanel = leftPageSpace.OverlapPoint(mousePos) || rightPageSpace.OverlapPoint(mousePos);
+
+        bool mouseClickElement = false;
+        bool containLeftRightPage = false;
+                
+        Physics2D.OverlapCircleAll(mousePos, 0.1f).ToList().ForEach((collider) => {
+            if (collider.gameObject == leftPageSpace.gameObject || collider.gameObject == rightPageSpace.gameObject) {
+                containLeftRightPage = true;
+            }
+
+            if (collider.gameObject.CompareTag("NotebookElement")) {
+                mouseClickElement = true;
+            }
+                    
+        });
+
+
+
+        if (!mouseClickElement  && containLeftRightPage) {
+            return true;
+        }
+        return false;
+    }
+    
     protected override void Update() {
         base.Update();
+        Vector3 mousePos = Input.mousePosition;
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        mousePos = new Vector3(mousePos.x, mousePos.y, 0);
+        
+        
         if (Input.GetMouseButtonDown(0)) {
-            Vector3 mousePos = Input.mousePosition;
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-            mousePos = new Vector3(mousePos.x, mousePos.y, 0);
-            lastMousePosition = mousePos;
+            lastMouseDownPosition = mousePos;
+            lastMouseDownInMarkerPanel = CheckMouseOnEmptySpace();
+        }
+
+        if (Input.GetMouseButton(0)) {
+            if (lastMouseDownInMarkerPanel && currentWritingText == null && !PhotoPanelUI.IsOpen && CheckMouseOnEmptySpace() && Vector3.Distance(lastMouseDownPosition, mousePos) > 0.1f) {
+                if (currentMarker == null) {
+                    CreateMarker(mousePos);
+                }
+            }
         }
         
         if (Input.GetMouseButtonUp(0)) {
-            if (currentWritingText == null) {
-                Vector3 mousePos = Input.mousePosition;
-                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-                mousePos = new Vector3(mousePos.x, mousePos.y, 0);
-
-                bool mouseClickPanel = leftPageSpace.OverlapPoint(mousePos) || rightPageSpace.OverlapPoint(mousePos);
-               
-                if (mouseClickPanel && Vector3.Distance(lastMousePosition, mousePos) < 0.1f) {
+            if (currentWritingText == null && !PhotoPanelUI.IsOpen && currentMarker == null) { //check whether create new text
+                if (CheckMouseOnEmptySpace() && Vector3.Distance(lastMouseDownPosition, mousePos) < 0.1f) {
                     CreateWritingText(mousePos);
                 }
-                
             }
-           
+            
+            
+            if (currentMarker != null) {
+                currentMarker.StopDraw();
+                currentMarker = null;
+            }
+
         }
+    }
+
+    private void CreateMarker(Vector3 mousePos) {
+        DateTime lastNoteBookOpenTime = notebookModel.LastOpened;
+        if(lastNoteBookOpenTime == DateTime.MinValue) {
+            lastNoteBookOpenTime = gameTimeModel.CurrentTime.Value.Date;
+        }
+
+        Bounds markerBounds = leftPageBounds.Contains(mousePos) ? leftPageBounds : rightPageBounds;
+        NotebookMarkerDroppableInfo droppableInfo = new NotebookMarkerDroppableInfo(markerPrefab, markerBounds);
+        
+        NotebookMarker droppedUIObjectViewController =
+            droppableInfo.GetContentUIObject(markerPanel) as NotebookMarker;
+        
+        //need to update content.bounds
+        AddContent(lastNoteBookOpenTime, mousePos, droppedUIObjectViewController.GetExtent(), droppableInfo,
+            droppedUIObjectViewController, false, markerPanel);
+        
+        currentMarker = droppedUIObjectViewController;
     }
 
     private void CreateWritingText(Vector2 mousePos) {
@@ -239,7 +344,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         
         //need to update content.bounds
         AddContent(lastNoteBookOpenTime, mousePos, droppedUIObjectViewController.GetExtent(), droppableInfo,
-            droppedUIObjectViewController, false);
+            droppedUIObjectViewController, false, contentPanel);
         
         currentWritingText = droppedUIObjectViewController;
         currentWritingText.OnClickOutside += OnClickOutside;
@@ -272,7 +377,8 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
             foreach (DroppableInfo content in infos) {
                 DroppedUIObjectViewController droppedUIObjectViewController =
                     content.GetContentUIObject(leftPageSpace.GetComponent<RectTransform>());
-               StartCoroutine(PlaceContent(droppedUIObjectViewController, content, hide));
+                StartCoroutine(PlaceContent(droppedUIObjectViewController, content, hide,
+                    content is NotebookMarkerDroppableInfo ? markerPanel : contentPanel));
             }
         }
         
@@ -324,18 +430,24 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
     }
 
 
-    private IEnumerator PlaceContent(DroppedUIObjectViewController droppedUIObjectViewController,DroppableInfo content, bool hide) {
+    private IEnumerator PlaceContent(DroppedUIObjectViewController droppedUIObjectViewController,DroppableInfo content, bool hide, RectTransform parent) {
         yield return null;
         LayoutRebuilder.ForceRebuildLayoutImmediate(droppedUIObjectViewController.transform.GetComponent<RectTransform>());
         droppedUIObjectViewController.DroppableInfo = content;
         
-        droppedUIObjectViewController.transform.SetParent(contentPanel);
+        droppedUIObjectViewController.transform.SetParent(parent);
+        //set local z to 0
+       
+        
         droppedUIObjectViewController.transform.SetAsLastSibling();
         RectTransform rectTransform = droppedUIObjectViewController.GetComponent<RectTransform>();
         droppedUIObjectViewController.Bounds = new[] {rightPageBounds, leftPageBounds};
 
 
         rectTransform.position = content.Bounds.center;
+        
+        Vector3 localPos = droppedUIObjectViewController.transform.localPosition;
+        droppedUIObjectViewController.transform.localPosition = new Vector3(localPos.x, localPos.y, 0);
         rectTransform.localScale = Vector3.one;
 
         if (hide) {
@@ -351,7 +463,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
     
     
     private IEnumerator AddContent(DateTime day, DroppableInfo content,
-        DroppedUIObjectViewController droppedUIObjectViewController, bool leftOrRight, bool hide) {
+        DroppedUIObjectViewController droppedUIObjectViewController, bool leftOrRight, bool hide, RectTransform parent, Vector3 overridePos = default) {
         
         yield return null;
         LayoutRebuilder.ForceRebuildLayoutImmediate(droppedUIObjectViewController.transform.GetComponent<RectTransform>());
@@ -360,15 +472,25 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         Vector2 extent = droppedUIObjectViewController.GetExtent();
         //convert extent to world space
         extent = contentPanel.TransformVector(extent);
+
+        overridePos = new Vector3(overridePos.x, overridePos.y, 0);
+        if (overridePos != default) {
+            //check if the overridePos is inside the bounds
+            if(!leftPageBounds.Contains(overridePos) && !rightPageBounds.Contains(overridePos)) {
+                overridePos = default;
+            }
+        }
         
-        Vector2 placedPos = FindAvailableSpace(content, extent, leftOrRight, day);
+        Vector2 placedPos =
+            overridePos == default ? FindAvailableSpace(content, extent, leftOrRight, day) : overridePos;
+        
         Debug.Log("placedPos: " + placedPos);
 
-        AddContent(day, placedPos, extent, content, droppedUIObjectViewController, hide);
+        AddContent(day, placedPos, extent, content, droppedUIObjectViewController, hide, parent);
     }
 
     private void AddContent(DateTime day, Vector2 pos, Vector2 extent, DroppableInfo content,
-        DroppedUIObjectViewController droppedUIObjectViewController, bool hide) {
+        DroppedUIObjectViewController droppedUIObjectViewController, bool hide, RectTransform parent) {
         droppedUIObjectViewController.DroppableInfo = content;
         
         content.Bounds = new Bounds(pos, extent);
@@ -379,18 +501,21 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
             Destroy(droppedUIObjectViewController.gameObject);
         }
         else {
-            StartCoroutine(PlaceContent(droppedUIObjectViewController, content, false));
+            StartCoroutine(PlaceContent(droppedUIObjectViewController, content, false, parent));
         }
 
     }
 
-    public void AddContent(DateTime day, DroppableInfo content, bool hide) {
+    public void AddContent(DateTime day, DroppableInfo content, bool hide,  Vector2 overridePos = default, RectTransform parent = null) {
         bool leftOrRight = content.IsDefaultLeftPage;
         DroppedUIObjectViewController droppedUIObjectViewController = content.GetContentUIObject(leftOrRight
             ? leftPageSpace.GetComponent<RectTransform>()
             : rightPageSpace.GetComponent<RectTransform>());
 
-        CoroutineRunner.Singleton.StartCoroutine(AddContent(day, content, droppedUIObjectViewController, leftOrRight, hide));
+        if (parent == null) {
+            parent = content is NotebookMarkerDroppableInfo ? markerPanel : contentPanel;
+        }
+        CoroutineRunner.Singleton.StartCoroutine(AddContent(day, content, droppedUIObjectViewController, leftOrRight, hide, parent, overridePos));
 
         if (hide) {
             notebookModel.UpdateLastOpened(gameTimeModel.CurrentTime.Value);
@@ -412,6 +537,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
     public void OnExit(IDroppable content) {
         droppingText.gameObject.SetActive(false);
     }
+    
 
     public void OnDrop(IDroppable content) {
         DateTime lastNoteBookOpenTime = notebookModel.LastOpened;
@@ -419,7 +545,13 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
             lastNoteBookOpenTime = gameTimeModel.CurrentTime.Value.Date;
         }
         
+        Vector2 pos = default;
+        if (IsShow) {
+            pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+       
+        
         droppingText.gameObject.SetActive(false);
-        AddContent(lastNoteBookOpenTime, content.GetDroppableInfo(), !IsShow);
+        AddContent(lastNoteBookOpenTime, content.GetDroppableInfo(), !IsShow, pos, contentPanel);
     }
 }

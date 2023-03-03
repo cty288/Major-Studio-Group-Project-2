@@ -45,13 +45,19 @@ public class NotebookWrittenText : DroppedUIObjectViewController {
 
 	public Action<string> OnClickOutside;
 
-
+	protected RectTransform rect;
+	protected BoxCollider2D collider;
 	protected override void Awake() {
 		base.Awake();
 		inputField = GetComponentInChildren<TMP_InputField>(true);
 		inputField.onValueChanged.AddListener(OnInputChanged);
+		rect = GetComponent<RectTransform>();
+		collider = GetComponent<BoxCollider2D>();
 	}
 
+	private void FixedUpdate() {
+		collider.size = rect.rect.size;
+	}
 
 	private void OnDestroy() {
 		inputField.onValueChanged.RemoveListener(OnInputChanged);

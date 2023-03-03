@@ -43,6 +43,8 @@ public abstract class DroppedUIObjectViewController : AbstractMikroController<Ma
         var pos = Camera.main.ScreenToWorldPoint(eventData.position);
         pos.z = 0;
         transform.position = pos;
+        Vector3 localPos = transform.localPosition;
+        transform.localPosition = new Vector3(localPos.x, localPos.y, 0);
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
