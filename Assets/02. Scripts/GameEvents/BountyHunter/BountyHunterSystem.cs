@@ -69,7 +69,7 @@ public class BountyHunterSystem : AbstractSystem {
     public void GoToJail(int day) {
         bountyHunterModel.NextAvailableDate = bountyHunterModel.NextAvailableDate.AddDays(day);
         bountyHunterModel. NextAvailableDate =
-            new DateTime(bountyHunterModel.NextAvailableDate.Year, bountyHunterModel.NextAvailableDate.Month, bountyHunterModel.NextAvailableDate.Day, 22, 0, 0);
+            new DateTime(bountyHunterModel.NextAvailableDate.Year, bountyHunterModel.NextAvailableDate.Month, bountyHunterModel.NextAvailableDate.Day, gameTimeManager.NightTimeStart, 0, 0);
         bountyHunterModel.IsInJail = true;
     }
    
@@ -78,7 +78,7 @@ public class BountyHunterSystem : AbstractSystem {
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
         
         DateTime nextEventTime = new DateTime(currentTime.Year, currentTime.Month,
-            currentTime.Day, Random.Range(22, 24), Random.Range(10, 40), 0);
+            currentTime.Day, Random.Range(gameTimeManager.NightTimeStart, 24), Random.Range(10, 40), 0);
         Debug.Log("Next Event Time: " + nextEventTime);
 
         gameEventSystem.AddEvent(new BountyHunterAdEvent(

@@ -40,6 +40,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<ElectricityModel>();
         this.RegisterModel<DogModel>();
         this.RegisterModel<NotebookModel>();
+        this.RegisterModel<OutdoorActivityModel>();
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();
@@ -53,6 +54,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<BountyHunterSystem>();
         this.RegisterSystem<ElectricitySystem>();
         this.RegisterSystem<DogSystem>();
+        this.RegisterSystem<OutdoorActivitySystem>();
     }
     
     protected void RegisterModel<T>() where T : class, IModel, new() {
@@ -76,6 +78,7 @@ public class MainGame : Architecture<MainGame> {
         T system = null;
         
         if (typeof(T).IsSubclassOf(typeof(AbstractSavableSystem)) && IsSave) {
+            
             system = ES3.Load<AbstractSavableSystem>("System_" + typeof(T).Name, "systems.es3", new T() as AbstractSavableSystem) as T;
             this.RegisterSystem<T>(system);
             (system as AbstractSavableSystem)?.OnLoad();

@@ -14,18 +14,44 @@ using UnityEngine.SceneManagement;
 public struct OnNewDay {
     public DateTime Date;
 }
+
+public struct OnEndOfOutdoorDayTimeEvent {
+    public List<Func<bool>> OnEndOfDayTimeEventList;
+}
 public class GameTimeManager : AbstractSystem, ISystem {
 
-    private Func<bool> beforeEndOfTodayEvent = null;
-    public Action<int> OnDayStart = null;
+    //private Func<bool> beforeEndOfTodayEvent = null;
+    private List<Func<bool>> endOfDayTimeEvents = new List<Func<bool>>();
+    
+    public Action<int, int> OnDayStart = null;
     
     
     private GameStateModel gameStateModel;
 
     public SimpleRC LockDayEnd { get; } = new SimpleRC();
+
+    public SimpleRC LockOutdoorEventEnd { get; } = new SimpleRC();
     
     private GameTimeModel gameTimeModel;
 
+    private const float timeFreq = 2.5f;
+
+    protected float timeSpeed = 1f;
+    protected DateTime timeSpeedUntil = DateTime.MinValue;
+
+    public int NightTimeStart { get; private set; } = 22;
+    public int DayTimeStart { get; private set; } = 9;
+    
+    public int DayTimeEnd { get; private set; } = 17;
+
+    public bool IsNight {
+        get {
+            return gameTimeModel.CurrentTime.Value.Hour >= NightTimeStart ||
+                   gameTimeModel.CurrentTime.Value.Hour < DayTimeStart;
+        }
+    }
+    
+    protected OutdoorActivityModel OutdoorActivityModel;
     public BindableProperty<DateTime> CurrentTime {
         get {
             return gameTimeModel.CurrentTime;
@@ -37,19 +63,32 @@ public class GameTimeManager : AbstractSystem, ISystem {
             return gameTimeModel.Day;
         }
     }
+    
+    
 
     public void NextDay() {
         gameTimeModel.AddDay();
         
-        beforeEndOfTodayEvent = null;
-        OnDayStart?.Invoke(gameTimeModel.Day);
+        //beforeEndOfTodayEvent = null;
+        int startHour = OutdoorActivityModel.HasMap.Value ? DayTimeStart : NightTimeStart;
+        
+        OnDayStart?.Invoke(gameTimeModel.Day, startHour);
+        if (gameStateModel.GameState != GameState.End) {
+            NewDayStart();
+        }
+       
+    }
+
+    private void NewDayStart() {
+        int startHour = OutdoorActivityModel.HasMap.Value ? DayTimeStart : NightTimeStart;
         this.GetSystem<ITimeSystem>().AddDelayTask(2f, () => {
             if (gameStateModel.GameState != GameState.End) {
                 this.GetModel<GameSceneModel>().GameScene.Value = GameScene.MainGame;
                 
-                
+                (MainGame.Interface as MainGame)?.SaveGame();
                 DateTime nextDay = gameTimeModel.CurrentTime.Value.AddDays(1);
-                gameTimeModel.CurrentTime.Value = new DateTime(nextDay.Year, nextDay.Month, nextDay.Day, 22, 0, 0);
+                gameTimeModel.CurrentTime.Value = new DateTime(nextDay.Year, nextDay.Month, nextDay.Day, startHour, 0, 0);
+                
                 this.SendEvent<OnNewDay>(new OnNewDay() {
                     Date = gameTimeModel.CurrentTime.Value
                 });
@@ -65,6 +104,11 @@ public class GameTimeManager : AbstractSystem, ISystem {
         CoroutineRunner.Singleton.StartCoroutine(GameTimerCoroutine());
     }
 
+    public void SpeedUpTime(float multiplier, DateTime until) {
+        timeSpeed = multiplier;
+        timeSpeedUntil = until;
+    }
+
     private IEnumerator GameTimerCoroutine() {
         while (true) {
             if (gameStateModel.GameState == GameState.End) {
@@ -73,36 +117,78 @@ public class GameTimeManager : AbstractSystem, ISystem {
             if (SceneManager.GetActiveScene().name != "MainGame") {
                 break;
             }
-            yield return new WaitForSeconds(1f);
-            
+            yield return new WaitForSeconds(timeFreq / timeSpeed);
 
-            if (!(gameTimeModel.CurrentTime.Value.Hour == 23 && gameTimeModel.CurrentTime.Value.Minute == 59)) {
+
+            if (!(gameTimeModel.CurrentTime.Value.Hour == 23 && gameTimeModel.CurrentTime.Value.Minute == 59)
+                && !(gameTimeModel.CurrentTime.Value.Hour == DayTimeEnd && gameTimeModel.CurrentTime.Value.Minute == 0)) {
                 gameTimeModel.CurrentTime.Value = gameTimeModel.CurrentTime.Value.AddMinutes(1);
+            }
+            
+            if(gameTimeModel.CurrentTime.Value >= timeSpeedUntil && timeSpeed != 1) {
+                timeSpeed = 1;
             }
             
             if (gameTimeModel.CurrentTime.Value.Hour == 23 && gameTimeModel.CurrentTime.Value.Minute == 59) {
                 if (LockDayEnd.RefCount > 0) {
                     continue;
                 }
-                OnDayEnd();
+               // (MainGame.Interface as MainGame)?.SaveGame();
+                NextDay();
+                break;
+            }
+            
+            if(gameTimeModel.CurrentTime.Value.Hour == DayTimeEnd && gameTimeModel.CurrentTime.Value.Minute == 00) {
+                if (LockOutdoorEventEnd.RefCount > 0) {
+                    continue;
+                }
+                OnOutdoorEventEnd();
                 break;
             }
         }
     }
 
-    private void OnDayEnd() {
-        if (beforeEndOfTodayEvent == null) {
-            (MainGame.Interface as MainGame)?.SaveGame();
-            NextDay();
-        }else {
-            UntilAction action = UntilAction.Allocate(beforeEndOfTodayEvent);
+    private void OnOutdoorEventEnd() {
+        endOfDayTimeEvents.Clear();
+        this.SendEvent<OnEndOfOutdoorDayTimeEvent>(new OnEndOfOutdoorDayTimeEvent() {
+            OnEndOfDayTimeEventList = endOfDayTimeEvents
+        });
+        if (endOfDayTimeEvents.Count > 0) {
+            UntilAction action = UntilAction.Allocate(() => {
+                bool allFinished = true;
+                foreach (var func in endOfDayTimeEvents) {
+                    if (!func()) {
+                        allFinished = false;
+                        break;
+                    }
+                }
+
+                return allFinished;
+            });
+            
+            
             action.OnEndedCallback += () => {
-                (MainGame.Interface as MainGame)?.SaveGame();
-                NextDay();
+                CoroutineRunner.Singleton.StartCoroutine(SkipToNightActivity());
             };
             action.Execute();
         }
+        else {
+            CoroutineRunner.Singleton.StartCoroutine(SkipToNightActivity());
+        }
     }
+
+    private IEnumerator SkipToNightActivity() {
+        while (true) {
+            yield return null;
+            gameTimeModel.CurrentTime.Value = gameTimeModel.CurrentTime.Value.AddMinutes(1);
+            if (gameTimeModel.CurrentTime.Value.Hour == NightTimeStart) {
+                break;
+            }
+        }
+        StartTimer();
+    }
+
+ 
 
 
     #region Framework
@@ -111,7 +197,16 @@ public class GameTimeManager : AbstractSystem, ISystem {
     protected override void OnInit() {
         gameStateModel = this.GetModel<GameStateModel>();
         gameTimeModel = this.GetModel<GameTimeModel>();
+        OutdoorActivityModel = this.GetModel<OutdoorActivityModel>();
         //NextDay();
+        
+        if (this.GetSystem<GameTimeManager>().Day == 0) {
+            this.GetSystem<GameTimeManager>().NextDay();
+        }
+        else {
+            NewDayStart();
+        }
+        
     }
 
     #endregion

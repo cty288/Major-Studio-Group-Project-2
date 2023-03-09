@@ -68,7 +68,7 @@ public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEven
         DateTime time = gameTimeManager.CurrentTime.Value;
         DateTime nextKnockStart = time.AddDays(Random.value < 0.5f ? 1 : 2);
 
-        nextKnockStart = new DateTime(nextKnockStart.Year, nextKnockStart.Month, nextKnockStart.Day, Random.Range(22,24), Random.Range(0, 60), 0);
+        nextKnockStart = new DateTime(nextKnockStart.Year, nextKnockStart.Month, nextKnockStart.Day, Random.Range(gameTimeManager.NightTimeStart,24), Random.Range(0, 60), 0);
         DateTime nextKnockEnd = nextKnockStart.AddMinutes(30);
 
         gameEventSystem.AddEvent(new DogKnockEvent(new TimeRange(nextKnockStart, nextKnockEnd), this.bodyInfo, this.TriggerChance));

@@ -90,7 +90,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
         
     }
 
-    private void OnDayStart(int obj) {
+    private void OnDayStart(int obj, int hour) {
         RefreshDailyGoods();
         RefreshAvailability();
     }
@@ -158,7 +158,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
 
                     DateTime currentTime = gameTimeManager.CurrentTime.Value;
                     currentTime = currentTime.AddDays(1);
-                    currentTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 22,
+                    currentTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, gameTimeManager.NightTimeStart,
                         0, 0);
                     gameEventSystem.AddEvent(new GetResourceEvent(new BulletGoods(),1 ,new TimeRange(currentTime)));
                 }

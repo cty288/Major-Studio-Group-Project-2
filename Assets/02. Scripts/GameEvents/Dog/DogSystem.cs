@@ -30,7 +30,7 @@ public class DogSystem : AbstractSystem
         dogModel.HaveDog = true;
     }
 
-    private void OnEndOfDay(int day) {
+    private void OnEndOfDay(int day, int hour) {
         if (day == 1) {
             SpawnDog(Random.Range(2, 5));
         }
@@ -51,7 +51,7 @@ public class DogSystem : AbstractSystem
 
        
         DateTime dogStartTime = gameTimeManager.CurrentTime.Value.AddDays(eventStartDay);
-        int hour = Random.Range(22, 24);
+        int hour = Random.Range(gameTimeManager.NightTimeStart, 24);
         int minute = Random.Range(20, 40);
 
         dogStartTime = new DateTime(dogStartTime.Year, dogStartTime.Month, dogStartTime.Day, hour, minute, 0);

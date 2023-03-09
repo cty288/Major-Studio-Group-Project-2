@@ -36,6 +36,8 @@ public class BodyGenerationSystem : AbstractSystem {
     //private Coroutine knockDoorCheckCoroutine;
     private BodyModel bodyModel;
     private BodyGenerationModel bodyGenerationModel;
+    
+    
     protected override void OnInit() {
         gameEventSystem = this.GetSystem<GameEventSystem>();
         this.GetSystem<ITimeSystem>().AddDelayTask(0.1f, () => {
@@ -57,7 +59,7 @@ public class BodyGenerationSystem : AbstractSystem {
 
   
 
-    private void OnEndOfDay(int day) {
+    private void OnEndOfDay(int day, int hour) {
         dayNum = day;
         if (day >= 2) {
             nonAlienChance -= 0.2f;

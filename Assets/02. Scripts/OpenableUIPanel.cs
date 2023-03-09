@@ -74,7 +74,7 @@ public abstract class OpenableUIPanel : AbstractMikroController<MainGame> {
 
     [SerializeField] private float hideTime = 0.5f;
     protected virtual void Update() {
-        if (Input.GetMouseButtonDown(0) && canBack.RefCount<=0) {
+        if (Input.GetMouseButtonDown(0) && canBack.RefCount<=0 && colliders.Count > 0) {
             Vector2 mousePos = Input.mousePosition;
             
             if(canvas.renderMode == RenderMode.ScreenSpaceCamera) {

@@ -19,7 +19,7 @@ public class PlayerResourceModel : AbstractSavableModel {
     
 
     public void AddFood(int count) {
-            FoodCount.Value = Mathf.Min(maxFoodCount, FoodCount.Value + count);
+        FoodCount.Value = Mathf.Min(maxFoodCount, FoodCount.Value + count);
      }
     
     public void RemoveFood(int count) {

@@ -104,7 +104,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
         
         DateTime current = gameTimeManager.CurrentTime.Value;
         current = current.AddDays(1);
-        DateTime tomorrow = new DateTime(current.Year, current.Month, current.Day , 22, 0, 0);
+        DateTime tomorrow = new DateTime(current.Year, current.Month, current.Day , gameTimeManager.NightTimeStart, 0, 0);
 
         //remove duplicate (if two bodies have the same id)
         

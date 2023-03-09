@@ -20,7 +20,7 @@ public class BountyHunterQuestFinishPhoneEvent: IncomingCallEvent {
     private void OnMissedOrHangUp() {
         DateTime today = gameTimeManager.CurrentTime.Value;
         DateTime targetNextTime = today.AddDays(1);
-        DateTime targetTime = new DateTime(targetNextTime.Year, targetNextTime.Month, targetNextTime.Day, 22,
+        DateTime targetTime = new DateTime(targetNextTime.Year, targetNextTime.Month, targetNextTime.Day, gameTimeManager.NightTimeStart,
             Random.Range(30, 60), 0);
         DateTime targetEndTime = new DateTime(targetTime.Year, targetTime.Month, targetTime.Day, 23, 58, 0);
         gameEventSystem.AddEvent(new BountyHunterQuestFinishPhoneEvent(new TimeRange(targetTime, targetEndTime), NotificationContact,

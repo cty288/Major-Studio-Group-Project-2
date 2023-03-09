@@ -7,7 +7,8 @@ using UnityEngine;
 public enum GameScene {
     MainGame,
     Peephole,
-    PowerGenerator
+    PowerGenerator,
+    Outdoor
 }
 public class GameSceneModel : AbstractModel {
     public BindableProperty<GameScene> GameScene { get; } = new BindableProperty<GameScene>(global::GameScene.MainGame);

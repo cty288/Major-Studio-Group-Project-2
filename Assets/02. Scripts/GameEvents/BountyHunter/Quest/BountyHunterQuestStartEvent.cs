@@ -37,7 +37,7 @@ public class BountyHunterQuestStartEvent : IncomingCallEvent {
     private void OnMissedOrHangUp() {
         DateTime today = gameTimeManager.CurrentTime.Value;
         DateTime targetNextTime = today.AddDays(1);
-        DateTime targetTime = new DateTime(targetNextTime.Year, targetNextTime.Month, targetNextTime.Day, 22,
+        DateTime targetTime = new DateTime(targetNextTime.Year, targetNextTime.Month, targetNextTime.Day, gameTimeManager.NightTimeStart,
             Random.Range(30, 60), 0);
         DateTime targetEndTime = new DateTime(targetTime.Year, targetTime.Month, targetTime.Day, 23, 58, 0);
         gameEventSystem.AddEvent(new BountyHunterQuestStartEvent(new TimeRange(targetTime, targetEndTime), NotificationContact,
@@ -57,7 +57,7 @@ public class BountyHunterQuestStartEvent : IncomingCallEvent {
         nextClueHappenTime = new DateTime(nextClueHappenTime.Year, nextClueHappenTime.Month, nextClueHappenTime.Day, 23, Random.Range(20, 56), 0);
 
         DateTime nextEventStartTime =
-            new DateTime(nextClueHappenTime.Year, nextClueHappenTime.Month, nextClueHappenTime.Day, 22, Random.Range(5, 20), 0);
+            new DateTime(nextClueHappenTime.Year, nextClueHappenTime.Month, nextClueHappenTime.Day, gameTimeManager.NightTimeStart, Random.Range(5, 20), 0);
         DateTime nextEventEndTime = nextClueHappenTime.AddMinutes(-20);
 
         gameEventSystem.AddEvent(new BountyHunterQuest1ClueNotification(

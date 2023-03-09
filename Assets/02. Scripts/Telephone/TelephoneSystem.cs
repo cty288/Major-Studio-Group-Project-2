@@ -94,7 +94,7 @@ public class TelephoneSystem : AbstractSavableSystem {
         }
     }
 
-    private void OnDayEnd(int obj) {
+    private void OnDayEnd(int obj, int hour) {
         State.Value = TelephoneState.Idle;
     }
 

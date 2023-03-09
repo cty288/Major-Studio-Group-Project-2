@@ -42,6 +42,13 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
     protected  NotebookMarker currentMarker = null;
     protected NotebookWritePage notebookWritePage;
     protected RectTransform markerPanel;
+
+    protected NotebookTool penTool;
+    protected NotebookTool eraserTool;
+    protected NotebookTool currentTool;
+    protected TMP_Text controlHint;
+    
+    protected  Animator flipAnimator;
     protected override void Awake() {
         base.Awake();
         panel = transform.Find("Panel").gameObject;
@@ -52,8 +59,17 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         markerPanel = panel.transform.Find("NotebookContent/MarkerPanel").GetComponent<RectTransform>();
         dateText = panel.transform.Find("NotebookContent/DateText").GetComponent<TMP_Text>();
 
+        penTool = panel.transform.Find("PenButton").GetComponent<NotebookTool>();
+        eraserTool = panel.transform.Find("EraserButton").GetComponent<NotebookTool>();
+        penTool.OnToolClicked += OnPenToolClicked;
+        eraserTool.OnToolClicked += OnEraserToolClicked;
+        
+        flipAnimator = panel.transform.Find("NotebookAnimation").GetComponent<Animator>();
+        
         lastPageButton = panel.transform.Find("LastPage").GetComponent<Button>();
         nextPageButton = panel.transform.Find("NextPage").GetComponent<Button>();
+        controlHint = panel.transform.Find("ControlHint").GetComponent<TMP_Text>();
+        
         
         
         this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -76,14 +92,30 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         notebookWritePage.OnTear += OnTear;
     }
 
-    
+    private void OnPenToolClicked(NotebookTool tool) {
+        currentTool = tool;
+        eraserTool.Deselect();
+        penTool.Select();
+        controlHint.text = "Click to add Text\nHold & Drag to Mark";
+    }
+
+    private void OnEraserToolClicked(NotebookTool tool) {
+        currentTool = tool;
+        penTool.Deselect();
+        eraserTool.Select();
+        controlHint.text = "Hold & Drag to Erase";
+    }
+
+
+   
 
     protected override void OnDestroy() {
         base.OnDestroy();
         lastPageButton.onClick.RemoveListener(OnLastPageButtonClicked);
         nextPageButton.onClick.RemoveListener(OnNextPageButtonClicked);
         notebookWritePage.OnTear -= OnTear;
-        
+        penTool.OnToolClicked -= OnPenToolClicked;
+        eraserTool.OnToolClicked -= OnEraserToolClicked;
     }
 
     private void OnNextPageButtonClicked() {
@@ -96,6 +128,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
             DestroyAllContents();
             LoadContent(nextTime,false);
             notebookModel.UpdateLastOpened(nextTime);
+            flipAnimator.CrossFade("FlipRight", 0f);
         }
         
     }
@@ -110,6 +143,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
             DestroyAllContents();
             LoadContent(nextTime, false);
             notebookModel.UpdateLastOpened(nextTime);
+            flipAnimator.CrossFade("FlipLeft", 0f);
         }
     }
     
@@ -155,7 +189,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         
         this.Delay(0.05f, () => {
             panel.gameObject.SetActive(true);
-
+            OnPenToolClicked(penTool);
             var images = GetComponentsInChildren<Image>(true).ToList();
             var texts = GetComponentsInChildren<TMP_Text>(true).ToList();
             var rawImages = GetComponentsInChildren<RawImage>(true).ToList();
@@ -289,15 +323,19 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         }
 
         if (Input.GetMouseButton(0)) {
-            if (lastMouseDownInMarkerPanel && currentWritingText == null && !PhotoPanelUI.IsOpen && CheckMouseOnEmptySpace() && Vector3.Distance(lastMouseDownPosition, mousePos) > 0.1f) {
-                if (currentMarker == null) {
+            if (currentWritingText == null && !PhotoPanelUI.IsOpen ) {
+                if (lastMouseDownInMarkerPanel && currentMarker == null && CheckMouseOnEmptySpace() && currentTool == penTool && Vector3.Distance(lastMouseDownPosition, mousePos) > 0.1f) {
                     CreateMarker(mousePos);
+                }
+
+                if (currentTool == eraserTool) {
+                    EraseMarker(mousePos);
                 }
             }
         }
         
         if (Input.GetMouseButtonUp(0)) {
-            if (currentWritingText == null && !PhotoPanelUI.IsOpen && currentMarker == null) { //check whether create new text
+            if (currentWritingText == null && !PhotoPanelUI.IsOpen && currentMarker == null && currentTool == penTool) { //check whether create new text
                 if (CheckMouseOnEmptySpace() && Vector3.Distance(lastMouseDownPosition, mousePos) < 0.1f) {
                     CreateWritingText(mousePos);
                 }
@@ -309,6 +347,40 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
                 currentMarker = null;
             }
 
+        }
+    }
+
+    private void EraseMarker(Vector3 mousePos) {
+        if (markerPanel.childCount <= 0) {
+            return;
+        }
+        
+        DateTime lastNoteBookOpenTime = notebookModel.LastOpened;
+        if(lastNoteBookOpenTime == DateTime.MinValue) {
+            lastNoteBookOpenTime = gameTimeModel.CurrentTime.Value.Date;
+        }
+
+        List<NotebookMarker> markers = markerPanel.GetComponentsInChildren<NotebookMarker>(true).ToList();
+        //Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+        if (markers != null) {
+            foreach (NotebookMarker info in markers) {
+                NotebookMarkerDroppableInfo droppableInfo = info.DroppableInfo as NotebookMarkerDroppableInfo;
+                Vector2 mouseRelative = new Vector3(mousePos.x, mousePos.y, -6);
+                mouseRelative = info.transform.InverseTransformPoint(mouseRelative);
+                
+                
+                foreach (Vector3 markerPosition in droppableInfo.markerPositions) {
+                    
+                    Vector2 markerPos = new Vector2(markerPosition.x, markerPosition.y);
+                   
+                    
+                    if (Vector3.Distance(markerPos, mouseRelative) < 10f) {
+                        notebookModel.RemoveNote(lastNoteBookOpenTime, droppableInfo);
+                        Destroy(info.gameObject);
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -549,8 +621,8 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         if (IsShow) {
             pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
+
        
-        
         droppingText.gameObject.SetActive(false);
         AddContent(lastNoteBookOpenTime, content.GetDroppableInfo(), !IsShow, pos, contentPanel);
     }

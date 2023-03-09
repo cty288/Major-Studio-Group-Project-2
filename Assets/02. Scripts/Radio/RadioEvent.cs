@@ -36,6 +36,7 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
 
     protected bool started = false;
     protected bool ended = false;
+   
     
     protected RadioEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer,
         RadioChannel channel) : base(startTimeRange) {

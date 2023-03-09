@@ -33,6 +33,12 @@ namespace _02._Scripts.Notebook {
 			}
 		}
 		
+		public void RemoveNote(DateTime date, DroppableInfo note) {
+			if (Notes.ContainsKey(date)) {
+				Notes[date].Remove(note);
+			}
+		}
+		
 		public bool HasNotes(DateTime date) {
 			date = date.Date;
 			return Notes.ContainsKey(date.Date);

@@ -18,12 +18,43 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
     [SerializeField] private List<Camera> scenesToCameras = new List<Camera>();
     [SerializeField] private List<Sprite> imageSprites = new List<Sprite>();
     private Image image;
+    private OutdoorActivityModel outdoorActivityModel;
     private void Awake() {
         gameTimeManager = this.GetSystem<GameTimeManager>();
         bg = transform.Find("BG").GetComponent<Image>();
         message = transform.Find("Message").GetComponent<TMP_Text>();
+        outdoorActivityModel = this.GetModel<OutdoorActivityModel>();
         this.GetModel<GameSceneModel>().GameScene.RegisterOnValueChaned(OnGameSceneChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnEndOfOutdoorDayTimeEvent>(OnEndOfOutdoorDayTime).UnRegisterWhenGameObjectDestroyed(gameObject);
         image = transform.Find("Image").GetComponent<Image>();
+    }
+
+    private void OnEndOfOutdoorDayTime(OnEndOfOutdoorDayTimeEvent e) {
+        bool loadFinished = false;
+        Func<bool> loadCondition = () => loadFinished;
+
+        string hint;
+        if (outdoorActivityModel.IsOutdoor) {
+            hint = "It's time to go home...";
+        }
+        else {
+            //indoor, then since it's the end of the day, it's better not to go out
+            hint = "It's dark outside, it's better to stay at home...";
+        }
+
+        LoadUntil(() => {
+            ShowMessage(hint);
+            this.Delay(3f, HideMessage);
+            this.Delay(4f, () => {
+                loadFinished = true;
+            });
+            return () => gameTimeManager.CurrentTime.Value.Hour >= gameTimeManager.NightTimeStart;
+        }, () => {
+            StopLoad(null);
+        });
+
+        e.OnEndOfDayTimeEventList.Add(loadCondition);
+
     }
 
     private void OnGameSceneChanged(GameScene scene) {

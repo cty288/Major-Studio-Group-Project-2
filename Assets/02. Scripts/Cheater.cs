@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.GameTime;
 using MikroFramework.Architecture;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -48,6 +49,21 @@ public class Cheater : AbstractMikroController<MainGame> {
         if (Input.GetKeyDown(KeyCode.D)) {
             this.GetModel<BodyGenerationModel>().CurrentOutsideBody.Value = null;
         }
+
+        if (Input.GetKeyDown(KeyCode.M)) {
+            this.GetModel<OutdoorActivityModel>().HasMap.Value = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.T)) {
+            this.GetSystem<OutdoorActivitySystem>().SetPlaceAvailable("TestArea", true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.U)) {
+            IPlace place = this.GetSystem<OutdoorActivitySystem>().GetPlace("TestArea");
+            place.EnableTemporaryActivity("TestArea_TestActivity2",
+                this.GetModel<GameTimeModel>().CurrentTime.Value.AddDays(1));
+        }
+        
 
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
             Time.timeScale += 10;

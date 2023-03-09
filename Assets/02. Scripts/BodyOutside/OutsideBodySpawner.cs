@@ -73,8 +73,8 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
     }
    
 
-    private void OnDayStart(int obj) {
-        todaysAlienIsVeryLarge = Random.value < 0.1f;
+    private void OnDayStart(int obj, int hour) {
+        todaysAlienIsVeryLarge = Random.value < 0.05f;
     }
 
     private void OnOutsideBodyChanged(BodyInfo oldBody, BodyInfo body) {

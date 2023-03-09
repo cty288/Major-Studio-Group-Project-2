@@ -27,7 +27,7 @@ public class MerchantSystem : AbstractSystem {
 
     private void AddMerchantPhoneNumebrEvent() {
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
-        currentTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day + merchantModel.PhoneNumberGenerationDate, 22,
+        currentTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day + merchantModel.PhoneNumberGenerationDate, gameTimeManager.NightTimeStart,
             0, 0);
         gameEventSystem.AddEvent(new MerchantPhoneNumberEvent(new TimeRange(currentTime)));
     }

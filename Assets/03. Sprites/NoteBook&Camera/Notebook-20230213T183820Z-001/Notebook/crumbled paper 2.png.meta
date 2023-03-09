@@ -143,12 +143,12 @@ TextureImporter:
       name: crumbled paper 2_0
       rect:
         serializedVersion: 2
-        x: 585
-        y: 600
-        width: 90
-        height: 95
+        x: 575
+        y: 594
+        width: 105
+        height: 110
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

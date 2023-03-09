@@ -27,15 +27,20 @@ public class ElectricitySystem : AbstractSystem {
     private ElectricityModel electricityModel;
     
     private float electricityDecreaseRate = 0.002f;
+
+    protected GameTimeManager gameTimeManager;
     protected override void OnInit() {
         electricityModel = this.GetModel<ElectricityModel>();
         updater = new GameObject("ElectricitySystemUpdater").AddComponent<ElectricitySystemUpdater>();
         electricityModel.Electricity.RegisterOnValueChaned(OnElectricityChange);
-        
+        gameTimeManager = this.GetSystem<GameTimeManager>();
         updater.OnUpdate += Update;
     }
 
     private void Update() {
+        if (!gameTimeManager.IsNight) {
+            return;
+        }
         electricityModel.Electricity.Value = Mathf.Max(electricityModel.Electricity.Value - electricityDecreaseRate * Time.deltaTime, 0);
     }
     private void OnElectricityChange(float oldElectricity, float newElectricity) {

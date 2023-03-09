@@ -40,7 +40,7 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
 
     private void OnMissedOrNotOpen() {
         DateTime tomorrow = gameTimeManager.CurrentTime.Value.AddDays(1);
-        DateTime policeEventStartTime = new DateTime(tomorrow.Year, tomorrow.Month, tomorrow.Day, 22, Random.Range(30,50), 0);
+        DateTime policeEventStartTime = new DateTime(tomorrow.Year, tomorrow.Month, tomorrow.Day, gameTimeManager.NightTimeStart, Random.Range(30,50), 0);
         DateTime policeEventEndTime = policeEventStartTime.AddMinutes(Random.Range(20, 40));
         gameEventSystem.AddEvent(new PoliceGenerateEvent(new TimeRange(policeEventStartTime, policeEventEndTime),
             PoliceGenerateEvent.GeneratePolice(), 0.8f, null, null));

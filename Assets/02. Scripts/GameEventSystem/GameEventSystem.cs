@@ -154,7 +154,7 @@ public class GameEventSystem : AbstractSavableSystem {
        
     }
 
-    public void AddEvent(GameEvent ev) {
+    public void AddEvent(GameEvent ev, bool nightEventOnly = true) {
         if (ev == null) return;
         TimeRange startTimeRange = ev.StartTimeRange;
         if (startTimeRange.EndTime < gameTimeManager.CurrentTime.Value) {
@@ -162,9 +162,9 @@ public class GameEventSystem : AbstractSavableSystem {
             return;
         }
 
-        if (startTimeRange.StartTime.Hour < 22) {
+        if (nightEventOnly && startTimeRange.StartTime.Hour < gameTimeManager.NightTimeStart) {
             DateTime gameStartTime = new DateTime(startTimeRange.StartTime.Year, startTimeRange.StartTime.Month,
-                startTimeRange.StartTime.Day, 22, 0, 0);
+                startTimeRange.StartTime.Day, gameTimeManager.NightTimeStart, 0, 0);
 
             int minuteInterval = Random.Range(8, 15);
             startTimeRange.StartTime = gameStartTime.AddMinutes(minuteInterval);

@@ -47,8 +47,7 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
                 panelObj.SetActive(true);
                 selfColliders.ForEach(c => c.enabled = true);
             }
-            else
-            {
+            else {
                 panelObj.SetActive(false);
                 selfColliders.ForEach(c => c.enabled = false);
             }

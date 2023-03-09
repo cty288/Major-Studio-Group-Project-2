@@ -63,7 +63,8 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
         if (!bountyHunterModel.QuestBodyClueAllHappened) {
             
             DateTime nextStartTime = ClueHappenTime.AddDays(1);
-            nextStartTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day, Random.Range(22, 24),
+            GameTimeManager gameTimeManager = this.GetSystem<GameTimeManager>();
+            nextStartTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day, Random.Range(gameTimeManager.NightTimeStart, 24),
                 Random.Range(10, 45), 0);
             DateTime nextEndTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day,
                 23, 50, 0);

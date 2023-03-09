@@ -35,7 +35,7 @@ public class PlayerResourceSystem : AbstractSystem {
     }
 
    
-    private void OnDayEnd(int day) {
+    private void OnDayEnd(int day, int hour) {
         if (day <= 1) {
             return;
         }

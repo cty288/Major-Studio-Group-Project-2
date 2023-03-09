@@ -24,8 +24,17 @@ public class DayIndicator : AbstractMikroController<MainGame> {
         dayIndicator = transform.Find("DayIndicator").GetComponent<TMP_Text>();
         animator = GetComponent<Animator>();
         this.GetSystem<GameTimeManager>().OnDayStart += OnDayStart;
-        this.GetSystem<GameTimeManager>().NextDay();
+        
+       
         lastFoodCount = playerResourceModel.FoodCount.Value;
+        GameTimeManager gameTimer = this.GetSystem<GameTimeManager>();
+        if (this.GetModel<OutdoorActivityModel>().HasMap) {
+            dayIndicator.text = $"Day {gameTimer.Day}\n{gameTimer.DayTimeStart}:00";
+        }
+        else {
+            dayIndicator.text = $"Day {gameTimer.Day}\n{gameTimer.NightTimeStart}:00";
+        }
+        
         
         
         //SetFoodCount(lastFoodCount);
@@ -90,8 +99,8 @@ public class DayIndicator : AbstractMikroController<MainGame> {
         }
     }
 
-    private void OnDayStart(int day) {
-        dayIndicator.text = $"Day {day}\n22:00";
+    private void OnDayStart(int day, int hour) {
+        dayIndicator.text = $"Day {day}\n{hour}:00";
         animator.CrossFade("Show", 1.5f);
     }
 

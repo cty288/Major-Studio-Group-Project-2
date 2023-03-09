@@ -66,7 +66,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
 
     protected float NoiseVolume {
         get {
-            return 1 - radioModel.Volume;
+            return 1 - radioModel.RelativeVolume;
         }
     }
     protected override void Awake() {
@@ -83,7 +83,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         radioModel = this.GetModel<RadioModel>();
         lowSoundLock.OnRefCleared += OnLowSoundReleased;
         
-        radioModel.Volume.RegisterWithInitValue(OnVolumeChange).UnRegisterWhenGameObjectDestroyed(gameObject);
+        radioModel.RelativeVolume.RegisterWithInitValue(OnVolumeChange).UnRegisterWhenGameObjectDestroyed(gameObject);
 
     }
 
@@ -98,21 +98,21 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         }
         if (!isInstant) {
             if (lowSoundLock.RefCount > 0) {
-                speaker.AudioMixer.DOSetFloat("volume", -45* (1/radioModel.Volume), 1f);
+                speaker.AudioMixer.DOSetFloat("volume", -45* (1/radioModel.RelativeVolume), 1f);
                 radioNoiseAudioSource.DOFade(0.1f * NoiseVolume, 1f);
             }
             else {
                 radioNoiseAudioSource.DOFade(NoiseVolume, 1f);
-                speaker.AudioMixer.DOSetFloat("volume", -20 * (1/radioModel.Volume), 1f);
+                speaker.AudioMixer.DOSetFloat("volume", -20 * (1/radioModel.RelativeVolume), 1f);
             }
         }
         else {
             if (lowSoundLock.RefCount > 0) {
-                speaker.AudioMixer.SetFloat("volume", -45 * (1/radioModel.Volume));
+                speaker.AudioMixer.SetFloat("volume", -45 * (1/radioModel.RelativeVolume));
                 radioNoiseAudioSource.volume = 0.1f * NoiseVolume;
             }
             else {
-                speaker.AudioMixer.SetFloat("volume", -20 * (1/radioModel.Volume));
+                speaker.AudioMixer.SetFloat("volume", -20 * (1/radioModel.RelativeVolume));
                 radioNoiseAudioSource.volume = NoiseVolume;
             }
         }

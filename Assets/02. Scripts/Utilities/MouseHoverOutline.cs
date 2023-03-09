@@ -11,6 +11,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Collider2D))]
 public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ICanGetModel {
     [SerializeField] private Material outlineMaterial;
+
+    public Material OutlineMaterial => outlineMaterial;
     private SpriteRenderer spriteRenderer;
     private MaskableGraphic image;
 

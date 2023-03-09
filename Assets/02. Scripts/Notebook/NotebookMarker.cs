@@ -83,7 +83,7 @@ namespace _02._Scripts.Notebook {
 					Vector2 mousePosWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 
 					//Debug.Log("MousePosWorld: " + mousePosWorld + " MarkerArea: " + markerArea.bounds + "MousePos: " + Input.mousePosition);
-					if(Vector2.Distance(lastMarkerPosition, Input.mousePosition) > 1) {
+					if(Vector2.Distance(lastMarkerPosition, Input.mousePosition) > 0.01) {
 						//check if the mouse is in the marker area. The canvas is screen space camera
 						Vector3 mousePosWorldFixed = new Vector3(mousePosWorld.x, mousePosWorld.y,
 							info.MarkerBounds.center.z);
