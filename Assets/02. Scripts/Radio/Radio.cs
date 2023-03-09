@@ -14,6 +14,7 @@ using MikroFramework;
 using MikroFramework.AudioKit;
 using MikroFramework.Singletons;
 using MikroFramework.Utilities;
+using TMPro;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
@@ -58,6 +59,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
 
     private BodyGenerationSystem bodyGenerationSystem;
     private BodyModel bodyModel;
+    protected TMP_Text mouseHoverHint;
    
     private GameTimeManager gameTimeManager;
     private RadioModel radioModel;
@@ -82,9 +84,23 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         this.GetSystem<TelephoneSystem>().State.RegisterOnValueChaned(OnTelephoneStateChange).UnRegisterWhenGameObjectDestroyed(gameObject);
         radioModel = this.GetModel<RadioModel>();
         lowSoundLock.OnRefCleared += OnLowSoundReleased;
+        mouseHoverHint = transform.Find("RadioCanvas/Hint").GetComponent<TMP_Text>();
+        radioModel.IsOn.RegisterWithInitValue(OnRadioOnOffChange).UnRegisterWhenGameObjectDestroyed(gameObject);
         
         radioModel.RelativeVolume.RegisterWithInitValue(OnVolumeChange).UnRegisterWhenGameObjectDestroyed(gameObject);
 
+    }
+
+    private void OnRadioOnOffChange(bool isOn) {
+        if (!isOn) {
+            StopRadio(false);
+            radioNoiseAudioSource.volume = 0;
+            mouseHoverHint.text = "Radio (Off)";
+        }
+        else {
+            UpdateSpeakerVolume(false);
+            mouseHoverHint.text = "Radio (On)";
+        }
     }
 
     private void OnVolumeChange(float volume) {
@@ -96,24 +112,25 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         if (!electricityModel.HasElectricity()) {
             return;
         }
+        float noiseMultiplier = radioModel.IsOn.Value ? 1 : 0;
         if (!isInstant) {
             if (lowSoundLock.RefCount > 0) {
                 speaker.AudioMixer.DOSetFloat("volume", -45* (1/radioModel.RelativeVolume), 1f);
-                radioNoiseAudioSource.DOFade(0.1f * NoiseVolume, 1f);
+                radioNoiseAudioSource.DOFade(0.1f * NoiseVolume * noiseMultiplier, 1f);
             }
             else {
-                radioNoiseAudioSource.DOFade(NoiseVolume, 1f);
+                radioNoiseAudioSource.DOFade(NoiseVolume * noiseMultiplier, 1f);
                 speaker.AudioMixer.DOSetFloat("volume", -20 * (1/radioModel.RelativeVolume), 1f);
             }
         }
         else {
             if (lowSoundLock.RefCount > 0) {
                 speaker.AudioMixer.SetFloat("volume", -45 * (1/radioModel.RelativeVolume));
-                radioNoiseAudioSource.volume = 0.1f * NoiseVolume;
+                radioNoiseAudioSource.volume = 0.1f * NoiseVolume * noiseMultiplier;
             }
             else {
                 speaker.AudioMixer.SetFloat("volume", -20 * (1/radioModel.RelativeVolume));
-                radioNoiseAudioSource.volume = NoiseVolume;
+                radioNoiseAudioSource.volume = NoiseVolume * noiseMultiplier;
             }
         }
         
@@ -168,9 +185,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
     }
 
     private void OnRadioStart(OnRadioStart e) {
-        if (!electricityModel.HasElectricity()) {
-            return;
-        }
+        
         RadioSpeak(e.speakContent, e.speakRate, e.speakGender, e.mixer);
         transform.DOShakeRotation(3f, 5, 20, 90, false).SetLoops(-1);
 

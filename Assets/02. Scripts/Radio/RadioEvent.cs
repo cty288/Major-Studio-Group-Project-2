@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.Electricity;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
@@ -36,13 +37,14 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
 
     protected bool started = false;
     protected bool ended = false;
+    protected ElectricityModel electricityModel;
    
     
     protected RadioEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer,
         RadioChannel channel) : base(startTimeRange) {
         radioModel = this.GetModel<RadioModel>();
         gameStateModel = this.GetModel<GameStateModel>();
-        
+        electricityModel = this.GetModel<ElectricityModel>();
         this.speakContent = speakContent;
         this.speakRate = speakRate;
         this.speakGender = speakGender;
@@ -53,6 +55,7 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
     public RadioEvent(): base() {
         radioModel = this.GetModel<RadioModel>();
         gameStateModel = this.GetModel<GameStateModel>();
+        electricityModel = this.GetModel<ElectricityModel>();
     }
 
     public override void OnStart() {
@@ -62,6 +65,9 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
    
 
     public override EventState OnUpdate() {
+        if ((!electricityModel.HasElectricity() || !radioModel.IsOn) && !started) {
+            return EventState.Missed;
+        }
         if (radioModel.CurrentChannel != channel && !started) {
             return EventState.Missed;
         }

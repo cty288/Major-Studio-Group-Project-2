@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _02._Scripts.Electricity;
 using _02._Scripts.Notebook;
 using DG.Tweening;
 using MikroFramework;
@@ -35,7 +36,9 @@ public class RadioUIPanel : OpenableUIPanel
     [SerializeField] private float rotateSpeed = 0.02f;
     
     protected TMP_Text channelNameText;
-    
+    protected Button radioOffButton;
+    protected TMP_Text radioOffButtonHint;
+    protected ElectricityModel electricityModel;
     
     
     
@@ -49,9 +52,12 @@ public class RadioUIPanel : OpenableUIPanel
         channelSlider = panel.Find("Radio/Slider").GetComponent<Slider>();
         radioChannelSwitch = panel.Find("Radio/RadioChannelSwitch").GetComponent<RadioChannelSwitch>();
         channelNameText = panel.Find("Radio/ChannelNameText").GetComponent<TMP_Text>();
-        
+        radioOffButton = panel.Find("Radio/RadioOffButton").GetComponent<Button>();
+        radioOffButtonHint = radioOffButton.transform.Find("Hint").GetComponent<TMP_Text>();
         radioModel.InitializeChannelRanges(radioChannalRanges);
-       
+        electricityModel = this.GetModel<ElectricityModel>();
+        radioModel.IsOn.RegisterWithInitValue(OnRadioIsOnChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
+        radioOffButton.onClick.AddListener(OnRadioOffButtonClick);
         foreach (var image in images) {
             imageAlpha.Add(image, image.color.a);
         }
@@ -65,7 +71,25 @@ public class RadioUIPanel : OpenableUIPanel
         
         radioModel.CurrentChannel.RegisterOnValueChaned(OnRadioChannelChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
+    }
 
+    private void OnRadioOffButtonClick() {
+        if (radioModel.IsOn) {
+            radioModel.IsOn.Value = false;
+        }
+        else {
+            radioModel.IsOn.Value = true;
+        }
+    }
+
+    private void OnRadioIsOnChanged(bool isOn) {
+        if(isOn){
+            radioOffButtonHint.text = "Turn Off";
+        }else{
+            radioOffButtonHint.text = "Turn On";
+        }
+
+        UpdateChannelNameText(true);
     }
 
     private string GetChannelNameByChannel(RadioChannel channel) {
@@ -88,9 +112,7 @@ public class RadioUIPanel : OpenableUIPanel
             channelNameText.DOFade(0, 0.5f);
         }
         else {
-            channelNameText.text = "Current Channel: " + channelName;
-            channelNameText.DOFade(1, 1f);
-            channelNameText.DOFade(0, 1f).SetDelay(4f);
+            UpdateChannelNameText(true);
         }
     }
 
@@ -107,17 +129,38 @@ public class RadioUIPanel : OpenableUIPanel
         radioChannelSwitch.OnSwitch -= OnSwitchRotate;
     }
 
+    public void UpdateChannelNameText(bool alsoAppear = false) {
+        if (radioModel.IsOn && electricityModel.HasElectricity()) {
+            string channelName = GetChannelNameByChannel(radioModel.CurrentChannel.Value);
+            if (String.IsNullOrEmpty(channelName)) {
+                channelNameText.text = "Channel Not Available";
+            }
+            else {
+                channelNameText.text = "Current Channel: " + channelName;
+            }
+        }else {
+            if (!electricityModel.HasElectricity()) {
+                channelNameText.text = "No Electricity";
+            }
+            else {
+                channelNameText.text = "The Radio is Off";
+            }
+        }
+
+        if (alsoAppear) {
+            channelNameText.DOFade(1, 1f);
+            channelNameText.DOFade(0, 1f).SetDelay(4f);
+        }
+    }
+
     public override void OnShow(float time) {
         panel.gameObject.SetActive(true);
         images.ForEach((image => image.DOFade(imageAlpha[image], time)));
         texts.ForEach((text => text.DOFade(1, time)));
-        string channelName = GetChannelNameByChannel(radioModel.CurrentChannel.Value);
-        if (String.IsNullOrEmpty(channelName)) {
-            channelNameText.text = "Channel Not Available";
-        }
-        else {
-            channelNameText.text = "Current Channel: " + channelName;
-        }
+        
+        
+        UpdateChannelNameText();
+        
        
         channelNameText.DOFade(0, 1f).SetDelay(3f);
     }

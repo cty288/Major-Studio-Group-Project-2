@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _02._Scripts.GameTime;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.BindableProperty;
@@ -13,6 +14,7 @@ using UnityEngine.EventSystems;
 
 
 public abstract class OpenableUIPanel : AbstractMikroController<MainGame> {
+    
     protected List<Collider2D> colliders = new List<Collider2D>();
     protected Canvas canvas;
     protected BindableProperty<bool> isShow = new BindableProperty<bool>(false);
@@ -24,6 +26,9 @@ public abstract class OpenableUIPanel : AbstractMikroController<MainGame> {
     [SerializeField] private GameObject useCameraMask;
     
     public void Show(float time) {
+        
+            
+            
         OnShow(time);
         this.Delay(time, () => {
             isShow.Value = true;

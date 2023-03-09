@@ -17,9 +17,12 @@ public class RadioModel : AbstractSavableModel {
     public bool IsSpeaking { get; set; } = false;
 
     [field: ES3Serializable] public BindableProperty<RadioChannel> CurrentChannel { get; private set; } = new BindableProperty<RadioChannel>(RadioChannel.DeadNews);
-    [field: ES3Serializable] public BindableProperty<float> Volume { get; } = new BindableProperty<float>(1); //0-1, if 0, then play noise
+    
+    [field: ES3Serializable] public BindableProperty<float> RelativeVolume { get; } = new BindableProperty<float>(1); //0-1, if 0, then play noise
     [field: ES3Serializable] public BindableProperty<float> CurrentProgress { get; } = new BindableProperty<float>(0); //0-1
     [field: ES3Serializable] public Dictionary<RadioChannel, RadioChannalRange> ChannelRanges { get; private set; } = null;
+
+    [field: ES3Serializable] public BindableProperty<bool> IsOn { get; } = new BindableProperty<bool>(true);
     protected override void OnInit() {
         
     }
@@ -32,11 +35,11 @@ public class RadioModel : AbstractSavableModel {
             float start = channel.start;
             float end = channel.end;
             //volume is determined by the progress, the closer to the middle, the louder
-            Volume.Value = Mathf.Clamp01(1 - Mathf.Abs(CurrentProgress.Value - (start + end) / 2) / (end - start));
+            RelativeVolume.Value = Mathf.Clamp01(1 - Mathf.Abs(CurrentProgress.Value - (start + end) / 2) / (end - start));
             CurrentChannel.Value = channel.channel;
         }
         else {
-            Volume.Value = 0;
+            RelativeVolume.Value = 0;
             CurrentChannel.Value = RadioChannel.None;
         }
         
