@@ -39,11 +39,13 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
         }
         else {
             //indoor, then since it's the end of the day, it's better not to go out
-            hint = "It's dark outside, it's better to stay at home...";
+            hint = "It's better to stay at home...";
         }
 
         LoadUntil(() => {
             ShowMessage(hint);
+            scenesToCameras[3].gameObject.SetActive(false);
+            scenesToCameras[0].gameObject.SetActive(true);
             this.Delay(3f, HideMessage);
             this.Delay(4f, () => {
                 loadFinished = true;
@@ -57,9 +59,12 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
 
     }
 
-    private void OnGameSceneChanged(GameScene scene) {
+    private void OnGameSceneChanged(GameScene oldScene, GameScene newScene) {
+        if (oldScene == GameScene.Outdoor && newScene == GameScene.MainGame) {
+            return;
+        }
         Load(0.2f, () => {
-            int index = (int) scene;
+            int index = (int) newScene;
             for (int i = 0; i < scenesToCameras.Count; i++) {
                 if (i == index) {
                     scenesToCameras[i].gameObject.SetActive(true);
@@ -69,13 +74,6 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
                 }
             }
 
-            if (scene == GameScene.MainGame) {
-                //BackButton.Singleton.Hide();
-            }
-            else {
-               // BackButton.Singleton.Show();
-            }
-           
         }, null);
     }
 
@@ -94,9 +92,12 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
         });
     }
 
-    public void Load(Action onScreenBlack) {
+    public void Load(Action onScreenBlack, bool lockDayEnd = true) {
         bg.raycastTarget = true;
-        gameTimeManager.LockDayEnd.Retain();
+        if (lockDayEnd) {
+            gameTimeManager.LockDayEnd.Retain();
+        }
+        
         bg.DOFade(1, 0.5f).OnComplete(() => {
             onScreenBlack?.Invoke();
         });

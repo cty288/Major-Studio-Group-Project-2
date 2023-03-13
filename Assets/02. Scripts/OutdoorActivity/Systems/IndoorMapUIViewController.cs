@@ -23,8 +23,14 @@ public class IndoorMapUIViewController : OpenableUIPanel {
 	private List<MapUIActivityOption> optionButtons = new List<MapUIActivityOption>();
 	protected List<MapPlace> mapPlaceUIs;
 	protected PlaceDescriptionPanel placeDescriptionPanel;
-	
 	protected IPlace lastSelectedPlace;
+	protected Button stayHomeButton;
+
+	protected GameTimeManager gameTimeManager;
+	protected Button setoffButton;
+
+//	protected IPlace selectedPlace;
+	protected IActivity selectedActivity;
 	protected override void Awake() {
 		base.Awake();
 		outdoorActivityModel = this.GetModel<OutdoorActivityModel>();
@@ -33,7 +39,11 @@ public class IndoorMapUIViewController : OpenableUIPanel {
 		texts = GetComponentsInChildren<TMP_Text>(true).ToList();
 		mapPlaceUIs = GetComponentsInChildren<MapPlace>(true).ToList();
 		placeDescriptionPanel = GetComponentInChildren<PlaceDescriptionPanel>(true);
+		stayHomeButton = panel.Find("Right/ProfilePanel/StatusPanel/StayHomeButton").GetComponent<Button>();
 		outdoorActivitySystem = this.GetSystem<OutdoorActivitySystem>();
+		gameTimeManager = this.GetSystem<GameTimeManager>();
+		setoffButton = panel.Find("Right/ProfilePanel/StatusPanel/SetoffButton").GetComponent<Button>();
+		setoffButton.onClick.AddListener(OnSetoffButtonClicked);
 		foreach (MapPlace mapPlace in mapPlaceUIs) {
 			mapPlace.OnPlaceClicked += OnPlaceClicked;
 		}
@@ -44,7 +54,46 @@ public class IndoorMapUIViewController : OpenableUIPanel {
 
 		//Hide(0.5f);
 		this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
+		this.RegisterEvent<OnEndOfOutdoorDayTimeEvent>(OnEndOfOutdoorDayTime).UnRegisterWhenGameObjectDestroyed(gameObject);
 		optionButtons = GetComponentsInChildren<MapUIActivityOption>(true).ToList();
+		stayHomeButton.onClick.AddListener(OnStayHomeButton);
+	}
+
+	private void OnSetoffButtonClicked() {
+		outdoorActivitySystem.EnterActivity(selectedActivity, lastSelectedPlace);
+		this.Delay(0.5f, () => {
+			Hide(0.1f);
+		});
+		
+	}
+
+	protected override void Update() {
+		base.Update();
+		bool selectAny = false;
+		foreach (MapUIActivityOption option in optionButtons) {
+			if(option.IsSelected) {
+				selectAny = true;
+				selectedActivity = option.Activity;
+				break;
+			}
+		}
+
+		setoffButton.interactable = selectAny;
+		
+
+	}
+
+	private void OnEndOfOutdoorDayTime(OnEndOfOutdoorDayTimeEvent e) {
+		Hide(0.5f);
+		
+	}
+
+	private void OnStayHomeButton() {
+		DateTime currentTime = gameTimeManager.CurrentTime.Value;
+		gameTimeManager.SpeedUpTime(1000,
+			new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, gameTimeManager.NightTimeStart, 0, 0));
+		
+		LoadCanvas.Singleton.Load(null, false);
 	}
 
 	private void OnDisable() {

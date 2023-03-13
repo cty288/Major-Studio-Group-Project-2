@@ -6,6 +6,12 @@ using MikroFramework.Architecture;
 using MikroFramework.DataStructures;
 using UnityEngine;
 
+
+public struct OnOutdoorActivityChanged {
+   public IActivity activity;
+   public IPlace place;
+}
+
 public class OutdoorActivitySystem : AbstractSavableSystem {
   
    protected Dictionary<string, IPlace> registeredPlaces { get; set; } = new Dictionary<string, IPlace>();
@@ -13,6 +19,7 @@ public class OutdoorActivitySystem : AbstractSavableSystem {
    protected GameTimeModel gameTimeModel;
    protected OutdoorActivityModel outdoorActivityModel;
    protected GameTimeManager gameTimeManager;
+   protected GameSceneModel gameSceneModel;
 
 
    public override void OnLoad() {
@@ -33,15 +40,22 @@ public class OutdoorActivitySystem : AbstractSavableSystem {
    }
 
    protected override void OnInit() {
-      base.OnInit();
+       base.OnInit();
       this.RegisterEvent<OnNewDay>(OnNewDay);
       outdoorActivityModel = this.GetModel<OutdoorActivityModel>();
       gameTimeManager = this.GetSystem<GameTimeManager>();
+      this.RegisterEvent<OnEndOfOutdoorDayTimeEvent>(OnEndOfOutdoorDayTimeEvent);
+      gameSceneModel = this.GetModel<GameSceneModel>();
       if (registeredPlaces.Count == 0) {
          RegisterPlace(new TestArea(), false);
       }
    }
-   
+
+   private void OnEndOfOutdoorDayTimeEvent(OnEndOfOutdoorDayTimeEvent e) {
+      outdoorActivityModel.CurrentActivity.Value = null;
+      gameSceneModel.GameScene.Value = GameScene.MainGame;
+   }
+
    public T GetPlace<T>() where T : class, IPlace {
       foreach (IPlace place in registeredPlaces.Values) {
          if (place is T) {
@@ -87,14 +101,25 @@ public class OutdoorActivitySystem : AbstractSavableSystem {
       }
    }
 
-   public void EnterActivity(IActivity activity) {
+   public void EnterActivity(IActivity activity, IPlace place) {
       activity.OnPlayerEnter();
       gameTimeManager.LockOutdoorEventEnd.Retain();
+      outdoorActivityModel.CurrentActivity.Value = activity;
+      gameSceneModel.GameScene.Value = GameScene.Outdoor;
+      this.SendEvent<OnOutdoorActivityChanged>(new OnOutdoorActivityChanged() {
+         activity = activity,
+         place = place
+      });
    }
    
    public void ExitActivity(IActivity activity) {
       activity.OnPlayerLeave();
       gameTimeManager.LockOutdoorEventEnd.Release();
+      outdoorActivityModel.CurrentActivity.Value = null;
+      this.SendEvent<OnOutdoorActivityChanged>(new OnOutdoorActivityChanged() {
+         activity = null,
+         place = null
+      });
    }
    
    public void SetPlaceAvailable(string placeName, bool available) {

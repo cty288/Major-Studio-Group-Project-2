@@ -17,6 +17,12 @@ public class MapUIActivityOption : AbstractMikroController<MainGame> {
 	private Toggle toggle;
 
 	public bool IsEnabled = false;
+
+	public bool IsSelected {
+		get {
+			return toggle.isOn;
+		}
+	}
 	private void Awake() {
 		panel = transform.Find("Content");
 		title = panel.Find("Title").GetComponent<TMP_Text>();

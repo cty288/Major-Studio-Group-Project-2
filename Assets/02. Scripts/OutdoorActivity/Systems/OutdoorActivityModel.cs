@@ -14,11 +14,16 @@ public class DescriptionData {
 public class OutdoorActivityModel : AbstractSavableModel {
     [field: ES3Serializable]
     public BindableProperty<bool> HasMap { get; private set; } = new BindableProperty<bool>(false);
-    
-    [field: ES3Serializable]
-    public BindableProperty<bool> IsOutdoor { get; private set; } = new BindableProperty<bool>(false);
 
-    
+
+    public bool IsOutdoor {
+        get {
+            return CurrentActivity != null;
+        }
+    }
+
+    public BindableProperty<IActivity> CurrentActivity { get; private set; } = new BindableProperty<IActivity>(null);
+
     protected Dictionary<string, DescriptionData> placeDescription = new Dictionary<string, DescriptionData>();
     protected Dictionary<string, DescriptionData> activityDescription = new Dictionary<string, DescriptionData>();
 

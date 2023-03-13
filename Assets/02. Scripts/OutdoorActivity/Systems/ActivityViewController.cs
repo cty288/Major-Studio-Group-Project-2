@@ -4,7 +4,11 @@ using System.Collections.Generic;
 using MikroFramework.Architecture;
 using UnityEngine;
 
-public abstract class ActivityViewController<TActivity>: AbstractMikroController<MainGame>
+
+public interface IActivityViewController {
+	public void SetPlace(IPlace place);
+}
+public abstract class ActivityViewController<TActivity>: AbstractMikroController<MainGame>, IActivityViewController
 where TActivity: class, IActivity {
 	
 	protected TActivity activity;
