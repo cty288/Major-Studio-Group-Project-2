@@ -20,7 +20,7 @@ public class MapUIActivityOption : AbstractMikroController<MainGame> {
 
 	public bool IsSelected {
 		get {
-			return toggle.isOn;
+			return toggle&&toggle.isOn;
 		}
 	}
 	private void Awake() {

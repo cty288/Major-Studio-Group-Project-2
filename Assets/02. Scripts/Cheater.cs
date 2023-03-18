@@ -63,6 +63,10 @@ public class Cheater : AbstractMikroController<MainGame> {
             place.EnableTemporaryActivity("TestArea_TestActivity2",
                 this.GetModel<GameTimeModel>().CurrentTime.Value.AddDays(1));
         }
+
+        if (Input.GetKeyDown(KeyCode.C)) {
+            this.GetModel<RadioModel>().UnlockChannel(RadioChannel.GeneralNews);
+        }
         
 
         if (Input.GetKeyDown(KeyCode.UpArrow)) {

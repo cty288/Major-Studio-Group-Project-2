@@ -71,7 +71,7 @@ public class IndoorMapUIViewController : OpenableUIPanel {
 		base.Update();
 		bool selectAny = false;
 		foreach (MapUIActivityOption option in optionButtons) {
-			if(option.IsSelected) {
+			if(option&&option.IsSelected) {
 				selectAny = true;
 				selectedActivity = option.Activity;
 				break;

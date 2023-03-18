@@ -82,6 +82,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         this.RegisterEvent<OnRadioStart>(OnRadioStart).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnConstructDescriptionDatas>(OnConstructDescriptionDatas).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.GetSystem<TelephoneSystem>().State.RegisterOnValueChaned(OnTelephoneStateChange).UnRegisterWhenGameObjectDestroyed(gameObject);
+        
         radioModel = this.GetModel<RadioModel>();
         lowSoundLock.OnRefCleared += OnLowSoundReleased;
         mouseHoverHint = transform.Find("RadioCanvas/Hint").GetComponent<TMP_Text>();
@@ -90,6 +91,8 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         radioModel.RelativeVolume.RegisterWithInitValue(OnVolumeChange).UnRegisterWhenGameObjectDestroyed(gameObject);
 
     }
+
+    
 
     private void OnRadioOnOffChange(bool isOn) {
         if (!isOn) {
@@ -236,6 +239,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         }
        
 
+        /*
         for (int i = 0; i < unrelatedBodyInfoCountWithDay.Evaluate(day); i++) {
             if (Random.Range(0, 2) < 1) {
                 descriptionDatas.Add(
@@ -248,7 +252,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
                 BodyInfo info = allPossibleBodyInfos[i];
                 descriptionDatas.Add(new AlienDescriptionData(info, radioReality));
             }
-        }
+        }*/
         descriptionDatas.CTShuffle();
 
     }
@@ -256,28 +260,28 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
     private void OnBodyInfoGenerated(OnNewBodyInfoGenerated e) {
         int day = this.GetSystem<GameTimeManager>().Day;
         float radioReality = radioRealityCurve.Evaluate(day);
-        
+
         radioModel.DescriptionDatas.Clear();
-       ConstructDescriptionDatas(radioModel.DescriptionDatas, radioReality, day);
+        ConstructDescriptionDatas(radioModel.DescriptionDatas, radioReality, day);
 
-       DateTime currentTime = gameTimeManager.CurrentTime.Value;
+      
        if (day == 1) {
-            AlienDescriptionData descriptionData = radioModel.DescriptionDatas[0];
-            radioModel.DescriptionDatas.RemoveAt(0);
-
-
-            GameEventSystem eventSystem = this.GetSystem<GameEventSystem>();
-            eventSystem.AddEvent(new DailyBodyRadio(
-                new TimeRange(currentTime + new TimeSpan(0, 10, 0), currentTime + new TimeSpan(0, 20, 0)),
-                AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo, descriptionData.Reality),
-                Random.Range(0.85f, 1.2f), Random.Range(0, 2) == 0 ? Gender.MALE : Gender.FEMALE,
-                radioNormalBroadcaseAudioMixerGroup));
-
-            eventSystem.AddEvent(new RandomStuffRadio(
-                new TimeRange(currentTime + new TimeSpan(0, Random.Range(30, 60), 0)),
-                RadioRandomStuff.Singleton.GetNextRandomRadio()));
-
+           AddDeadBodyIntroRadio();
        }
+    }
+
+    private void AddDeadBodyIntroRadio() {
+        DateTime currentTime = gameTimeManager.CurrentTime.Value;
+        
+        GameEventSystem eventSystem = this.GetSystem<GameEventSystem>();
+
+        string speakContent = this.GetModel<HotUpdateDataModel>().GetData("Radio_Intro").values[0];
+        
+        eventSystem.AddEvent(new DeadBodyRadioIntroEvent(
+            new TimeRange(currentTime + new TimeSpan(0, 10, 0), currentTime + new TimeSpan(0, 20, 0)),
+            speakContent,
+            1, Gender.MALE,
+            AudioMixerList.Singleton.AudioMixerGroups[1]));
     }
 
 

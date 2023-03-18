@@ -57,6 +57,8 @@ public class RadioUIPanel : OpenableUIPanel
         radioModel.InitializeChannelRanges(radioChannalRanges);
         electricityModel = this.GetModel<ElectricityModel>();
         radioModel.IsOn.RegisterWithInitValue(OnRadioIsOnChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
+        
+        this.RegisterEvent<OnRadioUnlocked>(OnRadioUnlocked).UnRegisterWhenGameObjectDestroyed(gameObject);
         radioOffButton.onClick.AddListener(OnRadioOffButtonClick);
         foreach (var image in images) {
             imageAlpha.Add(image, image.color.a);
@@ -71,6 +73,10 @@ public class RadioUIPanel : OpenableUIPanel
         
         radioModel.CurrentChannel.RegisterOnValueChaned(OnRadioChannelChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
+    }
+
+    private void OnRadioUnlocked(OnRadioUnlocked obj) {
+        UpdateChannelNameText();
     }
 
     private void OnRadioOffButtonClick() {

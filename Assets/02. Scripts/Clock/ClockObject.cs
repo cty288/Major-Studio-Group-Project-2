@@ -22,7 +22,8 @@ public class ClockObject : AbstractMikroController<MainGame>
         float minuteAngle = -(float)minute / 60 * 360;
         float hourAngle = -(float)(hour % 12) / 12 * 360 + minuteAngle/12;
         hourHand.rotation = Quaternion.Euler(0, 0, hourAngle);
-        minutesHand.rotation = Quaternion.Euler(0, 0, minuteAngle);
+        minutesHand.rotation = Quaternion.Lerp(minutesHand.rotation, Quaternion.Euler(0, 0, minuteAngle),
+            0.1f);
     }
 
     private void OnTimeChanged(DateTime arg1, DateTime time)

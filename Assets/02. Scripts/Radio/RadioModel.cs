@@ -9,6 +9,10 @@ public enum RadioChannel {
     GeneralNews,
     None
 }
+
+public struct OnRadioUnlocked {
+    
+}
 public class RadioModel : AbstractSavableModel {
 
     [field: ES3Serializable]
@@ -23,6 +27,10 @@ public class RadioModel : AbstractSavableModel {
     [field: ES3Serializable] public Dictionary<RadioChannel, RadioChannalRange> ChannelRanges { get; private set; } = null;
 
     [field: ES3Serializable] public BindableProperty<bool> IsOn { get; } = new BindableProperty<bool>(true);
+
+    [field: ES3Serializable] private HashSet<RadioChannel> unlockedChannel = new HashSet<RadioChannel>() {
+        RadioChannel.DeadNews
+    };
     protected override void OnInit() {
         
     }
@@ -42,14 +50,24 @@ public class RadioModel : AbstractSavableModel {
             RelativeVolume.Value = 0;
             CurrentChannel.Value = RadioChannel.None;
         }
-        
+    }
 
+    public void UnlockChannel(RadioChannel channel) {
+        if (!unlockedChannel.Contains(channel)) {
+            unlockedChannel.Add(channel);
+            ChangeProgress(0);
+            this.SendEvent<OnRadioUnlocked>();
+        }
     }
     
     private RadioChannalRange GetChannelByProgress(float progress) {
         foreach (var channelRange in ChannelRanges) {
             if (progress >= channelRange.Value.start && progress <= channelRange.Value.end) {
-                return channelRange.Value;
+                if (unlockedChannel.Contains(channelRange.Key)) {
+                    return channelRange.Value;
+                }
+
+                return null;
             }
         }
 

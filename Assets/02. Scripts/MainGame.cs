@@ -41,6 +41,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<DogModel>();
         this.RegisterModel<NotebookModel>();
         this.RegisterModel<OutdoorActivityModel>();
+        this.RegisterModel<HotUpdateDataModel>();
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();

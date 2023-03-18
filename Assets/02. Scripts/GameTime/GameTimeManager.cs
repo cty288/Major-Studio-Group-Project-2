@@ -200,8 +200,8 @@ public class GameTimeManager : AbstractSystem, ISystem {
         OutdoorActivityModel = this.GetModel<OutdoorActivityModel>();
         //NextDay();
         
-        if (this.GetSystem<GameTimeManager>().Day == 0) {
-            this.GetSystem<GameTimeManager>().NextDay();
+        if (Day == 0) {
+            NextDay();
         }
         else {
             NewDayStart();
