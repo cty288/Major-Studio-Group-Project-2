@@ -115,11 +115,11 @@ public class RadioUIPanel : OpenableUIPanel
         string channelName = GetChannelNameByChannel(channel);
         channelNameText.DOKill();
         if(String.IsNullOrEmpty(channelName)) {
-            channelNameText.DOFade(0, 0.5f);
+           // channelNameText.DOFade(0, 0.5f);
         }
-        else {
+        //else {
             UpdateChannelNameText(true);
-        }
+        //}
     }
 
     private void OnRadioProgressChanged(float progress) {
