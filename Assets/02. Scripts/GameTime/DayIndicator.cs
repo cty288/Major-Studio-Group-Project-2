@@ -34,6 +34,10 @@ public class DayIndicator : AbstractMikroController<MainGame> {
         else {
             dayIndicator.text = $"Day {gameTimer.Day}\n{gameTimer.NightTimeStart}:00";
         }
+
+        if (gameTimer.Day <= 0) {
+            dayIndicator.text = $"";
+        }
         
         
         
@@ -100,7 +104,13 @@ public class DayIndicator : AbstractMikroController<MainGame> {
     }
 
     private void OnDayStart(int day, int hour) {
-        dayIndicator.text = $"Day {day}\n{hour}:00";
+        if (day <= 0) {
+            dayIndicator.text = $"";
+        }
+        else {
+            dayIndicator.text = $"Day {day}\n{hour}:00";
+        }
+       
         animator.CrossFade("Show", 1.5f);
     }
 

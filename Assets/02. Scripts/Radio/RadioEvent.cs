@@ -68,7 +68,7 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
         if ((!electricityModel.HasElectricity() || !radioModel.IsOn) && !started) {
             return EventState.Missed;
         }
-        if (radioModel.CurrentChannel != channel && !started) {
+        if ((radioModel.CurrentChannel != channel && channel!= RadioChannel.AllChannels) && !started) {
             return EventState.Missed;
         }
         DateTime currentTime = gameTimeManager.CurrentTime.Value;

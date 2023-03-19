@@ -19,7 +19,7 @@ public class MerchantSystem : AbstractSystem {
         
         if(String.IsNullOrEmpty(merchantModel.PhoneNumber)) {
             merchantModel.PhoneNumber =  PhoneNumberGenor.GeneratePhoneNumber(7);
-            merchantModel.PhoneNumberGenerationDate = Random.Range(2, 5);
+            merchantModel.PhoneNumberGenerationDate = Random.Range(3, 6);
             telephoneSystem.AddContact(merchantModel.PhoneNumber, new MerchantPhone());
             AddMerchantPhoneNumebrEvent();
         }

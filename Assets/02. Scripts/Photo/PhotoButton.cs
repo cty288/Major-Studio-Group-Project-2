@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using MikroFramework.Architecture;
+using MikroFramework.Event;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -17,10 +18,15 @@ public class PhotoButton : AbstractMikroController<MainGame>, IPointerClickHandl
 		photoSaveModel = this.GetModel<PhotoSaveModel>();
 	
 		playerControlModel = this.GetModel<PlayerControlModel>();
+		photoSaveModel.HasCamera.RegisterWithInitValue(OnHasCameraChanged)
+			.UnRegisterWhenGameObjectDestroyed(gameObject);
 	}
-	
 
-	
+	private void OnHasCameraChanged(bool hasCamera) {
+		gameObject.SetActive(hasCamera);
+	}
+
+
 	private void OnDragMouse() {
 		this.gameObject.SetActive(false);
 	}

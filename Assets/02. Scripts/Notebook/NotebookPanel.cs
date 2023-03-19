@@ -90,6 +90,8 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         lastPageButton.onClick.AddListener(OnLastPageButtonClicked);
         nextPageButton.onClick.AddListener(OnNextPageButtonClicked);
         notebookWritePage.OnTear += OnTear;
+        
+        
     }
 
     private void OnPenToolClicked(NotebookTool tool) {
@@ -153,12 +155,17 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
             lastNoteBookOpenTime = gameTimeModel.CurrentTime.Value.Date;
         }
 
-        notebookModel.RemoveNotes(lastNoteBookOpenTime);
+        DeleteNotes(lastNoteBookOpenTime, true);
+
+    }
+
+    private void DeleteNotes(DateTime date, bool spawnTrash) {
+        notebookModel.RemoveNotes(date, spawnTrash);
         DestroyAllContents();
 
-        DateTime next = lastNoteBookOpenTime;
-        if (notebookModel.HasPreviousNotes(lastNoteBookOpenTime, out DateTime nextTime)) {
-           next = nextTime;
+        DateTime next = date;
+        if (notebookModel.HasPreviousNotes(date, out DateTime nextTime)) {
+            next = nextTime;
         }
         notebookModel.UpdateLastOpened(nextTime);
         LoadContent(next, false);
@@ -167,6 +174,13 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
 
     private void OnNewDay(OnNewDay e) {
         notebookModel.UpdateLastOpened(e.Date, true);
+        if (gameTimeModel.Day == 1) {
+            DateTime yesterday = e.Date.AddDays(-1).Date;
+            DeleteNotes(yesterday, false);
+            
+            notebookModel.UpdateLastOpened(e.Date);
+            LoadContent(e.Date, false);
+        }
     }
 
 

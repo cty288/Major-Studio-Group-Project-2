@@ -32,6 +32,26 @@ public static class AlienDescriptionFactory {
         // bodyInfo = BodyInfo.GetRandomBodyInfo();
         return RadioDescriptions[Random.Range(0, RadioDescriptions.Count)](bodyInfo, reality).TrimEnd();
     }
+    
+    public static string GetRadioDescription(BodyInfo bodyInfo, float reality, int index) {
+        if (!inited) {
+            Init();
+        }
+
+       
+        // bodyInfo = BodyInfo.GetRandomBodyInfo();
+        return RadioDescriptions[index](bodyInfo, reality).TrimEnd();
+    }
+    
+    public static string GetRadioDescription(BodyInfo bodyInfo, float reality, Func<BodyInfo, float, string> template) {
+        if (!inited) {
+            Init();
+        }
+
+       
+        // bodyInfo = BodyInfo.GetRandomBodyInfo();
+        return template(bodyInfo, reality).TrimEnd();
+    }
 
     public static void RegisterRadioDescription(Func<BodyInfo, float, string> description) {
         RadioDescriptions.Add(description);
@@ -126,10 +146,25 @@ public static class AlienDescriptionFactory {
 
         sb.AppendFormat(formatter,
             "We’ve got some news for you coming right up. One of the delivery couriers went missing yesterday according to our source.");
-        sb.AppendFormat(formatter, "{0:height}  {0:clothb} and {0:hair}", body);
+        sb.AppendFormat(formatter, "{0:height}  {0:clothb} And {0:hair}", body);
         return sb.ToString();
     }
+    public static string RadioPrologue(BodyInfo body, float reality)
+    {
+        DescriptionFormatter.Reality = reality;
+        StringBuilder sb = new StringBuilder();
 
+        sb.AppendFormat("Breaking news. A dead body was found in our town this morning.");
+        if (body.CheckContainTag<IAccessoryTag>(out var accessoryTag)) {
+            sb.AppendFormat(formatter, "According to our source, {0:acc} {0:clothl} And it is also believed that, {0:clothb}", body);
+        }
+        else {
+            sb.AppendFormat(formatter, "According to our source, {0:clothb} {0:clothl}", body);
+        }
+        sb.AppendFormat("We are still investigating the case and will keep you updated.");
+
+        return sb.ToString();
+    }
 
     private static bool IsReal(float reality) {
         return Random.Range(0f, 1f) < reality;

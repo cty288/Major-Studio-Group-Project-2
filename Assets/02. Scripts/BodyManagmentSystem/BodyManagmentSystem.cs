@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.GameTime;
 using Crosstales;
 using MikroFramework.Architecture;
 using UnityEngine;
@@ -44,15 +45,28 @@ public class BodyManagmentSystem : AbstractSystem {
 
     
     private void OnNewDay(OnNewDay e) {
+        
+        
         foreach (BodyTimeInfo timeInfo in bodyModel.allBodyTimeInfos) {
             timeInfo.DayRemaining--;
         }
-        
-        
+        GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
+        int bodyCount = MaxBodyEveryDay;
+        if (gameTimeModel.Day <= 0) {
+            bodyCount = 1;
+            
+            //prologue body
+            BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, true,
+                new NormalKnockBehavior(3, int.MaxValue, null));
+            bodyModel.AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(new BodyTimeInfo(1, info));
+        }
+
+
         HashSet<BodyTimeInfo> removeSet = new HashSet<BodyTimeInfo>();
         foreach (BodyTimeInfo bodyTimeInfo in bodyModel.allBodyTimeInfos) {
             if (bodyTimeInfo.DayRemaining <= 0) {
                 removeSet.Add(bodyTimeInfo);
+               
                
             }
         }
@@ -64,7 +78,7 @@ public class BodyManagmentSystem : AbstractSystem {
 
         List<BodyTimeInfo> newBodyInfos = new List<BodyTimeInfo>();
 
-        while (bodyModel.NextDayDeternimedBodies.Count > 0 && newBodyInfos.Count < MaxBodyEveryDay) {
+        while (bodyModel.NextDayDeternimedBodies.Count > 0 && newBodyInfos.Count < bodyCount) {
             BodyTimeInfo bodyTimeInfo = bodyModel.NextDayDeternimedBodies[0];
             bodyModel.NextDayDeternimedBodies.RemoveAt(0);
             
@@ -76,7 +90,7 @@ public class BodyManagmentSystem : AbstractSystem {
         }
         
         
-        for (int i = newBodyInfos.Count; i < MaxBodyEveryDay; i++) {
+        for (int i = newBodyInfos.Count; i < bodyCount; i++) {
             BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, true,
                 new NormalKnockBehavior(3, Random.Range(3, 7), null));
             

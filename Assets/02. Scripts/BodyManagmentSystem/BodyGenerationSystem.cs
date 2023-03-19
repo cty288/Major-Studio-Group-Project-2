@@ -100,7 +100,7 @@ public class BodyGenerationSystem : AbstractSystem {
         }
 
         int knockDoorTimeInterval = 3;
-        int knockTime = Random.Range(6, 9);
+       
         DateTime currentTime = gameTimeManager.CurrentTime;
 
         gameEventSystem.AddEvent(new DailyKnockEvent(

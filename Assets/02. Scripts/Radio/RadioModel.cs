@@ -7,7 +7,8 @@ using UnityEngine;
 public enum RadioChannel {
     DeadNews,
     GeneralNews,
-    None
+    None,
+    AllChannels
 }
 
 public struct OnRadioUnlocked {
@@ -47,7 +48,7 @@ public class RadioModel : AbstractSavableModel {
             CurrentChannel.Value = channel.channel;
         }
         else {
-            RelativeVolume.Value = 0;
+            RelativeVolume.Value = 1;
             CurrentChannel.Value = RadioChannel.None;
         }
     }

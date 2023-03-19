@@ -11,7 +11,7 @@ public class PhotoSaveModel : AbstractSavableModel {
     protected Dictionary<string, CropInfo> photoInfos;
 
     [field: ES3Serializable]
-    public BindableProperty<bool> HasCamera { get; protected set; } = new BindableProperty<bool>(true);
+    public BindableProperty<bool> HasCamera { get; protected set; } = new BindableProperty<bool>(false);
     
     public override void OnLoad() {
         base.OnLoad();

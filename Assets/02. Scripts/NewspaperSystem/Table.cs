@@ -29,7 +29,10 @@ public class Table :  AbstractDroppableItemContainerViewController {
         this.RegisterEvent<OnNoteDeleted>(OnNoteDeleted).UnRegisterWhenGameObjectDestroyed(gameObject);
     }
 
-    private void OnNoteDeleted(OnNoteDeleted obj) {
+    private void OnNoteDeleted(OnNoteDeleted e) {
+        if (!e.SpawnTrash) {
+            return;
+        }
         GameObject litter = SpawnItem(crumbledPaperList[Random.Range(0, crumbledPaperList.Count)]);
     }
 

@@ -28,11 +28,16 @@ public class OpeningManager : MonoBehaviour {
     private void Start() {
         canSkip = false;
         ImageEffectController.Singleton.DisableAllFeatures();
+        /*
         speaker.Speak(content, mixer, "Radio", OnFinished, rate);
         this.Delay(3f, () => {
             Architecture<MainGame>.ResetArchitecture();
             canSkipHint.SetActive(true);
             canSkip = true;
+        });*/
+        this.Delay(3f, () => {
+            Architecture<MainGame>.ResetArchitecture();
+            SceneManager.LoadScene("MainGame");
         });
         
     }

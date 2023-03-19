@@ -6,7 +6,7 @@ using MikroFramework.Architecture;
 namespace _02._Scripts.Notebook {
 
 	public struct OnNoteDeleted {
-		
+		public bool SpawnTrash;
 	}
 	public class NotebookModel : AbstractSavableModel {
 		[field: ES3Serializable]
@@ -26,10 +26,12 @@ namespace _02._Scripts.Notebook {
 			}
 		}
 		
-		public void RemoveNotes(DateTime date) {
+		public void RemoveNotes(DateTime date, bool spawnTrash) {
 			if (Notes.ContainsKey(date)) {
 				Notes.Remove(date);
-				this.SendEvent<OnNoteDeleted>();
+				this.SendEvent<OnNoteDeleted>(new OnNoteDeleted() {
+					SpawnTrash = spawnTrash
+				});
 			}
 		}
 		

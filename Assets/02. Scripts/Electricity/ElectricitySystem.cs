@@ -38,7 +38,7 @@ public class ElectricitySystem : AbstractSystem {
     }
 
     private void Update() {
-        if (!gameTimeManager.IsNight) {
+        if (!gameTimeManager.IsNight || !electricityModel.HasElectricityGenerator) {
             return;
         }
         electricityModel.Electricity.Value = Mathf.Max(electricityModel.Electricity.Value - electricityDecreaseRate * Time.deltaTime, 0);

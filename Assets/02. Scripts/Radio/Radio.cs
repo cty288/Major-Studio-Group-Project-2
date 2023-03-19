@@ -268,6 +268,23 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
        if (day == 1) {
            AddDeadBodyIntroRadio();
        }
+
+       if (day == 0) {
+           AddPrologueBodyIntroRadio();
+       }
+    }
+
+    private void AddPrologueBodyIntroRadio() {
+        DateTime currentTime = gameTimeManager.CurrentTime.Value;
+        
+        GameEventSystem eventSystem = this.GetSystem<GameEventSystem>();
+
+
+
+        eventSystem.AddEvent(new PrologueBodyRadio(
+            new TimeRange(currentTime + new TimeSpan(0, 15, 0), currentTime + new TimeSpan(0, 30, 0)),
+            AudioMixerList.Singleton.AudioMixerGroups[1]));
+
     }
 
     private void AddDeadBodyIntroRadio() {

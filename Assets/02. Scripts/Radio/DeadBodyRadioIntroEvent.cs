@@ -24,6 +24,10 @@ public class DeadBodyRadioIntroEvent : RadioEvent {
      [field: ES3Serializable]
     public override float TriggerChance { get; } = 1;
     public override void OnEnd() {
+        if (!radioModel.DescriptionDatas.Any()) {
+            this.SendEvent<OnConstructDescriptionDatas>();
+        }
+        
         AlienDescriptionData descriptionData = radioModel.DescriptionDatas[0];
         radioModel.DescriptionDatas.RemoveAt(0);
 

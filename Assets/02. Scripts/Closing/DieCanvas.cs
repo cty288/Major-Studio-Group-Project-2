@@ -24,14 +24,20 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
         SceneManager.LoadScene("Opening");
     }
 
-    public void Show(string dieReason) {
-        Show("You Died!", dieReason);
+    public void Show(string dieReason, bool isPrologue = false) {
+        
+        Show("You Died!", dieReason, isPrologue);
     }
 
-    public void Show(string title, string dieReason) {
+    public void Show(string title, string dieReason, bool isPrologue = false) {
         transform.Find("Panel").gameObject.SetActive(true);
         transform.Find("Panel/DieReason").GetComponent<TMP_Text>().text = dieReason;
         transform.Find("Panel/DieText").GetComponent<TMP_Text>().text = title;
+        restartButton.gameObject.SetActive(!isPrologue);
+    }
+    
+    public void Hide() {
+        transform.Find("Panel").gameObject.SetActive(false);
     }
     public IArchitecture GetArchitecture() {
         return MainGame.Interface;

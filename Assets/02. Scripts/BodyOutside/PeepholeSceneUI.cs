@@ -77,7 +77,10 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
             OnLightButtonPressed?.Invoke();
             StartCoroutine(FlashCoolDown());
             flashed = true;
-            this.electricitySystem.UseElectricity(0.2f);
+            if (electricityModel.HasElectricityGenerator) {
+                this.electricitySystem.UseElectricity(0.2f);
+            }
+           
         }
     }
     

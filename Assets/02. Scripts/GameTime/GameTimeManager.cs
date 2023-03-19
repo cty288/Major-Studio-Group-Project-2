@@ -13,6 +13,7 @@ using UnityEngine.SceneManagement;
 
 public struct OnNewDay {
     public DateTime Date;
+    public int Day;
 }
 
 public struct OnEndOfOutdoorDayTimeEvent {
@@ -34,7 +35,7 @@ public class GameTimeManager : AbstractSystem, ISystem {
     
     private GameTimeModel gameTimeModel;
 
-    private const float timeFreq = 2.5f;
+   
 
     protected float timeSpeed = 1f;
     protected DateTime timeSpeedUntil = DateTime.MinValue;
@@ -90,7 +91,8 @@ public class GameTimeManager : AbstractSystem, ISystem {
                 gameTimeModel.CurrentTime.Value = new DateTime(nextDay.Year, nextDay.Month, nextDay.Day, startHour, 0, 0);
                 
                 this.SendEvent<OnNewDay>(new OnNewDay() {
-                    Date = gameTimeModel.CurrentTime.Value
+                    Date = gameTimeModel.CurrentTime.Value,
+                    Day = gameTimeModel.Day
                 });
                 this.GetSystem<ITimeSystem>().AddDelayTask(3f, StartTimer);
             }
@@ -117,7 +119,7 @@ public class GameTimeManager : AbstractSystem, ISystem {
             if (SceneManager.GetActiveScene().name != "MainGame") {
                 break;
             }
-            yield return new WaitForSeconds(timeFreq / timeSpeed);
+            yield return new WaitForSeconds(gameTimeModel.GlobalTimeFreq / timeSpeed);
 
 
             if (!(gameTimeModel.CurrentTime.Value.Hour == 23 && gameTimeModel.CurrentTime.Value.Minute == 59)
@@ -200,7 +202,7 @@ public class GameTimeManager : AbstractSystem, ISystem {
         OutdoorActivityModel = this.GetModel<OutdoorActivityModel>();
         //NextDay();
         
-        if (Day == 0) {
+        if (Day == -1) {
             NextDay();
         }
         else {

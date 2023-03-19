@@ -10,11 +10,19 @@ public class PowerGeneratorViewController : ElectricalApplicance, IPointerClickH
     private SpriteRenderer spriteRenderer;
     protected override void Awake() {
         base.Awake();
+        gameObject.SetActive(false);
         spriteRenderer = GetComponent<SpriteRenderer>();
         electricityModel.Electricity.RegisterWithInitValue(OnElectricityChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
-       
+       electricityModel.HasElectricityGenerator.RegisterWithInitValue(OnHasElectricityGeneratorChanged)
+            .UnRegisterWhenGameObjectDestroyed(gameObject);
     }
+
+    private void OnHasElectricityGeneratorChanged(bool hasElectricityGenerator) {
+        gameObject.SetActive(hasElectricityGenerator);
+    }
+        
+    
 
     private void OnElectricityChanged(float arg1, float electricity) {
         int index = 0;
