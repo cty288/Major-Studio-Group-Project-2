@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.GameEvents.Camera;
+using _02._Scripts.GameTime;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
@@ -32,6 +34,16 @@ public class VintageCameraViewController : DraggableItems {
 		
 		playerControlModel = this.GetModel<PlayerControlModel>();
 
+		this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
+	}
+
+	private void OnNewDay(OnNewDay e)
+	{
+		if (e.Day == 6)
+		{
+			DateTime eventTime = new DateTime(e.Date.Year, e.Date.Month, e.Date.Day, 22, 0, 0);
+			this.GetSystem<GameEventSystem>().AddEvent(new ReceiveCamera(new TimeRange(eventTime, eventTime)));
+		}
 	}
 
 	private void OnDestroy() {

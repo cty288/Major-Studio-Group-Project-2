@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using _02._Scripts.FashionCatalog;
+using _02._Scripts.GameEvents.Camera;
 using _02._Scripts.Notebook;
+using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
 using MikroFramework.ResKit;
@@ -15,7 +18,11 @@ public class Table :  AbstractDroppableItemContainerViewController {
     [SerializeField] private GameObject bountyHunterGiftPrefab;
     [SerializeField] private List<GameObject> photoPrefabList;
     [SerializeField] private List<GameObject> crumbledPaperList;
+
     [SerializeField] private List<GameObject> fashionBookList;
+
+    [SerializeField] private GameObject cameraPrefab;
+
     
     
     private NewspaperViewController todayNewspaper;
@@ -29,12 +36,19 @@ public class Table :  AbstractDroppableItemContainerViewController {
         this.RegisterEvent<OnBountyHunterKillCorrectAlien>(OnBountyHunterKillCorrectAlien).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNewPhotoTaken>(OnNewPhotoTaken).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNoteDeleted>(OnNoteDeleted).UnRegisterWhenGameObjectDestroyed(gameObject);
+
         this.RegisterEvent<OnFashionCatalogGenerated>(OnFashionCatalogGenerated).UnRegisterWhenGameObjectDestroyed(gameObject);
     }
 
     private void OnFashionCatalogGenerated(OnFashionCatalogGenerated e) {
         GameObject book = SpawnItem(fashionBookList[Random.Range(0, fashionBookList.Count)]);
         book.GetComponent<FashionCatalogViewController>().SetContent(e.BodyPartIndicesUpdateInfo.Time, e.Week);
+
+        this.RegisterEvent<OnCameraReceive>(OnCameraReceive).UnRegisterWhenGameObjectDestroyed(gameObject);
+    }
+
+    private void OnCameraReceive(OnCameraReceive e) {
+        GameObject camera = SpawnItem(cameraPrefab);
     }
 
     private void OnNoteDeleted(OnNoteDeleted e) {
@@ -51,7 +65,6 @@ public class Table :  AbstractDroppableItemContainerViewController {
 
     private void OnBountyHunterKillCorrectAlien(OnBountyHunterKillCorrectAlien e) {
         GameObject gift = SpawnItem(bountyHunterGiftPrefab);
-        gift.GetComponent<BountyHunterGiftViewController>().FoodCount = e.FoodCount;
     }
 
 

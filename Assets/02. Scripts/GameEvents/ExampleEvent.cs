@@ -45,8 +45,6 @@ public class ExampleEvent : GameEvent {
 		this.SendEvent<OnCameraGet>(new OnCameraGet() {TestValue = 100});
 		return EventState.End;
 	}
-	
-	
 
 	public override void OnEnd() {
 		this.UnRegisterEvent<OnNewspaperUIPanelOpened>(OnOpen);
