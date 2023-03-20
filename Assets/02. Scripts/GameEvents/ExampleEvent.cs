@@ -43,8 +43,6 @@ public class ExampleEvent : GameEvent {
 
 		return EventState.End;
 	}
-	
-	
 
 	public override void OnEnd() {
 		this.UnRegisterEvent<OnNewspaperUIPanelOpened>(OnOpen);
