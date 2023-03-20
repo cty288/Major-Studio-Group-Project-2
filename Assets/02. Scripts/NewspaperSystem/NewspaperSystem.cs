@@ -23,9 +23,22 @@ public class NewspaperSystem : AbstractSystem {
     }
 
     private void OnNewBodyInfoGenerated(OnNewBodyInfoGenerated e) {
-        if (gameTimeModel.Day == 0) {
+        if (gameTimeModel.Day < 3) {
             return;
         }
+
+        if (gameTimeModel.Day == 3) {
+            DateTime currentTime = this.GetModel<GameTimeModel>().CurrentTime;
+            DateTime eventTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 22, 5, 0);
+            DateTime endTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 23, 59, 0);
+
+            this.GetSystem<GameEventSystem>().AddEvent(new NewspaperTutorialRadio(new TimeRange(eventTime, endTime),
+                AudioMixerList.Singleton.AudioMixerGroups[1]));
+        }
+        
+        
+        
+        
         List<BodyTimeInfo> newsPaperBodyInfos = new List<BodyTimeInfo>();
         foreach (BodyTimeInfo bodyTimeInfo in e.BodyTimeInfos) {
                 BodyInfo newsPaperInfo =

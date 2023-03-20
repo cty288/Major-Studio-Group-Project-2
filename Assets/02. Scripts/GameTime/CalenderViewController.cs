@@ -9,6 +9,7 @@ using UnityEngine;
 public class CalenderViewController : AbstractMikroController<MainGame> {
     [SerializeField] private TMP_Text monthText;
     [SerializeField] private TMP_Text dayText;
+    [SerializeField] private TMP_Text dayOfWeekText;
     private void Awake() {
         this.GetSystem<GameTimeManager>().CurrentTime.RegisterWithInitValue(OnTimeChange)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -17,6 +18,27 @@ public class CalenderViewController : AbstractMikroController<MainGame> {
     private void OnTimeChange(DateTime time) {
         monthText.text = GetMonthAbbreviation(time.Month);
         dayText.text = time.Day.ToString();
+        dayOfWeekText.text = GetDayOfWeekAbbreviation(time.DayOfWeek);
+    }
+
+    private string GetDayOfWeekAbbreviation(DayOfWeek timeDayOfWeek) {
+        switch (timeDayOfWeek) {
+            case DayOfWeek.Friday:
+                return "Fri";
+            case DayOfWeek.Monday:
+                return "Mon";
+            case DayOfWeek.Saturday:
+                return "Sat";
+            case DayOfWeek.Sunday:
+                return "Sun";
+            case DayOfWeek.Thursday:
+                return "Thu";
+            case DayOfWeek.Tuesday:
+                return "Tue";
+            case DayOfWeek.Wednesday:
+                return "Wed";
+        }
+        return "";
     }
 
     public static string GetMonthAbbreviation(int month) {

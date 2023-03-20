@@ -20,7 +20,7 @@ public struct OnRadioStart {
 }
 public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
     [field: ES3Serializable]
-    public override GameEventType GameEventType { get; } = GameEventType.Radio_News;
+    public override GameEventType GameEventType { get; } = GameEventType.Radio;
     
     protected RadioModel radioModel;
 
@@ -45,6 +45,8 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
         radioModel = this.GetModel<RadioModel>();
         gameStateModel = this.GetModel<GameStateModel>();
         electricityModel = this.GetModel<ElectricityModel>();
+        
+        
         this.speakContent = speakContent;
         this.speakRate = speakRate;
         this.speakGender = speakGender;
@@ -72,10 +74,6 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
             return EventState.Missed;
         }
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
-        if ((currentTime.Hour == 23 && currentTime.Minute >= 50) || gameStateModel.GameState.Value == GameState.End) {
-            //EndRadio();
-            //return EventState.End;
-        }
         
 
         if (!started) {

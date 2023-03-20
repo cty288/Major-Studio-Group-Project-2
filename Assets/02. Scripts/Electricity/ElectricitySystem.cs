@@ -2,9 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.Electricity;
+using _02._Scripts.GameTime;
 using MikroFramework.Architecture;
 using MikroFramework.BindableProperty;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 public class ElectricitySystemUpdater : MonoBehaviour
 {
     public Action OnUpdate;
@@ -35,13 +38,23 @@ public class ElectricitySystem : AbstractSystem {
         electricityModel.Electricity.RegisterOnValueChaned(OnElectricityChange);
         gameTimeManager = this.GetSystem<GameTimeManager>();
         updater.OnUpdate += Update;
+        this.RegisterEvent<OnNewDay>(OnNewDay);
+
+    }
+
+    private void OnNewDay(OnNewDay e) {
+        if (e.Day == 7) {
+            DateTime poweroffTime = e.Date.AddDays(Random.Range(0, 3));
+            this.GetSystem<GameEventSystem>().AddEvent(new PowerCutoffRadio(new TimeRange(poweroffTime),
+                AudioMixerList.Singleton.AudioMixerGroups[1]));
+        }
     }
 
     private void Update() {
-        if (!gameTimeManager.IsNight || !electricityModel.HasElectricityGenerator) {
+        if (!gameTimeManager.IsNight || !electricityModel.PowerCutoff) {
             return;
         }
-        electricityModel.Electricity.Value = Mathf.Max(electricityModel.Electricity.Value - electricityDecreaseRate * Time.deltaTime, 0);
+        UseElectricity(electricityDecreaseRate * Time.deltaTime);
     }
     private void OnElectricityChange(float oldElectricity, float newElectricity) {
         if (newElectricity <= 0 && oldElectricity > 0) {
@@ -58,7 +71,9 @@ public class ElectricitySystem : AbstractSystem {
     }
 
     public void UseElectricity(float amount) {
-        electricityModel.Electricity.Value = Mathf.Max(electricityModel.Electricity.Value - amount, 0);
+        bool hasElectricityGenerator = this.GetModel<PlayerResourceModel>().HasEnoughResource<PowerGeneratorGoods>(1);
+        float minElectricity = hasElectricityGenerator ? 0 : 0.01f;
+        electricityModel.Electricity.Value = Mathf.Max(electricityModel.Electricity.Value - amount, minElectricity);
     }
 
 

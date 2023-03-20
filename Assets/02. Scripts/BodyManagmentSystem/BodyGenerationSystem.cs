@@ -26,7 +26,7 @@ public class BodyGenerationSystem : AbstractSystem {
 
     private GameEventSystem gameEventSystem;
 
-    private int knockDoorCheckTimeInterval = 10;
+    private int knockDoorCheckTimeInterval = 20;
     private float knockDoorChance = 0.3f;
     private float nonAlienChance = 1f;
 
@@ -48,6 +48,7 @@ public class BodyGenerationSystem : AbstractSystem {
         });
        
         this.GetSystem<GameTimeManager>().OnDayStart += OnEndOfDay;
+        this.RegisterEvent<OnNewDay>(OnNewDay);
         //this.RegisterEvent<OnNewBodyInfoGenerated>(OnNewBodyInfoGenerated);
         bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
         bodyGenerationModel = this.GetModel<BodyGenerationModel>();
@@ -57,7 +58,10 @@ public class BodyGenerationSystem : AbstractSystem {
         
     }
 
-  
+    private void OnNewDay(OnNewDay e) {
+        
+    }
+
 
     private void OnEndOfDay(int day, int hour) {
         dayNum = day;
@@ -67,30 +71,48 @@ public class BodyGenerationSystem : AbstractSystem {
         }
 
         if (day == 1) {
-            this.GetSystem<ITimeSystem>().AddDelayTask(knockWaitTimeSinceDayStart, SpawnAlienOrDeliverBody);
+            SpawnAlienOrDeliverBody();
             
         }
         
      
     }
 
-  
-    
+    private Dictionary<BodyPartType, HashSet<int>> GetAvailableBodyPartIndicesa() {
+        Dictionary<BodyPartType, HashSet<int>> indices = bodyModel.AvailableBodyPartIndices;
+
+        foreach (BodyPartType bodyPartType in indices.Keys) {
+            BodyPartCollection collection =
+                AlienBodyPartCollections.Singleton.GetBodyPartCollectionByBodyType(bodyPartType);
+            int count = collection.HeightSubCollections[0].NewspaperBodyPartDisplays.HumanTraitPartsPrefabs.Count;
+
+            int additionalCount = Random.Range(1, 4);
+            for (int i = 0; i < additionalCount; i++) {
+                indices[bodyPartType].Add(Random.Range(0, count));
+            }
+        }
+
+        return indices;
+
+
+    }
+
     public void SpawnAlienOrDeliverBody() {
         List<BodyTimeInfo> Aliens = bodyModel.Aliens;
         List<BodyTimeInfo> Humans = bodyModel.Humans;
         
         BodyInfo targetBody;
-       
+
+        var availableBodyPartIndices = GetAvailableBodyPartIndicesa();
         
         if (Random.Range(0f, 1f) <= nonAlienChance || dayNum==1 || Aliens.Count==0) {
             if (Random.Range(0f, 1f) <= 0.5f && Aliens.Count > 0) {
                 targetBody = BodyInfo.GetBodyInfoOpposite(Aliens[Random.Range(0, Aliens.Count)].BodyInfo, 0.7f, 0.8f, true,
-                    false);
+                    false, availableBodyPartIndices);
             }
             else {
                 targetBody = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, false,
-                    new NormalKnockBehavior(3, Random.Range(4, 7), null));
+                    new NormalKnockBehavior(3, Random.Range(4, 7), null), availableBodyPartIndices);
             }
            // Debug.Log("Spawned a non-alien");
         }

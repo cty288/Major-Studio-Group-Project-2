@@ -143,7 +143,7 @@ public abstract  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegist
         bodyGenerationModel.CurrentOutsideBody.Value = bodyInfo;
       
         nestedKnockDoorCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(bodyInfo.KnockBehavior?.OnKnockDoor(speaker,
-            bodyInfo.VoiceTag));
+            bodyInfo.VoiceTag, bodyInfo.IsAlien));
         yield return nestedKnockDoorCheckCoroutine;
         
         knockDoorCheckCoroutine = null;

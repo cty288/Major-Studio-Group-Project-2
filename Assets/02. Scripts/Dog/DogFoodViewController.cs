@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
 using MikroFramework.Event;
@@ -19,10 +20,26 @@ public class DogFoodViewController : AbstractMikroController<MainGame> {
     private void Awake() {
         this.RegisterEvent<OnDogGet>(OnDogGet).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnDogDie>(OnDogDie).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnKnockOutsideAudioPlayed>(OnKnockOutsideAudioPlayed)
+            .UnRegisterWhenGameObjectDestroyed(gameObject);
         dogModel = this.GetModel<DogModel>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         infoText = transform.Find("Canvas/Text").GetComponent<TMP_Text>();
         gameObject.SetActive(false);
+    }
+
+    private void OnKnockOutsideAudioPlayed(OnKnockOutsideAudioPlayed e) {
+        if (dogModel.isDogAlive && dogModel.HaveDog) {
+            if (e.isAlien) {
+                if (Random.Range(0f, 1f) < 0.2f) {
+                    DogBark();
+                }
+            }
+        }
+    }
+
+    private void DogBark() {
+        AudioSystem.Singleton.Play2DSound($"dog_usual_{Random.Range(1, 3)}");
     }
 
     private void Start() {

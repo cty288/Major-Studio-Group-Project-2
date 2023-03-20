@@ -107,7 +107,7 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
     public static GameObject BuildShadowBody(BodyInfo info, bool hide) {
         return BuildShadowBody(info, hide, "AlienBody");
     }
-    public static GameObject BuildNewspaperAlienBody(BodyInfo info, int index) {
+    public static GameObject BuildNewspaperAlienBody(BodyInfo info, int index, int pos, float overallScale = 1.6f) {
         ResLoader resLoader = MainGame.Interface.GetUtility<ResLoader>();
         GameObject body = resLoader.LoadSync<GameObject>("aliens", $"NewspaperFrame_{index}");
         GameObject bodyInstance = GameObject.Instantiate(body);
@@ -117,11 +117,13 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
         RenderTexture renderTexture = new RenderTexture(renderCamera.targetTexture);
         renderCamera.targetTexture = renderTexture;
 
-        bodyInstance.transform.position = new Vector3(500, index * 100, 0);
+        bodyInstance.transform.position = new Vector3(500, pos * 100, 0);
 
         AlienBodyPartInfo lastInfo = null;
-
-       // int layer = 1;
+        alienBody.tallSpawnPosition.localScale = Vector3.one * overallScale;
+        alienBody.shortSpawnPosition.localScale = Vector3.one * overallScale;
+        
+        // int layer = 1;
         foreach (BodyPartPrefabInfo partInfo in info.AllBodyInfoPrefabs) {
             if (partInfo == null) {
                 continue;

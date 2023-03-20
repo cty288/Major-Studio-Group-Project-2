@@ -9,6 +9,11 @@ using UnityEngine;
 public struct OnOpenNewspepr {
 	
 }
+
+public struct OnCameraGet {
+	public int TestValue;
+}
+
 public class ExampleEvent : GameEvent {
 	public override GameEventType GameEventType { get; } = GameEventType.BountyHunterQuestClueNotification;
 
@@ -37,10 +42,7 @@ public class ExampleEvent : GameEvent {
 	}
 
 	public override EventState OnUpdate() {
-		if (!isCompleted) {
-			return EventState.Running;
-		}
-
+		this.SendEvent<OnCameraGet>(new OnCameraGet() {TestValue = 100});
 		return EventState.End;
 	}
 	

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using MikroFramework.Architecture;
@@ -15,6 +16,7 @@ public struct OnRadioUnlocked {
     
 }
 public class RadioModel : AbstractSavableModel {
+    
 
     [field: ES3Serializable]
     public List<AlienDescriptionData> DescriptionDatas { get; } = new List<AlienDescriptionData>();
@@ -30,7 +32,8 @@ public class RadioModel : AbstractSavableModel {
     [field: ES3Serializable] public BindableProperty<bool> IsOn { get; } = new BindableProperty<bool>(true);
 
     [field: ES3Serializable] private HashSet<RadioChannel> unlockedChannel = new HashSet<RadioChannel>() {
-        RadioChannel.DeadNews
+        RadioChannel.DeadNews,
+        RadioChannel.GeneralNews
     };
     protected override void OnInit() {
         

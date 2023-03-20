@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.Electricity;
+using _02._Scripts.FashionCatalog;
 using _02._Scripts.GameEvents.BountyHunter;
 using _02._Scripts.GameEvents.Merchant;
 using _02._Scripts.GameTime;
@@ -42,6 +43,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<NotebookModel>();
         this.RegisterModel<OutdoorActivityModel>();
         this.RegisterModel<HotUpdateDataModel>();
+        this.RegisterModel<FashionCatalogModel>();
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();
@@ -56,6 +58,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<ElectricitySystem>();
         this.RegisterSystem<DogSystem>();
         this.RegisterSystem<OutdoorActivitySystem>();
+        this.RegisterSystem<FashionCatalogSystem>();
     }
     
     protected void RegisterModel<T>() where T : class, IModel, new() {

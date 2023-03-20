@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 	public interface IKnockBehavior: IAlienTag {
-		public IEnumerator OnKnockDoor(Speaker speaker, IVoiceTag voiceTag);
+		public IEnumerator OnKnockDoor(Speaker speaker, IVoiceTag voiceTag, bool isAlien);
 
 		public IKnockBehavior GetOpposite();
 		public void OnStopKnock();
@@ -26,6 +26,8 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 		[field: ES3Serializable]
 		protected List<string> doorKnockingPhrases {get; set; }
 		
+		[field: ES3Serializable]
+		protected long bodyId {get; set; }
 		
 		public AbstractKnockBehavior(float knockDoorTimeInterval, float knockTime,
 			List<string> overrideDoorKnockingPhrases) {
@@ -35,6 +37,7 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 			if(doorKnockingPhrases==null) {
 				doorKnockingPhrases = this.GetModel<BodyKnockPhraseModel>().GetPhrases(name);
 			}
+			this.bodyId = bodyId;
 		}
 		
 		
@@ -62,7 +65,7 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 			return null;
 		}
 
-		public abstract IEnumerator OnKnockDoor(Speaker speaker, IVoiceTag voiceTag);
+		public abstract IEnumerator OnKnockDoor(Speaker speaker, IVoiceTag voiceTag, bool isAlien);
 		
 		//public abstract IEnumerator KnockDoorCoroutine(Speaker speaker, IVoiceTag voiceTag);
 

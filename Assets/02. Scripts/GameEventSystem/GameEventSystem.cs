@@ -18,7 +18,7 @@ public class GameEventSystemUpdater : MonoBehaviour {
 }
 
 public enum GameEventType {
-    Radio_News,
+    Radio,
     BodyGeneration,
     General,
     IncomingCall,

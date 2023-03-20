@@ -54,6 +54,22 @@ public class BulletGoods : MerchantGoods {
 }
 
 
+public class PowerGeneratorGoods : MerchantGoods {
+    public override int BaseFoodPerUnit { get; } = 2;
+    public override void RefreshFoodPerUnit() {
+        FoodPerUnit = Random.Range(BaseFoodPerUnit - 0, BaseFoodPerUnit + 2);
+    }
+
+    public override string SellSentence {
+        get {
+            return $"Portable Power Generator. Price: {BaseFoodPerUnit} units of food";
+        }
+    }
+
+    public override string PrefabName { get; } = "PowerGenerator";
+    public override int MaxCount { get; } = 1;
+}
+
 
 
 public class MerchantPhone : TelephoneContact, ICanGetModel {
@@ -67,9 +83,12 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
     [ES3Serializable]
     private bool isTodayAvailable = true;
    
-    private List<MerchantGoods> GoodsList = new List<MerchantGoods>() {new BulletGoods()};
+    private List<MerchantGoods> GoodsList = new List<MerchantGoods>() {
+        new BulletGoods(),
+        new PowerGeneratorGoods()
+    };
     [ES3Serializable]
-    private int dailyGoodsCount = 1;
+    private int dailyGoodsCount = 2;
     [ES3Serializable]
     private List<MerchantGoods> todayGoods = new List<MerchantGoods>();
 
@@ -116,7 +135,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
     }
 
     protected override void OnStart() {
-        string welcome = "Hello, here is the best underground merchant in MK Town! The following list is the items sold today, press the corresponding number to buy: ";
+        string welcome = "Hello, here is the best underground merchant in Dorcha! The following list is the items sold today, press the corresponding number to buy: ";
         speaker.Speak(welcome, mixer, "???", OnWelcomeSpeakFinished);
         
        
@@ -160,7 +179,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
                     currentTime = currentTime.AddDays(1);
                     currentTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, gameTimeManager.NightTimeStart,
                         0, 0);
-                    gameEventSystem.AddEvent(new GetResourceEvent(new BulletGoods(),1 ,new TimeRange(currentTime)));
+                    gameEventSystem.AddEvent(new GetResourceEvent(goods,1 ,new TimeRange(currentTime)));
                 }
             }
             speaker.Speak(reply, mixer, "Merchant", OnMerchantSpeakEnd);

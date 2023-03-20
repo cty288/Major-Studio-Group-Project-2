@@ -14,8 +14,18 @@ public class PowerGeneratorViewController : ElectricalApplicance, IPointerClickH
         spriteRenderer = GetComponent<SpriteRenderer>();
         electricityModel.Electricity.RegisterWithInitValue(OnElectricityChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
-       electricityModel.HasElectricityGenerator.RegisterWithInitValue(OnHasElectricityGeneratorChanged)
-            .UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnPlayerResourceNumberChanged>(OnPlayerResourceNumberChanged);
+    }
+
+    private void OnPlayerResourceNumberChanged(OnPlayerResourceNumberChanged e) {
+        if (e.GoodsInfo.Type == typeof(PowerGeneratorGoods)) {
+            if (e.GoodsInfo.Count > 0) {
+                OnHasElectricityGeneratorChanged(true);
+            }else {
+                OnHasElectricityGeneratorChanged(false);
+            }
+
+        }
     }
 
     private void OnHasElectricityGeneratorChanged(bool hasElectricityGenerator) {

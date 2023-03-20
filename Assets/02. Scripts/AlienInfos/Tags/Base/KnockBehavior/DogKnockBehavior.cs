@@ -10,7 +10,7 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 		}
 
 		public override string name { get; } = "Knock_dog";
-		public override IEnumerator OnKnockDoor(Speaker speaker, IVoiceTag voiceTag) {
+		public override IEnumerator OnKnockDoor(Speaker speaker, IVoiceTag voiceTag, bool isAlien) {
 			
 			for (int i = 0; i < KnockTime; i++) {
 				string clipName =  $"dog_outside_door_{Random.Range(1, 4)}";

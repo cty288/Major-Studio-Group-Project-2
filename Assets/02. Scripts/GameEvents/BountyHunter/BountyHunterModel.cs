@@ -39,7 +39,7 @@ namespace _02._Scripts.GameEvents.BountyHunter {
 			if(QuestBodyTimeInfo == null) {
 				QuestBodyTimeInfo = new BodyTimeInfo(UnityEngine.Random.Range(20, 30),
 					BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true, true,
-						new NormalKnockBehavior(3, UnityEngine.Random.Range(3, 7), new List<string>() { })));
+						new NormalKnockBehavior(3, UnityEngine.Random.Range(3, 7), new List<string>() { }), null));
 			}
 		}
 	}

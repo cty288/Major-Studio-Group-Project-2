@@ -2,8 +2,10 @@ using MikroFramework.ResKit;
 using MikroFramework.Singletons;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using _02._Scripts.AlienInfos.Tags.Base;
 using _02._Scripts.BodyManagmentSystem;
+using JetBrains.Annotations;
 using NHibernate.Mapping;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -85,12 +87,13 @@ public class AlienBodyPartCollections : MonoPersistentMikroSingleton<AlienBodyPa
     }
     
 
-    public BodyPartPrefabInfo GetRandomBodyPartInfo(BodyPartDisplayType displayType, BodyPartType bodyPartType, bool isAlien, HeightType height, bool isDinstinct) {
+    public BodyPartPrefabInfo GetRandomBodyPartInfo(BodyPartDisplayType displayType, BodyPartType bodyPartType, bool isAlien, HeightType height, bool isDinstinct,
+       [CanBeNull] HashSet<int> usedIndices) {
       
         BodyPartCollection collection = GetBodyPartCollectionByBodyType(bodyPartType);
         BodyPartHeightSubCollection subCollection = TryGetBodyPartHeightSubCollection(collection, height);
         BodyPartDisplays targetDisplays = GetBodyPartDisplayByType(subCollection, displayType);
-        return GetRandomBodyPartInfo(targetDisplays, isAlien, isDinstinct);
+        return GetRandomBodyPartInfo(targetDisplays, isAlien, isDinstinct, usedIndices);
     }
 
 
@@ -142,31 +145,44 @@ public class AlienBodyPartCollections : MonoPersistentMikroSingleton<AlienBodyPa
         return null;
     }
    
-    private BodyPartPrefabInfo GetRandomBodyPartInfo(BodyPartDisplays targetDisplays, bool isAlien, bool isDistinct) {
+    private BodyPartPrefabInfo GetRandomBodyPartInfo(BodyPartDisplays targetDisplays, bool isAlien, bool isDistinct,
+        HashSet<int> usedIndexes) {
         List<GameObject> targetList = new List<GameObject>(targetDisplays.HumanTraitPartsPrefabs);
-        if (isAlien) {
-            targetList.AddRange(targetDisplays.AlienOnlyPartsPrefabs);
+        List<GameObject> finalList;
+        if (usedIndexes == null) {
+            finalList = targetList;
         }
-
-        var oldTargetList = targetList;
-        if (isDistinct) {
-            targetList = targetList.FindAll((obj) => {
-                return obj.GetComponent<AlienBodyPartInfo>().SelfTags.Exists((alienTag => alienTag is DistinctiveTag));
-            });
-            if (targetList.Count == 0) {
-                targetList = oldTargetList;
+        else {
+            finalList = new List<GameObject>();
+            for (int i = 0; i < targetList.Count; i++) {
+                if (usedIndexes.Contains(i)) {
+                    finalList.Add(targetList[i]);
+                }
             }
         }
         
+        if (isAlien) {
+            finalList.AddRange(targetDisplays.AlienOnlyPartsPrefabs);
+        }
+
+        var oldTargetList = finalList;
+        if (isDistinct) {
+            finalList = finalList.FindAll((obj) => {
+                return obj.GetComponent<AlienBodyPartInfo>().SelfTags.Exists((alienTag => alienTag is DistinctiveTag));
+            });
+            if (finalList.Count == 0) {
+                finalList = oldTargetList;
+            }
+        }
+
+
+        BodyPartPrefabInfo info = finalList[Random.Range(0, finalList.Count)].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
         
-        
-        
-        BodyPartPrefabInfo info = targetList[Random.Range(0, targetList.Count)].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
         //info.IsAlienOnly = targetDisplays.AlienOnlyPartsPrefabs.Contains(info.gameObject);
         return info;
     }
 
-    private BodyPartCollection GetBodyPartCollectionByBodyType(BodyPartType type) {
+    public BodyPartCollection GetBodyPartCollectionByBodyType(BodyPartType type) {
         switch (type) {
             case BodyPartType.Body:
                 return MainBodyPartPrefabs;

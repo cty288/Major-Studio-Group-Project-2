@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.FashionCatalog;
 using _02._Scripts.Notebook;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
@@ -14,6 +15,7 @@ public class Table :  AbstractDroppableItemContainerViewController {
     [SerializeField] private GameObject bountyHunterGiftPrefab;
     [SerializeField] private List<GameObject> photoPrefabList;
     [SerializeField] private List<GameObject> crumbledPaperList;
+    [SerializeField] private List<GameObject> fashionBookList;
     
     
     private NewspaperViewController todayNewspaper;
@@ -27,6 +29,12 @@ public class Table :  AbstractDroppableItemContainerViewController {
         this.RegisterEvent<OnBountyHunterKillCorrectAlien>(OnBountyHunterKillCorrectAlien).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNewPhotoTaken>(OnNewPhotoTaken).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNoteDeleted>(OnNoteDeleted).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnFashionCatalogGenerated>(OnFashionCatalogGenerated).UnRegisterWhenGameObjectDestroyed(gameObject);
+    }
+
+    private void OnFashionCatalogGenerated(OnFashionCatalogGenerated e) {
+        GameObject book = SpawnItem(fashionBookList[Random.Range(0, fashionBookList.Count)]);
+        book.GetComponent<FashionCatalogViewController>().SetContent(e.BodyPartIndicesUpdateInfo.Time, e.Week);
     }
 
     private void OnNoteDeleted(OnNoteDeleted e) {

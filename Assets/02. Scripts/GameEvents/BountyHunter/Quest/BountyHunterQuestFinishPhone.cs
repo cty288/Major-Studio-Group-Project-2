@@ -54,7 +54,7 @@ public class BountyHunterQuestFinishContact : TelephoneContact {
 
     protected override void OnStart() {
         string welcome =
-            "Good day, mister. I'm the chief of the Police Department of MK Town. Congratulations on your glory achievement in protecting our community.";
+            "Good day, mister. I'm the chief of the Police Department of Dorcha. Congratulations on your glory achievement in protecting our community.";
         welcome +=
             "With your help in hunting down the dangerous creatures, we have successfully suppressed recent waves of infiltration in our neighborhood.";
         welcome +=

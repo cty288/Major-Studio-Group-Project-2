@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
+using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.GameEvents.BountyHunter;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.ActionKit;
@@ -39,7 +40,7 @@ public class BountyHunterQuest2Notification : BountyHunterQuestClueNotification 
         return new BountyHunterQuest2ClueEvent(newTimeRange,location,
             BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, false,
                 new NormalKnockBehavior(Random.Range(1,3), UnityEngine.Random.Range(3,6),
-                    new List<string>(){})), null, null);
+                    new List<string>(){}), this.GetModel<BodyModel>().AvailableBodyPartIndices), null, null);
     }
 }
 
@@ -251,7 +252,7 @@ public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
         bodyGenerationModel.CurrentOutsideBody.Value = bodyInfo;
       
         nestedKnockDoorCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(bodyInfo.KnockBehavior?.OnKnockDoor(speaker,
-            bodyInfo.VoiceTag));
+            bodyInfo.VoiceTag, bodyInfo.IsAlien));
         yield return nestedKnockDoorCheckCoroutine;
         
         knockDoorCheckCoroutine = null;

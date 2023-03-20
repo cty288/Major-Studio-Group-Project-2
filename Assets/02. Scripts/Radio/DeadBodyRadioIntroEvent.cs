@@ -43,6 +43,12 @@ public class DeadBodyRadioIntroEvent : RadioEvent {
         eventSystem.AddEvent(new RandomStuffRadio(
             new TimeRange(currentTime + new TimeSpan(0, Random.Range(30, 60), 0)),
             RadioRandomStuff.Singleton.GetNextRandomRadio()));
+        
+        eventSystem.AddEvent(new FoodTutorialRadio(
+            new TimeRange(currentTime + new TimeSpan(0, Random.Range(10, 40), 0)),
+            AudioMixerList.Singleton.AudioMixerGroups[1]));
+
+        
     }
 
     public override void OnMissed() {
