@@ -108,8 +108,10 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         controlHint.text = "Hold & Drag to Erase";
     }
 
-
-   
+    private void OnHintClicked()
+    {
+        
+    }
 
     protected override void OnDestroy() {
         base.OnDestroy();

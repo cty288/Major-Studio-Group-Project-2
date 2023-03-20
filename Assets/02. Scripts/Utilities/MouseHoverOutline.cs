@@ -52,9 +52,6 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
         playerControlModel = this.GetModel<PlayerControlModel>();
         playerControlModel.ControlType.RegisterOnValueChaned(OnControlChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
-
-
-
     }
 
     private void OnShowValueChanged(bool isShow) {
