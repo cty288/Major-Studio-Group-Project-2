@@ -5,8 +5,10 @@ using MikroFramework.Architecture;
 using UnityEngine;
 
 public class MerchantNoteOnTableViewController : DraggableItems {
-   
 
+    [ES3Serializable] protected string content;
+    
+    
     private SpriteRenderer spriteRenderer;
 
     protected override void Awake() {
@@ -18,6 +20,7 @@ public class MerchantNoteOnTableViewController : DraggableItems {
         spriteRenderer.sortingOrder = layer;
     }
 
+    
     protected override void OnClick() {
         this.SendCommand<OpenMerchantNoteUIPanelCommand>();
     }
