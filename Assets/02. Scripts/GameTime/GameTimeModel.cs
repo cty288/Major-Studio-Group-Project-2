@@ -14,7 +14,7 @@ namespace _02._Scripts.GameTime {
 		public void AddDay() {
 			Day++;
 			if (Day <= 0) {
-				GlobalTimeFreq = 0.6f;
+				GlobalTimeFreq = 1.2f;
 			}
 			else {
 				GlobalTimeFreq = 1.5f;
