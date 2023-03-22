@@ -107,7 +107,7 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
     public static GameObject BuildShadowBody(BodyInfo info, bool hide) {
         return BuildShadowBody(info, hide, "AlienBody");
     }
-    public static GameObject BuildNewspaperAlienBody(BodyInfo info, int index, int pos, float overallScale = 1.6f) {
+    public static GameObject BuildNewspaperAlienBody(BodyInfo info, int index, int pos, float bgAlpha=1f, float overallScale = 1.6f) {
         ResLoader resLoader = MainGame.Interface.GetUtility<ResLoader>();
         GameObject body = resLoader.LoadSync<GameObject>("aliens", $"NewspaperFrame_{index}");
         GameObject bodyInstance = GameObject.Instantiate(body);
@@ -118,7 +118,7 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
         renderCamera.targetTexture = renderTexture;
 
         bodyInstance.transform.position = new Vector3(500, pos * 100, 0);
-
+        bodyInstance.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, bgAlpha);
         AlienBodyPartInfo lastInfo = null;
         alienBody.tallSpawnPosition.localScale = Vector3.one * overallScale;
         alienBody.shortSpawnPosition.localScale = Vector3.one * overallScale;
@@ -148,9 +148,9 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
                 spawnedBodyPart.transform.localScale = scale;
                 //spawnedBodyPart.GetComponentInChildren<SpriteRenderer>().sortingOrder = layer;
                 spawnedBodyPart.GetComponent<AlienBodyPartInfo>().Init(partInfo);
-                
-                
                 lastInfo = spawnedBodyPart.GetComponent<AlienBodyPartInfo>();
+
+                
             }
             //layer++;
         }

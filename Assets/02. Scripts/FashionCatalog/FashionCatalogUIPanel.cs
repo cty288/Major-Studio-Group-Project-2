@@ -14,6 +14,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class BodyPartIndexInfo {
+	public BodyPartType BodyPartType;
+	public int Index;
+	
+	public BodyPartIndexInfo(BodyPartType bodyPartType, int index) {
+		BodyPartType = bodyPartType;
+		Index = index;
+	}
+}
+
 public class FashionCatalogUIPanel : OpenableUIPanel {
 	private GameObject panel;
 	private TMP_Text dateText;
@@ -26,8 +36,11 @@ public class FashionCatalogUIPanel : OpenableUIPanel {
 	private FashionCatalogModel fashionCatalogModel;
 	
 	private List<GameObject> spawnedBodies = new List<GameObject>();
-	
-	[SerializeField] private GameObject photoPrefab;
+
+	private List<BodyPartIndexInfo> bodyPartIndexInfos = new List<BodyPartIndexInfo>();
+	private int bodyPartsPerPage = 12;
+	private int currentPage = 0;
+	//[SerializeField] private GameObject photoPrefab;
 
 	protected override void Awake() {
 		base.Awake();
@@ -60,25 +73,49 @@ public class FashionCatalogUIPanel : OpenableUIPanel {
 	private void Show(DateTime date, int week) {
 		AudioSystem.Singleton.Play2DSound("pick_up_newspaper");
 		dateText.text = $"Week\n{week}";
+		SetContent(date);
+		Show(0.5f);
+		
+	}
 
+	private void SetContent(DateTime date) {
 		var info = fashionCatalogModel.GetBodyPartIndicesUpdateInfo(date);
 		Dictionary<BodyPartType, HashSet<int>> bodyPartIndices = info.AvailableBodyPartIndices;
 		
 		List<int> headIndices = bodyPartIndices[BodyPartType.Head].ToList();
 		List<int> bodyIndices = bodyPartIndices[BodyPartType.Body].ToList();
-		for (int i = 0; i < info.BodyPartCount; i++) {
-			BodyPartPrefabInfo headInfo = AlienBodyPartCollections.Singleton.GetBodyPartCollectionByBodyType(BodyPartType.Head)
-				.HeightSubCollections[0].NewspaperBodyPartDisplays.HumanTraitPartsPrefabs[headIndices[i]]
+		currentPage = 0;
+		bodyPartIndexInfos = new List<BodyPartIndexInfo>();
+		for (int i = 0; i < headIndices.Count; i++) {
+			bodyPartIndexInfos.Add(new BodyPartIndexInfo(BodyPartType.Head, headIndices[i]));
+		}
+		
+		for (int i = 0; i < bodyIndices.Count; i++) {
+			bodyPartIndexInfos.Add(new BodyPartIndexInfo(BodyPartType.Body, bodyIndices[i]));
+		}
+	}
+
+
+	private void AddContentToBook(int currentPage) {
+		for (int i = 0; i < indices.Count; i++) {
+			BodyPartPrefabInfo prefabInfo = AlienBodyPartCollections.Singleton.GetBodyPartCollectionByBodyType(bodyPartType)
+				.HeightSubCollections[0].NewspaperBodyPartDisplays.HumanTraitPartsPrefabs[indices[i]]
 				.GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo(0);
+
+
+			BodyInfo bodyInfo = null;
+			float scale = 1f;
+			if (bodyPartType == BodyPartType.Head) {
+				bodyInfo =  BodyInfo.GetBodyInfo(null, null, prefabInfo, HeightType.Tall, null, null,
+					BodyPartDisplayType.Newspaper, false);
+				scale = 1.5f;
+			}else if (bodyPartType == BodyPartType.Body) {
+				bodyInfo =  BodyInfo.GetBodyInfo(null, prefabInfo, null, HeightType.Tall, null, null,
+					BodyPartDisplayType.Newspaper, false);
+			}
 			
-			BodyPartPrefabInfo mainBodyInfo = AlienBodyPartCollections.Singleton.GetBodyPartCollectionByBodyType(BodyPartType.Body)
-				.HeightSubCollections[0].NewspaperBodyPartDisplays.HumanTraitPartsPrefabs[bodyIndices[i]]
-				.GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo(0);
-
-			BodyInfo bodyInfo = BodyInfo.GetBodyInfo(null, mainBodyInfo, headInfo, HeightType.Tall, null, null,
-				BodyPartDisplayType.Newspaper, false);
-
-			GameObject spawnedBody = AlienBody.BuildNewspaperAlienBody(bodyInfo, 0, i+100,1f);
+			
+			GameObject spawnedBody = AlienBody.BuildNewspaperAlienBody(bodyInfo, 0, i + 100, 0, scale);
 			spawnedBodies.Add(spawnedBody);
 			
 			Camera camera = spawnedBody.GetComponentInChildren<Camera>();
@@ -87,14 +124,13 @@ public class FashionCatalogUIPanel : OpenableUIPanel {
 			RawImage rawImage = Instantiate(photoPrefab, photoContainer).GetComponent<RawImage>();
 			rawImage.texture = renderTexture;
 			rawImage.GetComponentInChildren<TMP_Text>(true).text = GetShortDescription(bodyInfo);
+			rawImage
 			
 			//imageContainers[i].GetComponent<BountyHuntingSelector>().SetHintText(GetShortDescription(bodyInfo));
 			
 		}
-		Show(0.5f);
-		
 	}
-	
+
 	public static string GetShortDescription(BodyInfo bodyInfo) {
         
         List<IAlienTag> tags = new List<IAlienTag>();
@@ -179,9 +215,10 @@ public class FashionCatalogUIPanel : OpenableUIPanel {
 	public override void OnHide(float time) {
 		images = GetComponentsInChildren<MaskableGraphic>(true).ToList();
 		texts = GetComponentsInChildren<TMP_Text>(true).ToList();
-		//AudioSystem.Singleton.Play2DSound("put_down_newspaper");
+		
 		images.ForEach((image => image.DOFade(0, time)));
 		texts.ForEach((text => text.DOFade(0, time)));
+		
 		this.Delay(time, () => {
 			if (this) { {
 					//destroy all children of photoContainer
