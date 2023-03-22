@@ -8,15 +8,21 @@ namespace _02._Scripts.GameTime {
 		[ES3Serializable]
 		public BindableProperty<DateTime> CurrentTime = new BindableProperty<DateTime>(new DateTime(2022, 11, 12, 22, 0, 0));
 
-		[field: ES3Serializable] public float GlobalTimeFreq { get; set; } = 2.5f;
+		protected DateTime DayStartTime = new DateTime(2022, 11, 13, 22, 0, 0);
+		
+		[field: ES3Serializable] public float GlobalTimeFreq { get; set; } = 1.5f;
 		public void AddDay() {
 			Day++;
 			if (Day <= 0) {
-				GlobalTimeFreq = 1f;
+				GlobalTimeFreq = 0.6f;
 			}
 			else {
-				GlobalTimeFreq = 2.5f;
+				GlobalTimeFreq = 1.5f;
 			}
+		}
+		
+		public DateTime GetDay(int day) {
+			return DayStartTime.AddDays(day);
 		}
 		
 		

@@ -26,8 +26,8 @@ public class BodyGenerationSystem : AbstractSystem {
 
     private GameEventSystem gameEventSystem;
 
-    private int knockDoorCheckTimeInterval = 20;
-    private float knockDoorChance = 0.3f;
+    private int knockDoorCheckTimeInterval = 40;
+    private float knockDoorChance = 0.5f;
     private float nonAlienChance = 1f;
 
 

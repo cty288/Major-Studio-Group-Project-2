@@ -47,12 +47,12 @@ public class DailyBodyRadio : RadioEvent {
 
 
             DateTime currentTime = gameTimeManager.CurrentTime.Value;
-            int nextEventInterval = Random.Range(8,15);
+            int nextEventInterval = Random.Range(40, 80);
 
 
             gameEventSystem.AddEvent(new DailyBodyRadio(
-                new TimeRange(currentTime + new TimeSpan(0, nextEventInterval, 0),
-                    currentTime + new TimeSpan(0, nextEventInterval + 10, 0)),
+                new TimeRange(currentTime.AddMinutes(nextEventInterval),
+                    currentTime.AddMinutes(nextEventInterval+10)),
                 AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo, descriptionData.Reality),
                 Random.Range(0.85f, 1.2f), Random.Range(0, 2) == 0 ? Gender.MALE : Gender.FEMALE, mixer));
         }

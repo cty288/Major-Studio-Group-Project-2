@@ -40,7 +40,7 @@ public class PowerCutoffRadio : RadioEvent {
 	    int nextEventInterval = Random.Range(8,15);
 
 
-	    gameEventSystem.AddEvent(new NewspaperTutorialRadio(
+	    gameEventSystem.AddEvent(new PowerCutoffRadio(
 		    new TimeRange(currentTime + new TimeSpan(0, nextEventInterval, 0),
 			    currentTime + new TimeSpan(0, nextEventInterval + 10, 0)), mixer));
     }

@@ -601,7 +601,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6463690984375166296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.091, y: 0, z: 0}
+  m_LocalPosition: {x: 0.2, y: 0.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -708,8 +708,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1017
-  m_Sprite: {fileID: 21300000, guid: d774cc6dd697936488c2787d924ad213, type: 3}
-  m_Color: {r: 0.74934804, g: 1, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 5b187290d425dfb46ba4af70f8244a73, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -732,18 +732,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.21142936, y: -0.4129746}
+  m_Offset: {x: 0.0049909055, y: -0.019482851}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 16, y: 16}
+    oldSize: {x: 1.6875, y: 2.34375}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.3206487, y: 2.7134206}
+  m_Size: {x: 1.7304115, y: 2.3199286}
   m_EdgeRadius: 0
 --- !u!114 &4809821239342007284
 MonoBehaviour:
@@ -816,7 +816,7 @@ MonoBehaviour:
     - {fileID: 4894522079946507090}
     - {fileID: 856761473258900024}
     - {fileID: 658027840323694604}
-    _Values: 990a91347cda0d6caf6efef893ea074d398b884c4e3abe65316099f0375bcb6d53a5dc00d1ff8c21fdcbee2b352331147c2bfa77eb562c4a861dcb6fca737909b62d9337062469153b6924ce22bf9f155974c77934355103799187eecafcec75ae1a1e9c4896e456c3e4b3557afb6d387db51556abffd4148169408a6284b438ab6683c221c3a110a7e1c4e71659827ddbb1937feebdde52f0321eb2d66fb946661455eb8855e941aada02723c43d4241542504e0fcab5684001bf3e0bcd7d2d287d4d2baf6e0579f2bc2a7ee7c0c638d3e038e62ee14133c85228c8c0508f54a106626be194c831cabd305e28d8e7455f33b54009568a59c228e99e0c81d76a9ad76f53af5ae743467ff56d9e63a20f6ae2688c9b4e4a4a7c08a8b8ab292448e6c5c450689396044c7286884cf7f826caf83329194acf4b
+    _Values: 990a91347cda0d6caf6efef893ea074d398b884c4e3abe65316099f0375bcb6d53a5dc00d1ff8c21fdcbee2b352331147c2bfa77eb562c4a861dcb6fca737909b62d9337062469153b6924ce22bf9f155974c77934355103799187eecafcec75ae1a1e9c4896e456c3e4b3557afb6d387db51556abffd4148169408a6284b438ab6683c221c3a110a7e1c4e71659827ddbb1937feebdde52f0321eb2d66fb946661455eb8855e941aada02723c43d4241542504e0fcab568fa7d49056bdd9e37287d4d2baf6e0579f2bc2a7ee7c0c638d3e038e62ee14133c85228c8c0508f54a106626be194c831cabd305e28d8e7455f33b54009568a59c228e99e0c81d76a9ad76f53af5ae743467ff56d9e63a20f6ae2688c9b4e4a4a7c08a8b8ab292448e6c5c450689396044c7286884cf7f826caf83329194acf4b
 --- !u!114 &-7109755171871184515
 MonoBehaviour:
   m_ObjectHideFlags: 0

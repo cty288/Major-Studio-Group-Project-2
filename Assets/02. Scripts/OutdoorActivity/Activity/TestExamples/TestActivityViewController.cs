@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using MikroFramework.Architecture;
 using UnityEngine;
 
 public class TestActivityViewController : ActivityViewController<TestActivity> {
@@ -7,4 +9,6 @@ public class TestActivityViewController : ActivityViewController<TestActivity> {
 		base.Awake();
 		Debug.Log("Hello");
 	}
+
+	
 }

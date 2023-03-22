@@ -5,6 +5,7 @@ using _02._Scripts.Electricity;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
+using MikroFramework.TimeSystem;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -37,6 +38,8 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
 
     protected bool started = false;
     protected bool ended = false;
+    private bool delayEnded = false;
+    private bool startDelayEnded = false;
     protected ElectricityModel electricityModel;
    
     
@@ -67,13 +70,14 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
    
 
     public override EventState OnUpdate() {
-        if ((!electricityModel.HasElectricity() || !radioModel.IsOn) && !started) {
+        DateTime currentTime = gameTimeManager.CurrentTime.Value;
+        if ((!electricityModel.HasElectricity() || !radioModel.IsOn || (currentTime.Hour==23 && currentTime.Minute>=55)) && !started) {
             return EventState.Missed;
         }
         if ((radioModel.CurrentChannel != channel && channel!= RadioChannel.AllChannels) && !started) {
             return EventState.Missed;
         }
-        DateTime currentTime = gameTimeManager.CurrentTime.Value;
+       
         
 
         if (!started) {
@@ -87,7 +91,19 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
             OnRadioStart();
         }
 
-        return (radioModel.IsSpeaking && !ended) ? EventState.Running : EventState.End;
+        if ((!radioModel.IsSpeaking || ended)&& !startDelayEnded) {
+            startDelayEnded = true;
+            delayEnded = false;
+            this.GetSystem<ITimeSystem>().AddDelayTask(1f, () => {
+                delayEnded = true;
+            });
+        } 
+        
+        if(delayEnded) {
+            return EventState.End;
+        }
+
+        return EventState.Running;
     }
 
     protected abstract void OnRadioStart();

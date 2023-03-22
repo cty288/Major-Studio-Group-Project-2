@@ -100,7 +100,7 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
             }
         }
         alienBody.BodyInfos = new List<BodyInfo>() {info};
-       
+        
         alienBody.OnBuilt();
         return bodyInstance;
     }

@@ -1,15 +1,17 @@
 ManifestFileVersion: 0
-CRC: 999036626
+CRC: 2821905804
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 94d6466e53ff933ced2afe2291b4e1d8
+    Hash: 1a7a5748f1e4b099bfcd9d033606dca7
   TypeTreeHash:
     serializedVersion: 2
-    Hash: d650b38859ebe7a5ea740a5f5b0ef698
+    Hash: 349746a49d851709a9e6c7120f3058ae
 HashAppended: 0
 ClassTypes:
 - Class: 1
+  Script: {instanceID: 0}
+- Class: 4
   Script: {instanceID: 0}
 - Class: 21
   Script: {instanceID: 0}
@@ -24,6 +26,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 713e266a9b6765a45a4e214d417a0729, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 650910a5192c6bc419d61e4a3b7fe274, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
@@ -34,7 +38,11 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 260b52fa4b43b9d4296254fbde67bf60, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9f10fed3cbc19422bba628fff172e431, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
 - Class: 114
@@ -42,6 +50,8 @@ ClassTypes:
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
+  Script: {instanceID: 0}
+- Class: 212
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
@@ -52,6 +62,8 @@ ClassTypes:
 SerializeReferenceClassIdentifiers:
 - AssemblyName: EasySave3
   ClassName: ES3Internal.ES3RefIdDictionary
+- AssemblyName: Unity.RenderPipelines.Universal.Runtime
+  ClassName: UnityEngine.Rendering.Universal.LightUtility/LightMeshVertex
 - AssemblyName: Unity.TextMeshPro
   ClassName: TMPro.FaceInfo_Legacy
 - AssemblyName: Unity.TextMeshPro
@@ -81,5 +93,6 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
+- Assets/05. Prefabs/OutdoorActivity/TestActivity/TestArea_TestActivity.prefab
 - Assets/05. Prefabs/General/DraggedText.prefab
 Dependencies: []

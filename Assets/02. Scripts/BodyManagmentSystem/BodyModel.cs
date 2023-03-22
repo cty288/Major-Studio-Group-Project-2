@@ -24,7 +24,7 @@ namespace _02._Scripts.BodyManagmentSystem {
 			availableBodyPartIndices = null;
 
 
-		[field: ES3Serializable] public int availableBodyPartIndexCount { get; protected set; } = 5;
+		[field: ES3Serializable] public int availableBodyPartIndexCount { get; protected set; } =6;
 
 		public Dictionary<BodyPartType, HashSet<int>> AvailableBodyPartIndices {
 			get {

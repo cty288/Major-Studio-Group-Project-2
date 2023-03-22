@@ -98,7 +98,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         currentTool = tool;
         eraserTool.Deselect();
         penTool.Select();
-        controlHint.text = "Click to add Text\nHold & Drag to Mark";
+        controlHint.text = "Hold & Drag to Mark";
     }
 
     private void OnEraserToolClicked(NotebookTool tool) {
@@ -351,7 +351,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         if (Input.GetMouseButtonUp(0)) {
             if (currentWritingText == null && !PhotoPanelUI.IsOpen && currentMarker == null && currentTool == penTool) { //check whether create new text
                 if (CheckMouseOnEmptySpace() && Vector3.Distance(lastMouseDownPosition, mousePos) < 0.1f) {
-                    CreateWritingText(mousePos);
+                    //CreateWritingText(mousePos);
                 }
             }
             

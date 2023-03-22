@@ -12,6 +12,8 @@ public class TempClearSavedFiles : MonoBehaviour
 
 	private void OnClicked() {
 		ES3.DeleteFile("models.es3");
+		ES3.DeleteFile("systems.es3");
+		ES3.DeleteFile("photos");
 		ES3.DeleteFile("SaveFile.es3");
 	}
 }

@@ -43,7 +43,7 @@ public class ElectricitySystem : AbstractSystem {
     }
 
     private void OnNewDay(OnNewDay e) {
-        if (e.Day == 7) {
+        if (e.Day == 9) {
             DateTime poweroffTime = e.Date.AddDays(Random.Range(0, 3));
             this.GetSystem<GameEventSystem>().AddEvent(new PowerCutoffRadio(new TimeRange(poweroffTime),
                 AudioMixerList.Singleton.AudioMixerGroups[1]));

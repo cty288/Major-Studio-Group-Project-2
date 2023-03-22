@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class PlayerResourceModel : AbstractSavableModel {
 	[field: ES3Serializable]
-	public BindableProperty<int> FoodCount { get; } = new BindableProperty<int>(5);
+	public BindableProperty<int> FoodCount { get; } = new BindableProperty<int>(6);
 	[field: ES3Serializable]
 	public Dictionary<Type, GoodsInfo> PlayerResources { get; } = new Dictionary<Type, GoodsInfo>();
 	

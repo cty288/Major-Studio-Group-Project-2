@@ -86,10 +86,10 @@ public static class AlienDescriptionFactory {
 
         sb.AppendFormat("Welcome back, we have some updated information about the dead body we found this morning.");
         if (body.CheckContainTag<IAccessoryTag>(out var accessoryTag)) {
-            sb.AppendFormat(formatter, "According to our source, {0:acc} and it is also believed that, {0:clothb}", body);
+            sb.AppendFormat(formatter, "According to our source, {0:acc} and it is also believed that, {0:clothb} {clothl}", body);
         }
         else {
-            sb.AppendFormat(formatter, "According to our source, {0:clothb}", body);
+            sb.AppendFormat(formatter, "According to our source, {0:clothb} {clothl}", body);
         }
        
         return sb.ToString();
@@ -101,7 +101,7 @@ public static class AlienDescriptionFactory {
         StringBuilder sb = new StringBuilder();
 
         sb.AppendFormat("This is Radio MK, and I’m your host. New reports indicate that a newly found dead body yesterday has the following trait: ");
-        sb.AppendFormat(formatter, "{0:height} and {0:voice}", body);
+        sb.AppendFormat(formatter, "{0:height} and {0:voice} {0:clothb}", body);
         sb.AppendFormat("Since the creature can disguise itself into human bodies, we highly recommend you to be aware of anyone who looks like this dead body.");
         return sb.ToString();
     }

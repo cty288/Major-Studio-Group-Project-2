@@ -62,7 +62,7 @@ public class PowerGeneratorGoods : MerchantGoods {
 
     public override string SellSentence {
         get {
-            return $"Portable Power Generator. Price: {BaseFoodPerUnit} units of food";
+            return $"Portable Power Generator - I bet you might need it some time! Price: {BaseFoodPerUnit} units of food";
         }
     }
 
@@ -115,7 +115,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
     }
 
     private void RefreshAvailability() {
-        isTodayAvailable = Random.Range(0f, 1f) <= dailyAvailability;
+        isTodayAvailable = true;
     }
 
     private void RefreshDailyGoods() {

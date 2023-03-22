@@ -36,7 +36,7 @@ public class DayIndicator : AbstractMikroController<MainGame> {
         }
 
         if (gameTimer.Day <= 0) {
-            dayIndicator.text = $"";
+            dayIndicator.text = $"Prologue";
         }
         
         
@@ -105,7 +105,7 @@ public class DayIndicator : AbstractMikroController<MainGame> {
 
     private void OnDayStart(int day, int hour) {
         if (day <= 0) {
-            dayIndicator.text = $"";
+            dayIndicator.text = $"Prologue";
         }
         else {
             dayIndicator.text = $"Day {day}\n{hour}:00";

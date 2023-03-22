@@ -20,7 +20,8 @@ public class CameraViewController : DraggableItems {
 
     protected override void OnClick() {
         this.GetModel<PhotoSaveModel>().HasCamera.Value = true;
-        //Container.SpawnItem(paperPrefab);
+        DeliveryNoteViewController note = Container.SpawnItem(paperPrefab).GetComponent<DeliveryNoteViewController>();
+        note.SetContent("Package Detail:\n1x Camera\n\nThanks for your purchasing!");
         GameObject.Destroy(gameObject);
     }
 

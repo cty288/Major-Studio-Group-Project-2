@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using _02._Scripts.AlienInfos.Tags.Base;
 using _02._Scripts.FashionCatalog;
 using DG.Tweening;
 using MikroFramework;
@@ -84,7 +86,7 @@ public class FashionCatalogUIPanel : OpenableUIPanel {
 
 			RawImage rawImage = Instantiate(photoPrefab, photoContainer).GetComponent<RawImage>();
 			rawImage.texture = renderTexture;
-			rawImage.GetComponentInChildren<TMP_Text>(true).text = NewspaperUIPanel.GetShortDescription(bodyInfo);
+			rawImage.GetComponentInChildren<TMP_Text>(true).text = GetShortDescription(bodyInfo);
 			
 			//imageContainers[i].GetComponent<BountyHuntingSelector>().SetHintText(GetShortDescription(bodyInfo));
 			
@@ -92,6 +94,69 @@ public class FashionCatalogUIPanel : OpenableUIPanel {
 		Show(0.5f);
 		
 	}
+	
+	public static string GetShortDescription(BodyInfo bodyInfo) {
+        
+        List<IAlienTag> tags = new List<IAlienTag>();
+
+
+        List<BodyPartPrefabInfo> bodyPartPrefabInfos = new List<BodyPartPrefabInfo>();
+        bodyPartPrefabInfos.AddRange(bodyInfo.HeadInfoPrefab.GetSubBodyPartInfos());
+        bodyPartPrefabInfos.AddRange(bodyInfo.MainBodyInfoPrefab.GetSubBodyPartInfos());
+        
+        
+        
+        
+        int temp = 0;
+        for (int i = 0; i < bodyInfo.HeadInfoPrefab.AllTags.Count; i++) {
+            if (temp == 2) {
+                break;
+            }
+            IAlienTag alienTag = bodyInfo.HeadInfoPrefab.AllTags[i];
+            List<string> shortDescriptions = alienTag.GetShortDescriptions();
+            if (shortDescriptions?.Count > 0) {
+                tags.Add(alienTag);
+                temp++;
+            }
+        }
+
+        
+        temp = 0;
+        
+        for (int i = 0; i < bodyInfo.MainBodyInfoPrefab.AllTags.Count; i++) {
+            if (temp == 2) {
+                break;
+            }
+            IAlienTag alienTag = bodyInfo.MainBodyInfoPrefab.AllTags[i];
+            List<string> shortDescriptions = alienTag.GetShortDescriptions();
+            if (shortDescriptions?.Count > 0) {
+                tags.Add(alienTag);
+                temp++;
+            }
+        }
+        
+
+        StringBuilder stringBuilder = new StringBuilder();
+        int addedCount = 0;
+        for (int i = 0; i < tags.Count; i++) {
+            if (addedCount == 4) {
+                break;
+            }
+            string shortDescription = tags[i].GetShortDescriptions()[0];
+            if(!String.IsNullOrEmpty(shortDescription)) {
+                if (addedCount == 0) {
+                    stringBuilder.Append(shortDescription);
+                }
+                else {
+                    stringBuilder.Append("\n").Append(shortDescription);
+                }
+                addedCount++;
+            }
+        }
+
+        return stringBuilder.ToString();
+    }
+	
 
 	public override void OnShow(float time) {
 		panel.gameObject.SetActive(true);

@@ -3,8 +3,8 @@
   "ABMD5List": [
     {
       "AssetName": "aliens",
-      "MD5": "e5d8ccdcbc3ea890e9201d72cddfc92a",
-      "FileSize": 458.830078,
+      "MD5": "4fc8d460c6cbc7886bd1d8df85f22d1f",
+      "FileSize": 460.9912,
       "assetDatas": [
         {
           "Name": "AlienBody",
@@ -187,11 +187,16 @@
     },
     {
       "AssetName": "general",
-      "MD5": "d557475a881174af1654d9dcb63b07a0",
-      "FileSize": 327.357422,
+      "MD5": "7e03f0ebbc263c497ca41fb861f85ee2",
+      "FileSize": 343.620117,
       "assetDatas": [
         {
           "Name": "DraggedText",
+          "OwnerBundleName": "general",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "TestArea_TestActivity",
           "OwnerBundleName": "general",
           "AssetType": "UnityEngine.GameObject"
         }
@@ -199,8 +204,8 @@
     },
     {
       "AssetName": "mftest",
-      "MD5": "1a9606d92fda878f843b5f4feae843e9",
-      "FileSize": 1046.833,
+      "MD5": "c5ba7587a900642d0c1b13b61888b908",
+      "FileSize": 1056.64746,
       "assetDatas": [
         {
           "Name": "War loop",
@@ -299,7 +304,7 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "eed95a4c6afe6d2aa3ad3aba21670016",
+      "MD5": "6c217e96bdde7400025d040b10337011",
       "FileSize": 1.79296875,
       "assetDatas": []
     },

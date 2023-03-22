@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class MerchantNoteOnTableViewController : DraggableItems {
 
-    [ES3Serializable] protected string content;
+    
     
     
     private SpriteRenderer spriteRenderer;
