@@ -13,7 +13,7 @@ namespace _02._Scripts.FashionCatalog {
 		}
 
 		private void OnBodyPartIndicesUpdate(BodyPartIndicesUpdateInfo e) {
-			if (gameTimeModel.CurrentTime.Value.DayOfWeek == DayOfWeek.Monday) {
+			if (gameTimeModel.CurrentTime.Value.DayOfWeek == DayOfWeek.Sunday) {
 				e.Time = gameTimeModel.CurrentTime.Value.Date;
 				model.AddBodyPartIndicesUpdateInfo(e);
 			}

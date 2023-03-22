@@ -3,8 +3,8 @@
   "ABMD5List": [
     {
       "AssetName": "aliens",
-      "MD5": "4fc8d460c6cbc7886bd1d8df85f22d1f",
-      "FileSize": 460.9912,
+      "MD5": "f16a7856e87fa252b3114f4606e735df",
+      "FileSize": 464.646484,
       "assetDatas": [
         {
           "Name": "AlienBody",
@@ -50,8 +50,8 @@
     },
     {
       "AssetName": "audios",
-      "MD5": "aa91a45d146117e6ca1dbd75aa97a604",
-      "FileSize": 1493.0,
+      "MD5": "b57ae0cbb886f0408e715707570d6139",
+      "FileSize": 1337.40332,
       "assetDatas": [
         {
           "Name": "dogBark_1",
@@ -187,8 +187,8 @@
     },
     {
       "AssetName": "general",
-      "MD5": "7e03f0ebbc263c497ca41fb861f85ee2",
-      "FileSize": 343.620117,
+      "MD5": "9e406f30b8126b478c731028cc4e91c1",
+      "FileSize": 343.6172,
       "assetDatas": [
         {
           "Name": "DraggedText",
@@ -204,8 +204,8 @@
     },
     {
       "AssetName": "mftest",
-      "MD5": "c5ba7587a900642d0c1b13b61888b908",
-      "FileSize": 1056.64746,
+      "MD5": "10871f3c51118b1714a66e98177ea1a8",
+      "FileSize": 1028.24707,
       "assetDatas": [
         {
           "Name": "War loop",
@@ -304,7 +304,7 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "6c217e96bdde7400025d040b10337011",
+      "MD5": "cea5020755252cb7c2e8cd2011374912",
       "FileSize": 1.79296875,
       "assetDatas": []
     },

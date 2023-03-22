@@ -55,7 +55,7 @@ public class BulletGoods : MerchantGoods {
 
 
 public class PowerGeneratorGoods : MerchantGoods {
-    public override int BaseFoodPerUnit { get; } = 2;
+    public override int BaseFoodPerUnit { get; } = 1;
     public override void RefreshFoodPerUnit() {
         FoodPerUnit = Random.Range(BaseFoodPerUnit - 0, BaseFoodPerUnit + 2);
     }
@@ -163,7 +163,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
                  reply = "The number you dialed is invalid. Please try again or press 9 to repeat the list.";
             }else {
                 MerchantGoods goods = todayGoods[index];
-                if (goods.FoodPerUnit >= playerResourceModel.FoodCount) {
+                if (goods.FoodPerUnit > playerResourceModel.FoodCount) {
                     reply =
                         "You don't have enough food to purchase this item!";
                 }

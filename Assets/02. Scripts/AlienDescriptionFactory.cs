@@ -86,10 +86,10 @@ public static class AlienDescriptionFactory {
 
         sb.AppendFormat("Welcome back, we have some updated information about the dead body we found this morning.");
         if (body.CheckContainTag<IAccessoryTag>(out var accessoryTag)) {
-            sb.AppendFormat(formatter, "According to our source, {0:acc} and it is also believed that, {0:clothb} {clothl}", body);
+            sb.AppendFormat(formatter, "According to our source, {0:acc} and it is also believed that, {0:clothb} {0:clothl}", body);
         }
         else {
-            sb.AppendFormat(formatter, "According to our source, {0:clothb} {clothl}", body);
+            sb.AppendFormat(formatter, "According to our source, {0:clothb} {0:clothl}", body);
         }
        
         return sb.ToString();

@@ -67,7 +67,10 @@ public class DogFoodViewController : AbstractMikroController<MainGame> {
     private IEnumerator DogEnvSound() {
         while (true) {
             yield return new WaitForSeconds(Random.Range(30f, 60f));
-            AudioSystem.Singleton.Play2DSound($"dog_usual_{Random.Range(1, 3)}");
+            if (dogModel.isDogAlive && dogModel.HaveDog) {
+                AudioSystem.Singleton.Play2DSound($"dog_usual_{Random.Range(1, 3)}");
+            }
+            
         }
     }
 }

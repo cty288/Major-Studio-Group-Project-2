@@ -10,7 +10,7 @@ namespace _02._Scripts.GameTime {
 
 		protected DateTime DayStartTime = new DateTime(2022, 11, 13, 22, 0, 0);
 		
-		[field: ES3Serializable] public float GlobalTimeFreq { get; set; } = 1.5f;
+		[field: ES3Serializable] public float GlobalTimeFreq { get; set; } = 1.2f;
 		public void AddDay() {
 			Day++;
 			if (Day <= 0) {
