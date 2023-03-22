@@ -757,7 +757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 260b52fa4b43b9d4296254fbde67bf60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMaterial: {fileID: 2100000, guid: 5a6db85ebb9466f4b90af9ebdd3c4fdc, type: 2}
+  outlineMaterial: {fileID: 2100000, guid: 93bf8c90e4a9d42498d1fd55c03fce02, type: 2}
   overriddeImage: {fileID: 0}
   followingObject: {fileID: 2310876633927551591}
   followingObjectIsUI: 0
