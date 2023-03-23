@@ -70,3 +70,241 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+Development Build.zip
+Development Build/Darkest Shadow.exe
+Development Build/Darkest Shadow_BurstDebugInformation_DoNotShip/Data/Plugins/x86_64/lib_burst_generated.txt
+Development Build/Darkest Shadow_Data/app.info
+Development Build/Darkest Shadow_Data/boot.config
+Development Build/Darkest Shadow_Data/globalgamemanagers
+Development Build/Darkest Shadow_Data/globalgamemanagers.assets
+Development Build/Darkest Shadow_Data/globalgamemanagers.assets.resS
+Development Build/Darkest Shadow_Data/level0
+Development Build/Darkest Shadow_Data/level1
+Development Build/Darkest Shadow_Data/Managed/Accessibility.dll
+Development Build/Darkest Shadow_Data/Managed/Antlr3.Runtime.dll
+Development Build/Darkest Shadow_Data/Managed/Assembly-CSharp-firstpass.dll
+Development Build/Darkest Shadow_Data/Managed/Assembly-CSharp.dll
+Development Build/Darkest Shadow_Data/Managed/CTNAudio.dll
+Development Build/Darkest Shadow_Data/Managed/DOTween.dll
+Development Build/Darkest Shadow_Data/Managed/DOTween.Modules.dll
+Development Build/Darkest Shadow_Data/Managed/EasySave3.dll
+Development Build/Darkest Shadow_Data/Managed/Iesi.Collections.dll
+Development Build/Darkest Shadow_Data/Managed/Microsoft.CSharp.dll
+Development Build/Darkest Shadow_Data/Managed/MikroFramework.dll
+Development Build/Darkest Shadow_Data/Managed/MikroNHibernateCore.dll
+Development Build/Darkest Shadow_Data/Managed/Mono.Data.Sqlite.dll
+Development Build/Darkest Shadow_Data/Managed/Mono.Messaging.dll
+Development Build/Darkest Shadow_Data/Managed/Mono.Posix.dll
+Development Build/Darkest Shadow_Data/Managed/Mono.Security.dll
+Development Build/Darkest Shadow_Data/Managed/Mono.WebBrowser.dll
+Development Build/Darkest Shadow_Data/Managed/mscorlib.dll
+Development Build/Darkest Shadow_Data/Managed/MySql.Data.dll
+Development Build/Darkest Shadow_Data/Managed/netstandard.dll
+Development Build/Darkest Shadow_Data/Managed/Newtonsoft.Json.dll
+Development Build/Darkest Shadow_Data/Managed/NHibernate.dll
+Development Build/Darkest Shadow_Data/Managed/Novell.Directory.Ldap.dll
+Development Build/Darkest Shadow_Data/Managed/Polyglot.Scripts.dll
+Development Build/Darkest Shadow_Data/Managed/Remotion.Linq.dll
+Development Build/Darkest Shadow_Data/Managed/Remotion.Linq.EagerFetching.dll
+Development Build/Darkest Shadow_Data/Managed/System.ComponentModel.Composition.dll
+Development Build/Darkest Shadow_Data/Managed/System.ComponentModel.DataAnnotations.dll
+Development Build/Darkest Shadow_Data/Managed/System.Configuration.dll
+Development Build/Darkest Shadow_Data/Managed/System.Configuration.Install.dll
+Development Build/Darkest Shadow_Data/Managed/System.Core.dll
+Development Build/Darkest Shadow_Data/Managed/System.Data.DataSetExtensions.dll
+Development Build/Darkest Shadow_Data/Managed/System.Data.dll
+Development Build/Darkest Shadow_Data/Managed/System.Design.dll
+Development Build/Darkest Shadow_Data/Managed/System.DirectoryServices.dll
+Development Build/Darkest Shadow_Data/Managed/System.dll
+Development Build/Darkest Shadow_Data/Managed/System.Drawing.Design.dll
+Development Build/Darkest Shadow_Data/Managed/System.Drawing.dll
+Development Build/Darkest Shadow_Data/Managed/System.EnterpriseServices.dll
+Development Build/Darkest Shadow_Data/Managed/System.IdentityModel.dll
+Development Build/Darkest Shadow_Data/Managed/System.IdentityModel.Selectors.dll
+Development Build/Darkest Shadow_Data/Managed/System.IO.Compression.dll
+Development Build/Darkest Shadow_Data/Managed/System.IO.Compression.FileSystem.dll
+Development Build/Darkest Shadow_Data/Managed/System.Management.dll
+Development Build/Darkest Shadow_Data/Managed/System.Messaging.dll
+Development Build/Darkest Shadow_Data/Managed/System.Net.Http.dll
+Development Build/Darkest Shadow_Data/Managed/System.Numerics.dll
+Development Build/Darkest Shadow_Data/Managed/System.Runtime.dll
+Development Build/Darkest Shadow_Data/Managed/System.Runtime.DurableInstancing.dll
+Development Build/Darkest Shadow_Data/Managed/System.Runtime.Serialization.dll
+Development Build/Darkest Shadow_Data/Managed/System.Runtime.Serialization.Formatters.Soap.dll
+Development Build/Darkest Shadow_Data/Managed/System.Security.dll
+Development Build/Darkest Shadow_Data/Managed/System.ServiceModel.Activation.dll
+Development Build/Darkest Shadow_Data/Managed/System.ServiceModel.dll
+Development Build/Darkest Shadow_Data/Managed/System.ServiceModel.Internals.dll
+Development Build/Darkest Shadow_Data/Managed/System.Transactions.dll
+Development Build/Darkest Shadow_Data/Managed/System.Web.ApplicationServices.dll
+Development Build/Darkest Shadow_Data/Managed/System.Web.dll
+Development Build/Darkest Shadow_Data/Managed/System.Web.Services.dll
+Development Build/Darkest Shadow_Data/Managed/System.Windows.Forms.dll
+Development Build/Darkest Shadow_Data/Managed/System.Xaml.dll
+Development Build/Darkest Shadow_Data/Managed/System.Xml.dll
+Development Build/Darkest Shadow_Data/Managed/System.Xml.Linq.dll
+Development Build/Darkest Shadow_Data/Managed/UniRx.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.2D.Animation.Runtime.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.2D.Common.Runtime.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.2D.IK.Runtime.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.2D.PixelPerfect.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.2D.SpriteShape.Runtime.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.2D.Tilemap.Extras.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Burst.Cecil.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Burst.Cecil.Mdb.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Burst.Cecil.Pdb.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Burst.Cecil.Rocks.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Burst.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Burst.Unsafe.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.InternalAPIEngineBridge.001.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Mathematics.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.RenderPipeline.Universal.ShaderLibrary.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.RenderPipelines.Core.Runtime.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.RenderPipelines.Core.ShaderLibrary.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.RenderPipelines.Universal.Runtime.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.RenderPipelines.Universal.Shaders.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Services.Core.Analytics.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Services.Core.Configuration.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Services.Core.Device.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Services.Core.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Services.Core.Environments.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Services.Core.Environments.Internal.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Services.Core.Internal.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Services.Core.Networking.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Services.Core.Registration.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Services.Core.Scheduler.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Services.Core.Telemetry.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Services.Core.Threading.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.TextMeshPro.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.Timeline.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.VisualScripting.Antlr3.Runtime.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.VisualScripting.Core.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.VisualScripting.Flow.dll
+Development Build/Darkest Shadow_Data/Managed/Unity.VisualScripting.State.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.AccessibilityModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.AIModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.AndroidJNIModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.AnimationModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.ARModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.AssetBundleModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.AudioModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.ClothModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.ClusterInputModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.ClusterRendererModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.CoreModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.CrashReportingModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.DirectorModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.DSPGraphModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.GameCenterModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.GIModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.GridModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.HotReloadModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.ImageConversionModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.IMGUIModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.InputLegacyModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.InputModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.JSONSerializeModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.LocalizationModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.NVIDIAModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.ParticleSystemModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.PerformanceReportingModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.Physics2DModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.PhysicsModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.ProfilerModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.ScreenCaptureModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.SharedInternalsModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.SpriteMaskModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.SpriteShapeModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.StreamingModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.SubstanceModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.SubsystemsModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.TerrainModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.TerrainPhysicsModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.TextRenderingModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.TilemapModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.TLSModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.UI.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.UIElementsModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.UIElementsNativeModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.UIModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.UmbraModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.UNETModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.UnityAnalyticsModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.UnityConnectModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.UnityCurlModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.UnityTestProtocolModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.UnityWebRequestModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.VehiclesModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.VFXModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.VideoModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.VirtualTexturingModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.VRModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.WindModule.dll
+Development Build/Darkest Shadow_Data/Managed/UnityEngine.XRModule.dll
+Development Build/Darkest Shadow_Data/Plugins/x86_64/lib_burst_generated.dll
+Development Build/Darkest Shadow_Data/resources.assets
+Development Build/Darkest Shadow_Data/resources.assets.resS
+Development Build/Darkest Shadow_Data/resources.resource
+Development Build/Darkest Shadow_Data/Resources/unity default resources
+Development Build/Darkest Shadow_Data/Resources/unity_builtin_extra
+Development Build/Darkest Shadow_Data/RuntimeInitializeOnLoads.json
+Development Build/Darkest Shadow_Data/ScriptingAssemblies.json
+Development Build/Darkest Shadow_Data/sharedassets0.assets
+Development Build/Darkest Shadow_Data/sharedassets1.assets
+Development Build/Darkest Shadow_Data/sharedassets1.assets.resS
+Development Build/Darkest Shadow_Data/sharedassets1.resource
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/aliens
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/aliens.manifest
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/audios
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/audios.manifest
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/general
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/general.manifest
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/mftest
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/mftest.manifest
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/mftest2
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/mftest2.manifest
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/others
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/others.manifest
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/ResVersion.json
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/scene
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/scene.manifest
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/test/scene_test.ab
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/test/scene_test.ab.manifest
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/test_sphere
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/test_sphere.manifest
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/Windows
+Development Build/Darkest Shadow_Data/StreamingAssets/AssetBundles/Windows/Windows.manifest
+Development Build/Darkest Shadow_Data/StreamingAssets/UnityServicesProjectConfiguration.json
+Development Build/MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll
+Development Build/MonoBleedingEdge/EmbedRuntime/MonoPosixHelper.dll
+Development Build/MonoBleedingEdge/etc/mono/2.0/Browsers/Compat.browser
+Development Build/MonoBleedingEdge/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx
+Development Build/MonoBleedingEdge/etc/mono/2.0/machine.config
+Development Build/MonoBleedingEdge/etc/mono/2.0/settings.map
+Development Build/MonoBleedingEdge/etc/mono/2.0/web.config
+Development Build/MonoBleedingEdge/etc/mono/4.0/Browsers/Compat.browser
+Development Build/MonoBleedingEdge/etc/mono/4.0/DefaultWsdlHelpGenerator.aspx
+Development Build/MonoBleedingEdge/etc/mono/4.0/machine.config
+Development Build/MonoBleedingEdge/etc/mono/4.0/settings.map
+Development Build/MonoBleedingEdge/etc/mono/4.0/web.config
+Development Build/MonoBleedingEdge/etc/mono/4.5/Browsers/Compat.browser
+Development Build/MonoBleedingEdge/etc/mono/4.5/DefaultWsdlHelpGenerator.aspx
+Development Build/MonoBleedingEdge/etc/mono/4.5/machine.config
+Development Build/MonoBleedingEdge/etc/mono/4.5/settings.map
+Development Build/MonoBleedingEdge/etc/mono/4.5/web.config
+Development Build/MonoBleedingEdge/etc/mono/browscap.ini
+Development Build/MonoBleedingEdge/etc/mono/config
+Development Build/MonoBleedingEdge/etc/mono/mconfig/config.xml
+Development Build/README BEFORE PLAY\!.txt
+Development Build/UnityCrashHandler64.exe
+Development Build/UnityPlayer.dll
+Development Build/WinPixEventRuntime.dll

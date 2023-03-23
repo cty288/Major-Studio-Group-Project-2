@@ -12,7 +12,11 @@ namespace _02._Scripts.FashionCatalog {
 			new Dictionary<DateTime, BodyPartIndicesUpdateInfo>();
 
 		[ES3Serializable] private int week = 0;
+
 		public void AddBodyPartIndicesUpdateInfo(BodyPartIndicesUpdateInfo bodyPartIndicesUpdateInfo) {
+			if (_bodyPartIndicesUpdateInfo.ContainsKey(bodyPartIndicesUpdateInfo.Time)) {
+				return;
+			}
 			_bodyPartIndicesUpdateInfo.Add(bodyPartIndicesUpdateInfo.Time, bodyPartIndicesUpdateInfo);
 			week++;
 			this.SendEvent<OnFashionCatalogGenerated>(new OnFashionCatalogGenerated() {

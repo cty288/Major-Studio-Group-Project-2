@@ -90,7 +90,7 @@ public class BodyManagmentSystem : AbstractSystem {
             newBodyInfos.Add(bodyTimeInfo);
         }
 
-        if (e.Date.DayOfWeek == DayOfWeek.Monday) {
+        if (e.Date.DayOfWeek == DayOfWeek.Sunday) {
             bodyModel.UpdateAvailableBodyPartIndices();
         }
         for (int i = newBodyInfos.Count; i < bodyCount; i++) {
