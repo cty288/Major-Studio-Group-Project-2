@@ -11,8 +11,16 @@ namespace _02._Scripts.GameTime {
 		protected DateTime DayStartTime = new DateTime(2022, 11, 13, 22, 0, 0);
 		
 		[field: ES3Serializable] public float GlobalTimeFreq { get; set; } = 1.2f;
+		
+		[ES3Serializable] private int week = 0;
+
+		public int Week => week;
 		public void AddDay() {
 			Day++;
+			if(week==0 || Day%7==0) {
+				week++;
+			}
+			
 			if (Day <= 0) {
 				GlobalTimeFreq = 1.2f;
 			}

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using MikroFramework.Architecture;
 using MikroFramework.BindableProperty;
 using NHibernate.Mapping;
+using Unity.Mathematics;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 [ES3Serializable]
@@ -24,12 +26,15 @@ namespace _02._Scripts.BodyManagmentSystem {
 			availableBodyPartIndices = null;
 
 
-		[field: ES3Serializable] public int availableBodyPartIndexCount { get; protected set; } =6;
+		[field: ES3Serializable] public int AvailableBodyPartIndexCount { get; protected set; } =6;
+		
+		
+		
 
 		public Dictionary<BodyPartType, HashSet<int>> AvailableBodyPartIndices {
 			get {
 				if (availableBodyPartIndices == null) {
-					UpdateAvailableBodyPartIndices();
+					UpdateAvailableBodyPartIndices(AvailableBodyPartIndexCount);
 				}
 				Dictionary<BodyPartType, HashSet<int>> result = new Dictionary<BodyPartType, HashSet<int>>();
 				foreach (var bodyPartType in availableBodyPartIndices.Keys) {
@@ -58,7 +63,7 @@ namespace _02._Scripts.BodyManagmentSystem {
 			}
 		}
 		
-		public void UpdateAvailableBodyPartIndices() {
+		public void UpdateAvailableBodyPartIndices(int count) {
 			if(availableBodyPartIndices == null) {
 				availableBodyPartIndices = new Dictionary<BodyPartType, Dictionary<int, BindableProperty<int>>>();
 				availableBodyPartIndices.Add(BodyPartType.Head, new Dictionary<int, BindableProperty<int>>());
@@ -86,11 +91,15 @@ namespace _02._Scripts.BodyManagmentSystem {
 				}
 			}
 
+			AvailableBodyPartIndexCount = count;
+
 			foreach (BodyPartType bodyPartType in availableBodyPartIndices.Keys) {
 				var targetList = AlienBodyPartCollections.Singleton.GetBodyPartCollectionByBodyType(bodyPartType)
 					.HeightSubCollections[0].NewspaperBodyPartDisplays.HumanTraitPartsPrefabs;
 				
-				while (availableBodyPartIndices[bodyPartType].Count < availableBodyPartIndexCount) {
+				int actualCount = Mathf.Min(count, targetList.Count);
+				
+				while (availableBodyPartIndices[bodyPartType].Count < actualCount) {
 					int randomIndex = Random.Range(0, targetList.Count);
 					if (!availableBodyPartIndices[bodyPartType].ContainsKey(randomIndex)) {
 						availableBodyPartIndices[bodyPartType].Add(randomIndex, new BindableProperty<int>(Random.Range(1, 3)));
@@ -100,7 +109,7 @@ namespace _02._Scripts.BodyManagmentSystem {
 			
 			this.SendEvent<BodyPartIndicesUpdateInfo>(new BodyPartIndicesUpdateInfo(){
 				AvailableBodyPartIndices = AvailableBodyPartIndices,
-				BodyPartCount = availableBodyPartIndexCount
+				BodyPartCount = AvailableBodyPartIndexCount
 			});
 			
 		}

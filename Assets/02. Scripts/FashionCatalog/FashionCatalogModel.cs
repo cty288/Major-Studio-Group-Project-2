@@ -5,19 +5,21 @@ using MikroFramework.Architecture;
 namespace _02._Scripts.FashionCatalog {
 	public struct OnFashionCatalogGenerated {
 		public BodyPartIndicesUpdateInfo BodyPartIndicesUpdateInfo;
-		public int Week;
 	}
 	public class FashionCatalogModel: AbstractSavableModel {
 		[ES3Serializable] private Dictionary<DateTime, BodyPartIndicesUpdateInfo> _bodyPartIndicesUpdateInfo =
 			new Dictionary<DateTime, BodyPartIndicesUpdateInfo>();
 
-		[ES3Serializable] private int week = 0;
+		
 		public void AddBodyPartIndicesUpdateInfo(BodyPartIndicesUpdateInfo bodyPartIndicesUpdateInfo) {
+			if (_bodyPartIndicesUpdateInfo.ContainsKey(bodyPartIndicesUpdateInfo.Time)) {
+				return;
+			}
 			_bodyPartIndicesUpdateInfo.Add(bodyPartIndicesUpdateInfo.Time, bodyPartIndicesUpdateInfo);
-			week++;
+			
 			this.SendEvent<OnFashionCatalogGenerated>(new OnFashionCatalogGenerated() {
 				BodyPartIndicesUpdateInfo = bodyPartIndicesUpdateInfo,
-				Week = week
+				
 			});
 		}
 		

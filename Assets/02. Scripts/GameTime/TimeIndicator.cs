@@ -17,6 +17,6 @@ public class TimeIndicator : AbstractMikroController<MainGame> {
     }
 
     private void OnTimeChanged(DateTime arg1, DateTime time) {
-        text.text = $"{time.Hour:D2}:{time.Minute:D2}";
+        //text.text = $"{time.Hour:D2}:{time.Minute:D2}";
     }
 }

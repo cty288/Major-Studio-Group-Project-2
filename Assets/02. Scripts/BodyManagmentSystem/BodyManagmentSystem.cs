@@ -6,6 +6,7 @@ using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.GameTime;
 using Crosstales;
 using MikroFramework.Architecture;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class BodyTimeInfo {
@@ -90,9 +91,12 @@ public class BodyManagmentSystem : AbstractSystem {
             newBodyInfos.Add(bodyTimeInfo);
         }
 
-        if (e.Date.DayOfWeek == DayOfWeek.Monday) {
-            bodyModel.UpdateAvailableBodyPartIndices();
+        if (e.Date.DayOfWeek == DayOfWeek.Sunday) {
+            int week = gameTimeModel.Week;
+            bodyModel.UpdateAvailableBodyPartIndices(Mathf.RoundToInt(6 + 3 * Mathf.Log((float) Math.E, week)));
         }
+        
+        
         for (int i = newBodyInfos.Count; i < bodyCount; i++) {
             BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, true,
                 new NormalKnockBehavior(3, Random.Range(3, 7), null),bodyModel.AvailableBodyPartIndices);
