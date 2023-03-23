@@ -37,7 +37,7 @@ public class Table :  AbstractDroppableItemContainerViewController {
         this.RegisterEvent<OnBountyHunterKillCorrectAlien>(OnBountyHunterKillCorrectAlien).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNewPhotoTaken>(OnNewPhotoTaken).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNoteDeleted>(OnNoteDeleted).UnRegisterWhenGameObjectDestroyed(gameObject);
-
+        this.RegisterEvent<OnCameraReceive>(OnCameraReceive).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnFashionCatalogGenerated>(OnFashionCatalogGenerated).UnRegisterWhenGameObjectDestroyed(gameObject);
     }
 
@@ -46,7 +46,7 @@ public class Table :  AbstractDroppableItemContainerViewController {
         GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
         book.GetComponent<FashionCatalogViewController>().SetContent(e.BodyPartIndicesUpdateInfo.Time, gameTimeModel.Week);
 
-        this.RegisterEvent<OnCameraReceive>(OnCameraReceive).UnRegisterWhenGameObjectDestroyed(gameObject);
+       
     }
 
     private void OnCameraReceive(OnCameraReceive e) {
