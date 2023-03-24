@@ -33,9 +33,16 @@ public class FashionCatalogViewController : DraggableItems {
 		fashionCatalogModel = this.GetModel<FashionCatalogModel>();
 		selfRenderer = GetComponent<SpriteRenderer>();
 		//SetLayer(1000);
+		
 	}
-	
-	
+
+	protected override void Start() {
+		base.Start();
+		dateCanvas.transform.GetChild(0).GetComponent<TMP_Text>().text =
+			$"Week {week} Fashion Book";
+	}
+
+
 	public override void SetLayer(int layer) {
 		foreach (var renderer in renderers) {
 			renderer.sortingOrder = layer;

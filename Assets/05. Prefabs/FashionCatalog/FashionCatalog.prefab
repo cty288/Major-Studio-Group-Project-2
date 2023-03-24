@@ -154,8 +154,7 @@ MonoBehaviour:
   saveHideFlags: 0
   saveActive: 0
   saveChildren: 0
-  componentsToSave:
-  - {fileID: 4503888934964618168}
+  componentsToSave: []
 --- !u!1 &1739381927613884291
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +358,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1000
   m_TargetDisplay: 0
 --- !u!114 &7434331639698299951
 MonoBehaviour:
@@ -641,9 +640,9 @@ GameObject:
   - component: {fileID: 964001999672510036}
   - component: {fileID: 278492680528086243}
   - component: {fileID: 4809821239342007284}
-  - component: {fileID: 3499891595587147050}
   - component: {fileID: -7109755171871184515}
-  - component: {fileID: -955742146552718746}
+  - component: {fileID: -409707974429158368}
+  - component: {fileID: 7923607431293086122}
   m_Layer: 0
   m_Name: FashionCatalog
   m_TagString: Untagged
@@ -707,7 +706,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1017
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 5b187290d425dfb46ba4af70f8244a73, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -762,7 +761,21 @@ MonoBehaviour:
   followingObject: {fileID: 2310876633927551591}
   followingObjectIsUI: 0
   moveToTopWhenHovering: 0
---- !u!114 &3499891595587147050
+--- !u!114 &-7109755171871184515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8124068863148200562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0003c21519962045898ca36662cf073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Container: {fileID: 0}
+  canDrag: 1
+--- !u!114 &-409707974429158368
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -774,7 +787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabId: 6065129466363037377
+  prefabId: 7462286493889891528
   localRefs:
     _Keys:
     - {fileID: 8124068863148200562}
@@ -801,9 +814,9 @@ MonoBehaviour:
     - {fileID: 5365422085007836458}
     - {fileID: 4503888934964618168}
     - {fileID: 0}
-    - {fileID: 3499891595587147050}
     - {fileID: -7109755171871184515}
     - {fileID: 11500000, guid: a0003c21519962045898ca36662cf073, type: 3}
+    - {fileID: -409707974429158368}
     - {fileID: 6463690984375166296}
     - {fileID: 9109830707764288089}
     - {fileID: 1739381927613884291}
@@ -816,22 +829,8 @@ MonoBehaviour:
     - {fileID: 4894522079946507090}
     - {fileID: 856761473258900024}
     - {fileID: 658027840323694604}
-    _Values: 990a91347cda0d6caf6efef893ea074d398b884c4e3abe65962ad594e9bab43d53a5dc00d1ff8c21fdcbee2b352331147c2bfa77eb562c4a861dcb6fca737909b62d933706246915989efb6c73e62a495974c77934355103799187eecafcec75ae1a1e9c4896e456c3e4b3557afb6d387db51556abffd4148169408a6284b438ab6683c221c3a110a7e1c4e71659827ddbb1937feebdde52f0321eb2d66fb946661455eb8855e941aada02723c43d4241542504e0fcab568163852a028b54253287d4d2baf6e0579f2bc2a7ee7c0c638d3e038e62ee14133c85228c8c0508f54a106626be194c831cabd305e28d8e7455f33b54009568a59c228e99e0c81d76a9ad76f53af5ae743467ff56d9e63a20f6ae2688c9b4e4a4a7c08a8b8ab292448e6c5c450689396044c7286884cf7f826caf83329194acf4b
---- !u!114 &-7109755171871184515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8124068863148200562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0003c21519962045898ca36662cf073, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Container: {fileID: 0}
-  canDrag: 1
---- !u!114 &-955742146552718746
+    _Values: a8e894d9f804fa6362cb8f59e918aa1cd3495a3c458de356f7b8e973dc579b3d4e6259487383b51229802ce8b5e7c5396d7daa079759713534152e4f1291c0469933f378409d5756ff6d13c560fba10ff2afdf5a02a2d40cf2247c89b2052468411ab17d0cb306092afef9fb93c96a388ce1a39d4e9abb085ee76a6419e008046f84fa8453e0e35ab6e92f03a9d97845714a022f9d78e659a157230ce294dc4af6f46918c3ef8c55fe485337c9bfb27b6e25f3ceded96619b98973cf9e88c148f41af24a8f9f7e7dbdad2ce6cc1d23600a9f9dbda10d6b1d73af7ce7eac7a60df38bbb513398140ea3711031ac804c777886b6a38df97f01870fd8e02396937a5339f24161d12d718a8e192ffd3a700dfdf47063110280120abdd84370f5313afc74228c72f4ea494cd8d1e4ec50013e801a1cd0d9d09655
+--- !u!114 &7923607431293086122
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
