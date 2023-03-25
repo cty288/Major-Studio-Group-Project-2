@@ -15,19 +15,23 @@ public class NewspaperSystem : AbstractSystem {
     
     protected NewspaperModel newspaperModel;
     protected GameTimeModel gameTimeModel;
+    protected int newspaperStartDay = 2;
     
     protected override void OnInit() {
         this.RegisterEvent<OnNewBodyInfoGenerated>(OnNewBodyInfoGenerated);
         newspaperModel = this.GetModel<NewspaperModel>();
         gameTimeModel = this.GetModel<GameTimeModel>();
+        newspaperStartDay =
+            int.Parse(this.GetModel<HotUpdateDataModel>().GetData("NewspaperDay").values[0]);
     }
 
     private void OnNewBodyInfoGenerated(OnNewBodyInfoGenerated e) {
-        if (gameTimeModel.Day < 3) {
+        
+        if (gameTimeModel.Day < newspaperStartDay) {
             return;
         }
 
-        if (gameTimeModel.Day == 3) {
+        if (gameTimeModel.Day == newspaperStartDay) {
             DateTime currentTime = this.GetModel<GameTimeModel>().CurrentTime;
             DateTime eventTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 22, 5, 0);
             DateTime endTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 23, 59, 0);

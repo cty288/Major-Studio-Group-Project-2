@@ -93,7 +93,7 @@ public class BodyManagmentSystem : AbstractSystem {
 
         if (e.Date.DayOfWeek == DayOfWeek.Sunday) {
             int week = gameTimeModel.Week;
-            bodyModel.UpdateAvailableBodyPartIndices(Mathf.RoundToInt(6 + 3 * Mathf.Log((float) Math.E, week)));
+            bodyModel.UpdateAvailableBodyPartIndices(Mathf.RoundToInt(6 + 3 * Mathf.Log(week, (float) Math.E)));
         }
         
         

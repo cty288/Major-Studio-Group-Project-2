@@ -11,14 +11,15 @@ using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 
-public class FoodTutorialRadio : RadioEvent {
+public class FoodTutorialRadio : RadioEvent<RadioTextContent> {
 
    
-    
+	[field: ES3Serializable]
+	protected override RadioTextContent radioContent { get; set; }
     public FoodTutorialRadio(TimeRange startTimeRange, AudioMixerGroup mixer) :
-     base(startTimeRange, "", 1.2f, Gender.MALE, mixer,
+     base(startTimeRange, new RadioTextContent("", 1.2f, Gender.MALE, mixer),
      RadioChannel.AllChannels) {
-        this.speakContent = this.GetModel<HotUpdateDataModel>().GetData("FoodTutorialRadio").values[0];
+	    this.radioContent.SetContent(this.GetModel<HotUpdateDataModel>().GetData("FoodTutorialRadio").values[0]);
     }
          
     public FoodTutorialRadio(): base(){}
@@ -35,13 +36,15 @@ public class FoodTutorialRadio : RadioEvent {
 
 	    gameEventSystem.AddEvent(new FoodTutorialRadio(
 		    new TimeRange(currentTime + new TimeSpan(0, nextEventInterval, 0),
-			    currentTime + new TimeSpan(0, nextEventInterval + 10, 0)), mixer));
+			    currentTime + new TimeSpan(0, nextEventInterval + 10, 0)), this.radioContent.mixer));
     }
     
 
     protected override void OnRadioStart() {
         
     }
-        
+    protected override void OnPlayedWhenRadioOff() {
+	    OnMissed();
+    }
 }
 

@@ -13,13 +13,14 @@ using Random = UnityEngine.Random;
 public struct OnConstructDescriptionDatas {
 
 }
-public class DailyBodyRadio : RadioEvent {
+public class DailyBodyRadio : RadioEvent<RadioTextContent> {
 
-
+        [field: ES3Serializable]
+        protected override RadioTextContent radioContent { get; set; }
         private Coroutine radioCorruptCheckCoroutine;
          public DailyBodyRadio(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer) :
-             base(startTimeRange, speakContent, speakRate, speakGender, mixer,
-             RadioChannel.DeadNews) {
+             base(startTimeRange, new RadioTextContent(speakContent, speakRate, speakGender, mixer),
+             RadioChannel.FM96) {
              
          }
          
@@ -54,14 +55,18 @@ public class DailyBodyRadio : RadioEvent {
                 new TimeRange(currentTime.AddMinutes(nextEventInterval),
                     currentTime.AddMinutes(nextEventInterval+10)),
                 AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo, descriptionData.Reality),
-                Random.Range(0.85f, 1.2f), Random.Range(0, 2) == 0 ? Gender.MALE : Gender.FEMALE, mixer));
+                Random.Range(0.85f, 1.2f), Random.Range(0, 2) == 0 ? Gender.MALE : Gender.FEMALE, radioContent.mixer));
         }
 
         protected override void OnRadioStart() {
             radioCorruptCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(RadioCorruptCheck());
         }
 
-    private IEnumerator RadioCorruptCheck()
+        protected override void OnPlayedWhenRadioOff() {
+            
+        }
+
+        private IEnumerator RadioCorruptCheck()
     {
         while (true) {
             yield return new WaitForSeconds(Random.Range(15f, 25f));

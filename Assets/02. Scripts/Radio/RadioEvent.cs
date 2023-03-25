@@ -9,30 +9,29 @@ using MikroFramework.TimeSystem;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public struct OnRadioEnd {
-
+struct OnRadioEnd {
+    public RadioChannel channel;
 }
 
-public struct OnRadioStart {
-    public string speakContent;
-    public float speakRate;
-    public Gender speakGender;
-    public AudioMixerGroup mixer;
+
+
+public struct OnRadioProgramStart {
+    public IRadioContent radioContent;
+    public RadioChannel channel;
+   // public RadioProgramType programType;
 }
-public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
+public abstract class RadioEvent<TRadioContent> : GameEvent, ICanGetModel, ICanSendEvent  where TRadioContent : IRadioContent {
     [field: ES3Serializable]
     public override GameEventType GameEventType { get; } = GameEventType.Radio;
     
     protected RadioModel radioModel;
 
-    [ES3Serializable]
-    protected string speakContent;
-    [ES3Serializable]
-    protected float speakRate;
-    [ES3Serializable]
-    protected Gender speakGender;
-    [ES3Serializable]
-    protected AudioMixerGroup mixer;
+    
+    protected abstract TRadioContent radioContent { get; set; }
+    
+   // [ES3Serializable]
+    //protected RadioProgramType programType;
+    
     [ES3Serializable]
     protected RadioChannel channel;
 
@@ -41,19 +40,18 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
     private bool delayEnded = false;
     private bool startDelayEnded = false;
     protected ElectricityModel electricityModel;
-   
-    
-    protected RadioEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer,
+
+    [field: ES3Serializable]
+    public override bool CanStartWithSameType { get; } = true;
+
+    protected RadioEvent(TimeRange startTimeRange, TRadioContent radioContent,
         RadioChannel channel) : base(startTimeRange) {
         radioModel = this.GetModel<RadioModel>();
         gameStateModel = this.GetModel<GameStateModel>();
         electricityModel = this.GetModel<ElectricityModel>();
-        
-        
-        this.speakContent = speakContent;
-        this.speakRate = speakRate;
-        this.speakGender = speakGender;
-        this.mixer = mixer;
+
+        this.radioContent = radioContent;
+       // this.programType = programType;
         this.channel = channel;
     }
 
@@ -64,34 +62,51 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
     }
 
     public override void OnStart() {
-       radioModel.CurrentChannel.RegisterOnValueChaned(OnRadioChannelChanged);
+     //  radioModel.CurrentChannel.RegisterOnValueChaned(OnRadioChannelChanged);
+       if (channel == RadioChannel.AllChannels) {
+           channel = radioModel.CurrentChannel.Value;
+       }
     }
 
    
 
     public override EventState OnUpdate() {
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
-        if ((!electricityModel.HasElectricity() || !radioModel.IsOn || (currentTime.Hour==23 && currentTime.Minute>=55)) && !started) {
+        if (((currentTime.Hour==23 && currentTime.Minute>=55))) {
+            if (!started) {
+                return EventState.Missed;
+            }
+
+            if (radioModel.CurrentChannel.Value != channel || !electricityModel.HasElectricity() || !radioModel.IsOn) {
+                this.SendEvent<OnRadioEnd>(new OnRadioEnd() {
+                    channel = channel
+                });
+                return EventState.End;
+            }
+        }
+
+        if (radioModel.GetIsSpeaking(channel) && !started) {
             return EventState.Missed;
         }
-        if ((radioModel.CurrentChannel != channel && channel!= RadioChannel.AllChannels) && !started) {
-            return EventState.Missed;
+
+
+        if (!started && (!electricityModel.HasElectricity() || !radioModel.IsOn ||
+                         radioModel.CurrentChannel != channel)) {
+            //still play the radio, but not the voice
+            OnPlayedWhenRadioOff();
         }
-       
-        
 
         if (!started) {
             started = true;
-            this.SendEvent<OnRadioStart>(new OnRadioStart() {
-                speakContent = speakContent,
-                speakRate = speakRate,
-                speakGender = speakGender,
-                mixer = mixer
+            this.SendEvent<OnRadioProgramStart>(new OnRadioProgramStart() {
+                radioContent = radioContent,
+                channel = channel,
+               // programType = programType
             });
             OnRadioStart();
         }
 
-        if ((!radioModel.IsSpeaking || ended)&& !startDelayEnded) {
+        if ((!radioModel.GetIsSpeaking(channel) || ended)&& !startDelayEnded) {
             startDelayEnded = true;
             delayEnded = false;
             this.GetSystem<ITimeSystem>().AddDelayTask(1f, () => {
@@ -107,18 +122,10 @@ public abstract class RadioEvent : GameEvent, ICanGetModel, ICanSendEvent {
     }
 
     protected abstract void OnRadioStart();
+    
+    protected abstract void OnPlayedWhenRadioOff();
 
-    protected void EndRadio() {
-        ended = true;
-        this.SendEvent<OnRadioEnd>();
-        radioModel.CurrentChannel.UnRegisterOnValueChanged(OnRadioChannelChanged);
-    }
-
-    private void OnRadioChannelChanged(RadioChannel channel) {
-        if(this.channel != channel) {
-            EndRadio();
-        }
-    }
+    
 }
 
 

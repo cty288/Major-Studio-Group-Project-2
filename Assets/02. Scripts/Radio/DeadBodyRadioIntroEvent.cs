@@ -11,12 +11,15 @@ using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 
-public class DeadBodyRadioIntroEvent : RadioEvent {
+public class DeadBodyRadioIntroEvent : RadioEvent<RadioTextContent> {
+    
+    [field: ES3Serializable]
+    protected override RadioTextContent radioContent { get; set; }
 
     [field: ES3Serializable] private string speakContent;
     public DeadBodyRadioIntroEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer) :
-     base(startTimeRange, speakContent, speakRate, speakGender, mixer,
-     RadioChannel.DeadNews) {
+     base(startTimeRange, new RadioTextContent(speakContent, speakRate, speakGender, mixer),
+     RadioChannel.FM96) {
         this.speakContent = speakContent;
     }
          
@@ -65,12 +68,15 @@ public class DeadBodyRadioIntroEvent : RadioEvent {
             new TimeRange(currentTime + new TimeSpan(0, nextEventInterval, 0),
                 currentTime + new TimeSpan(0, nextEventInterval + 10, 0)),
             speakContent,
-            1f, Gender.MALE, mixer));
+            1f, Gender.MALE, radioContent.mixer));
     }
 
     protected override void OnRadioStart() {
         
     }
-        
+
+    protected override void OnPlayedWhenRadioOff() {
+        OnMissed();
+    }
 }
 

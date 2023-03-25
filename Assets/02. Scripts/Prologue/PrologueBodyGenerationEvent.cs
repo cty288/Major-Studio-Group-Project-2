@@ -41,12 +41,12 @@ namespace _02._Scripts.Prologue {
 				"hI, Hi! iT IS yOur tiMe!",
 				"YOuR TimE IS oVeR!"
 			};
-			speaker.Speak(messages[UnityEngine.Random.Range(0, messages.Count)], AudioMixerList.Singleton.AudioMixerGroups[4], "???", OnAlienClickedOutside);
+			speaker.Speak(messages[UnityEngine.Random.Range(0, messages.Count)], AudioMixerList.Singleton.AudioMixerGroups[4], "???", 1f, OnAlienClickedOutside);
 			return () => onClickPeepholeSpeakEnd;
 		}
 		
 		
-		protected void OnAlienClickedOutside() {
+		protected void OnAlienClickedOutside(Speaker speaker) {
 			
 			LoadCanvas.Singleton.HideImage(1f);
 			//DieCanvas.Singleton.Show("", true);
@@ -60,10 +60,10 @@ namespace _02._Scripts.Prologue {
 			Speaker speaker = GameObject.Find("PrologueSpeaker").GetComponent<Speaker>();
 			HotUpdateDataModel hotUpdateDataModel = this.GetModel<HotUpdateDataModel>();
 			string content = hotUpdateDataModel.GetData("Opening").values[0];
-			speaker.Speak(content, AudioMixerList.Singleton.AudioMixerGroups[5], "Radio", OnPrologueSpeakEnd, 1.2f);
+			speaker.Speak(content, AudioMixerList.Singleton.AudioMixerGroups[5], "Radio", 1f, OnPrologueSpeakEnd, 1.2f);
 		}
 
-		private void OnPrologueSpeakEnd() {
+		private void OnPrologueSpeakEnd(Speaker speaker) {
 			onClickPeepholeSpeakEnd = true;
 			DieCanvas.Singleton.Show("","", true);
 			this.GetSystem<ITimeSystem>().AddDelayTask(2.7f, () => {

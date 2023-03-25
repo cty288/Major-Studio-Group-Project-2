@@ -15,11 +15,12 @@ using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 
-public class PrologueBodyRadio : RadioEvent {
-    
+public class PrologueBodyRadio : RadioEvent<RadioTextContent> {
+    [field: ES3Serializable]
+    protected override RadioTextContent radioContent { get; set; }
     private Coroutine radioCorruptCheckCoroutine;
      public PrologueBodyRadio(TimeRange startTimeRange, AudioMixerGroup mixer) :
-         base(startTimeRange,"", 1, Gender.MALE, mixer,
+         base(startTimeRange,new RadioTextContent("", 1, Gender.MALE, mixer),
          RadioChannel.AllChannels) {
          
          if (!radioModel.DescriptionDatas.Any()) {
@@ -29,8 +30,9 @@ public class PrologueBodyRadio : RadioEvent {
          AlienDescriptionData descriptionData = radioModel.DescriptionDatas[0];
          radioModel.DescriptionDatas.RemoveAt(0);
 
-         speakContent = AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo, descriptionData.Reality,
-             AlienDescriptionFactory.RadioPrologue);
+         radioContent.SetContent(AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo,
+             descriptionData.Reality,
+             AlienDescriptionFactory.RadioPrologue));
          
          DeliveryRadio();
          SpawnAlien();
@@ -91,7 +93,9 @@ public class PrologueBodyRadio : RadioEvent {
     protected override void OnRadioStart() {
        
     }
-
+    protected override void OnPlayedWhenRadioOff() {
+        OnMissed();
+    }
    
 }
 

@@ -109,12 +109,14 @@ public class TelephoneSystem : AbstractSavableSystem {
         if (e.Day == 0) {
             IsBroken = true;
             GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
-            DateTime telephoneBrokenRadio = gameTimeModel.GetDay(2);
+            DateTime telephoneBrokenRadio = gameTimeModel.GetDay(1);
             this.GetSystem<GameEventSystem>().AddEvent(new TelephoneBrokenRadioEvent(
                 new TimeRange(telephoneBrokenRadio.AddMinutes(10)),
                 AudioMixerList.Singleton.AudioMixerGroups[1]));
 
-            DateTime telephoneFixedTime = gameTimeModel.GetDay(8);
+
+            int telephoneFixDay = int.Parse(this.GetModel<HotUpdateDataModel>().GetData("PhoneFixDay").values[0]);
+            DateTime telephoneFixedTime = gameTimeModel.GetDay(telephoneFixDay);
             this.GetSystem<GameEventSystem>().AddEvent(new TelephoneFixedEvent(new TimeRange(telephoneFixedTime)));
 
         }

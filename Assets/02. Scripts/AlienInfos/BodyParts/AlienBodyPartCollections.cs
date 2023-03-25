@@ -174,6 +174,10 @@ public class AlienBodyPartCollections : MonoPersistentMikroSingleton<AlienBodyPa
                 finalList = oldTargetList;
             }
         }
+        
+        if(finalList.Count == 0) {
+            finalList.AddRange(targetList);
+        }
 
 
         BodyPartPrefabInfo info = finalList[Random.Range(0, finalList.Count)].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();

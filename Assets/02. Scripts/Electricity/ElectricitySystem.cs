@@ -32,6 +32,8 @@ public class ElectricitySystem : AbstractSystem {
     private float electricityDecreaseRate = 0.002f;
 
     protected GameTimeManager gameTimeManager;
+
+    protected int powerCutoffDay = 4;
     protected override void OnInit() {
         electricityModel = this.GetModel<ElectricityModel>();
         updater = new GameObject("ElectricitySystemUpdater").AddComponent<ElectricitySystemUpdater>();
@@ -39,12 +41,13 @@ public class ElectricitySystem : AbstractSystem {
         gameTimeManager = this.GetSystem<GameTimeManager>();
         updater.OnUpdate += Update;
         this.RegisterEvent<OnNewDay>(OnNewDay);
+        powerCutoffDay = int.Parse(this.GetModel<HotUpdateDataModel>().GetData("PowerCutoffDay").values[0]);
 
     }
 
     private void OnNewDay(OnNewDay e) {
-        if (e.Day == 9) {
-            DateTime poweroffTime = e.Date.AddDays(Random.Range(0, 3));
+        if (e.Day == powerCutoffDay) {
+            DateTime poweroffTime = e.Date;
             this.GetSystem<GameEventSystem>().AddEvent(new PowerCutoffRadio(new TimeRange(poweroffTime),
                 AudioMixerList.Singleton.AudioMixerGroups[1]));
         }

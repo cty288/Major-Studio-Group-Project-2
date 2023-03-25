@@ -54,7 +54,7 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
             "Several of those cases showed that the evidence was provided by you." +
             "Here¡¯s the search warrant, and we are taking you in for further inquiries. " +
             "Apologies and thank you for your cooperation.";
-        speaker.Speak(message, AudioMixerList.Singleton.AudioMixerGroups[3], "???", OnFinishSpeak, 1.15f, 1.2f);
+        speaker.Speak(message, AudioMixerList.Singleton.AudioMixerGroups[3], "???", 1f, OnFinishSpeak, 1.15f, 1.2f);
         return () => onClickPeepholeSpeakEnd;
     }
 
@@ -62,7 +62,7 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
         
     }
 
-    private void OnFinishSpeak() {
+    private void OnFinishSpeak(Speaker speaker) {
         DieCanvas.Singleton.Show("You are arrested by the police!");
         this.GetModel<GameStateModel>().GameState.Value = GameState.End;
         this.GetSystem<BodyGenerationSystem>().StopCurrentBody();

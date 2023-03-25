@@ -78,10 +78,10 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
             }
         }
        
-        speaker.Speak(welcomes[Random.Range(0, welcomes.Count)], mixer, "Bounty Hunter", OnWelcomeEnd);
+        speaker.Speak(welcomes[Random.Range(0, welcomes.Count)], mixer, "Bounty Hunter", 1f, OnWelcomeEnd);
     }
 
-    private void OnWelcomeEnd() {
+    private void OnWelcomeEnd(Speaker speaker) {
         playerControlModel.ControlType.Value = PlayerControlType.BountyHunting;
         TopScreenHintText.Singleton.Show(
             "Please select any information related to the unknown creatures to report to the bounty hunter.\n\nPossible information includes: figure outside / newspaper photos");
@@ -194,7 +194,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
         messages.Add("Appreciate it buddy. I¡¯ll keep an eye on that person. I will reward you with foods once I find out the truth!");
         messages.Add("Thank you citizen! Your cooperation will make our community a better place!");
         string message = messages[Random.Range(0, messages.Count)];
-        speaker.Speak(message, mixer, "Bounty Hunter", OnEndingSpeak);
+        speaker.Speak(message, mixer, "Bounty Hunter", 1f, OnEndingSpeak);
 
 
         if (bountyHunterModel.FalseClueCount >= bountyHunterModel.FalseClueCountForPolice) {
@@ -206,7 +206,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
         }
     }
 
-    private void OnEndingSpeak() {
+    private void OnEndingSpeak(Speaker speaker) {
         EndConversation();
     }
 
@@ -215,7 +215,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
             yield return new WaitForSeconds(30);
             if (playerControlModel.ControlType.Value == PlayerControlType.BountyHunting) {
                 string noInfo = "Don't waste my time! Tell me something about the creatures!";
-                speaker.Speak(noInfo, mixer, "Bounty Hunter", null);
+                speaker.Speak(noInfo, mixer, "Bounty Hunter", 1f, null);
             }
         }
       

@@ -11,14 +11,15 @@ using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 
-public class NewspaperTutorialRadio : RadioEvent {
+public class NewspaperTutorialRadio : RadioEvent<RadioTextContent> {
 
-   
+	[field: ES3Serializable]
+	protected override RadioTextContent radioContent { get; set; }
     
     public NewspaperTutorialRadio(TimeRange startTimeRange, AudioMixerGroup mixer) : 
-	    base(startTimeRange, "", 1f, Gender.MALE, mixer,
+	    base(startTimeRange, new RadioTextContent("", 1f, Gender.MALE, mixer),
      RadioChannel.AllChannels) {
-	    this.speakContent = this.GetModel<HotUpdateDataModel>().GetData("NewspaperTutorialRadio").values[0];
+	    this.radioContent.SetContent(this.GetModel<HotUpdateDataModel>().GetData("NewspaperTutorialRadio").values[0]);
     }
          
     public NewspaperTutorialRadio(): base(){}
@@ -35,12 +36,16 @@ public class NewspaperTutorialRadio : RadioEvent {
 
 	    gameEventSystem.AddEvent(new NewspaperTutorialRadio(
 		    new TimeRange(currentTime + new TimeSpan(0, nextEventInterval, 0),
-			    currentTime + new TimeSpan(0, nextEventInterval + 10, 0)), mixer));
+			    currentTime + new TimeSpan(0, nextEventInterval + 10, 0)), this.radioContent.mixer));
     }
     
 
     protected override void OnRadioStart() {
         
+    }
+    
+    protected override void OnPlayedWhenRadioOff() {
+	    OnMissed();
     }
         
 }

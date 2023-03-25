@@ -136,16 +136,16 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
 
     protected override void OnStart() {
         string welcome = "Hello, here is the best underground merchant in Dorcha! The following list is the items sold today, press the corresponding number to buy: ";
-        speaker.Speak(welcome, mixer, "???", OnWelcomeSpeakFinished);
+        speaker.Speak(welcome, mixer, "???", 1f, OnWelcomeSpeakFinished);
         
        
     }
 
-    private void OnWelcomeSpeakFinished(){
+    private void OnWelcomeSpeakFinished(Speaker speaker){
        
         this.RegisterEvent<OnDialDigit>(OnDialDigit);
         string welcome = GetSellListSentence();
-        speaker.Speak(welcome, mixer, "Merchant", null);
+        speaker.Speak(welcome, mixer, "Merchant", 1f, null);
     }
 
     private void OnDialDigit(OnDialDigit e) {
@@ -154,7 +154,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
             speaker.Stop();
         }
         if (e.Digit == 9) {
-            speaker.Speak(GetSellListSentence(), mixer,"Merchant", OnWelcomeSpeakFinished);
+            speaker.Speak(GetSellListSentence(), mixer,"Merchant", 1f, OnWelcomeSpeakFinished);
         }
         else {
             int index = e.Digit - 1;
@@ -182,11 +182,11 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
                     gameEventSystem.AddEvent(new GetResourceEvent(goods,1 ,new TimeRange(currentTime)));
                 }
             }
-            speaker.Speak(reply, mixer, "Merchant", OnMerchantSpeakEnd);
+            speaker.Speak(reply, mixer, "Merchant", 1f, OnMerchantSpeakEnd);
         }
     }
 
-    private void OnMerchantSpeakEnd() {
+    private void OnMerchantSpeakEnd(Speaker speaker) {
         EndConversation();
     }
 

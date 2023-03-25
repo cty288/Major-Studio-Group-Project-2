@@ -37,7 +37,7 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 				bool speakFinished = false;
 				if(doorKnockingPhrases!=null && doorKnockingPhrases.Count>0 && speak) {
 					speaker.Speak(doorKnockingPhrases[Random.Range(0, doorKnockingPhrases.Count)],
-						mixer, "???", () => { speakFinished = true;}, voiceTag.VoiceSpeed, 1, voiceTag.VoiceType);
+						mixer, "???", 1,(speaker) => { speakFinished = true;}, voiceTag.VoiceSpeed, 1, voiceTag.VoiceType);
 					
 					while (!speakFinished) {
 						yield return null;

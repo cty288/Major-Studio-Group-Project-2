@@ -11,14 +11,15 @@ using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 
-public class PrologueDeliveryRadio : RadioEvent {
+public class PrologueDeliveryRadio : RadioEvent<RadioTextContent> {
 
    
-    
+	[field: ES3Serializable]
+	protected override RadioTextContent radioContent { get; set; }
     public PrologueDeliveryRadio(TimeRange startTimeRange, AudioMixerGroup mixer) :
-     base(startTimeRange, "", 1f, Gender.MALE, mixer,
+     base(startTimeRange, new RadioTextContent("", 1f, Gender.MALE, mixer),
      RadioChannel.AllChannels) {
-        this.speakContent = this.GetModel<HotUpdateDataModel>().GetData("PrologueDeliveryRadio").values[0];
+	    this.radioContent.SetContent(this.GetModel<HotUpdateDataModel>().GetData("PrologueDeliveryRadio").values[0]);
     }
          
     public PrologueDeliveryRadio(): base(){}
@@ -27,7 +28,9 @@ public class PrologueDeliveryRadio : RadioEvent {
     public override void OnEnd() {
         
     }
-
+    protected override void OnPlayedWhenRadioOff() {
+	    OnMissed();
+    }
     public override void OnMissed() {
         
     }

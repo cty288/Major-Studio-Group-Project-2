@@ -7,6 +7,7 @@ using _02._Scripts.GameEvents.BountyHunter;
 using _02._Scripts.GameEvents.Merchant;
 using _02._Scripts.GameTime;
 using _02._Scripts.Notebook;
+using _02._Scripts.Radio.RadioScheduling;
 using MikroFramework.Architecture;
 using MikroFramework.ResKit;
 using MikroFramework.TimeSystem;
@@ -21,8 +22,6 @@ public class MainGame : Architecture<MainGame> {
     protected override void Init() {
         
         this.RegisterExtensibleUtility<ResLoader>(ResLoader.Allocate());
-        
-        
         
         this.RegisterModel<PlayerControlModel>();
         this.RegisterModel<GameStateModel>();
@@ -44,6 +43,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<OutdoorActivityModel>();
         this.RegisterModel<HotUpdateDataModel>();
         this.RegisterModel<FashionCatalogModel>();
+        this.RegisterModel<RadioSchedulingModel>();
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();
@@ -59,6 +59,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<DogSystem>();
         this.RegisterSystem<OutdoorActivitySystem>();
         this.RegisterSystem<FashionCatalogSystem>();
+        this.RegisterSystem<RadioSchedulingSystem>();
     }
     
     protected void RegisterModel<T>() where T : class, IModel, new() {

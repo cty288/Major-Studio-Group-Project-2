@@ -229,12 +229,12 @@ public abstract class BountyHunterQuestClueEvent : GameEvent {
 
 
 //相关情报的收音机内容
-public abstract class BountyHunterQuestClueInfoEvent : RadioEvent {
+public abstract class BountyHunterQuestClueInfoEvent : RadioEvent<RadioTextContent> {
     [field: ES3Serializable]
     protected bool IsRealClue { get; set; }
     [field: ES3Serializable]
     protected DateTime startDate;
-    public BountyHunterQuestClueInfoEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, bool isReal, DateTime startDate) : base(startTimeRange, speakContent, speakRate, speakGender, mixer, RadioChannel.DeadNews) {
+    public BountyHunterQuestClueInfoEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, bool isReal, DateTime startDate) : base(startTimeRange, new RadioTextContent(speakContent, speakRate, speakGender, mixer), RadioChannel.FM96) {
         this.IsRealClue = isReal;
         this.startDate = startDate;
     }

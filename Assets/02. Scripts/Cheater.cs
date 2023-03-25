@@ -65,7 +65,7 @@ public class Cheater : AbstractMikroController<MainGame> {
         }
 
         if (Input.GetKeyDown(KeyCode.C)) {
-            this.GetModel<RadioModel>().UnlockChannel(RadioChannel.GeneralNews);
+            this.GetModel<RadioModel>().UnlockChannel(RadioChannel.FM100);
         }
         
 

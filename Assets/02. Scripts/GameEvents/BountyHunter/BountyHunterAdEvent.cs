@@ -7,14 +7,17 @@ using MikroFramework.Architecture;
 using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
-public class BountyHunterAdEvent : RadioEvent {
+public class BountyHunterAdEvent : RadioEvent<RadioTextContent> {
     private BountyHunterModel bountyHunterModel;
     private TelephoneSystem telephoneSystem;
     [field: ES3Serializable]
     private string phoneNumber;
     [field: ES3Serializable]
     private float triggerChance;
-   public BountyHunterAdEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, float triggerChance) : base(startTimeRange, speakContent, speakRate, speakGender, mixer, RadioChannel.GeneralNews) {
+    
+    [field: ES3Serializable]
+    protected override RadioTextContent radioContent { get; set; }
+   public BountyHunterAdEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, float triggerChance) : base(startTimeRange, new RadioTextContent(speakContent, speakRate, speakGender, mixer), RadioChannel.FM100) {
         //this.TriggerChance = triggerChance;
         telephoneSystem = this.GetSystem<TelephoneSystem>();
         bountyHunterModel = this.GetModel<BountyHunterModel>();
@@ -66,6 +69,10 @@ public class BountyHunterAdEvent : RadioEvent {
             GetRandomAD(), 1, Gender.MALE, AudioMixerList.Singleton.AudioMixerGroups[0], 1));
     }
     protected override void OnRadioStart() {
+        
+    }
+
+    protected override void OnPlayedWhenRadioOff() {
         
     }
 

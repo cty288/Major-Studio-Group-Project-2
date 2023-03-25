@@ -26,10 +26,10 @@ public class BountyHunterQuestStartPhone : TelephoneContact, ICanGetModel {
             "I have gathered some information about it, but I still don't know its physical characteristics. " +
             "I don't want my information to be leaked to other bounty hunters while I'm on the phone with you. So to keep it private, I'll keep you informed of the clues in various ways over the next few days. " +
             "Don't worry, I will call you ahead of time to let you know how I will deliver the message before I send you the lead. Don't forget call me back when you find out the murderer!";        
-        speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], "Bounty Hunter", OnSpeakEnd, 1.1f);
+        speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], "Bounty Hunter", 1f, OnSpeakEnd, 1.1f);
     }
 
-    private void OnSpeakEnd() {
+    private void OnSpeakEnd(Speaker speaker) {
         EndConversation();
 
 

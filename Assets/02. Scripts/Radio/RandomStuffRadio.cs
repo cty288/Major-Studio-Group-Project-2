@@ -6,19 +6,19 @@ using UnityEngine;
 using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
-public class RandomStuffRadio : RadioEvent {
-    public RandomStuffRadio(TimeRange startTimeRange, RadioMessage message) :
-        base(startTimeRange, message.Content, message.SpeakSpeed, message.Gender, AudioMixerList.Singleton.AudioMixerGroups[message.MixerIndex], RadioChannel.GeneralNews ) {
-        if (mixer == null) {
-            this.mixer = AudioMixerList.Singleton.AudioMixerGroups[1];
+public class RandomStuffRadio : RadioEvent<RadioTextContent> {
+    public RandomStuffRadio(TimeRange startTimeRange, RadioTextMessageInfo textMessageInfo) :
+        base(startTimeRange, new RadioTextContent( textMessageInfo.Content, textMessageInfo.SpeakSpeed, textMessageInfo.Gender, AudioMixerList.Singleton.AudioMixerGroups[textMessageInfo.MixerIndex]), RadioChannel.FM100 ) {
+        if (radioContent.mixer == null) {
+            radioContent.mixer = AudioMixerList.Singleton.AudioMixerGroups[1];
         }
 
-        channel = message.Channel;
+        channel = textMessageInfo.Channel;
     }
 
     public RandomStuffRadio() : base() {
-        if (mixer == null) {
-            this.mixer = AudioMixerList.Singleton.AudioMixerGroups[1];
+        if (radioContent.mixer == null) {
+            this.radioContent.mixer = AudioMixerList.Singleton.AudioMixerGroups[1];
         }
     }
     [field: ES3Serializable]
@@ -39,7 +39,14 @@ public class RandomStuffRadio : RadioEvent {
         gameEventSystem.AddEvent(new RandomStuffRadio(new TimeRange(nextTime), RadioRandomStuff.Singleton.GetNextRandomRadio()));
     }
 
+    [field: ES3Serializable]
+    protected override RadioTextContent radioContent { get; set; }
+
     protected override void OnRadioStart() {
        
+    }
+
+    protected override void OnPlayedWhenRadioOff() {
+        
     }
 }

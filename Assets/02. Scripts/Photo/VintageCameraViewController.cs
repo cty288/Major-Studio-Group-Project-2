@@ -21,6 +21,7 @@ public class VintageCameraViewController : DraggableItems {
 	private Vector3 originalLocalPosition = new Vector3(5, -0.5f, 0);
 	
 	private PlayerControlModel playerControlModel;
+	protected int cameraDay = 3;
 	protected override void Awake() {
 		base.Awake();
 		spriteRenderer = GetComponent<SpriteRenderer>();
@@ -35,11 +36,12 @@ public class VintageCameraViewController : DraggableItems {
 		playerControlModel = this.GetModel<PlayerControlModel>();
 
 		this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
+		cameraDay = int.Parse(this.GetModel<HotUpdateDataModel>().GetData("CameraDay").values[0]);
 	}
 
 	private void OnNewDay(OnNewDay e)
 	{
-		if (e.Day == 6)
+		if (e.Day == cameraDay)
 		{
 			DateTime eventTime = new DateTime(e.Date.Year, e.Date.Month, e.Date.Day, 22, 0, 0);
 			this.GetSystem<GameEventSystem>().AddEvent(new ReceiveCamera(new TimeRange(eventTime, eventTime)));
