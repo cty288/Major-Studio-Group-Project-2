@@ -46,6 +46,8 @@ namespace _02._Scripts.Radio.RadioScheduling {
 		protected override void OnInit() {
 			base.OnInit();
 		}
+		
+		
 
 		/// <summary>
 		/// The last one has the highest priority
@@ -96,8 +98,23 @@ namespace _02._Scripts.Radio.RadioScheduling {
 				}
 			}
 		}
-		
-		
+
+		public Dictionary<DateTime, Dictionary<RadioChannel, List<RadioScheduleInfo>>> GetSchedule(DateTime startDate,
+			int days) {
+			startDate = startDate.Date;
+			Dictionary<DateTime, Dictionary<RadioChannel, List<RadioScheduleInfo>>> result =
+				new Dictionary<DateTime, Dictionary<RadioChannel, List<RadioScheduleInfo>>>();
+			
+			for (int i = 0; i < days; i++) {
+				DateTime date = startDate.AddDays(i);
+				if (Schedule.ContainsKey(date)) {
+					result.Add(date, Schedule[date]);
+				}
+			}
+
+			return result;
+		}
+
 
 		protected void AddToSchedule(RadioScheduleInfo scheduleInfo, DateTime date) {
 			date = date.Date;
@@ -174,6 +191,47 @@ namespace _02._Scripts.Radio.RadioScheduling {
 		}
 
 
+		public bool CheckIsProgramPlaying(DateTime time, RadioChannel channel, RadioProgramType programType) {
+			DateTime date = time.Date;
+			if (Schedule.ContainsKey(date)) {
+				Dictionary<RadioChannel, List<RadioScheduleInfo>> channelSchedule = Schedule[date];
+				if (channelSchedule.ContainsKey(channel)) {
+					List<RadioScheduleInfo> radioScheduleInfos = channelSchedule[channel];
+					foreach (RadioScheduleInfo scheduleInfo in radioScheduleInfos) {
+						if (scheduleInfo.NameInfo.Type == programType) {
+							if (scheduleInfo.ActualTimeRange.StartTime <= time &&
+							    scheduleInfo.ActualTimeRange.EndTime >= time) {
+								return true;
+							}
+						}
+					}
+				}
+			}
+			return false;
+		}
+		
+		
+		public DateTime FindNextAvailableTime(DateTime currentTime, RadioChannel channel, RadioProgramType programType) {
+			DateTime date = currentTime.Date;
+			foreach (DateTime scheduleDate in Schedule.Keys) {
+				if(scheduleDate >= date) {
+					Dictionary<RadioChannel, List<RadioScheduleInfo>> channelSchedule = Schedule[scheduleDate];
+					if (channelSchedule.ContainsKey(channel)) {
+						List<RadioScheduleInfo> radioScheduleInfos = channelSchedule[channel];
+						foreach (RadioScheduleInfo scheduleInfo in radioScheduleInfos) {
+							if (scheduleInfo.NameInfo.Type == programType) {
+								if (scheduleInfo.ActualTimeRange.StartTime > currentTime) {
+									return scheduleInfo.ActualTimeRange.StartTime;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			return DateTime.MinValue;
+		}
+		
 		protected TimeRange CheckHasAvailableTime(List<RadioScheduleInfo> radioScheduleInfos,
 			TimeRange preferredTimeRange, int duration) {
 			

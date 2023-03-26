@@ -276,7 +276,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         if (radioModel.CurrentChannel.Value == channel && radioModel.IsOn.Value && electricityModel.HasElectricity()) {
             volume = 1;
         }
-        ContentStart(e.radioContent, channel);
+        ContentStart(e.radioContent, channel, volume<=0);
         if (volume > 0) {
             transform.DOShakeRotation(3f, 5, 20, 90, false).SetLoops(-1);
         }
@@ -296,8 +296,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
 
 
 
-    private void ContentStart(IRadioContent content,
-        RadioChannel channel) {
+    private void ContentStart(IRadioContent content, RadioChannel channel, bool isMuted) {
         
        
         if (this) {
@@ -306,7 +305,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
                 if (player == null) {
                     player = SpawnPlayer(channel, content.ContentType);
                     radioModel.SetIsSpeaking(channel, true);
-                    player.Play(content, OnSpeakerStop);
+                    player.Play(content, OnSpeakerStop, isMuted);
                 }
                 //activePlayers[channel].Speak(speakText, mixer, "Radio", overallVolume, OnSpeakerStop, speakRate, 1f, speakGender);
                 

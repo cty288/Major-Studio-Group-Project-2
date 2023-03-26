@@ -1,13 +1,20 @@
-﻿public interface IAccessoryTag : IAlienTag {
+﻿using System.Collections.Generic;
+
+public interface IAccessoryTag : IAlienTag {
     
 }
 
 public abstract class AccessoryTag : AbstractAlienTag, IAccessoryTag {
+	public override List<string> GetFakeRadioDescription() {
+		return bodyTagInfoModel.GetFakeRadioDescription(TagName,
+			description => typeof(IAccessoryTag).IsAssignableFrom(description.TagType));
+	}
 }
 
 //Head
 public class AccessoryTag_Sunglasses : AccessoryTag {
 	public override string TagName { get; } = "Headwear_Sunglasses";
+	
 }
 
 

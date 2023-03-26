@@ -100,7 +100,7 @@ public static class AlienDescriptionFactory {
         DescriptionFormatter.Reality = reality;
         StringBuilder sb = new StringBuilder();
 
-        sb.AppendFormat("This is Radio MK, and I’m your host. New reports indicate that a newly found dead body yesterday has the following trait: ");
+        sb.AppendFormat("This is FM96: Dead Body Report, and I’m your host. New reports indicate that a newly found dead body yesterday has the following trait: ");
         sb.AppendFormat(formatter, "{0:height} and {0:voice} {0:clothb}", body);
         sb.AppendFormat("Since the creature can disguise itself into human bodies, we highly recommend you to be aware of anyone who looks like this dead body.");
         return sb.ToString();

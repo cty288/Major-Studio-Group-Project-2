@@ -7,7 +7,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public interface IAlienTag {
-    
+    public string TagName { get; }
     string GetRandomRadioDescription(out bool isReal);
     string GetRandomRadioDescription(bool isReal);
     
@@ -19,7 +19,7 @@ public abstract class AbstractAlienTag : IAlienTag {
     
     public abstract string TagName { get; }
     
-    private BodyTagInfoModel bodyTagInfoModel;
+    protected BodyTagInfoModel bodyTagInfoModel;
     
     protected void CheckInit() {
         if (bodyTagInfoModel == null) {
@@ -30,7 +30,7 @@ public abstract class AbstractAlienTag : IAlienTag {
         CheckInit();
          isReal = Random.Range(0, 2) == 0;
         List<string> targetList = isReal ? bodyTagInfoModel.GetRealRadioDescription(TagName) : 
-            bodyTagInfoModel.GetFakeRadioDescription(TagName);
+            GetFakeRadioDescription();
         
         return targetList[Random.Range(0, targetList.Count)];
         
@@ -39,10 +39,12 @@ public abstract class AbstractAlienTag : IAlienTag {
     public virtual string GetRandomRadioDescription(bool isReal) {
         CheckInit();
         List<string> targetList = isReal ? bodyTagInfoModel.GetRealRadioDescription(TagName) : 
-            bodyTagInfoModel.GetFakeRadioDescription(TagName);
+            GetFakeRadioDescription();
         if(targetList == null || targetList.Count == 0) return "";
         return targetList[Random.Range(0, targetList.Count)];
     }
+
+    public abstract List<string> GetFakeRadioDescription();
 
     public virtual List<string> GetShortDescriptions() {
         CheckInit();

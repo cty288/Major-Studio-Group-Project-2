@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.GameEvents.BountyHunter;
+using _02._Scripts.Radio.RadioScheduling;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
-public class BountyHunterAdEvent : RadioEvent<RadioTextContent> {
+public class BountyHunterAdEvent : ScheduledRadioEvent<RadioTextContent> {
     private BountyHunterModel bountyHunterModel;
     private TelephoneSystem telephoneSystem;
     [field: ES3Serializable]
@@ -16,7 +17,14 @@ public class BountyHunterAdEvent : RadioEvent<RadioTextContent> {
     private float triggerChance;
     
     [field: ES3Serializable]
-    protected override RadioTextContent radioContent { get; set; }
+    protected RadioTextContent radioContent { get; set; }
+
+    protected override RadioTextContent GetRadioContent() {
+        return radioContent;
+    }
+    protected override void SetRadioContent(RadioTextContent radioContent) {
+        this.radioContent = radioContent;
+    }
    public BountyHunterAdEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, float triggerChance) : base(startTimeRange, new RadioTextContent(speakContent, speakRate, speakGender, mixer), RadioChannel.FM100) {
         //this.TriggerChance = triggerChance;
         telephoneSystem = this.GetSystem<TelephoneSystem>();
@@ -35,6 +43,9 @@ public class BountyHunterAdEvent : RadioEvent<RadioTextContent> {
        bountyHunterModel = this.GetModel<BountyHunterModel>();
        gameTimeManager = this.GetSystem<GameTimeManager>();
    }
+
+   [field: ES3Serializable] protected override RadioProgramType ProgramType { get; set; } = RadioProgramType.Ads;
+
    public override float TriggerChance {
        get {
             BountyHunterPhone phone = telephoneSystem.Contacts[phoneNumber] as BountyHunterPhone;
@@ -46,12 +57,25 @@ public class BountyHunterAdEvent : RadioEvent<RadioTextContent> {
        }
    }
 
-   public override void OnEnd() {
-        OnStopOrMissed();
-    }
+ 
+    protected override ScheduledRadioEvent<RadioTextContent> OnGetNextRadioProgramMessage(TimeRange nextTimeRange, bool playSuccess) {
+        if (playSuccess) {
+            DateTime currentTime = nextTimeRange.StartTime;
+            
+            int nextDayInterval = bountyHunterModel.ContactedBountyHunter ? 1 : 5;
 
-    public override void OnMissed() {
-        OnStopOrMissed();
+            DateTime nextEventDay = currentTime.AddDays(nextDayInterval);
+            DateTime nextEventTime = new DateTime(nextEventDay.Year, nextEventDay.Month,
+                nextEventDay.Day, Random.Range(gameTimeManager.NightTimeStart,24), Random.Range(0, 40), 0);
+            DateTime nextEventTimeRange2 = nextEventTime.AddMinutes(Random.Range(30, 60));
+
+            return new BountyHunterAdEvent(new TimeRange(nextEventTime, nextEventTimeRange2),
+                GetRandomAD(), 1, Gender.MALE, AudioMixerList.Singleton.AudioMixerGroups[0], 1);
+        }
+        else {
+            return new BountyHunterAdEvent(nextTimeRange,
+                GetRandomAD(), 1, Gender.MALE, AudioMixerList.Singleton.AudioMixerGroups[0], 1);
+        }
     }
 
     private void OnStopOrMissed() {

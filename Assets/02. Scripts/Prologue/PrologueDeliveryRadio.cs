@@ -15,11 +15,18 @@ public class PrologueDeliveryRadio : RadioEvent<RadioTextContent> {
 
    
 	[field: ES3Serializable]
-	protected override RadioTextContent radioContent { get; set; }
+	protected RadioTextContent radioContent { get; set; }
+
+	protected override RadioTextContent GetRadioContent() {
+		return radioContent;
+	}
+	protected override void SetRadioContent(RadioTextContent radioContent) {
+		this.radioContent = radioContent;
+	}
     public PrologueDeliveryRadio(TimeRange startTimeRange, AudioMixerGroup mixer) :
      base(startTimeRange, new RadioTextContent("", 1f, Gender.MALE, mixer),
      RadioChannel.AllChannels) {
-	    this.radioContent.SetContent(this.GetModel<HotUpdateDataModel>().GetData("PrologueDeliveryRadio").values[0]);
+	    this.radioContent.SetContent(this.GetModel<HotUpdateDataModel>().GetData("PrologueDeliveryRadio").values[1]);
     }
          
     public PrologueDeliveryRadio(): base(){}

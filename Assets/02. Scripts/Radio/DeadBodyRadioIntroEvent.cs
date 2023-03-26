@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _02._Scripts.Radio.RadioScheduling;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using UnityEngine;
@@ -14,7 +15,14 @@ using Random = UnityEngine.Random;
 public class DeadBodyRadioIntroEvent : RadioEvent<RadioTextContent> {
     
     [field: ES3Serializable]
-    protected override RadioTextContent radioContent { get; set; }
+    protected RadioTextContent radioContent { get; set; }
+
+    protected override RadioTextContent GetRadioContent() {
+        return radioContent;
+    }
+    protected override void SetRadioContent(RadioTextContent radioContent) {
+        this.radioContent = radioContent;
+    }
 
     [field: ES3Serializable] private string speakContent;
     public DeadBodyRadioIntroEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer) :
@@ -45,7 +53,11 @@ public class DeadBodyRadioIntroEvent : RadioEvent<RadioTextContent> {
 
         eventSystem.AddEvent(new RandomStuffRadio(
             new TimeRange(currentTime + new TimeSpan(0, Random.Range(30, 60), 0)),
-            RadioRandomStuff.Singleton.GetNextRandomRadio()));
+            RadioRandomStuff.Singleton.GetNextRandomRadio(RadioProgramType.Ads)));
+        
+        eventSystem.AddEvent(new RandomStuffRadio(
+            new TimeRange(currentTime + new TimeSpan(0, Random.Range(30, 60), 0)),
+            RadioRandomStuff.Singleton.GetNextRandomRadio(RadioProgramType.Announcement)));
         
         eventSystem.AddEvent(new FoodTutorialRadio(
             new TimeRange(currentTime + new TimeSpan(0, Random.Range(10, 40), 0)),
@@ -76,7 +88,7 @@ public class DeadBodyRadioIntroEvent : RadioEvent<RadioTextContent> {
     }
 
     protected override void OnPlayedWhenRadioOff() {
-        OnMissed();
+       // OnMissed();
     }
 }
 

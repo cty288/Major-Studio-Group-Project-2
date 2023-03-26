@@ -19,6 +19,7 @@ public class PoliceHairTag : HaircutTag {
         return "Police Hair";
     }
 
+    
     public override List<string> GetShortDescriptions() {
         return new List<string> {
             "police hair"

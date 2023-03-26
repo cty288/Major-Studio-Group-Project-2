@@ -41,27 +41,89 @@ namespace _02._Scripts.Radio.RadioScheduling {
 			FixedTimeInWeek = fixedTimeInWeek;
 		}
 	}
+
+	public struct OnWeeklyRadioScheduleGenerated {
+		public Dictionary<DateTime, Dictionary<RadioChannel, List<RadioScheduleInfo>>> Schedule;
+	}
+
+	public class ImportantNewspaperRadioSchedulePage: IImportantNewspaperPageContent {
+		public Dictionary<DateTime, Dictionary<RadioChannel, List<RadioScheduleInfo>>> Schedule =
+			new Dictionary<DateTime, Dictionary<RadioChannel, List<RadioScheduleInfo>>>();
+		
+		public ImportantNewspaperRadioSchedulePage(Dictionary<DateTime, Dictionary<RadioChannel, List<RadioScheduleInfo>>> schedule) {
+			Schedule = schedule;
+		}
+
+		public ImportantNewspaperRadioSchedulePage() {
+			//Schedule = new Dictionary<DateTime, Dictionary<RadioChannel, List<RadioScheduleInfo>>>();
+		}
+		public List<IImportantNewspaperPageContent> GetPages() {
+			int contentPerPage = 23;
+			int currentContentCount = 0;
+			List<IImportantNewspaperPageContent> pages = new List<IImportantNewspaperPageContent>();
+			
+			//first calculete each day's content count
+			Dictionary<DateTime, int> dayContentCount = new Dictionary<DateTime, int>();
+			foreach (DateTime date in Schedule.Keys) {
+				float count = 0;
+				Dictionary<RadioChannel, List<RadioScheduleInfo>> channelSchedule = Schedule[date];
+				foreach (RadioChannel radioChannel in channelSchedule.Keys) {
+					count += 1.5f;
+					foreach (RadioScheduleInfo radioScheduleInfo in channelSchedule[radioChannel]) {
+						count += 1f;
+					}
+				}
+
+				dayContentCount.Add(date, Mathf.RoundToInt(count));
+			}
+			
+			//then divide them into pages. Schedule of the same day will be put into the same page. So if current count + next day's count > contentPerPage, then create a new page
+			ImportantNewspaperRadioSchedulePage currentPage = new ImportantNewspaperRadioSchedulePage();
+			foreach (DateTime date in Schedule.Keys) {
+				if (currentContentCount + dayContentCount[date] > contentPerPage && currentContentCount != 0) {
+					pages.Add(currentPage);
+					currentPage = new ImportantNewspaperRadioSchedulePage();
+					currentContentCount = 0;
+				}
+
+				currentPage.Schedule.Add(date, Schedule[date]);
+				currentContentCount += dayContentCount[date];
+			}
+			
+			if (currentPage.Schedule.Count > 0) {
+				pages.Add(currentPage);
+			}
+			
+			//pages.Add(currentPage);
+
+			return pages;
+		}
+	}
 	
 	public class RadioSchedulingSystem: AbstractSystem {
 		private List<PermanentRadioProgramInfo> permanentRadioProgramInfos = new List<PermanentRadioProgramInfo>();
 		private RadioSchedulingModel radioSchedulingModel;
-		private DayOfWeek importantNewsPaperDay = 0;
+		//private DayOfWeek importantNewsPaperDay = 0;
 		private GameTimeModel gameTimeModel;
+		private ImportantNewspaperModel importantNewspaperModel;
 		protected override void OnInit() {
 			RegisterPermanentRadioPrograms();
-			int eventDay =
-				int.Parse(this.GetModel<HotUpdateDataModel>().GetData("ImportantNewsDay").values[0]);
 			gameTimeModel = this.GetModel<GameTimeModel>();
-			importantNewsPaperDay = gameTimeModel.GetDay(eventDay).DayOfWeek;
 			this.RegisterEvent<OnNewDay>(OnNewDay);
 			radioSchedulingModel = this.GetModel<RadioSchedulingModel>();
-			
+			importantNewspaperModel = this.GetModel<ImportantNewspaperModel>();
 		}
 
 		private void OnNewDay(OnNewDay e) {
-			if (e.Date.DayOfWeek == importantNewsPaperDay) {
-				BuildThisWeekAllRadioPrograms(e.Date);
+			if (e.Date.DayOfWeek == importantNewspaperModel.ImportantNewsPaperDay) {
+				BuildThisWeekAllRadioPrograms(e.Date, 7, true);
 			}
+
+			if (e.Day == 1) {
+				DateTime date = e.Date;
+				BuildThisWeekAllRadioPrograms(e.Date, importantNewspaperModel.ImportantNewsPaperDay - date.DayOfWeek, false);
+			}
+			
 		}
 
 		
@@ -70,10 +132,10 @@ namespace _02._Scripts.Radio.RadioScheduling {
 				"Dead Body Report", 70, RadioChannel.FM96, new Vector2Int(7, 8), true));
 
 			permanentRadioProgramInfos.Add(new PermanentRadioProgramInfo(RadioProgramType.Ads,
-				"Ads", 30, RadioChannel.FM100, new Vector2Int(2, 5), true));
+				"Ads", 30, RadioChannel.FM100, new Vector2Int(4, 8), true));
 
 			permanentRadioProgramInfos.Add(new PermanentRadioProgramInfo(RadioProgramType.Announcement, "Announcement",
-				30, RadioChannel.FM100, new Vector2Int(2, 5), false));
+				30, RadioChannel.FM100, new Vector2Int(4, 8), false));
 			
 			permanentRadioProgramInfos.Reverse();
 
@@ -85,12 +147,12 @@ namespace _02._Scripts.Radio.RadioScheduling {
 			radioSchedulingModel.AddToUnscheduled(info, date.Date, gameTimeModel.NightTimeStart);
 		}
 		
-		private void BuildThisWeekAllRadioPrograms(DateTime date) {
+		private void BuildThisWeekAllRadioPrograms(DateTime date, int weekDayCount, bool addToImportantNewspaper) {
 			date = date.Date;
 			Dictionary<DateTime, List<RadioScheduleInfo>> permanentRadioPrograms =
-				GenerateWeeklyPermanentRadioProgramInfo(date);
+				GenerateWeeklyPermanentRadioProgramInfo(date, weekDayCount);
 			
-			for (int i = 0; i < 7; i++) {
+			for (int i = 0; i < weekDayCount; i++) {
 				DateTime currentDate = date.AddDays(i);
 				List<RadioScheduleInfo> permanentRadioScheduleInfos = permanentRadioPrograms[currentDate];
 				foreach (RadioScheduleInfo programInfo in permanentRadioScheduleInfos) {
@@ -99,16 +161,28 @@ namespace _02._Scripts.Radio.RadioScheduling {
 				
 				radioSchedulingModel.LoadToScheduled(currentDate);
 			}
+
+			var schedule = radioSchedulingModel.GetSchedule(date, weekDayCount);
+			this.SendEvent(new OnWeeklyRadioScheduleGenerated() {
+				Schedule = schedule
+			});
+
+			if (addToImportantNewspaper) {
+				importantNewspaperModel.AddPageToNewspaper(gameTimeModel.Week,
+					new ImportantNewspaperRadioSchedulePage(schedule));
+			}
 		}
 
-		private Dictionary<DateTime,List<RadioScheduleInfo>> GenerateWeeklyPermanentRadioProgramInfo(DateTime date) {
+		private Dictionary<DateTime,List<RadioScheduleInfo>> GenerateWeeklyPermanentRadioProgramInfo(DateTime date, int weekDayCount) {
 			Dictionary<DateTime, List<RadioScheduleInfo>> result = new Dictionary<DateTime, List<RadioScheduleInfo>>();
-			for (int i = 0; i < 7; i++) {
+			List<int> days = new List<int>();
+			for (int i = 0; i < weekDayCount; i++) {
 				DateTime currentDate = date.AddDays(i);
 				result.Add(currentDate, new List<RadioScheduleInfo>());
+				days.Add(i);
 			}
 
-			List<int> days = new List<int>() {0, 1, 2, 3, 4, 5, 6};
+			
 			days.CTShuffle();
 			
 			
@@ -116,6 +190,10 @@ namespace _02._Scripts.Radio.RadioScheduling {
 			
 			foreach (PermanentRadioProgramInfo info in permanentRadioProgramInfos) {
 				int dayCount = Random.Range(info.DaysPerWeek.x, info.DaysPerWeek.y);
+				if (dayCount > weekDayCount) {
+					dayCount = weekDayCount;
+				}
+				
 				TimeRange timeRange = null;
 				
 				for (int i = 0; i < dayCount; i++) {

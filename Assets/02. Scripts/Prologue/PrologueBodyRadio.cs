@@ -17,7 +17,14 @@ using Random = UnityEngine.Random;
 
 public class PrologueBodyRadio : RadioEvent<RadioTextContent> {
     [field: ES3Serializable]
-    protected override RadioTextContent radioContent { get; set; }
+    protected RadioTextContent radioContent { get; set; }
+
+    protected override RadioTextContent GetRadioContent() {
+        return radioContent;
+    }
+    protected override void SetRadioContent(RadioTextContent radioContent) {
+        this.radioContent = radioContent;
+    }
     private Coroutine radioCorruptCheckCoroutine;
      public PrologueBodyRadio(TimeRange startTimeRange, AudioMixerGroup mixer) :
          base(startTimeRange,new RadioTextContent("", 1, Gender.MALE, mixer),

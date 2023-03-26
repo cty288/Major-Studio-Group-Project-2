@@ -141,7 +141,14 @@ public class BountyHunterQuest1ClueEvent : BountyHunterQuestClueEvent {
 
 public class BountyHunterQuestClueInfoRadioEvent : BountyHunterQuestClueInfoEvent {
     [field: ES3Serializable]
-    protected override RadioTextContent radioContent { get; set; }
+    protected RadioTextContent radioContent { get; set; }
+
+    protected override RadioTextContent GetRadioContent() {
+        return radioContent;
+    }
+    protected override void SetRadioContent(RadioTextContent radioContent) {
+        this.radioContent = radioContent;
+    }
     
     [ES3Serializable]
     private int dieTime;

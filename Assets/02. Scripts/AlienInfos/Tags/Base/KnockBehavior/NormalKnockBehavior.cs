@@ -18,8 +18,10 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 		AudioSource knockAudioSource = null;
 		public NormalKnockBehavior(float knockDoorTimeInterval, float knockTime, List<string> overrideDoorKnockingPhrases) : base(knockDoorTimeInterval, knockTime, overrideDoorKnockingPhrases) {
 		}
+		
+		public NormalKnockBehavior(): base(){}
 
-		public override string name { get; } = "Knock_random";
+		public override string TagName { get; }= "Knock_random";
 		public override IEnumerator OnKnockDoor(Speaker speaker, IVoiceTag voiceTag, bool isAlien) {
 			currentSpeaker = speaker;
 			AudioMixerGroup mixer = AudioMixerList.Singleton.AlienVoiceGroups[voiceTag.VoiceIndex];

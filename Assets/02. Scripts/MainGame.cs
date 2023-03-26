@@ -6,6 +6,7 @@ using _02._Scripts.FashionCatalog;
 using _02._Scripts.GameEvents.BountyHunter;
 using _02._Scripts.GameEvents.Merchant;
 using _02._Scripts.GameTime;
+using _02._Scripts.ImportantNewspaper;
 using _02._Scripts.Notebook;
 using _02._Scripts.Radio.RadioScheduling;
 using MikroFramework.Architecture;
@@ -44,6 +45,8 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<HotUpdateDataModel>();
         this.RegisterModel<FashionCatalogModel>();
         this.RegisterModel<RadioSchedulingModel>();
+        this.RegisterModel<ImportantNewsTextModel>();
+        this.RegisterModel<ImportantNewspaperModel>();
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();
@@ -60,6 +63,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<OutdoorActivitySystem>();
         this.RegisterSystem<FashionCatalogSystem>();
         this.RegisterSystem<RadioSchedulingSystem>();
+        this.RegisterSystem<ImportantNewspaperSystem>();
     }
     
     protected void RegisterModel<T>() where T : class, IModel, new() {

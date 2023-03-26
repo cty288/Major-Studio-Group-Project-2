@@ -27,7 +27,8 @@ public abstract class RadioEvent<TRadioContent> : GameEvent, ICanGetModel, ICanS
     protected RadioModel radioModel;
 
     
-    protected abstract TRadioContent radioContent { get; set; }
+    protected abstract TRadioContent GetRadioContent();
+    protected abstract void SetRadioContent(TRadioContent radioContent);
     
    // [ES3Serializable]
     //protected RadioProgramType programType;
@@ -37,8 +38,8 @@ public abstract class RadioEvent<TRadioContent> : GameEvent, ICanGetModel, ICanS
 
     protected bool started = false;
     protected bool ended = false;
-    private bool delayEnded = false;
-    private bool startDelayEnded = false;
+    protected bool delayEnded = false;
+    protected bool startDelayEnded = false;
     protected ElectricityModel electricityModel;
 
     [field: ES3Serializable]
@@ -50,7 +51,7 @@ public abstract class RadioEvent<TRadioContent> : GameEvent, ICanGetModel, ICanS
         gameStateModel = this.GetModel<GameStateModel>();
         electricityModel = this.GetModel<ElectricityModel>();
 
-        this.radioContent = radioContent;
+        SetRadioContent(radioContent);
        // this.programType = programType;
         this.channel = channel;
     }
@@ -99,7 +100,7 @@ public abstract class RadioEvent<TRadioContent> : GameEvent, ICanGetModel, ICanS
         if (!started) {
             started = true;
             this.SendEvent<OnRadioProgramStart>(new OnRadioProgramStart() {
-                radioContent = radioContent,
+                radioContent = GetRadioContent(),
                 channel = channel,
                // programType = programType
             });

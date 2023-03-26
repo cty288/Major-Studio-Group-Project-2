@@ -8,7 +8,14 @@ namespace _02._Scripts.Telephone {
 	public class TelephoneFixedRadioEvent: RadioEvent<RadioTextContent> {
 		
 		[field: ES3Serializable]
-		protected override RadioTextContent radioContent { get; set; }
+		protected RadioTextContent radioContent { get; set; }
+
+		protected override RadioTextContent GetRadioContent() {
+			return radioContent;
+		}
+		protected override void SetRadioContent(RadioTextContent radioContent) {
+			this.radioContent = radioContent;
+		}
 		
 		public TelephoneFixedRadioEvent(TimeRange startTimeRange, AudioMixerGroup mixer) :
 			base(startTimeRange, new RadioTextContent("", 1.2f, Gender.MALE, mixer),

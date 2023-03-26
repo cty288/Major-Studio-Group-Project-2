@@ -14,7 +14,14 @@ using Random = UnityEngine.Random;
 public class NewspaperTutorialRadio : RadioEvent<RadioTextContent> {
 
 	[field: ES3Serializable]
-	protected override RadioTextContent radioContent { get; set; }
+	protected RadioTextContent radioContent { get; set; }
+
+	protected override RadioTextContent GetRadioContent() {
+		return radioContent;
+	}
+	protected override void SetRadioContent(RadioTextContent radioContent) {
+		this.radioContent = radioContent;
+	}
     
     public NewspaperTutorialRadio(TimeRange startTimeRange, AudioMixerGroup mixer) : 
 	    base(startTimeRange, new RadioTextContent("", 1f, Gender.MALE, mixer),

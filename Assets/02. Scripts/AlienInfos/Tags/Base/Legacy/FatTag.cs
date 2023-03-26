@@ -33,7 +33,9 @@ public class FatTag : AbstractAlienTag, IFatTag {
         }
        
     }
-
+    
+    public FatTag(){}
+    
     public override string GetRandomRadioDescription(out bool isReal) {
         isReal = Random.Range(0, 2) == 0;
         if (isReal) {
@@ -49,6 +51,10 @@ public class FatTag : AbstractAlienTag, IFatTag {
         } else {
             return FakeRadioDescriptions[Random.Range(0, FakeRadioDescriptions.Count)];
         }
+    }
+
+    public override List<string> GetFakeRadioDescription() {
+        return null;
     }
 
     public override List<string> GetShortDescriptions() {

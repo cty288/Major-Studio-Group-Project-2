@@ -47,7 +47,7 @@ public class FashionCatalogViewController : DraggableItems {
 		foreach (var renderer in renderers) {
 			renderer.sortingOrder = layer;
 		}
-		indicateCanvas.GetComponent<Canvas>().sortingOrder = layer;
+		//indicateCanvas.GetComponent<Canvas>().sortingOrder = layer;
 		dateCanvas.GetComponent<Canvas>().sortingOrder = 1000;
 	}
 

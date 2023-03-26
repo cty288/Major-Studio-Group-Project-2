@@ -14,8 +14,8 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 	}
 
 	public abstract class AbstractKnockBehavior : IKnockBehavior, ICanGetModel {
-		
-		public abstract string name { get; }
+		public abstract string TagName { get; }
+		//public abstract string name { get; }
 		
 		[field: ES3Serializable]
 		protected float KnockDoorTimeInterval {get; set; }
@@ -35,12 +35,18 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 			KnockTime = knockTime;
 			doorKnockingPhrases = overrideDoorKnockingPhrases;
 			if(doorKnockingPhrases==null) {
-				doorKnockingPhrases = this.GetModel<BodyKnockPhraseModel>().GetPhrases(name);
+				doorKnockingPhrases = this.GetModel<BodyKnockPhraseModel>().GetPhrases(TagName);
 			}
 			this.bodyId = bodyId;
 		}
+
+		public AbstractKnockBehavior() {
+			
+		}
+
+
 		
-		
+
 		public virtual string GetRandomRadioDescription(out bool isReal) {
 			isReal = Random.Range(0, 2) == 0;
 			return GetRandomRadioDescription(isReal);
@@ -50,16 +56,21 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 			BodyTagInfoModel bodyTagInfoModel = this.GetModel<BodyTagInfoModel>();
 			List<string> targetList;
 			if (isReal) {
-				targetList = bodyTagInfoModel.GetRealRadioDescription(name);
+				targetList = bodyTagInfoModel.GetRealRadioDescription(TagName);
 			}
 			else {
-				targetList = bodyTagInfoModel.GetFakeRadioDescription(name);
+				targetList = bodyTagInfoModel.GetRealRadioDescription(TagName);
 			}
 			if(targetList==null || targetList.Count==0) {
 				return null;
 			}
 			return targetList[Random.Range(0, targetList.Count)];
 		}
+		
+		public List<string> GetFakeRadioDescription() {
+			return null;
+		}
+
 
 		public virtual List<string> GetShortDescriptions() {
 			return null;

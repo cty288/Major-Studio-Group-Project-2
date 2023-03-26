@@ -84,7 +84,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
     private void OnWelcomeEnd(Speaker speaker) {
         playerControlModel.ControlType.Value = PlayerControlType.BountyHunting;
         TopScreenHintText.Singleton.Show(
-            "Please select any information related to the unknown creatures to report to the bounty hunter.\n\nPossible information includes: figure outside / newspaper photos");
+            "Please select any information related to the unknown creatures to report to the bounty hunter.\n\nPossible information includes: figure outside / death report photos");
         this.RegisterEvent<OnBodyHuntingSelect>(OnBodyHuntingSelect);
         waitingForInteractionCoroutine = CoroutineRunner.Singleton.StartCoroutine(WaitingInteraction());
     }

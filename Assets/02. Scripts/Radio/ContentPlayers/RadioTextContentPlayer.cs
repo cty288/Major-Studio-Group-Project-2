@@ -23,11 +23,12 @@ namespace _02._Scripts.Radio {
 			speaker.Stop();
 		}
 
-		public override void Play(IRadioContent content, Action<RadioContentPlayer> onFinish) {
+		public override void Play(IRadioContent content, Action<RadioContentPlayer> onFinish, bool isMuted) {
 			RadioTextContent textContent = content as RadioTextContent;
 			speaker.Speak(textContent.speakContent, textContent.mixer, "Radio", 1, (speaker) => {
 				onFinish?.Invoke(this);
 			}, textContent.speakRate, 1f, textContent.speakGender);
+			Mute(isMuted);
 		}
 
 		public override void SetVolume(float relativeVolume, bool isLoud, bool isInstant) {

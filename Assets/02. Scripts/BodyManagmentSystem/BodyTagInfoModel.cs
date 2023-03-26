@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MikroFramework.Architecture;
 using NHibernate.Mapping;
@@ -8,9 +9,12 @@ using UnityEngine;
 namespace _02._Scripts.BodyManagmentSystem {
 
 	public class TagDescription {
+		public string TagName;
 		public List<string> RealRadioDescription = new List<string>();
 		public List<string> FakeRadioDescription = new List<string>();
 		public List<string> ShortDescription = new List<string>();
+		public Type TagType = null;
+		public bool IsUpperBody = false;
 	}
 	
 	public class BodyTagInfoModel: AbstractModel {
@@ -30,21 +34,36 @@ namespace _02._Scripts.BodyManagmentSystem {
 			}
 		}
 		
-		public List<string> GetFakeRadioDescription(string tag) {
+		public List<string> GetFakeRadioDescription(string tag, Predicate<TagDescription> predicate) {
 			tag = tag.ToLower();
 			if (tagDescriptions.ContainsKey(tag)) {
-				return tagDescriptions[tag].FakeRadioDescription;
-			}
-			else {
-				var result=  tagDescriptions.Values.Where((description =>
-					description.RealRadioDescription != null && description.RealRadioDescription.Count > 0)).ToList();
-				
-				List<string> fakeDescriptions = new List<string>();
-				foreach (var tagDescription in result) {
-					fakeDescriptions.AddRange(tagDescription.FakeRadioDescription);
+				List<string> targetList = tagDescriptions[tag].FakeRadioDescription;
+				if (targetList.Count > 0) {
+					return targetList;
 				}
-				return fakeDescriptions;
 			}
+
+			
+			List<TagDescription> result = new List<TagDescription>();  //tagDescriptions.Values.Where((description =>
+				//description.RealRadioDescription != null && description.RealRadioDescription.Count > 0)).ToList();
+
+			foreach (string descriptionsKey in tagDescriptions.Keys) {
+				if(descriptionsKey == tag) continue;
+				TagDescription description = tagDescriptions[descriptionsKey];
+				if (description.RealRadioDescription != null && description.RealRadioDescription.Count > 0 && description.TagType!=null && predicate(description)) {
+					result.Add(description);
+				}
+			}
+
+			List<string> fakeDescriptions = new List<string>();
+			if (result.Count>0) {
+				foreach (var tagDescription in result) {
+					fakeDescriptions.AddRange(tagDescription.RealRadioDescription);
+				}
+			}
+			
+			return fakeDescriptions;
+			
 		}
 		
 		public List<string> GetShortDescriptions(string tag) {
@@ -90,6 +109,7 @@ namespace _02._Scripts.BodyManagmentSystem {
 						if (!string.IsNullOrEmpty(row[0].ToLower()) && row[0].ToLower() != currentTag) {
 							currentTag = row[0].ToLower();
 							currentTagDescription = new TagDescription();
+							currentTagDescription.TagName = currentTag;
 							tagDescriptions.Add(currentTag, currentTagDescription);
 						}
 						if (!string.IsNullOrEmpty(row[1])) {
@@ -105,6 +125,26 @@ namespace _02._Scripts.BodyManagmentSystem {
 				}
 
             }
+            
+            
+            //use reflection to create instances of all the classes that inherit from IAlienTag
+            var types = AppDomain.CurrentDomain.GetAssemblies()
+				.SelectMany(s => s.GetTypes())
+				.Where(p => typeof(IAlienTag).IsAssignableFrom(p) && p.IsClass && !p.IsAbstract);
+			foreach (var type in types) {
+	            IAlienTag tag = (IAlienTag) Activator.CreateInstance(type);
+	            if (tagDescriptions.ContainsKey(tag.TagName.ToLower())) {
+		            tagDescriptions[tag.TagName.ToLower()].TagType = type;
+		            
+		            if(tag is IClothTag clothTag) {
+			            if (clothTag.IsUpperCloth) {
+				            tagDescriptions[tag.TagName.ToLower()].IsUpperBody = true;
+			            }
+		            }
+	            }
+	            
+	            
+			}
             
         }
 	}

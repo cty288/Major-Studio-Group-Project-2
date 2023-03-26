@@ -8,49 +8,67 @@ using UnityEngine;
 public class ImportantNewsHotUpdateInfo {
 	public string Key;
 	public List<string> Titles;
+	public List<string> SubTitles;
 	public List<string> Contents;
+	public List<int> ImageIndices;
 
 	public ImportantNewsHotUpdateInfo(string key) {
 		Key = key;
 		Titles = new List<string>();
 		Contents = new List<string>();
+		ImageIndices = new List<int>();
+		SubTitles = new List<string>();
 	}
 }
 
-public class ImportantNewsInfo {
+public class ImportantNewsTextInfo: IImportantNewspaperPageContent {
 	public string Key;
 	public string Title;
 	public string Content;
+	public int ImageIndex;
+	public string SubTitle;
 	
-	public ImportantNewsInfo(string key, string title, string content) {
+	public ImportantNewsTextInfo(string key, string title, string content, int imageIndex, string subtitle) {
 		Key = key;
 		Title = title;
 		Content = content;
+		ImageIndex = imageIndex;
+		SubTitle = subtitle;
+	}
+
+	public List<IImportantNewspaperPageContent> GetPages() {
+		return new List<IImportantNewspaperPageContent>() {this};
 	}
 }
 
-public class ImportantNewsModel: AbstractModel {
+public class ImportantNewsTextModel: AbstractModel {
 	private Dictionary<string, ImportantNewsHotUpdateInfo> hotUpdateInfo =
 		new Dictionary<string, ImportantNewsHotUpdateInfo>();
+	
+	
 
 	protected override void OnInit() {
 		LoadInfo();
 	}
 
-	public ImportantNewsInfo GetInfo(string key, int titleIndex, int contentIndex) {
+	public ImportantNewsTextInfo GetInfo(string key, int titleIndex, int contentIndex, int imageIndex, int subtitleIndex) {
 		if (hotUpdateInfo.ContainsKey(key)) {
 			var info = hotUpdateInfo[key];
-			return new ImportantNewsInfo(key, info.Titles[titleIndex], info.Contents[contentIndex]);
+			return new ImportantNewsTextInfo(key, info.Titles[titleIndex], info.Contents[contentIndex],
+				info.ImageIndices[imageIndex], info.SubTitles[subtitleIndex]);
 		}
 		return null;
 	}
 	
-	public ImportantNewsInfo GetInfo(string key) {
+	public ImportantNewsTextInfo GetInfo(string key) {
 		if (hotUpdateInfo.ContainsKey(key)) {
 			var info = hotUpdateInfo[key];
 			int titleIndex = Random.Range(0, info.Titles.Count);
 			int contentIndex = Random.Range(0, info.Contents.Count);
-			return new ImportantNewsInfo(key, info.Titles[titleIndex], info.Contents[contentIndex]);
+			int imageIndex = Random.Range(0, info.ImageIndices.Count);
+			int subtitleIndex = Random.Range(0, info.SubTitles.Count);
+			return new ImportantNewsTextInfo(key, info.Titles[titleIndex], info.Contents[contentIndex],
+				info.ImageIndices[imageIndex], info.SubTitles[subtitleIndex]);
 		}
 		return null;
 	}
@@ -94,7 +112,15 @@ public class ImportantNewsModel: AbstractModel {
 						currentTagDescription.Titles.Add(row[1]);
 					}
 					if (!string.IsNullOrEmpty(row[2])) {
+						currentTagDescription.SubTitles.Add(row[2]);
+					}
+					
+					if (!string.IsNullOrEmpty(row[3])) {
 						currentTagDescription.Contents.Add(row[2]);
+					}
+					
+					if (!string.IsNullOrEmpty(row[4])) {
+						currentTagDescription.ImageIndices.Add(int.Parse(row[3]));
 					}
 				}
 			}

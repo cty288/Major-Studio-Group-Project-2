@@ -82,7 +82,14 @@ public class BountyHunterHuntEvent : GameEvent{
 
 public class BountyHunterHuntWrongPersonRadio : RadioEvent<RadioTextContent> {
     [field: ES3Serializable]
-    protected override RadioTextContent radioContent { get; set; }
+    protected RadioTextContent radioContent { get; set; }
+
+    protected override RadioTextContent GetRadioContent() {
+        return radioContent;
+    }
+    protected override void SetRadioContent(RadioTextContent radioContent) {
+        this.radioContent = radioContent;
+    }
     public BountyHunterHuntWrongPersonRadio(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer) : base(startTimeRange, new RadioTextContent(speakContent, speakRate, speakGender, mixer), RadioChannel.AllChannels) {
     }
     

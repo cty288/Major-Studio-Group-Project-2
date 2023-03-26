@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using _02._Scripts.FashionCatalog;
 using _02._Scripts.GameEvents.Camera;
 using _02._Scripts.GameTime;
+using _02._Scripts.ImportantNewspaper;
 using _02._Scripts.Notebook;
 using MikroFramework;
 using MikroFramework.Architecture;
@@ -19,13 +20,14 @@ public class Table :  AbstractDroppableItemContainerViewController {
     [SerializeField] private GameObject bountyHunterGiftPrefab;
     [SerializeField] private List<GameObject> photoPrefabList;
     [SerializeField] private List<GameObject> crumbledPaperList;
+    [SerializeField] private GameObject importantNewspaperPrefab;
 
     [SerializeField] private List<GameObject> fashionBookList;
 
     [SerializeField] private GameObject cameraPrefab;
 
     
-    
+    private ImportantNewspaperModel importantNewspaperModel;
     private NewspaperViewController todayNewspaper;
     
 
@@ -39,6 +41,15 @@ public class Table :  AbstractDroppableItemContainerViewController {
         this.RegisterEvent<OnNoteDeleted>(OnNoteDeleted).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnCameraReceive>(OnCameraReceive).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnFashionCatalogGenerated>(OnFashionCatalogGenerated).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnImportantNewspaperGenerated>(OnImportantNewspaperGenerated)
+            .UnRegisterWhenGameObjectDestroyed(gameObject);
+
+        importantNewspaperModel = this.GetModel<ImportantNewspaperModel>();
+    }
+
+    private void OnImportantNewspaperGenerated(OnImportantNewspaperGenerated e) {
+        GameObject obj = SpawnItem(importantNewspaperPrefab);
+        obj.GetComponent<ImportantNewspaperViewController>().SetContent(e.Week);
     }
 
     private void OnFashionCatalogGenerated(OnFashionCatalogGenerated e) {

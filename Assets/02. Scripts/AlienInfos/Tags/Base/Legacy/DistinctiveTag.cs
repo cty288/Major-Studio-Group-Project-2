@@ -2,6 +2,8 @@
 
 namespace _02._Scripts.AlienInfos.Tags.Base {
 	public class DistinctiveTag: IAlienTag {
+		public string TagName { get; } = "Distinctive";
+
 		public string GetRandomRadioDescription(out bool isReal) {
 			isReal = true;
 			return "";

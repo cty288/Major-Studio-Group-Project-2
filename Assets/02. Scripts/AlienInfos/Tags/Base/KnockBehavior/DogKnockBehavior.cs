@@ -9,7 +9,10 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 		public DogKnockBehavior(float knockDoorTimeInterval, float knockTime, List<string> overrideDoorKnockingPhrases) : base(knockDoorTimeInterval, knockTime, overrideDoorKnockingPhrases) {
 		}
 
-		public override string name { get; } = "Knock_dog";
+		public DogKnockBehavior():base(){}
+		
+		public override string TagName { get; }= "Knock_dog";
+
 		public override IEnumerator OnKnockDoor(Speaker speaker, IVoiceTag voiceTag, bool isAlien) {
 			
 			for (int i = 0; i < KnockTime; i++) {
