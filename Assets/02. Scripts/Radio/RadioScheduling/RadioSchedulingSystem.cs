@@ -58,7 +58,7 @@ namespace _02._Scripts.Radio.RadioScheduling {
 			//Schedule = new Dictionary<DateTime, Dictionary<RadioChannel, List<RadioScheduleInfo>>>();
 		}
 		public List<IImportantNewspaperPageContent> GetPages() {
-			int contentPerPage = 23;
+			int contentPerPage = 20;
 			int currentContentCount = 0;
 			List<IImportantNewspaperPageContent> pages = new List<IImportantNewspaperPageContent>();
 			

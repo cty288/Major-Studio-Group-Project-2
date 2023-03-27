@@ -37,6 +37,8 @@ public class ImportantNewspaperModel: AbstractSavableModel {
 	
 	[field: ES3Serializable]
 	public DayOfWeek ImportantNewsPaperDay { get; set; }
+	[field: ES3Serializable]
+	public int NewspaperStartDay { get; set; }
 	
 	public void AddPageToNewspaper(int week, IImportantNewspaperPageContent page) {
 		if (!importantNewspaperInfo.ContainsKey(week)) {
@@ -57,8 +59,22 @@ public class ImportantNewspaperModel: AbstractSavableModel {
 			importantNewspaperInfo[week].Add(importantNewspaperPageContent, index + indexCounter);
 			indexCounter++;
 		}
-		
-		
+	}
+
+	public int GetWeekForNews(int day) {
+		//suppose newspaper start day is 3. So if day is 1-3 (inclusive), week is 1; if day is 4-10 (inclusive) , it is week 2 and so on
+		if (day <= NewspaperStartDay) {
+			return 1;
+		}
+		else {
+			if((day - NewspaperStartDay) % 7 == 0) {
+				return (day - NewspaperStartDay) / 7 + 1;
+			}
+			else {
+				return (day - NewspaperStartDay) / 7 + 2;
+			}
+		}
+
 	}
 	
 	public ImportantNewspaperInfo GetNewspaperInfo(int week) {

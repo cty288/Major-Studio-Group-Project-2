@@ -54,21 +54,27 @@ public class ImportantNewsTextModel: AbstractModel {
 	public ImportantNewsTextInfo GetInfo(string key, int titleIndex, int contentIndex, int imageIndex, int subtitleIndex) {
 		if (hotUpdateInfo.ContainsKey(key)) {
 			var info = hotUpdateInfo[key];
+			int realImageIndex = imageIndex < 0 ? -1 : info.ImageIndices[imageIndex];
 			return new ImportantNewsTextInfo(key, info.Titles[titleIndex], info.Contents[contentIndex],
-				info.ImageIndices[imageIndex], info.SubTitles[subtitleIndex]);
+				realImageIndex, info.SubTitles[subtitleIndex]);
 		}
 		return null;
 	}
 	
 	public ImportantNewsTextInfo GetInfo(string key) {
+		key = key.ToLower();
 		if (hotUpdateInfo.ContainsKey(key)) {
 			var info = hotUpdateInfo[key];
 			int titleIndex = Random.Range(0, info.Titles.Count);
 			int contentIndex = Random.Range(0, info.Contents.Count);
-			int imageIndex = Random.Range(0, info.ImageIndices.Count);
+			int imageIndex = -1;
+			if (info.ImageIndices.Count > 0) {
+				imageIndex = Random.Range(0, info.ImageIndices.Count);
+				imageIndex = info.ImageIndices[imageIndex];
+			}
 			int subtitleIndex = Random.Range(0, info.SubTitles.Count);
 			return new ImportantNewsTextInfo(key, info.Titles[titleIndex], info.Contents[contentIndex],
-				info.ImageIndices[imageIndex], info.SubTitles[subtitleIndex]);
+				imageIndex, info.SubTitles[subtitleIndex]);
 		}
 		return null;
 	}
@@ -116,11 +122,11 @@ public class ImportantNewsTextModel: AbstractModel {
 					}
 					
 					if (!string.IsNullOrEmpty(row[3])) {
-						currentTagDescription.Contents.Add(row[2]);
+						currentTagDescription.Contents.Add(row[3]);
 					}
 					
 					if (!string.IsNullOrEmpty(row[4])) {
-						currentTagDescription.ImageIndices.Add(int.Parse(row[3]));
+						currentTagDescription.ImageIndices.Add(int.Parse(row[4]));
 					}
 				}
 			}

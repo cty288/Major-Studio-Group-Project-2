@@ -97,6 +97,8 @@ public class FashionCatalogUIPanel : OpenableUIPanel {
 		Show(0.5f);
 		
 	}
+	
+	
 
 	private void SetContent(DateTime date) {
 		var info = fashionCatalogModel.GetBodyPartIndicesUpdateInfo(date);

@@ -36,6 +36,7 @@ public class PowerCutoffRadio : RadioEvent<RadioTextContent> {
     public override void OnStart() {
 	    base.OnStart();
 	    this.GetModel<ElectricityModel>().PowerCutoff.Value = true;
+	    
     }
 
     public override void OnEnd() {

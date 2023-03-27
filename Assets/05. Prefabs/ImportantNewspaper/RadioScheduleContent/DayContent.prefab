@@ -158,12 +158,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
+  m_fontSize: 30
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 25
+  m_fontSizeMax: 30
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -210,6 +210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5794223857811387545}
   - component: {fileID: 5794223857811387544}
+  - component: {fileID: -4925348120025472266}
   m_Layer: 0
   m_Name: DayContent
   m_TagString: Untagged
@@ -265,3 +266,16 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &-4925348120025472266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5794223857811387550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87a846f347654f4faf4f43c24245317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  channelContentPrefab: {fileID: 8177283531146551649, guid: 30f2b5ac3c3b3d14095c9bd9e7bcc9cd, type: 3}

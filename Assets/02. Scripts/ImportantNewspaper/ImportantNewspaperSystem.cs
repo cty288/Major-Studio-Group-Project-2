@@ -18,6 +18,7 @@ namespace _02._Scripts.ImportantNewspaper {
 			gameTimeModel = this.GetModel<GameTimeModel>();
 			importantNewspaperModel = this.GetModel<ImportantNewspaperModel>();
 			importantNewspaperModel.ImportantNewsPaperDay = gameTimeModel.GetDay(eventDay).DayOfWeek;
+			importantNewspaperModel.NewspaperStartDay = eventDay;
 			
 			this.RegisterEvent<OnNewDay>(OnNewDay);
 		}

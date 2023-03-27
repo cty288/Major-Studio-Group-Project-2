@@ -31,7 +31,11 @@ namespace _02._Scripts.GameTime {
 				GlobalTimeFreq = 1f;
 			}
 		}
-		
+
+
+		public int GetWeek(int day) {
+			return day / 7 + 1;
+		}
 		public DateTime GetDay(int day) {
 			return DayStartTime.AddDays(day);
 		}

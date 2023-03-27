@@ -90,7 +90,7 @@ public class NewspaperViewController : DraggableItems, IPointerEnterHandler, IPo
         dateCanvas.SetActive(true);
         Newspaper newspaper = NewspaperModel.GetNewspaper(newsID);
         
-        newspaper.dateString = newspaper.date.Month.ToString() + "/" + newspaper.date.Day.ToString() + "'s Newspaper";
+        newspaper.dateString = newspaper.date.Month.ToString() + "/" + newspaper.date.Day.ToString() + "'s Death Report";
         dateCanvas.transform.GetChild(0).GetComponent<TMP_Text>().text = newspaper.dateString;
         //mouseOnNewspaper = true;
     }

@@ -119,6 +119,12 @@ public class TelephoneSystem : AbstractSavableSystem {
             DateTime telephoneFixedTime = gameTimeModel.GetDay(telephoneFixDay);
             this.GetSystem<GameEventSystem>().AddEvent(new TelephoneFixedEvent(new TimeRange(telephoneFixedTime)));
 
+            ImportantNewspaperModel newspaperModel = this.GetModel<ImportantNewspaperModel>();
+            newspaperModel.AddPageToNewspaper(newspaperModel.GetWeekForNews(telephoneFixDay),
+                this.GetModel<ImportantNewsTextModel>().GetInfo("LandlineMaintenanceEnds"));
+            
+            newspaperModel.AddPageToNewspaper(newspaperModel.GetWeekForNews(telephoneFixDay),
+                this.GetModel<ImportantNewsTextModel>().GetInfo("ExampleKey"));
         }
     }
     void Update() {
