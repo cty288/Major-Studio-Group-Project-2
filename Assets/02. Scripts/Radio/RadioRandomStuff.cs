@@ -69,6 +69,9 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
 
     private  void Init() {
         RegisterRadioMessages(Message1, RadioProgramType.Ads);
+        RegisterRadioMessages(Message_Makeup, RadioProgramType.Ads);
+        RegisterRadioMessages(Message_Boombox, RadioProgramType.Ads);
+        RegisterRadioMessages(Message_Game_Console, RadioProgramType.Ads);
         RegisterRadioMessages(Message_Missing_Something, RadioProgramType.Announcement);
         RegisterRadioMessages(Message_Weather_Report, RadioProgramType.Announcement);
         RegisterRadioMessages(Message_Announcement_Of_President, RadioProgramType.Announcement);
@@ -111,7 +114,100 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
         string content = $"The newest album from our beloved singer {singer}, \"{songName}\" is now available on the market. Please support our local artists!";
         return new RadioTextMessageInfo(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f), RadioChannel.FM100, RadioProgramType.Ads,1);
     }
-    
+
+    private RadioTextMessageInfo Message_Makeup()
+    {
+        List<string> makeups = new List<string>();
+        makeups.Add("Lux Queen");
+        makeups.Add("Supreme Sparkle");
+        makeups.Add("La Belle");
+        makeups.Add("Lipsy");
+        makeups.Add("Sweet Temptation");
+
+        List<string> looks = new List<string>();
+        looks.Add("bold colors and long-lasting wear");
+        looks.Add("vibrant hues and smudge-proof formula");
+        looks.Add("lustrous shades and waterproof finish");
+        looks.Add("dewy glow and nourishing ingredients");
+        looks.Add("flawless coverage and weightless feel");
+        looks.Add("sheer shimmer and buildable color");
+        looks.Add("matte finish and oil-free formula");
+
+
+        string makeup = makeups[Random.Range(0, makeups.Count)];
+        string look = looks[Random.Range(0, looks.Count)];
+
+        string content = "Attention all beauty queens! Do you want to look your best? Then you need our new makeup line," +
+            $" {makeup}! With {look}, {makeup} will have you looking stunning all day and night. So get your glam on and try {makeup} today";
+        return new RadioTextMessageInfo(content, Random.Range(0.8f, 1.2f), Gender.FEMALE, Random.Range(0.2f, 0.8f), RadioChannel.FM100, RadioProgramType.Ads, 1);
+    }
+
+    private RadioTextMessageInfo Message_Boombox()
+    {
+        List<string> names = new List<string>();
+        names.Add("Sonic Breeze");
+        names.Add("Beat Blaster");
+        names.Add("PowerBeat");
+        names.Add("RockBox");
+        names.Add("GrooveCube");
+        names.Add("JamMaster");
+
+        List<string> looks = new List<string>();
+        looks.Add("high-quality sound and a portable design");
+        looks.Add("clear acoustics and lightweight frame");
+        looks.Add("dynamic range and sleek form factor");
+        looks.Add("distortion-free playback and durable casing");
+        looks.Add("rich tone and adjustable EQ");
+        looks.Add("long battery life and convenient carrying handle");
+        looks.Add("crisp audio and compact construction");
+
+
+        string name = names[Random.Range(0, names.Count)];
+        string look = looks[Random.Range(0, looks.Count)];
+
+        string content = $"Do you want to be the life of the party? Then you need our new boombox, the {name}!" +
+            $" With {look}, the {name} will have you grooving wherever you go." +
+            $" So turn up the volume and get the party started with the {name}!";
+        return new RadioTextMessageInfo(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f), RadioChannel.FM100, RadioProgramType.Ads, 1);
+    }
+
+    private RadioTextMessageInfo Message_Game_Console()
+    {
+        List<string> names = new List<string>();
+        names.Add("Game Master 9000");
+        names.Add("PX1");
+        names.Add("QuestArcade");
+        names.Add("SuperDrive");
+        names.Add("GameSphere");
+        names.Add("FunMaster A20");
+
+        List<string> looks = new List<string>();
+        looks.Add("newest games and immersive gameplay");
+        looks.Add("expandable memory and customizable settings");
+        looks.Add("8-bit architecture and speedy processing");
+        looks.Add("revolutionary technology and advanced features");
+        looks.Add("intuitive controls and ergonomic design");
+        looks.Add("long battery life and convenient carrying handle");
+        looks.Add("multiplayer compatibility and head-to-head play");
+
+
+        string name = names[Random.Range(0, names.Count)];
+        string look = looks[Random.Range(0, looks.Count)];
+
+        string content = $"Attention all gamers! Do you want to take your gaming experience to the next level? Then you need our new video game console, the {name}!" +
+            $" With {look}, the {name} will have you immersed in virtual worlds like never before." +
+            $" So power up and get your game on with the {name}!";
+        return new RadioTextMessageInfo(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f), RadioChannel.FM100, RadioProgramType.Ads, 1);
+    }
+
+    private RadioTextMessageInfo Message_Coffee_Machine()  //important feature
+    {
+        string content = "Are you tired of boring old coffee? Then you need our new coffee maker, the Java Jolt!" +
+            " With programmable settings and a sleek design, the Java Jolt will brew the perfect cup every time. " +
+            $"So wake up and smell the coffee with the Java Jolt!";
+        return new RadioTextMessageInfo(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f), RadioChannel.FM100, RadioProgramType.Ads, 1);
+    }
+
     private RadioTextMessageInfo Message_Missing_Something()
     {
         string content = "Accroding to an informer, "
