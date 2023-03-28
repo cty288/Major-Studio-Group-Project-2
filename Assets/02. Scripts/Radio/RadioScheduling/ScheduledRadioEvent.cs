@@ -9,6 +9,8 @@ namespace _02._Scripts.Radio.RadioScheduling {
 		
 		protected abstract  RadioProgramType ProgramType { get; set; }
 		protected RadioSchedulingModel radioschedulingModel;
+		
+		protected abstract bool DayEndAfterFinish { get; set; }
 		protected ScheduledRadioEvent(TimeRange startTimeRange, TRadioContent radioContent,
 			RadioChannel channel) : base(startTimeRange, radioContent, channel) {
 			radioschedulingModel = this.GetModel<RadioSchedulingModel>();
@@ -30,7 +32,7 @@ namespace _02._Scripts.Radio.RadioScheduling {
 					return EventState.Missed;
 				}
 
-				if (radioModel.CurrentChannel.Value != channel || !electricityModel.HasElectricity() || !radioModel.IsOn) {
+				if (radioModel.CurrentChannel.Value != channel || !electricityModel.HasElectricity() || !radioModel.IsOn || !DayEndAfterFinish) {
 					this.SendEvent<OnRadioEnd>(new OnRadioEnd() {
 						channel = channel
 					});
@@ -88,7 +90,7 @@ namespace _02._Scripts.Radio.RadioScheduling {
 			DateTime currentTime = gameTimeManager.CurrentTime.Value;
 			if (radioschedulingModel.CheckIsProgramPlaying(currentTime, channel, ProgramType)) {
 
-				TimeRange nextTimeRange = new TimeRange(currentTime.AddMinutes(Random.Range(5, 10)));
+				TimeRange nextTimeRange = new TimeRange(currentTime.AddMinutes(Random.Range(1, 5)));
 
 				ScheduledRadioEvent<TRadioContent> nextRadioProgram = OnGetNextRadioProgramMessage(nextTimeRange, playSuccess);
 				if (nextRadioProgram != null) {

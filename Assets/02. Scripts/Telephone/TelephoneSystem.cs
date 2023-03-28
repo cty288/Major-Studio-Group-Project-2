@@ -121,7 +121,7 @@ public class TelephoneSystem : AbstractSavableSystem {
 
             ImportantNewspaperModel newspaperModel = this.GetModel<ImportantNewspaperModel>();
             newspaperModel.AddPageToNewspaper(newspaperModel.GetWeekForNews(telephoneFixDay),
-                this.GetModel<ImportantNewsTextModel>().GetInfo("LandlineMaintenanceEnds"));
+                this.GetModel<ImportantNewsTextModel>().GetInfo("LandlineMaintenanceEnds"), 0);
             
             newspaperModel.AddPageToNewspaper(newspaperModel.GetWeekForNews(telephoneFixDay),
                 this.GetModel<ImportantNewsTextModel>().GetInfo("ExampleKey"));

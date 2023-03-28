@@ -63,6 +63,12 @@ namespace _02._Scripts.BodyManagmentSystem {
 			}
 		}
 		
+		public List<BodyTimeInfo> AllTodayDeadBodies {
+			get {
+				return allBodyTimeInfos.FindAll(bodyTimeInfo => bodyTimeInfo.IsTodayDead);
+			}
+		}
+
 		public void UpdateAvailableBodyPartIndices(int count) {
 			if(availableBodyPartIndices == null) {
 				availableBodyPartIndices = new Dictionary<BodyPartType, Dictionary<int, BindableProperty<int>>>();

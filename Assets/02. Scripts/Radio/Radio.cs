@@ -263,7 +263,8 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         }
     }
 
-    private void OnConstructDescriptionDatas(OnConstructDescriptionDatas obj) {
+    private void OnConstructDescriptionDatas(OnConstructDescriptionDatas e) {
+        
         int day = this.GetSystem<GameTimeManager>().Day;
         float radioReality = radioRealityCurve.Evaluate(day);
         ConstructDescriptionDatas(radioModel.DescriptionDatas, radioReality, day);
@@ -290,10 +291,10 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         this.RegisterEvent<OnNewBodyInfoGenerated>(OnBodyInfoGenerated).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.GetModel<GameSceneModel>().GameScene.RegisterOnValueChaned(OnGameSceneChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
+        //this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
     }
 
-
-
+   
 
 
     private void ContentStart(IRadioContent content, RadioChannel channel, bool isMuted) {
@@ -315,22 +316,17 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
 
     private void ConstructDescriptionDatas(List<AlienDescriptionData> descriptionDatas, float radioReality, int day) {
 
-        List<BodyInfo> todayAliens = null;
-        if (bodyModel.Aliens.Count > 0) {
-            todayAliens = bodyModel.Aliens.Select((info => info.BodyInfo)).ToList();
-        }
-          
+        descriptionDatas.Clear();
 
-        List<BodyInfo> allPossibleBodyInfos =
-            bodyModel.allBodyTimeInfos.Select((info => info.BodyInfo)).ToList();
+        List<BodyInfo> todayBodies = bodyModel.AllTodayDeadBodies.Select((info => info.BodyInfo)).ToList();
 
-        allPossibleBodyInfos.CTShuffle();
-        if (todayAliens != null) {
-            foreach (BodyInfo bodyInfo in allPossibleBodyInfos) {
-                descriptionDatas.Add(new AlienDescriptionData(bodyInfo, radioReality));
-            }
+        todayBodies.CTShuffle();
+        foreach (BodyInfo bodyInfo in todayBodies) {
+            descriptionDatas.Add(new AlienDescriptionData(bodyInfo, radioReality));
         }
-       
+
+
+
 
         /*
         for (int i = 0; i < unrelatedBodyInfoCountWithDay.Evaluate(day); i++) {
@@ -359,7 +355,9 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
 
       
        if (day == 1) {
+          
            AddDeadBodyIntroRadio();
+           AddInitialRadio();
        }
 
        if (day == 0) {
@@ -391,6 +389,19 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
             new TimeRange(currentTime + new TimeSpan(0, 10, 0), currentTime + new TimeSpan(0, 20, 0)),
             speakContent,
             1, Gender.MALE,
+            AudioMixerList.Singleton.AudioMixerGroups[1]));
+    }
+
+    private void AddInitialRadio() {
+        DateTime currentTime = gameTimeManager.CurrentTime.Value;
+        
+        GameEventSystem eventSystem = this.GetSystem<GameEventSystem>();
+        
+        eventSystem.AddEvent(new MusicRadio(
+            new TimeRange(currentTime + new TimeSpan(0, 1, 0)),
+            RadioContentPlayerFactory.Singleton.GetMusicSourceIndex()));
+
+        eventSystem.AddEvent(new FoodTutorialRadio(new TimeRange(currentTime.AddDays(1)),
             AudioMixerList.Singleton.AudioMixerGroups[1]));
     }
 

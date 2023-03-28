@@ -47,7 +47,7 @@ public class NewspaperSystem : AbstractSystem {
         foreach (BodyTimeInfo bodyTimeInfo in e.BodyTimeInfos) {
                 BodyInfo newsPaperInfo =
                 BodyInfo.GetBodyInfoForDisplay(bodyTimeInfo.BodyInfo, BodyPartDisplayType.Newspaper);
-            newsPaperBodyInfos.Add(new BodyTimeInfo(bodyTimeInfo.DayRemaining, newsPaperInfo));
+                newsPaperBodyInfos.Add(new BodyTimeInfo(bodyTimeInfo.DayRemaining, newsPaperInfo, true));
         }
 
         newspaperModel.CreateNewspaper(this.GetSystem<GameTimeManager>().CurrentTime,

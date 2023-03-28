@@ -33,8 +33,8 @@ public abstract  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegist
     protected bool onClickPeepholeSpeakEnd = false;
     protected PlayerResourceModel playerResourceModel;
     protected ITimeSystem timeSystem;
-  
-    
+    protected bool interacted = false;
+
     public BodyGenerationEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float eventTriggerChance) : base(startTimeRange) {
         
         bodyGenerationModel = this.GetModel<BodyGenerationModel>();
@@ -59,6 +59,7 @@ public abstract  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegist
 
     private void OnOutsideBodyClicked(OnOutsideBodyClicked e) {
         if (e.BodyInfo.ID == bodyInfo.ID) {
+            interacted = true;
             if (knockDoorCheckCoroutine != null) {
                 CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
                 knockDoorCheckCoroutine = null;
@@ -84,7 +85,7 @@ public abstract  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegist
     public override EventState OnUpdate() {
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
         
-        if ((currentTime.Hour == 23 && currentTime.Minute >= 58) || gameStateModel.GameState.Value == GameState.End) {
+        if ((currentTime.Hour == 23 && currentTime.Minute >= 58 && !interacted) || gameStateModel.GameState.Value == GameState.End) {
             if (knockDoorCheckCoroutine != null) {
                 CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
                 knockDoorCheckCoroutine = null;

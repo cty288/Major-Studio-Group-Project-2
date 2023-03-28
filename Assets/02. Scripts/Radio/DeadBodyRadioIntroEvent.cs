@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _02._Scripts.Radio;
 using _02._Scripts.Radio.RadioScheduling;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
@@ -47,7 +48,7 @@ public class DeadBodyRadioIntroEvent : RadioEvent<RadioTextContent> {
 
         eventSystem.AddEvent(new DailyBodyRadio(
             new TimeRange(currentTime + new TimeSpan(0, 10, 0), currentTime + new TimeSpan(0, 20, 0)),
-            AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo, descriptionData.Reality),
+            
             Random.Range(0.85f, 1.2f), Random.Range(0, 2) == 0 ? Gender.MALE : Gender.FEMALE,
             AudioMixerList.Singleton.AudioMixerGroups[1]));
 
@@ -59,9 +60,7 @@ public class DeadBodyRadioIntroEvent : RadioEvent<RadioTextContent> {
             new TimeRange(currentTime + new TimeSpan(0, Random.Range(30, 60), 0)),
             RadioRandomStuff.Singleton.GetNextRandomRadio(RadioProgramType.Announcement)));
         
-        eventSystem.AddEvent(new FoodTutorialRadio(
-            new TimeRange(currentTime + new TimeSpan(0, Random.Range(10, 40), 0)),
-            AudioMixerList.Singleton.AudioMixerGroups[1]));
+      
 
         
     }

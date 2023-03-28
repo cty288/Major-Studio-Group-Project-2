@@ -8,6 +8,9 @@ using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 public class RandomStuffRadio : ScheduledRadioEvent<RadioTextContent> {
+    [field: ES3Serializable]
+    protected override bool DayEndAfterFinish { get; set; } = true;
+    
     
     public RandomStuffRadio(TimeRange startTimeRange, RadioTextMessageInfo textMessageInfo) :
         base(startTimeRange, new RadioTextContent(textMessageInfo.Content, textMessageInfo.SpeakSpeed, textMessageInfo.Gender, AudioMixerList.Singleton.AudioMixerGroups[textMessageInfo.MixerIndex]), RadioChannel.FM100 ) {

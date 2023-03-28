@@ -12,10 +12,12 @@ using Random = UnityEngine.Random;
 public class BodyTimeInfo {
     public int DayRemaining;
     public BodyInfo BodyInfo;
+    public bool IsTodayDead;
 
-    public BodyTimeInfo(int dayRemaining, BodyInfo bodyInfo) {
+    public BodyTimeInfo(int dayRemaining, BodyInfo bodyInfo, bool isTodayDead) {
         DayRemaining = dayRemaining;
         BodyInfo = bodyInfo;
+        IsTodayDead = isTodayDead;
     }
 }
 
@@ -51,6 +53,7 @@ public class BodyManagmentSystem : AbstractSystem {
         
         foreach (BodyTimeInfo timeInfo in bodyModel.allBodyTimeInfos) {
             timeInfo.DayRemaining--;
+            timeInfo.IsTodayDead = false;
         }
         GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
         int bodyCount = MaxBodyEveryDay;
@@ -60,7 +63,7 @@ public class BodyManagmentSystem : AbstractSystem {
             //prologue body
             BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, true,
                 new NormalKnockBehavior(3, int.MaxValue, null),bodyModel.AvailableBodyPartIndices);
-            bodyModel.AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(new BodyTimeInfo(1, info));
+            bodyModel.AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(new BodyTimeInfo(1, info, true));
         }
 
 
@@ -103,9 +106,9 @@ public class BodyManagmentSystem : AbstractSystem {
             
             BodyTimeInfo timeInfo = null;
             if (i == 0) {
-                timeInfo = new BodyTimeInfo(3, info);
+                timeInfo = new BodyTimeInfo(3, info, true);
             }else {
-                timeInfo = new BodyTimeInfo(Random.Range(0, 4), info);
+                timeInfo = new BodyTimeInfo(Random.Range(0, 4), info, true);
             }
             bodyModel.AddToAllBodyTimeInfos(timeInfo);
             newBodyInfos.Add(timeInfo);

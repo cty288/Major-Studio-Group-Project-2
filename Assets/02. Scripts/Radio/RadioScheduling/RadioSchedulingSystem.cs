@@ -132,10 +132,13 @@ namespace _02._Scripts.Radio.RadioScheduling {
 				"Dead Body Report", 70, RadioChannel.FM96, new Vector2Int(7, 8), true));
 
 			permanentRadioProgramInfos.Add(new PermanentRadioProgramInfo(RadioProgramType.Ads,
-				"Ads", 30, RadioChannel.FM100, new Vector2Int(4, 8), true));
+				"Ads", 45, RadioChannel.FM100, new Vector2Int(4, 8), true));
 
 			permanentRadioProgramInfos.Add(new PermanentRadioProgramInfo(RadioProgramType.Announcement, "Announcement",
-				30, RadioChannel.FM100, new Vector2Int(4, 8), false));
+				45, RadioChannel.FM100, new Vector2Int(4, 8), false));
+
+			permanentRadioProgramInfos.Add(new PermanentRadioProgramInfo(RadioProgramType.Music, "Music", 119,
+				RadioChannel.FM104, new Vector2Int(7, 8), true));
 			
 			permanentRadioProgramInfos.Reverse();
 

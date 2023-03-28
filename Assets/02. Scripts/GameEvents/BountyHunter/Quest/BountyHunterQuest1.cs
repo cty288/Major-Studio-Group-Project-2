@@ -141,6 +141,9 @@ public class BountyHunterQuest1ClueEvent : BountyHunterQuestClueEvent {
 
 public class BountyHunterQuestClueInfoRadioEvent : BountyHunterQuestClueInfoEvent {
     [field: ES3Serializable]
+    protected override bool DayEndAfterFinish { get; set; } = true;
+    
+    [field: ES3Serializable]
     protected RadioTextContent radioContent { get; set; }
 
     protected override RadioTextContent GetRadioContent() {

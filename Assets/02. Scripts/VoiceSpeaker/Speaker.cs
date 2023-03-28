@@ -141,6 +141,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
 
 
     private bool isMuted = false;
+    private bool subtitleShowing = false;
     public void Mute(bool mute) {
         isMuted = mute;
         if (!String.IsNullOrEmpty(currentSpeachUID)) {
@@ -154,13 +155,15 @@ public class Speaker :  AbstractMikroController<MainGame> {
         
         
         if (mute) {
-            if (subtitile && currentSentence!=null) {
+            if (subtitile && currentSentence!=null && subtitleShowing) {
                 subtitile.OnSpeakStop();
+                subtitleShowing = false;
             }
         }
         else {
             if(subtitile && currentSentence!=null) {
                 subtitile.OnSpeakStart(currentSentence.SentenceFragment, currentSentence.SpeakName);
+                subtitleShowing = true;
             }
         }
     }
@@ -209,6 +212,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
         audioSource.volume = volume;
         if (subtitile && !isMuted) {
             subtitile.OnSpeakStart(text.SentenceFragment, text.SpeakName);
+            subtitleShowing = true;
         }
      
     }
@@ -216,8 +220,9 @@ public class Speaker :  AbstractMikroController<MainGame> {
     public void Stop() {
         sentenceQueues.Clear();
         
-        if (subtitile) {
+        if (subtitile && subtitleShowing) {
             subtitile.OnSpeakStart("","");
+            subtitleShowing = false;
         }
         IsSpeaking = false;
         if (AudioMixer) {

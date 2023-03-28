@@ -7,6 +7,7 @@ using _02._Scripts.GameEvents.Camera;
 using _02._Scripts.GameTime;
 using _02._Scripts.ImportantNewspaper;
 using _02._Scripts.Notebook;
+using _02._Scripts.Poster;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
@@ -21,6 +22,7 @@ public class Table :  AbstractDroppableItemContainerViewController {
     [SerializeField] private List<GameObject> photoPrefabList;
     [SerializeField] private List<GameObject> crumbledPaperList;
     [SerializeField] private GameObject importantNewspaperPrefab;
+    [SerializeField] private GameObject posterPrefab;
 
     [SerializeField] private List<GameObject> fashionBookList;
 
@@ -43,8 +45,14 @@ public class Table :  AbstractDroppableItemContainerViewController {
         this.RegisterEvent<OnFashionCatalogGenerated>(OnFashionCatalogGenerated).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnImportantNewspaperGenerated>(OnImportantNewspaperGenerated)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnPosterGet>(OnPosterGet).UnRegisterWhenGameObjectDestroyed(gameObject);
 
         importantNewspaperModel = this.GetModel<ImportantNewspaperModel>();
+    }
+
+    private void OnPosterGet(OnPosterGet e) {
+        GameObject obj = SpawnItem(posterPrefab);
+        obj.GetComponent<PosterViewController>().SetContent(e.ID);
     }
 
     private void OnImportantNewspaperGenerated(OnImportantNewspaperGenerated e) {

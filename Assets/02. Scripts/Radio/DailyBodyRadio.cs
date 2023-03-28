@@ -15,9 +15,15 @@ public struct OnConstructDescriptionDatas {
 
 }
 public class DailyBodyRadio : ScheduledRadioEvent<RadioTextContent> {
+    [field: ES3Serializable]
+    protected override bool DayEndAfterFinish { get; set; } = true;
 
         [field: ES3Serializable]
         protected RadioTextContent radioContent { get; set; }
+
+        [field: ES3Serializable] protected float speakRate;
+        [field: ES3Serializable] protected Gender speakerGender;
+        [field: ES3Serializable] protected AudioMixerGroup mixer;
 
         protected override RadioTextContent GetRadioContent() {
             return radioContent;
@@ -26,12 +32,27 @@ public class DailyBodyRadio : ScheduledRadioEvent<RadioTextContent> {
             this.radioContent = radioContent;
         }
         private Coroutine radioCorruptCheckCoroutine;
-         public DailyBodyRadio(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer) :
-             base(startTimeRange, new RadioTextContent(speakContent, speakRate, speakGender, mixer),
+         public DailyBodyRadio(TimeRange startTimeRange, float speakRate, Gender speakGender, AudioMixerGroup mixer) :
+             base(startTimeRange, null ,
              RadioChannel.FM96) {
-             
+             this.speakRate = speakRate;
+             this.speakerGender = speakGender; 
+             this.mixer = mixer;
+           
          }
-         
+
+         public override void OnStart() {
+             base.OnStart();
+             if (!radioModel.DescriptionDatas.Any()) {
+                 this.SendEvent<OnConstructDescriptionDatas>();
+             }
+             AlienDescriptionData descriptionData = radioModel.DescriptionDatas[0];
+             radioModel.DescriptionDatas.RemoveAt(0);
+             SetRadioContent(new RadioTextContent(
+                 AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo, descriptionData.Reality),
+                 this.speakRate, this.speakerGender, this.mixer));
+         }
+
          public DailyBodyRadio(): base(){}
          [field: ES3Serializable]
          protected override RadioProgramType ProgramType { get; set; } = RadioProgramType.DailyDeadBody;
@@ -50,16 +71,10 @@ public class DailyBodyRadio : ScheduledRadioEvent<RadioTextContent> {
 
         
         protected override ScheduledRadioEvent<RadioTextContent> OnGetNextRadioProgramMessage(TimeRange nextTimeRange, bool playSuccess) {
-            if (!radioModel.DescriptionDatas.Any()) {
-                this.SendEvent<OnConstructDescriptionDatas>();
-            }
-            AlienDescriptionData descriptionData = radioModel.DescriptionDatas[0];
-            radioModel.DescriptionDatas.RemoveAt(0);
-
 
             return new DailyBodyRadio(nextTimeRange,
-                AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo, descriptionData.Reality),
-                Random.Range(0.85f, 1.2f), Random.Range(0, 2) == 0 ? Gender.MALE : Gender.FEMALE, radioContent.mixer);
+                Random.Range(0.85f, 1.2f), Random.Range(0, 2) == 0 ? Gender.MALE : Gender.FEMALE,
+                AudioMixerList.Singleton.AudioMixerGroups[1]);
         }
 
     

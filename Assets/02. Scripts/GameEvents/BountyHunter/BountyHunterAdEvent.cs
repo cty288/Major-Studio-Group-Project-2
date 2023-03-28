@@ -45,6 +45,8 @@ public class BountyHunterAdEvent : ScheduledRadioEvent<RadioTextContent> {
    }
 
    [field: ES3Serializable] protected override RadioProgramType ProgramType { get; set; } = RadioProgramType.Ads;
+   [field: ES3Serializable]
+   protected override bool DayEndAfterFinish { get; set; } = true;
 
    public override float TriggerChance {
        get {

@@ -51,8 +51,7 @@ public class ExampleEvent : GameEvent {
 		DateTime time = gameTimeManager.CurrentTime.Value;
 
 
-		gameEventSystem.AddEvent(new DailyBodyRadio(new TimeRange(time.AddMinutes(10), time.AddMinutes(10)),
-			"aba aba", 1f, Gender.MALE, null));
+		gameEventSystem.AddEvent(new DailyBodyRadio(new TimeRange(time.AddMinutes(10), time.AddMinutes(10)), 1f, Gender.MALE, null));
 	}
 
 	public override void OnMissed() {

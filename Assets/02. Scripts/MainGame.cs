@@ -8,6 +8,7 @@ using _02._Scripts.GameEvents.Merchant;
 using _02._Scripts.GameTime;
 using _02._Scripts.ImportantNewspaper;
 using _02._Scripts.Notebook;
+using _02._Scripts.Poster;
 using _02._Scripts.Radio.RadioScheduling;
 using MikroFramework.Architecture;
 using MikroFramework.ResKit;
@@ -47,6 +48,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<RadioSchedulingModel>();
         this.RegisterModel<ImportantNewsTextModel>();
         this.RegisterModel<ImportantNewspaperModel>();
+        this.RegisterModel<PosterModel>();
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();
@@ -64,6 +66,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<FashionCatalogSystem>();
         this.RegisterSystem<RadioSchedulingSystem>();
         this.RegisterSystem<ImportantNewspaperSystem>();
+        this.RegisterSystem<PosterSystem>();
     }
     
     protected void RegisterModel<T>() where T : class, IModel, new() {

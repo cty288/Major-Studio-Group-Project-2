@@ -42,7 +42,7 @@ public class Cheater : AbstractMikroController<MainGame> {
             BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true, false,
                 new NormalKnockBehavior(3, Random.Range(3, 7), null), null);
             
-            this.GetModel<BodyModel>().AddToAllBodyTimeInfos(new BodyTimeInfo(3, info));
+            this.GetModel<BodyModel>().AddToAllBodyTimeInfos(new BodyTimeInfo(3, info, true));
             this.GetModel<BodyGenerationModel>().CurrentOutsideBody.Value = info;
         }
 

@@ -3,7 +3,8 @@ using Crosstales.RTVoice.Model.Enum;
 using UnityEngine.Audio;
 
 public enum RadioContentType {
-	Text
+	Text,
+	Music
 }
 public interface IRadioContent {
 	public RadioContentType ContentType { get; }
@@ -39,4 +40,23 @@ public class RadioTextContent : IRadioContent {
 	public RadioTextContent() {
 	}
 	
+}
+
+public class RadioMusicContent : IRadioContent {
+	[field: ES3Serializable]
+	public RadioContentType ContentType { get; } = RadioContentType.Music;
+
+	[field: ES3Serializable] public int MusicIndexInPlayList { get; set; } = 0;
+
+	
+	public RadioMusicContent(int musicIndexInPlayList) {
+		MusicIndexInPlayList = musicIndexInPlayList;
+	}
+	
+	public void SetContent(object content) {
+		this.MusicIndexInPlayList = (int) content;
+	}
+	
+	public RadioMusicContent() {
+	}
 }
