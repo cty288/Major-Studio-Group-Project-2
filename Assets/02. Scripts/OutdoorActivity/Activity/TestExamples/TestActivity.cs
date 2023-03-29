@@ -28,6 +28,7 @@ public class TestActivity : Activity {
 	}
 
 	protected override void OnLeavePlayer() {
+		
 		Debug.Log("OnLeavePlayer");
 	}
 

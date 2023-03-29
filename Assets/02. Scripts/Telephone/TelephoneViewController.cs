@@ -67,14 +67,20 @@ public class TelephoneViewController : ElectricalApplicance, IPointerClickHandle
         string speakText = "";
         switch (failType) {
             case PhoneDealErrorType.NumberNotAvailable:
-                speakText = "The number you dialed is not available. Please try again later.";
+                if (telephoneSystem.IsBroken) {
+                    speakText = "Unable to deal with the call. Please check your phone line wiring and try again.";
+                }
+                else {
+                    speakText = "The number you dialed is not available. Please try again later.";
+                }
+               
                 break;
             case PhoneDealErrorType.NumberNotExists:
                 speakText = "The number you dialed does not exist. Please check the number and try again.";
                 break;
         }
 
-        speaker.Speak(speakText, null,"",null, 1f, 1.5f);
+        speaker.Speak(speakText, null,"",1f, null, 1f, 1.5f);
         return () => !speaker.IsSpeaking;
     }
 

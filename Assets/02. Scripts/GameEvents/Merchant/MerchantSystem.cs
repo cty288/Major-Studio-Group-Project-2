@@ -18,9 +18,14 @@ public class MerchantSystem : AbstractSystem {
         merchantModel = this.GetModel<MerchantModel>();
         
         if(String.IsNullOrEmpty(merchantModel.PhoneNumber)) {
+
+            merchantModel.PhoneNumberGenerationDate = int.Parse(this.GetModel<HotUpdateDataModel>()
+                .GetData("MerchantNoteDay").values[0]) + 1; //day 3 in actual game
+            
+            
             merchantModel.PhoneNumber =  PhoneNumberGenor.GeneratePhoneNumber(7);
-            merchantModel.PhoneNumberGenerationDate = Random.Range(3, 6);
             telephoneSystem.AddContact(merchantModel.PhoneNumber, new MerchantPhone());
+            
             AddMerchantPhoneNumebrEvent();
         }
     }

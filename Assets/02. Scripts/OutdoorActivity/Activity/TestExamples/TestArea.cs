@@ -12,13 +12,18 @@ public class TestArea : Place {
 	
 	protected override void OnRegisterActivities() {
 		Debug.Log("Registering activities");
+		
 		RegisterActivity(new TestActivity());
 		RegisterActivity(new TestActivity2());
+		
+		
+		
 		EnablePermanentActivity("TestArea_TestActivity");
 	}
 
 	protected override void OnInit() {
 		Debug.Log("Initing");
+		
 	}
 
 	protected override void OnAvailable() {

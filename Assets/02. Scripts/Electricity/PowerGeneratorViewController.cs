@@ -8,14 +8,26 @@ using UnityEngine.EventSystems;
 public class PowerGeneratorViewController : ElectricalApplicance, IPointerClickHandler {
     [SerializeField] private List<Sprite> electricitySprites;
     private SpriteRenderer spriteRenderer;
+
+    [SerializeField] private bool isUI = false; 
     protected override void Awake() {
         base.Awake();
         gameObject.SetActive(false);
         spriteRenderer = GetComponent<SpriteRenderer>();
         electricityModel.Electricity.RegisterWithInitValue(OnElectricityChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
-       electricityModel.HasElectricityGenerator.RegisterWithInitValue(OnHasElectricityGeneratorChanged)
-            .UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnPlayerResourceNumberChanged>(OnPlayerResourceNumberChanged);
+    }
+
+    private void OnPlayerResourceNumberChanged(OnPlayerResourceNumberChanged e) {
+        if (e.GoodsInfo.Type == typeof(PowerGeneratorGoods)) {
+            if (e.GoodsInfo.Count > 0) {
+                OnHasElectricityGeneratorChanged(true);
+            }else {
+                OnHasElectricityGeneratorChanged(false);
+            }
+
+        }
     }
 
     private void OnHasElectricityGeneratorChanged(bool hasElectricityGenerator) {
@@ -26,19 +38,41 @@ public class PowerGeneratorViewController : ElectricalApplicance, IPointerClickH
 
     private void OnElectricityChanged(float arg1, float electricity) {
         int index = 0;
-        if (electricity <= 0.01f) {
-            index = 0;
-        }
-        else if (electricity <= 0.45f) {
-            index = 1;
-        }
-        else if (electricity <= 0.95f) {
-            index = 2;
-        }
-        else {
-            index = 3;
-        }
+        if (!isUI) {
+            if (electricity <= 0.01f) {
+                index = 0;
+            }
+            else if (electricity <= 0.45f) {
+                index = 1;
+            }
+            else if (electricity <= 0.95f) {
+                index = 2;
+            }
+            else {
+                index = 3;
+            }
 
+        }else {
+            if (electricity <= 0.01f) {
+                index = 0;
+            }
+            else if (electricity <= 0.25f) {
+                index = 1;
+            }
+            else if (electricity <= 0.5f) {
+                index = 2;
+            }
+            else if(electricity<=0.75) {
+                index = 3;
+            }else if (electricity <= 0.95f) {
+                index = 4;
+            }
+            else {
+                index = 5;
+            }
+
+        }
+       
         spriteRenderer.sprite = electricitySprites[index];
     }
 

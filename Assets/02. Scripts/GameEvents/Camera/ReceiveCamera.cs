@@ -7,10 +7,14 @@ namespace _02._Scripts.GameEvents.Camera
     {
         
     }
+    
+    
+    [ES3Serializable]
     public class ReceiveCamera : GameEvent {
    
+        [field: ES3Serializable]
         public override GameEventType GameEventType { get; } = GameEventType.BountyHunterQuestClueNotification;
-
+        [field: ES3Serializable]
         private bool isCompleted = false;
         public override float TriggerChance {
             get

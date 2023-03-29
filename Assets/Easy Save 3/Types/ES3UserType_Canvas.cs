@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("overrideSorting", "sortingOrder", "targetDisplay", "sortingLayerID", "sortingLayerName")]
+	[ES3PropertiesAttribute("overrideSorting", "targetDisplay", "sortingLayerID", "sortingLayerName")]
 	public class ES3UserType_Canvas : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -17,7 +17,6 @@ namespace ES3Types
 			var instance = (UnityEngine.Canvas)obj;
 			
 			writer.WriteProperty("overrideSorting", instance.overrideSorting, ES3Type_bool.Instance);
-			writer.WriteProperty("sortingOrder", instance.sortingOrder, ES3Type_int.Instance);
 			writer.WriteProperty("targetDisplay", instance.targetDisplay, ES3Type_int.Instance);
 			writer.WriteProperty("sortingLayerID", instance.sortingLayerID, ES3Type_int.Instance);
 			writer.WriteProperty("sortingLayerName", instance.sortingLayerName, ES3Type_string.Instance);
@@ -33,9 +32,6 @@ namespace ES3Types
 					
 					case "overrideSorting":
 						instance.overrideSorting = reader.Read<System.Boolean>(ES3Type_bool.Instance);
-						break;
-					case "sortingOrder":
-						instance.sortingOrder = reader.Read<System.Int32>(ES3Type_int.Instance);
 						break;
 					case "targetDisplay":
 						instance.targetDisplay = reader.Read<System.Int32>(ES3Type_int.Instance);

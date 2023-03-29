@@ -1,8 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
+using _02._Scripts.FashionCatalog;
 using _02._Scripts.GameEvents.Camera;
+using _02._Scripts.GameTime;
+using _02._Scripts.ImportantNewspaper;
 using _02._Scripts.Notebook;
+using _02._Scripts.Poster;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
@@ -16,9 +21,15 @@ public class Table :  AbstractDroppableItemContainerViewController {
     [SerializeField] private GameObject bountyHunterGiftPrefab;
     [SerializeField] private List<GameObject> photoPrefabList;
     [SerializeField] private List<GameObject> crumbledPaperList;
+    [SerializeField] private GameObject importantNewspaperPrefab;
+    [SerializeField] private GameObject posterPrefab;
+
+    [SerializeField] private List<GameObject> fashionBookList;
+
     [SerializeField] private GameObject cameraPrefab;
+
     
-    
+    private ImportantNewspaperModel importantNewspaperModel;
     private NewspaperViewController todayNewspaper;
     
 
@@ -31,10 +42,33 @@ public class Table :  AbstractDroppableItemContainerViewController {
         this.RegisterEvent<OnNewPhotoTaken>(OnNewPhotoTaken).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNoteDeleted>(OnNoteDeleted).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnCameraReceive>(OnCameraReceive).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnFashionCatalogGenerated>(OnFashionCatalogGenerated).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnImportantNewspaperGenerated>(OnImportantNewspaperGenerated)
+            .UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnPosterGet>(OnPosterGet).UnRegisterWhenGameObjectDestroyed(gameObject);
+
+        importantNewspaperModel = this.GetModel<ImportantNewspaperModel>();
     }
 
-    private void OnCameraReceive(OnCameraReceive e)
-    {
+    private void OnPosterGet(OnPosterGet e) {
+        GameObject obj = SpawnItem(posterPrefab);
+        obj.GetComponent<PosterViewController>().SetContent(e.ID);
+    }
+
+    private void OnImportantNewspaperGenerated(OnImportantNewspaperGenerated e) {
+        GameObject obj = SpawnItem(importantNewspaperPrefab);
+        obj.GetComponent<ImportantNewspaperViewController>().SetContent(e.Week);
+    }
+
+    private void OnFashionCatalogGenerated(OnFashionCatalogGenerated e) {
+        GameObject book = SpawnItem(fashionBookList[Random.Range(0, fashionBookList.Count)]);
+        GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
+        book.GetComponent<FashionCatalogViewController>().SetContent(e.BodyPartIndicesUpdateInfo.Time, gameTimeModel.Week);
+
+       
+    }
+
+    private void OnCameraReceive(OnCameraReceive e) {
         GameObject camera = SpawnItem(cameraPrefab);
     }
 

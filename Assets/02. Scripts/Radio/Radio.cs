@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.Radio;
 using Crosstales;
 using Crosstales.RTVoice.Model.Enum;
 using DG.Tweening;
@@ -44,7 +45,7 @@ public class RadioRC : SimpleRC {
 
 public class Radio : ElectricalApplicance, IPointerClickHandler
 {
-    public Speaker speaker;
+    //public Speaker speaker;
     
     public BodyInfo targetAlien;
 
@@ -66,6 +67,9 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
 
     private RadioRC lowSoundLock = new RadioRC();
 
+    [SerializeField] private GameObject speakerPrefab;
+    protected Dictionary<RadioChannel, RadioContentPlayer> activePlayers = new Dictionary<RadioChannel, RadioContentPlayer>();
+
     protected float NoiseVolume {
         get {
             return 1 - radioModel.RelativeVolume;
@@ -79,28 +83,90 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         gameTimeManager = this.GetSystem<GameTimeManager>();
 
         this.RegisterEvent<OnRadioEnd>(OnRadioEnd).UnRegisterWhenGameObjectDestroyed(gameObject);
-        this.RegisterEvent<OnRadioStart>(OnRadioStart).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnRadioProgramStart>(OnRadioStart).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnConstructDescriptionDatas>(OnConstructDescriptionDatas).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.GetSystem<TelephoneSystem>().State.RegisterOnValueChaned(OnTelephoneStateChange).UnRegisterWhenGameObjectDestroyed(gameObject);
         
         radioModel = this.GetModel<RadioModel>();
+        InitializePlayers();
+
+       // Crosstales.RTVoice.Speaker.Instance.Caching = false;
         lowSoundLock.OnRefCleared += OnLowSoundReleased;
         mouseHoverHint = transform.Find("RadioCanvas/Hint").GetComponent<TMP_Text>();
         radioModel.IsOn.RegisterWithInitValue(OnRadioOnOffChange).UnRegisterWhenGameObjectDestroyed(gameObject);
         
         radioModel.RelativeVolume.RegisterWithInitValue(OnVolumeChange).UnRegisterWhenGameObjectDestroyed(gameObject);
+        radioModel.CurrentChannel.RegisterWithInitValue(OnChannelChange).UnRegisterWhenGameObjectDestroyed(gameObject);
 
     }
 
+    private void InitializePlayers() {
+        foreach (RadioChannel channel in Enum.GetValues(typeof(RadioChannel))) {
+            activePlayers.Add(channel, null);
+        }
+    }
+
+    private void OnRadioEnd(OnRadioEnd e) {
+        if (activePlayers.ContainsKey(e.channel)) {
+            activePlayers[e.channel]?.Stop();
+            DestroyPlayer(e.channel);
+            radioModel.SetIsSpeaking(e.channel, false);
+        }
+    }
     
+    protected bool IsPlayerPlaying(RadioChannel channel) {
+        return activePlayers[channel] != null && activePlayers[channel].IsPlaying();
+    }
+
+    private void OnChannelChange(RadioChannel oldChannel, RadioChannel newChannel) {
+        if (activePlayers.ContainsKey(oldChannel)) {
+            //speakers[oldChannel].SetOverallVolume(0);
+            activePlayers[oldChannel]?.Mute(true);
+        }
+        
+        if (activePlayers.ContainsKey(newChannel)) {
+            //speakers[newChannel].SetOverallVolume(1);
+            activePlayers[newChannel]?.Mute(false);
+            if (IsPlayerPlaying(newChannel) && radioModel.IsOn.Value && electricityModel.HasElectricity()) {
+                transform.DOShakeRotation(3f, 5, 20, 90, false).SetLoops(-1);
+            }
+            else {
+                transform.DOKill();
+            }
+            
+        }
+        else {
+            transform.DOKill();
+        }
+        
+        
+    }
+
+    private RadioContentPlayer SpawnPlayer(RadioChannel channel, RadioContentType contentType) {
+        if (activePlayers[channel] != null) return null;
+
+        RadioContentPlayer player = RadioContentPlayerFactory.Singleton.SpawnPlayerPrefabByType(contentType, transform)
+            .GetComponent<RadioContentPlayer>();
+        
+        activePlayers[channel] = player;
+        return player;
+    }
+    
+    protected void DestroyPlayer(RadioChannel channel) {
+        if (activePlayers[channel] == null) return;
+        Destroy(activePlayers[channel].gameObject);
+        activePlayers[channel] = null;
+    }
+
 
     private void OnRadioOnOffChange(bool isOn) {
         if (!isOn) {
-            StopRadio(false);
+            TurnRadioOff();
             radioNoiseAudioSource.volume = 0;
             mouseHoverHint.text = "Radio (Off)";
         }
         else {
+            TurnRadioOn();
             UpdateSpeakerVolume(false);
             mouseHoverHint.text = "Radio (On)";
         }
@@ -111,6 +177,8 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         UpdateSpeakerVolume(true);
     }
 
+    
+    
     private void UpdateSpeakerVolume(bool isInstant) {
         if (!electricityModel.HasElectricity()) {
             return;
@@ -118,34 +186,48 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         float noiseMultiplier = radioModel.IsOn.Value ? 1 : 0;
         if (!isInstant) {
             if (lowSoundLock.RefCount > 0) {
-                speaker.AudioMixer.DOSetFloat("volume", -45* (1/radioModel.RelativeVolume), 1f);
+                SetAllSpeakersVolume(radioModel.RelativeVolume, false, false);
                 radioNoiseAudioSource.DOFade(0.1f * NoiseVolume * noiseMultiplier, 1f);
             }
             else {
                 radioNoiseAudioSource.DOFade(NoiseVolume * noiseMultiplier, 1f);
-                speaker.AudioMixer.DOSetFloat("volume", -20 * (1/radioModel.RelativeVolume), 1f);
+                SetAllSpeakersVolume(radioModel.RelativeVolume, true,false);
             }
         }
         else {
             if (lowSoundLock.RefCount > 0) {
-                speaker.AudioMixer.SetFloat("volume", -45 * (1/radioModel.RelativeVolume));
+                SetAllSpeakersVolume(radioModel.RelativeVolume, false, true);
                 radioNoiseAudioSource.volume = 0.1f * NoiseVolume * noiseMultiplier;
             }
             else {
-                speaker.AudioMixer.SetFloat("volume", -20 * (1/radioModel.RelativeVolume));
+                SetAllSpeakersVolume(radioModel.RelativeVolume, true, true);
                 radioNoiseAudioSource.volume = NoiseVolume * noiseMultiplier;
             }
         }
         
     }
 
+    
+    private void SetAllSpeakersVolume(float relativeVolume, bool isLoud, bool isInstant) {
+        foreach (RadioContentPlayer player in activePlayers.Values) {
+            if (player == null) {
+                continue;
+            }
+            player.SetVolume(relativeVolume, isLoud, isInstant);
+        }
+    }
+        
+    
+    
+    
     protected override void OnNoElectricity() {
-        StopRadio(false);
+        TurnRadioOff();
         radioNoiseAudioSource.volume = 0;
     }
 
     protected override void OnElectricityRecovered() {
         UpdateSpeakerVolume(false);
+        TurnRadioOn();
     }
 
     private void OnDestroy() {
@@ -181,63 +263,70 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         }
     }
 
-    private void OnConstructDescriptionDatas(OnConstructDescriptionDatas obj) {
+    private void OnConstructDescriptionDatas(OnConstructDescriptionDatas e) {
+        
         int day = this.GetSystem<GameTimeManager>().Day;
         float radioReality = radioRealityCurve.Evaluate(day);
         ConstructDescriptionDatas(radioModel.DescriptionDatas, radioReality, day);
     }
 
-    private void OnRadioStart(OnRadioStart e) {
+    private void OnRadioStart(OnRadioProgramStart e) {
+        RadioChannel channel = e.channel;
+        float volume = 0f;
         
-        RadioSpeak(e.speakContent, e.speakRate, e.speakGender, e.mixer);
-        transform.DOShakeRotation(3f, 5, 20, 90, false).SetLoops(-1);
-
+        if (radioModel.CurrentChannel.Value == channel && radioModel.IsOn.Value && electricityModel.HasElectricity()) {
+            volume = 1;
+        }
+        ContentStart(e.radioContent, channel, volume<=0);
+        if (volume > 0) {
+            transform.DOShakeRotation(3f, 5, 20, 90, false).SetLoops(-1);
+        }
+       
     }
 
-    private void OnRadioEnd(OnRadioEnd e) {
-        StopRadio(false);
-        
-    }
+ 
 
     
     void Start() {
         this.RegisterEvent<OnNewBodyInfoGenerated>(OnBodyInfoGenerated).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.GetModel<GameSceneModel>().GameScene.RegisterOnValueChaned(OnGameSceneChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
-
-       // this.GetSystem<GameEventSystem>().AddEvent(new RandomStuffRadio(new TimeRange(gameTimeManager.)));
+        //this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
     }
 
+   
 
 
-
-
-    private void RadioSpeak(string speakText, float speakRate, Gender speakGender, AudioMixerGroup mixer) {
+    private void ContentStart(IRadioContent content, RadioChannel channel, bool isMuted) {
         
-        radioModel.IsSpeaking = true;
+       
         if (this) {
-            speaker.Speak(speakText, mixer, "Radio", OnSpeakerStop, speakRate, 1f, speakGender);
+            if(activePlayers.ContainsKey(channel)) {
+                RadioContentPlayer player = activePlayers[channel];
+                if (player == null) {
+                    player = SpawnPlayer(channel, content.ContentType);
+                    radioModel.SetIsSpeaking(channel, true);
+                    player.Play(content, OnSpeakerStop, isMuted);
+                }
+                //activePlayers[channel].Speak(speakText, mixer, "Radio", overallVolume, OnSpeakerStop, speakRate, 1f, speakGender);
+                
+            }
         }
     }
 
     private void ConstructDescriptionDatas(List<AlienDescriptionData> descriptionDatas, float radioReality, int day) {
 
-        List<BodyInfo> todayAliens = null;
-        if (bodyModel.Aliens.Count > 0) {
-            todayAliens = bodyModel.Aliens.Select((info => info.BodyInfo)).ToList();
-        }
-          
+        descriptionDatas.Clear();
 
-        List<BodyInfo> allPossibleBodyInfos =
-            bodyModel.allBodyTimeInfos.Select((info => info.BodyInfo)).ToList();
+        List<BodyInfo> todayBodies = bodyModel.AllTodayDeadBodies.Select((info => info.BodyInfo)).ToList();
 
-        allPossibleBodyInfos.CTShuffle();
-        if (todayAliens != null) {
-            foreach (BodyInfo bodyInfo in allPossibleBodyInfos) {
-                descriptionDatas.Add(new AlienDescriptionData(bodyInfo, radioReality));
-            }
+        todayBodies.CTShuffle();
+        foreach (BodyInfo bodyInfo in todayBodies) {
+            descriptionDatas.Add(new AlienDescriptionData(bodyInfo, radioReality));
         }
-       
+
+
+
 
         /*
         for (int i = 0; i < unrelatedBodyInfoCountWithDay.Evaluate(day); i++) {
@@ -266,7 +355,9 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
 
       
        if (day == 1) {
+          
            AddDeadBodyIntroRadio();
+           AddInitialRadio();
        }
 
        if (day == 0) {
@@ -282,7 +373,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
 
 
         eventSystem.AddEvent(new PrologueBodyRadio(
-            new TimeRange(currentTime + new TimeSpan(0, 15, 0), currentTime + new TimeSpan(0, 30, 0)),
+            new TimeRange(currentTime + new TimeSpan(0, 5, 0), currentTime + new TimeSpan(0, 30, 0)),
             AudioMixerList.Singleton.AudioMixerGroups[1]));
 
     }
@@ -301,25 +392,55 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
             AudioMixerList.Singleton.AudioMixerGroups[1]));
     }
 
+    private void AddInitialRadio() {
+        DateTime currentTime = gameTimeManager.CurrentTime.Value;
+        
+        GameEventSystem eventSystem = this.GetSystem<GameEventSystem>();
+        
+        eventSystem.AddEvent(new MusicRadio(
+            new TimeRange(currentTime + new TimeSpan(0, 1, 0)),
+            RadioContentPlayerFactory.Singleton.GetMusicSourceIndex()));
 
-    private void StopRadio(bool corrupt) {
-       
-        if (corrupt) {
-            speaker.Corrupt(5, () => {
-                speaker.Stop();
-            });
-        }
-        else {
-            speaker.Stop();
-        }
-      
-       
+        eventSystem.AddEvent(new FoodTutorialRadio(new TimeRange(currentTime.AddDays(1)),
+            AudioMixerList.Singleton.AudioMixerGroups[1]));
     }
 
-    private void OnSpeakerStop() {
-        radioModel.IsSpeaking = false;
+
+    private void TurnRadioOff() {
+        foreach (var speaker in activePlayers.Values) {
+            //speaker.SetOverallVolume(0);
+            if (speaker) {
+                speaker.Mute(true);
+            }
+            
+        }
         transform.DOKill(true);
-     
+    }
+    
+    private void TurnRadioOn() {
+        RadioChannel channel = radioModel.CurrentChannel.Value;
+        if (activePlayers.ContainsKey(channel)) {
+            //speakers[channel].SetOverallVolume(1);
+            activePlayers[channel]?.Mute(false);
+            if (IsPlayerPlaying(channel)) {
+                transform.DOShakeRotation(3f, 5, 20, 90, false).SetLoops(-1);
+            }
+        }
+    }
+
+    private void OnSpeakerStop(RadioContentPlayer player) {
+        
+        foreach (var pair in activePlayers) {
+            if (pair.Value == player) {
+                radioModel.SetIsSpeaking(pair.Key, false);
+                if (pair.Key == radioModel.CurrentChannel.Value) {
+                    transform.DOKill(true);
+                }
+
+                DestroyPlayer(pair.Key);
+                break;
+            }
+        }
     }
 
 

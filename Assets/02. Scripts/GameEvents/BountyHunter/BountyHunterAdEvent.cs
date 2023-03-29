@@ -2,19 +2,30 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.GameEvents.BountyHunter;
+using _02._Scripts.Radio.RadioScheduling;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
-public class BountyHunterAdEvent : RadioEvent {
+public class BountyHunterAdEvent : ScheduledRadioEvent<RadioTextContent> {
     private BountyHunterModel bountyHunterModel;
     private TelephoneSystem telephoneSystem;
     [field: ES3Serializable]
     private string phoneNumber;
     [field: ES3Serializable]
     private float triggerChance;
-   public BountyHunterAdEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, float triggerChance) : base(startTimeRange, speakContent, speakRate, speakGender, mixer, RadioChannel.GeneralNews) {
+    
+    [field: ES3Serializable]
+    protected RadioTextContent radioContent { get; set; }
+
+    protected override RadioTextContent GetRadioContent() {
+        return radioContent;
+    }
+    protected override void SetRadioContent(RadioTextContent radioContent) {
+        this.radioContent = radioContent;
+    }
+   public BountyHunterAdEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, float triggerChance) : base(startTimeRange, new RadioTextContent(speakContent, speakRate, speakGender, mixer), RadioChannel.FM100) {
         //this.TriggerChance = triggerChance;
         telephoneSystem = this.GetSystem<TelephoneSystem>();
         bountyHunterModel = this.GetModel<BountyHunterModel>();
@@ -32,6 +43,11 @@ public class BountyHunterAdEvent : RadioEvent {
        bountyHunterModel = this.GetModel<BountyHunterModel>();
        gameTimeManager = this.GetSystem<GameTimeManager>();
    }
+
+   [field: ES3Serializable] protected override RadioProgramType ProgramType { get; set; } = RadioProgramType.Ads;
+   [field: ES3Serializable]
+   protected override bool DayEndAfterFinish { get; set; } = true;
+
    public override float TriggerChance {
        get {
             BountyHunterPhone phone = telephoneSystem.Contacts[phoneNumber] as BountyHunterPhone;
@@ -43,16 +59,31 @@ public class BountyHunterAdEvent : RadioEvent {
        }
    }
 
-   public override void OnEnd() {
-        OnStopOrMissed();
-    }
+ 
+    protected override ScheduledRadioEvent<RadioTextContent> OnGetNextRadioProgramMessage(TimeRange nextTimeRange, bool playSuccess) {
+        if (playSuccess) {
+            DateTime currentTime = nextTimeRange.StartTime;
+            
+            int nextDayInterval = bountyHunterModel.ContactedBountyHunter ? 1 : 5;
 
-    public override void OnMissed() {
-        OnStopOrMissed();
+            DateTime nextEventDay = currentTime.AddDays(nextDayInterval);
+            DateTime nextEventTime = new DateTime(nextEventDay.Year, nextEventDay.Month,
+                nextEventDay.Day, Random.Range(gameTimeManager.NightTimeStart,24), Random.Range(0, 40), 0);
+            DateTime nextEventTimeRange2 = nextEventTime.AddMinutes(Random.Range(30, 60));
+
+            return new BountyHunterAdEvent(new TimeRange(nextEventTime, nextEventTimeRange2),
+                GetRandomAD(), 1, Gender.MALE, AudioMixerList.Singleton.AudioMixerGroups[0], 1);
+        }
+        else {
+            return new BountyHunterAdEvent(nextTimeRange,
+                GetRandomAD(), 1, Gender.MALE, AudioMixerList.Singleton.AudioMixerGroups[0], 1);
+        }
     }
 
     private void OnStopOrMissed() {
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
+        
+        
         int nextDayInterval = bountyHunterModel.ContactedBountyHunter ? 1 : 5;
 
         DateTime nextEventDay = currentTime.AddDays(nextDayInterval);
@@ -64,6 +95,10 @@ public class BountyHunterAdEvent : RadioEvent {
             GetRandomAD(), 1, Gender.MALE, AudioMixerList.Singleton.AudioMixerGroups[0], 1));
     }
     protected override void OnRadioStart() {
+        
+    }
+
+    protected override void OnPlayedWhenRadioOff() {
         
     }
 

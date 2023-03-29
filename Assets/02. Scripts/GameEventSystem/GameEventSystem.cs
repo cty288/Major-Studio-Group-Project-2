@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Crosstales;
 using MikroFramework.Architecture;
+using NHibernate.Mapping;
 using Unity.VisualScripting;
 using UnityEngine;
+using Array = System.Array;
 using Random = UnityEngine.Random;
 
 
@@ -18,7 +20,7 @@ public class GameEventSystemUpdater : MonoBehaviour {
 }
 
 public enum GameEventType {
-    Radio_News,
+    Radio,
     BodyGeneration,
     General,
     IncomingCall,
@@ -40,7 +42,7 @@ public class GameEventSystem : AbstractSavableSystem {
     
     
     //[field: ES3Serializable]
-    private Dictionary<GameEventType, GameEvent> currentEvents = new Dictionary<GameEventType, GameEvent>();
+    private Dictionary<GameEventType, List<GameEvent>> currentEvents = new Dictionary<GameEventType, List<GameEvent>>();
 
     private Array gameEventTypeValues = Enum.GetValues(typeof(GameEventType));
 
@@ -58,7 +60,7 @@ public class GameEventSystem : AbstractSavableSystem {
             return;
         }
         EventDict = ES3.Load<Dictionary<DateTime, List<GameEvent>>>("eventDict", "systems.es3");
-        currentEvents = ES3.Load<Dictionary<GameEventType, GameEvent>>("currentEvents", "systems.es3");
+        currentEvents = ES3.Load<Dictionary<GameEventType, List<GameEvent>>>("currentEvents", "systems.es3");
         AllPossibleEvents = ES3.Load<Dictionary<GameEventType, List<GameEvent>>>("allPossibleEvents", "systems.es3");
         
     }
@@ -74,7 +76,7 @@ public class GameEventSystem : AbstractSavableSystem {
         //GameEventType[] eventTypes = Enum.GetValues(typeof(GameEventType)).Cast<GameEventType>().ToArray();
         foreach (object value in gameEventTypeValues) {
             if (!currentEvents.ContainsKey((GameEventType) value)) {
-                currentEvents.Add((GameEventType) value, null);
+                currentEvents.Add((GameEventType) value, new List<GameEvent>());
             }
 
             if (!AllPossibleEvents.ContainsKey((GameEventType) value)) {
@@ -85,38 +87,47 @@ public class GameEventSystem : AbstractSavableSystem {
 
     private void Update() {
         foreach (GameEventType eventType in gameEventTypeValues) {
-            GameEvent currentEvent = currentEvents[eventType];
+            List<GameEvent> currentEventList = currentEvents[eventType];
             
-            if (currentEvents[eventType]  != null) {
-                EventState eventState = currentEvent.Update();
-                if (eventState == EventState.NotStart) {
-                    currentEvents[eventType] = null;
-                    AllPossibleEvents[eventType].Add(currentEvent);
-                    AllPossibleEvents[eventType].CTShuffle();
-                }
-                else if (eventState == EventState.End)
-                {
-                    currentEvent.End();
-                    currentEvents[eventType] = null;
-                    // AllPossibleEvents.Remove(currentEvent);
-                }else if (eventState == EventState.Missed) {
-                    currentEvent.Miss();
-                    currentEvents[eventType] = null;
-                }
-            }
-
-            if (currentEvents[eventType] == null) {
-                if (AllPossibleEvents[eventType].Any()) {
-                    GameEvent ev = AllPossibleEvents[eventType][0];
-                    AllPossibleEvents[eventType].RemoveAt(0);
-                    if (Random.Range(0, 1f) <= ev.TriggerChance)
+            if (currentEventList.Count > 0) {
+                List<GameEvent> toRemove = new List<GameEvent>();
+                foreach (GameEvent gameEvent in currentEventList) {
+                    EventState eventState = gameEvent.Update();
+                    if (eventState == EventState.NotStart) {
+                        currentEvents[eventType] = null;
+                        AllPossibleEvents[eventType].Add(gameEvent);
+                        AllPossibleEvents[eventType].CTShuffle();
+                    }
+                    else if (eventState == EventState.End)
                     {
-                        currentEvents[eventType] = ev;
+                        gameEvent.End();
+                        toRemove.Add(gameEvent);
+                        // AllPossibleEvents.Remove(currentEvent);
+                    }else if (eventState == EventState.Missed) {
+                        gameEvent.Miss();
+                        toRemove.Add(gameEvent);
+                    }
+                }
+                
+                foreach (GameEvent gameEvent in toRemove) {
+                    currentEventList.Remove(gameEvent);
+                }
+               
+            }
+            
+            
+            if (AllPossibleEvents[eventType].Any()) {
+                GameEvent ev = AllPossibleEvents[eventType][0];
+                if (Random.Range(0, 1f) <= ev.TriggerChance) {
+                    if (currentEvents[eventType].Count == 0 || ev.CanStartWithSameType) {
+                        currentEvents[eventType].Add(ev);
+                        AllPossibleEvents[eventType].RemoveAt(0);
                         ev.Start();
                     }
-                    else {
-                        ev.Miss();
-                    }
+                }
+                else {
+                    AllPossibleEvents[eventType].RemoveAt(0);
+                    ev.Miss();
                 }
             }
         }
@@ -124,12 +135,12 @@ public class GameEventSystem : AbstractSavableSystem {
     }
 
     private void OnTimeChanged(DateTime oldTime, DateTime newTime) {
-        HashSet<GameEvent> removedEvents = new HashSet<GameEvent>();
+        //HashSet<GameEvent> removedEvents = new HashSet<GameEvent>();
         foreach (List<GameEvent> events in AllPossibleEvents.Values) {
             events.RemoveAll((ev => {
                 if (ev.StartTimeRange.EndTime < newTime) {
                     ev.Miss();
-                    removedEvents.Add(ev);
+                   // removedEvents.Add(ev);
                     return true;
                 }
                 return false;

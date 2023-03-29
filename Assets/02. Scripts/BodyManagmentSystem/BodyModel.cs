@@ -1,5 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MikroFramework.Architecture;
+using MikroFramework.BindableProperty;
+using NHibernate.Mapping;
+using Unity.Mathematics;
+using UnityEngine;
+using Random = UnityEngine.Random;
+
+[ES3Serializable]
+public class BodyPartIndicesUpdateInfo {
+	public Dictionary<BodyPartType, HashSet<int>> AvailableBodyPartIndices;
+	public int BodyPartCount;
+	public DateTime Time;
+}
 
 namespace _02._Scripts.BodyManagmentSystem {
 	public class BodyModel: AbstractSavableModel {
@@ -8,6 +21,33 @@ namespace _02._Scripts.BodyManagmentSystem {
 		
 		[ES3Serializable]
 		private List<BodyTimeInfo> nextDayDeternimedBodies = new List<BodyTimeInfo>();
+
+		[ES3Serializable] private Dictionary<BodyPartType, Dictionary<int, BindableProperty<int>>>
+			availableBodyPartIndices = null;
+
+
+		[field: ES3Serializable] public int AvailableBodyPartIndexCount { get; protected set; } =6;
+		
+		
+		
+
+		public Dictionary<BodyPartType, HashSet<int>> AvailableBodyPartIndices {
+			get {
+				if (availableBodyPartIndices == null) {
+					UpdateAvailableBodyPartIndices(AvailableBodyPartIndexCount);
+				}
+				Dictionary<BodyPartType, HashSet<int>> result = new Dictionary<BodyPartType, HashSet<int>>();
+				foreach (var bodyPartType in availableBodyPartIndices.Keys) {
+					result.Add(bodyPartType, new HashSet<int>());
+					foreach (var index in availableBodyPartIndices[bodyPartType].Keys) {
+						if (availableBodyPartIndices[bodyPartType][index] > 0) {
+							result[bodyPartType].Add(index);
+						}
+					}
+				}
+				return result;
+			}
+		}
 
 		public List<BodyTimeInfo> NextDayDeternimedBodies => nextDayDeternimedBodies;
 
@@ -23,8 +63,67 @@ namespace _02._Scripts.BodyManagmentSystem {
 			}
 		}
 		
+		public List<BodyTimeInfo> AllTodayDeadBodies {
+			get {
+				return allBodyTimeInfos.FindAll(bodyTimeInfo => bodyTimeInfo.IsTodayDead);
+			}
+		}
+
+		public void UpdateAvailableBodyPartIndices(int count) {
+			if(availableBodyPartIndices == null) {
+				availableBodyPartIndices = new Dictionary<BodyPartType, Dictionary<int, BindableProperty<int>>>();
+				availableBodyPartIndices.Add(BodyPartType.Head, new Dictionary<int, BindableProperty<int>>());
+				availableBodyPartIndices.Add(BodyPartType.Body, new Dictionary<int, BindableProperty<int>>());
+			}
+
+			Dictionary<BodyPartType, List<int>> removedIndices = new Dictionary<BodyPartType, List<int>>();
+			foreach (BodyPartType bodyPartType in availableBodyPartIndices.Keys) {
+				
+				foreach (int index in availableBodyPartIndices[bodyPartType].Keys) {
+					availableBodyPartIndices[bodyPartType][index].Value--;
+					if (availableBodyPartIndices[bodyPartType][index] <= 0) {
+
+						if (!removedIndices.ContainsKey(bodyPartType)) {
+							removedIndices.Add(bodyPartType, new List<int>());
+						}
+						removedIndices[bodyPartType].Add(index);
+					}
+				}
+			}
+			
+			foreach (BodyPartType bodyPartType in removedIndices.Keys) {
+				foreach (int index in removedIndices[bodyPartType]) {
+					availableBodyPartIndices[bodyPartType].Remove(index);
+				}
+			}
+
+			AvailableBodyPartIndexCount = count;
+
+			foreach (BodyPartType bodyPartType in availableBodyPartIndices.Keys) {
+				var targetList = AlienBodyPartCollections.Singleton.GetBodyPartCollectionByBodyType(bodyPartType)
+					.HeightSubCollections[0].NewspaperBodyPartDisplays.HumanTraitPartsPrefabs;
+				
+				int actualCount = Mathf.Min(count, targetList.Count);
+				
+				while (availableBodyPartIndices[bodyPartType].Count < actualCount) {
+					int randomIndex = Random.Range(0, targetList.Count);
+					if (!availableBodyPartIndices[bodyPartType].ContainsKey(randomIndex)) {
+						availableBodyPartIndices[bodyPartType].Add(randomIndex, new BindableProperty<int>(Random.Range(1, 3)));
+					}
+				}
+			}
+			
+			this.SendEvent<BodyPartIndicesUpdateInfo>(new BodyPartIndicesUpdateInfo(){
+				AvailableBodyPartIndices = AvailableBodyPartIndices,
+				BodyPartCount = AvailableBodyPartIndexCount
+			});
+			
+		}
+		
+		
 		
 		public BodyInfo GetBodyInfoByID(long id) {
+			
 			return allBodyTimeInfos.Find(bodyTimeInfo => bodyTimeInfo.BodyInfo.ID == id)?.BodyInfo;
 		}
     

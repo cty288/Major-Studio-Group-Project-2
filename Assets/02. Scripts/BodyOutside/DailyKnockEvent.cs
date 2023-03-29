@@ -35,7 +35,7 @@ namespace _02._Scripts.BodyOutside {
 						"YOur bRaIN iS MiNE!",
 						"YOuR TimE IS oVeR!"
 					};
-					speaker.Speak(messages[Random.Range(0, messages.Count)], AudioMixerList.Singleton.AudioMixerGroups[4], "???", OnAlienClickedOutside);
+					speaker.Speak(messages[Random.Range(0, messages.Count)], AudioMixerList.Singleton.AudioMixerGroups[4], "???", 1f,OnAlienClickedOutside);
 				}
 				else {
 	            
@@ -50,7 +50,7 @@ namespace _02._Scripts.BodyOutside {
 
 					speaker.Speak(messages[Random.Range(0, messages.Count)],
 						AudioMixerList.Singleton.AlienVoiceGroups[bodyInfo.VoiceTag.VoiceIndex],
-						"Deliver", OnDelivererClickedOutside,
+						"Deliver", 1, OnDelivererClickedOutside,
 						voiceTag.VoiceSpeed, 1, voiceTag.VoiceType);
 				}
 				return () => onClickPeepholeSpeakEnd;
@@ -58,7 +58,7 @@ namespace _02._Scripts.BodyOutside {
 			
 			
 			
-		private void OnDelivererClickedOutside() {
+		private void OnDelivererClickedOutside(Speaker speaker) {
 	        this.GetModel<PlayerResourceModel>().AddFood(Random.Range(1, 3));
 	       // this.SendEvent<OnShowFood>();
 	        timeSystem.AddDelayTask(1f, () => {
@@ -67,7 +67,7 @@ namespace _02._Scripts.BodyOutside {
 	        });
 	    }
 
-	    protected void OnAlienClickedOutside() {
+	    protected void OnAlienClickedOutside(Speaker speaker) {
 		    DogModel dogModel = this.GetModel<DogModel>();
 		    DogSystem dogSystem = this.GetSystem<DogSystem>();
 		    

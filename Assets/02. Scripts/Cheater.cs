@@ -40,9 +40,9 @@ public class Cheater : AbstractMikroController<MainGame> {
 
         if (Input.GetKeyDown(KeyCode.A)) {
             BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true, false,
-                new NormalKnockBehavior(3, Random.Range(3, 7), null));
+                new NormalKnockBehavior(3, Random.Range(3, 7), null), null);
             
-            this.GetModel<BodyModel>().AddToAllBodyTimeInfos(new BodyTimeInfo(3, info));
+            this.GetModel<BodyModel>().AddToAllBodyTimeInfos(new BodyTimeInfo(3, info, true));
             this.GetModel<BodyGenerationModel>().CurrentOutsideBody.Value = info;
         }
 
@@ -65,7 +65,7 @@ public class Cheater : AbstractMikroController<MainGame> {
         }
 
         if (Input.GetKeyDown(KeyCode.C)) {
-            this.GetModel<RadioModel>().UnlockChannel(RadioChannel.GeneralNews);
+            this.GetModel<RadioModel>().UnlockChannel(RadioChannel.FM100);
         }
         
 
@@ -83,6 +83,10 @@ public class Cheater : AbstractMikroController<MainGame> {
 
         if (Input.GetKeyDown(KeyCode.B)) {
             this.GetModel<PlayerResourceModel>().AddResource(new BulletGoods(), 1);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.G)) {
+            this.GetModel<PlayerResourceModel>().AddResource(new PowerGeneratorGoods(), 1);
         }
     }
 }

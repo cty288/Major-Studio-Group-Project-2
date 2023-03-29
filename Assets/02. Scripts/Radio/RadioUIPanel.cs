@@ -8,6 +8,7 @@ using DG.Tweening;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
+using NHibernate.Mapping;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,7 +16,6 @@ using UnityEngine.UI;
 
 [Serializable]
 public class RadioChannalRange {
-    public RadioChannel channel;
     public float start;
     public float end;
 }
@@ -29,8 +29,12 @@ public class RadioUIPanel : OpenableUIPanel
     
     private RadioModel radioModel;
     
-    [SerializeField]
-    private List<RadioChannalRange> radioChannalRanges = new List<RadioChannalRange>();
+    //[SerializeField]
+    //private List<RadioChannalRange> radioChannalRanges = new List<RadioChannalRange>();
+
+    [SerializeField] private List<RadioChannelInfo> radioChannelInfos = new List<RadioChannelInfo>();
+    
+    
     private Slider channelSlider;
     private RadioChannelSwitch radioChannelSwitch;
     [SerializeField] private float rotateSpeed = 0.02f;
@@ -54,7 +58,7 @@ public class RadioUIPanel : OpenableUIPanel
         channelNameText = panel.Find("Radio/ChannelNameText").GetComponent<TMP_Text>();
         radioOffButton = panel.Find("Radio/RadioOffButton").GetComponent<Button>();
         radioOffButtonHint = radioOffButton.transform.Find("Hint").GetComponent<TMP_Text>();
-        radioModel.InitializeChannelRanges(radioChannalRanges);
+        radioModel.InitializeChannelInfos(radioChannelInfos);
         electricityModel = this.GetModel<ElectricityModel>();
         radioModel.IsOn.RegisterWithInitValue(OnRadioIsOnChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
         
@@ -99,16 +103,11 @@ public class RadioUIPanel : OpenableUIPanel
     }
 
     private string GetChannelNameByChannel(RadioChannel channel) {
-        switch (channel) {
-            case RadioChannel.DeadNews:
-                return "Dead Body Reports";
-            case RadioChannel.GeneralNews:
-                return "Daily News";
-            case RadioChannel.None:
-                return "";
+        RadioChannelInfo ch = radioModel.GetRadioChannelInfo(channel);
+        if(ch == null){
+            return "";
         }
-
-        return "";
+        return ch.ChannelName;
     }
 
     private void OnRadioChannelChanged(RadioChannel channel) {
@@ -142,7 +141,7 @@ public class RadioUIPanel : OpenableUIPanel
                 channelNameText.text = "Channel Not Available";
             }
             else {
-                channelNameText.text = "Current Channel: " + channelName;
+                channelNameText.text = channelName;
             }
         }else {
             if (!electricityModel.HasElectricity()) {
@@ -161,7 +160,15 @@ public class RadioUIPanel : OpenableUIPanel
 
     public override void OnShow(float time) {
         panel.gameObject.SetActive(true);
-        images.ForEach((image => image.DOFade(imageAlpha[image], time)));
+        images.ForEach((image => {
+            if(imageAlpha.ContainsKey(image)) {
+                image.DOFade(imageAlpha[image], time);
+            }
+            else {
+                image.DOFade(1, time);
+            }
+           
+        }));
         texts.ForEach((text => text.DOFade(1, time)));
         
         

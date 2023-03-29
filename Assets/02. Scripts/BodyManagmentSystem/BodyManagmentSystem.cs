@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
@@ -6,14 +7,17 @@ using _02._Scripts.GameTime;
 using Crosstales;
 using MikroFramework.Architecture;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BodyTimeInfo {
     public int DayRemaining;
     public BodyInfo BodyInfo;
+    public bool IsTodayDead;
 
-    public BodyTimeInfo(int dayRemaining, BodyInfo bodyInfo) {
+    public BodyTimeInfo(int dayRemaining, BodyInfo bodyInfo, bool isTodayDead) {
         DayRemaining = dayRemaining;
         BodyInfo = bodyInfo;
+        IsTodayDead = isTodayDead;
     }
 }
 
@@ -49,6 +53,7 @@ public class BodyManagmentSystem : AbstractSystem {
         
         foreach (BodyTimeInfo timeInfo in bodyModel.allBodyTimeInfos) {
             timeInfo.DayRemaining--;
+            timeInfo.IsTodayDead = false;
         }
         GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
         int bodyCount = MaxBodyEveryDay;
@@ -57,8 +62,8 @@ public class BodyManagmentSystem : AbstractSystem {
             
             //prologue body
             BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, true,
-                new NormalKnockBehavior(3, int.MaxValue, null));
-            bodyModel.AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(new BodyTimeInfo(1, info));
+                new NormalKnockBehavior(3, int.MaxValue, null),bodyModel.AvailableBodyPartIndices);
+            bodyModel.AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(new BodyTimeInfo(1, info, true));
         }
 
 
@@ -88,17 +93,22 @@ public class BodyManagmentSystem : AbstractSystem {
           
             newBodyInfos.Add(bodyTimeInfo);
         }
+
+        if (e.Date.DayOfWeek == DayOfWeek.Sunday) {
+            int week = gameTimeModel.Week;
+            bodyModel.UpdateAvailableBodyPartIndices(Mathf.RoundToInt(6 + 3 * Mathf.Log(week, (float) Math.E)));
+        }
         
         
         for (int i = newBodyInfos.Count; i < bodyCount; i++) {
             BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, true,
-                new NormalKnockBehavior(3, Random.Range(3, 7), null));
+                new NormalKnockBehavior(3, Random.Range(3, 7), null),bodyModel.AvailableBodyPartIndices);
             
             BodyTimeInfo timeInfo = null;
             if (i == 0) {
-                timeInfo = new BodyTimeInfo(3, info);
+                timeInfo = new BodyTimeInfo(3, info, true);
             }else {
-                timeInfo = new BodyTimeInfo(Random.Range(0, 4), info);
+                timeInfo = new BodyTimeInfo(Random.Range(0, 4), info, true);
             }
             bodyModel.AddToAllBodyTimeInfos(timeInfo);
             newBodyInfos.Add(timeInfo);

@@ -48,14 +48,14 @@ public class BodyPartPrefabInfo {
 
 	public BodyPartPrefabInfo(){}
 
-	public BodyPartPrefabInfo(GameObject prefab) {
+	public BodyPartPrefabInfo(GameObject prefab, int subBodyPartChance) {
 		this.prefab = prefab;
 		AlienBodyPartInfo info = prefab.GetComponent<AlienBodyPartInfo>();
 		bodyPartInfo = this.prefab.GetComponent<AlienBodyPartInfo>();
 		if (info.SubBodyPartCollectionIndex < 0) {
 			return;
 		}
-		bool hasSubBodyPart = Random.Range(0, 100) < 30;
+		bool hasSubBodyPart = Random.Range(0, 100) < subBodyPartChance;
 		if (!hasSubBodyPart) {
 			return;
 		}
@@ -119,8 +119,8 @@ public abstract class AlienBodyPartInfo : MonoBehaviour {
 
     protected SpriteRenderer spriteRenderer;
 
-    public BodyPartPrefabInfo GetBodyPartPrefabInfo() {
-	    return new BodyPartPrefabInfo(this.gameObject);
+    public BodyPartPrefabInfo GetBodyPartPrefabInfo(int subBodyPartChance = 30) {
+	    return new BodyPartPrefabInfo(this.gameObject, subBodyPartChance);
 	}
 
     protected virtual void Awake() {

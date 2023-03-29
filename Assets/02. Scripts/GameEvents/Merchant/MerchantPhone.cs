@@ -54,6 +54,22 @@ public class BulletGoods : MerchantGoods {
 }
 
 
+public class PowerGeneratorGoods : MerchantGoods {
+    public override int BaseFoodPerUnit { get; } = 1;
+    public override void RefreshFoodPerUnit() {
+        FoodPerUnit = Random.Range(BaseFoodPerUnit - 0, BaseFoodPerUnit + 2);
+    }
+
+    public override string SellSentence {
+        get {
+            return $"Portable Power Generator - I bet you might need it some time! Price: {BaseFoodPerUnit} units of food";
+        }
+    }
+
+    public override string PrefabName { get; } = "PowerGenerator";
+    public override int MaxCount { get; } = 1;
+}
+
 
 
 public class MerchantPhone : TelephoneContact, ICanGetModel {
@@ -67,9 +83,12 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
     [ES3Serializable]
     private bool isTodayAvailable = true;
    
-    private List<MerchantGoods> GoodsList = new List<MerchantGoods>() {new BulletGoods()};
+    private List<MerchantGoods> GoodsList = new List<MerchantGoods>() {
+        new BulletGoods(),
+        new PowerGeneratorGoods()
+    };
     [ES3Serializable]
-    private int dailyGoodsCount = 1;
+    private int dailyGoodsCount = 2;
     [ES3Serializable]
     private List<MerchantGoods> todayGoods = new List<MerchantGoods>();
 
@@ -96,7 +115,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
     }
 
     private void RefreshAvailability() {
-        isTodayAvailable = Random.Range(0f, 1f) <= dailyAvailability;
+        isTodayAvailable = true;
     }
 
     private void RefreshDailyGoods() {
@@ -116,17 +135,17 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
     }
 
     protected override void OnStart() {
-        string welcome = "Hello, here is the best underground merchant in MK Town! The following list is the items sold today, press the corresponding number to buy: ";
-        speaker.Speak(welcome, mixer, "???", OnWelcomeSpeakFinished);
+        string welcome = "Hello, here is the best underground merchant in Dorcha! The following list is the items sold today, press the corresponding number to buy: ";
+        speaker.Speak(welcome, mixer, "???", 1f, OnWelcomeSpeakFinished);
         
        
     }
 
-    private void OnWelcomeSpeakFinished(){
+    private void OnWelcomeSpeakFinished(Speaker speaker){
        
         this.RegisterEvent<OnDialDigit>(OnDialDigit);
         string welcome = GetSellListSentence();
-        speaker.Speak(welcome, mixer, "Merchant", null);
+        speaker.Speak(welcome, mixer, "Merchant", 1f, null);
     }
 
     private void OnDialDigit(OnDialDigit e) {
@@ -135,7 +154,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
             speaker.Stop();
         }
         if (e.Digit == 9) {
-            speaker.Speak(GetSellListSentence(), mixer,"Merchant", OnWelcomeSpeakFinished);
+            speaker.Speak(GetSellListSentence(), mixer,"Merchant", 1f, OnWelcomeSpeakFinished);
         }
         else {
             int index = e.Digit - 1;
@@ -144,7 +163,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
                  reply = "The number you dialed is invalid. Please try again or press 9 to repeat the list.";
             }else {
                 MerchantGoods goods = todayGoods[index];
-                if (goods.FoodPerUnit >= playerResourceModel.FoodCount) {
+                if (goods.FoodPerUnit > playerResourceModel.FoodCount) {
                     reply =
                         "You don't have enough food to purchase this item!";
                 }
@@ -160,14 +179,14 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
                     currentTime = currentTime.AddDays(1);
                     currentTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, gameTimeManager.NightTimeStart,
                         0, 0);
-                    gameEventSystem.AddEvent(new GetResourceEvent(new BulletGoods(),1 ,new TimeRange(currentTime)));
+                    gameEventSystem.AddEvent(new GetResourceEvent(goods,1 ,new TimeRange(currentTime)));
                 }
             }
-            speaker.Speak(reply, mixer, "Merchant", OnMerchantSpeakEnd);
+            speaker.Speak(reply, mixer, "Merchant", 1f, OnMerchantSpeakEnd);
         }
     }
 
-    private void OnMerchantSpeakEnd() {
+    private void OnMerchantSpeakEnd(Speaker speaker) {
         EndConversation();
     }
 

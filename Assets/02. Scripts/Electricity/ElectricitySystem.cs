@@ -2,9 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.Electricity;
+using _02._Scripts.GameTime;
 using MikroFramework.Architecture;
 using MikroFramework.BindableProperty;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 public class ElectricitySystemUpdater : MonoBehaviour
 {
     public Action OnUpdate;
@@ -29,19 +32,42 @@ public class ElectricitySystem : AbstractSystem {
     private float electricityDecreaseRate = 0.002f;
 
     protected GameTimeManager gameTimeManager;
+    
+    private GameTimeModel gameTimeModel;
+    protected ImportantNewspaperModel importantNewspaperModel;
+
+    protected int powerCutoffDay = 4;
     protected override void OnInit() {
         electricityModel = this.GetModel<ElectricityModel>();
         updater = new GameObject("ElectricitySystemUpdater").AddComponent<ElectricitySystemUpdater>();
         electricityModel.Electricity.RegisterOnValueChaned(OnElectricityChange);
         gameTimeManager = this.GetSystem<GameTimeManager>();
         updater.OnUpdate += Update;
+        this.RegisterEvent<OnNewDay>(OnNewDay);
+        powerCutoffDay = int.Parse(this.GetModel<HotUpdateDataModel>().GetData("PowerCutoffDay").values[0]);
+        gameTimeModel = this.GetModel<GameTimeModel>();
+        importantNewspaperModel = this.GetModel<ImportantNewspaperModel>();
+
+    }
+
+    private void OnNewDay(OnNewDay e) {
+        if (e.Day == 1) {
+            importantNewspaperModel.AddPageToNewspaper(importantNewspaperModel.GetWeekForNews(powerCutoffDay),
+                this.GetModel<ImportantNewsTextModel>().GetInfo("NoElectricity"),0);
+        }
+        
+        if (e.Day == powerCutoffDay) {
+            DateTime poweroffTime = e.Date;
+            this.GetSystem<GameEventSystem>().AddEvent(new PowerCutoffRadio(new TimeRange(poweroffTime),
+                AudioMixerList.Singleton.AudioMixerGroups[1]));
+        }
     }
 
     private void Update() {
-        if (!gameTimeManager.IsNight || !electricityModel.HasElectricityGenerator) {
+        if (!gameTimeManager.IsNight || !electricityModel.PowerCutoff) {
             return;
         }
-        electricityModel.Electricity.Value = Mathf.Max(electricityModel.Electricity.Value - electricityDecreaseRate * Time.deltaTime, 0);
+        UseElectricity(electricityDecreaseRate * Time.deltaTime);
     }
     private void OnElectricityChange(float oldElectricity, float newElectricity) {
         if (newElectricity <= 0 && oldElectricity > 0) {
@@ -58,7 +84,9 @@ public class ElectricitySystem : AbstractSystem {
     }
 
     public void UseElectricity(float amount) {
-        electricityModel.Electricity.Value = Mathf.Max(electricityModel.Electricity.Value - amount, 0);
+        bool hasElectricityGenerator = this.GetModel<PlayerResourceModel>().HasEnoughResource<PowerGeneratorGoods>(1);
+        float minElectricity = hasElectricityGenerator ? 0 : 0.01f;
+        electricityModel.Electricity.Value = Mathf.Max(electricityModel.Electricity.Value - amount, minElectricity);
     }
 
 

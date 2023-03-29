@@ -3,8 +3,8 @@
   "ABMD5List": [
     {
       "AssetName": "aliens",
-      "MD5": "e5d8ccdcbc3ea890e9201d72cddfc92a",
-      "FileSize": 458.830078,
+      "MD5": "f90607363f3ec6fb27c7f2460562af98",
+      "FileSize": 465.4707,
       "assetDatas": [
         {
           "Name": "AlienBody",
@@ -50,8 +50,8 @@
     },
     {
       "AssetName": "audios",
-      "MD5": "aa91a45d146117e6ca1dbd75aa97a604",
-      "FileSize": 1493.0,
+      "MD5": "b57ae0cbb886f0408e715707570d6139",
+      "FileSize": 1337.40332,
       "assetDatas": [
         {
           "Name": "dogBark_1",
@@ -187,11 +187,16 @@
     },
     {
       "AssetName": "general",
-      "MD5": "d557475a881174af1654d9dcb63b07a0",
-      "FileSize": 327.357422,
+      "MD5": "bedabb901dcf8d1af3b148651a7148bb",
+      "FileSize": 343.620117,
       "assetDatas": [
         {
           "Name": "DraggedText",
+          "OwnerBundleName": "general",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "TestArea_TestActivity",
           "OwnerBundleName": "general",
           "AssetType": "UnityEngine.GameObject"
         }
@@ -199,8 +204,8 @@
     },
     {
       "AssetName": "mftest",
-      "MD5": "1a9606d92fda878f843b5f4feae843e9",
-      "FileSize": 1046.833,
+      "MD5": "10871f3c51118b1714a66e98177ea1a8",
+      "FileSize": 1028.24707,
       "assetDatas": [
         {
           "Name": "War loop",
@@ -299,7 +304,7 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "eed95a4c6afe6d2aa3ad3aba21670016",
+      "MD5": "2a6943eb70888e127af82e4338cb3e50",
       "FileSize": 1.79296875,
       "assetDatas": []
     },

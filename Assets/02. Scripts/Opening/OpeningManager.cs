@@ -35,7 +35,10 @@ public class OpeningManager : MonoBehaviour {
             canSkipHint.SetActive(true);
             canSkip = true;
         });*/
+        Architecture<MainGame>.ResetArchitecture();
+        //((MainGame) (MainGame.Interface)).ClearSave();
         this.Delay(3f, () => {
+           
             Architecture<MainGame>.ResetArchitecture();
             SceneManager.LoadScene("MainGame");
         });

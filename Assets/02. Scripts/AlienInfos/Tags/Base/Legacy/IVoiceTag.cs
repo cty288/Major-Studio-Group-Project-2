@@ -45,9 +45,14 @@ namespace _02._Scripts.AlienInfos.Tags.Base {
 			VoiceSpeed = Random.Range(0.7f, 1.4f);
 			VoiceIndex = voiceIndex;
 		}
-		
-		
-		
+
+		public VoiceTag() {
+			
+		}
+
+
+		public string TagName { get; } = "VoiceTag";
+
 		public string GetRandomRadioDescription(out bool isReal) {
 			isReal = Random.Range(0, 2) == 0;
 			return isReal ? GetRandomRadioDescription(true) : GetRandomRadioDescription(false);

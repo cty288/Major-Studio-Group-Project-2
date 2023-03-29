@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
+using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.GameEvents.BountyHunter;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.ActionKit;
@@ -39,7 +40,7 @@ public class BountyHunterQuest2Notification : BountyHunterQuestClueNotification 
         return new BountyHunterQuest2ClueEvent(newTimeRange,location,
             BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, false,
                 new NormalKnockBehavior(Random.Range(1,3), UnityEngine.Random.Range(3,6),
-                    new List<string>(){})), null, null);
+                    new List<string>(){}), this.GetModel<BodyModel>().AvailableBodyPartIndices), null, null);
     }
 }
 
@@ -65,7 +66,7 @@ public class BountyHunterQuest2ClueNotificationNotificationContact : BountyHunte
                       $" I will let my friend to deliver you a note again about its <color=yellow>location</color>. Make sure there's no one outside your home when he arrives, otherwise he might be scared away. Call me back when you find out that guy!";
 
         }
-        speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], "Bounty Hunter", OnSpeakEnd);
+        speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], "Bounty Hunter", 1f, OnSpeakEnd);
     }
 
     protected override void OnHangUp() {
@@ -76,7 +77,7 @@ public class BountyHunterQuest2ClueNotificationNotificationContact : BountyHunte
        
     }
 
-    private void OnSpeakEnd() {
+    private void OnSpeakEnd(Speaker speaker) {
         this.GetModel<BountyHunterModel>().QuestBodyClueAllHappened = true;
         EndConversation();
     }
@@ -203,12 +204,12 @@ public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
             $"Hey. My boss want to tell you that the prey appeared in <color=yellow>{location}</color>."
         };
 
-        speaker.Speak(messages[Random.Range(0, messages.Count)], null, "Bounty Hunter", OnDelivererClickedOutside, 1, 1.3f);
+        speaker.Speak(messages[Random.Range(0, messages.Count)], null, "Bounty Hunter",1f, OnDelivererClickedOutside, 1, 1.3f);
         
         return () => onClickPeepholeSpeakEnd;
     }
 
-    private void OnDelivererClickedOutside() {
+    private void OnDelivererClickedOutside(Speaker speaker) {
         timeSystem.AddDelayTask(1f, () => {
             onClickPeepholeSpeakEnd = true;
         });
@@ -251,7 +252,7 @@ public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
         bodyGenerationModel.CurrentOutsideBody.Value = bodyInfo;
       
         nestedKnockDoorCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(bodyInfo.KnockBehavior?.OnKnockDoor(speaker,
-            bodyInfo.VoiceTag));
+            bodyInfo.VoiceTag, bodyInfo.IsAlien));
         yield return nestedKnockDoorCheckCoroutine;
         
         knockDoorCheckCoroutine = null;
@@ -272,13 +273,26 @@ public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
 
 
 public class BountyHunterQuestClueInfoRadioAreaEvent : BountyHunterQuestClueInfoEvent {
+    [field: ES3Serializable]
+    protected override bool DayEndAfterFinish { get; set; } = true;
+    
+    [field: ES3Serializable]
+    protected RadioTextContent radioContent { get; set; }
+
+    protected override RadioTextContent GetRadioContent() {
+        return radioContent;
+    }
+    protected override void SetRadioContent(RadioTextContent radioContent) {
+        this.radioContent = radioContent;
+    }
+    
     [ES3Serializable]
     private string location;
     public BountyHunterQuestClueInfoRadioAreaEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, bool isReal, DateTime startDate, string location) : 
         base(startTimeRange, speakContent, speakRate, speakGender, mixer, isReal, startDate) {
         this.location = location;
         BodyInfo info = this.GetModel<BountyHunterModel>().QuestBodyTimeInfo.BodyInfo;
-        this.speakContent = Radio(info, isReal);
+        this.radioContent.SetContent(Radio(info, isReal));
     }
 
     public BountyHunterQuestClueInfoRadioAreaEvent() : base() {
@@ -287,6 +301,10 @@ public class BountyHunterQuestClueInfoRadioAreaEvent : BountyHunterQuestClueInfo
 
     protected override void OnRadioStart() {
        
+    }
+
+    protected override void OnPlayedWhenRadioOff() {
+        
     }
 
     private string Radio(BodyInfo body, bool isReal)
@@ -343,8 +361,8 @@ public class BountyHunterQuestClueInfoRadioAreaEvent : BountyHunterQuestClueInfo
 
     protected override GameEvent GetSameEvent(TimeRange timeRange, bool isRealClue, DateTime dateTime)
     {
-        return new BountyHunterQuestClueInfoRadioAreaEvent(timeRange, this.speakContent, this.speakRate, this.speakGender,
-            this.mixer,
+        return new BountyHunterQuestClueInfoRadioAreaEvent(timeRange, this.radioContent.speakContent, this.radioContent.speakRate, this.radioContent.speakGender,
+            this.radioContent.mixer,
             isRealClue, dateTime, location);
     }
 }

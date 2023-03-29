@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CameraViewController : DraggableItems {
     private PlayerResourceModel playerResourceModel;
+    [SerializeField] protected GameObject paperPrefab;
     protected override void Awake() {
         base.Awake();
         // = this.GetSystem<PlayerResourceSystem>();
@@ -17,9 +18,10 @@ public class CameraViewController : DraggableItems {
         
     }
 
-    protected override void OnClick()
-    {
+    protected override void OnClick() {
         this.GetModel<PhotoSaveModel>().HasCamera.Value = true;
+        DeliveryNoteViewController note = Container.SpawnItem(paperPrefab).GetComponent<DeliveryNoteViewController>();
+        note.SetContent("Package Detail:\n1x Camera\n\nThanks for your purchasing!");
         GameObject.Destroy(gameObject);
     }
 

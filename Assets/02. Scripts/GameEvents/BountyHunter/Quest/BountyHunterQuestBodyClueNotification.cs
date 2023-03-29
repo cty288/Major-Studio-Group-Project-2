@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.GameEvents.BountyHunter;
+using _02._Scripts.Radio.RadioScheduling;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using UnityEngine;
@@ -229,12 +230,16 @@ public abstract class BountyHunterQuestClueEvent : GameEvent {
 
 
 //相关情报的收音机内容
-public abstract class BountyHunterQuestClueInfoEvent : RadioEvent {
+public abstract class BountyHunterQuestClueInfoEvent : ScheduledRadioEvent<RadioTextContent> {
+    [field: ES3Serializable]
+    protected override RadioProgramType ProgramType { get; set; } = RadioProgramType.DailyDeadBody;
+
     [field: ES3Serializable]
     protected bool IsRealClue { get; set; }
     [field: ES3Serializable]
     protected DateTime startDate;
-    public BountyHunterQuestClueInfoEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, bool isReal, DateTime startDate) : base(startTimeRange, speakContent, speakRate, speakGender, mixer, RadioChannel.DeadNews) {
+    public BountyHunterQuestClueInfoEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, bool isReal, DateTime startDate) 
+        : base(startTimeRange, new RadioTextContent(speakContent, speakRate, speakGender, mixer), RadioChannel.FM96) {
         this.IsRealClue = isReal;
         this.startDate = startDate;
     }
@@ -253,39 +258,15 @@ public abstract class BountyHunterQuestClueInfoEvent : RadioEvent {
         }
     }
 
-    public override void OnEnd() {
+    
+    protected override ScheduledRadioEvent<RadioTextContent> OnGetNextRadioProgramMessage(TimeRange nextTimeRange, bool playSuccess) {
         DateTime currentTime = this.GetSystem<GameTimeManager>().CurrentTime.Value;
         if ((currentTime - startDate).Days > 3) {
-            return;
+            return null;
         }
 
-        DateTime nextStartTime = currentTime.AddDays(1);
-        nextStartTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day, Random.Range(gameTimeManager.NightTimeStart,24),
-            Random.Range(5, 55), 0);
-        DateTime nextEventEndTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day, 23, 58, 0);
-
-        gameEventSystem.AddEvent(GetSameEvent(new TimeRange(nextStartTime, nextEventEndTime), IsRealClue, startDate));
-    }
-
-    public override void OnMissed() {
-        DateTime currentTime = this.GetSystem<GameTimeManager>().CurrentTime.Value;
-        if ((currentTime - startDate).Days > 3) {
-            return;
-        }
-
-        DateTime nextStartTime = currentTime.AddMinutes(1);
-        DateTime nextEventEndTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 23, 58, 0);
-        if (nextStartTime > nextEventEndTime) {
-            nextStartTime = currentTime.AddDays(1);
-            nextStartTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day, gameTimeManager.NightTimeStart,
-                Random.Range(5, 20), 0);
-            nextEventEndTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day, 23, 58, 0);
-            
-            gameEventSystem.AddEvent(GetSameEvent(new TimeRange(nextStartTime, nextEventEndTime), IsRealClue, startDate));
-        }
-        else {
-            gameEventSystem.AddEvent(GetSameEvent(new TimeRange(nextStartTime, nextEventEndTime), IsRealClue, startDate));
-        }
+       
+        return GetSameEvent(nextTimeRange, IsRealClue, startDate) as ScheduledRadioEvent<RadioTextContent>;
     }
 
     protected abstract GameEvent GetSameEvent(TimeRange timeRange, bool isRealClue, DateTime dateTime);

@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Container: {fileID: 0}
   canDrag: 1
+  paperPrefab: {fileID: 6114853706820401901, guid: 1e564e3d881187e4493cddea1ca4ccc9, type: 3}
 --- !u!1 &8135244913027082783
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,7 +215,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gift from Bounty Hunter
+  m_text: Package Delivery
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: badf858e225dfe34cb3f338b20ae133d, type: 2}
   m_sharedMaterial: {fileID: 1940898061598942409, guid: badf858e225dfe34cb3f338b20ae133d, type: 2}

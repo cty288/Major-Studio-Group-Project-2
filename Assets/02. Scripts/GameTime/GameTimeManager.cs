@@ -40,10 +40,15 @@ public class GameTimeManager : AbstractSystem, ISystem {
     protected float timeSpeed = 1f;
     protected DateTime timeSpeedUntil = DateTime.MinValue;
 
-    public int NightTimeStart { get; private set; } = 22;
-    public int DayTimeStart { get; private set; } = 9;
-    
-    public int DayTimeEnd { get; private set; } = 17;
+    public int NightTimeStart {
+        get {
+            return gameTimeModel.NightTimeStart;
+        }
+    }
+
+    public int DayTimeStart { get { return gameTimeModel.DayTimeStart; } }
+
+    public int DayTimeEnd { get { return gameTimeModel.DayTimeEnd; } }
 
     public bool IsNight {
         get {

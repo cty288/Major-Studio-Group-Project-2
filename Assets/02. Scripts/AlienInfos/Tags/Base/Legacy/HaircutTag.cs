@@ -7,8 +7,12 @@ public interface IHaircutTag : IAlienTag
 
 }
 [ES3Serializable]
-public abstract class HaircutTag : AbstractAlienTag, IHaircutTag
-{
+public abstract class HaircutTag : AbstractAlienTag, IHaircutTag {
+    public override List<string> GetFakeRadioDescription() {
+        return bodyTagInfoModel.GetFakeRadioDescription(TagName,
+            description => typeof(IHaircutTag).IsAssignableFrom(description.TagType));
+    }
+
 }
 
 

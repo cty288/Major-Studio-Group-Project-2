@@ -9,6 +9,11 @@ using UnityEngine;
 public struct OnOpenNewspepr {
 	
 }
+
+public struct OnCameraGet {
+	public int TestValue;
+}
+
 public class ExampleEvent : GameEvent {
 	public override GameEventType GameEventType { get; } = GameEventType.BountyHunterQuestClueNotification;
 
@@ -37,10 +42,7 @@ public class ExampleEvent : GameEvent {
 	}
 
 	public override EventState OnUpdate() {
-		if (!isCompleted) {
-			return EventState.Running;
-		}
-
+		this.SendEvent<OnCameraGet>(new OnCameraGet() {TestValue = 100});
 		return EventState.End;
 	}
 
@@ -49,8 +51,7 @@ public class ExampleEvent : GameEvent {
 		DateTime time = gameTimeManager.CurrentTime.Value;
 
 
-		gameEventSystem.AddEvent(new DailyBodyRadio(new TimeRange(time.AddMinutes(10), time.AddMinutes(10)),
-			"aba aba", 1f, Gender.MALE, null));
+		gameEventSystem.AddEvent(new DailyBodyRadio(new TimeRange(time.AddMinutes(10), time.AddMinutes(10)), 1f, Gender.MALE, null));
 	}
 
 	public override void OnMissed() {

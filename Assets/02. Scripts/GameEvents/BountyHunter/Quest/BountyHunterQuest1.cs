@@ -53,12 +53,12 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
             welcome = $"Buddy, someone reported a new occurrence of that creature! At <color=yellow>{hourIn12}:{ClueHappenTime.Minute} pm</color>," +
                       $" pay attention to the flashlights outside your home. As always, the number of flashlights will still indicate which <color=yellow>hour</color> in PM. Don't forget call me back when you find out the murderer! Good luck!";
         }
-        speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], "Bounty Hunter", OnSpeakEnd);
+        speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], "Bounty Hunter", 1f, OnSpeakEnd);
     }
     
     public BountyHunterQuest1ClueNotificationNotificationContact(): base(){}
 
-    private void OnSpeakEnd() {
+    private void OnSpeakEnd(Speaker speaker) {
         BountyHunterModel bountyHunterModel = this.GetModel<BountyHunterModel>();
         if (!bountyHunterModel.QuestBodyClueAllHappened) {
             
@@ -140,12 +140,25 @@ public class BountyHunterQuest1ClueEvent : BountyHunterQuestClueEvent {
 
 
 public class BountyHunterQuestClueInfoRadioEvent : BountyHunterQuestClueInfoEvent {
+    [field: ES3Serializable]
+    protected override bool DayEndAfterFinish { get; set; } = true;
+    
+    [field: ES3Serializable]
+    protected RadioTextContent radioContent { get; set; }
+
+    protected override RadioTextContent GetRadioContent() {
+        return radioContent;
+    }
+    protected override void SetRadioContent(RadioTextContent radioContent) {
+        this.radioContent = radioContent;
+    }
+    
     [ES3Serializable]
     private int dieTime;
     public BountyHunterQuestClueInfoRadioEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, bool isReal, DateTime startDate, int dieTime) : base(startTimeRange, speakContent, speakRate, speakGender, mixer, isReal, startDate) {
         this.dieTime = dieTime;
         BodyInfo info = this.GetModel<BountyHunterModel>().QuestBodyTimeInfo.BodyInfo;
-        this.speakContent = Radio(info, isReal);
+        this.radioContent.SetContent(Radio(info, isReal));
     }
 
     public BountyHunterQuestClueInfoRadioEvent(): base() {
@@ -154,6 +167,10 @@ public class BountyHunterQuestClueInfoRadioEvent : BountyHunterQuestClueInfoEven
     
     protected override void OnRadioStart() {
        
+    }
+
+    protected override void OnPlayedWhenRadioOff() {
+        
     }
 
     private  string Radio(BodyInfo body, bool isReal) {
@@ -194,8 +211,8 @@ public class BountyHunterQuestClueInfoRadioEvent : BountyHunterQuestClueInfoEven
     
 
     protected override GameEvent GetSameEvent(TimeRange timeRange, bool isRealClue, DateTime dateTime) {
-        return new BountyHunterQuestClueInfoRadioEvent(timeRange, this.speakContent, this.speakRate, this.speakGender,
-            this.mixer,
+        return new BountyHunterQuestClueInfoRadioEvent(timeRange, this.radioContent.speakContent, this.radioContent.speakRate, this.radioContent.speakGender,
+            this.radioContent.mixer,
             isRealClue, dateTime, dieTime);
     }
 }

@@ -1,45 +1,62 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.Radio.RadioScheduling;
 using Crosstales.RTVoice.Model.Enum;
 using UnityEngine;
 using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
-public class RandomStuffRadio : RadioEvent {
-    public RandomStuffRadio(TimeRange startTimeRange, RadioMessage message) :
-        base(startTimeRange, message.Content, message.SpeakSpeed, message.Gender, AudioMixerList.Singleton.AudioMixerGroups[message.MixerIndex], RadioChannel.GeneralNews ) {
-        if (mixer == null) {
-            this.mixer = AudioMixerList.Singleton.AudioMixerGroups[1];
+public class RandomStuffRadio : ScheduledRadioEvent<RadioTextContent> {
+    [field: ES3Serializable]
+    protected override bool DayEndAfterFinish { get; set; } = true;
+    
+    
+    public RandomStuffRadio(TimeRange startTimeRange, RadioTextMessageInfo textMessageInfo) :
+        base(startTimeRange, new RadioTextContent(textMessageInfo.Content, textMessageInfo.SpeakSpeed, textMessageInfo.Gender, AudioMixerList.Singleton.AudioMixerGroups[textMessageInfo.MixerIndex]), RadioChannel.FM100 ) {
+        if (radioContent.mixer == null) {
+            radioContent.mixer = AudioMixerList.Singleton.AudioMixerGroups[1];
         }
 
-        channel = message.Channel;
+        ProgramType = textMessageInfo.ProgramType;
+        channel = textMessageInfo.Channel;
     }
 
     public RandomStuffRadio() : base() {
-        if (mixer == null) {
-            this.mixer = AudioMixerList.Singleton.AudioMixerGroups[1];
-        }
+       // if (radioContent.mixer == null) {
+            //this.radioContent.mixer = AudioMixerList.Singleton.AudioMixerGroups[1];
+        //}
+        //}
     }
+
+    [field: SerializeField]
+    protected override RadioProgramType ProgramType { get; set; }
+
     [field: ES3Serializable]
-    public override float TriggerChance { get; } = 0.8f;
-    public override void OnEnd() {
-        End();
+    public override float TriggerChance { get; } = 1f;
+   
+
+    protected override ScheduledRadioEvent<RadioTextContent> OnGetNextRadioProgramMessage(TimeRange nextTimeRange, bool playSuccess) {
+        return new RandomStuffRadio(nextTimeRange, RadioRandomStuff.Singleton.GetNextRandomRadio(ProgramType));
     }
 
-    public override void OnMissed() {
-        End();
-    }
+  
 
-    public void End() {
-        DateTime currentTime = gameTimeManager.CurrentTime;
-        int timeInterval = RadioRandomStuff.Singleton.RandomRadioAverageTimeInterval;
-        int t = (int) (timeInterval * 0.1f);
-        DateTime nextTime = currentTime.AddMinutes(Random.Range(timeInterval - t, timeInterval + t));
-        gameEventSystem.AddEvent(new RandomStuffRadio(new TimeRange(nextTime), RadioRandomStuff.Singleton.GetNextRandomRadio()));
+    [field: ES3Serializable]
+    protected RadioTextContent radioContent { get; set; }
+
+    protected override RadioTextContent GetRadioContent() {
+        return radioContent;
+    }
+    protected override void SetRadioContent(RadioTextContent radioContent) {
+        this.radioContent = radioContent;
     }
 
     protected override void OnRadioStart() {
-       
+        
+    }
+
+    protected override void OnPlayedWhenRadioOff() {
+        
     }
 }

@@ -54,15 +54,15 @@ public class BountyHunterQuestFinishContact : TelephoneContact {
 
     protected override void OnStart() {
         string welcome =
-            "Good day, mister. I'm the chief of the Police Department of MK Town. Congratulations on your glory achievement in protecting our community.";
+            "Good day, mister. I'm the chief of the Police Department of Dorcha. Congratulations on your glory achievement in protecting our community.";
         welcome +=
             "With your help in hunting down the dangerous creatures, we have successfully suppressed recent waves of infiltration in our neighborhood.";
         welcome +=
             "Thanks again for your contribution to our neighborhood.";
-        speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[3], "???", OnSpeakEnd, 1.1f);
+        speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[3], "???", 1f, OnSpeakEnd, 1.1f);
     }
 
-    private void OnSpeakEnd() {
+    private void OnSpeakEnd(Speaker speaker) {
         EndConversation();
     }
 

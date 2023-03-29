@@ -18,9 +18,9 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
     public static BodyInfo GeneratePolice() {
         HeightType height = Random.Range(0, 2) == 0 ? HeightType.Short : HeightType.Tall;
         BodyPartPrefabInfo body = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartDisplayType.Shadow, BodyPartType.Body, false,
-            height, false);
+            height, false, null);
         BodyPartPrefabInfo leg = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartDisplayType.Shadow, BodyPartType.Legs, false,
-            height, false);
+            height, false, null);
         BodyPartPrefabInfo head = AlienBodyPartCollections.Singleton.SpecialBodyPartPrefabs.HeightSubCollections[0]
             .ShadowBodyPartPrefabs.HumanTraitPartsPrefabs[0].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
       
@@ -54,7 +54,7 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
             "Several of those cases showed that the evidence was provided by you." +
             "Here¡¯s the search warrant, and we are taking you in for further inquiries. " +
             "Apologies and thank you for your cooperation.";
-        speaker.Speak(message, AudioMixerList.Singleton.AudioMixerGroups[3], "???", OnFinishSpeak, 1.15f, 1.2f);
+        speaker.Speak(message, AudioMixerList.Singleton.AudioMixerGroups[3], "???", 1f, OnFinishSpeak, 1.15f, 1.2f);
         return () => onClickPeepholeSpeakEnd;
     }
 
@@ -62,7 +62,7 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
         
     }
 
-    private void OnFinishSpeak() {
+    private void OnFinishSpeak(Speaker speaker) {
         DieCanvas.Singleton.Show("You are arrested by the police!");
         this.GetModel<GameStateModel>().GameState.Value = GameState.End;
         this.GetSystem<BodyGenerationSystem>().StopCurrentBody();

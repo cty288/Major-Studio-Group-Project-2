@@ -136,8 +136,8 @@ public class NewspaperUIPanel : OpenableUIPanel {
         for (int i = 0; i < news.timeInfos.Count; i++) {
             BodyTimeInfo info = news.timeInfos[i];
             BodyInfo bodyInfo = info.BodyInfo;
-            
-            GameObject spawnedBody = AlienBody.BuildNewspaperAlienBody(bodyInfo, i);
+
+            GameObject spawnedBody = AlienBody.BuildNewspaperAlienBody(bodyInfo, i, i);
             savedSpawnedImages.Add(spawnedBody);
             Camera camera = spawnedBody.GetComponentInChildren<Camera>();
             RenderTexture renderTexture = camera.targetTexture;
@@ -204,7 +204,8 @@ public class NewspaperUIPanel : OpenableUIPanel {
     }
 
     
-    public string GetShortDescription(BodyInfo bodyInfo) {
+    public static string GetShortDescription(BodyInfo bodyInfo) {
+        
         List<IAlienTag> tags = new List<IAlienTag>();
 
 

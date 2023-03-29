@@ -20,6 +20,11 @@ public class Subtitle : MonoBehaviour {
         }
     }
     
+    public void OnSpeakStop() {
+        text.text = "";
+    }
+    
+    
     private void Update()
     {
       

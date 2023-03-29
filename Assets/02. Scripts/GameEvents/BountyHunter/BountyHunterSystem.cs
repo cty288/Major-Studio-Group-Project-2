@@ -77,8 +77,13 @@ public class BountyHunterSystem : AbstractSystem {
     private void AddEvent() {
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
         
+        HotUpdateDataModel hotUpdateDataModel = this.GetModel<HotUpdateDataModel>();
+        string[] days = hotUpdateDataModel.GetData("BountyHunterDay").values;
+        int minDay = int.Parse(days[0]);
+        int maxDay = int.Parse(days[1]);
+
         DateTime nextEventTime = new DateTime(currentTime.Year, currentTime.Month,
-            currentTime.Day, Random.Range(gameTimeManager.NightTimeStart, 24), Random.Range(10, 40), 0);
+            currentTime.Day + Random.Range(minDay,maxDay), Random.Range(gameTimeManager.NightTimeStart, 24), Random.Range(10, 40), 0);
         Debug.Log("Next Event Time: " + nextEventTime);
 
         gameEventSystem.AddEvent(new BountyHunterAdEvent(

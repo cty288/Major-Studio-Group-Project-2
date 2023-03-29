@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.Electricity;
+using _02._Scripts.GameTime;
+using _02._Scripts.Telephone;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
@@ -65,15 +67,21 @@ public class TelephoneSystem : AbstractSavableSystem {
     [field: ES3Serializable]
     public BindableProperty<TelephoneContact> CurrentTalkingContact { get; } =
         new BindableProperty<TelephoneContact>();
+
+
+    [field: ES3Serializable] public bool IsBroken { get; set; } = false;
+    
     protected override void OnInit() {
         gameTimeManager = this.GetSystem<GameTimeManager>();
         gameTimeManager.OnDayStart += OnDayEnd;
         updater = new GameObject("TelephoneSystemUpdater").AddComponent<TelephoneSystemUpdater>();
         updater.OnUpdate += Update;
         electricityModel = this.GetModel<ElectricityModel>();
-
+        this.RegisterEvent<OnNewDay>(OnNewDayStart);
         State.RegisterOnValueChaned(OnStateChanged);
     }
+
+    
 
     private bool dayEndLocked = false;
     private void OnStateChanged(TelephoneState oldState, TelephoneState newState) {
@@ -94,10 +102,31 @@ public class TelephoneSystem : AbstractSavableSystem {
         }
     }
 
-    private void OnDayEnd(int obj, int hour) {
+    private void OnDayEnd(int day, int hour) {
         State.Value = TelephoneState.Idle;
     }
+    private void OnNewDayStart(OnNewDay e) {
+        if (e.Day == 0) {
+            IsBroken = true;
+            GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
+            DateTime telephoneBrokenRadio = gameTimeModel.GetDay(1);
+            this.GetSystem<GameEventSystem>().AddEvent(new TelephoneBrokenRadioEvent(
+                new TimeRange(telephoneBrokenRadio.AddMinutes(10)),
+                AudioMixerList.Singleton.AudioMixerGroups[1]));
 
+
+            int telephoneFixDay = int.Parse(this.GetModel<HotUpdateDataModel>().GetData("PhoneFixDay").values[0]);
+            DateTime telephoneFixedTime = gameTimeModel.GetDay(telephoneFixDay);
+            this.GetSystem<GameEventSystem>().AddEvent(new TelephoneFixedEvent(new TimeRange(telephoneFixedTime)));
+
+            ImportantNewspaperModel newspaperModel = this.GetModel<ImportantNewspaperModel>();
+            newspaperModel.AddPageToNewspaper(newspaperModel.GetWeekForNews(telephoneFixDay),
+                this.GetModel<ImportantNewsTextModel>().GetInfo("LandlineMaintenanceEnds"), 0);
+            
+            newspaperModel.AddPageToNewspaper(newspaperModel.GetWeekForNews(telephoneFixDay),
+                this.GetModel<ImportantNewsTextModel>().GetInfo("ExampleKey"));
+        }
+    }
     void Update() {
         if (State.Value == TelephoneState.Dealing) {
             dealWaitTimer += Time.deltaTime;
@@ -115,7 +144,7 @@ public class TelephoneSystem : AbstractSavableSystem {
 
     public TelephoneContact CurrentIncomingCallContact => currentIncomingCallContact;
     public void IncomingCall(TelephoneContact contact, int maxWaitTime) {
-        if ( (State.Value == TelephoneState.Idle || State.Value == TelephoneState.Dealing) && electricityModel.HasElectricity() && contact.OnDealt()) {
+        if ((State.Value == TelephoneState.Idle || State.Value == TelephoneState.Dealing) && electricityModel.HasElectricity() && contact.OnDealt() && !IsBroken) {
             currentIncomingCallContact = contact;
             State.Value = TelephoneState.IncomingCall;
 
@@ -151,7 +180,7 @@ public class TelephoneSystem : AbstractSavableSystem {
         }
 
         if (CheckContactExists(dealingDigits)) {
-            if (!Contacts[dealingDigits].OnDealt()) {
+            if (!Contacts[dealingDigits].OnDealt() || IsBroken) {
                 for (int i = 0; i < 2; i++) {
                     OnDealWaitBeep?.Invoke();
                     yield return new WaitForSeconds(3f);

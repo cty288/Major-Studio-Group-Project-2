@@ -24,6 +24,12 @@ public class TimeRange {
         this.StartTime = startTime;
         this.EndTime = endTime;
     }
+    
+    public int Duration{
+        get {
+            return (int) (EndTime - StartTime).TotalMinutes;
+        }
+    }
 
     public TimeRange(DateTime triggerTime) {
         this.StartTime = triggerTime;
@@ -81,6 +87,10 @@ public abstract class GameEvent: ICanGetSystem, ICanGetModel, ICanSendEvent, ICa
         OnEnd();
     }
 
+    public virtual bool CanStartWithSameType{
+        get { return false; }
+    }
+    
     public void Miss() {
         if (LockedTime) {
             gameTimeManager.LockDayEnd.Release();

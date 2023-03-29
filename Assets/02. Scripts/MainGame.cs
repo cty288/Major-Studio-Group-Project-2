@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.Electricity;
+using _02._Scripts.FashionCatalog;
 using _02._Scripts.GameEvents.BountyHunter;
 using _02._Scripts.GameEvents.Merchant;
 using _02._Scripts.GameTime;
+using _02._Scripts.ImportantNewspaper;
 using _02._Scripts.Notebook;
+using _02._Scripts.Poster;
+using _02._Scripts.Radio.RadioScheduling;
 using MikroFramework.Architecture;
 using MikroFramework.ResKit;
 using MikroFramework.TimeSystem;
@@ -20,8 +24,6 @@ public class MainGame : Architecture<MainGame> {
     protected override void Init() {
         
         this.RegisterExtensibleUtility<ResLoader>(ResLoader.Allocate());
-        
-        
         
         this.RegisterModel<PlayerControlModel>();
         this.RegisterModel<GameStateModel>();
@@ -42,6 +44,11 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<NotebookModel>();
         this.RegisterModel<OutdoorActivityModel>();
         this.RegisterModel<HotUpdateDataModel>();
+        this.RegisterModel<FashionCatalogModel>();
+        this.RegisterModel<RadioSchedulingModel>();
+        this.RegisterModel<ImportantNewsTextModel>();
+        this.RegisterModel<ImportantNewspaperModel>();
+        this.RegisterModel<PosterModel>();
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();
@@ -56,6 +63,10 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<ElectricitySystem>();
         this.RegisterSystem<DogSystem>();
         this.RegisterSystem<OutdoorActivitySystem>();
+        this.RegisterSystem<FashionCatalogSystem>();
+        this.RegisterSystem<RadioSchedulingSystem>();
+        this.RegisterSystem<ImportantNewspaperSystem>();
+        this.RegisterSystem<PosterSystem>();
     }
     
     protected void RegisterModel<T>() where T : class, IModel, new() {
