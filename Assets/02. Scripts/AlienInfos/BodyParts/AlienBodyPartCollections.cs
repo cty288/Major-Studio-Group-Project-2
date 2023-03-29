@@ -36,7 +36,7 @@ public class BodyPartCollection {
     public List<BodyPartHeightSubCollection> HeightSubCollections;
 }
 
-public class AlienBodyPartCollections : MonoPersistentMikroSingleton<AlienBodyPartCollections> {
+public class AlienBodyPartCollections : MonoMikroSingleton<AlienBodyPartCollections> {
     public BodyPartCollection HeadBodyPartPrefabs;
     [FormerlySerializedAs("MainBodyPartPrefabs")]
     public BodyPartCollection MainBodyPartPrefabs;

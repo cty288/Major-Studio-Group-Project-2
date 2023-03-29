@@ -153,6 +153,14 @@ namespace MikroFramework.Architecture
         private ITypeEventSystem typeEventSystem = new TypeEventSystem();
 
         public static void ResetArchitecture() {
+            foreach (var updater in GameObject.FindObjectsOfType<TimeSystem.TimeSystem.TimeSystemUpdate>()) {
+                GameObject.DestroyImmediate(updater.gameObject);
+            }
+            GameObject fwp = GameObject.Find("[FrameworkPersistent]");
+            if (fwp) {
+                GameObject.DestroyImmediate(fwp);
+            }
+            
             if (architecture == null) {
                 return;
             }

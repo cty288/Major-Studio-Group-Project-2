@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using MikroFramework.Architecture;
 using MikroFramework.Singletons;
+using MikroFramework.TimeSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,6 +22,12 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
         Architecture<MainGame>.ResetArchitecture();
         
         //MainGame.Interface.ResetArchitecture();
+        foreach (var updater in GameObject.FindObjectsOfType<TimeSystem.TimeSystemUpdate>()) {
+            Destroy(updater.gameObject);
+        }
+
+        
+
         SceneManager.LoadScene("Opening");
     }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Mikrocosmos;
 using MikroFramework;
 using MikroFramework.Architecture;
+using MikroFramework.TimeSystem;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -36,6 +37,8 @@ public class OpeningManager : MonoBehaviour {
             canSkip = true;
         });*/
         Architecture<MainGame>.ResetArchitecture();
+        //MainGame.Interface.ResetArchitecture();
+       
         //((MainGame) (MainGame.Interface)).ClearSave();
         this.Delay(3f, () => {
            
