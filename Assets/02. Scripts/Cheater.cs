@@ -56,6 +56,7 @@ public class Cheater : AbstractMikroController<MainGame> {
 
         if (Input.GetKeyDown(KeyCode.T)) {
             this.GetSystem<OutdoorActivitySystem>().SetPlaceAvailable("TestArea", true);
+            this.GetSystem<OutdoorActivitySystem>().SetPlaceAvailable("HuntingGround", true);
         }
 
         if (Input.GetKeyDown(KeyCode.U)) {

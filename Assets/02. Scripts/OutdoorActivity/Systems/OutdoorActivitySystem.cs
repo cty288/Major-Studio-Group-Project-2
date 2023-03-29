@@ -48,7 +48,8 @@ public class OutdoorActivitySystem : AbstractSavableSystem {
       gameSceneModel = this.GetModel<GameSceneModel>();
       if (registeredPlaces.Count == 0) {
          RegisterPlace(new TestArea(), false);
-      }
+         RegisterPlace(new HuntingGround(), false);
+        }
    }
 
    private void OnEndOfOutdoorDayTimeEvent(OnEndOfOutdoorDayTimeEvent e) {

@@ -25,6 +25,10 @@ namespace _02._Scripts.GameTime {
 			return DayStartTime.AddDays(day);
 		}
 		
+		public int GetDay(DateTime dateTime)
+		{
+			return (int)(dateTime - DayStartTime).TotalDays;
+		}
 		
 	}
 }
