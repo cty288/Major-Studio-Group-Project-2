@@ -83,7 +83,7 @@ public class BodyGenerationSystem : AbstractSystem {
 
         foreach (BodyPartType bodyPartType in indices.Keys) {
             BodyPartCollection collection =
-                AlienBodyPartCollections.Singleton.GetBodyPartCollectionByBodyType(bodyPartType);
+                AlienBodyPartCollections.Singleton.GetBodyPartCollectionByBodyType(bodyPartType, false);
             int count = collection.HeightSubCollections[0].NewspaperBodyPartDisplays.HumanTraitPartsPrefabs.Count;
 
             int additionalCount = Random.Range(1, 4);

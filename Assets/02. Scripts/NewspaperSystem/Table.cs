@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using _02._Scripts.Dog;
 using _02._Scripts.FashionCatalog;
 using _02._Scripts.GameEvents.Camera;
 using _02._Scripts.GameTime;
@@ -23,6 +23,7 @@ public class Table :  AbstractDroppableItemContainerViewController {
     [SerializeField] private List<GameObject> crumbledPaperList;
     [SerializeField] private GameObject importantNewspaperPrefab;
     [SerializeField] private GameObject posterPrefab;
+    [SerializeField] private GameObject dogRewardPrefab;
 
     [SerializeField] private List<GameObject> fashionBookList;
 
@@ -39,6 +40,7 @@ public class Table :  AbstractDroppableItemContainerViewController {
         this.RegisterEvent<OnNewspaperGenerated>(OnNewspaperGenerated).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<SpawnTableItemEvent>(OnSpawnItem).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnBountyHunterKillCorrectAlien>(OnBountyHunterKillCorrectAlien).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnMissingDogReward>(OnMissingDogReward).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNewPhotoTaken>(OnNewPhotoTaken).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNoteDeleted>(OnNoteDeleted).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnCameraReceive>(OnCameraReceive).UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -48,6 +50,11 @@ public class Table :  AbstractDroppableItemContainerViewController {
         this.RegisterEvent<OnPosterGet>(OnPosterGet).UnRegisterWhenGameObjectDestroyed(gameObject);
 
         importantNewspaperModel = this.GetModel<ImportantNewspaperModel>();
+    }
+
+    private void OnMissingDogReward(OnMissingDogReward e) {
+        GameObject reward = SpawnItem(dogRewardPrefab);
+        reward.GetComponent<DogRewardDeliveryViewController>().SetFoodCount(e.FoodCount);
     }
 
     private void OnPosterGet(OnPosterGet e) {

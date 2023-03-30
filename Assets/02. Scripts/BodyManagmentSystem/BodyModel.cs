@@ -100,7 +100,7 @@ namespace _02._Scripts.BodyManagmentSystem {
 			AvailableBodyPartIndexCount = count;
 
 			foreach (BodyPartType bodyPartType in availableBodyPartIndices.Keys) {
-				var targetList = AlienBodyPartCollections.Singleton.GetBodyPartCollectionByBodyType(bodyPartType)
+				var targetList = AlienBodyPartCollections.Singleton.GetBodyPartCollectionByBodyType(bodyPartType, false)
 					.HeightSubCollections[0].NewspaperBodyPartDisplays.HumanTraitPartsPrefabs;
 				
 				int actualCount = Mathf.Min(count, targetList.Count);

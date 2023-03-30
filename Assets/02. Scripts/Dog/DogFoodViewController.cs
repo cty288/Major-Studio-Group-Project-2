@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
+using _02._Scripts.Dog;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
 using MikroFramework.Event;
@@ -17,19 +18,31 @@ public class DogFoodViewController : AbstractMikroController<MainGame> {
     private Coroutine dogEnvSoundCoroutine = null;
     
     private DogModel dogModel;
+    private GameObject spawnedDog;
+    [SerializeField] private Transform dogSpawnPosition;
     private void Awake() {
         this.RegisterEvent<OnDogGet>(OnDogGet).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnDogDie>(OnDogDie).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnKnockOutsideAudioPlayed>(OnKnockOutsideAudioPlayed)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnDogSendBack>(OnDogSendBack).UnRegisterWhenGameObjectDestroyed(gameObject);
         dogModel = this.GetModel<DogModel>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         infoText = transform.Find("Canvas/Text").GetComponent<TMP_Text>();
         gameObject.SetActive(false);
     }
 
+    private void OnDogSendBack(OnDogSendBack e) {
+        if (dogEnvSoundCoroutine != null) {
+            StopCoroutine(dogEnvSoundCoroutine);
+            dogEnvSoundCoroutine = null;
+        }
+        gameObject.SetActive(false);
+        DestroyDog();
+    }
+
     private void OnKnockOutsideAudioPlayed(OnKnockOutsideAudioPlayed e) {
-        if (dogModel.isDogAlive && dogModel.HaveDog) {
+        if (dogModel.isDogAlive && dogModel.HaveDog && !dogModel.SentDogBack) {
             if (e.isAlien) {
                 if (Random.Range(0f, 1f) < 0.2f) {
                     DogBark();
@@ -43,8 +56,9 @@ public class DogFoodViewController : AbstractMikroController<MainGame> {
     }
 
     private void Start() {
-        if (dogModel.isDogAlive && dogModel.HaveDog) {
+        if (dogModel.isDogAlive && dogModel.HaveDog && !dogModel.SentDogBack) {
             dogEnvSoundCoroutine = StartCoroutine(DogEnvSound());
+            SpawnDog(dogModel.MissingDogBodyInfo);
         }else if (!dogModel.isDogAlive) {
             infoText.text = "My friend is gone...";
         }
@@ -57,17 +71,35 @@ public class DogFoodViewController : AbstractMikroController<MainGame> {
             StopCoroutine(dogEnvSoundCoroutine);
             dogEnvSoundCoroutine = null;
         }
+        DestroyDog();
     }
 
     private void OnDogGet(OnDogGet e) {
         gameObject.SetActive(true);
         dogEnvSoundCoroutine = StartCoroutine(DogEnvSound());
+        SpawnDog(e.BodyInfo);
+    }
+
+    private void SpawnDog(BodyInfo info) {
+        if (spawnedDog) {
+            return;
+        }
+        spawnedDog = AlienBody.BuildShadowBody(info, false, "HomeDogBody", 0.6f, 2);
+        spawnedDog.transform.position = dogSpawnPosition.position;
+        spawnedDog.transform.SetParent(dogSpawnPosition);
+        spawnedDog.GetComponent<AlienBody>().ShowColor(0);
+    }
+    
+    private void DestroyDog() {
+        if (spawnedDog != null) {
+            Destroy(spawnedDog);
+        }
     }
 
     private IEnumerator DogEnvSound() {
         while (true) {
             yield return new WaitForSeconds(Random.Range(30f, 60f));
-            if (dogModel.isDogAlive && dogModel.HaveDog) {
+            if (dogModel.isDogAlive && dogModel.HaveDog  && !dogModel.SentDogBack) {
                 AudioSystem.Singleton.Play2DSound($"dog_usual_{Random.Range(1, 3)}");
             }
             

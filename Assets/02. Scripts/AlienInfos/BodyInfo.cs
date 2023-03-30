@@ -199,16 +199,17 @@ public class BodyInfo : ICanRegisterEvent {
     }
 
 
-    public static BodyInfo GetBodyInfoForDisplay(BodyInfo original, BodyPartDisplayType targetDisplayType, float reality = 1, bool sameID = true, string builtBodyOverriddenPrefabName = "") {
+    public static BodyInfo GetBodyInfoForDisplay(BodyInfo original, BodyPartDisplayType targetDisplayType,  bool isSpecial, float reality = 1, bool sameID = true, string builtBodyOverriddenPrefabName = "") {
         HeightType height = original.Height;
+        
         BodyPartPrefabInfo head = AlienBodyPartCollections.Singleton.GetBodyPartInfoForDisplay(targetDisplayType,
-            original.DisplayType, original.HeadInfoPrefab.BodyPartInfo, height, reality);
+            original.DisplayType, original.HeadInfoPrefab?.BodyPartInfo, height, reality, isSpecial, original.HeadInfoPrefab==null? -1: original.HeadInfoPrefab.SubBodyPartInfoIndex);
 
         BodyPartPrefabInfo body = AlienBodyPartCollections.Singleton.GetBodyPartInfoForDisplay(targetDisplayType,
-            original.DisplayType, original.MainBodyInfoPrefab.BodyPartInfo, height, reality);
+            original.DisplayType, original.MainBodyInfoPrefab?.BodyPartInfo, height, reality, isSpecial, original.MainBodyInfoPrefab==null? -1: original.MainBodyInfoPrefab.SubBodyPartInfoIndex);
 
         BodyPartPrefabInfo leg = AlienBodyPartCollections.Singleton.GetBodyPartInfoForDisplay(targetDisplayType, original.DisplayType,
-            original.LegInfoPreab.BodyPartInfo, height, reality);
+            original.LegInfoPreab?.BodyPartInfo, height, reality, isSpecial, original.LegInfoPreab==null? -1: original.LegInfoPreab.SubBodyPartInfoIndex);
 
         BodyInfo info = new BodyInfo(original.VoiceTag, head, body, leg, targetDisplayType, height,
             original.KnockBehavior,builtBodyOverriddenPrefabName);

@@ -10,7 +10,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public struct OnDogGet {
-
+    public BodyInfo BodyInfo;
 }
 public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEvent{
     [field: ES3Serializable]
@@ -19,7 +19,7 @@ public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEven
     public override float TriggerChance { get; } = 1;
 
     public override void OnMissed() {
-        
+        OnNotOpen();
     }
 
     public DogKnockEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float eventTriggerChance) : base(startTimeRange, bodyInfo, eventTriggerChance) {
@@ -33,7 +33,9 @@ public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEven
        
         this.GetSystem<ITimeSystem>().AddDelayTask(AudioSystem.Singleton.Play2DSound("dogBark_4", 1, false).clip.length, OnOpenFinish);
         LoadCanvas.Singleton.ShowMessage("You adopted this lonely dog.");
-        this.SendEvent<OnDogGet>();
+        this.SendEvent<OnDogGet>(new OnDogGet() {
+            BodyInfo = bodyInfo
+        });
         return OnPeepholeSpeakEnd;
     }
 
@@ -51,19 +53,7 @@ public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEven
         LoadCanvas.Singleton.HideMessage();
     }
 
-    public static BodyInfo GenerateDog(float knockDoorTimeInterval, int knockTime) {
-        HeightType height =HeightType.Short;
-        List<GameObject> dogs = AlienBodyPartCollections.Singleton.SpecialBodyPartPrefabs.HeightSubCollections[1]
-            .ShadowBodyPartPrefabs.HumanTraitPartsPrefabs;//.GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
 
-
-        BodyPartPrefabInfo dog = dogs[Random.Range(0, dogs.Count)].GetComponent<AlienBodyPartInfo>()
-            .GetBodyPartPrefabInfo();
-        
-        return BodyInfo.GetBodyInfo(null, null, dog, height, null,
-            new DogKnockBehavior(knockDoorTimeInterval, knockTime, null), BodyPartDisplayType.Shadow, false);
-
-    }
     protected override void OnNotOpen() {
         DateTime time = gameTimeManager.CurrentTime.Value;
         DateTime nextKnockStart = time.AddDays(Random.value < 0.5f ? 1 : 2);

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;using MikroFramework.Architecture;
 using UnityEngine;
 [ES3Serializable]
-public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegisterEvent {
+public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegisterEvent, ICanGetModel {
    // [field: ES3NonSerializable]
     public Action OnConversationComplete { get; set; }
     protected Speaker speaker;

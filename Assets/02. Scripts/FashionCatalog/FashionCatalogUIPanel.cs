@@ -146,7 +146,7 @@ public class FashionCatalogUIPanel : OpenableUIPanel {
 			Transform photo = photoContainer.GetChild(i - startIndex);
 			photo.gameObject.SetActive(true);
 			
-			BodyPartPrefabInfo prefabInfo = AlienBodyPartCollections.Singleton.GetBodyPartCollectionByBodyType(bodyPartIndexInfo.BodyPartType)
+			BodyPartPrefabInfo prefabInfo = AlienBodyPartCollections.Singleton.GetBodyPartCollectionByBodyType(bodyPartIndexInfo.BodyPartType, false)
 				.HeightSubCollections[0].NewspaperBodyPartDisplays.HumanTraitPartsPrefabs[bodyPartIndexInfo.Index]
 				.GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo(0);
 			

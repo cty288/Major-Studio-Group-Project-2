@@ -71,7 +71,7 @@ namespace _02._Scripts.BodyOutside {
 		    DogModel dogModel = this.GetModel<DogModel>();
 		    DogSystem dogSystem = this.GetSystem<DogSystem>();
 		    
-	        if (dogModel.HaveDog && dogModel.isDogAlive) {
+	        if (dogModel.HaveDog && dogModel.isDogAlive && !dogModel.SentDogBack) {
 	            float clipLength = AudioSystem.Singleton.Play2DSound("dogBark_4").clip.length;
 	            timeSystem.AddDelayTask(clipLength, () => {
 	                LoadCanvas.Singleton.HideImage(1f);

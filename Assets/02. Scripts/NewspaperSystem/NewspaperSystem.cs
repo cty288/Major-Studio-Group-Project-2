@@ -46,7 +46,7 @@ public class NewspaperSystem : AbstractSystem {
         List<BodyTimeInfo> newsPaperBodyInfos = new List<BodyTimeInfo>();
         foreach (BodyTimeInfo bodyTimeInfo in e.BodyTimeInfos) {
                 BodyInfo newsPaperInfo =
-                BodyInfo.GetBodyInfoForDisplay(bodyTimeInfo.BodyInfo, BodyPartDisplayType.Newspaper);
+                BodyInfo.GetBodyInfoForDisplay(bodyTimeInfo.BodyInfo, BodyPartDisplayType.Newspaper, false);
                 newsPaperBodyInfos.Add(new BodyTimeInfo(bodyTimeInfo.DayRemaining, newsPaperInfo, true));
         }
 

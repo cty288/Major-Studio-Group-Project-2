@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using _02._Scripts.Dog;
 using _02._Scripts.Radio.RadioScheduling;
 using MikroFramework.Architecture;
 using MikroFramework.ResKit;
@@ -37,6 +38,10 @@ namespace _02._Scripts.ImportantNewspaper {
 
 			if (content is ImportantNewspaperRadioSchedulePage) {
 				return resLoader.LoadSync<GameObject>("general", "RadioScheduleContent");
+			}
+
+			if (content is MissingDogImportantNewsContent) {
+				return resLoader.LoadSync<GameObject>("general", "MissingDogContent");
 			}
 
 			return null;

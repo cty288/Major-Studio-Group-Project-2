@@ -14,6 +14,7 @@ using UnityEngine.SceneManagement;
 public struct OnNewDay {
     public DateTime Date;
     public int Day;
+    public bool IsNewWeek;
 }
 
 public struct OnEndOfOutdoorDayTimeEvent {
@@ -73,19 +74,19 @@ public class GameTimeManager : AbstractSystem, ISystem {
     
 
     public void NextDay() {
-        gameTimeModel.AddDay();
+        gameTimeModel.AddDay(out bool isNewWeek);
         
         //beforeEndOfTodayEvent = null;
         int startHour = OutdoorActivityModel.HasMap.Value ? DayTimeStart : NightTimeStart;
         
         OnDayStart?.Invoke(gameTimeModel.Day, startHour);
         if (gameStateModel.GameState != GameState.End) {
-            NewDayStart();
+            NewDayStart(isNewWeek);
         }
        
     }
 
-    private void NewDayStart() {
+    private void NewDayStart(bool isNewWeek) {
         int startHour = OutdoorActivityModel.HasMap.Value ? DayTimeStart : NightTimeStart;
         this.GetSystem<ITimeSystem>().AddDelayTask(2f, () => {
             if (gameStateModel.GameState != GameState.End) {
@@ -97,7 +98,8 @@ public class GameTimeManager : AbstractSystem, ISystem {
                 
                 this.SendEvent<OnNewDay>(new OnNewDay() {
                     Date = gameTimeModel.CurrentTime.Value,
-                    Day = gameTimeModel.Day
+                    Day = gameTimeModel.Day,
+                    IsNewWeek = isNewWeek
                 });
                 this.GetSystem<ITimeSystem>().AddDelayTask(3f, StartTimer);
             }
@@ -211,7 +213,7 @@ public class GameTimeManager : AbstractSystem, ISystem {
             NextDay();
         }
         else {
-            NewDayStart();
+            NewDayStart(Day % 7 == 0);
         }
         
     }

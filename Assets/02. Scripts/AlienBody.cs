@@ -69,7 +69,7 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
     }
 
 
-    public static GameObject BuildShadowBody(BodyInfo info, bool hide, string prefabName) {
+    public static GameObject BuildShadowBody(BodyInfo info, bool hide, string prefabName, float overallScale = 1f, int orderInLayer = 0) {
         ResLoader resLoader = MainGame.Interface.GetUtility<ResLoader>();
         GameObject body = resLoader.LoadSync<GameObject>("aliens", prefabName);
         GameObject bodyInstance = GameObject.Instantiate(body);
@@ -88,8 +88,7 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
                 GameObject spawnedBodyPart = Instantiate(partInfo.BodyPartInfo.gameObject, position, Quaternion.identity, bodyInstance.transform);
                 lastInfo = spawnedBodyPart.GetComponent<AlienBodyPartInfo>();
                 lastInfo.Init(partInfo);
-                
-                
+                spawnedBodyPart.transform.localScale = Vector3.one * overallScale;
             }
             
         }
@@ -100,6 +99,10 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
             }
         }
         alienBody.BodyInfos = new List<BodyInfo>() {info};
+        SpriteRenderer[] spriteRenderers = bodyInstance.GetComponentsInChildren<SpriteRenderer>(true);
+        foreach (SpriteRenderer spriteRenderer in spriteRenderers) {
+            spriteRenderer.sortingOrder += orderInLayer;
+        }
         
         alienBody.OnBuilt();
         return bodyInstance;

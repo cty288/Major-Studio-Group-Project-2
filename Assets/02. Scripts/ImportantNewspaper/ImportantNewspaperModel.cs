@@ -24,7 +24,13 @@ public class ImportantNewspaperInfo {
 	}
 	
 	public void Add(IImportantNewspaperPageContent content, int index) {
-		News.Insert(index, content);
+		if (index < 0 || index > News.Count) {
+			News.Add(content);
+		}
+		else {
+			News.Insert(index, content);
+		}
+		
 	}
 }
 

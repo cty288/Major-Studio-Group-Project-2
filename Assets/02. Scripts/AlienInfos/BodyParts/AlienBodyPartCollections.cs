@@ -59,7 +59,8 @@ public class AlienBodyPartCollections : MonoMikroSingleton<AlienBodyPartCollecti
     /// <param name="originalIsAlienOnly"></param>
     /// <param name="originalHeight"></param>
     /// <returns></returns>
-    public BodyPartPrefabInfo TryGetHeightOppositeBodyPartInfo(BodyPartDisplayType displayType, AlienBodyPartInfo original, bool originalIsAlienOnly, HeightType height) {
+    public BodyPartPrefabInfo TryGetHeightOppositeBodyPartInfo(BodyPartDisplayType displayType, AlienBodyPartInfo original, bool originalIsAlienOnly, HeightType height,
+        bool isSpecial = false) {
 
         BodyPartDisplays originalDisplays = null;
         BodyPartDisplays targetDisplays = null;
@@ -68,11 +69,11 @@ public class AlienBodyPartCollections : MonoMikroSingleton<AlienBodyPartCollecti
         HeightType targetHeight = originalHeight == HeightType.Short ? HeightType.Tall : HeightType.Short;
 
 
-        BodyPartHeightSubCollection targetSubCollection = TryGetBodyPartHeightSubCollection(GetBodyPartCollectionByBodyType(original.BodyPartType), targetHeight);
+        BodyPartHeightSubCollection targetSubCollection = TryGetBodyPartHeightSubCollection(GetBodyPartCollectionByBodyType(original.BodyPartType, isSpecial), targetHeight);
         targetDisplays = GetBodyPartDisplayByType(targetSubCollection, displayType);
         
 
-        BodyPartHeightSubCollection originalSubCollection = TryGetBodyPartHeightSubCollection(GetBodyPartCollectionByBodyType(original.BodyPartType), height);
+        BodyPartHeightSubCollection originalSubCollection = TryGetBodyPartHeightSubCollection(GetBodyPartCollectionByBodyType(original.BodyPartType, isSpecial), height);
         originalDisplays = GetBodyPartDisplayByType(originalSubCollection, displayType);
 
         int index = originalIsAlienOnly ? originalDisplays.AlienOnlyPartsPrefabs.IndexOf(original.gameObject) : originalDisplays.HumanTraitPartsPrefabs.IndexOf(original.gameObject);
@@ -90,7 +91,7 @@ public class AlienBodyPartCollections : MonoMikroSingleton<AlienBodyPartCollecti
     public BodyPartPrefabInfo GetRandomBodyPartInfo(BodyPartDisplayType displayType, BodyPartType bodyPartType, bool isAlien, HeightType height, bool isDinstinct,
        [CanBeNull] HashSet<int> usedIndices) {
       
-        BodyPartCollection collection = GetBodyPartCollectionByBodyType(bodyPartType);
+        BodyPartCollection collection = GetBodyPartCollectionByBodyType(bodyPartType, false);
         BodyPartHeightSubCollection subCollection = TryGetBodyPartHeightSubCollection(collection, height);
         BodyPartDisplays targetDisplays = GetBodyPartDisplayByType(subCollection, displayType);
         return GetRandomBodyPartInfo(targetDisplays, isAlien, isDinstinct, usedIndices);
@@ -98,8 +99,12 @@ public class AlienBodyPartCollections : MonoMikroSingleton<AlienBodyPartCollecti
 
 
     
-    public BodyPartPrefabInfo GetBodyPartInfoForDisplay(BodyPartDisplayType targetDisplay, BodyPartDisplayType originalDisplay, AlienBodyPartInfo originalBodyPart, HeightType height, float reality) {
-        BodyPartCollection collection = GetBodyPartCollectionByBodyType(originalBodyPart.BodyPartType);
+    public BodyPartPrefabInfo GetBodyPartInfoForDisplay(BodyPartDisplayType targetDisplay, BodyPartDisplayType originalDisplay, AlienBodyPartInfo originalBodyPart, HeightType height, float reality,
+        bool isSpecialType, int subBodyPartIndex) {
+        if (originalBodyPart == null) {
+            return null;
+        }
+        BodyPartCollection collection = GetBodyPartCollectionByBodyType(originalBodyPart.BodyPartType, isSpecialType);
         BodyPartHeightSubCollection subCollection = TryGetBodyPartHeightSubCollection(collection, height);
 
         BodyPartDisplays originalDisplays = GetBodyPartDisplayByType(subCollection, originalDisplay);
@@ -111,10 +116,11 @@ public class AlienBodyPartCollections : MonoMikroSingleton<AlienBodyPartCollecti
         int index = originalList.IndexOf(originalBodyPart.gameObject);
         if (index >= 0 && index < targetList.Count) {
             if (reality >= Random.Range(0f, 1f)) {
-                return targetList[index].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
+                return targetList[index].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo(subBodyPartIndex, true);
             }
             else {
-                return targetList[Random.Range(0, targetList.Count)].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
+                return targetList[Random.Range(0, targetList.Count)].GetComponent<AlienBodyPartInfo>()
+                    .GetBodyPartPrefabInfo(subBodyPartIndex, true);
             }
            
         }
@@ -186,7 +192,10 @@ public class AlienBodyPartCollections : MonoMikroSingleton<AlienBodyPartCollecti
         return info;
     }
 
-    public BodyPartCollection GetBodyPartCollectionByBodyType(BodyPartType type) {
+    public BodyPartCollection GetBodyPartCollectionByBodyType(BodyPartType type, bool isSpecial) {
+        if (isSpecial) {
+            return SpecialBodyPartPrefabs;
+        }
         switch (type) {
             case BodyPartType.Body:
                 return MainBodyPartPrefabs;

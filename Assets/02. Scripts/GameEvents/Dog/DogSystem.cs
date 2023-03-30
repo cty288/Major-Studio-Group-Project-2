@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
+using _02._Scripts.Dog;
 using MikroFramework.ActionKit;
 using MikroFramework.Architecture;
 using UnityEngine;
@@ -22,8 +24,36 @@ public class DogSystem : AbstractSystem
         dogModel = this.GetModel<DogModel>();
         
         gameTimeManager.OnDayStart += OnEndOfDay;
-        
+        this.RegisterEvent<OnNewDay>(OnNewDay);
         this.RegisterEvent<OnDogGet>(OnGetDog);
+    }
+
+    private void OnNewDay(OnNewDay e) {
+        if (e.Day == 0) {
+            GenerateMissingDogContact();
+        }
+			
+			
+        if (e.IsNewWeek) {
+            if(!dogModel.SentDogBack && dogModel.isDogAlive){
+                ImportantNewspaperModel newspaperModel = this.GetModel<ImportantNewspaperModel>();
+                newspaperModel.AddPageToNewspaper(newspaperModel.GetWeekForNews(e.Day),
+                    new MissingDogImportantNewsContent(dogModel.MissingDogPhoneNumber, dogModel.MissingDogBodyInfo), 1);
+            }
+				
+        }
+    }
+    
+    private void GenerateMissingDogContact() {
+        int knockDoorTimeInterval = 3;
+        int knockTime = Random.Range(6, 9);
+        BodyInfo targetBody = GetMissingDogBodyInfo(knockDoorTimeInterval, knockTime);
+        dogModel.MissingDogBodyInfo = targetBody;
+        
+        dogModel.MissingDogPhoneNumber = PhoneNumberGenor.GeneratePhoneNumber(7);
+        TelephoneSystem telephoneSystem = this.GetSystem<TelephoneSystem>();
+        //merchantModel.PhoneNumber =  PhoneNumberGenor.GeneratePhoneNumber(7);
+        telephoneSystem.AddContact(dogModel.MissingDogPhoneNumber, new MissingDogContact());
     }
 
     private void OnGetDog(OnDogGet e) {
@@ -43,13 +73,7 @@ public class DogSystem : AbstractSystem
         }
     }
 
-    private void SpawnDog(int eventStartDay)
-    {
-        int knockDoorTimeInterval = 3;
-        int knockTime = Random.Range(6, 9);
-        BodyInfo targetBody = DogKnockEvent.GenerateDog(knockDoorTimeInterval, knockTime);
-
-       
+    private void SpawnDog(int eventStartDay) {
         DateTime dogStartTime = gameTimeManager.CurrentTime.Value.AddDays(eventStartDay);
         int hour = Random.Range(gameTimeManager.NightTimeStart, 24);
         int minute = Random.Range(20, 40);
@@ -60,8 +84,23 @@ public class DogSystem : AbstractSystem
 
         Debug.Log("Dog Event Start Time: " + dogStartTime);
         gameEventSystem.AddEvent(new DogKnockEvent(
-            new TimeRange(dogStartTime, dogEventEndTime), targetBody,
+            new TimeRange(dogStartTime, dogEventEndTime), dogModel.MissingDogBodyInfo,
             1));
+    }
+
+
+    private BodyInfo GetMissingDogBodyInfo(float knockDoorTimeInterval, int knockTime) {
+        HeightType height =HeightType.Short;
+        List<GameObject> dogs = AlienBodyPartCollections.Singleton.SpecialBodyPartPrefabs.HeightSubCollections[1]
+            .ShadowBodyPartPrefabs.HumanTraitPartsPrefabs;//.GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
+
+
+        BodyPartPrefabInfo dog = dogs[Random.Range(0, dogs.Count)].GetComponent<AlienBodyPartInfo>()
+            .GetBodyPartPrefabInfo(0);
+        
+        return BodyInfo.GetBodyInfo(null, null, dog, height, null,
+            new DogKnockBehavior(knockDoorTimeInterval, knockTime, null), BodyPartDisplayType.Shadow, false);
+
     }
 
    

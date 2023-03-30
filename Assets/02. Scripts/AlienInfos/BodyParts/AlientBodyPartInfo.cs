@@ -24,6 +24,9 @@ public class BodyPartPrefabInfo {
 	[ES3Serializable]
 	public BodyPartPrefabInfo SubBodyPartInfo;
 	
+	[ES3Serializable]
+	public int SubBodyPartInfoIndex;
+	
 	[ES3NonSerializable]
 	private List<IAlienTag> tags;
 
@@ -47,9 +50,41 @@ public class BodyPartPrefabInfo {
 	}
 
 	public BodyPartPrefabInfo(){}
+	
+	public BodyPartPrefabInfo(GameObject prefab, int indexInsubBodyPartCollection, bool hasSubBodyPart) {
+		this.prefab = prefab;
+		SubBodyPartInfoIndex = -1;
+		AlienBodyPartInfo info = prefab.GetComponent<AlienBodyPartInfo>();
+		bodyPartInfo = this.prefab.GetComponent<AlienBodyPartInfo>();
+		if (info.SubBodyPartCollectionIndex < 0 || !hasSubBodyPart) {
+			return;
+		}
+		
+		if (indexInsubBodyPartCollection<0) {
+			return;
+		}
+
+		BodyPartCollection accessoryCollection = AlienBodyPartCollections.Singleton.AccessoryCollections[info.SubBodyPartCollectionIndex];
+
+		if (accessoryCollection.HeightSubCollections.Count == 0) {
+			return;
+		}
+		bool isTall = info.IsTall;
+		bool isNews = info.IsNewspaper;
+		BodyPartHeightSubCollection subCollection = AlienBodyPartCollections.Singleton.TryGetBodyPartHeightSubCollection(accessoryCollection,
+			isTall ? HeightType.Tall : HeightType.Short);
+
+		var infos = AlienBodyPartCollections.Singleton.GetBodyPartDisplayByType(subCollection,
+			isNews ? BodyPartDisplayType.Newspaper : BodyPartDisplayType.Shadow);
+		this.SubBodyPartInfoIndex = indexInsubBodyPartCollection;
+		
+		SubBodyPartInfo =
+			infos.HumanTraitPartsPrefabs[indexInsubBodyPartCollection].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
+	}
 
 	public BodyPartPrefabInfo(GameObject prefab, int subBodyPartChance) {
 		this.prefab = prefab;
+		SubBodyPartInfoIndex = -1;
 		AlienBodyPartInfo info = prefab.GetComponent<AlienBodyPartInfo>();
 		bodyPartInfo = this.prefab.GetComponent<AlienBodyPartInfo>();
 		if (info.SubBodyPartCollectionIndex < 0) {
@@ -73,9 +108,9 @@ public class BodyPartPrefabInfo {
 		var infos = AlienBodyPartCollections.Singleton.GetBodyPartDisplayByType(subCollection,
 			isNews ? BodyPartDisplayType.Newspaper : BodyPartDisplayType.Shadow);
 		
-		
+		SubBodyPartInfoIndex = Random.Range(0, infos.HumanTraitPartsPrefabs.Count);
 		SubBodyPartInfo =
-			infos.HumanTraitPartsPrefabs[Random.Range(0, infos.HumanTraitPartsPrefabs.Count)].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
+			infos.HumanTraitPartsPrefabs[SubBodyPartInfoIndex].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
 	}
 
 	public List<IAlienTag> AllTags {
@@ -119,9 +154,13 @@ public abstract class AlienBodyPartInfo : MonoBehaviour {
 
     protected SpriteRenderer spriteRenderer;
 
-    public BodyPartPrefabInfo GetBodyPartPrefabInfo(int subBodyPartChance = 30) {
+    public BodyPartPrefabInfo GetBodyPartPrefabInfo(int subBodyPartChance = 40) {
 	    return new BodyPartPrefabInfo(this.gameObject, subBodyPartChance);
 	}
+    
+    public BodyPartPrefabInfo GetBodyPartPrefabInfo(int indexInSubbodyPart,  bool hasSubBodyPart) {
+	    return new BodyPartPrefabInfo(this.gameObject, indexInSubbodyPart, hasSubBodyPart);
+    }
 
     protected virtual void Awake() {
 	    Transform sprite = transform.Find("Sprite");
@@ -152,12 +191,14 @@ public abstract class AlienBodyPartInfo : MonoBehaviour {
 	    if (spriteRenderer != null) {
 		    spriteRenderer.DOColor(color, duration);
 	    }
+	    OnShowColor(duration);
     }
     
     public void HideColor(float duration) {
 	    if (spriteRenderer != null) {
 		    spriteRenderer.DOColor(Color.black, duration);
 	    }
+	    OnHideColor(duration);
 	}
 
 
@@ -180,7 +221,10 @@ public abstract class AlienBodyPartInfo : MonoBehaviour {
     public virtual void OnFlashStop(float fadeTime) {
 	    
     }
+    
+    public virtual void OnShowColor(float fadeTime){}
 
+    public virtual void OnHideColor(float fadeTime) {}
 	
 
 }
@@ -212,6 +256,20 @@ public abstract class HeadBodyPartInfo : AlienBodyPartInfo {
 			var color = eye.color;
 			color = new Color(color.r, color.g, color.b, 1);
 			eye.color = color;
+		}
+	}
+
+	public override void OnShowColor(float fadeTime) {
+		base.OnShowColor(fadeTime);
+		foreach (SpriteRenderer eye in eyes) {
+			eye.DOFade(0, fadeTime);
+		}
+	}
+	
+	public override void OnHideColor(float fadeTime) {
+		base.OnHideColor(fadeTime);
+		foreach (SpriteRenderer eye in eyes) {
+			eye.DOFade(1, fadeTime);
 		}
 	}
 }

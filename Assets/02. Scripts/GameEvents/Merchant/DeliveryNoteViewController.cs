@@ -1,23 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using MikroFramework.Architecture;
+using TMPro;
 using UnityEngine;
 
 public class DeliveryNoteViewController : DraggableItems {
     [ES3Serializable] protected string content;
+    [ES3Serializable] protected string title = "A Note";
 
+    protected TMP_Text titleText;
     protected SpriteRenderer spriteRenderer;
     protected override void Awake() {
         base.Awake();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        titleText = transform.Find("Canvas/Title").GetComponent<TMP_Text>();
     }
 
     public override void SetLayer(int layer) {
         spriteRenderer.sortingOrder = layer;
     }
 
-    public void SetContent(string content) {
+    protected override void Start() {
+        base.Start();
+        titleText.text = title;
+    }
+
+    public void SetContent(string content, string title = "A Note") {
         this.content = content;
+        this.title = title;
+        titleText.text = this.title;
     }
     protected override void OnClick() {
         this.SendCommand<OpenGeneralNoteUIPanelCommand>(new OpenGeneralNoteUIPanelCommand(content));

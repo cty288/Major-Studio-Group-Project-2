@@ -18,10 +18,12 @@ namespace _02._Scripts.GameTime {
 		[ES3Serializable] private int week = 0;
 
 		public int Week => week;
-		public void AddDay() {
+		public void AddDay(out bool isNewWeek) {
 			Day++;
+			isNewWeek = false;
 			if(week==0 || Day%7==0) {
 				week++;
+				isNewWeek = true;
 			}
 			
 			if (Day <= 0) {
@@ -37,9 +39,13 @@ namespace _02._Scripts.GameTime {
 			return day / 7 + 1;
 		}
 		public DateTime GetDay(int day) {
-			return DayStartTime.AddDays(day);
+			DateTime date = DayStartTime.AddDays(day);
+			date = new DateTime(date.Year, date.Month, date.Day, NightTimeStart, 0, 0);
+			return date;
 		}
 		
-		
+		public int GetDay(DateTime dateTime) {
+			return (int) (dateTime - DayStartTime).TotalDays;
+		}
 	}
 }
