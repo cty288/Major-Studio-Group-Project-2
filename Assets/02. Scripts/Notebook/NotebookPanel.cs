@@ -98,7 +98,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         currentTool = tool;
         eraserTool.Deselect();
         penTool.Select();
-        controlHint.text = "Hold & Drag to Mark";
+        controlHint.text = "Click to add Text\nHold & Drag to Mark";
     }
 
     private void OnEraserToolClicked(NotebookTool tool) {
