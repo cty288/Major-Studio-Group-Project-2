@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3513313757
+CRC: 2139003571
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 28b57558964064cb732bf8d55488e942
+    Hash: 3a2274cb67008b3873e4b742536d51f5
   TypeTreeHash:
     serializedVersion: 2
     Hash: 325319ff42990db097c22f69c3fa9297
@@ -117,6 +117,7 @@ Assets:
 - Assets/05. Prefabs/BodyParts/ExampleBody_Normal_Short.prefab
 - Assets/05. Prefabs/Newspaper/NewspaperFrame_0.prefab
 - Assets/05. Prefabs/BodyParts/ExampleNewspaper.prefab
+- Assets/05. Prefabs/HomeDogBody.prefab
 - Assets/NewspaperTex1.renderTexture
 - Assets/05. Prefabs/Newspaper/NewspaperFrame_1.prefab
 - Assets/05. Prefabs/Newspaper/NewspaperFrame_2.prefab

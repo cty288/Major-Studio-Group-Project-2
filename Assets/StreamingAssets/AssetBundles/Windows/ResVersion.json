@@ -3,8 +3,8 @@
   "ABMD5List": [
     {
       "AssetName": "aliens",
-      "MD5": "f90607363f3ec6fb27c7f2460562af98",
-      "FileSize": 465.4707,
+      "MD5": "1f642d1198681d26702a748b51043b2a",
+      "FileSize": 465.148438,
       "assetDatas": [
         {
           "Name": "AlienBody",
@@ -23,6 +23,11 @@
         },
         {
           "Name": "ExampleNewspaper",
+          "OwnerBundleName": "aliens",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "HomeDogBody",
           "OwnerBundleName": "aliens",
           "AssetType": "UnityEngine.GameObject"
         },
@@ -187,11 +192,26 @@
     },
     {
       "AssetName": "general",
-      "MD5": "bedabb901dcf8d1af3b148651a7148bb",
-      "FileSize": 343.620117,
+      "MD5": "920566eb96aa747562bf2535b609948d",
+      "FileSize": 904.231445,
       "assetDatas": [
         {
           "Name": "DraggedText",
+          "OwnerBundleName": "general",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "MissingDogContent",
+          "OwnerBundleName": "general",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "RadioScheduleContent",
+          "OwnerBundleName": "general",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "TextContent",
           "OwnerBundleName": "general",
           "AssetType": "UnityEngine.GameObject"
         },
@@ -204,8 +224,8 @@
     },
     {
       "AssetName": "mftest",
-      "MD5": "10871f3c51118b1714a66e98177ea1a8",
-      "FileSize": 1028.24707,
+      "MD5": "263f9dd09ab1ab18413e51d34a253c32",
+      "FileSize": 1086.3623,
       "assetDatas": [
         {
           "Name": "War loop",
@@ -304,8 +324,8 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "2a6943eb70888e127af82e4338cb3e50",
-      "FileSize": 1.79296875,
+      "MD5": "03ff8bd24161cbc2f5c8d84075ef7835",
+      "FileSize": 1.79199219,
       "assetDatas": []
     },
     {

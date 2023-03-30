@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1663928796
+CRC: 1018802568
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 72665901bf5eb57638246f7899b54a3a
+    Hash: 1e862a9d6357548ffb75b604830e4de2
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 349746a49d851709a9e6c7120f3058ae
+    Hash: aadfe5868c7680a7a15a75b1092b16fb
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -24,21 +24,41 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 713e266a9b6765a45a4e214d417a0729, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ce17f3e0a2003d1489c87029cdad6cb1, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 650910a5192c6bc419d61e4a3b7fe274, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: a3f101520a4b4c3418a30505021817cb, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 21598655238708249bd1afe229ad6d61, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6d870f0584eba2d4597a173c5b740d5e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 110f4aa04759c1b4fa024c0d9c00eb06, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 260b52fa4b43b9d4296254fbde67bf60, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 64347c19dd43542488bf5b916d47c06a, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b87a846f347654f4faf4f43c24245317, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
 - Class: 114
@@ -94,5 +114,8 @@ SerializeReferenceClassIdentifiers:
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
 - Assets/05. Prefabs/OutdoorActivity/TestActivity/TestArea_TestActivity.prefab
+- Assets/05. Prefabs/ImportantNewspaper/MissingDogContent.prefab
+- Assets/05. Prefabs/ImportantNewspaper/TextContent.prefab
 - Assets/05. Prefabs/General/DraggedText.prefab
+- Assets/05. Prefabs/ImportantNewspaper/RadioScheduleContent/RadioScheduleContent.prefab
 Dependencies: []
