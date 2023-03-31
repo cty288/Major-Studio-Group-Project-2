@@ -9,7 +9,10 @@ using _02._Scripts.GameTime;
 using _02._Scripts.ImportantNewspaper;
 using _02._Scripts.Notebook;
 using _02._Scripts.Poster;
+using _02._Scripts.Radio;
 using _02._Scripts.Radio.RadioScheduling;
+using _02._Scripts.Radio.RadioScheduling.DorchaDaily;
+using _02._Scripts.Radio.RadioScheduling.GhostStory;
 using MikroFramework.Architecture;
 using MikroFramework.ResKit;
 using MikroFramework.TimeSystem;
@@ -49,6 +52,8 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<ImportantNewsTextModel>();
         this.RegisterModel<ImportantNewspaperModel>();
         this.RegisterModel<PosterModel>();
+        this.RegisterModel<RadioDialogueDataModel>();
+        this.RegisterModel<GhostStoryModel>();
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();
@@ -67,6 +72,8 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<RadioSchedulingSystem>();
         this.RegisterSystem<ImportantNewspaperSystem>();
         this.RegisterSystem<PosterSystem>();
+        this.RegisterSystem<DorchaDailySystem>();
+        this.RegisterSystem<GhostStorySystem>();
     }
     
     protected void RegisterModel<T>() where T : class, IModel, new() {

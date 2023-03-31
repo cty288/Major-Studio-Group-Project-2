@@ -39,9 +39,10 @@ public class PlayerResourceSystem : AbstractSystem {
         if (day <= 1) {
             return;
         }
-        playerResourceModel.FoodCount.Value = Mathf.Max(0,  playerResourceModel.FoodCount.Value - 1);
         if (playerResourceModel.FoodCount.Value <= 0) {
             this.GetModel<GameStateModel>().GameState.Value = GameState.End;
         }
+        playerResourceModel.FoodCount.Value = Mathf.Max(0,  playerResourceModel.FoodCount.Value - 1);
+        
     }
 }

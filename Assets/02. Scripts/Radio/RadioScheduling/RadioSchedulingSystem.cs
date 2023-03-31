@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using _02._Scripts.GameTime;
 using Crosstales;
+using Crosstales.RTVoice.Model.Enum;
 using JetBrains.Annotations;
 using MikroFramework.Architecture;
 using UnityEngine;
+using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 namespace _02._Scripts.Radio.RadioScheduling {
@@ -13,6 +15,8 @@ namespace _02._Scripts.Radio.RadioScheduling {
 		Ads,
 		Announcement,
 		Music,
+		DorchaDaily,
+		GhostStory,
 	}
 
 	public class RadioProgramNameInfo {
@@ -127,6 +131,7 @@ namespace _02._Scripts.Radio.RadioScheduling {
 		}
 
 		
+
 		private void RegisterPermanentRadioPrograms() {
 			permanentRadioProgramInfos.Add(new PermanentRadioProgramInfo(RadioProgramType.DailyDeadBody,
 				"Dead Body Report", 70, RadioChannel.FM96, new Vector2Int(7, 8), true));
@@ -134,7 +139,7 @@ namespace _02._Scripts.Radio.RadioScheduling {
 			permanentRadioProgramInfos.Add(new PermanentRadioProgramInfo(RadioProgramType.Ads,
 				"Ads", 45, RadioChannel.FM100, new Vector2Int(4, 8), true));
 
-			permanentRadioProgramInfos.Add(new PermanentRadioProgramInfo(RadioProgramType.Announcement, "Announcement",
+			permanentRadioProgramInfos.Add(new PermanentRadioProgramInfo(RadioProgramType.Announcement, "News",
 				45, RadioChannel.FM100, new Vector2Int(4, 8), false));
 
 			permanentRadioProgramInfos.Add(new PermanentRadioProgramInfo(RadioProgramType.Music, "Music", 119,

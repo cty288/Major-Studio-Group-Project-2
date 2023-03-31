@@ -9,6 +9,7 @@ public enum RadioChannel {
     FM96,
     FM100,
     FM104,
+    FM92,
     None,
     AllChannels
 }
@@ -52,7 +53,8 @@ public class RadioModel : AbstractSavableModel {
     [field: ES3Serializable] private HashSet<RadioChannel> unlockedChannel = new HashSet<RadioChannel>() {
         RadioChannel.FM96,
         RadioChannel.FM100,
-        RadioChannel.FM104
+        RadioChannel.FM104,
+        RadioChannel.FM92
     };
     protected override void OnInit() {
         

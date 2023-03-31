@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.GameTime;
 using MikroFramework.Architecture;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace _02._Scripts.Poster.PosterEvents {
@@ -11,6 +12,7 @@ namespace _02._Scripts.Poster.PosterEvents {
 		public AdPosterDeliverEvent(TimeRange timeRange, int index, BodyInfo bodyInfo) : base(null, timeRange, bodyInfo, 1) {
 			this.Poster = new RawImagePoster(index);
 			this.index = index;
+			Debug.Log($"Next poster event {timeRange.StartTime}");
 		}
 		
 		

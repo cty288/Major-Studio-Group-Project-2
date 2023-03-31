@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace _02._Scripts.Radio.RadioScheduling {
@@ -70,6 +71,22 @@ namespace _02._Scripts.Radio.RadioScheduling {
 			Unscheduled[date].Push(scheduleInfo);
 		}
 
+		public TimeRange AddToScheduled(RadioScheduleInfo scheduleInfo, DateTime date, int nightTimeStartHour) {
+			date = date.Date;
+			if (scheduleInfo.PreferredTimeRange == null) {
+				DateTime start = date.Date.AddHours(nightTimeStartHour);
+				DateTime end = new DateTime(date.Year, date.Month, date.Day, 23, 59, 59);
+				scheduleInfo.PreferredTimeRange = new TimeRange(start, end);
+				
+			}
+			
+			if (!Schedule.ContainsKey(date)) {
+				Schedule.Add(date, new Dictionary<RadioChannel, List<RadioScheduleInfo>>());
+			}
+
+			return AddChannelToScheduled(scheduleInfo, date);
+		}
+
 		public void LoadToScheduled(DateTime date) {
 			if (!Unscheduled.ContainsKey(date)) return;
 			date = date.Date;
@@ -82,21 +99,27 @@ namespace _02._Scripts.Radio.RadioScheduling {
 			
 			while (unscheduled.Count > 0) {
 				RadioScheduleInfo scheduleInfo = unscheduled.Pop();
-				RadioChannel channel = scheduleInfo.Channel;
-				Dictionary<RadioChannel, List<RadioScheduleInfo>> channelSchedule = Schedule[date];
-				
-				
-				if (!channelSchedule.ContainsKey(scheduleInfo.Channel)) {
-					channelSchedule.Add(scheduleInfo.Channel, new List<RadioScheduleInfo>());
-				}
-
-				TimeRange actualTime = CheckHasAvailableTime(channelSchedule[channel], scheduleInfo.PreferredTimeRange,
-					scheduleInfo.Duration);
-				if (actualTime != null) {
-					scheduleInfo.SetActualTimeRange(actualTime);
-					AddToSchedule(scheduleInfo, date);
-				}
+				AddChannelToScheduled(scheduleInfo, date);
 			}
+		}
+
+		protected TimeRange AddChannelToScheduled(RadioScheduleInfo scheduleInfo, DateTime date) {
+			RadioChannel channel = scheduleInfo.Channel;
+			Dictionary<RadioChannel, List<RadioScheduleInfo>> channelSchedule = Schedule[date];
+				
+				
+			if (!channelSchedule.ContainsKey(scheduleInfo.Channel)) {
+				channelSchedule.Add(scheduleInfo.Channel, new List<RadioScheduleInfo>());
+			}
+
+			TimeRange actualTime = CheckHasAvailableTime(channelSchedule[channel], scheduleInfo.PreferredTimeRange,
+				scheduleInfo.Duration);
+			if (actualTime != null) {
+				scheduleInfo.SetActualTimeRange(actualTime);
+				return AddToSchedule(scheduleInfo, date);
+			}
+			
+			return null;
 		}
 
 		public Dictionary<DateTime, Dictionary<RadioChannel, List<RadioScheduleInfo>>> GetSchedule(DateTime startDate,
@@ -116,7 +139,7 @@ namespace _02._Scripts.Radio.RadioScheduling {
 		}
 
 
-		protected void AddToSchedule(RadioScheduleInfo scheduleInfo, DateTime date) {
+		protected TimeRange AddToSchedule(RadioScheduleInfo scheduleInfo, DateTime date) {
 			date = date.Date;
 			if (!Schedule.ContainsKey(date)) {
 				Schedule.Add(date, new Dictionary<RadioChannel, List<RadioScheduleInfo>>());
@@ -127,11 +150,11 @@ namespace _02._Scripts.Radio.RadioScheduling {
 				channelSchedule.Add(scheduleInfo.Channel, new List<RadioScheduleInfo>());
 			}
 
-			InsertToSchedule(channelSchedule[scheduleInfo.Channel], scheduleInfo);
+			return InsertToSchedule(channelSchedule[scheduleInfo.Channel], scheduleInfo);
 		}
 		
 		
-		private void InsertToSchedule(List<RadioScheduleInfo> radioScheduleInfos, RadioScheduleInfo scheduleInfo) {
+		private TimeRange InsertToSchedule(List<RadioScheduleInfo> radioScheduleInfos, RadioScheduleInfo scheduleInfo) {
 			//Schedule is sorted by time range start time. Insert the schedule info to the correct position
 			//If the time range is overlapping, change the start time of the schedule info so that it is not overlapping.
 			//Also make sure the start time is at least 10 minutes after the previous schedule info's end time.
@@ -142,7 +165,7 @@ namespace _02._Scripts.Radio.RadioScheduling {
 			//if the schedule is empty, just add it
 			if (radioScheduleInfos.Count == 0) {
 				radioScheduleInfos.Add(scheduleInfo);
-				return;
+				return scheduleInfo.ActualTimeRange;
 			}
 
 			TimeRange timeRange = scheduleInfo.ActualTimeRange;
@@ -152,7 +175,7 @@ namespace _02._Scripts.Radio.RadioScheduling {
 				if (timeRange.StartTime < currentScheduleInfo.ActualTimeRange.StartTime) {
 					//if the schedule info's start time is before the current schedule info's start time, insert it before the current schedule info
 					radioScheduleInfos.Insert(i, scheduleInfo);
-					return;
+					return timeRange;
 				}
 			}
 			
@@ -188,6 +211,8 @@ namespace _02._Scripts.Radio.RadioScheduling {
 				//if the schedule info's time range is less than 20 minutes long, remove it from the schedule
 				radioScheduleInfos.Remove(scheduleInfo);
 			}
+			
+			return timeRange;
 		}
 
 
