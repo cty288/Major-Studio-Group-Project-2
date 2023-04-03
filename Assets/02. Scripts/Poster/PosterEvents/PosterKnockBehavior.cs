@@ -9,6 +9,7 @@ using UnityEngine.Audio;
 
 namespace _02._Scripts.Poster.PosterEvents {
 	public class PosterKnockBehavior: AbstractKnockBehavior, ICanSendEvent {
+		[field: ES3Serializable]
 		public override string TagName { get; } = "Knock_Poster";
 		
 		public PosterKnockBehavior(): base(){}
@@ -19,7 +20,7 @@ namespace _02._Scripts.Poster.PosterEvents {
 		public PosterKnockBehavior(float knockDoorTimeInterval, float knockTime, List<string> overrideDoorKnockingPhrases): base(knockDoorTimeInterval, knockTime, overrideDoorKnockingPhrases){}
 		public override IEnumerator OnKnockDoor(Speaker speaker, IVoiceTag voiceTag, bool isAlien) {
 			currentSpeaker = speaker;
-			AudioMixerGroup mixer = AudioMixerList.Singleton.AlienVoiceGroups[voiceTag.VoiceIndex];
+			AudioMixerGroup mixer = voiceTag.VoiceGroup;
 			for (int i = 0; i < KnockTime; i++) {
 				string clipName = $"knock_{Random.Range(1, 8)}";
 				knockAudioSource = AudioSystem.Singleton.Play2DSound(clipName, 1, false);

@@ -39,7 +39,7 @@ public class Cheater : AbstractMikroController<MainGame> {
         }
 
         if (Input.GetKeyDown(KeyCode.A)) {
-            BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true, false,
+            BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true, 0,
                 new NormalKnockBehavior(3, Random.Range(3, 7), null), null);
             
             this.GetModel<BodyModel>().AddToAllBodyTimeInfos(new BodyTimeInfo(3, info, true));

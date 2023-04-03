@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using _02._Scripts.GameTime;
 using MikroFramework.Architecture;
+using Random = UnityEngine.Random;
 
 namespace _02._Scripts.GameEvents.BountyHunter {
 	public class BountyHunterModel: AbstractSavableModel, ICanGetModel {
@@ -38,7 +39,7 @@ namespace _02._Scripts.GameEvents.BountyHunter {
 			
 			if(QuestBodyTimeInfo == null) {
 				QuestBodyTimeInfo = new BodyTimeInfo(UnityEngine.Random.Range(20, 30),
-					BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true, true,
+					BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true, Random.Range(0.1f,0.9f),
 						new NormalKnockBehavior(3, UnityEngine.Random.Range(3, 7), new List<string>() { }), null),
 					true);
 			}

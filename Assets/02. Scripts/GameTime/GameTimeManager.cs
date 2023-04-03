@@ -126,7 +126,7 @@ public class GameTimeManager : AbstractSystem, ISystem {
             if (SceneManager.GetActiveScene().name != "MainGame") {
                 break;
             }
-            yield return new WaitForSeconds(gameTimeModel.GlobalTimeFreq / timeSpeed);
+            yield return new WaitForSeconds(gameTimeModel.GlobalTimeFreqCurve.Evaluate(gameTimeModel.Day) / timeSpeed);
 
 
             if (!(gameTimeModel.CurrentTime.Value.Hour == 23 && gameTimeModel.CurrentTime.Value.Minute == 59)

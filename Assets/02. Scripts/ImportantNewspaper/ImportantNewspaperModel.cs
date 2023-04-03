@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public interface IImportantNewspaperPageContent {
 	public List<IImportantNewspaperPageContent> GetPages();
+	public string ID { get; }
 }
 public class ImportantNewspaperInfo {
 	public int Week;
@@ -23,6 +24,10 @@ public class ImportantNewspaperInfo {
 		News.Add(content);
 	}
 	
+	public void AddRange(IEnumerable<IImportantNewspaperPageContent> content) {
+		News.AddRange(content);
+	}
+	
 	public void Add(IImportantNewspaperPageContent content, int index) {
 		if (index < 0 || index > News.Count) {
 			News.Add(content);
@@ -31,6 +36,15 @@ public class ImportantNewspaperInfo {
 			News.Insert(index, content);
 		}
 		
+	}
+	
+	public void AddRange(IEnumerable<IImportantNewspaperPageContent> content, int index) {
+		if (index < 0 || index > News.Count) {
+			News.AddRange(content);
+		}
+		else {
+			News.InsertRange(index, content);
+		}
 	}
 }
 
@@ -54,17 +68,62 @@ public class ImportantNewspaperModel: AbstractSavableModel {
 			importantNewspaperInfo[week].Add(importantNewspaperPageContent);
 		}
 	}
+
+	public bool HasPageOfID(int week, string ID) {
+		if(!importantNewspaperInfo.ContainsKey(week)) return false;
+		
+		foreach (IImportantNewspaperPageContent importantNewspaperPageContent in importantNewspaperInfo[week].News) {
+			if (importantNewspaperPageContent.ID == ID) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void RemoveAllPagesOfID(int week, string ID) {
+		if(!importantNewspaperInfo.ContainsKey(week)) return;
+		
+		for (int i = importantNewspaperInfo[week].News.Count - 1; i >= 0; i--) {
+			if (importantNewspaperInfo[week].News[i].ID == ID) {
+				importantNewspaperInfo[week].News.RemoveAt(i);
+			}
+		}
+	}
 	
 	public void AddPageToNewspaper(int week, IImportantNewspaperPageContent page, int index) {
 		if (!importantNewspaperInfo.ContainsKey(week)) {
 			importantNewspaperInfo.Add(week, new ImportantNewspaperInfo(week));
 		}
 		
-		int indexCounter = 0;
-		foreach (IImportantNewspaperPageContent importantNewspaperPageContent in page.GetPages()) {
-			importantNewspaperInfo[week].Add(importantNewspaperPageContent, index + indexCounter);
-			indexCounter++;
+		if(index >= importantNewspaperInfo[week].News.Count) {
+			importantNewspaperInfo[week].AddRange(page.GetPages());
 		}
+		else if (index <= 0) {
+			importantNewspaperInfo[week].AddRange(page.GetPages(), 0);
+		} else {
+			//when we insert a page, we need to make sure that the page before it is not a page that has multiple pages
+			//if it is, we need to insert the page after the last page of the page that has the same ID
+			IImportantNewspaperPageContent originalPage = importantNewspaperInfo[week].News[index];
+			IImportantNewspaperPageContent originalPageBefore = importantNewspaperInfo[week].News[index - 1];
+			if (originalPage.ID == originalPageBefore.ID) {
+				//we need to find the last page of the original page
+				int lastIndexOfOriginalPage = index;
+				for (int i = index; i < importantNewspaperInfo[week].News.Count; i++) {
+					if (importantNewspaperInfo[week].News[i].ID != originalPage.ID) {
+						break;
+					}
+					lastIndexOfOriginalPage = i;
+				}
+				importantNewspaperInfo[week].AddRange(page.GetPages(), lastIndexOfOriginalPage + 1);
+			}
+			else {
+				importantNewspaperInfo[week].AddRange(page.GetPages(), index);
+			}
+
+
+		}
+		
+		
 	}
 
 	public int GetWeekForNews(int day) {

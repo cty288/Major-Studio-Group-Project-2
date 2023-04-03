@@ -38,7 +38,7 @@ public class BountyHunterQuest2Notification : BountyHunterQuestClueNotification 
         TimeRange newTimeRange = new TimeRange(happenTimeRange.StartTime, happenTimeRange.StartTime.AddMinutes(10));
         string location = BountyHunterQuestClueInfoRadioAreaEvent.GetRandomLocation();
         return new BountyHunterQuest2ClueEvent(newTimeRange,location,
-            BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, false,
+            BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, 0,
                 new NormalKnockBehavior(Random.Range(1,3), UnityEngine.Random.Range(3,6),
                     new List<string>(){}), this.GetModel<BodyModel>().AvailableBodyPartIndices), null, null);
     }

@@ -59,7 +59,7 @@ namespace _02._Scripts.Prologue {
 		private void PrologueSpeak() {
 			Speaker speaker = GameObject.Find("PrologueSpeaker").GetComponent<Speaker>();
 			HotUpdateDataModel hotUpdateDataModel = this.GetModel<HotUpdateDataModel>();
-			string content = hotUpdateDataModel.GetData("Opening").values[0];
+			string content = hotUpdateDataModel.GetData("Opening").values[Application.isEditor ? 0 : 1];
 			speaker.Speak(content, AudioMixerList.Singleton.AudioMixerGroups[5], "Radio", 1f, OnPrologueSpeakEnd, 1.2f);
 		}
 

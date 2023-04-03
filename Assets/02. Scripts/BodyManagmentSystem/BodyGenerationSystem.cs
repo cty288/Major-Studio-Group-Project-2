@@ -111,7 +111,7 @@ public class BodyGenerationSystem : AbstractSystem {
                     false, availableBodyPartIndices);
             }
             else {
-                targetBody = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, false,
+                targetBody = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, 0,
                     new NormalKnockBehavior(3, Random.Range(4, 7), null), availableBodyPartIndices);
             }
            // Debug.Log("Spawned a non-alien");

@@ -15,15 +15,21 @@ public class ImportantTextContent : AbstractMikroController<MainGame> {
 	private TMP_Text contentText;
 	private void Awake() {
 		imageContainer = transform.Find("ImageContainer")?.GetComponent<Image>();
-		titleText = transform.Find("Title").GetComponent<TMP_Text>();
-		subtitleText = transform.Find("Subtitle").GetComponent<TMP_Text>();
+		titleText = transform.Find("Title")?.GetComponent<TMP_Text>();
+		subtitleText = transform.Find("Subtitle")?.GetComponent<TMP_Text>();
 		contentText = transform.Find("Content").GetComponent<TMP_Text>();
 	}
 
 	public void SetContent(ImportantNewsTextInfo info) {
 		Awake();
-		titleText.text = info.Title;
-		subtitleText.text = info.SubTitle;
+		if (titleText) {
+			titleText.text = info.Title;
+		}
+
+		if (subtitleText) {
+			subtitleText.text = info.SubTitle;
+		}
+		
 		contentText.text = info.Content;
 		if (info.ImageIndex >= 0 && imageContainer) {
 			imageContainer.sprite = ImportantNewspaperPageFactory.Singleton.GetImageSprite(info.ImageIndex);

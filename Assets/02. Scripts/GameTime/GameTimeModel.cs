@@ -1,5 +1,6 @@
 ﻿using System;
 using MikroFramework.BindableProperty;
+using UnityEngine;
 
 namespace _02._Scripts.GameTime {
 	public class GameTimeModel: AbstractSavableModel {
@@ -13,7 +14,8 @@ namespace _02._Scripts.GameTime {
 		public int DayTimeStart { get; private set; } = 9;
     
 		public int DayTimeEnd { get; private set; } = 17;
-		[field: ES3Serializable] public float GlobalTimeFreq { get; set; } = 1.2f;
+		
+		public AnimationCurve GlobalTimeFreqCurve { get; set; }
 		
 		[ES3Serializable] private int week = 0;
 
@@ -25,22 +27,22 @@ namespace _02._Scripts.GameTime {
 				week++;
 				isNewWeek = true;
 			}
-			
+			/*
 			if (Day <= 0) {
 				GlobalTimeFreq = 0.6f;
 			}
 			else {
 				GlobalTimeFreq = 1f;
-			}
+			}*/
 		}
 
 
 		public int GetWeek(int day) {
 			return day / 7 + 1;
 		}
-		public DateTime GetDay(int day) {
+		public DateTime GetDay(int day, bool startFromNight = true) {
 			DateTime date = DayStartTime.AddDays(day);
-			date = new DateTime(date.Year, date.Month, date.Day, NightTimeStart, 0, 0);
+			date = new DateTime(date.Year, date.Month, date.Day, startFromNight? NightTimeStart: DayTimeStart, 0, 0);
 			return date;
 		}
 		

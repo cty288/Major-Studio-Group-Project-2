@@ -19,6 +19,16 @@ public class GunViewController : AbstractMikroController<MainGame> {
         
         this.RegisterEvent<OnPlayerResourceNumberChanged>(OnResourceNumberChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
+    }
+
+    private void OnNewDay(OnNewDay e) {
+        if (e.Day == 0) {
+            gameObject.SetActive(false);
+        }
+        else {
+            gameObject.SetActive(true);
+        }
     }
 
     private void Start() {

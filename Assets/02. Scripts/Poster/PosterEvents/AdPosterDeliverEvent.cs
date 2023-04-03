@@ -43,7 +43,7 @@ namespace _02._Scripts.Poster.PosterEvents {
 		
 
 		public static BodyInfo GetPosterDelivererBody() {
-			BodyInfo bodyInfo = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, false,
+			BodyInfo bodyInfo = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, 0,
 				new PosterKnockBehavior(4,
 					Random.Range(3, 7), new List<string>()),
 				MainGame.Interface.GetModel<BodyModel>().AvailableBodyPartIndices);

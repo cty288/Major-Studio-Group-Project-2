@@ -24,6 +24,10 @@ namespace _02._Scripts.ImportantNewspaper {
 		}
 
 		private void OnNewDay(OnNewDay e) {
+			if (e.Day == 0) {
+				importantNewspaperModel.AddPageToNewspaper(1,
+					this.GetModel<ImportantNewsTextModel>().GetInfo("ManDead"), 0);
+			}
 			if(e.Date.DayOfWeek == importantNewspaperModel.ImportantNewsPaperDay) {
 				this.SendEvent(new OnImportantNewspaperGenerated() {Week = gameTimeModel.Week});
 			}

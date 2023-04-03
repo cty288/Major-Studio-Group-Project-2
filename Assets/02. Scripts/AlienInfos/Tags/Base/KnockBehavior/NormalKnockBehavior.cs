@@ -21,10 +21,11 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 		
 		public NormalKnockBehavior(): base(){}
 
+		[field: ES3Serializable]
 		public override string TagName { get; }= "Knock_random";
 		public override IEnumerator OnKnockDoor(Speaker speaker, IVoiceTag voiceTag, bool isAlien) {
 			currentSpeaker = speaker;
-			AudioMixerGroup mixer = AudioMixerList.Singleton.AlienVoiceGroups[voiceTag.VoiceIndex];
+			AudioMixerGroup mixer = voiceTag.VoiceGroup;
 			for (int i = 0; i < KnockTime; i++) {
 				string clipName = $"knock_{Random.Range(1, 8)}";
 				knockAudioSource = AudioSystem.Singleton.Play2DSound(clipName, 1, false);

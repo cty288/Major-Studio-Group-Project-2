@@ -54,8 +54,8 @@ public class AbstractDroppableItemContainerViewController : AbstractMikroControl
         obj.Container = this;
         obj.OnThrownToTrashBin += OnItemThrownToTrashBin;
 
-        if (CurrentMaxLayer > 100) {
-            CurrentMaxLayer = 2;
+        if (CurrentMaxLayer > 1000) {
+            CurrentMaxLayer = 8;
         }
 
         spawnedColliders.Add(obj.GetComponent<Collider2D>());

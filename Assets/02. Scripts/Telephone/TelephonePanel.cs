@@ -18,6 +18,7 @@ public class TelephonePanel : OpenableUIPanel {
     private EventTrigger phonecallEventTrigger;
     private TMP_Text pickupText;
     private PlayerControlModel playerControlModel;
+
     protected override void Awake() {
         base.Awake();
         panel = transform.Find("Panel").gameObject;
@@ -25,9 +26,11 @@ public class TelephonePanel : OpenableUIPanel {
         telephoneSystem = this.GetSystem<TelephoneSystem>();
         bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
         playerControlModel = this.GetModel<PlayerControlModel>();
-        playerControlModel.ControlType.RegisterOnValueChaned(OnPlayerControlTypeChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
-       // bountyHunterSystem.IsBountyHunting.RegisterOnValueChaned(OnBountyHuntingChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
-        telephoneSystem.State.RegisterOnValueChaned(OnTelephoneSystemStateChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
+        playerControlModel.ControlType.RegisterOnValueChaned(OnPlayerControlTypeChanged)
+            .UnRegisterWhenGameObjectDestroyed(gameObject);
+        // bountyHunterSystem.IsBountyHunting.RegisterOnValueChaned(OnBountyHuntingChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
+        telephoneSystem.State.RegisterOnValueChaned(OnTelephoneSystemStateChanged)
+            .UnRegisterWhenGameObjectDestroyed(gameObject);
         phonecallEventTrigger = panel.transform.Find("Phone").GetComponent<EventTrigger>();
         pickupText = phonecallEventTrigger.transform.Find("Text").GetComponent<TMP_Text>();
         phonecallEventTrigger.GetComponent<Image>().alphaHitTestMinimumThreshold = 1;
@@ -36,7 +39,7 @@ public class TelephonePanel : OpenableUIPanel {
 
     private void OnPlayerControlTypeChanged(PlayerControlType oldControlType, PlayerControlType newControlType) {
         if (newControlType == PlayerControlType.BountyHunting) {
-            Hide(0.5f);            
+            Hide(0.5f);
         }
     }
 
@@ -59,11 +62,13 @@ public class TelephonePanel : OpenableUIPanel {
 
     private void OnTelephoneSystemStateChanged(TelephoneState state) {
         if (state == TelephoneState.Idle || state == TelephoneState.Dealing || state == TelephoneState.IncomingCall) {
-           // backButton.gameObject.SetActive(true);
-        }else{
-        {
-           // backButton.gameObject.SetActive(false);
-        }}
+            // backButton.gameObject.SetActive(true);
+        }
+        else {
+            {
+                // backButton.gameObject.SetActive(false);
+            }
+        }
     }
 
     private void OnBackButtonClicked() {
@@ -76,12 +81,14 @@ public class TelephonePanel : OpenableUIPanel {
 
     public override void OnHide(float time) {
         panel.gameObject.GetComponent<Animator>().CrossFade("Stop", time);
-        this.Delay(time, () => {
-            panel.gameObject.SetActive(false);
-        });
+        this.Delay(time, () => { panel.gameObject.SetActive(false); });
     }
 
     public override void OnDayEnd() {
-       Hide(0.5f);
+        Hide(0.5f);
+    }
+
+    public override bool AdditionMouseExitCheck() {
+        return playerControlModel.ControlType.Value != PlayerControlType.Choosing;
     }
 }

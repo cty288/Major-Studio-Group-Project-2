@@ -14,5 +14,7 @@ namespace _02._Scripts.Dog {
 		public List<IImportantNewspaperPageContent> GetPages() {
 			return new List<IImportantNewspaperPageContent>() {this};
 		}
+		[field: ES3Serializable]
+		public string ID { get; } = "MissingDog";
 	}
 }

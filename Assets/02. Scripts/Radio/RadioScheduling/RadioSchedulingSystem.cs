@@ -53,7 +53,8 @@ namespace _02._Scripts.Radio.RadioScheduling {
 	public class ImportantNewspaperRadioSchedulePage: IImportantNewspaperPageContent {
 		public Dictionary<DateTime, Dictionary<RadioChannel, List<RadioScheduleInfo>>> Schedule =
 			new Dictionary<DateTime, Dictionary<RadioChannel, List<RadioScheduleInfo>>>();
-		
+		[field: ES3Serializable]
+		public string ID { get; } = "NewsSchedule";
 		public ImportantNewspaperRadioSchedulePage(Dictionary<DateTime, Dictionary<RadioChannel, List<RadioScheduleInfo>>> schedule) {
 			Schedule = schedule;
 		}

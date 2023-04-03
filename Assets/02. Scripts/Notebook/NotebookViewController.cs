@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using _02._Scripts.GameTime;
 using _02._Scripts.Notebook;
 using MikroFramework.Architecture;
+using MikroFramework.Event;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,6 +19,16 @@ public class NotebookViewController : AbstractCanHaveDroppableItems, IPointerCli
         base.Awake();
         mouseHoverOutline = GetComponent<MouseHoverOutline>();
         gameTimeModel = this.GetModel<GameTimeModel>();
+        this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
+    }
+
+    private void OnNewDay(OnNewDay e) {
+        if (e.Day == 0) {
+            gameObject.SetActive(false);
+        }
+        else {
+            gameObject.SetActive(true);
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData) {

@@ -23,6 +23,7 @@ public class DogKnockEvent : BodyGenerationEvent, ICanGetModel, ICanRegisterEven
     }
 
     public DogKnockEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float eventTriggerChance) : base(startTimeRange, bodyInfo, eventTriggerChance) {
+        Debug.Log($"Dog Knock Time: {startTimeRange.StartTime} - {startTimeRange.EndTime}");
     }
     
     public DogKnockEvent(): base(){}

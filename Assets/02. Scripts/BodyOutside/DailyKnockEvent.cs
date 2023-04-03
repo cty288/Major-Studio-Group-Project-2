@@ -49,7 +49,7 @@ namespace _02._Scripts.BodyOutside {
 					IVoiceTag voiceTag = bodyInfo.VoiceTag;
 
 					speaker.Speak(messages[Random.Range(0, messages.Count)],
-						AudioMixerList.Singleton.AlienVoiceGroups[bodyInfo.VoiceTag.VoiceIndex],
+						bodyInfo.VoiceTag.VoiceGroup,
 						"Deliver", 1, OnDelivererClickedOutside,
 						voiceTag.VoiceSpeed, 1, voiceTag.VoiceType);
 				}

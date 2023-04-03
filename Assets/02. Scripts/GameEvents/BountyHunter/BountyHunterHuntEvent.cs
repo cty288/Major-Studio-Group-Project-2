@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.GameTime;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using UnityEngine;
@@ -46,13 +47,21 @@ public class BountyHunterHuntEvent : GameEvent{
             if (bodyInfo == null) {
                 continue;
             }
-            BodyInfo updatedInfo = bodyModel.GetBodyInfoByID(bodyInfo.ID);
-            if (updatedInfo != null) {
-                if (!updatedInfo.IsDead) {
-                    bodyModel.RemoveBodyInfo(updatedInfo);
-                    updatedInfo.IsDead = true;
+            
+            
+            BodyInfo targetInfo = bodyModel.GetBodyInfoByID(bodyInfo.ID);   //bodyInfos.Add();
+            if (targetInfo == null) {
+                targetInfo = bodyInfo;
+            }
+           
+            
+           
+            if (targetInfo != null) {
+                if (!targetInfo.IsDead) {
+                    bodyModel.RemoveBodyInfo(targetInfo);
+                    targetInfo.IsDead = true;
                     
-                    if (updatedInfo.IsAlien) {
+                    if (targetInfo.IsAlien) {
                         killAlien = true;
                     }
                     else {
@@ -66,9 +75,26 @@ public class BountyHunterHuntEvent : GameEvent{
             this.SendEvent<OnBountyHunterKillCorrectAlien>(new OnBountyHunterKillCorrectAlien() {
                 FoodCount = Random.Range(3, 5)
             });
+            AddToImportantNews(true);
+        }
+
+        if (killGood) {
+            AddToImportantNews(false);
         }
 
         return EventState.End;
+    }
+
+    private void AddToImportantNews(bool killAlien) {
+        ImportantNewspaperModel importantNewspaperModel = this.GetModel<ImportantNewspaperModel>();
+        ImportantNewsTextModel importantNewsTextModel = this.GetModel<ImportantNewsTextModel>();
+        int week = importantNewspaperModel.GetWeekForNews(this.GetModel<GameTimeModel>().Day);
+        if (importantNewspaperModel.HasPageOfID(week, "BountyHunterKill")) {
+            importantNewspaperModel.RemoveAllPagesOfID(week, "BountyHunterKill");
+        }
+
+        importantNewspaperModel.AddPageToNewspaper(week,
+            importantNewsTextModel.GetInfo(killAlien ? "BountyHunterSuccess" : "BountyHunterFail"), 1);
     }
 
     public override void OnEnd() {

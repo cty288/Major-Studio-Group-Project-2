@@ -16,7 +16,7 @@ public class ImportantNewspaperTextContentUI : ImportantNewspaperPageContentUIPa
 		Awake();
 		ImportantNewsTextInfo info = content as ImportantNewsTextInfo;
 		bool hasImage = info.ImageIndex >= 0;
-		
+		bool hasTitle = !string.IsNullOrEmpty(info.Title);
 		weekText.text = $"Week {weekCount}";
 		foreach (ImportantTextContent textContent in importantTextContents) {
 			textContent.gameObject.SetActive(false);
@@ -26,8 +26,14 @@ public class ImportantNewspaperTextContentUI : ImportantNewspaperPageContentUIPa
 			importantTextContents[0].gameObject.SetActive(true);
 		}
 		else {
-			importantTextContents[1].SetContent(info);
-			importantTextContents[1].gameObject.SetActive(true);
+			if (hasTitle) {
+				importantTextContents[1].SetContent(info);
+				importantTextContents[1].gameObject.SetActive(true);
+			}else {
+				importantTextContents[2].SetContent(info);
+				importantTextContents[2].gameObject.SetActive(true);
+			}
+			
 		}
 	}
 }

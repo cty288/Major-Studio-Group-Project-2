@@ -32,7 +32,6 @@ namespace _02._Scripts.Radio.RadioScheduling.GhostStory {
 		public RadioDialogueContent GetRandomContent() {
 			if (allContents.Count == 0) {
 				this.SendEvent<OnGhostStoryDataInit>();
-				return null;
 			}
 
 			if (randomIndexList.Count == 0) {

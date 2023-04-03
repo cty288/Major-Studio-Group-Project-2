@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8678412266769244317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d88a4bcc4993b4bb97ac7ec74b39c0, type: 3}
+  m_Name: CustomRenderPassFeature
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  settings:
+    material: {fileID: 2100000, guid: c465fd157588eb64e890ae92b8696ebf, type: 2}
 --- !u!114 &-1518609317111143566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31,7 +46,9 @@ MonoBehaviour:
     debugReplacementPS: {fileID: 4800000, guid: cf852408f2e174538bcd9b7fda1c5ae7, type: 3}
   m_RendererFeatures:
   - {fileID: -1518609317111143566}
-  m_RendererFeatureMap: 72e3fd3cdfd0ecea
+  - {fileID: 2603248208213719889}
+  - {fileID: -8678412266769244317}
+  m_RendererFeatureMap: 72e3fd3cdfd0ecea513bc0e873982024639fd30806169087
   m_UseNativeRenderPass: 0
   m_TransparencySortMode: 0
   m_TransparencySortAxis: {x: 0, y: 1, z: 0}
@@ -74,3 +91,18 @@ MonoBehaviour:
   m_DefaultLitMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_DefaultUnlitMaterial: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_DefaultMaskMaterial: {fileID: 2100000, guid: 15d0c3709176029428a0da2f8cecf0b5, type: 2}
+--- !u!114 &2603248208213719889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d88a4bcc4993b4bb97ac7ec74b39c0, type: 3}
+  m_Name: CustomRenderPassFeature
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  settings:
+    material: {fileID: 2100000, guid: 2dd60c31a7c8da3459e62c1659f851c4, type: 2}

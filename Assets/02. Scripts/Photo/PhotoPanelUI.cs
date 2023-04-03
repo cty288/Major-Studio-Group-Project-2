@@ -19,7 +19,7 @@ public class PhotoPanelUI : OpenableUIPanel {
 	private Image bgImage;
 	private Transform photoPanel;
 	private IHaveBodyInfo bodyInfoContainer;
-	
+	private TMP_Text hintText;
 	private Dictionary<Image, float> imageAlpha = new Dictionary<Image, float>();
 	
 	public static bool IsOpen { get; private set; }
@@ -34,7 +34,7 @@ public class PhotoPanelUI : OpenableUIPanel {
 		photoRawImage = bgImage.transform.Find("RawImage").GetComponent<RawImage>();
 		photoPanel = transform.Find("Panel");
 		bodyInfoContainer = GetComponentInChildren<IHaveBodyInfo>(true);
-		
+		hintText = transform.Find("Panel/Hint").GetComponent<TMP_Text>();
 		foreach (var image in images) {
 			imageAlpha.Add(image, image.color.a);
 		}
@@ -47,6 +47,12 @@ public class PhotoPanelUI : OpenableUIPanel {
 		bgImage.sprite = e.BGSprite;
 		photoRawImage.texture = photoSaveModel.GetPhotoTexture(photoSaveModel.GetPhoto(e.Content));
 		bodyInfoContainer.BodyInfos = e.BodyInfos;
+		if(e.BodyInfos!=null && e.BodyInfos.Count>0){
+			hintText.text = $"This photo contains {e.BodyInfos.Count} figures";
+		}
+		else {
+			hintText.text = "";
+		}
 		Show(0.5f);
 	}
 

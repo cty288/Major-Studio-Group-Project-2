@@ -106,7 +106,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
             sentenceQueues.Enqueue(new SentenceInfo(sentence, splitedSentence,speakName,  mixer, onEnd, rate, gender, overallVolume, volumeMultiplier));
         }
 
-        if (needSpeak) {
+        if (needSpeak && sentenceQueues.Count > 0) {
             SentenceInfo text = sentenceQueues.Dequeue();
             if (AudioMixer) {
                 AudioMixer.SetFloat("cutoffFreq", 4600);

@@ -3,10 +3,11 @@ using _02._Scripts.BodyManagmentSystem;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace _02._Scripts.AlienInfos.Tags.Base {
 	public interface IVoiceTag: IAlienTag {
-		public int VoiceIndex { get; }
+		public AudioMixerGroup VoiceGroup { get; }
 		public float VoiceSpeed { get; }
 		public Gender VoiceType { get; }
 
@@ -14,9 +15,11 @@ namespace _02._Scripts.AlienInfos.Tags.Base {
 	}
 
 	public class VoiceTag : IVoiceTag, ICanGetModel {
-		
-		public int VoiceIndex { get; protected set; }
+		[field: ES3Serializable]
+		public AudioMixerGroup VoiceGroup { get; protected set; }
+		[field: ES3Serializable]
 		public float VoiceSpeed { get; protected set; }
+		[field: ES3Serializable]
 		public Gender VoiceType { get; protected set; }
 		public IVoiceTag GetOpposite() {
 			int voiceIndex = Random.Range(0, AudioMixerList.Singleton.AlienVoiceGroups.Count);
@@ -31,26 +34,26 @@ namespace _02._Scripts.AlienInfos.Tags.Base {
 			}
 
 			Gender voiceType = VoiceType == Gender.MALE ? Gender.FEMALE : Gender.MALE;
-			return new VoiceTag(voiceIndex, voiceSpeed, voiceType);
+			return new VoiceTag(AudioMixerList.Singleton.AlienVoiceGroups[voiceIndex], voiceSpeed, voiceType);
 		}
 
-		public VoiceTag(int voiceIndex, float voiceSpeed, Gender voiceType) {
-			VoiceIndex = voiceIndex;
+		public VoiceTag(AudioMixerGroup voiceGroup, float voiceSpeed, Gender voiceType) {
+			VoiceGroup = voiceGroup;
 			VoiceSpeed = voiceSpeed;
 			VoiceType = voiceType;
 		}
-		public VoiceTag(int voiceIndex) {
+		public VoiceTag(AudioMixerGroup voiceGroup) {
 			//get a random voicetype
 			VoiceType = (Gender) Random.Range(0, 2);
 			VoiceSpeed = Random.Range(0.7f, 1.4f);
-			VoiceIndex = voiceIndex;
+			VoiceGroup = voiceGroup;
 		}
 
 		public VoiceTag() {
 			
 		}
 
-
+		[field: ES3Serializable]
 		public string TagName { get; } = "VoiceTag";
 
 		public string GetRandomRadioDescription(out bool isReal) {

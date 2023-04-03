@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.ChoiceSystem;
 using _02._Scripts.Electricity;
 using _02._Scripts.FashionCatalog;
 using _02._Scripts.GameEvents.BountyHunter;
@@ -13,6 +14,7 @@ using _02._Scripts.Radio;
 using _02._Scripts.Radio.RadioScheduling;
 using _02._Scripts.Radio.RadioScheduling.DorchaDaily;
 using _02._Scripts.Radio.RadioScheduling.GhostStory;
+using _02._Scripts.SexyCard;
 using MikroFramework.Architecture;
 using MikroFramework.ResKit;
 using MikroFramework.TimeSystem;
@@ -54,6 +56,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<PosterModel>();
         this.RegisterModel<RadioDialogueDataModel>();
         this.RegisterModel<GhostStoryModel>();
+        this.RegisterModel<SexyCardModel>();
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();
@@ -74,6 +77,8 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<PosterSystem>();
         this.RegisterSystem<DorchaDailySystem>();
         this.RegisterSystem<GhostStorySystem>();
+        this.RegisterSystem<ChoiceSystem>();
+        this.RegisterSystem<SexyCardSystem>();
     }
     
     protected void RegisterModel<T>() where T : class, IModel, new() {

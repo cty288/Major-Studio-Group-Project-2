@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
+using MikroFramework.Event;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
@@ -22,6 +23,16 @@ public class TelephoneViewController : ElectricalApplicance, IPointerClickHandle
         telephoneSystem.OnHangUp += OnHangUp;
         telephoneSystem.OnIncomingCallBeep += OnIncomingCallBeep;
         telephoneSystem.OnPickUp += OnPickUp;
+        this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
+    }
+
+    private void OnNewDay(OnNewDay e) {
+        if (e.Day == 0) {
+            gameObject.SetActive(false);
+        }
+        else {
+            gameObject.SetActive(true);
+        }
     }
 
     private void OnPickUp() {

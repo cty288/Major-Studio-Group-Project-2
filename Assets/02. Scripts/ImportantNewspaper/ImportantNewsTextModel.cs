@@ -27,17 +27,62 @@ public class ImportantNewsTextInfo: IImportantNewspaperPageContent {
 	public string Content;
 	public int ImageIndex;
 	public string SubTitle;
-	
+	[field: ES3Serializable]
+	public string ID { get; }
 	public ImportantNewsTextInfo(string key, string title, string content, int imageIndex, string subtitle) {
 		Key = key;
 		Title = title;
 		Content = content;
 		ImageIndex = imageIndex;
 		SubTitle = subtitle;
+		ID = key;
 	}
+	
+	//has image: max 400 characters per page; no image (if has title): max 430 characters per page; no image and no title: max 715 characters per page
 
 	public List<IImportantNewspaperPageContent> GetPages() {
-		return new List<IImportantNewspaperPageContent>() {this};
+		int pageNumbers = 1;
+		List<IImportantNewspaperPageContent> pages = new List<IImportantNewspaperPageContent>();
+		int firstPageLength = (ImageIndex >= 0) ? 400 : (Title.Length > 0) ? 430 : 715;
+		//first page has image, then the remaining pages are text only
+		if(Content.Length > firstPageLength) {
+			pageNumbers += Mathf.CeilToInt((Content.Length - firstPageLength) / 715f);
+		}
+			
+		//get the text for each page. If the cut is in the middle of a word, cut it at the end of the word
+		for (int i = 0; i < pageNumbers; i++) {
+			int pageContentLength = firstPageLength;
+			string title = i == 0 ? Title : "";
+			string subtitle = i == 0 ? SubTitle : "";
+			int imageIndex = i == 0 ? ImageIndex : -1;
+			if(i > 0) {
+				pageContentLength = 715;
+			}
+			int cutIndex = pageContentLength;
+			bool hasNextPage = false;
+			if (Content.Length > cutIndex) {
+				while (Content[cutIndex] != ' ') {
+					cutIndex--;
+				}
+				hasNextPage = true;
+			}
+			else {
+				cutIndex = Content.Length;
+			}
+			string pageContent = Content.Substring(0, cutIndex);
+			Content = Content.Substring(cutIndex);
+			pageContent = pageContent.Trim();
+			if(string.IsNullOrEmpty(pageContent)) {
+				break;
+			}
+
+			if (hasNextPage) {
+				pageContent += " <color=red>(Continued on the next page...)</color>";
+			}
+			pages.Add(new ImportantNewsTextInfo(Key, title, pageContent, imageIndex, subtitle));
+		}
+
+		return pages;
 	}
 }
 

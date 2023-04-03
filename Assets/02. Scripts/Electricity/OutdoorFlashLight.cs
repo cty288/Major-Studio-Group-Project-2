@@ -57,7 +57,7 @@ public class OutdoorFlashLight : ElectricalApplicance
 
                     IVoiceTag voiceTag = bodyGenerationModel.CurrentOutsideBody.Value.VoiceTag;
                     if (voiceTag != null) {
-                        speaker.Speak(reply, AudioMixerList.Singleton.AlienVoiceGroups[voiceTag.VoiceIndex],
+                        speaker.Speak(reply, voiceTag.VoiceGroup,
                             "",1f, null,voiceTag.VoiceSpeed,1f,
                             voiceTag.VoiceType);
                     }

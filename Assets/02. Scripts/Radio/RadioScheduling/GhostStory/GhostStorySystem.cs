@@ -60,15 +60,15 @@ namespace _02._Scripts.Radio.RadioScheduling.GhostStory {
 				GameEventSystem gameEventSystem = this.GetSystem<GameEventSystem>();
 				
 				if (timeRange1 != null) {
-					gameEventSystem.AddEvent(new GhostStoryRadioEvent(timeRange1));
+					gameEventSystem.AddEvent(new GhostStoryRadioEvent(timeRange1, data));
 					
 					TimeRange timeRange2 = radioSchedulingModel.AddToScheduled(
-						new RadioScheduleInfo(new RadioProgramNameInfo(RadioProgramType.DorchaDaily, "Ghost Story (Replayed)"),
+						new RadioScheduleInfo(new RadioProgramNameInfo(RadioProgramType.GhostStory, "Ghost Story (Replayed)"),
 							RadioChannel.FM92, null, 90),
 						gameTimeModel.CurrentTime.Value.AddDays(Random.Range(4, 7)), gameTimeModel.NightTimeStart);
 
 					if (timeRange2 != null) {
-						gameEventSystem.AddEvent(new GhostStoryRadioEvent(timeRange2));
+						gameEventSystem.AddEvent(new GhostStoryRadioEvent(timeRange2, data));
 					}
 				}
 			}

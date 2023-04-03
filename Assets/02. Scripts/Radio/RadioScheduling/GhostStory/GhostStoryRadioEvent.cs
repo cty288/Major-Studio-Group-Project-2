@@ -9,8 +9,8 @@ namespace _02._Scripts.Radio.RadioScheduling {
 		[field: ES3Serializable]
 		protected RadioDialogueContent radioContent { get; set; }
 
-		public GhostStoryRadioEvent(TimeRange startTimeRange) :
-			base(startTimeRange, null,
+		public GhostStoryRadioEvent(TimeRange startTimeRange, RadioDialogueContent content) :
+			base(startTimeRange, content,
 				RadioChannel.FM92) {
 			
 		}
@@ -19,11 +19,7 @@ namespace _02._Scripts.Radio.RadioScheduling {
 			
 		}
 
-		public override void OnStart() {
-			base.OnStart();
-			GhostStoryModel ghostStoryModel = this.GetModel<GhostStoryModel>();
-			SetRadioContent(ghostStoryModel.GetRandomContent());
-		}
+
 
 		protected override RadioDialogueContent GetRadioContent() {
 			return radioContent;
@@ -46,6 +42,9 @@ namespace _02._Scripts.Radio.RadioScheduling {
 		[field: ES3Serializable]
 		protected override bool DayEndAfterFinish { get; set; } = true;
 		protected override ScheduledRadioEvent<RadioDialogueContent> OnGetNextRadioProgramMessage(TimeRange nextTimeRange, bool playSuccess) {
+			if (!playSuccess) {
+				return new GhostStoryRadioEvent(nextTimeRange, radioContent);
+			}
 			return null;
 		}
 	}

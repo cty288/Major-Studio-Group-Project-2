@@ -126,7 +126,7 @@ public class BodyInfo : ICanRegisterEvent {
     #region Static
     
     public static BodyInfo GetRandomBodyInfo(BodyPartDisplayType displayType, bool isAlien, 
-        bool needDistinctive, IKnockBehavior knockBehavior,  Dictionary<BodyPartType, HashSet<int>> usedIndices, string builtBodyOverriddenPrefabName = "") {
+        float distinctiveWeight, IKnockBehavior knockBehavior,  Dictionary<BodyPartType, HashSet<int>> usedIndices, string builtBodyOverriddenPrefabName = "") {
         Gender[] voiceValues = (Gender[]) Enum.GetValues(typeof(Gender));
         HeightType height = Random.Range(0, 2) == 0 ? HeightType.Short : HeightType.Tall;
         //Gender gender = voiceValues[Random.Range(0, voiceValues.Length)];
@@ -134,7 +134,7 @@ public class BodyInfo : ICanRegisterEvent {
         int bodyPartTypeEnumLength = Enum.GetValues(typeof(BodyPartType)).Length-1;
         List<BodyPartPrefabInfo> allBodyPartInfos = new List<BodyPartPrefabInfo>(3);
 
-        int distinctBodyPartCount = needDistinctive ? Random.Range(1, 4) : 0;
+        int distinctBodyPartCount = Mathf.RoundToInt(3 * distinctiveWeight);
         List<int> distinctBodyPartIndexes = new List<int>();
         for (int i = 0; i < distinctBodyPartCount; i++) {
             int distinctBodyPartIndex = Random.Range(0, bodyPartTypeEnumLength);
@@ -157,7 +157,9 @@ public class BodyInfo : ICanRegisterEvent {
         }
 
         IVoiceTag voiceTag =
-            new VoiceTag(Random.Range(0, AudioMixerList.Singleton.AlienVoiceGroups.Count));
+            new VoiceTag(
+                AudioMixerList.Singleton.AlienVoiceGroups[
+                    Random.Range(0, AudioMixerList.Singleton.AlienVoiceGroups.Count)]);
         
         return GetBodyInfo(allBodyPartInfos[2], allBodyPartInfos[1], allBodyPartInfos[0], height, voiceTag,knockBehavior, displayType, isAlien, builtBodyOverriddenPrefabName);
     }

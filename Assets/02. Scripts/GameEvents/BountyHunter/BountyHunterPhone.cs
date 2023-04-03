@@ -20,14 +20,17 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
     private Coroutine waitingForInteractionCoroutine;
    
     private GameEventSystem gameEventSystem;
+    
+    [ES3Serializable]
     private bool talkedBefore = false;
+    [ES3Serializable]
     private bool failedLastTime = false;
-
+    [ES3Serializable]
     private int provideCorrectInfoCount = 0;
  
     private BodyManagmentSystem bodyManagmentSystem;
     private BodyModel bodyModel;
-    
+    [ES3Serializable]
     private bool lastPersonDead = false;
     
     private PlayerControlModel playerControlModel;
@@ -110,7 +113,13 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
         
         HashSet<BodyInfo> bodyInfos = new HashSet<BodyInfo>();
         foreach (BodyInfo info in e.bodyInfos) {
-            bodyInfos.Add(bodyModel.GetBodyInfoByID(info.ID));
+            BodyInfo infoInModelInModel = bodyModel.GetBodyInfoByID(info.ID);   //bodyInfos.Add();
+            if (infoInModelInModel == null) {
+                bodyInfos.Add(info);
+            }
+            else if(infoInModelInModel.IsAlien) {
+                bodyInfos.Add(infoInModelInModel);
+            }
         }
 
 

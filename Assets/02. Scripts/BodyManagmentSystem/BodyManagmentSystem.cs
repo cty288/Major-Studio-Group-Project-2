@@ -61,7 +61,7 @@ public class BodyManagmentSystem : AbstractSystem {
             bodyCount = 1;
             
             //prologue body
-            BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, true,
+            BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, Random.Range(0.5f,1f),
                 new NormalKnockBehavior(3, int.MaxValue, null),bodyModel.AvailableBodyPartIndices);
             bodyModel.AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(new BodyTimeInfo(1, info, true));
         }
@@ -101,7 +101,7 @@ public class BodyManagmentSystem : AbstractSystem {
         
         
         for (int i = newBodyInfos.Count; i < bodyCount; i++) {
-            BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, true,
+            BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, Random.Range(0.1f,0.9f),
                 new NormalKnockBehavior(3, Random.Range(3, 7), null),bodyModel.AvailableBodyPartIndices);
             
             BodyTimeInfo timeInfo = null;
