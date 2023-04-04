@@ -11,6 +11,7 @@ namespace _02._Scripts.BodyOutside {
 	public class DailyKnockEvent : BodyGenerationEvent {
 		
 		protected BodyGenerationSystem bodyGenerationSystem;
+		protected DateTime knockWaitTimeUntil = DateTime.MaxValue;
 		public DailyKnockEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float eventTriggerChance) : base(startTimeRange, bodyInfo, eventTriggerChance) {
 			bodyGenerationSystem = this.GetSystem<BodyGenerationSystem>(system => {
 				bodyGenerationSystem = system;
@@ -22,7 +23,44 @@ namespace _02._Scripts.BodyOutside {
 				bodyGenerationSystem = system;
 			});
 		}
-		
+		public override EventState OnUpdate() {
+			DateTime currentTime = gameTimeManager.CurrentTime.Value;
+        
+			if ((currentTime.Hour == 23 && currentTime.Minute >= 58 && !interacted) || gameStateModel.GameState.Value == GameState.End) {
+				if (knockDoorCheckCoroutine != null) {
+					CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
+					knockDoorCheckCoroutine = null;
+				}
+            
+				if (nestedKnockDoorCheckCoroutine != null) {
+					CoroutineRunner.Singleton.StopCoroutine(nestedKnockDoorCheckCoroutine);
+					nestedKnockDoorCheckCoroutine = null;
+				}
+				bodyGenerationModel.CurrentOutsideBody.Value = null;
+				OnNotOpen();
+				return EventState.End;
+			}
+
+			if (!started) {
+				if (knockWaitTimeUntil == DateTime.MaxValue) {
+					knockWaitTimeUntil = currentTime.AddMinutes(5);
+				}
+				else {
+					if (bodyGenerationModel.CurrentOutsideBody.Value != null) {
+						OnNotOpen();
+						return EventState.End;
+					}
+					if (currentTime >= knockWaitTimeUntil) {
+						started = true;
+						knockDoorCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(KnockDoorCheck());
+					}
+				}
+				
+			}
+
+			return (bodyGenerationModel.CurrentOutsideBody.Value == null && !bodyGenerationModel.CurrentOutsideBodyConversationFinishing
+				&& currentTime >= knockWaitTimeUntil) ? EventState.End : EventState.Running;
+		}
 		protected override Func<bool> OnOpen() {
 				onClickPeepholeSpeakEnd = false;
 				Speaker speaker = GameObject.Find("OutsideBodySpeaker").GetComponent<Speaker>();

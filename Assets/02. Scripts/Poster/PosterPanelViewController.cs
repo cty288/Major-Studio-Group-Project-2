@@ -50,7 +50,8 @@ public class PosterPanelViewController : OpenableUIPanel {
 		}
 	}
 
-	public override void OnShow(float time) {panel.gameObject.SetActive(true);
+	public override void OnShow(float time) {
+		panel.gameObject.SetActive(true);
 		images = GetComponentsInChildren<MaskableGraphic>(true).ToList();
 		texts = GetComponentsInChildren<TMP_Text>(true).ToList();
 		AudioSystem.Singleton.Play2DSound("pick_up_newspaper");

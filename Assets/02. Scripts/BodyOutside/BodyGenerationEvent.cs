@@ -34,6 +34,8 @@ public abstract  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegist
     protected PlayerResourceModel playerResourceModel;
     protected ITimeSystem timeSystem;
     protected bool interacted = false;
+    protected int knockWaitTime = 5;
+    protected int knockDoorWaitTimer = 0;
 
     public BodyGenerationEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float eventTriggerChance) : base(startTimeRange) {
         
@@ -101,6 +103,7 @@ public abstract  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegist
         }
 
         if (!started) {
+            
             if (bodyGenerationModel.CurrentOutsideBody.Value != null) {
                 OnNotOpen();
                 return EventState.End;

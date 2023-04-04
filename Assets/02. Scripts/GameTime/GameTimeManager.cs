@@ -126,6 +126,11 @@ public class GameTimeManager : AbstractSystem, ISystem {
             if (SceneManager.GetActiveScene().name != "MainGame") {
                 break;
             }
+
+            if (gameTimeModel.LockTime.RefCount > 0) {
+                yield return null;
+                continue;
+            }
             yield return new WaitForSeconds(gameTimeModel.GlobalTimeFreqCurve.Evaluate(gameTimeModel.Day) / timeSpeed);
 
 

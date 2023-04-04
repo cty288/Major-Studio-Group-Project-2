@@ -3,8 +3,8 @@
   "ABMD5List": [
     {
       "AssetName": "aliens",
-      "MD5": "1f642d1198681d26702a748b51043b2a",
-      "FileSize": 465.148438,
+      "MD5": "ddcfc7bd515e0f13a0c476ab19a484a3",
+      "FileSize": 465.855469,
       "assetDatas": [
         {
           "Name": "AlienBody",
@@ -55,8 +55,8 @@
     },
     {
       "AssetName": "audios",
-      "MD5": "b57ae0cbb886f0408e715707570d6139",
-      "FileSize": 1337.40332,
+      "MD5": "a164f3c3c6b52360efc1d6ec2c389573",
+      "FileSize": 1435.291,
       "assetDatas": [
         {
           "Name": "dogBark_1",
@@ -174,6 +174,26 @@
           "AssetType": "UnityEngine.AudioClip"
         },
         {
+          "Name": "door_open",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "hit_player",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "rummage",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "slam_door",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
           "Name": "hang_out",
           "OwnerBundleName": "audios",
           "AssetType": "UnityEngine.AudioClip"
@@ -192,11 +212,16 @@
     },
     {
       "AssetName": "general",
-      "MD5": "920566eb96aa747562bf2535b609948d",
-      "FileSize": 904.231445,
+      "MD5": "240a0ba2e037c61f3583d3869062e3c1",
+      "FileSize": 908.7822,
       "assetDatas": [
         {
           "Name": "DraggedText",
+          "OwnerBundleName": "general",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "RadioSubtitle",
           "OwnerBundleName": "general",
           "AssetType": "UnityEngine.GameObject"
         },
@@ -224,8 +249,8 @@
     },
     {
       "AssetName": "mftest",
-      "MD5": "263f9dd09ab1ab18413e51d34a253c32",
-      "FileSize": 1086.3623,
+      "MD5": "b42266f84ede4c86f07da942deb8a5c2",
+      "FileSize": 1092.00391,
       "assetDatas": [
         {
           "Name": "War loop",
@@ -324,8 +349,8 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "03ff8bd24161cbc2f5c8d84075ef7835",
-      "FileSize": 1.79199219,
+      "MD5": "f9a3e92bd72374ed4739bbaf75fdd019",
+      "FileSize": 1.79296875,
       "assetDatas": []
     },
     {

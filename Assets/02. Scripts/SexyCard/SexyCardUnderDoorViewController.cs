@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class SexyCardUnderDoorViewController : AbstractMikroController<MainGame>, IPointerClickHandler {
+	[SerializeField] private GameObject cardPrefab;
 	private void Awake() {
 		this.RegisterEvent<OnSexyCardDelivered>(OnSexyCardDelivered).UnRegisterWhenGameObjectDestroyed(gameObject);
 		this.gameObject.SetActive(false);
@@ -18,6 +19,7 @@ public class SexyCardUnderDoorViewController : AbstractMikroController<MainGame>
 	}
 
 	public void OnPointerClick(PointerEventData eventData) {
-		
+		this.SendCommand<SpawnTableItemCommand>(new SpawnTableItemCommand() {Prefab = cardPrefab});
+		this.gameObject.SetActive(false);
 	}
 }

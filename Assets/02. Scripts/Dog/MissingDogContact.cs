@@ -17,7 +17,7 @@ namespace _02._Scripts.Dog {
 		private AudioMixerGroup mixer;
 		protected DogModel dogModel;
 		private bool dogSent = false;
-		public MissingDogContact() {
+		public MissingDogContact(): base() {
 			speaker = GameObject.Find("MissingDogSpeaker").GetComponent<Speaker>();
 			this.mixer = speaker.GetComponent<AudioSource>().outputAudioMixerGroup;
 			dogModel = this.GetModel<DogModel>();

@@ -1,5 +1,6 @@
 ﻿using System;
 using MikroFramework.BindableProperty;
+using MikroFramework.Utilities;
 using UnityEngine;
 
 namespace _02._Scripts.GameTime {
@@ -14,6 +15,8 @@ namespace _02._Scripts.GameTime {
 		public int DayTimeStart { get; private set; } = 9;
     
 		public int DayTimeEnd { get; private set; } = 17;
+		
+		public SimpleRC LockTime { get; } = new SimpleRC();
 		
 		public AnimationCurve GlobalTimeFreqCurve { get; set; }
 		

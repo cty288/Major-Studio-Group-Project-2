@@ -30,11 +30,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _blueNoisePixel: 19
-    - _contrast: 2.91
-    - _lineScale: 130
-    - _lineSpeed: 0.5
-    - _noiseScale: 0.149
+    - _blueNoisePixel: 0
+    - _contrast: 1.9
+    - _lineScale: 423
+    - _lineSpeed: 0.009
+    - _noiseScale: 0.075
     m_Colors:
     - _colorMultiplier: {r: 0.10203699, g: 0.1792453, b: 0.062003072, a: 0.9607843}
   m_BuildTextureStacks: []

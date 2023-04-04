@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2547763922
+CRC: 779992059
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 776cc0a78f828bb4c03f7ee0bada13a5
+    Hash: cfc68021d212f7ec5a5d390b2d9ed5da
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9a2ca7bdbd1871f7131daf57de908e0c
@@ -22,12 +22,16 @@ Assets:
 - Assets/04. Audios/Dog/dogBark_4.wav
 - Assets/04. Audios/Dog/New/dog_usual_1.mp3
 - Assets/04. Audios/Knocks/knock_7.wav
+- Assets/04. Audios/SexPerson/hit_player.wav
 - Assets/04. Audios/telephone/hang_out.ogg
+- Assets/04. Audios/SexPerson/door_open.wav
 - Assets/04. Audios/Newspaper/pick_up_newspaper.wav
 - Assets/04. Audios/Dog/New/dog_outside_door_1.mp3
+- Assets/04. Audios/SexPerson/rummage.mp3
 - Assets/04. Audios/Newspaper/Newspaper SOUND EFFECT - Reading Newspaper Flipping
   Newspaper SOUND-[AudioTrimmer.com].mp3
 - Assets/04. Audios/Newspaper/put_down_newspaper.mp3
+- Assets/04. Audios/SexPerson/slam_door.wav
 - Assets/04. Audios/Dog/New/dog_usual_2.mp3
 - Assets/04. Audios/Dog/New/dog_outside_door_2.mp3
 - Assets/04. Audios/Gun/gun_fire.wav

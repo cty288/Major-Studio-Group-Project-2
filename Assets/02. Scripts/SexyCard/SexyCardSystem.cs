@@ -28,6 +28,7 @@ namespace _02._Scripts.SexyCard {
 			List<Sprite> targetCardSprites = gender == Gender.MALE
 				? PosterAssets.Singleton.sexyCardMenSprites
 				: PosterAssets.Singleton.sexyCardWomenSprites;
+			model.SexyPersonGender = gender;
 
 			model.SexyCardSprite = targetCardSprites[Random.Range(0, targetCardSprites.Count)];
 
@@ -44,14 +45,15 @@ namespace _02._Scripts.SexyCard {
 			BodyPartPrefabInfo bodyPrefabInfo = AlienBodyPartCollections.Singleton.MainBodyPartPrefabs
 				.HeightSubCollections[0].ShadowBodyPartPrefabs
 				.HumanTraitPartsPrefabs[PosterAssets.Singleton.nakeBodyPrefabIndex].GetComponent<AlienBodyPartInfo>()
-				.GetBodyPartPrefabInfo();
+				.GetBodyPartPrefabInfo(0);
 			BodyPartPrefabInfo legPrefabInfo = AlienBodyPartCollections.Singleton.LegBodyPartPrefabs
 				.HeightSubCollections[0].ShadowBodyPartPrefabs
 				.HumanTraitPartsPrefabs[PosterAssets.Singleton.nakeLegsPrefabIndex].GetComponent<AlienBodyPartInfo>()
 				.GetBodyPartPrefabInfo();
 
-			BodyInfo bodyInfo = BodyInfo.GetBodyInfo(headPrefabInfo, bodyPrefabInfo, legPrefabInfo, HeightType.Tall,
-				new VoiceTag(AudioMixerList.Singleton.SexCardVoiceGroups[(int) gender]), new SexyCardKnockBehavior(),
+			BodyInfo bodyInfo = BodyInfo.GetBodyInfo(legPrefabInfo, bodyPrefabInfo, headPrefabInfo, HeightType.Tall,
+				new VoiceTag(AudioMixerList.Singleton.SexCardVoiceGroups[(int) gender], 1, gender), new SexyCardKnockBehavior(3,
+					5, null),
 				BodyPartDisplayType.Shadow, false);
 
 			model.SexyPerson = bodyInfo;

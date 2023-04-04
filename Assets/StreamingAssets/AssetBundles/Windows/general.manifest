@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1018802568
+CRC: 3655696149
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1e862a9d6357548ffb75b604830e4de2
+    Hash: 9f29be7820b30a5eb2eb3ad53c24b16b
   TypeTreeHash:
     serializedVersion: 2
-    Hash: aadfe5868c7680a7a15a75b1092b16fb
+    Hash: e791e131166f4e2cdca2a85edd8f8287
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -26,11 +26,13 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1cb6101d773401e49ba07a5be4f3bc3b, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 713e266a9b6765a45a4e214d417a0729, type: 3}
 - Class: 114
@@ -38,13 +40,13 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 650910a5192c6bc419d61e4a3b7fe274, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: a3f101520a4b4c3418a30505021817cb, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 21598655238708249bd1afe229ad6d61, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c9aa080947e51ce41a6d3a5de4fbfa05, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 6d870f0584eba2d4597a173c5b740d5e, type: 3}
 - Class: 114
@@ -118,4 +120,5 @@ Assets:
 - Assets/05. Prefabs/ImportantNewspaper/TextContent.prefab
 - Assets/05. Prefabs/General/DraggedText.prefab
 - Assets/05. Prefabs/ImportantNewspaper/RadioScheduleContent/RadioScheduleContent.prefab
+- Assets/05. Prefabs/General/RadioSubtitle.prefab
 Dependencies: []

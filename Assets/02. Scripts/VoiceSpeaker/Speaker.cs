@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Crosstales.RTVoice;
+using Crosstales.RTVoice.Model;
 using Crosstales.RTVoice.Model.Enum;
 using DG.Tweening;
 using MikroFramework;
@@ -156,6 +157,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
         
         if (mute) {
             if (subtitile && currentSentence!=null && subtitleShowing) {
+                
                 subtitile.OnSpeakStop();
                 subtitleShowing = false;
             }
