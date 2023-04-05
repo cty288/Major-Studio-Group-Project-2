@@ -386,7 +386,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         string speakContent = this.GetModel<HotUpdateDataModel>().GetData("Radio_Intro").values[0];
         
         eventSystem.AddEvent(new DeadBodyRadioIntroEvent(
-            new TimeRange(currentTime + new TimeSpan(0, 10, 0), currentTime + new TimeSpan(0, 20, 0)),
+            new TimeRange(currentTime + new TimeSpan(0, 0, 0), currentTime + new TimeSpan(0, 20, 0)),
             speakContent,
             1, Gender.MALE,
             AudioMixerList.Singleton.AudioMixerGroups[1]));

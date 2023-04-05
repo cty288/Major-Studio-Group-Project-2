@@ -32,6 +32,8 @@ public class BodyPartPrefabInfo {
 
 	[ES3NonSerializable] private AlienBodyPartInfo bodyPartInfo;
 
+	[ES3Serializable] public int SubBodyPartChance;
+
 	public AlienBodyPartInfo BodyPartInfo {
 		get {
 			if (bodyPartInfo == null) {
@@ -57,13 +59,16 @@ public class BodyPartPrefabInfo {
 		AlienBodyPartInfo info = prefab.GetComponent<AlienBodyPartInfo>();
 		bodyPartInfo = this.prefab.GetComponent<AlienBodyPartInfo>();
 		if (info.SubBodyPartCollectionIndex < 0 || !hasSubBodyPart) {
+			SubBodyPartChance = 0;
 			return;
 		}
 		
 		if (indexInsubBodyPartCollection<0) {
+			SubBodyPartChance = 0;
 			return;
 		}
 
+		SubBodyPartChance = 1;
 		BodyPartCollection accessoryCollection = AlienBodyPartCollections.Singleton.AccessoryCollections[info.SubBodyPartCollectionIndex];
 
 		if (accessoryCollection.HeightSubCollections.Count == 0) {
@@ -88,8 +93,11 @@ public class BodyPartPrefabInfo {
 		AlienBodyPartInfo info = prefab.GetComponent<AlienBodyPartInfo>();
 		bodyPartInfo = this.prefab.GetComponent<AlienBodyPartInfo>();
 		if (info.SubBodyPartCollectionIndex < 0) {
+			SubBodyPartChance = 0;
 			return;
 		}
+
+		SubBodyPartChance = subBodyPartChance;
 		bool hasSubBodyPart = Random.Range(0, 100) < subBodyPartChance;
 		if (!hasSubBodyPart) {
 			return;
@@ -98,6 +106,7 @@ public class BodyPartPrefabInfo {
 		BodyPartCollection accessoryCollection = AlienBodyPartCollections.Singleton.AccessoryCollections[info.SubBodyPartCollectionIndex];
 
 		if (accessoryCollection.HeightSubCollections.Count == 0) {
+			SubBodyPartChance = 0;
 			return;
 		}
 		bool isTall = info.IsTall;

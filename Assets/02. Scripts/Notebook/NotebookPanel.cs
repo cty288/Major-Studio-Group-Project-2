@@ -611,8 +611,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
 
 
     public override bool AdditionMouseExitCheck() {
-        return DroppedUIObjectViewController.CurrentDroppingItem == null &&
-               String.IsNullOrEmpty(SubtitleHightlightedTextDragger.CurrentDraggedText);
+        return DroppedUIObjectViewController.CurrentDroppingItem == null && SubtitleNotebookHightlightedTextRecorder.IsMouseOverUIRC.RefCount==0;
     }
 
     public void OnEnter(IDroppable content) {

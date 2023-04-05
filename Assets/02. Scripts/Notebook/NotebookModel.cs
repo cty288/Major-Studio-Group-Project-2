@@ -14,7 +14,8 @@ namespace _02._Scripts.Notebook {
 		
 		[field: ES3Serializable]
 		public DateTime LastOpened { get; private set; }
-		
+
+		[field: ES3Serializable] public bool HasNotebook { get;  set; } = false;
 		
 		
 		public void UpdateLastOpened(DateTime time, bool alsoInit = false) {

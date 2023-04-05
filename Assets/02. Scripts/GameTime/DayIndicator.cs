@@ -24,9 +24,9 @@ public class DayIndicator : AbstractMikroController<MainGame> {
         dayIndicator = transform.Find("DayIndicator").GetComponent<TMP_Text>();
         animator = GetComponent<Animator>();
         this.GetSystem<GameTimeManager>().OnDayStart += OnDayStart;
-        
-       
-        lastFoodCount = playerResourceModel.FoodCount.Value;
+
+
+        lastFoodCount = playerResourceModel.GetResourceCount<FoodResource>();
         GameTimeManager gameTimer = this.GetSystem<GameTimeManager>();
         if (this.GetModel<OutdoorActivityModel>().HasMap) {
             dayIndicator.text = $"Day {gameTimer.Day}\n{gameTimer.DayTimeStart}:00";
@@ -67,15 +67,15 @@ public class DayIndicator : AbstractMikroController<MainGame> {
             image.DOFade(1, 1f);
         }
 
-        if (lastFoodCount > playerResourceModel.FoodCount) {
-            int count = lastFoodCount - playerResourceModel.FoodCount;
+        if (lastFoodCount > playerResourceModel.GetResourceCount<FoodResource>()) {
+            int count = lastFoodCount -  playerResourceModel.GetResourceCount<FoodResource>();
             
             for (int i = lastFoodCount - count ; i < foodImages.Count; i++) {
                 foodImages[i].DOFade(0, 1f).SetDelay(2);
             }
         }
-        else if (lastFoodCount < playerResourceModel.FoodCount) {
-            int count = playerResourceModel.FoodCount - lastFoodCount;
+        else if (lastFoodCount <  playerResourceModel.GetResourceCount<FoodResource>()) {
+            int count =  playerResourceModel.GetResourceCount<FoodResource>() - lastFoodCount;
            
             for (int i = lastFoodCount; i < lastFoodCount + count; i++) {
                 foodImages[i].DOKill();
@@ -93,7 +93,7 @@ public class DayIndicator : AbstractMikroController<MainGame> {
 
         foodIndicatorText.DOFade(0, 1f).SetDelay(4.5f);
 
-        lastFoodCount = playerResourceModel.FoodCount;
+        lastFoodCount =  playerResourceModel.GetResourceCount<FoodResource>();
 
     }
 

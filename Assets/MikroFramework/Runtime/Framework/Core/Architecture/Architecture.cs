@@ -161,6 +161,7 @@ namespace MikroFramework.Architecture
                 GameObject.DestroyImmediate(fwp);
             }
             
+            
             if (architecture == null) {
                 return;
             }

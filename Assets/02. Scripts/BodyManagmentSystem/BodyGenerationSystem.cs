@@ -112,7 +112,7 @@ public class BodyGenerationSystem : AbstractSystem {
             }
             else {
                 targetBody = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, 0,
-                    new NormalKnockBehavior(3, Random.Range(4, 7), null), availableBodyPartIndices);
+                    new NormalKnockBehavior(3, Random.Range(4, 7), null), availableBodyPartIndices, 40);
             }
            // Debug.Log("Spawned a non-alien");
         }
@@ -125,8 +125,13 @@ public class BodyGenerationSystem : AbstractSystem {
        
         DateTime currentTime = gameTimeManager.CurrentTime;
 
+        DateTime nextTime = currentTime + new TimeSpan(0, knockDoorCheckTimeInterval, 0);
+        if (nextTime.Hour < gameTimeManager.NightTimeStart) {
+            nextTime = new DateTime(nextTime.Year, nextTime.Month, nextTime.Day, gameTimeManager.NightTimeStart,
+                Random.Range(20, 40), 0);
+        }
         gameEventSystem.AddEvent(new DailyKnockEvent(
-            new TimeRange(currentTime + new TimeSpan(0, knockDoorCheckTimeInterval, 0)), targetBody,
+            new TimeRange(nextTime), targetBody,
             knockDoorChance));
     }
 

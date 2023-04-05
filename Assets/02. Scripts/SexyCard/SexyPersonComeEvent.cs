@@ -81,7 +81,7 @@ namespace _02._Scripts.SexyCard {
 			Speaker speaker = GameObject.Find("SexyCardSpeaker").GetComponent<Speaker>();
 			timeSystem.AddDelayTask(audioSource.clip.length, () => {
 				string speakContent = "Thanks for being such an easy target. I appreciate it.";
-				if (playerResourceModel.FoodCount.Value <= 0) {
+				if (playerResourceModel.GetResourceCount<FoodResource>() <= 0) {
 					speakContent = "No food? What a waste of my time. I guess I'll be leaving now.";
 				}
 				speaker.Speak(speakContent,
@@ -94,13 +94,13 @@ namespace _02._Scripts.SexyCard {
 		private void OnRobEnd(Speaker obj) {
 			AudioSource audioSource = AudioSystem.Singleton.Play2DSound("slam_door");
 			ITimeSystem timeSystem = this.GetSystem<ITimeSystem>();
-			int robMaxCount = Mathf.Min(4, playerResourceModel.FoodCount);
+			int robMaxCount = Mathf.Min(4, playerResourceModel.GetResourceCount<FoodResource>());
 			int robCount = 0;
 			if (robMaxCount > 0) {
 				robCount = UnityEngine.Random.Range(2, robMaxCount + 1);
 			}
 
-			playerResourceModel.FoodCount.Value -= robCount;
+			playerResourceModel.RemoveFood(robMaxCount);
 			timeSystem.AddDelayTask(audioSource.clip.length, () => {
 				LoadCanvas.Singleton.ShowMessage("Your foods are robbed!");
 				timeSystem.AddDelayTask(2f, () => {

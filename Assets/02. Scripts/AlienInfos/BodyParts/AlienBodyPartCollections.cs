@@ -89,12 +89,12 @@ public class AlienBodyPartCollections : MonoMikroSingleton<AlienBodyPartCollecti
     
 
     public BodyPartPrefabInfo GetRandomBodyPartInfo(BodyPartDisplayType displayType, BodyPartType bodyPartType, bool isAlien, HeightType height, bool isDinstinct,
-       [CanBeNull] HashSet<int> usedIndices) {
+       [CanBeNull] HashSet<int> usedIndices, int subBodyPartChance) {
       
         BodyPartCollection collection = GetBodyPartCollectionByBodyType(bodyPartType, false);
         BodyPartHeightSubCollection subCollection = TryGetBodyPartHeightSubCollection(collection, height);
         BodyPartDisplays targetDisplays = GetBodyPartDisplayByType(subCollection, displayType);
-        return GetRandomBodyPartInfo(targetDisplays, isAlien, isDinstinct, usedIndices);
+        return GetRandomBodyPartInfo(targetDisplays, isAlien, isDinstinct, usedIndices, subBodyPartChance);
     }
 
 
@@ -152,7 +152,7 @@ public class AlienBodyPartCollections : MonoMikroSingleton<AlienBodyPartCollecti
     }
    
     private BodyPartPrefabInfo GetRandomBodyPartInfo(BodyPartDisplays targetDisplays, bool isAlien, bool isDistinct,
-        HashSet<int> usedIndexes) {
+        HashSet<int> usedIndexes, int subBodyPartChance) {
         List<GameObject> targetList = new List<GameObject>(targetDisplays.HumanTraitPartsPrefabs);
         List<GameObject> finalList;
         if (usedIndexes == null) {
@@ -186,7 +186,7 @@ public class AlienBodyPartCollections : MonoMikroSingleton<AlienBodyPartCollecti
         }
 
 
-        BodyPartPrefabInfo info = finalList[Random.Range(0, finalList.Count)].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
+        BodyPartPrefabInfo info = finalList[Random.Range(0, finalList.Count)].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo(subBodyPartChance);
         
         //info.IsAlienOnly = targetDisplays.AlienOnlyPartsPrefabs.Contains(info.gameObject);
         return info;

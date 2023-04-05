@@ -5,23 +5,30 @@ using System.Text.RegularExpressions;
 using _02._Scripts.Notebook;
 using MikroFramework.Architecture;
 using MikroFramework.ResKit;
+using MikroFramework.Utilities;
 using TMPro;
 using UnityEngine;
 
-public class SubtitleHightlightedTextDragger : AbstractMikroController<MainGame> {
+public class SubtitleNotebookHightlightedTextRecorder : AbstractMikroController<MainGame> {
 	private TMP_Text text;
-	private TMP_Text currentDraggedText;
-    private ICanHaveDroppableItems lastReceiver;
-    RaycastHit2D[] raycastResults = new RaycastHit2D[5];
+//	private TMP_Text currentDraggedText;
+    //private ICanHaveDroppableItems lastReceiver;
+   // RaycastHit2D[] raycastResults = new RaycastHit2D[5];
     private TMP_Text hintTmpText;
+    public static SimpleRC IsMouseOverUIRC = new SimpleRC();
+    protected bool isMouseOverUI = false;
+    protected NotebookModel NotebookModel;
     
-    public static string CurrentDraggedText { get; private set; } = null;
+   // public static string CurrentDraggedText { get; private set; } = null;
 	private void Awake() {
 		text = GetComponent<TMP_Text>();
-	}
+        NotebookModel = this.GetModel<NotebookModel>();
+    }
 
 	private void Update() {
-        
+        if (!NotebookModel.HasNotebook) {
+            return;
+        }
         var wordIndex = TMP_TextUtilities.FindIntersectingWord(text, Input.mousePosition, null);
         string targetText = "";
         
@@ -64,31 +71,31 @@ public class SubtitleHightlightedTextDragger : AbstractMikroController<MainGame>
         }
         
         
-        if (wordIndex != -1 && !string.IsNullOrEmpty(targetText) && !targetText.Equals(CurrentDraggedText)) {
+        if (wordIndex != -1 && !string.IsNullOrEmpty(targetText)) {
             if (!hintTmpText) {
-                hintTmpText = CreateDraggedText("Drag to the notebook \nto quick-record", new Color(0.7f, 0.7f, 0.7f, 1f));
+                hintTmpText = CreateDraggedText("Click to add to the notebook \nto quick-record", new Color(0.7f, 0.7f, 0.7f, 1f), null);
                 hintTmpText.fontSize = 20;
             }
             hintTmpText.transform.position = Input.mousePosition + Vector3.up * 30;
+            if (!isMouseOverUI) {
+                isMouseOverUI = true;
+                IsMouseOverUIRC.Retain();
+            }
         }
         else {
             if(hintTmpText) {
                 Destroy(hintTmpText.gameObject);
                 hintTmpText = null;
             }
-        }
-        
-        if (Input.GetMouseButtonDown(0)) {
-            if (wordIndex != -1) {
-                if(!string.IsNullOrEmpty(targetText)) {
-                    currentDraggedText = CreateDraggedText(targetText, Color.yellow);
-                    lastReceiver = null;
-                    CurrentDraggedText = targetText;
-                }
-            }
             
+            if (isMouseOverUI) {
+                isMouseOverUI = false;
+                IsMouseOverUIRC.Release();
+            }
         }
         
+      
+        /*
         if(Input.GetMouseButton(0)) {
             if (currentDraggedText != null) {
                 currentDraggedText.transform.position = Input.mousePosition;
@@ -115,30 +122,38 @@ public class SubtitleHightlightedTextDragger : AbstractMikroController<MainGame>
                 }
                 
             }
-        }
+        }*/
         
         if(Input.GetMouseButtonUp(0)) {
-            if(lastReceiver!=null) {
-                lastReceiver.OnDrop(currentDraggedText.GetComponent<IDroppable>());
+            if (wordIndex != -1) {
+                if(!string.IsNullOrEmpty(targetText)) {
+                    NotebookViewController notebookViewController =
+                        GameObject.Find("Notebook").GetComponent<NotebookViewController>();
+                    DroppableTexts droppableTexts =
+                        CreateDraggedText(targetText, Color.yellow, notebookViewController).GetComponent<DroppableTexts>();
+                    notebookViewController.OnDrop(droppableTexts);
+                    //lastReceiver = null;
+                    //CurrentDraggedText = targetText;
+                }
             }
-            
-            lastReceiver = null;
-            if(currentDraggedText != null) {
-                Destroy(currentDraggedText.gameObject);
-            }
-            CurrentDraggedText = null;
         }
 	}
 
     private void OnDestroy() {
-        SubtitleHightlightedTextDragger.CurrentDraggedText = null;
+        //SubtitleHightlightedTextRecorder.CurrentDraggedText = null;
     }
 
-    private TMP_Text CreateDraggedText(string targetText, Color color) {
+    private TMP_Text CreateDraggedText(string targetText, Color color, NotebookViewController notebook) {
         TMP_Text spawnedText = GameObject
             .Instantiate(this.GetUtility<ResLoader>().LoadSync<GameObject>("general", "DraggedText"), transform)
             .GetComponent<TMP_Text>();
-        spawnedText.GetComponent<DroppableTexts>().SetContent(targetText, color);
+        Vector2 notebookScreenPos = Vector2.zero;
+        
+        if (notebook) {
+            notebookScreenPos = Camera.main.WorldToScreenPoint(notebook.transform.position);
+        }
+       
+        spawnedText.GetComponent<DroppableTexts>().SetContent(targetText, color, notebookScreenPos);
         return spawnedText;
     }
 

@@ -26,7 +26,7 @@ public class PrologueDeliveryRadio : RadioEvent<RadioTextContent> {
     public PrologueDeliveryRadio(TimeRange startTimeRange, AudioMixerGroup mixer) :
      base(startTimeRange, new RadioTextContent("", 1f, Gender.MALE, mixer),
      RadioChannel.AllChannels) {
-	    this.radioContent.SetContent(this.GetModel<HotUpdateDataModel>().GetData("PrologueDeliveryRadio").values[1]);
+	    this.radioContent.SetContent(this.GetModel<HotUpdateDataModel>().GetData("PrologueDeliveryRadio").values[0]);
     }
          
     public PrologueDeliveryRadio(): base(){}

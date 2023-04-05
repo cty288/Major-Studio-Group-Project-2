@@ -21,6 +21,9 @@ namespace _02._Scripts.BodyManagmentSystem {
 		
 		[ES3Serializable]
 		private List<BodyTimeInfo> nextDayDeternimedBodies = new List<BodyTimeInfo>();
+		
+		[field: ES3Serializable]
+		private List<BodyInfo> managedBodyInfos { get; set; } = new List<BodyInfo>();
 
 		[ES3Serializable] private Dictionary<BodyPartType, Dictionary<int, BindableProperty<int>>>
 			availableBodyPartIndices = null;
@@ -124,23 +127,52 @@ namespace _02._Scripts.BodyManagmentSystem {
 		
 		public BodyInfo GetBodyInfoByID(long id) {
 			
-			return allBodyTimeInfos.Find(bodyTimeInfo => bodyTimeInfo.BodyInfo.ID == id)?.BodyInfo;
+			BodyInfo result = allBodyTimeInfos.Find(bodyTimeInfo => bodyTimeInfo.BodyInfo.ID == id)?.BodyInfo;
+			if(result == null) {
+				result = managedBodyInfos.Find(bodyInfo => bodyInfo.ID == id);
+			}
+
+			return result;
+		}
+		
+		public void AddToManagedBodyInfos(BodyInfo bodyInfo) {
+			managedBodyInfos.Add(bodyInfo);
 		}
     
 		public bool IsInAllBodyTimeInfos(BodyInfo bodyInfo) {
 			return allBodyTimeInfos.FindIndex(bodyTimeInfo => bodyTimeInfo.BodyInfo.ID == bodyInfo.ID) != -1;
 		}
+
+		public void KillBodyInfo(BodyInfo bodyInfo) {
+			foreach (BodyTimeInfo bodyTimeInfo in allBodyTimeInfos) {
+				if (bodyTimeInfo.BodyInfo.ID == bodyInfo.ID) {
+					this.SendEvent<OnBodyInfoKilled>(new OnBodyInfoKilled() {ID = bodyTimeInfo.BodyInfo.ID});
+					break;
+				}
+			}
+
+			foreach (BodyInfo info in managedBodyInfos) {
+				if (info.ID == bodyInfo.ID) {
+					this.SendEvent<OnBodyInfoKilled>(new OnBodyInfoKilled() {ID = info.ID});
+					break;
+				}
+			}
+			
+			RemoveTimedBodyInfo(bodyInfo);
+			
+		}
 		
-		public void RemoveBodyInfo(BodyInfo bodyInfo) {
+		private void RemoveTimedBodyInfo(BodyInfo bodyInfo) {
 			allBodyTimeInfos.RemoveAll(bodyTimeInfo => {
 
 				if (bodyTimeInfo.BodyInfo.ID == bodyInfo.ID) {
-					this.SendEvent<OnBodyInfoRemoved>(new OnBodyInfoRemoved() {ID = bodyTimeInfo.BodyInfo.ID});
+					//this.SendEvent<OnBodyInfoKilled>(new OnBodyInfoKilled() {ID = bodyTimeInfo.BodyInfo.ID});
 					return true;
 				}
 
 				return false;
 			});
+			
 		}
 		
 		

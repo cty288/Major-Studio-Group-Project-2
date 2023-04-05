@@ -67,6 +67,16 @@ namespace _02._Scripts.Radio.RadioScheduling.GhostStory {
 							RadioChannel.FM92, null, 90),
 						gameTimeModel.CurrentTime.Value.AddDays(Random.Range(4, 7)), gameTimeModel.NightTimeStart);
 
+					retryCount = 50;
+					while (retryCount > 0 && timeRange2 == null) {
+						 timeRange2 = radioSchedulingModel.AddToScheduled(
+							new RadioScheduleInfo(new RadioProgramNameInfo(RadioProgramType.GhostStory, "Ghost Story (Replayed)"),
+								RadioChannel.FM92, null, 90),
+							gameTimeModel.CurrentTime.Value.AddDays(Random.Range(4, 7)), gameTimeModel.NightTimeStart);
+						retryCount--;
+					}
+					
+					
 					if (timeRange2 != null) {
 						gameEventSystem.AddEvent(new GhostStoryRadioEvent(timeRange2, data));
 					}

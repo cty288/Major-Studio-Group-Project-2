@@ -57,6 +57,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<RadioDialogueDataModel>();
         this.RegisterModel<GhostStoryModel>();
         this.RegisterModel<SexyCardModel>();
+        this.RegisterModel<SuspectModel>();
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();
@@ -79,6 +80,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<GhostStorySystem>();
         this.RegisterSystem<ChoiceSystem>();
         this.RegisterSystem<SexyCardSystem>();
+        this.RegisterSystem<SuspectSystem>();
     }
     
     protected void RegisterModel<T>() where T : class, IModel, new() {

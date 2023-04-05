@@ -25,9 +25,11 @@ public class NotebookViewController : AbstractCanHaveDroppableItems, IPointerCli
     private void OnNewDay(OnNewDay e) {
         if (e.Day == 0) {
             gameObject.SetActive(false);
+            this.GetModel<NotebookModel>().HasNotebook = false;
         }
         else {
             gameObject.SetActive(true);
+            this.GetModel<NotebookModel>().HasNotebook = true;
         }
     }
 

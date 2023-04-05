@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.GameTime;
 using Crosstales;
 using MikroFramework.Architecture;
 using UnityEngine;
@@ -10,7 +11,7 @@ using Random = UnityEngine.Random;
 public interface IPlayerResource {
     public string PrefabName { get; }
     public int MaxCount { get; }
-    
+    public string DisplayName { get; }
 }
 
 
@@ -31,6 +32,7 @@ public abstract class MerchantGoods: IPlayerResource {
     public abstract string SellSentence { get; }
     public abstract string PrefabName { get; }
     public abstract int MaxCount { get; }
+    public abstract string DisplayName { get; }
 }
 
 
@@ -51,6 +53,7 @@ public class BulletGoods : MerchantGoods {
 
     public override string PrefabName { get; } = "Bullet";
     public override int MaxCount { get; } = 6;
+    public override string DisplayName { get; } = "Bullet";
 }
 
 
@@ -68,6 +71,7 @@ public class PowerGeneratorGoods : MerchantGoods {
 
     public override string PrefabName { get; } = "PowerGenerator";
     public override int MaxCount { get; } = 1;
+    public override string DisplayName { get; } = "Power Generator";
 }
 
 
@@ -93,7 +97,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
     private List<MerchantGoods> todayGoods = new List<MerchantGoods>();
 
     private AudioMixerGroup mixer;
-    public MerchantPhone() {
+    public MerchantPhone(): base() {
         speaker = GameObject.Find("MerchantSpeaker").GetComponent<Speaker>();
         gameTimeManager = this.GetSystem<GameTimeManager>((manager => {
             gameTimeManager = manager;
@@ -142,10 +146,25 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
     }
 
     private void OnWelcomeSpeakFinished(Speaker speaker){
-       
         this.RegisterEvent<OnDialDigit>(OnDialDigit);
         string welcome = GetSellListSentence();
-        speaker.Speak(welcome, mixer, "Merchant", 1f, null);
+        GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
+        if(!(gameTimeModel.CurrentTime.Value.Hour==23 && gameTimeModel.CurrentTime.Value.Minute>=59)){
+            speaker.Speak(welcome, mixer, "Merchant", 1f, null);
+        }
+        
+        gameTimeModel.CurrentTime.RegisterWithInitValue(OnTimeChanged);
+       
+      
+    }
+
+    private void OnTimeChanged(DateTime time) {
+        if(time.Hour == 23 && time.Minute == 59) {
+            isTodayAvailable = false;
+            this.UnRegisterEvent<OnDialDigit>(OnDialDigit);
+            this.GetModel<GameTimeModel>().CurrentTime.UnRegisterOnValueChanged(OnTimeChanged);
+            TelephoneSystem.HangUp();
+        }
     }
 
     private void OnDialDigit(OnDialDigit e) {
@@ -163,7 +182,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
                  reply = "The number you dialed is invalid. Please try again or press 9 to repeat the list.";
             }else {
                 MerchantGoods goods = todayGoods[index];
-                if (goods.FoodPerUnit > playerResourceModel.FoodCount) {
+                if (goods.FoodPerUnit > playerResourceModel.GetResourceCount<FoodResource>()) {
                     reply =
                         "You don't have enough food to purchase this item!";
                 }
@@ -187,6 +206,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
     }
 
     private void OnMerchantSpeakEnd(Speaker speaker) {
+        this.GetModel<GameTimeModel>().CurrentTime.UnRegisterOnValueChanged(OnTimeChanged);
         EndConversation();
     }
 
@@ -213,6 +233,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
             speaker.Stop();
         }
         
+        this.GetModel<GameTimeModel>().CurrentTime.UnRegisterOnValueChanged(OnTimeChanged);
         this.UnRegisterEvent<OnDialDigit>(OnDialDigit);
     }
 }
