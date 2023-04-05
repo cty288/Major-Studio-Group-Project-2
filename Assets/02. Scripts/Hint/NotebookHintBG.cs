@@ -11,7 +11,6 @@ public class NotebookHintBG : MonoBehaviour
     {
         GetComponent<Button>().onClick.AddListener(() =>
         {   
-            Debug.Log("open");
             notebookHint.Hide();
             this.gameObject.SetActive(false);
         });
