@@ -16,7 +16,7 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
     
     public PoliceGenerateEvent(){}
     public static BodyInfo GeneratePolice() {
-        HeightType height = Random.Range(0, 2) == 0 ? HeightType.Short : HeightType.Tall;
+        HeightType height = HeightType.Tall;
         BodyPartPrefabInfo body = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartDisplayType.Shadow, BodyPartType.Body, false,
             height, false, null, 0);
         BodyPartPrefabInfo leg = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartDisplayType.Shadow, BodyPartType.Legs, false,

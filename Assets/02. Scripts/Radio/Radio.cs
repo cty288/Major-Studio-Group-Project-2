@@ -97,7 +97,12 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         
         radioModel.RelativeVolume.RegisterWithInitValue(OnVolumeChange).UnRegisterWhenGameObjectDestroyed(gameObject);
         radioModel.CurrentChannel.RegisterWithInitValue(OnChannelChange).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
 
+    }
+
+    private void OnNewDay(OnNewDay e) {
+        radioModel.IsOn.Value = true;
     }
 
     private void InitializePlayers() {
@@ -373,7 +378,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
 
 
         eventSystem.AddEvent(new PrologueBodyRadio(
-            new TimeRange(currentTime + new TimeSpan(0, 5, 0), currentTime + new TimeSpan(0, 30, 0)),
+            new TimeRange(currentTime + new TimeSpan(0, 10, 0), currentTime + new TimeSpan(0, 30, 0)),
             AudioMixerList.Singleton.AudioMixerGroups[1]));
 
     }

@@ -1,17 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.GameTime;
 using Mikrocosmos;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
 using UnityEngine;
 
-public class ImageEffectOpener : AbstractMikroController<MainGame>
-{
+public class ImageEffectOpener : AbstractMikroController<MainGame> {
+    private GameTimeModel gameTimeModel;
     private void Awake() {
         this.GetModel<GameSceneModel>().GameScene.RegisterOnValueChaned(OnGameSceneChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
+        gameTimeModel = this.GetModel<GameTimeModel>();
     }
 
     private void OnNewDay(OnNewDay e) {
@@ -27,12 +29,15 @@ public class ImageEffectOpener : AbstractMikroController<MainGame>
 
     private void OnGameSceneChanged(GameScene scene) {
         this.Delay(0.5f, () => {
-            if (scene == GameScene.Peephole)
-            {
+            if (scene == GameScene.Peephole) {
+                if (gameTimeModel.Day == 0) {
+                    ImageEffectController.Singleton.TurnOffScriptableRendererFeature(1);
+                }
                 ImageEffectController.Singleton.TurnOnScriptableRendererFeature(0);
-            }
-            else
-            {
+            }else {
+                if (gameTimeModel.Day == 0) {
+                    ImageEffectController.Singleton.TurnOnScriptableRendererFeature(1);
+                }
                 ImageEffectController.Singleton.TurnOffScriptableRendererFeature(0);
             }
         });

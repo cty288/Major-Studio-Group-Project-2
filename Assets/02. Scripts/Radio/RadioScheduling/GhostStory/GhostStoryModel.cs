@@ -40,7 +40,13 @@ namespace _02._Scripts.Radio.RadioScheduling.GhostStory {
 					randomIndexList.Add(i);
 				}
 				randomIndexList.CTShuffle();
+				//the 4th item is always after the 1st item
+				randomIndexList.Remove(3);
+				int firstIndexPos = randomIndexList.IndexOf(0);
+				randomIndexList.Insert(firstIndexPos + 1, 3);
 			}
+			
+			
 
 			
 			int index = randomIndexList[0];

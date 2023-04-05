@@ -81,7 +81,7 @@ namespace _02._Scripts.Radio {
 						}
 						catch (Exception e) {
 							hasError = true;
-							Debug.LogError("Error in parsing radio dialogue: " + keyName + " " + e);
+							Debug.LogError("Error in parsing radio dialogue: " + keyName + " " + e.StackTrace);
 							break;
 						}
 					}

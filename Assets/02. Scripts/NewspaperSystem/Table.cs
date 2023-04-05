@@ -70,7 +70,7 @@ public class Table :  AbstractDroppableItemContainerViewController {
     private void OnFashionCatalogGenerated(OnFashionCatalogGenerated e) {
         GameObject book = SpawnItem(fashionBookList[Random.Range(0, fashionBookList.Count)]);
         GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
-        book.GetComponent<FashionCatalogViewController>().SetContent(e.BodyPartIndicesUpdateInfo.Time, gameTimeModel.Week);
+        book.GetComponent<FashionCatalogViewController>().SetContent(e.BodyPartIndicesUpdateInfo.Time, gameTimeModel.Week, e.CurrentSpriteIndex);
 
        
     }

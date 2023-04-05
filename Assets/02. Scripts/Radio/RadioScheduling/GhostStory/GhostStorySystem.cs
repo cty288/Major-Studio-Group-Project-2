@@ -36,7 +36,7 @@ namespace _02._Scripts.Radio.RadioScheduling.GhostStory {
 		}
 
 		private void GhostStoryProgram(int week) {
-			bool hasGhostStoryThisWeek = Random.Range(0, 100) > 40;
+			bool hasGhostStoryThisWeek = true;//Random.Range(0, 100) > 40;
 			if (!hasGhostStoryThisWeek) {
 				return;
 			}
