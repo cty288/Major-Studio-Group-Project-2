@@ -126,16 +126,16 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
 
         List<string> looks = new List<string>();
         looks.Add("bold colors and long-lasting wear");
-        looks.Add("vibrant hues and smudge-proof formula");
         looks.Add("lustrous shades and waterproof finish");
         looks.Add("dewy glow and nourishing ingredients");
-        looks.Add("flawless coverage and weightless feel");
         looks.Add("sheer shimmer and buildable color");
         looks.Add("matte finish and oil-free formula");
+        //looks.Add("flawless coverage and weightless feel");
+        //looks.Add("vibrant hues and smudge-proof formula");
 
-
-        string makeup = makeups[Random.Range(0, makeups.Count)];
-        string look = looks[Random.Range(0, looks.Count)];
+        int i = Random.Range(0, makeups.Count);
+        string makeup = makeups[i];
+        string look = looks[i];
 
         string content = "Attention all beauty queens! Do you want to look your best? Then you need our new makeup line," +
             $" {makeup}! With {look}, {makeup} will have you looking stunning all day and night. So get your glam on and try {makeup} today";
@@ -161,9 +161,9 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
         looks.Add("long battery life and convenient carrying handle");
         looks.Add("crisp audio and compact construction");
 
-
-        string name = names[Random.Range(0, names.Count)];
-        string look = looks[Random.Range(0, looks.Count)];
+        int i = Random.Range(0, names.Count);
+        string name = names[i];
+        string look = looks[i];
 
         string content = $"Do you want to be the life of the party? Then you need our new boombox, the {name}!" +
             $" With {look}, the {name} will have you grooving wherever you go." +
@@ -191,8 +191,9 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
         looks.Add("multiplayer compatibility and head-to-head play");
 
 
-        string name = names[Random.Range(0, names.Count)];
-        string look = looks[Random.Range(0, looks.Count)];
+        int i = Random.Range(0, names.Count);
+        string name = names[i];
+        string look = looks[i]; ;
 
         string content = $"Attention all gamers! Do you want to take your gaming experience to the next level? Then you need our new video game console, the {name}!" +
             $" With {look}, the {name} will have you immersed in virtual worlds like never before." +
@@ -204,7 +205,14 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
     {
         string content = "Are you tired of boring old coffee? Then you need our new coffee maker, the Java Jolt!" +
             " With programmable settings and a sleek design, the Java Jolt will brew the perfect cup every time. " +
-            $"So wake up and smell the coffee with the Java Jolt!";
+            "So wake up and smell the coffee with the Java Jolt! Call xxxxxxxxxxx";
+        return new RadioTextMessageInfo(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f), RadioChannel.FM100, RadioProgramType.Ads, 1);
+    }
+    private RadioTextMessageInfo Message_Mobile_Phone() //important feature
+    {
+        string content = "Do you want to stay connected with your friends and family no matter where you go? Then you need our new mobile phone, the Mobile Master! " +
+             " With advanced technology and easy-to-use features, the Mobile Master will keep you connected on the go. " +
+             "So stay in touch and get the Mobile Master today! Call xxxxxxxxxxx";
         return new RadioTextMessageInfo(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f), RadioChannel.FM100, RadioProgramType.Ads, 1);
     }
 
@@ -216,6 +224,8 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
                          + "We're not entirely sure yet that this was those creatures did. But the possibility is extremely high.";
         return new RadioTextMessageInfo(content, Random.Range(0.8f, 1.2f), Gender.MALE, Random.Range(0.2f, 0.8f),RadioChannel.FM100,RadioProgramType.Announcement ,1);
     }
+
+
 
     private RadioTextMessageInfo Message_Weather_Report()
     {
