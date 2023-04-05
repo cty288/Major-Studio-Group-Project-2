@@ -272,6 +272,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         this.Delay(time, () => {
             DestroyAllContents();
             panel.gameObject.SetActive(false);
+            GetComponentInChildren<NotebookHint>(true).Hide();
         });
         selfCollider.enabled = false;
 
@@ -326,6 +327,9 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
     
     protected override void Update() {
         base.Update();
+        if(GetComponentInChildren<NotebookHint>(true).IsShow){
+            return;
+        }
         Vector3 mousePos = Input.mousePosition;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
         mousePos = new Vector3(mousePos.x, mousePos.y, 0);

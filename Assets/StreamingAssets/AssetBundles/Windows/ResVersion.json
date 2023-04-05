@@ -55,9 +55,14 @@
     },
     {
       "AssetName": "audios",
-      "MD5": "a164f3c3c6b52360efc1d6ec2c389573",
-      "FileSize": 1435.291,
+      "MD5": "3cdcc3cbb89cb300665624215f1d023b",
+      "FileSize": 1438.833,
       "assetDatas": [
+        {
+          "Name": "clock_tick",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
         {
           "Name": "dogBark_1",
           "OwnerBundleName": "audios",
@@ -212,8 +217,8 @@
     },
     {
       "AssetName": "general",
-      "MD5": "240a0ba2e037c61f3583d3869062e3c1",
-      "FileSize": 908.7822,
+      "MD5": "9dfe23c3a1a4a38edb1502bb4e463f46",
+      "FileSize": 910.368164,
       "assetDatas": [
         {
           "Name": "DraggedText",
@@ -249,8 +254,8 @@
     },
     {
       "AssetName": "mftest",
-      "MD5": "b42266f84ede4c86f07da942deb8a5c2",
-      "FileSize": 1092.00391,
+      "MD5": "2adebda1e0391c01d4c746fea04d9a30",
+      "FileSize": 1054.09766,
       "assetDatas": [
         {
           "Name": "War loop",
@@ -349,7 +354,7 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "f9a3e92bd72374ed4739bbaf75fdd019",
+      "MD5": "571e3b6d88e39cb7e1a236128a39b665",
       "FileSize": 1.79296875,
       "assetDatas": []
     },
