@@ -4,7 +4,7 @@ using MikroFramework.Architecture;
 using MikroFramework.Event;
 using TMPro;
 
-public class ClockObject : DraggableItems
+public class ClockObject : AbstractMikroController<MainGame>
 //AbstractMikroController<MainGame>
 //MonoBehaviour
 {
@@ -17,7 +17,7 @@ public class ClockObject : DraggableItems
     private TMP_Text timeText;
     void Awake()
     {
-        base.Awake();
+        //base.Awake();
         timeText = transform.Find("TimeCanvas/Time").GetComponent<TMP_Text>();
         this.GetSystem<GameTimeManager>().CurrentTime.RegisterWithInitValue(OnTimeChanged)
              .UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -25,19 +25,9 @@ public class ClockObject : DraggableItems
         
     }
 
-    public override void SetLayer(int layer) {
-        foreach (SpriteRenderer sprite in sprites) {
-            //sprite.sortingOrder = layer;
-        }
-    }
+   
 
-    protected override void OnClick() {
-        
-    }
-
-    public override void OnThrownToRubbishBin() {
-        Destroy(gameObject);
-    }
+   
 
     void Update()
     {
