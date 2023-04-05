@@ -37,7 +37,7 @@ public class BountyHuntingSelector : AbstractMikroController<MainGame>, IPointer
 
     private void OnBountyHuntingChanged(PlayerControlType controlType) {
         if (controlType == PlayerControlType.BountyHunting) {
-            hintText.text = "Report to the Bounty Hunter";
+            hintText.text = "Report this Person";
         }
         else {
             hintText.text = hintTextOriginal;

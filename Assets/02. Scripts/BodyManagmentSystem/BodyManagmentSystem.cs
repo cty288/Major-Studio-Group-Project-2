@@ -61,8 +61,8 @@ public class BodyManagmentSystem : AbstractSystem {
             bodyCount = 1;
             
             //prologue body
-            BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, Random.Range(0.5f,1f),
-                new NormalKnockBehavior(3, int.MaxValue, null),bodyModel.AvailableBodyPartIndices);
+            BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, Random.Range(0.5f, 1f),
+                new NormalKnockBehavior(3, int.MaxValue, null), bodyModel.AvailableBodyPartIndices, 40);
             bodyModel.AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(new BodyTimeInfo(1, info, true));
         }
 
@@ -77,7 +77,7 @@ public class BodyManagmentSystem : AbstractSystem {
         }
        
         foreach (BodyTimeInfo bodyTimeInfo in removeSet) {
-            bodyModel.RemoveBodyInfo(bodyTimeInfo.BodyInfo);
+            bodyModel.KillBodyInfo(bodyTimeInfo.BodyInfo);
             bodyTimeInfo.BodyInfo.IsDead = true;
         }
 
@@ -102,7 +102,8 @@ public class BodyManagmentSystem : AbstractSystem {
         
         for (int i = newBodyInfos.Count; i < bodyCount; i++) {
             BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, Random.Range(0.1f,0.9f),
-                new NormalKnockBehavior(3, Random.Range(3, 7), null),bodyModel.AvailableBodyPartIndices);
+                new NormalKnockBehavior(3, Random.Range(3, 7), null),bodyModel.AvailableBodyPartIndices,
+                40);
             
             BodyTimeInfo timeInfo = null;
             if (i == 0) {
@@ -133,6 +134,6 @@ public struct OnBodyInfoBecomeAlien {
     public long ID;
 }
 
-public struct OnBodyInfoRemoved {
+public struct OnBodyInfoKilled {
     public long ID;
 }

@@ -123,8 +123,8 @@ public class TelephoneSystem : AbstractSavableSystem {
             newspaperModel.AddPageToNewspaper(newspaperModel.GetWeekForNews(telephoneFixDay),
                 this.GetModel<ImportantNewsTextModel>().GetInfo("LandlineMaintenanceEnds"), 0);
             
-            newspaperModel.AddPageToNewspaper(newspaperModel.GetWeekForNews(telephoneFixDay),
-                this.GetModel<ImportantNewsTextModel>().GetInfo("ExampleKey"));
+            //newspaperModel.AddPageToNewspaper(newspaperModel.GetWeekForNews(telephoneFixDay),
+              //  this.GetModel<ImportantNewsTextModel>().GetInfo("ExampleKey"));
         }
     }
     void Update() {

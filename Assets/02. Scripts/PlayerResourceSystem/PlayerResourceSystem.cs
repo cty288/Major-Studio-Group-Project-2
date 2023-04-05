@@ -8,18 +8,29 @@ using UnityEngine;
 
 public struct OnPlayerResourceNumberChanged {
     public GoodsInfo GoodsInfo;
+    public int OldValue;
+    public int NewValue;
 }
 
 public class GoodsInfo {
     public int Count;
     public string PrefabName;
     public Type Type;
+    public int MaxCount;
+    public string DisplayName;
 
-    public GoodsInfo(int count, string prefabName, Type type)
+    public GoodsInfo(int count, string prefabName, Type type, int maxCount, string DisplayName)
     {
         Count = count;
         PrefabName = prefabName;
         this.Type = type;
+        MaxCount = maxCount;
+        this.DisplayName = DisplayName;
+    }
+
+
+    public static GoodsInfo GetGoodsInfo(IPlayerResource resource, int count) {
+        return new GoodsInfo(count, resource.PrefabName, resource.GetType(), resource.MaxCount, resource.DisplayName);
     }
 }
 public class PlayerResourceSystem : AbstractSystem {
@@ -31,6 +42,7 @@ public class PlayerResourceSystem : AbstractSystem {
         this.GetSystem<GameTimeManager>().OnDayStart += OnDayEnd;
         if (!playerResourceModel.HasEnoughResource<GunResource>(1)) {
             playerResourceModel.AddResource(new GunResource(), 1);
+            playerResourceModel.AddFood(5);
         }
     }
 
@@ -39,10 +51,11 @@ public class PlayerResourceSystem : AbstractSystem {
         if (day <= 1) {
             return;
         }
-        if (playerResourceModel.FoodCount.Value <= 0) {
+        if (!playerResourceModel.HasEnoughResource<FoodResource>(1)) {
             this.GetModel<GameStateModel>().GameState.Value = GameState.End;
         }
-        playerResourceModel.FoodCount.Value = Mathf.Max(0,  playerResourceModel.FoodCount.Value - 1);
-        
+
+        playerResourceModel.RemoveFood(1);
+
     }
 }

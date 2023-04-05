@@ -44,7 +44,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
 
     public AudioMixer AudioMixer {
         get {
-            if (audioSource.outputAudioMixerGroup) {
+            if (audioSource && audioSource.outputAudioMixerGroup) {
                 return audioSource.outputAudioMixerGroup.audioMixer;
             }
 

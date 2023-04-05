@@ -5,6 +5,7 @@ using Mikrocosmos;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.TimeSystem;
+using MikroFramework.Utilities;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -28,6 +29,7 @@ public class OpeningManager : MonoBehaviour {
 
     private void Start() {
         canSkip = false;
+        SubtitleNotebookHightlightedTextRecorder.IsMouseOverUIRC = new SimpleRC();
         ImageEffectController.Singleton.DisableAllFeatures();
         /*
         speaker.Speak(content, mixer, "Radio", OnFinished, rate);

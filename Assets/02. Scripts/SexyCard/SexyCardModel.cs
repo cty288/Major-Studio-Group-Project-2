@@ -7,7 +7,7 @@ namespace _02._Scripts.SexyCard {
 		public Sprite SexyCardSprite { get; set; }
 		
 		[field: ES3Serializable]
-		public BodyInfo SexyPerson { get; set; }
+		public long SexyPersonID { get; set; }
 		
 		[field: ES3Serializable]
 		public string SexyPersonPhoneNumber { get; set; }

@@ -40,7 +40,7 @@ public class BountyHunterQuest2Notification : BountyHunterQuestClueNotification 
         return new BountyHunterQuest2ClueEvent(newTimeRange,location,
             BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, 0,
                 new NormalKnockBehavior(Random.Range(1,3), UnityEngine.Random.Range(3,6),
-                    new List<string>(){}), this.GetModel<BodyModel>().AvailableBodyPartIndices), null, null);
+                    new List<string>(){}), this.GetModel<BodyModel>().AvailableBodyPartIndices, 40), null, null);
     }
 }
 

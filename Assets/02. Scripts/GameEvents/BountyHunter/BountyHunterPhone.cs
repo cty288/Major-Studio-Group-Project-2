@@ -38,7 +38,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
         
         return bountyHunterModel.NextAvailableDate.Date <= gameTimeManager.CurrentTime.Value.Date;
     }
-    public BountyHunterPhone() {
+    public BountyHunterPhone(): base() {
         speaker = GameObject.Find("BountyHunterSpeaker").GetComponent<Speaker>();
         bountyHunterSystem = this.GetSystem<BountyHunterSystem>(system => {
             bountyHunterSystem= system;
@@ -117,7 +117,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
             if (infoInModelInModel == null) {
                 bodyInfos.Add(info);
             }
-            else if(infoInModelInModel.IsAlien) {
+            else{ 
                 bodyInfos.Add(infoInModelInModel);
             }
         }

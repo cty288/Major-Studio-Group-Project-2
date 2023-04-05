@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base;
+using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.GameTime;
 using _02._Scripts.Poster.PosterEvents;
 using Crosstales.RTVoice.Model.Enum;
@@ -56,9 +57,12 @@ namespace _02._Scripts.SexyCard {
 					5, null),
 				BodyPartDisplayType.Shadow, false);
 
-			model.SexyPerson = bodyInfo;
+			model.SexyPersonID = bodyInfo.ID;
+			this.GetModel<BodyModel>().AddToManagedBodyInfos(bodyInfo);
 			model.SexyPersonPhoneNumber = PhoneNumberGenor.GeneratePhoneNumber(7);
 			this.GetSystem<TelephoneSystem>().AddContact(model.SexyPersonPhoneNumber, new SexyCardPhoneContact());
+			this.GetModel<SuspectModel>().AddSuspect(bodyInfo,
+				GoodsInfo.GetGoodsInfo(new BulletGoods(), 2));
 
 			DateTime sexyCardEventDay = this.GetModel<GameTimeModel>().GetDay(Random.Range(7, 15));
 			this.GetSystem<GameEventSystem>().AddEvent(new SexyCardDeliverEvent(new TimeRange(sexyCardEventDay)));

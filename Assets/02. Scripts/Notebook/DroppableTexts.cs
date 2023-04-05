@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.Notebook;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -45,13 +46,17 @@ public class DroppableTexts : MonoBehaviour, IDroppable {
 		text = GetComponent<TMP_Text>();
 	}
 
-	public void SetContent(string content, Color color) {
+	public void SetContent(string content, Color color, Vector2 targetPos) {
 		text.fontSize = text.fontSize;
 		text.color = color;
 		text.text = content;
 		text.transform.SetParent(text.transform.parent);
 		text.transform.SetAsLastSibling();
 		text.transform.position = Input.mousePosition;
+		if (targetPos != Vector2.zero) {
+			text.transform.DOMove(targetPos, 0.5f).OnComplete(OnDropped);
+		}
+		
 	}
 	
 

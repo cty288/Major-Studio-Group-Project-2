@@ -115,10 +115,10 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
         if (playerControlModel.ControlType.Value == PlayerControlType.Screenshot) {
             return;
         }
-        if (!string.IsNullOrEmpty(SubtitleHightlightedTextDragger.CurrentDraggedText)) {
-            StopHovering();
-            return;
-        }
+      //  if (!string.IsNullOrEmpty(SubtitleHightlightedTextRecorder.CurrentDraggedText)) {
+        //    StopHovering();
+          //  return;
+        //}
 
         StartHovering();
     }

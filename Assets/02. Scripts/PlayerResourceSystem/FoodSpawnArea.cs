@@ -18,12 +18,20 @@ public class FoodSpawnArea : AbstractMikroController<MainGame> {
     private TMP_Text foodText;
     private void Awake() {
         playerResourceModel = this.GetModel<PlayerResourceModel>();
-       
-        playerResourceModel.FoodCount.RegisterOnValueChaned(OnFoodNumberChanged)
+
+        this.RegisterEvent<OnPlayerResourceNumberChanged>(OnPlayerResourceNumberChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
+        
         foodRenderers = GetComponentsInChildren<SpriteRenderer>(true).ToList();
         foodText = transform.Find("FoodAreaHint/Text").GetComponent<TMP_Text>();
-        OnFoodNumberChanged(0, playerResourceModel.FoodCount.Value);
+        OnFoodNumberChanged(0, playerResourceModel.GetResourceCount<FoodResource>());
+    }
+
+    private void OnPlayerResourceNumberChanged(OnPlayerResourceNumberChanged e) {
+        if (e.GoodsInfo.Type == typeof(FoodResource)) {
+            OnFoodNumberChanged(e.OldValue, e.NewValue);
+            
+        }
     }
 
     private void OnFoodNumberChanged(int oldNumber, int foodNumber) {

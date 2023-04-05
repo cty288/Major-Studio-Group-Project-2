@@ -56,13 +56,6 @@ public abstract class AbstractCanHaveDroppableItems : AbstractMikroController<Ma
 				lastDroppable = null;
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
 	}
 
 

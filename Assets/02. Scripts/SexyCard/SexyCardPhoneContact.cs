@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.ChoiceSystem;
 using _02._Scripts.GameTime;
 using Crosstales.RTVoice.Model.Enum;
@@ -15,14 +16,17 @@ namespace _02._Scripts.SexyCard {
 		protected Gender speakerGender;
 		
 		protected SexyCardModel model;
+		protected BodyInfo sexyPersonInfo;
 		public SexyCardPhoneContact() : base() {
 			speaker = GameObject.Find("SexyCardSpeaker").GetComponent<Speaker>();
-			this.mixer = this.GetModel<SexyCardModel>().SexyPerson.VoiceTag.VoiceGroup;
+			sexyPersonInfo = this.GetModel<BodyModel>().GetBodyInfoByID(this.GetModel<SexyCardModel>().SexyPersonID);
+			this.mixer = sexyPersonInfo.VoiceTag.VoiceGroup;
 			speakerGender = this.GetModel<SexyCardModel>().SexyPersonGender;
 			model = this.GetModel<SexyCardModel>();
 		}
 		public override bool OnDealt() {
-			return model.IsSexyPersonAvailable;
+			BodyInfo sexyPerson = this.GetModel<BodyModel>().GetBodyInfoByID(model.SexyPersonID);
+			return model.IsSexyPersonAvailable && !sexyPerson.IsDead;
 		}
 
 		protected override void OnStart() {
@@ -84,7 +88,7 @@ namespace _02._Scripts.SexyCard {
 			speaker.Speak(content
 				, mixer, "???", 1f, OnPlayerAgree, 1f,1f, speakerGender);
 			this.GetSystem<GameEventSystem>()
-				.AddEvent(new SexyPersonComeEvent(new TimeRange(comeTime, comeTime.AddMinutes(20)), model.SexyPerson));
+				.AddEvent(new SexyPersonComeEvent(new TimeRange(comeTime, comeTime.AddMinutes(20)), sexyPersonInfo));
 		}
 
 		private void OnPlayerAgree(Speaker obj) {

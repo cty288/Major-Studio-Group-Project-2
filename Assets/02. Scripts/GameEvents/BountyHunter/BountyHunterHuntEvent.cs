@@ -58,7 +58,7 @@ public class BountyHunterHuntEvent : GameEvent{
            
             if (targetInfo != null) {
                 if (!targetInfo.IsDead) {
-                    bodyModel.RemoveBodyInfo(targetInfo);
+                    bodyModel.KillBodyInfo(targetInfo);
                     targetInfo.IsDead = true;
                     
                     if (targetInfo.IsAlien) {

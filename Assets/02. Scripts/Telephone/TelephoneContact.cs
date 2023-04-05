@@ -7,12 +7,18 @@ public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegist
    // [field: ES3NonSerializable]
     public Action OnConversationComplete { get; set; }
     protected Speaker speaker;
-    protected TelephoneSystem telephoneSystem;
+    //protected TelephoneSystem telephoneSystem;
     public Action OnTelephoneHangUp { get; set; }
     public Action OnTelephoneStart { get; set; }
 
+    public TelephoneSystem TelephoneSystem {
+        get {
+            return this.GetSystem<TelephoneSystem>();
+        }
+    }
+
     public TelephoneContact() {
-        telephoneSystem = this.GetSystem<TelephoneSystem>();
+       // telephoneSystem = this.GetSystem<TelephoneSystem>();
     }
     public void Start() {
         OnTelephoneStart?.Invoke();
