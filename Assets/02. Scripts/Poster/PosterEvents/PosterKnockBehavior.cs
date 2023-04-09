@@ -10,7 +10,7 @@ using UnityEngine.Audio;
 namespace _02._Scripts.Poster.PosterEvents {
 	public class PosterKnockBehavior: AbstractKnockBehavior, ICanSendEvent {
 		[field: ES3Serializable]
-		public override string TagName { get; } = "Knock_Poster";
+		public override string TagName { get; protected set; } = "Knock_Poster";
 		
 		public PosterKnockBehavior(): base(){}
 		
@@ -51,7 +51,7 @@ namespace _02._Scripts.Poster.PosterEvents {
 		}
 
 		public override void OnStopKnock() {
-			currentSpeaker.Stop();
+			currentSpeaker.Stop(true);
 			knockAudioSource.Stop();
 		}
 	}

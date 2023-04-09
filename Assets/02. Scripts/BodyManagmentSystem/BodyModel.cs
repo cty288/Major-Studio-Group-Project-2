@@ -77,6 +77,7 @@ namespace _02._Scripts.BodyManagmentSystem {
 				availableBodyPartIndices = new Dictionary<BodyPartType, Dictionary<int, BindableProperty<int>>>();
 				availableBodyPartIndices.Add(BodyPartType.Head, new Dictionary<int, BindableProperty<int>>());
 				availableBodyPartIndices.Add(BodyPartType.Body, new Dictionary<int, BindableProperty<int>>());
+				availableBodyPartIndices.Add(BodyPartType.Legs, new Dictionary<int, BindableProperty<int>>());
 			}
 
 			Dictionary<BodyPartType, List<int>> removedIndices = new Dictionary<BodyPartType, List<int>>();
@@ -104,7 +105,7 @@ namespace _02._Scripts.BodyManagmentSystem {
 
 			foreach (BodyPartType bodyPartType in availableBodyPartIndices.Keys) {
 				var targetList = AlienBodyPartCollections.Singleton.GetBodyPartCollectionByBodyType(bodyPartType, false)
-					.HeightSubCollections[0].NewspaperBodyPartDisplays.HumanTraitPartsPrefabs;
+					.HeightSubCollections[0].ShadowBodyPartPrefabs.HumanTraitPartsPrefabs;
 				
 				int actualCount = Mathf.Min(count, targetList.Count);
 				

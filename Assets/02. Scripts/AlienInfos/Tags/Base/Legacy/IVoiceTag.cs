@@ -45,7 +45,7 @@ namespace _02._Scripts.AlienInfos.Tags.Base {
 		public VoiceTag(AudioMixerGroup voiceGroup) {
 			//get a random voicetype
 			VoiceType = (Gender) Random.Range(0, 2);
-			VoiceSpeed = Random.Range(0.7f, 1.4f);
+			VoiceSpeed = Random.Range(0.85f, 1.15f);
 			VoiceGroup = voiceGroup;
 		}
 

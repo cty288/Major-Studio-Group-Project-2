@@ -29,7 +29,7 @@ public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegist
         OnTelephoneHangUp?.Invoke();
         OnConversationComplete = null;
         if (speaker.IsSpeaking) {
-            speaker.Stop();
+            speaker.Stop(false);
         }
         OnHangUp();
     }
@@ -39,7 +39,7 @@ public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegist
         OnConversationComplete?.Invoke();
         if (speaker.IsSpeaking)
         {
-            speaker.Stop();
+            speaker.Stop(true);
         }
         OnEnd();
     }

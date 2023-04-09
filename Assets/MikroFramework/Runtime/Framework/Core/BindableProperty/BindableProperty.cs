@@ -32,8 +32,9 @@ namespace MikroFramework.BindableProperty
                     return;
                 }
 
-                this.onValueChanged2?.Invoke(this.value, value);
+                T oldValue = this.value;
                 this.value = value;
+                this.onValueChanged2?.Invoke(oldValue, value);
                 this.onValueChanged?.Invoke(value);
             }
         }

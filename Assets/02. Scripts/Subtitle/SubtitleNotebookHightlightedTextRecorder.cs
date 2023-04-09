@@ -138,9 +138,14 @@ public class SubtitleNotebookHightlightedTextRecorder : AbstractMikroController<
             }
         }
 	}
+    
+    
 
     private void OnDestroy() {
         //SubtitleHightlightedTextRecorder.CurrentDraggedText = null;
+        if(isMouseOverUI) {
+            IsMouseOverUIRC.Release();
+        }
     }
 
     private TMP_Text CreateDraggedText(string targetText, Color color, NotebookViewController notebook) {

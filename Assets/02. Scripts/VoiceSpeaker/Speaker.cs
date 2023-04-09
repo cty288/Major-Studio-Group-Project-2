@@ -94,7 +94,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
             SpeakSentence(nextSentence, nextSentence.Rate, nextSentence.volumeMultiplier);
         }
         else {
-            Stop();
+            Stop(true);
         }
     }
 
@@ -193,10 +193,13 @@ public class Speaker :  AbstractMikroController<MainGame> {
         return text;
     }
     private void SpeakSentence(SentenceInfo text, float rate, float volumeMultiplier) {
+        if (!audioSource) {
+            return;
+        }
         currentSentence = text;
-        float volume = text.SpeakGender == Gender.MALE ? 0.5f : 0.8f;
+        float volume = text.SpeakGender == Gender.MALE ? 0.65f : 0.9f;
         volume *= volumeMultiplier;
-        audioSource.outputAudioMixerGroup = text.Mixer;
+        audioSource.outputAudioMixerGroup = text.Mixer ==null? null : text.Mixer;
 
         string processedSentence = text.SentenceFragment;
         //remove all rich text tags and all texts in <>
@@ -219,7 +222,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
      
     }
 
-    public void Stop() {
+    public void Stop(bool invokeEndCallback) {
         sentenceQueues.Clear();
         
         if (subtitile && subtitleShowing) {
@@ -233,7 +236,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
         }
        
         audioSource.Stop();
-        if (currentSentence!=null) {
+        if (currentSentence!=null && invokeEndCallback) {
             currentSentence.Callback?.Invoke(this);
         }
         

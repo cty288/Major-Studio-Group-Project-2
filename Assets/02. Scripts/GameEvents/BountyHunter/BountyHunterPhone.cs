@@ -55,7 +55,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
     }
 
     protected override void OnStart() {
-       
+        this.GetModel<TelephoneNumberRecordModel>().AddOrEditRecord(bountyHunterModel.PhoneNumber, "Bounty Hunter");
         bodyManagmentSystem = this.GetSystem<BodyManagmentSystem>();
         bountyHunterModel.ContactedBountyHunter = true;
         List<string> welcomes = new List<string>();

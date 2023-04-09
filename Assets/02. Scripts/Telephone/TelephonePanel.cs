@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using DG.Tweening;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
@@ -12,7 +14,10 @@ using UnityEngine.UI;
 
 public class TelephonePanel : OpenableUIPanel {
     private GameObject panel;
-
+    private List<MaskableGraphic> images;
+    private List<TMP_Text> texts;
+    private Dictionary<MaskableGraphic, float> imageAlpha = new Dictionary<MaskableGraphic, float>();
+    private TelephoneNotepadUIPanel notepadUIPanel;
     private BountyHunterSystem bountyHunterSystem;
     private TelephoneSystem telephoneSystem;
     private EventTrigger phonecallEventTrigger;
@@ -22,7 +27,11 @@ public class TelephonePanel : OpenableUIPanel {
     protected override void Awake() {
         base.Awake();
         panel = transform.Find("Panel").gameObject;
-
+        images = GetComponentsInChildren<MaskableGraphic>(true).ToList();
+        texts = GetComponentsInChildren<TMP_Text>(true).ToList();
+        foreach (var image in images) {
+            imageAlpha.Add(image, image.color.a);
+        }
         telephoneSystem = this.GetSystem<TelephoneSystem>();
         bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
         playerControlModel = this.GetModel<PlayerControlModel>();
@@ -35,6 +44,9 @@ public class TelephonePanel : OpenableUIPanel {
         pickupText = phonecallEventTrigger.transform.Find("Text").GetComponent<TMP_Text>();
         phonecallEventTrigger.GetComponent<Image>().alphaHitTestMinimumThreshold = 1;
         phonecallEventTrigger.triggers[0].callback.AddListener(OnPhoneCallClicked);
+        notepadUIPanel = GetComponentInChildren<TelephoneNotepadUIPanel>(true);
+        notepadUIPanel.Init();
+        Hide(0.5f);
     }
 
     private void OnPlayerControlTypeChanged(PlayerControlType oldControlType, PlayerControlType newControlType) {
@@ -76,12 +88,40 @@ public class TelephonePanel : OpenableUIPanel {
     }
 
     public override void OnShow(float time) {
+        notepadUIPanel.OnPanelOpened();
+        images = GetComponentsInChildren<MaskableGraphic>(true).ToList();
+        texts = GetComponentsInChildren<TMP_Text>(true).ToList();
         panel.gameObject.SetActive(true);
+        images.ForEach((image => {
+            if(imageAlpha.ContainsKey(image)) {
+                image.DOFade(imageAlpha[image], time);
+            }
+            else {
+                image.DOFade(1, time);
+            }
+			
+        }));
+        texts.ForEach((text => {
+            text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
+            text.DOFade(1, time);
+        }));
     }
 
     public override void OnHide(float time) {
-        panel.gameObject.GetComponent<Animator>().CrossFade("Stop", time);
-        this.Delay(time, () => { panel.gameObject.SetActive(false); });
+        images = GetComponentsInChildren<MaskableGraphic>(true).ToList();
+        texts = GetComponentsInChildren<TMP_Text>(true).ToList();
+        
+        images.ForEach((image => image.DOFade(0, time)));
+        texts.ForEach((text => text.DOFade(0, time)));
+		
+		
+        this.Delay(time, () => {
+            if (this) { {
+                    notepadUIPanel.OnPanelOpened();
+                    panel.gameObject.SetActive(false);
+                }
+            }
+        });
     }
 
     public override void OnDayEnd() {

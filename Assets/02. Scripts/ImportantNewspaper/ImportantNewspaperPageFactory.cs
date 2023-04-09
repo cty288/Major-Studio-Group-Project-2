@@ -40,7 +40,7 @@ namespace _02._Scripts.ImportantNewspaper {
 				return resLoader.LoadSync<GameObject>("general", "RadioScheduleContent");
 			}
 
-			if (content is MissingDogImportantNewsContent) {
+			if (content is MissingDogPoster) {
 				return resLoader.LoadSync<GameObject>("general", "MissingDogContent");
 			}
 

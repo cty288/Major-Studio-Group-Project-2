@@ -136,8 +136,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.111, y: 0.0366}
+  m_SizeDelta: {x: 2.5339, y: 0.7254}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5545624732805615956
 CanvasRenderer:
@@ -194,12 +194,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.25
+  m_fontSize: 0.44
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0.1
-  m_fontSizeMax: 32
+  m_fontSizeMax: 0.44
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -428,7 +428,7 @@ MonoBehaviour:
     - {fileID: 2594777423302099215}
     - {fileID: 11500000, guid: 2769b5bbb8b0339489c3207dee3335f0, type: 3}
     - {fileID: 3328169327778032014}
-    _Values: 0e9f634435d9a64279baba3d0f955e1d3892f8f45b3e21192df029c46943ff5569bff72a9f01c8106e1ed1d6881d0576cc26b7ed8711484b3f838ed9fd95544445f0583173774237cae7863d6c4a9010ebb28f8ffbeddd7bf9bd15e38d11ed2736726e673b2cfc426aefb86f9886b80af27eed4b05c54858ed22d6cf73d93b24d4ad73dfb8f84b17512e071559b3eb71faf529f401c7d204443984e7a9d23170b5944345f997c305ce2a64cb33a14e3812c90c27f036ac32259164808c9b9222607761c56fa6786d48d03dd4d361c71987bd1e0e9b99747b
+    _Values: 0e9f634435d9a64279baba3d0f955e1d3892f8f45b3e21192df029c46943ff5569bff72a9f01c8106e1ed1d6881d0576cc26b7ed8711484b3f838ed9fd95544445f0583173774237cae7863d6c4a9010ebb28f8ffbeddd7bf9bd15e38d11ed2736726e673b2cfc426aefb86f9886b80af27eed4b05c54858ed22d6cf73d93b24d4ad73dfb8f84b17512e071559b3eb71faf529f401c7d204443984e7a9d23170b5944345f997c305ce2a64cb33a14e388344853b219b265d259164808c9b9222607761c56fa6786d48d03dd4d361c71987bd1e0e9b99747b
 --- !u!114 &-4517823076505037747
 MonoBehaviour:
   m_ObjectHideFlags: 0

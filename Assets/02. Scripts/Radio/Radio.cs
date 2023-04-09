@@ -154,6 +154,8 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
             .GetComponent<RadioContentPlayer>();
         
         activePlayers[channel] = player;
+        
+        
         return player;
     }
     
@@ -312,6 +314,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
                     player = SpawnPlayer(channel, content.ContentType);
                     radioModel.SetIsSpeaking(channel, true);
                     player.Play(content, OnSpeakerStop, isMuted);
+                    UpdateSpeakerVolume(true);
                 }
                 //activePlayers[channel].Speak(speakText, mixer, "Radio", overallVolume, OnSpeakerStop, speakRate, 1f, speakGender);
                 

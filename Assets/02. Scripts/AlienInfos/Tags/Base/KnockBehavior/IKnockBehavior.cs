@@ -14,7 +14,8 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 	}
 
 	public abstract class AbstractKnockBehavior : IKnockBehavior, ICanGetModel {
-		public abstract string TagName { get; }
+		
+		public abstract string TagName { get; protected set; }
 		//public abstract string name { get; }
 		
 		[field: ES3Serializable]
@@ -30,10 +31,13 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 		protected long bodyId {get; set; }
 		
 		public AbstractKnockBehavior(float knockDoorTimeInterval, float knockTime,
-			List<string> overrideDoorKnockingPhrases) {
+			List<string> overrideDoorKnockingPhrases, string overrideTagName="") {
 			KnockDoorTimeInterval = knockDoorTimeInterval;
 			KnockTime = knockTime;
 			doorKnockingPhrases = overrideDoorKnockingPhrases;
+			if(overrideTagName!="") {
+				TagName = overrideTagName;
+			}
 			if(doorKnockingPhrases==null) {
 				doorKnockingPhrases = this.GetModel<BodyKnockPhraseModel>().GetPhrases(TagName);
 			}

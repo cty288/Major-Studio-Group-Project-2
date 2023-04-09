@@ -23,9 +23,10 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
             height, false, null, 0);
         BodyPartPrefabInfo head = AlienBodyPartCollections.Singleton.SpecialBodyPartPrefabs.HeightSubCollections[0]
             .ShadowBodyPartPrefabs.HumanTraitPartsPrefabs[0].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
-      
-        return BodyInfo.GetBodyInfo(leg, body, head, height, new VoiceTag( AudioMixerList.Singleton.AlienVoiceGroups[1]),
-            new NormalKnockBehavior(3, Random.Range(3,7), new List<string>(){}),BodyPartDisplayType.Shadow, false);
+
+        return BodyInfo.GetBodyInfo(leg, body, head, height,
+            new VoiceTag(AudioMixerList.Singleton.AlienVoiceGroups[1], 1, Gender.MALE),
+            new NormalKnockBehavior(3, Random.Range(3,7), null, "Knock_Police"),BodyPartDisplayType.Shadow, false);
 
     }
 

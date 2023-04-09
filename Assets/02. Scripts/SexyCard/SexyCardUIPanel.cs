@@ -35,6 +35,7 @@ public class SexyCardUIPanel : OpenableUIPanel
     }
 
     private void OnSexyCardUIPanelOpened(OnSexyCardUIPanelOpened e) {
+        
         ShowPage();
         Show(0.5f);
     }
@@ -43,6 +44,7 @@ public class SexyCardUIPanel : OpenableUIPanel
         SexyCardModel sexyCardModel = this.GetModel<SexyCardModel>();
         sexyCardSprite.sprite = sexyCardModel.SexyCardSprite;
         sexyCardText.text = sexyCardModel.SexyPersonPhoneNumber;
+        this.GetModel<TelephoneNumberRecordModel>().AddOrEditRecord(sexyCardModel.SexyPersonPhoneNumber, "Sexy Card");
     }
 
     public override void OnShow(float time) {

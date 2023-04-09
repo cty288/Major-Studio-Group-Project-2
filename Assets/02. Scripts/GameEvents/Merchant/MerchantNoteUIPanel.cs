@@ -19,6 +19,7 @@ public class MerchantNoteUIPanel : OpenableUIPanel {
     private MerchantModel merchantModel;
     
     private Dictionary<Image, float> imageAlpha = new Dictionary<Image, float>();
+    private TelephoneNumberRecordModel telephoneNumberRecordModel;
 
     protected override void Awake() {
         base.Awake();
@@ -28,6 +29,7 @@ public class MerchantNoteUIPanel : OpenableUIPanel {
         merchantModel = this.GetModel<MerchantModel>();
         phoneNumberText = transform.Find("Panel/Paper/PhoneNumberText").GetComponent<TMP_Text>();
         panel = transform.Find("Panel").gameObject;
+        telephoneNumberRecordModel = this.GetModel<TelephoneNumberRecordModel>();
 
         foreach (Image image in images) {
             imageAlpha.Add(image, image.color.a);
@@ -36,6 +38,10 @@ public class MerchantNoteUIPanel : OpenableUIPanel {
     }
 
     private void OnMerchantNoteUIPanelOpened(OnMerchantNoteUIPanelOpened e) {
+        if (!telephoneNumberRecordModel.ContainsRecord(merchantModel.PhoneNumber)) {
+            telephoneNumberRecordModel.AddOrEditRecord(merchantModel.PhoneNumber, "Number on \"I have everything you want\"");
+        }
+       
         Show(0.5f);
     }
 

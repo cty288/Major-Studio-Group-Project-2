@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class SuspectModel : AbstractSavableModel {
     [field: ES3Serializable]
-    private Dictionary<long, List<GoodsInfo>> suspectIDToRewards { get; set; } = new Dictionary<long, List<GoodsInfo>>();
+    private Dictionary<long, GoodsInfo> suspectIDToRewards { get; set; } = new Dictionary<long, GoodsInfo>();
 
     public void AddSuspect(BodyInfo bodyInfo, params GoodsInfo[] rewards) {
         if (suspectIDToRewards.ContainsKey(bodyInfo.ID) || bodyInfo.IsDead) {
             return;
         }
 
-        suspectIDToRewards.Add(bodyInfo.ID, new List<GoodsInfo>(rewards));
+        suspectIDToRewards.Add(bodyInfo.ID, rewards[Random.Range(0, rewards.Length)]);
     }
     
     public void RemoveBody(long id) {
@@ -22,6 +22,13 @@ public class SuspectModel : AbstractSavableModel {
         suspectIDToRewards.Remove(id);
     }
     
+    public bool IsSuspect(long id) {
+        return suspectIDToRewards.ContainsKey(id);
+    }
+    
+    public GoodsInfo GetReward(long id) {
+        return suspectIDToRewards[id];
+    }
     public long GetRandomSuspect(out GoodsInfo reward) {
         reward = null;
         if (suspectIDToRewards.Count == 0) {
@@ -29,13 +36,16 @@ public class SuspectModel : AbstractSavableModel {
         }
 
         var randomIndex = Random.Range(0, suspectIDToRewards.Count);
-        var enumerator = suspectIDToRewards.GetEnumerator();
-        for (var i = 0; i < randomIndex; i++) {
-            enumerator.MoveNext();
-        }
+        int currentIndex = 0;
+        foreach (var pair in suspectIDToRewards) {
+            if (currentIndex == randomIndex) {
+                reward = pair.Value;
+                return pair.Key;
+            }
 
-        var randomSuspect = enumerator.Current;
-        reward = randomSuspect.Value[Random.Range(0, randomSuspect.Value.Count)];
-        return randomSuspect.Key;
+            currentIndex++;
+        }
+        
+        return -1;
     }
 }

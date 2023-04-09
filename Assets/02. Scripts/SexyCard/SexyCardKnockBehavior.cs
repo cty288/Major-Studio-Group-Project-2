@@ -9,7 +9,7 @@ using UnityEngine.Audio;
 
 namespace _02._Scripts.SexyCard {
 	public class SexyCardKnockBehavior: AbstractKnockBehavior, ICanSendEvent {
-		[field: ES3Serializable] public override string TagName { get; } = "Knock_SexyCard";
+		[field: ES3Serializable] public override string TagName { get; protected set; } = "Knock_SexyCard";
 		private Speaker currentSpeaker = null;
 		AudioSource knockAudioSource = null;
 
@@ -49,7 +49,7 @@ namespace _02._Scripts.SexyCard {
 		}
 
 		public override void OnStopKnock() {
-			currentSpeaker.Stop();
+			currentSpeaker.Stop(true);
 			knockAudioSource.Stop();
 		}
 	}

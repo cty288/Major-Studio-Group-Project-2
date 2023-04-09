@@ -32,7 +32,7 @@ namespace _02._Scripts.Radio {
 		}
 
 		public override void Stop() {
-			speaker.Stop();
+			speaker.Stop(true);
 		}
 
 		public override void Play(IRadioContent content, Action<RadioContentPlayer> onFinish, bool isMuted) {
@@ -44,8 +44,8 @@ namespace _02._Scripts.Radio {
 		}
 
 		public override void SetVolume(float relativeVolume, bool isLoud, bool isInstant) {
-			float loudVolume = -20 * (1 / relativeVolume);
-			float notLoudVolume = -45 * (1 / relativeVolume);
+			float loudVolume = -17 * (1 / relativeVolume);
+			float notLoudVolume = -37 * (1 / relativeVolume);
 			
 			
 			if (!isInstant) {

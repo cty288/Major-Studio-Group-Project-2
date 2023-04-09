@@ -5,14 +5,29 @@ using MikroFramework.Architecture;
 using MikroFramework.Event;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class CalenderViewController : AbstractMikroController<MainGame> {
+public class CalenderViewController : AbstractMikroController<MainGame>, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
     [SerializeField] private TMP_Text monthText;
     [SerializeField] private TMP_Text dayText;
     [SerializeField] private TMP_Text dayOfWeekText;
+    
+    private GameTimeManager gameTimeManager;
+    private bool isSkippingTime = false;
     private void Awake() {
         this.GetSystem<GameTimeManager>().CurrentTime.RegisterWithInitValue(OnTimeChange)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnNewDay>(OnNewDay);
+        gameTimeManager = this.GetSystem<GameTimeManager>();
+    }
+    
+
+    private void OnNewDay(OnNewDay e) {
+        gameObject.SetActive(e.Day >= 1);
+        if (isSkippingTime) {
+            isSkippingTime = false;
+            LoadCanvas.Singleton.StopLoad(null);
+        }
     }
 
     private void OnTimeChange(DateTime time) {
@@ -69,5 +84,27 @@ public class CalenderViewController : AbstractMikroController<MainGame> {
                 return "Dec";
         }
         return "Jan";
+    }
+
+    public void OnPointerEnter(PointerEventData eventData) {
+       
+    }
+
+    public void OnPointerExit(PointerEventData eventData) {
+       
+    }
+
+    public void OnPointerClick(PointerEventData eventData) {
+        LoadCanvas.Singleton.Load(OnSkipTimeStart, false);
+    }
+
+    private void OnSkipTimeStart() {
+        DateTime time = gameTimeManager.CurrentTime.Value;
+        this.GetModel<RadioModel>().IsOn.Value = false;
+        this.GetSystem<TelephoneSystem>().HangUp();
+        isSkippingTime = true;
+        
+        gameTimeManager.SkipTimeTo(new DateTime(time.Year, time.Month, time.Day, 23, 58, 0));
+        
     }
 }

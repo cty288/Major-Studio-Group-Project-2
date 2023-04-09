@@ -58,6 +58,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<GhostStoryModel>();
         this.RegisterModel<SexyCardModel>();
         this.RegisterModel<SuspectModel>();
+        this.RegisterModel<TelephoneNumberRecordModel>();
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();

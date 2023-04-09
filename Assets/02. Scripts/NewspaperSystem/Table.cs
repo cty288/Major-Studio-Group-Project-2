@@ -8,12 +8,14 @@ using _02._Scripts.GameTime;
 using _02._Scripts.ImportantNewspaper;
 using _02._Scripts.Notebook;
 using _02._Scripts.Poster;
+using _02._Scripts.Poster.PosterEvents;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
 using MikroFramework.ResKit;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Table :  AbstractDroppableItemContainerViewController {
@@ -22,8 +24,8 @@ public class Table :  AbstractDroppableItemContainerViewController {
     [SerializeField] private List<GameObject> photoPrefabList;
     [SerializeField] private List<GameObject> crumbledPaperList;
     [SerializeField] private GameObject importantNewspaperPrefab;
-    [SerializeField] private GameObject posterPrefab;
-    [SerializeField] private GameObject dogRewardPrefab;
+   // [SerializeField] private GameObject posterPrefab;
+    [FormerlySerializedAs("dogRewardPrefab")] [SerializeField] private GameObject rewardPrefab;
 
     [SerializeField] private List<GameObject> fashionBookList;
 
@@ -40,7 +42,7 @@ public class Table :  AbstractDroppableItemContainerViewController {
         this.RegisterEvent<OnNewspaperGenerated>(OnNewspaperGenerated).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<SpawnTableItemEvent>(OnSpawnItem).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnBountyHunterKillCorrectAlien>(OnBountyHunterKillCorrectAlien).UnRegisterWhenGameObjectDestroyed(gameObject);
-        this.RegisterEvent<OnMissingDogReward>(OnMissingDogReward).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnRewardPackage>(OnRewardPackage).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNewPhotoTaken>(OnNewPhotoTaken).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNoteDeleted>(OnNoteDeleted).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnCameraReceive>(OnCameraReceive).UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -52,13 +54,13 @@ public class Table :  AbstractDroppableItemContainerViewController {
         importantNewspaperModel = this.GetModel<ImportantNewspaperModel>();
     }
 
-    private void OnMissingDogReward(OnMissingDogReward e) {
-        GameObject reward = SpawnItem(dogRewardPrefab);
-        reward.GetComponent<DogRewardDeliveryViewController>().SetFoodCount(e.FoodCount);
+    private void OnRewardPackage(OnRewardPackage e) {
+        GameObject reward = SpawnItem(rewardPrefab);
+        reward.GetComponent<RewardDeliveryViewController>().SetReward(e.GoodsInfo, e.NoteText, e.NoteName);
     }
 
     private void OnPosterGet(OnPosterGet e) {
-        GameObject obj = SpawnItem(posterPrefab);
+        GameObject obj = SpawnItem(PosterAssets.Singleton.GetTableItem(this.GetModel<PosterModel>().GetPoster(e.ID)));
         obj.GetComponent<PosterViewController>().SetContent(e.ID);
     }
 

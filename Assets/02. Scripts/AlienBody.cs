@@ -110,9 +110,12 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
     public static GameObject BuildShadowBody(BodyInfo info, bool hide) {
         return BuildShadowBody(info, hide, "AlienBody");
     }
-    public static GameObject BuildNewspaperAlienBody(BodyInfo info, int index, int pos, float bgAlpha=1f, float overallScale = 1.6f) {
+    public static GameObject BuildNewspaperAlienBody(BodyInfo info, int index, int pos, float bgAlpha=1f, float overallScale = 1.6f,
+        Material overriddenMaterial = null, string overridePrefabName = null) {
         ResLoader resLoader = MainGame.Interface.GetUtility<ResLoader>();
-        GameObject body = resLoader.LoadSync<GameObject>("aliens", $"NewspaperFrame_{index}");
+        GameObject body = resLoader.LoadSync<GameObject>("aliens",
+            overridePrefabName == null ? $"NewspaperFrame_{index}" : overridePrefabName);
+        
         GameObject bodyInstance = GameObject.Instantiate(body);
         AlienBody alienBody = bodyInstance.GetComponent<AlienBody>();
 
@@ -156,6 +159,13 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
                 
             }
             //layer++;
+        }
+
+        if (overriddenMaterial != null) {
+            SpriteRenderer[] spriteRenderers = bodyInstance.GetComponentsInChildren<SpriteRenderer>(true);
+            foreach (SpriteRenderer spriteRenderer in spriteRenderers) {
+                spriteRenderer.material = overriddenMaterial;
+            }
         }
         alienBody.BodyInfos = new List<BodyInfo>(){info};
         alienBody.alienBodyPartInfos = bodyInstance.GetComponentsInChildren<AlienBodyPartInfo>(true).ToList();

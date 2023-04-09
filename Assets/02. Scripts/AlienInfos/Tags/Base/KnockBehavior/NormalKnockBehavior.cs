@@ -16,13 +16,13 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 		
 		private Speaker currentSpeaker = null;
 		AudioSource knockAudioSource = null;
-		public NormalKnockBehavior(float knockDoorTimeInterval, float knockTime, List<string> overrideDoorKnockingPhrases) : base(knockDoorTimeInterval, knockTime, overrideDoorKnockingPhrases) {
+		public NormalKnockBehavior(float knockDoorTimeInterval, float knockTime, List<string> overrideDoorKnockingPhrases, string overrideTagName = "") : base(knockDoorTimeInterval, knockTime, overrideDoorKnockingPhrases, overrideTagName) {
 		}
 		
 		public NormalKnockBehavior(): base(){}
 
 		[field: ES3Serializable]
-		public override string TagName { get; }= "Knock_random";
+		public override string TagName { get; protected set; }= "Knock_random";
 		public override IEnumerator OnKnockDoor(Speaker speaker, IVoiceTag voiceTag, bool isAlien) {
 			currentSpeaker = speaker;
 			AudioMixerGroup mixer = voiceTag.VoiceGroup;
@@ -57,7 +57,7 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 		}
 
 		public override void OnStopKnock() {
-			currentSpeaker.Stop();
+			currentSpeaker.Stop(true);
 			knockAudioSource.Stop();
 		}
 	}

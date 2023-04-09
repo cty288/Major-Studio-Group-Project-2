@@ -37,8 +37,8 @@ namespace _02._Scripts.Radio {
 		}
 
 		public override void SetVolume(float relativeVolume, bool isLoud, bool isInstant) {
-			float loudVolume = 1f;
-			float notLoudVolume = 0.5f;
+			float loudVolume = 0.8f;
+			float notLoudVolume = 0.3f;
 			
 			
 			if (!isInstant) {
