@@ -94,22 +94,24 @@ namespace _02._Scripts.SexyCard {
 		private void OnPlayerAgree(Speaker obj) {
 			model.IsSexyPersonAvailable = false;
 			GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
-			gameTimeModel.LockTime.Release();
+			
 			EndConversation();
 		}
 
 		private void OnSexUnAvailable(Speaker obj) {
-			GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
-			gameTimeModel.LockTime.Release();
+			
+			
 			EndConversation();
 		}
 
 		protected override void OnHangUp() {
-			
+			GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
+			gameTimeModel.LockTime.Release();
 		}
 
 		protected override void OnEnd() {
-			
+			GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
+			gameTimeModel.LockTime.Release();
 		}
 	}
 }

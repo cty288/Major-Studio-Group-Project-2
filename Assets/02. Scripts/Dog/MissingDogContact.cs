@@ -101,19 +101,24 @@ namespace _02._Scripts.Dog {
 		}
 
 		private void OnSpeakEnd(Speaker obj) {
-			if (dogSent) {
-				dogModel.SentDogBack = true;
-				this.SendEvent<OnDogSendBack>();
-			}
+			
 			
 			EndConversation();
 		}
 
 		protected override void OnHangUp() {
+			if (dogSent) {
+				dogModel.SentDogBack = true;
+				this.SendEvent<OnDogSendBack>();
+			}
 			dogSent = false;
 		}
 
 		protected override void OnEnd() {
+			if (dogSent) {
+				dogModel.SentDogBack = true;
+				this.SendEvent<OnDogSendBack>();
+			}
 			dogSent = false;
 		}
 	}

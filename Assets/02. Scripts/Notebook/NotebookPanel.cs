@@ -327,7 +327,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
     
     protected override void Update() {
         base.Update();
-        if(GetComponentInChildren<NotebookHint>(true).IsShow){
+        if(GetComponentInChildren<NotebookHint>(true).IsShow || PauseGame.IsPause){
             return;
         }
         Vector3 mousePos = Input.mousePosition;

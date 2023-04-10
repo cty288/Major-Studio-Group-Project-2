@@ -51,7 +51,7 @@ public class NewspaperViewController : DraggableItems, IPointerEnterHandler, IPo
     }
 
     public void StopIndicateTodayNewspaper() {
-        indicateCanvas.SetActive(false);
+       
     }
 
     public override void SetLayer(int layer) {
@@ -75,6 +75,7 @@ public class NewspaperViewController : DraggableItems, IPointerEnterHandler, IPo
             if (this) {
                 this.SendCommand<OpenNewspaperUIPanelCommand>(new OpenNewspaperUIPanelCommand(
                     NewspaperModel.GetNewspaper(newsID), true));
+                indicateCanvas.SetActive(false);
             }
         });
     }

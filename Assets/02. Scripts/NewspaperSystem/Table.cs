@@ -104,7 +104,7 @@ public class Table :  AbstractDroppableItemContainerViewController {
 
     private void OnNewspaperGenerated(OnNewspaperGenerated e) {
         if (todayNewspaper) {
-            todayNewspaper.StopIndicateTodayNewspaper();
+          //  todayNewspaper.StopIndicateTodayNewspaper();
         }
 
         

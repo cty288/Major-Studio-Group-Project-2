@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using MikroFramework.Architecture;
@@ -17,6 +18,14 @@ public class PowerGeneratorViewController : ElectricalApplicance, IPointerClickH
         electricityModel.Electricity.RegisterWithInitValue(OnElectricityChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnPlayerResourceNumberChanged>(OnPlayerResourceNumberChanged);
+        
+        if (this.GetModel<PlayerResourceModel>().HasEnoughResource<PowerGeneratorGoods>(1)) {
+            gameObject.SetActive(true);
+        }
+    }
+
+    private void Start() {
+        
     }
 
     private void OnPlayerResourceNumberChanged(OnPlayerResourceNumberChanged e) {

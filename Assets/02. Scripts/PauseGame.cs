@@ -7,7 +7,10 @@ using MikroFramework.Architecture;
 using Crosstales.RTVoice;
 
 public class PauseGame : MonoBehaviour {
-    protected bool isPause = false;
+    protected static bool isPause = false;
+
+    public static bool IsPause => isPause;
+
     protected GameObject PausePanel;
     protected GameObject PauseBtn;
     [SerializeField] protected Sprite Spr_Pause;
@@ -18,7 +21,7 @@ public class PauseGame : MonoBehaviour {
         PauseBtn = transform.Find("PauseButton").gameObject;
         
         PauseBtn.GetComponent<Button>().onClick.AddListener(OnPauseButtonClicked);
-        
+        isPause = false;
         PausePanel.transform.Find("BG").GetComponent<Button>().onClick.AddListener(OnPausePanelClicked);
     }
 
