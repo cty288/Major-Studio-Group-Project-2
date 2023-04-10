@@ -79,6 +79,16 @@ public class HairTag_GreyMiddlePart : HaircutTag
 	public override string TagName { get; } = "Hair_GreyMiddlePart";
 }
 
+public class HairTag_SP_Police : HaircutTag
+{
+    public override string TagName { get; } = "Hair_Police";
+}
+
+public class HairTag_SP_Sexy : HaircutTag
+{
+    public override string TagName { get; } = "Hair_Sexy";
+}
+
 public class DogTag_0 : HaircutTag
 {
 	public override string TagName { get; } = "Dog_0";
