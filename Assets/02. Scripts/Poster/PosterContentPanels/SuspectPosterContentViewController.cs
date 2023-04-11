@@ -12,6 +12,8 @@ namespace _02._Scripts.Poster.PosterContentPanels {
 		private BodyModel bodyModel;
 		private GameObject spawnedBody;
 		private TMP_Text rewardsText;
+		
+		[SerializeField] private Material bodyMaterial;
 
 		private void Awake() {
 			suspectPhoto = transform.Find("Content/SuspectMask/SuspectPhoto").GetComponent<RawImage>();
@@ -23,11 +25,13 @@ namespace _02._Scripts.Poster.PosterContentPanels {
 			Awake();
 			
 			BodyInfo bodyInfo = bodyModel.GetBodyInfoByID(suspectId);
-			BodyInfo newspaperInfo = BodyInfo.GetBodyInfoForDisplay(bodyInfo, BodyPartDisplayType.Newspaper, false);
-			
-			
-			
-			spawnedBody = AlienBody.BuildNewspaperAlienBody(newspaperInfo, 0, -100, 0, 1.1f);
+			//BodyInfo newspaperInfo = BodyInfo.GetBodyInfoForDisplay(bodyInfo, BodyPartDisplayType.Newspaper, false);
+
+
+
+			spawnedBody = AlienBody.BuildNewspaperAlienBody(bodyInfo, 0, -100, 0, 0.35f,
+				Instantiate(bodyMaterial), "SuspectBody");
+			spawnedBody.GetComponent<AlienBody>().ShowColor(0);
 			Camera camera = spawnedBody.GetComponentInChildren<Camera>();
 			RenderTexture renderTexture = camera.targetTexture;
 		

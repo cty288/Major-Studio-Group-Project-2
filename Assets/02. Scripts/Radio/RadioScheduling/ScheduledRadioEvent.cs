@@ -45,6 +45,11 @@ namespace _02._Scripts.Radio.RadioScheduling {
 				return EventState.Missed;
 			}
 
+			if (!started) {
+				OnScheduledRadioStartPlay();
+			}
+			
+
 
 			if (!started && (!electricityModel.HasElectricity() || !radioModel.IsOn ||
 			                 radioModel.CurrentChannel != channel)) {
@@ -75,6 +80,10 @@ namespace _02._Scripts.Radio.RadioScheduling {
 			}
 
 			return EventState.Running;
+		}
+
+		protected virtual void OnScheduledRadioStartPlay() {
+			
 		}
 
 		public override float TriggerChance { get; } = 1;

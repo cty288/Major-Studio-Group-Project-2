@@ -39,7 +39,8 @@ public class RadioModel : AbstractSavableModel {
     [field: ES3Serializable]
     public List<AlienDescriptionData> DescriptionDatas { get; } = new List<AlienDescriptionData>();
 
-    
+    [field: ES3Serializable]
+    public bool HasDescriptionDatasToday { get; set; } = false;
     public Dictionary<RadioChannel, bool> IsSpeaking { get; private set; } = new Dictionary<RadioChannel, bool>();
 
     [field: ES3Serializable] public BindableProperty<RadioChannel> CurrentChannel { get; private set; } = new BindableProperty<RadioChannel>(RadioChannel.FM96);

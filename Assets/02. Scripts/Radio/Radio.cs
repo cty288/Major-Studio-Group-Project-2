@@ -84,7 +84,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
 
         this.RegisterEvent<OnRadioEnd>(OnRadioEnd).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnRadioProgramStart>(OnRadioStart).UnRegisterWhenGameObjectDestroyed(gameObject);
-        this.RegisterEvent<OnConstructDescriptionDatas>(OnConstructDescriptionDatas).UnRegisterWhenGameObjectDestroyed(gameObject);
+       // this.RegisterEvent<OnConstructDescriptionDatas>(OnConstructDescriptionDatas).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.GetSystem<TelephoneSystem>().State.RegisterOnValueChaned(OnTelephoneStateChange).UnRegisterWhenGameObjectDestroyed(gameObject);
         
         radioModel = this.GetModel<RadioModel>();
@@ -270,11 +270,24 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         }
     }
 
-    private void OnConstructDescriptionDatas(OnConstructDescriptionDatas e) {
-        
+   
+    
+    private void OnBodyInfoGenerated(OnNewBodyInfoGenerated e) {
         int day = this.GetSystem<GameTimeManager>().Day;
         float radioReality = radioRealityCurve.Evaluate(day);
+
+        radioModel.DescriptionDatas.Clear();
         ConstructDescriptionDatas(radioModel.DescriptionDatas, radioReality, day);
+
+      
+        if (day == 1) {
+            AddDeadBodyIntroRadio();
+            AddInitialRadio();
+        }
+
+        if (day == 0) {
+            AddPrologueBodyIntroRadio();
+        }
     }
 
     private void OnRadioStart(OnRadioProgramStart e) {
@@ -284,11 +297,11 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         if (radioModel.CurrentChannel.Value == channel && radioModel.IsOn.Value && electricityModel.HasElectricity()) {
             volume = 1;
         }
-        ContentStart(e.radioContent, channel, volume<=0);
+       
         if (volume > 0) {
             transform.DOShakeRotation(3f, 5, 20, 90, false).SetLoops(-1);
         }
-       
+        ContentStart(e.radioContent, channel, volume<=0);
     }
 
  
@@ -323,55 +336,29 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
     }
 
     private void ConstructDescriptionDatas(List<AlienDescriptionData> descriptionDatas, float radioReality, int day) {
-
         descriptionDatas.Clear();
 
-        List<BodyInfo> todayBodies = bodyModel.AllTodayDeadBodies.Select((info => info.BodyInfo)).ToList();
+
+        List<BodyTimeInfo> allTodayAliens = bodyModel.AllTodayAliens;
+        if (allTodayAliens == null || allTodayAliens.Count == 0) {
+            radioModel.HasDescriptionDatasToday = false;
+            return;
+        }
+
+        radioModel.HasDescriptionDatasToday = true;
+        
+        List<BodyInfo> todayBodies = bodyModel.AllTodayAliens.Select((info => info.BodyInfo)).ToList();
 
         todayBodies.CTShuffle();
         foreach (BodyInfo bodyInfo in todayBodies) {
             descriptionDatas.Add(new AlienDescriptionData(bodyInfo, radioReality));
         }
-
-
-
-
-        /*
-        for (int i = 0; i < unrelatedBodyInfoCountWithDay.Evaluate(day); i++) {
-            if (Random.Range(0, 2) < 1) {
-                descriptionDatas.Add(
-                    new AlienDescriptionData(BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, false,
-                            new NormalKnockBehavior(3, Random.Range(3,7),
-                                null)),
-                        radioReality));
-            }
-            else {
-                BodyInfo info = allPossibleBodyInfos[i];
-                descriptionDatas.Add(new AlienDescriptionData(info, radioReality));
-            }
-        }*/
+        
         descriptionDatas.CTShuffle();
 
     }
 
-    private void OnBodyInfoGenerated(OnNewBodyInfoGenerated e) {
-        int day = this.GetSystem<GameTimeManager>().Day;
-        float radioReality = radioRealityCurve.Evaluate(day);
 
-        radioModel.DescriptionDatas.Clear();
-        ConstructDescriptionDatas(radioModel.DescriptionDatas, radioReality, day);
-
-      
-       if (day == 1) {
-          
-           AddDeadBodyIntroRadio();
-           AddInitialRadio();
-       }
-
-       if (day == 0) {
-           AddPrologueBodyIntroRadio();
-       }
-    }
 
     private void AddPrologueBodyIntroRadio() {
         DateTime currentTime = gameTimeManager.CurrentTime.Value;

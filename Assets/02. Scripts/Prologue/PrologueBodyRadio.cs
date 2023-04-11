@@ -30,9 +30,7 @@ public class PrologueBodyRadio : RadioEvent<RadioTextContent> {
          base(startTimeRange,new RadioTextContent("", 1, Gender.MALE, mixer),
          RadioChannel.AllChannels) {
          
-         if (!radioModel.DescriptionDatas.Any()) {
-             this.SendEvent<OnConstructDescriptionDatas>();
-         }
+         
         
          AlienDescriptionData descriptionData = radioModel.DescriptionDatas[0];
          radioModel.DescriptionDatas.RemoveAt(0);

@@ -69,7 +69,7 @@ namespace _02._Scripts.SuspectSystem {
 			DogModel dogModel = this.GetModel<DogModel>();
 			string additionalMessage = "";
 			if(!dogModel.SentDogBack && dogModel.isDogAlive) {
-				additionalMessage = "By the way, one of our residents has a dog that went missing. " +
+				additionalMessage = " By the way, one of our residents has a dog that went missing. " +
 				                           "She asked us to help her find it. Here's the photo and the number to call if you find it.";
 				this.GetModel<PosterModel>()
 					.AddPoster(new MissingDogPoster(dogModel.MissingDogPhoneNumber, dogModel.MissingDogBodyInfo));

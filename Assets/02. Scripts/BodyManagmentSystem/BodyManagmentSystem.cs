@@ -117,8 +117,10 @@ public class BodyManagmentSystem : AbstractSystem {
         }
         newBodyInfos.CTShuffle();
         //transform an alien
-        BodyInfo selectedAlien = bodyModel.allBodyTimeInfos[Random.Range(0, bodyModel.allBodyTimeInfos.Count)].BodyInfo;
+        BodyInfo selectedAlien = newBodyInfos[Random.Range(0, newBodyInfos.Count)].BodyInfo;
         selectedAlien.IsAlien = true;
+        
+        
         this.SendEvent<OnBodyInfoBecomeAlien>(new OnBodyInfoBecomeAlien() {ID = selectedAlien.ID});
         this.SendEvent<OnNewBodyInfoGenerated>(new OnNewBodyInfoGenerated() {
             BodyTimeInfos = newBodyInfos,

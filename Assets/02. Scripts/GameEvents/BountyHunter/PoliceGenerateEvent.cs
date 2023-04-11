@@ -17,12 +17,14 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
     public PoliceGenerateEvent(){}
     public static BodyInfo GeneratePolice() {
         HeightType height = HeightType.Tall;
-        BodyPartPrefabInfo body = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartDisplayType.Shadow, BodyPartType.Body, false,
-            height, false, null, 0);
-        BodyPartPrefabInfo leg = AlienBodyPartCollections.Singleton.GetRandomBodyPartInfo(BodyPartDisplayType.Shadow, BodyPartType.Legs, false,
-            height, false, null, 0);
+        BodyPartPrefabInfo body = AlienBodyPartCollections.Singleton.SpecialBodyPartPrefabs.HeightSubCollections[2]
+            .ShadowBodyPartPrefabs.HumanTraitPartsPrefabs[0].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo(0);
+        
+        BodyPartPrefabInfo leg =  AlienBodyPartCollections.Singleton.SpecialBodyPartPrefabs.HeightSubCollections[3]
+            .ShadowBodyPartPrefabs.HumanTraitPartsPrefabs[0].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo(0);
+        
         BodyPartPrefabInfo head = AlienBodyPartCollections.Singleton.SpecialBodyPartPrefabs.HeightSubCollections[0]
-            .ShadowBodyPartPrefabs.HumanTraitPartsPrefabs[0].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
+            .ShadowBodyPartPrefabs.HumanTraitPartsPrefabs[0].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo(0);
 
         return BodyInfo.GetBodyInfo(leg, body, head, height,
             new VoiceTag(AudioMixerList.Singleton.AlienVoiceGroups[1], 1, Gender.MALE),

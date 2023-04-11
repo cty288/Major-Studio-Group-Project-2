@@ -106,6 +106,7 @@ namespace _02._Scripts.Radio.RadioScheduling {
 	}
 	
 	public class RadioSchedulingSystem: AbstractSystem {
+		public bool NoMonsterTodayAnnounced { get; set; } = false;
 		private List<PermanentRadioProgramInfo> permanentRadioProgramInfos = new List<PermanentRadioProgramInfo>();
 		private RadioSchedulingModel radioSchedulingModel;
 		//private DayOfWeek importantNewsPaperDay = 0;
@@ -120,6 +121,7 @@ namespace _02._Scripts.Radio.RadioScheduling {
 		}
 
 		private void OnNewDay(OnNewDay e) {
+			NoMonsterTodayAnnounced = false;
 			if (e.Date.DayOfWeek == importantNewspaperModel.ImportantNewsPaperDay) {
 				BuildThisWeekAllRadioPrograms(e.Date, 7, true);
 			}

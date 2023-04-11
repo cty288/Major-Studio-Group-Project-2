@@ -11,9 +11,9 @@ using UnityEngine;
 using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
-public struct OnConstructDescriptionDatas {
+    //public struct OnConstructDescriptionDatas {
 
-}
+//}
 public class DailyBodyRadio : ScheduledRadioEvent<RadioTextContent> {
     [field: ES3Serializable]
     protected override bool DayEndAfterFinish { get; set; } = true;
@@ -25,6 +25,7 @@ public class DailyBodyRadio : ScheduledRadioEvent<RadioTextContent> {
         [field: ES3Serializable] protected Gender speakerGender;
         [field: ES3Serializable] protected AudioMixerGroup mixer;
 
+      //  protected bool noMonsterToday = false;
         protected override RadioTextContent GetRadioContent() {
             return radioContent;
         }
@@ -41,16 +42,37 @@ public class DailyBodyRadio : ScheduledRadioEvent<RadioTextContent> {
            
          }
 
-         public override void OnStart() {
-             base.OnStart();
-             if (!radioModel.DescriptionDatas.Any()) {
-                 this.SendEvent<OnConstructDescriptionDatas>();
+         protected void SetRadioContent() {
+             if (radioModel.DescriptionDatas.Count == 0) {
+                 RadioSchedulingSystem radioSchedulingSystem = this.GetSystem<RadioSchedulingSystem>();
+                 if (!radioModel.HasDescriptionDatasToday) {
+                     if (!radioSchedulingSystem.NoMonsterTodayAnnounced) {
+                         radioSchedulingSystem.NoMonsterTodayAnnounced = true;
+                         SetRadioContent(new RadioTextContent("We have no monster today. Enjoy your day!",
+                             this.speakRate, this.speakerGender, this.mixer));
+                     } else {
+                         SetRadioContent(new RadioTextContent("", this.speakRate, this.speakerGender, this.mixer));
+                     }
+                 }
+                 else {
+                     SetRadioContent(new RadioTextContent("", this.speakRate, this.speakerGender, this.mixer));
+                 }
+                 return;
              }
+             
              AlienDescriptionData descriptionData = radioModel.DescriptionDatas[0];
              radioModel.DescriptionDatas.RemoveAt(0);
              SetRadioContent(new RadioTextContent(
                  AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo, descriptionData.Reality),
                  this.speakRate, this.speakerGender, this.mixer));
+         }
+        
+    
+
+
+         protected override void OnScheduledRadioStartPlay() {
+             base.OnScheduledRadioStartPlay();
+             SetRadioContent();
          }
 
          public DailyBodyRadio(): base(){}
@@ -87,14 +109,14 @@ public class DailyBodyRadio : ScheduledRadioEvent<RadioTextContent> {
         }
 
         private IEnumerator RadioCorruptCheck()
-    {
-        while (true) {
-            yield return new WaitForSeconds(Random.Range(15f, 25f));
-            if (Random.Range(0, 100) <= 10) {
-                //EndRadio();
-                break;
+        {
+            while (true) {
+                yield return new WaitForSeconds(Random.Range(15f, 25f));
+                if (Random.Range(0, 100) <= 10) {
+                    //EndRadio();
+                    break;
+                }
             }
         }
-    }
 }
 

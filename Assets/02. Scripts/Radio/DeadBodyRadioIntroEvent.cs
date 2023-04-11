@@ -36,12 +36,6 @@ public class DeadBodyRadioIntroEvent : RadioEvent<RadioTextContent> {
      [field: ES3Serializable]
     public override float TriggerChance { get; } = 1;
     public override void OnEnd() {
-        if (!radioModel.DescriptionDatas.Any()) {
-            this.SendEvent<OnConstructDescriptionDatas>();
-        }
-        
-        AlienDescriptionData descriptionData = radioModel.DescriptionDatas[0];
-        radioModel.DescriptionDatas.RemoveAt(0);
 
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
         GameEventSystem eventSystem = this.GetSystem<GameEventSystem>();
