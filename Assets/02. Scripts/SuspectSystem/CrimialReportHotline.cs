@@ -129,14 +129,14 @@ namespace _02._Scripts.SuspectSystem {
 		        "Your report has been very helpful. With this additional information, we will have a better chance of apprehending the suspect. " +
 		        "You will receive your reward tomorrow. Thank you for your help in making our community safer.");
 
-	        GoodsInfo reward = suspectModel.GetReward(bodyInfo.ID);
+	        SuspectInfo suspectInfo = suspectModel.GetSuspectInfo(bodyInfo.ID);
 	        bodyModel.KillBodyInfo(bodyInfo);
 
 
 
 	        speaker.Speak(welcomes[Random.Range(0, welcomes.Count)], mixer,
 		        $"Officer {officerName}", 1f, OnEndingSpeak);
-	        this.GetSystem<GameEventSystem>().AddEvent(new GoodsRewardEvent(new TimeRange(tomorrow), reward,
+	        this.GetSystem<GameEventSystem>().AddEvent(new GoodsRewardEvent(new TimeRange(tomorrow), new List<GoodsInfo>(){suspectInfo.rewards},
 		        "Thanks for your making our community safer!",
 		        "Note from Dorcha Police Department"));
 		}

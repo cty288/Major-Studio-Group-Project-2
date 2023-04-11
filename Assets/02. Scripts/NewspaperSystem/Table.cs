@@ -56,7 +56,7 @@ public class Table :  AbstractDroppableItemContainerViewController {
 
     private void OnRewardPackage(OnRewardPackage e) {
         GameObject reward = SpawnItem(rewardPrefab);
-        reward.GetComponent<RewardDeliveryViewController>().SetReward(e.GoodsInfo, e.NoteText, e.NoteName);
+        reward.GetComponent<RewardDeliveryViewController>().SetReward(e.GoodsInfos, e.NoteText, e.NoteName);
     }
 
     private void OnPosterGet(OnPosterGet e) {

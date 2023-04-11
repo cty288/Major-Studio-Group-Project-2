@@ -117,7 +117,14 @@ public class BodyGenerationSystem : AbstractSystem {
            // Debug.Log("Spawned a non-alien");
         }
         else {
-            targetBody = Aliens[Random.Range(0, Aliens.Count)].BodyInfo;
+            float todayAlien = Random.Range(0f, 1f);
+            List<BodyTimeInfo> todayAliens = bodyModel.AllTodayAliens;
+            if (todayAlien <= 0.6f && todayAliens!=null && todayAliens.Count > 0) {
+                targetBody = todayAliens[Random.Range(0, todayAliens.Count)].BodyInfo;
+            }
+            else {
+                targetBody = Aliens[Random.Range(0, Aliens.Count)].BodyInfo;
+            }
             //Debug.Log("Spawned an alien!");
         }
 

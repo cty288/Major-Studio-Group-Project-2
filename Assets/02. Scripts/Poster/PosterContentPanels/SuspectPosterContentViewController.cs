@@ -12,6 +12,7 @@ namespace _02._Scripts.Poster.PosterContentPanels {
 		private BodyModel bodyModel;
 		private GameObject spawnedBody;
 		private TMP_Text rewardsText;
+		private TMP_Text wantedReasonText;
 		
 		[SerializeField] private Material bodyMaterial;
 
@@ -19,9 +20,10 @@ namespace _02._Scripts.Poster.PosterContentPanels {
 			suspectPhoto = transform.Find("Content/SuspectMask/SuspectPhoto").GetComponent<RawImage>();
 			bodyModel = this.GetModel<BodyModel>();
 			rewardsText = transform.Find("Content/RewardText").GetComponent<TMP_Text>();
+			wantedReasonText = transform.Find("Content/WantedReason").GetComponent<TMP_Text>();
 		}
 
-		public void SetContent(long suspectId, GoodsInfo rewards) {
+		public void SetContent(long suspectId, SuspectInfo suspectInfo) {
 			Awake();
 			
 			BodyInfo bodyInfo = bodyModel.GetBodyInfoByID(suspectId);
@@ -36,8 +38,8 @@ namespace _02._Scripts.Poster.PosterContentPanels {
 			RenderTexture renderTexture = camera.targetTexture;
 		
 			suspectPhoto.GetComponent<RawImage>().texture = renderTexture;
-			rewardsText.text = $"{rewards.DisplayName} x{rewards.Count}";
-
+			rewardsText.text = $"{suspectInfo.rewards.DisplayName} x{suspectInfo.rewards.Count}";
+			wantedReasonText.text = suspectInfo.Crime;
 			this.GetModel<TelephoneNumberRecordModel>().AddOrEditRecord("611", "Suspect Report Hotline");
 		}
 		

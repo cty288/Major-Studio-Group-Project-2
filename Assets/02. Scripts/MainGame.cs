@@ -5,6 +5,7 @@ using _02._Scripts.ChoiceSystem;
 using _02._Scripts.Electricity;
 using _02._Scripts.FashionCatalog;
 using _02._Scripts.GameEvents.BountyHunter;
+using _02._Scripts.GameEvents.FoodBorrowEvent;
 using _02._Scripts.GameEvents.Merchant;
 using _02._Scripts.GameTime;
 using _02._Scripts.ImportantNewspaper;
@@ -59,6 +60,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<SexyCardModel>();
         this.RegisterModel<SuspectModel>();
         this.RegisterModel<TelephoneNumberRecordModel>();
+        this.RegisterModel<FoodBorrowModel>();
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();
@@ -82,6 +84,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<ChoiceSystem>();
         this.RegisterSystem<SexyCardSystem>();
         this.RegisterSystem<SuspectSystem>();
+        this.RegisterSystem<FoodBorrowSystem>();
     }
     
     protected void RegisterModel<T>() where T : class, IModel, new() {

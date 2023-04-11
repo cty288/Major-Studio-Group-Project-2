@@ -53,7 +53,7 @@ namespace _02._Scripts.Poster.PosterEvents {
 			}else if (poster is SuspectPoster suspectPoster) {
 				SuspectPosterContentViewController vc = Instantiate(contentPagePrefabs[1], transform)
 					.GetComponent<SuspectPosterContentViewController>();
-				vc.SetContent(suspectPoster.SuspectId, suspectPoster.RewardsInfo);
+				vc.SetContent(suspectPoster.SuspectId, suspectPoster.SuspectInfo);
 				return vc.gameObject;
 			}else if (poster is MissingDogPoster missingDogPoster) {
 				MissingDogContentPosterViewController vc = Instantiate(contentPagePrefabs[2], transform)

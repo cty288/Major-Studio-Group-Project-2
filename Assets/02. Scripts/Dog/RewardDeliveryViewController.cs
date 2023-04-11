@@ -7,7 +7,7 @@ public class RewardDeliveryViewController : DraggableItems {
 	private PlayerResourceModel playerResourceModel;
 	[SerializeField] protected GameObject paperPrefab;
 
-	[ES3Serializable] protected GoodsInfo goodsInfo;
+	[ES3Serializable] protected List<GoodsInfo> goodsInfos;
 	[ES3Serializable] protected string paperNote;
 	[ES3Serializable] protected string noteName;
 	protected override void Awake() {
@@ -22,16 +22,21 @@ public class RewardDeliveryViewController : DraggableItems {
         
 	}
 
-	public void SetReward(GoodsInfo goodsInfo, string paperNote, string noteName) {
-		this.goodsInfo = goodsInfo;
+	public void SetReward(List<GoodsInfo> goodsInfos, string paperNote, string noteName) {
+		this.goodsInfos = goodsInfos;
 		this.paperNote = paperNote;
 		this.noteName = noteName;
 		
 	}
 	protected override void OnClick() {
-		playerResourceModel.AddResources(goodsInfo);
+		string packageDetailText = "";
+		foreach (GoodsInfo goodsInfo in goodsInfos) {
+			playerResourceModel.AddResources(goodsInfo);
+			packageDetailText += $"{goodsInfo.Count}x {goodsInfo.DisplayName}\n";
+		}
+		
 		DeliveryNoteViewController note = Container.SpawnItem(paperPrefab).GetComponent<DeliveryNoteViewController>();
-		note.SetContent($"Package Detail:\n{goodsInfo.Count}x {goodsInfo.DisplayName}\n\n{paperNote}", noteName);
+		note.SetContent($"Package Detail:\n{packageDetailText}\n{paperNote}", noteName);
 		GameObject.Destroy(gameObject);
 	}
 

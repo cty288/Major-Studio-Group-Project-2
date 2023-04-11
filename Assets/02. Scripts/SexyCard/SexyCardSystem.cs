@@ -65,7 +65,7 @@ namespace _02._Scripts.SexyCard {
 			model.SexyPersonPhoneNumber = PhoneNumberGenor.GeneratePhoneNumber(7);
 			this.GetSystem<TelephoneSystem>().AddContact(model.SexyPersonPhoneNumber, new SexyCardPhoneContact());
 			this.GetModel<SuspectModel>().AddSuspect(bodyInfo,
-				GoodsInfo.GetGoodsInfo(new BulletGoods(), 2));
+				"Robber",GoodsInfo.GetGoodsInfo(new BulletGoods(), 2));
 
 			DateTime sexyCardEventDay = this.GetModel<GameTimeModel>().GetDay(Random.Range(7, 15));
 			this.GetSystem<GameEventSystem>().AddEvent(new SexyCardDeliverEvent(new TimeRange(sexyCardEventDay)));

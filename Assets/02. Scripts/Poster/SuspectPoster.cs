@@ -3,10 +3,10 @@
 		[field: ES3Serializable]
 		public long SuspectId { get; set; }
 		[field: ES3Serializable]
-		public GoodsInfo RewardsInfo { get; set; }
-		public SuspectPoster(long suspectID, GoodsInfo rewardsInfo) {
+		public SuspectInfo SuspectInfo { get; set; }
+		public SuspectPoster(long suspectID, SuspectInfo suspectInfo) {
 			this.SuspectId = suspectID;
-			this.RewardsInfo = rewardsInfo;
+			this.SuspectInfo = suspectInfo;
 		}
 		
 		public SuspectPoster(){}
