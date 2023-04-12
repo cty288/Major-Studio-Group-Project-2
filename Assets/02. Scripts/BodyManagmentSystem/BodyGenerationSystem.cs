@@ -88,7 +88,7 @@ public class BodyGenerationSystem : AbstractSystem {
 
             int additionalCount = Random.Range(1, 4);
             for (int i = 0; i < additionalCount; i++) {
-                indices[bodyPartType].Add(Random.Range(0, count));
+                //indices[bodyPartType].Add(Random.Range(0, count));
             }
         }
 
