@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 603661187
+CRC: 2006127203
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 06198c9f29625b1681bb46ee26342cf8
+    Hash: 90a6c4da69ce08fd236ec6d4e7ac1667
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c47d8ebe4c1670f224db57f21781ae85
+    Hash: fa87bf81ac7cdd8390f19f34b1096060
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -39,6 +39,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: ce17f3e0a2003d1489c87029cdad6cb1, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 650910a5192c6bc419d61e4a3b7fe274, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: a3f101520a4b4c3418a30505021817cb, type: 3}
 - Class: 114
@@ -116,7 +118,7 @@ SerializeReferenceClassIdentifiers:
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
 - Assets/05. Prefabs/OutdoorActivity/TestActivity/TestArea_TestActivity.prefab
-- Assets/05. Prefabs/ImportantNewspaper/MissingDogContent.prefab
+- Assets/05. Prefabs/Posters/MissingDogContent.prefab
 - Assets/05. Prefabs/ImportantNewspaper/TextContent.prefab
 - Assets/05. Prefabs/General/DraggedText.prefab
 - Assets/05. Prefabs/ImportantNewspaper/RadioScheduleContent/RadioScheduleContent.prefab

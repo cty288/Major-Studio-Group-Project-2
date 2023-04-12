@@ -21,12 +21,12 @@ public class NewspaperUIPanel : OpenableUIPanel {
     
    
 
-    [SerializeField] private List<RawImage> imageContainers = new List<RawImage>();
+    [SerializeField] private List<GameObject> imageContainers = new List<GameObject>();
     
     private List<GameObject> savedSpawnedImages = new List<GameObject>();
     private Newspaper lastNewspaper = null;
-    [SerializeField] private List<Image> symbolImages = new List<Image>();
-    [SerializeField] private List<Sprite> symbols = new List<Sprite>();
+    //[SerializeField] private List<Image> symbolImages = new List<Image>();
+    //[SerializeField] private List<Sprite> symbols = new List<Sprite>();
     private GameTimeManager gameTimeManager;
     
     protected Newspaper news;
@@ -131,19 +131,26 @@ public class NewspaperUIPanel : OpenableUIPanel {
             GameObject.Destroy(image.gameObject);
         }
 
-        
+        for (int i = 0; i < imageContainers.Count; i++) {
+            imageContainers[i].gameObject.SetActive(false);
+        }
 
         for (int i = 0; i < news.timeInfos.Count; i++) {
             BodyTimeInfo info = news.timeInfos[i];
             BodyInfo bodyInfo = info.BodyInfo;
 
-            GameObject spawnedBody = AlienBody.BuildNewspaperAlienBody(bodyInfo, i, i);
+            GameObject spawnedBody = AlienBody.BuildNewspaperAlienBody(bodyInfo, i, i, 0);
             savedSpawnedImages.Add(spawnedBody);
             Camera camera = spawnedBody.GetComponentInChildren<Camera>();
             RenderTexture renderTexture = camera.targetTexture;
-            imageContainers[i].texture = renderTexture;
-            imageContainers[i].GetComponent<IHaveBodyInfo>().BodyInfos = new List<BodyInfo>(){bodyInfo};
+            imageContainers[i].gameObject.SetActive(true);
 
+            RawImage imageContainerImage = imageContainers[i].GetComponentInChildren<RawImage>(true);
+            
+            imageContainerImage.texture = renderTexture;
+            imageContainerImage.GetComponent<IHaveBodyInfo>().BodyInfos = new List<BodyInfo>(){bodyInfo};
+
+            /*
             TMP_Text hintText = symbolImages[i].GetComponentInChildren<TMP_Text>(true);
             if (info.DayRemaining == 3) {
                 symbolImages[i].sprite = symbols[0];
@@ -152,9 +159,9 @@ public class NewspaperUIPanel : OpenableUIPanel {
             else {
                 symbolImages[i].sprite = symbols[1];
                 hintText.text = "Not sure whether they are dead.";
-            }
+            }*/
 
-            imageContainers[i].GetComponent<BountyHuntingSelector>().SetHintText(GetShortDescription(bodyInfo));
+            imageContainerImage.GetComponent<BountyHuntingSelector>().SetHintText(GetShortDescription(bodyInfo));
 
         }
 

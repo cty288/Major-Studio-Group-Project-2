@@ -114,7 +114,7 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
         Material overriddenMaterial = null, string overridePrefabName = null) {
         ResLoader resLoader = MainGame.Interface.GetUtility<ResLoader>();
         GameObject body = resLoader.LoadSync<GameObject>("aliens",
-            overridePrefabName == null ? $"NewspaperFrame_{index}" : overridePrefabName);
+            overridePrefabName == null ? $"NewspaperFrame_0" : overridePrefabName);
         
         GameObject bodyInstance = GameObject.Instantiate(body);
         AlienBody alienBody = bodyInstance.GetComponent<AlienBody>();

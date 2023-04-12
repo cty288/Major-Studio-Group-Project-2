@@ -14,6 +14,10 @@ public abstract class ElectricalApplicance : AbstractMikroController<MainGame> {
         this.RegisterEvent<OnElectricityRecovered>(OnElectricityRecovered).UnRegisterWhenGameObjectDestroyed(gameObject);
         
         noElectricityCanvas = transform.Find("NoElectricityCanvas");
+
+        if (!electricityModel.HasElectricity() && noElectricityCanvas) {
+            noElectricityCanvas.gameObject.SetActive(true);
+        }
     }
 
     private void OnElectricityRecovered(OnElectricityRecovered e) {

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class NotebookPhotoDroppableInfo : DroppableInfo {
     [field: ES3Serializable]
-    public override bool IsDefaultLeftPage { get; } = true;
+    public override bool IsDefaultOnTop { get; } = true;
 
     [ES3Serializable] private string photoID = "";
     

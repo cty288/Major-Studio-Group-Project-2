@@ -21,9 +21,15 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
     protected Collider2D leftPageSpace;
     protected Collider2D rightPageSpace;
     [SerializeField]
+    protected List<Bounds> topPageBounds;
+    [SerializeField]
+    protected List<Bounds> bottomPageBounds;
+    
+    [SerializeField]
     protected Bounds leftPageBounds;
     [SerializeField]
     protected Bounds rightPageBounds;
+    
     protected RectTransform contentPanel;
    
     private Dictionary<Image, float> imageAlpha = new Dictionary<Image, float>();
@@ -402,6 +408,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         }
     }
 
+
     private void CreateMarker(Vector3 mousePos) {
         DateTime lastNoteBookOpenTime = notebookModel.LastOpened;
         if(lastNoteBookOpenTime == DateTime.MinValue) {
@@ -479,30 +486,36 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         nextPageButton.gameObject.SetActive(notebookModel.HasNextNotes(date, out dates));
     }
 
-    private Vector2 FindAvailableSpace(DroppableInfo content, Vector2 extent, bool isLeft, DateTime date) {
+    private Vector2 FindAvailableSpace(DroppableInfo content, Vector2 extent, bool isTop, DateTime date) {
         Vector2 uiExtent = extent;
         List<DroppableInfo> allContents = notebookModel.GetNotes(date);
 
-        Bounds targetBounds = isLeft ? leftPageBounds : rightPageBounds;
+        List<Bounds> targetBounds = isTop ? topPageBounds : bottomPageBounds;
+
         
-        //use DroppableInfo.Extent and DroppableInfo.Position to calculate the available space withing targetBounds
-        //return the position of the place where the content can be dropped
+        foreach (Bounds bounds in targetBounds) {
+            Vector2 tryPos = new Vector2(Random.Range(bounds.min.x + uiExtent.x, bounds.max.x - uiExtent.x),
+                Random.Range(bounds.min.y + uiExtent.y, bounds.max.y - uiExtent.y));
+            bool successInBound = true;
         
-        Vector2 tryPos = new Vector2(Random.Range(targetBounds.min.x + uiExtent.x, targetBounds.max.x - uiExtent.x),
-            Random.Range(targetBounds.min.y + uiExtent.y, targetBounds.max.y - uiExtent.y));
-        
-        
-        int tryCount = 0;
-        while (IsOverlap(tryPos, uiExtent, allContents)) {
-            tryPos = new Vector2(Random.Range(targetBounds.min.x + uiExtent.x, targetBounds.max.x - uiExtent.x),
-                Random.Range(targetBounds.min.y + uiExtent.y, targetBounds.max.y - uiExtent.y));
-            tryCount++;
-            if (tryCount > 100) {
+            int tryCount = 0;
+            while (IsOverlap(tryPos, uiExtent, allContents)) {
+                tryPos = new Vector2(Random.Range(bounds.min.x + uiExtent.x, bounds.max.x - uiExtent.x),
+                    Random.Range(bounds.min.y + uiExtent.y, bounds.max.y - uiExtent.y));
+                tryCount++;
+                if (tryCount > 100) {
+                    successInBound = false;
+                    break;
+                }
+            }
+            
+            if (successInBound) {
                 return tryPos;
             }
         }
-
-        return tryPos;
+        return new Vector2(Random.Range(targetBounds[0].min.x + uiExtent.x, targetBounds[0].max.x - uiExtent.x),
+            Random.Range(targetBounds[0].min.y + uiExtent.y, targetBounds[0].max.y - uiExtent.y));
+        
     }
     
     private bool IsOverlap(Vector3 pos, Vector3 extent, List<DroppableInfo> allContents) {
@@ -597,15 +610,15 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
     }
 
     public void AddContent(DateTime day, DroppableInfo content, bool hide,  Vector2 overridePos = default, RectTransform parent = null) {
-        bool leftOrRight = content.IsDefaultLeftPage;
-        DroppedUIObjectViewController droppedUIObjectViewController = content.GetContentUIObject(leftOrRight
+        bool isTop = content.IsDefaultOnTop;
+        DroppedUIObjectViewController droppedUIObjectViewController = content.GetContentUIObject(isTop
             ? leftPageSpace.GetComponent<RectTransform>()
             : rightPageSpace.GetComponent<RectTransform>());
 
         if (parent == null) {
             parent = content is NotebookMarkerDroppableInfo ? markerPanel : contentPanel;
         }
-        CoroutineRunner.Singleton.StartCoroutine(AddContent(day, content, droppedUIObjectViewController, leftOrRight, hide, parent, overridePos));
+        CoroutineRunner.Singleton.StartCoroutine(AddContent(day, content, droppedUIObjectViewController, isTop, hide, parent, overridePos));
 
         if (hide) {
             notebookModel.UpdateLastOpened(gameTimeModel.CurrentTime.Value);

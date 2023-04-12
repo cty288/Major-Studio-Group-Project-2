@@ -31,7 +31,7 @@ public class BodyManagmentSystem : AbstractSystem {
     private BodyModel bodyModel;
     
 
-    private const int MaxBodyEveryDay = 3;
+    private const int MaxBodyEveryDay = 6;
 
     
 
@@ -47,7 +47,15 @@ public class BodyManagmentSystem : AbstractSystem {
         return Aliens.Exists(bodyTimeInfo => bodyTimeInfo.BodyInfo == bodyInfo);
     }*/
 
-    
+    static float GenerateNormalRandom(float mean, float stddev) {
+        float u1 = Random.Range(0f, 1f);
+        float u2 = Random.Range(0f, 1f);
+
+        float z1 = Mathf.Sqrt(-2.0f * Mathf.Log(u1)) * Mathf.Cos(2.0f * Mathf.PI * u2);
+        
+
+        return mean + stddev * z1;
+    }
     private void OnNewDay(OnNewDay e) {
         
         
@@ -56,14 +64,27 @@ public class BodyManagmentSystem : AbstractSystem {
             timeInfo.IsTodayDead = false;
         }
         GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
-        int bodyCount = MaxBodyEveryDay;
+        int bodyCount = Mathf.Clamp(Mathf.RoundToInt(GenerateNormalRandom(MaxBodyEveryDay / 2f, 1f)), 0,
+            MaxBodyEveryDay);
+        
+        List<int> testCount = new List<int>();
+        for (int i = 0; i < 10; i++) {
+            testCount.Add(Mathf.Clamp(Mathf.RoundToInt(GenerateNormalRandom(MaxBodyEveryDay / 2f, 2.34f)), 0,
+                MaxBodyEveryDay));
+        }
+
+        Debug.Log("Body Count: " + testCount.Count);
+
         if (gameTimeModel.Day <= 0) {
             bodyCount = 1;
-            
             //prologue body
             BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, Random.Range(0.5f, 1f),
                 new NormalKnockBehavior(3, int.MaxValue, null), bodyModel.AvailableBodyPartIndices, 40);
             bodyModel.AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(new BodyTimeInfo(1, info, true));
+        }
+
+        if (gameTimeModel.Day > 0 && gameTimeModel.Day <= 5) {
+            bodyCount = 3;
         }
 
 
@@ -71,8 +92,6 @@ public class BodyManagmentSystem : AbstractSystem {
         foreach (BodyTimeInfo bodyTimeInfo in bodyModel.allBodyTimeInfos) {
             if (bodyTimeInfo.DayRemaining <= 0) {
                 removeSet.Add(bodyTimeInfo);
-               
-               
             }
         }
        
@@ -117,11 +136,18 @@ public class BodyManagmentSystem : AbstractSystem {
         }
         newBodyInfos.CTShuffle();
         //transform an alien
-        BodyInfo selectedAlien = newBodyInfos[Random.Range(0, newBodyInfos.Count)].BodyInfo;
-        selectedAlien.IsAlien = true;
+        int alienCount = bodyCount / 3;
+
+        if (gameTimeModel.Day == 0) {
+            alienCount = 1;
+        }
+        for (int i = 0; i < alienCount; i++) {
+            BodyInfo selectedAlien = bodyModel.allBodyTimeInfos[Random.Range(0, bodyModel.allBodyTimeInfos.Count)].BodyInfo;
+            selectedAlien.IsAlien = true;
         
-        
-        this.SendEvent<OnBodyInfoBecomeAlien>(new OnBodyInfoBecomeAlien() {ID = selectedAlien.ID});
+            this.SendEvent<OnBodyInfoBecomeAlien>(new OnBodyInfoBecomeAlien() {ID = selectedAlien.ID});
+        }
+      
         this.SendEvent<OnNewBodyInfoGenerated>(new OnNewBodyInfoGenerated() {
             BodyTimeInfos = newBodyInfos,
         });

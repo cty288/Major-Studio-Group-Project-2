@@ -178,7 +178,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -519.1201, y: -204.93}
-  m_SizeDelta: {x: 409.86, y: 409.86}
+  m_SizeDelta: {x: 285, y: 285}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5142878764217246588
 CanvasRenderer:
@@ -231,7 +231,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.4251404, y: -7.838516}
+  m_Offset: {x: -0.4613037, y: -0.1277008}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -242,7 +242,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 354.63086, y: 367.45767}
+  m_Size: {x: 264.02863, y: 274.9277}
   m_EdgeRadius: 0
 --- !u!114 &7216872814173503821
 MonoBehaviour:
@@ -315,7 +315,7 @@ MonoBehaviour:
     - {fileID: 4466253240191846771}
     - {fileID: 2513305029562771172}
     - {fileID: 6691177191997445581}
-    _Values: d92d3d4ec23ec449150f3becd70b850a41cd2ee951268a743f531adfd49c2326648b57f87412a67e00cabfb77234236a9d5fdb9a6712cf00b8b20f6e24e4744dce9e780918ce3d7d21e817e41abe1809cf5082cb87427251f0dbf30531a3c41aaa8e162c43e6ae6c6df48e1f81df925dd49bbfd14871ef3286bc5feec0d7de0a45e81231b20d9f389d58ba4f2ab41a069a063e75673fd51012c91a3cdb384c7cf655efdcb3bca86a8a56342855eadc0324fd8fa8d4454d16a2162d2e8723275cf7f96c2a654fb3159dd9c1f2ff14b729
+    _Values: d92d3d4ec23ec449150f3becd70b850a41cd2ee951268a743f531adfd49c232619f808c6f01e411300cabfb77234236a9d5fdb9a6712cf00b8b20f6e24e4744dce9e780918ce3d7d21e817e41abe1809cf5082cb87427251f0dbf30531a3c41aaa8e162c43e6ae6c6df48e1f81df925dd49bbfd14871ef3286bc5feec0d7de0a45e81231b20d9f389d58ba4f2ab41a069a063e75673fd51012c91a3cdb384c7cf655efdcb3bca86a8a56342855eadc0324fd8fa8d4454d16a2162d2e8723275cf7f96c2a654fb3159dd9c1f2ff14b729
 --- !u!114 &7710464566323844157
 MonoBehaviour:
   m_ObjectHideFlags: 0

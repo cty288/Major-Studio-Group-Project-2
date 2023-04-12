@@ -102,7 +102,10 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
     }
 
     private void OnNewDay(OnNewDay e) {
-        radioModel.IsOn.Value = true;
+        if (electricityModel.HasElectricity()) {
+            radioModel.IsOn.Value = true;
+        }
+        
     }
 
     private void InitializePlayers() {
@@ -131,11 +134,13 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         
         if (activePlayers.ContainsKey(newChannel)) {
             //speakers[newChannel].SetOverallVolume(1);
-            activePlayers[newChannel]?.Mute(false);
+           
             if (IsPlayerPlaying(newChannel) && radioModel.IsOn.Value && electricityModel.HasElectricity()) {
                 transform.DOShakeRotation(3f, 5, 20, 90, false).SetLoops(-1);
+                activePlayers[newChannel]?.Mute(false);
             }
             else {
+                activePlayers[newChannel]?.Mute(true);
                 transform.DOKill();
             }
             
@@ -173,6 +178,9 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
             mouseHoverHint.text = "Radio (Off)";
         }
         else {
+            if (!electricityModel.HasElectricity()) {
+                return;
+            }
             TurnRadioOn();
             UpdateSpeakerVolume(false);
             mouseHoverHint.text = "Radio (On)";
@@ -339,7 +347,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         descriptionDatas.Clear();
 
 
-        List<BodyTimeInfo> allTodayAliens = bodyModel.AllTodayAliens;
+        List<BodyTimeInfo> allTodayAliens = bodyModel.Aliens;
         if (allTodayAliens == null || allTodayAliens.Count == 0) {
             radioModel.HasDescriptionDatasToday = false;
             return;
@@ -347,7 +355,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
 
         radioModel.HasDescriptionDatasToday = true;
         
-        List<BodyInfo> todayBodies = bodyModel.AllTodayAliens.Select((info => info.BodyInfo)).ToList();
+        List<BodyInfo> todayBodies = bodyModel.Aliens.Select((info => info.BodyInfo)).ToList();
 
         todayBodies.CTShuffle();
         foreach (BodyInfo bodyInfo in todayBodies) {
@@ -413,6 +421,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
     }
     
     private void TurnRadioOn() {
+        radioModel.IsOn.Value = true;
         RadioChannel channel = radioModel.CurrentChannel.Value;
         if (activePlayers.ContainsKey(channel)) {
             //speakers[channel].SetOverallVolume(1);
