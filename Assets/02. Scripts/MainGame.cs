@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.AlienInfos;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.ChoiceSystem;
 using _02._Scripts.Electricity;
@@ -31,6 +32,7 @@ public class MainGame : Architecture<MainGame> {
         
         this.RegisterExtensibleUtility<ResLoader>(ResLoader.Allocate());
         
+        this.RegisterModel<AlienNameModel>();
         this.RegisterModel<PlayerControlModel>();
         this.RegisterModel<GameStateModel>();
         this.RegisterModel<GameSceneModel>();
@@ -61,6 +63,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<SuspectModel>();
         this.RegisterModel<TelephoneNumberRecordModel>();
         this.RegisterModel<FoodBorrowModel>();
+        
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();

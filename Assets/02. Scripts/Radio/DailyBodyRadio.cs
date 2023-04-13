@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _02._Scripts.AlienInfos;
 using _02._Scripts.Radio.RadioScheduling;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
@@ -63,7 +64,7 @@ public class DailyBodyRadio : ScheduledRadioEvent<RadioTextContent> {
              AlienDescriptionData descriptionData = radioModel.DescriptionDatas[0];
              radioModel.DescriptionDatas.RemoveAt(0);
              SetRadioContent(new RadioTextContent(
-                 AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo, descriptionData.Reality),
+                 AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo, descriptionData.Reality, this.GetModel<AlienNameModel>().AlienName),
                  this.speakRate, this.speakerGender, this.mixer));
          }
         

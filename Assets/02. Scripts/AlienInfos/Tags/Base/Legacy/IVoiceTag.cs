@@ -56,9 +56,9 @@ namespace _02._Scripts.AlienInfos.Tags.Base {
 		[field: ES3Serializable]
 		public string TagName { get; } = "VoiceTag";
 
-		public string GetRandomRadioDescription(out bool isReal) {
+		public string GetRandomRadioDescription(string alienName,out bool isReal) {
 			isReal = Random.Range(0, 2) == 0;
-			return isReal ? GetRandomRadioDescription(true) : GetRandomRadioDescription(false);
+			return isReal ? GetRandomRadioDescription(alienName, true) : GetRandomRadioDescription(alienName, false);
 		}
 
 		protected string GetVoiceString(int index) {
@@ -86,20 +86,20 @@ namespace _02._Scripts.AlienInfos.Tags.Base {
 			return voiceList[speedIndex];
 		}
 
-		public string GetRandomRadioDescription(bool isReal) {
+		public string GetRandomRadioDescription(string alienName,bool isReal) {
 			BodyTagInfoModel bodyTagInfoModel = this.GetModel<BodyTagInfoModel>();
-			List<string> voiceDescription = bodyTagInfoModel.GetRealRadioDescription("Voice_Gender");
+			List<string> voiceDescription = bodyTagInfoModel.GetRealRadioDescription("Voice_Gender", alienName);
 			int index = Random.Range(0, voiceDescription.Count);
 			string voiceDescriptionString =
 				string.Format(voiceDescription[index], Random.Range(0, 2) == 0 ? "male" : "female");
 
-			string speedDescription = bodyTagInfoModel.GetRealRadioDescription("Voice_Speed")[index];
+			string speedDescription = bodyTagInfoModel.GetRealRadioDescription("Voice_Speed", alienName)[index];
 			string voiceParam = GetVoiceString(index);
 			
 			
 			string voiceDescriptionStringWithSpeed = string.Format(speedDescription, voiceParam);
 
-			var detailDescriptions = bodyTagInfoModel.GetRealRadioDescription($"Voice_Type_{index}");
+			var detailDescriptions = bodyTagInfoModel.GetRealRadioDescription($"Voice_Type_{index}", alienName);
 
 			string detailDescription = detailDescriptions.Count > 0
 				? detailDescriptions[Random.Range(0, detailDescriptions.Count)]

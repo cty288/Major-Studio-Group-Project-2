@@ -23,20 +23,20 @@ public class FatTag : AbstractAlienTag, IFatTag {
         this.fatness = fatness;
         if(fatness == FatType.Fat)
         {
-            RealRadioDescriptions = new List<string>() { "The convict is a <color=yellow>fatty</color>, according to the witness." };
+            RealRadioDescriptions = new List<string>() { "It is a <color=yellow>fatty</color>, according to the witness." };
             FakeRadioDescriptions = new List<string>() { "It is <color=yellow>strong</color>, as the witness reported." };
         }
         else if(fatness == FatType.Thin)
         {
-            RealRadioDescriptions = new List<string>() { "The victim's body is reported to be <color=yellow>slim</color>." };
-            FakeRadioDescriptions = new List<string>() { "The witness saw this victim's <color=yellow>batter down a wall with its fist</color>." };
+            RealRadioDescriptions = new List<string>() { "The monster's body is reported to be <color=yellow>slim</color>." };
+            FakeRadioDescriptions = new List<string>() { "The witness saw this its <color=yellow>batter down a wall with its fist</color>." };
         }
        
     }
     
     public FatTag(){}
     
-    public override string GetRandomRadioDescription(out bool isReal) {
+    public override string GetRandomRadioDescription(string alienName,out bool isReal) {
         isReal = Random.Range(0, 2) == 0;
         if (isReal) {
             return RealRadioDescriptions[Random.Range(0, RealRadioDescriptions.Count)];
@@ -45,7 +45,7 @@ public class FatTag : AbstractAlienTag, IFatTag {
         }
     }
 
-    public override string GetRandomRadioDescription(bool isReal) {
+    public override string GetRandomRadioDescription(string alienName,bool isReal) {
         if (isReal) {
             return RealRadioDescriptions[Random.Range(0, RealRadioDescriptions.Count)];
         } else {
@@ -53,7 +53,7 @@ public class FatTag : AbstractAlienTag, IFatTag {
         }
     }
 
-    public override List<string> GetFakeRadioDescription() {
+    public override List<string> GetFakeRadioDescription(string alienName) {
         return null;
     }
 

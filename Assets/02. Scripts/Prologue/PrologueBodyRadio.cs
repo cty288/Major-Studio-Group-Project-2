@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _02._Scripts.AlienInfos;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.BodyOutside;
@@ -36,7 +37,7 @@ public class PrologueBodyRadio : RadioEvent<RadioTextContent> {
          radioModel.DescriptionDatas.RemoveAt(0);
 
          radioContent.SetContent(AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo,
-             descriptionData.Reality,
+             descriptionData.Reality,this.GetModel<AlienNameModel>().AlienName,
              AlienDescriptionFactory.RadioPrologue));
          
          DeliveryRadio();

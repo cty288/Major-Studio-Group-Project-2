@@ -10,12 +10,12 @@ public class Head_Police : AlienBodyPartInfo {
 }
 
 public class PoliceHairTag : HaircutTag {
-    public override string GetRandomRadioDescription(out bool isReal) {
+    public override string GetRandomRadioDescription(string alienName,out bool isReal) {
         isReal = true;
         return "Police Hair";
     }
 
-    public override string GetRandomRadioDescription(bool isReal) {
+    public override string GetRandomRadioDescription(string alienName, bool isReal) {
         return "Police Hair";
     }
 

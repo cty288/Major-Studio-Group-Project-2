@@ -51,19 +51,19 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 
 		
 
-		public virtual string GetRandomRadioDescription(out bool isReal) {
+		public virtual string GetRandomRadioDescription(string alienName,out bool isReal) {
 			isReal = Random.Range(0, 2) == 0;
-			return GetRandomRadioDescription(isReal);
+			return GetRandomRadioDescription(alienName, isReal);
 		}
 
-		public virtual string GetRandomRadioDescription(bool isReal) {
+		public virtual string GetRandomRadioDescription(string alienName,bool isReal) {
 			BodyTagInfoModel bodyTagInfoModel = this.GetModel<BodyTagInfoModel>();
 			List<string> targetList;
 			if (isReal) {
-				targetList = bodyTagInfoModel.GetRealRadioDescription(TagName);
+				targetList = bodyTagInfoModel.GetRealRadioDescription(TagName, alienName);
 			}
 			else {
-				targetList = bodyTagInfoModel.GetRealRadioDescription(TagName);
+				targetList = bodyTagInfoModel.GetRealRadioDescription(TagName, alienName);
 			}
 			if(targetList==null || targetList.Count==0) {
 				return null;

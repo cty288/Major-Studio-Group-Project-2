@@ -43,15 +43,15 @@ public class Hunting : Activity {
     void getNonAlineChance(int day)
     {
         int getMapDate = 14;
-        if(nonAlienChance < getMapDate + 7)
+        if(day < getMapDate + 3)
         {
-            nonAlienChance = 0;
+            nonAlienChance = 1;
         }
         else
         {
-            float minChance = Math.Min((day - getMapDate) * 0.05f,0.2f);
-            float maxChance = 0.75f;
-            nonAlienChance = Math.Max(minChance, maxChance) * Random.Range(0.75f, 1.25f);
+            //float minChance = Math.Min((day - getMapDate) * 0.05f,0.2f);
+            //float maxChance = 0.75f;
+            nonAlienChance = 0.9f - Mathf.Min(0.1f, (day - getMapDate) * 0.01f);
         }
     }
 	protected override void OnDayEnds(DateTime date) {
@@ -83,7 +83,7 @@ public class Hunting : Activity {
         foreach (BodyPartType bodyPartType in indices.Keys)
         {
             BodyPartCollection collection =
-                AlienBodyPartCollections.Singleton.GetBodyPartCollectionByBodyType(bodyPartType);
+                AlienBodyPartCollections.Singleton.GetBodyPartCollectionByBodyType(bodyPartType,false);
             int count = collection.HeightSubCollections[0].NewspaperBodyPartDisplays.HumanTraitPartsPrefabs.Count;
 
             int additionalCount = Random.Range(1, 4);
@@ -107,8 +107,8 @@ public class Hunting : Activity {
             if ((Random.Range(0f, 1f) <= nonAlienChance || Aliens.Count == 0 ) || (i >= allyNum))
             {
                 attenderIsAlien[i] = false;
-                attenders[i] = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, attenderIsAlien[i], false,
-                   new NormalKnockBehavior(3, Random.Range(4, 7), null), availableBodyPartIndices);
+                attenders[i] = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, attenderIsAlien[i], 0.4f,
+	                new NormalKnockBehavior(3, Random.Range(4, 7), null), availableBodyPartIndices, 40);
                 // Debug.Log("Spawned a non-alien");
             }
             else
