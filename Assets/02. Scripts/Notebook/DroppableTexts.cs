@@ -16,6 +16,7 @@ public class DroppableTextInfo : DroppableInfo{
 	[ES3Serializable]
 	private GameObject contentUIPrefab;
 	
+	
 	public DroppableTextInfo(){}
 	
 	public DroppableTextInfo(string text, GameObject prefab){

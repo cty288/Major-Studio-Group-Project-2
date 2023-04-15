@@ -64,10 +64,10 @@ public class PrologueBodyRadio : RadioEvent<RadioTextContent> {
     private void DeliveryRadio() {
         DateTime currentTime = gameTimeManager.CurrentTime;
         DateTime happenTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day,
-            23, 10, 0);
+            23, 00, 0);
 
         gameEventSystem.AddEvent(new PrologueDeliveryRadio(
-            new TimeRange(happenTime, happenTime.AddMinutes(30)),
+            new TimeRange(happenTime, happenTime.AddMinutes(60)),
             AudioMixerList.Singleton.AudioMixerGroups[1]));
     }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class VoiceTextSpliter {
@@ -24,13 +25,13 @@ public static class VoiceTextSpliter {
             }
             if (sentence.Length > minSentenceLength)
             {
-                sentences.Add(sentence);
+                sentences.Add(sentence.TrimEnd());
                 sentence = "";
             }
         }
         if (sentence.Length > 0)
         {
-            sentences.Add(sentence);
+            sentences.Add(sentence.TrimEnd());
         }
         return sentences;
     }

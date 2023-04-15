@@ -28,10 +28,8 @@ public class BodyGenerationSystem : AbstractSystem {
 
     private int knockDoorCheckTimeInterval = 30;
     private float knockDoorChance = 0.7f;
-    private float nonAlienChance = 1f;
-
-
-    private float knockWaitTimeSinceDayStart = 60f;
+   // private float nonAlienChance = 1f;
+   //private float knockWaitTimeSinceDayStart = 60f;
     
     //private Coroutine knockDoorCheckCoroutine;
     private BodyModel bodyModel;
@@ -65,13 +63,9 @@ public class BodyGenerationSystem : AbstractSystem {
 
     private void OnEndOfDay(int day, int hour) {
         dayNum = day;
-        if (day >= 2) {
-            nonAlienChance -= 0.2f;
-            nonAlienChance = Mathf.Clamp(nonAlienChance, 0.5f, 1f);
-        }
-
+       
         if (day == 1) {
-            SpawnAlienOrDeliverBody();
+            InitialSpawnBodyEvent();
             
         }
         
@@ -97,13 +91,25 @@ public class BodyGenerationSystem : AbstractSystem {
 
     }
 
-    public void SpawnAlienOrDeliverBody() {
+    public BodyInfo GetAlienOrDeliverBody() {
         List<BodyTimeInfo> Aliens = bodyModel.Aliens;
-        List<BodyTimeInfo> Humans = bodyModel.Humans;
+       // List<BodyTimeInfo> TodayAliens = bodyModel.AllTodayAliens;
+        BodyInfo targetBody = null;
+        //TODO: 改成如果今天报纸上没人那就啥怪物都不刷
         
-        BodyInfo targetBody;
-
+        HotUpdateDataModel hotUpdateDataModel = this.GetModel<HotUpdateDataModel>();
+        float baseProb = float.Parse(hotUpdateDataModel.GetData("Monster_Knock_Prob_Base").values[0]);
         var availableBodyPartIndices = GetAvailableBodyPartIndicesa();
+        float alienChance = Mathf.Min((baseProb + Mathf.Min(0.2f, dayNum * 0.007f)) * Aliens.Count, 0.9f);
+        alienChance += bodyModel.ConsecutiveNonAlianSpawnCount * 0.05f;
+        alienChance = Mathf.Min(alienChance, 0.9f);
+        
+        
+        Debug.Log("alienChance: " + alienChance);
+        if (bodyModel.AllTodayDeadBodies.Count ==0) {
+            alienChance = 0;
+        }
+        float nonAlienChance = 1f - alienChance;
         
         if (Random.Range(0f, 1f) <= nonAlienChance || dayNum==1 || Aliens.Count==0) {
             if (Random.Range(0f, 1f) <= 0.5f && Aliens.Count > 0) {
@@ -114,7 +120,8 @@ public class BodyGenerationSystem : AbstractSystem {
                 targetBody = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, 0,
                     new NormalKnockBehavior(3, Random.Range(4, 7), null), availableBodyPartIndices, 40);
             }
-           // Debug.Log("Spawned a non-alien");
+            // Debug.Log("Spawned a non-alien");
+            //bodyModel.ConsecutiveNonAlianSpawnCount++;
         }
         else {
             float todayAlien = Random.Range(0f, 1f);
@@ -125,21 +132,27 @@ public class BodyGenerationSystem : AbstractSystem {
             else {
                 targetBody = Aliens[Random.Range(0, Aliens.Count)].BodyInfo;
             }
-            //Debug.Log("Spawned an alien!");
+            Debug.Log("Spawned an alien!");
+            //bodyModel.ConsecutiveNonAlianSpawnCount = 0;
         }
 
+      
+        return targetBody;
+    }
+
+    public void InitialSpawnBodyEvent() {
+        
         int knockDoorTimeInterval = 3;
        
         DateTime currentTime = gameTimeManager.CurrentTime;
 
-        DateTime nextTime = currentTime + new TimeSpan(0, knockDoorCheckTimeInterval, 0);
+        DateTime nextTime = currentTime + new TimeSpan(0, knockDoorCheckTimeInterval + Random.Range(0, 30), 0);
         if (nextTime.Hour < gameTimeManager.NightTimeStart) {
             nextTime = new DateTime(nextTime.Year, nextTime.Month, nextTime.Day, gameTimeManager.NightTimeStart,
                 Random.Range(20, 40), 0);
         }
         gameEventSystem.AddEvent(new DailyKnockEvent(
-            new TimeRange(nextTime), targetBody,
-            knockDoorChance));
+            new TimeRange(nextTime)));
     }
 
     public void StopCurrentBody() {

@@ -10,8 +10,9 @@ using Random = UnityEngine.Random;
 public class BountyHunterQuestAlienSpawnEvent : DailyKnockEvent {
     private BodyModel bodyModel;
     public BountyHunterQuestAlienSpawnEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float eventTriggerChance) :
-        base(startTimeRange, bodyInfo, eventTriggerChance) {
+        base(startTimeRange) {
         bodyModel = this.GetModel<BodyModel>();
+        this.bodyInfo = bodyInfo;
     }
 
     public BountyHunterQuestAlienSpawnEvent() : base() {

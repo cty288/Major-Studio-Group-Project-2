@@ -10,16 +10,20 @@ namespace _02._Scripts.Poster {
 
 	public struct OnPosterGet {
 		public string ID;
+		public bool SpawnPoster;
 	}
 	public class PosterModel: AbstractSavableModel {
 		[ES3Serializable]
 		private Dictionary<string, Poster> posters = new Dictionary<string, Poster>();
 		
 		
-		public string AddPoster(Poster poster) {
+		public string AddPoster(Poster poster, bool spawnPoster = true) {
 			poster.ID = Guid.NewGuid().ToString();
 			posters.Add(poster.ID, poster);
-			this.SendEvent<OnPosterGet>(new OnPosterGet() {ID = poster.ID});
+			this.SendEvent<OnPosterGet>(new OnPosterGet() {
+				ID = poster.ID,
+				SpawnPoster = spawnPoster
+			});
 			return poster.ID;
 		}
 		

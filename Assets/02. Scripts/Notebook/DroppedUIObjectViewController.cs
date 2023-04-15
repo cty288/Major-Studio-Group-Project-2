@@ -91,7 +91,7 @@ public abstract class DroppedUIObjectViewController : AbstractMikroController<Ma
         
     }
 
-    private void OnDestroy() {
+    protected virtual void OnDestroy() {
         if(CurrentDroppingItem == this) {
             CurrentDroppingItem = null;
         }

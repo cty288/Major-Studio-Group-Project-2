@@ -49,7 +49,14 @@ public class DailyBodyRadio : ScheduledRadioEvent<RadioTextContent> {
                  if (!radioModel.HasDescriptionDatasToday) {
                      if (!radioSchedulingSystem.NoMonsterTodayAnnounced) {
                          radioSchedulingSystem.NoMonsterTodayAnnounced = true;
-                         SetRadioContent(new RadioTextContent("We have no monster today. Enjoy your day!",
+                         List<string> noMonsterToday = new List<string>();
+
+                         noMonsterToday.Add(
+                             "Good evening, listeners. Today, we have no reports of any monster sightings. Dorcha is safe, at least for today.");
+                         noMonsterToday.Add(
+                             "Welcome to our daily broadcast. Today, we have no reports of any monster sightings. Take a deep breath and enjoy the peace while it lasts!");
+                         
+                         SetRadioContent(new RadioTextContent(noMonsterToday[Random.Range(0, noMonsterToday.Count)],
                              this.speakRate, this.speakerGender, this.mixer));
                      } else {
                          SetRadioContent(new RadioTextContent("", this.speakRate, this.speakerGender, this.mixer));

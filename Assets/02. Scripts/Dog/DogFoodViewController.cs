@@ -11,7 +11,8 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class DogFoodViewController : AbstractMikroController<MainGame> {
-    [SerializeField] private Sprite dogDieSprite;
+    [SerializeField] 
+    private Sprite dogDieSprite;
     private SpriteRenderer spriteRenderer;
     private TMP_Text infoText;
 
@@ -30,6 +31,10 @@ public class DogFoodViewController : AbstractMikroController<MainGame> {
         spriteRenderer = GetComponent<SpriteRenderer>();
         infoText = transform.Find("Canvas/Text").GetComponent<TMP_Text>();
         gameObject.SetActive(false);
+
+        if (!dogModel.isDogAlive) {
+            spriteRenderer.sprite = dogDieSprite;
+        }
     }
 
     private void OnDogSendBack(OnDogSendBack e) {

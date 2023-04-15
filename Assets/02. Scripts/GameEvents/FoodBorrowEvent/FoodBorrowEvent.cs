@@ -55,7 +55,7 @@ namespace _02._Scripts.GameEvents.FoodBorrowEvent {
 		private void AddNextWeekEvent() {
 		//	bool isNextScammer = Random.Range(0, 100) <= 40;
 			GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
-			int nextDayTime = isScammer ? Random.Range(3, 7) : Random.Range(7, 10);
+			int nextDayTime = isScammer ? Random.Range(4, 8 ): Random.Range(8, 10);
 			DateTime nextTime = gameTimeModel.GetDay(gameTimeModel.Day + nextDayTime);
 			nextTime = nextTime.AddMinutes(Random.Range(20, 100));
 

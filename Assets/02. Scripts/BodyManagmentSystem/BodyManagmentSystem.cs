@@ -64,7 +64,7 @@ public class BodyManagmentSystem : AbstractSystem {
             timeInfo.IsTodayDead = false;
         }
         GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
-        int bodyCount = Mathf.Clamp(Mathf.RoundToInt(GenerateNormalRandom(MaxBodyEveryDay / 2f, 1f)), 0,
+        int bodyCount = Mathf.Clamp(Mathf.RoundToInt(GenerateNormalRandom(MaxBodyEveryDay / 2f, 2.34f)), 0,
             MaxBodyEveryDay);
         
         List<int> testCount = new List<int>();
@@ -86,6 +86,8 @@ public class BodyManagmentSystem : AbstractSystem {
         if (gameTimeModel.Day > 0 && gameTimeModel.Day <= 5) {
             bodyCount = 3;
         }
+
+        //bodyCount = 0;
 
 
         HashSet<BodyTimeInfo> removeSet = new HashSet<BodyTimeInfo>();
@@ -142,9 +144,8 @@ public class BodyManagmentSystem : AbstractSystem {
             alienCount = 1;
         }
         for (int i = 0; i < alienCount; i++) {
-            BodyInfo selectedAlien = bodyModel.allBodyTimeInfos[Random.Range(0, bodyModel.allBodyTimeInfos.Count)].BodyInfo;
+            BodyInfo selectedAlien = newBodyInfos[Random.Range(0, newBodyInfos.Count)].BodyInfo;
             selectedAlien.IsAlien = true;
-        
             this.SendEvent<OnBodyInfoBecomeAlien>(new OnBodyInfoBecomeAlien() {ID = selectedAlien.ID});
         }
       

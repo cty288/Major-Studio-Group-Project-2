@@ -31,9 +31,8 @@ namespace _02._Scripts.BodyManagmentSystem {
 
 		[field: ES3Serializable] public int AvailableBodyPartIndexCount { get; protected set; } =6;
 		
+		[field: ES3Serializable] public int ConsecutiveNonAlianSpawnCount { get;  set; } = 0;
 		
-		
-
 		public Dictionary<BodyPartType, HashSet<int>> AvailableBodyPartIndices {
 			get {
 				if (availableBodyPartIndices == null) {

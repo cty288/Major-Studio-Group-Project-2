@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base;
+using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.GameTime;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
 using UnityEngine;
@@ -12,7 +14,7 @@ namespace _02._Scripts.BodyOutside {
 		
 		protected BodyGenerationSystem bodyGenerationSystem;
 		protected DateTime knockWaitTimeUntil = DateTime.MaxValue;
-		public DailyKnockEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float eventTriggerChance) : base(startTimeRange, bodyInfo, eventTriggerChance) {
+		public DailyKnockEvent(TimeRange startTimeRange) : base(startTimeRange, null, 1) {
 			bodyGenerationSystem = this.GetSystem<BodyGenerationSystem>(system => {
 				bodyGenerationSystem = system;
 			});
@@ -23,9 +25,24 @@ namespace _02._Scripts.BodyOutside {
 				bodyGenerationSystem = system;
 			});
 		}
+
+		public override void OnStart() {
+			base.OnStart();
+			bodyInfo = bodyGenerationSystem.GetAlienOrDeliverBody();
+		}
+
 		public override EventState OnUpdate() {
 			DateTime currentTime = gameTimeManager.CurrentTime.Value;
-        
+
+			if (bodyInfo == null) {
+				return EventState.End;
+			}
+
+			if (currentTime.Hour == gameTimeManager.NightTimeStart && currentTime.Minute <= 20) {
+				
+				return EventState.End;
+			}
+			
 			if ((currentTime.Hour == 23 && currentTime.Minute >= 58 && !interacted) || gameStateModel.GameState.Value == GameState.End) {
 				if (knockDoorCheckCoroutine != null) {
 					CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
@@ -51,6 +68,14 @@ namespace _02._Scripts.BodyOutside {
 						return EventState.End;
 					}
 					if (currentTime >= knockWaitTimeUntil) {
+						BodyModel bodyModel = this.GetModel<BodyModel>();
+						//bodyModel.ConsecutiveNonAlianSpawnCount = Mathf.Max(0, bodyModel.ConsecutiveNonAlianSpawnCount - 1);
+						if (bodyInfo.IsAlien) {
+							bodyModel.ConsecutiveNonAlianSpawnCount = 0;
+						}
+						else {
+							bodyModel.ConsecutiveNonAlianSpawnCount++;
+						}
 						started = true;
 						knockDoorCheckCoroutine = CoroutineRunner.Singleton.StartCoroutine(KnockDoorCheck());
 					}
@@ -61,6 +86,7 @@ namespace _02._Scripts.BodyOutside {
 			return (bodyGenerationModel.CurrentOutsideBody.Value == null && !bodyGenerationModel.CurrentOutsideBodyConversationFinishing
 				&& currentTime >= knockWaitTimeUntil) ? EventState.End : EventState.Running;
 		}
+		
 		protected override Func<bool> OnOpen() {
 				onClickPeepholeSpeakEnd = false;
 				Speaker speaker = GameObject.Find("OutsideBodySpeaker").GetComponent<Speaker>();
@@ -76,12 +102,13 @@ namespace _02._Scripts.BodyOutside {
 					speaker.Speak(messages[Random.Range(0, messages.Count)], AudioMixerList.Singleton.AudioMixerGroups[4], "???", 1f,OnAlienClickedOutside);
 				}
 				else {
-	            
+					int foodCount = Random.Range(1, 3);
+					this.GetModel<PlayerResourceModel>().AddFood(foodCount);
 					LoadCanvas.Singleton.ShowImage(1, 0.2f);
 					List<string> messages = new List<string>() {
-						"Delivery service! Take care!",
-						"Here's the food for you today. Take care!",
-						"Hey, I brought you some foods! Take care!"
+						$"Delivery service! I got {foodCount} can{((foodCount > 1) ? "s" : "")} of food for you!",
+						$"Here {(foodCount > 1 ? "are" : "is")} your food delivery! {foodCount} can{((foodCount > 1) ? "s" : "")} of food!",
+						$"Hey, I brought you {foodCount} can{((foodCount > 1) ? "s" : "")} of food! Take care!",
 					};
 
 					IVoiceTag voiceTag = bodyInfo.VoiceTag;
@@ -97,7 +124,7 @@ namespace _02._Scripts.BodyOutside {
 			
 			
 		private void OnDelivererClickedOutside(Speaker speaker) {
-	        this.GetModel<PlayerResourceModel>().AddFood(Random.Range(1, 3));
+	       
 	       // this.SendEvent<OnShowFood>();
 	        timeSystem.AddDelayTask(1f, () => {
 	            onClickPeepholeSpeakEnd = true;
@@ -146,11 +173,16 @@ namespace _02._Scripts.BodyOutside {
 	    }
 
 	    public override void OnMissed() {
-		    bodyGenerationSystem.SpawnAlienOrDeliverBody();
+		    GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
+		    DateTime nextTime = gameTimeModel.CurrentTime.Value.AddMinutes(Random.Range(10, 20));
+		    gameEventSystem.AddEvent(new DailyKnockEvent(new TimeRange(nextTime, nextTime.AddMinutes(20))));
 	    }
 	    
 	    public override void OnEventEnd() {
-		    bodyGenerationSystem.SpawnAlienOrDeliverBody();
+		    //bodyGenerationSystem.SpawnAlienOrDeliverBody();
+		    GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
+		    DateTime nextTime = gameTimeModel.CurrentTime.Value.AddMinutes(Random.Range(20, 50));
+		    gameEventSystem.AddEvent(new DailyKnockEvent(new TimeRange(nextTime, nextTime.AddMinutes(20))));
 	    }
 	}
 }

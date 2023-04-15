@@ -60,6 +60,9 @@ public class Table :  AbstractDroppableItemContainerViewController {
     }
 
     private void OnPosterGet(OnPosterGet e) {
+        if (!e.SpawnPoster) {
+            return;
+        }
         GameObject obj = SpawnItem(PosterAssets.Singleton.GetTableItem(this.GetModel<PosterModel>().GetPoster(e.ID)));
         obj.GetComponent<PosterViewController>().SetContent(e.ID);
     }

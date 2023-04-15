@@ -38,11 +38,12 @@ public class PlayerResourceSystem : AbstractSystem {
     protected PlayerResourceModel playerResourceModel;
     
     protected override void OnInit() {
+        HotUpdateDataModel hotUpdateDataModel = this.GetModel<HotUpdateDataModel>();
         playerResourceModel = this.GetModel<PlayerResourceModel>();
         this.GetSystem<GameTimeManager>().OnDayStart += OnDayEnd;
         if (!playerResourceModel.HasEnoughResource<GunResource>(1)) {
             playerResourceModel.AddResource(new GunResource(), 1);
-            playerResourceModel.AddFood(5);
+            playerResourceModel.AddFood(int.Parse(hotUpdateDataModel.GetData("Initial_Food_Count").values[0]));
         }
     }
 

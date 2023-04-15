@@ -347,22 +347,32 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         descriptionDatas.Clear();
 
 
-        List<BodyTimeInfo> allTodayAliens = bodyModel.Aliens;
-        if (allTodayAliens == null || allTodayAliens.Count == 0) {
+        List<BodyTimeInfo> allTodayAliens = bodyModel.AllTodayAliens;
+        List<BodyTimeInfo> allAliens = bodyModel.Aliens;
+        List<BodyTimeInfo> allTodayDeadBodies = bodyModel.AllTodayDeadBodies;
+        if (allAliens == null || allAliens.Count == 0 || allTodayDeadBodies.Count == 0) {
             radioModel.HasDescriptionDatasToday = false;
             return;
         }
+        allTodayAliens.CTShuffle();
+        allAliens.CTShuffle();
 
         radioModel.HasDescriptionDatasToday = true;
-        
-        List<BodyInfo> todayBodies = bodyModel.Aliens.Select((info => info.BodyInfo)).ToList();
 
-        todayBodies.CTShuffle();
+        foreach (BodyTimeInfo info in allAliens) {
+            if(allTodayAliens.Exists((timeInfo => timeInfo.BodyInfo.ID == info.BodyInfo.ID))) {
+                continue;
+            }
+            allTodayAliens.Add(info);
+        }
+        
+        List<BodyInfo> todayBodies = allTodayAliens.Select((info => info.BodyInfo)).ToList();
+        
         foreach (BodyInfo bodyInfo in todayBodies) {
             descriptionDatas.Add(new AlienDescriptionData(bodyInfo, radioReality));
         }
         
-        descriptionDatas.CTShuffle();
+        //descriptionDatas.CTShuffle();
 
     }
 

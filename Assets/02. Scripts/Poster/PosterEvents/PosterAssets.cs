@@ -60,6 +60,11 @@ namespace _02._Scripts.Poster.PosterEvents {
 					.GetComponent<MissingDogContentPosterViewController>();
 				vc.OnSetContent(missingDogPoster);
 				return vc.gameObject;
+			}else if (poster is MerchantAdPoster merchantAdPoster) {
+				MerchantAdPosterViewController vc = Instantiate(contentPagePrefabs[3], transform)
+					.GetComponent<MerchantAdPosterViewController>();
+				
+				return vc.gameObject;
 			}
 
 			return null;

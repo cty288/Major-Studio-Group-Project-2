@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.Electricity;
+using _02._Scripts.GameEvents.Merchant;
 using _02._Scripts.GameTime;
 using MikroFramework.Architecture;
 using MikroFramework.BindableProperty;
@@ -60,6 +61,7 @@ public class ElectricitySystem : AbstractSystem {
             DateTime poweroffTime = e.Date;
             this.GetSystem<GameEventSystem>().AddEvent(new PowerCutoffRadio(new TimeRange(poweroffTime),
                 AudioMixerList.Singleton.AudioMixerGroups[1]));
+            this.GetSystem<GameEventSystem>().AddEvent(new MerchantGeneratorAdEvent(new TimeRange(poweroffTime.AddDays(1))));
         }
     }
 

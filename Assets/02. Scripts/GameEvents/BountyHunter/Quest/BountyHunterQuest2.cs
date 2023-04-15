@@ -329,7 +329,7 @@ public class BountyHunterQuestClueInfoRadioAreaEvent : BountyHunterQuestClueInfo
         }
 
         if (!alreadyNotified) {
-            sb.AppendFormat("A victim, who was believed to be a {1}, was found at {0}.", location, name);
+            sb.AppendFormat("A witness of a monster, who was believed to kill a {1} a few days ago, was seen at {0}.", location, name);
             sb.AppendFormat(AlienDescriptionFactory.Formatter,
                 "{0:hair}. And {0:height}", body);
         }

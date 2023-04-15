@@ -70,15 +70,15 @@ namespace _02._Scripts.SuspectSystem {
 
 			}
 			else {
-				messages.Add("Hello again, have you seen the guy on the warrant that I sent you last time? " +
-				             "Well, we need your help again. If you spot the guy on this poster, please <color=yellow>contact us and send us a photo</color> as soon as possible. Thank you.");
+				messages.Add("Hello again! " +
+				             "Well, we need your help again. If you spot the guy on this poster, please <color=yellow>contact us and send us a photo</color>. Thank you!");
 				
 				messages.Add("Well hello again, the days are getting more and more crazy and we've got a new warrant for you to look over again. " +
-				             "If you come across the person on the poster, <color=yellow>give us a call and send us a photo</color>. Thank you!");
+				             "You know how to do it! Thank you!");
 
 				messages.Add(
 					"Greetings, I'm the police in Dorcha again. We've got another warrant for your attention." +
-					" If you happen to see the person on the poster,please don't hesitate to <color=yellow>contact us and send us a photo</color> so we can bring them to justice.");
+					"As always, please don't hesitate to <color=yellow>contact us and send us a photo</color> so we can bring them to justice.");
 			}
 			
 			IVoiceTag voiceTag = bodyInfo.VoiceTag;

@@ -18,7 +18,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
     
     private TMP_Text dateText;
     protected GameObject outOfDateText;
-    
+    protected GameObject noVictimTextObj;
    
 
     [SerializeField] private List<GameObject> imageContainers = new List<GameObject>();
@@ -64,6 +64,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
         this.RegisterEvent<OnNewspaperUIPanelOpened>(OnNewspaperUIPanelOpened)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
         playerControl = this.GetModel<PlayerControlModel>();
+        noVictimTextObj = panel.transform.Find("NoVictimText").gameObject;
     }
 
     
@@ -122,7 +123,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
         
         CurrentScreenSpaceCameraMarker.gameObject.SetActive(true);
         
-        
+        noVictimTextObj.gameObject.SetActive(news.timeInfos.Count == 0);
         if (lastNewspaper == news && savedSpawnedImages.Count > 0) {
             return;
         }
@@ -134,6 +135,8 @@ public class NewspaperUIPanel : OpenableUIPanel {
         for (int i = 0; i < imageContainers.Count; i++) {
             imageContainers[i].gameObject.SetActive(false);
         }
+        
+       
 
         for (int i = 0; i < news.timeInfos.Count; i++) {
             BodyTimeInfo info = news.timeInfos[i];
@@ -150,6 +153,8 @@ public class NewspaperUIPanel : OpenableUIPanel {
             imageContainerImage.texture = renderTexture;
             imageContainerImage.GetComponent<IHaveBodyInfo>().BodyInfos = new List<BodyInfo>(){bodyInfo};
 
+            imageContainerImage.GetComponent<NewspaperPhotoViewController>().BodyInfo = bodyInfo;
+
             /*
             TMP_Text hintText = symbolImages[i].GetComponentInChildren<TMP_Text>(true);
             if (info.DayRemaining == 3) {
@@ -161,7 +166,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
                 hintText.text = "Not sure whether they are dead.";
             }*/
 
-            imageContainerImage.GetComponent<BountyHuntingSelector>().SetHintText(GetShortDescription(bodyInfo));
+            //imageContainerImage.GetComponent<BountyHuntingSelector>().SetHintText(GetShortDescription(bodyInfo));
 
         }
 
