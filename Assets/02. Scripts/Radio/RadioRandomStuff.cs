@@ -72,6 +72,7 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
         RegisterRadioMessages(Message_Makeup, RadioProgramType.Ads);
         RegisterRadioMessages(Message_Boombox, RadioProgramType.Ads);
         RegisterRadioMessages(Message_Game_Console, RadioProgramType.Ads);
+        RegisterRadioMessages(Message_KFCVMe50, RadioProgramType.Ads);
         RegisterRadioMessages(Message_Missing_Something, RadioProgramType.Announcement);
         RegisterRadioMessages(Message_Weather_Report, RadioProgramType.Announcement);
         RegisterRadioMessages(Message_Announcement_Of_President, RadioProgramType.Announcement);
@@ -302,10 +303,10 @@ public  class RadioRandomStuff :MikroSingleton<RadioRandomStuff>, IController {
         DateTime today = this.GetSystem<GameTimeManager>().CurrentTime.Value;
         float chance = 0f;
         if (today.DayOfWeek == DayOfWeek.Thursday) {
-            chance = 1;
+            chance = 0.1f;
         }
 
-        string content = "Crazy Thursday is back! Call 233333 to get a V50 combo for half price!";
+        string content = "CFK Crazy Thursday is back! Call <color=yellow>2 3 3 3 3 3</color> to get a V50 combo for free!";
         return new RadioTextMessageInfo(content, 1.2f, Gender.MALE, chance, RadioChannel.FM100,RadioProgramType.Ads,1);
     }
     private void RegisterRadioMessages(Func<RadioTextMessageInfo> message, RadioProgramType programType) {

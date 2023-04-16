@@ -10,6 +10,7 @@ using _02._Scripts.GameEvents.FoodBorrowEvent;
 using _02._Scripts.GameEvents.Merchant;
 using _02._Scripts.GameTime;
 using _02._Scripts.ImportantNewspaper;
+using _02._Scripts.KFC;
 using _02._Scripts.Notebook;
 using _02._Scripts.Poster;
 using _02._Scripts.Radio;
@@ -90,6 +91,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<SexyCardSystem>();
         this.RegisterSystem<SuspectSystem>();
         this.RegisterSystem<FoodBorrowSystem>();
+        this.RegisterSystem<KFCSystem>();
     }
     
     protected void RegisterModel<T>() where T : class, IModel, new() {
