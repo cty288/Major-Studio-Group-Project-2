@@ -28,6 +28,8 @@ namespace _02._Scripts.BodyManagmentSystem {
 		[ES3Serializable] private Dictionary<BodyPartType, Dictionary<int, BindableProperty<int>>>
 			availableBodyPartIndices = null;
 
+		[field: ES3Serializable]
+		public BodyInfo ProloguePlayerBodyInfo { get; set; }
 
 		[field: ES3Serializable] public int AvailableBodyPartIndexCount { get; protected set; } =6;
 		

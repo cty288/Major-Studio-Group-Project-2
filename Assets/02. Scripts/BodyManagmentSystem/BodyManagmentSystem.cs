@@ -83,8 +83,10 @@ public class BodyManagmentSystem : AbstractSystem {
             bodyModel.AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(new BodyTimeInfo(1, info, true));
         }
 
-        if (gameTimeModel.Day > 0 && gameTimeModel.Day <= 5) {
+        if (gameTimeModel.Day > 1 && gameTimeModel.Day <= 5) {
             bodyCount = 3;
+        }else if (gameTimeModel.Day == 1) {
+            bodyCount = 1;
         }
 
         //bodyCount = 0;
@@ -140,7 +142,7 @@ public class BodyManagmentSystem : AbstractSystem {
         //transform an alien
         int alienCount = bodyCount / 3;
 
-        if (gameTimeModel.Day == 0) {
+        if (gameTimeModel.Day <= 1) {
             alienCount = 1;
         }
         for (int i = 0; i < alienCount; i++) {

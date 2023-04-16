@@ -397,6 +397,8 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         GameEventSystem eventSystem = this.GetSystem<GameEventSystem>();
 
         string speakContent = this.GetModel<HotUpdateDataModel>().GetData("Radio_Intro").values[0];
+
+        
         
         eventSystem.AddEvent(new DeadBodyRadioIntroEvent(
             new TimeRange(currentTime + new TimeSpan(0, 0, 0), currentTime + new TimeSpan(0, 20, 0)),
