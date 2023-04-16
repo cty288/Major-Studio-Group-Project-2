@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.GameTime;
+using _02._Scripts.SurvivalGuide;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
 using UnityEngine;
@@ -14,16 +15,19 @@ namespace _02._Scripts.BodyOutside {
 		
 		protected BodyGenerationSystem bodyGenerationSystem;
 		protected DateTime knockWaitTimeUntil = DateTime.MaxValue;
+		protected SurvivalGuideModel survivalGuideModel;
 		public DailyKnockEvent(TimeRange startTimeRange) : base(startTimeRange, null, 1) {
 			bodyGenerationSystem = this.GetSystem<BodyGenerationSystem>(system => {
 				bodyGenerationSystem = system;
 			});
+			survivalGuideModel = this.GetModel<SurvivalGuideModel>();
 		}
 
 		public DailyKnockEvent() : base() {
 			bodyGenerationSystem = this.GetSystem<BodyGenerationSystem>(system => {
 				bodyGenerationSystem = system;
 			});
+			survivalGuideModel = this.GetModel<SurvivalGuideModel>();
 		}
 
 		public override void OnStart() {
@@ -112,17 +116,28 @@ namespace _02._Scripts.BodyOutside {
 					};
 
 					IVoiceTag voiceTag = bodyInfo.VoiceTag;
+					
+					string additionalMessage = "";
+					additionalMessage += SendSurvivalGuideAndGetPhrases();
 
-					speaker.Speak(messages[Random.Range(0, messages.Count)],
+					speaker.Speak(messages[Random.Range(0, messages.Count)]+additionalMessage,
 						bodyInfo.VoiceTag.VoiceGroup,
 						"Deliver", 1, OnDelivererClickedOutside,
 						voiceTag.VoiceSpeed, 1, voiceTag.VoiceType);
 				}
 				return () => onClickPeepholeSpeakEnd;
 			}
-			
-			
-			
+
+		private string SendSurvivalGuideAndGetPhrases() {
+			if (survivalGuideModel.ReceivedSurvivalGuideBefore.Value) {
+				return "";
+			}
+			survivalGuideModel.ReceivedSurvivalGuideBefore.Value = true;
+			return
+				" By the way, we are also sending out survival guide. It is written by the Dorcha government recently, and it could be very beneficial for you in this world filled with danger. Please take it and read it carefully. It's essential to know how to survive in this world full of monsters.";
+		}
+
+
 		private void OnDelivererClickedOutside(Speaker speaker) {
 	       
 	       // this.SendEvent<OnShowFood>();

@@ -17,6 +17,7 @@ using _02._Scripts.Radio.RadioScheduling;
 using _02._Scripts.Radio.RadioScheduling.DorchaDaily;
 using _02._Scripts.Radio.RadioScheduling.GhostStory;
 using _02._Scripts.SexyCard;
+using _02._Scripts.SurvivalGuide;
 using MikroFramework.Architecture;
 using MikroFramework.ResKit;
 using MikroFramework.TimeSystem;
@@ -63,6 +64,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<SuspectModel>();
         this.RegisterModel<TelephoneNumberRecordModel>();
         this.RegisterModel<FoodBorrowModel>();
+        this.RegisterModel<SurvivalGuideModel>();
         
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());

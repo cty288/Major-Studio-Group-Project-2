@@ -9,6 +9,7 @@ using _02._Scripts.ImportantNewspaper;
 using _02._Scripts.Notebook;
 using _02._Scripts.Poster;
 using _02._Scripts.Poster.PosterEvents;
+using _02._Scripts.SurvivalGuide;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
@@ -31,6 +32,7 @@ public class Table :  AbstractDroppableItemContainerViewController {
 
     [SerializeField] private GameObject cameraPrefab;
 
+    [SerializeField] protected GameObject survivalGuidePrefab;
     
     private ImportantNewspaperModel importantNewspaperModel;
     private NewspaperViewController todayNewspaper;
@@ -50,8 +52,16 @@ public class Table :  AbstractDroppableItemContainerViewController {
         this.RegisterEvent<OnImportantNewspaperGenerated>(OnImportantNewspaperGenerated)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnPosterGet>(OnPosterGet).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.GetModel<SurvivalGuideModel>().ReceivedSurvivalGuideBefore.RegisterOnValueChaned(OnHasSurvivalGuideChanged)
+            .UnRegisterWhenGameObjectDestroyed(gameObject);
 
         importantNewspaperModel = this.GetModel<ImportantNewspaperModel>();
+    }
+
+    private void OnHasSurvivalGuideChanged(bool hasGuide) {
+        if (hasGuide) {
+            GameObject obj = SpawnItem(survivalGuidePrefab);
+        }
     }
 
     private void OnRewardPackage(OnRewardPackage e) {
