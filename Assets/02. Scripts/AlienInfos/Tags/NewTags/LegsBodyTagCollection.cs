@@ -139,3 +139,11 @@ public class LegsTag_SP_Sexy : ClothTag
     [field: ES3Serializable]
     public override bool IsUpperCloth { get; } = false;
 }
+
+public class LegsTag_SP_Army : ClothTag
+{
+    public override string TagName { get; } = "Cloth_Army";
+
+    [field: ES3Serializable]
+    public override bool IsUpperCloth { get; } = false;
+}
