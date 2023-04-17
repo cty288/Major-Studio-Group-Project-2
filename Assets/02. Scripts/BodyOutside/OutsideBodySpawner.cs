@@ -34,8 +34,13 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
         this.GetSystem<GameTimeManager>().OnDayStart += OnDayStart;
         peepholeSceneUI.OnLightButtonPressed += OpenFlashLight;
         peepholeSceneUI.OnLightStopped += OnCloseFlashLight;
-
+        this.RegisterEvent<OnFlashlightFlash>(OnFlashLightFlash).UnRegisterWhenGameObjectDestroyed(gameObject);
       
+    }
+
+    private void OnFlashLightFlash(OnFlashlightFlash obj) {
+        OpenFlashLight();
+        this.Delay(0.2f, OnCloseFlashLight);
     }
 
     private void OnCloseFlashLight() {
@@ -53,7 +58,7 @@ public class OutsideBodySpawner : AbstractMikroController<MainGame>, ICanSendEve
 
     private void OpenFlashLight() {
         if (this.electricityModel.Electricity.Value <= 0.2f) {
-            return;
+           // return;
         }
         ShowCurrentBodyColor();
         isFlashOn = true;
