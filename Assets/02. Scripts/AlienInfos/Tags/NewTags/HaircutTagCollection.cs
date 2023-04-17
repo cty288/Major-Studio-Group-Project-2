@@ -89,6 +89,12 @@ public class HairTag_SP_Sexy : HaircutTag
     public override string TagName { get; } = "Hair_Sexy";
 }
 
+public class HairTag_SP_Army : HaircutTag
+{
+    public override string TagName { get; } = "Hair_Army";
+}
+
+
 public class DogTag_0 : HaircutTag
 {
 	public override string TagName { get; } = "Dog_0";
