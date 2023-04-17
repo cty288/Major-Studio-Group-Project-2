@@ -27,6 +27,7 @@ public abstract class IncomingCallEvent : GameEvent {
     [ES3Serializable]
     protected bool onHangupOrFinish = false;
     public override void OnStart() {
+        telephoneSystem = this.GetSystem<TelephoneSystem>();
         NotificationContact.OnConversationComplete += OnFinishConversation;
         NotificationContact.OnTelephoneHangUp += OnConversationHangUp;
         NotificationContact.OnTelephoneStart += OnConversationStart;

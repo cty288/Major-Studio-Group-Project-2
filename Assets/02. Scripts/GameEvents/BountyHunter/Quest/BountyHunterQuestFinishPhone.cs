@@ -33,7 +33,7 @@ public class BountyHunterQuestFinishPhoneEvent: IncomingCallEvent {
 
     protected override void OnComplete() {
         LoadCanvas.Singleton.Load(() => {
-            DieCanvas.Singleton.Show("Game Ends", "You solved the crisis!");
+            DieCanvas.Singleton.Show("Game Ends", "You solved the crisis!", false, false);
         });
     }
 

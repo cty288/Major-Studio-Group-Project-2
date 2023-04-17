@@ -57,7 +57,7 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
             "Several of those cases showed that the evidence was provided by you." +
             "Here¡¯s the search warrant, and we are taking you in for further inquiries. " +
             "Apologies and thank you for your cooperation.";
-        speaker.Speak(message, AudioMixerList.Singleton.AudioMixerGroups[3], "???", 1f, OnFinishSpeak, 1.15f, 1.2f);
+        speaker.Speak(message, AudioMixerList.Singleton.AudioMixerGroups[3], "Police", 1f, OnFinishSpeak, 1.15f, 1.2f);
         return () => onClickPeepholeSpeakEnd;
     }
 

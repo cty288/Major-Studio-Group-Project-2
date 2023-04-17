@@ -58,12 +58,12 @@ public class BountyHunterQuest2ClueNotificationNotificationContact : BountyHunte
         string welcome =
             $"Hey friend, I hope you got some clues. I have gathered more information about the <color=yellow>location</color> of a dead body killed by the creature we are looking for." +
             $" Between <color=yellow>{hourIn12_1}:{ClueHappenTime.Minute} and {hourIn12_1}:{ClueHappenTime.Minute+10} pm</color>," +
-            $" someone will deliver a note to you. Make sure there's no one outside your home when he arrives, otherwise he might be scared away. Call me back when you find out that guy!";
+            $" <color=yellow>someone will deliver a note to you</color>. Make sure there's no one outside your home when he arrives, otherwise he might be scared away. Call me back when you find out that guy!";
 
         if (alreadyNotified) {
             welcome = $"Hey friend, someone reported to me that they saw that creature again this morning." +
                       $" Between <color=yellow>{hourIn12_1}:{ClueHappenTime.Minute} and {hourIn12_1}:{ClueHappenTime.Minute + 10} pm</color>," +
-                      $" I will let my friend to deliver you a note again about its <color=yellow>location</color>. Make sure there's no one outside your home when he arrives, otherwise he might be scared away. Call me back when you find out that guy!";
+                      $" <color=yellow>I will let my friend to deliver you a note</color> again about its <color=yellow>location</color>. Make sure there's no one outside your home when he arrives, otherwise he might be scared away. Call me back when you find out that guy!";
 
         }
         speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], "Bounty Hunter", 1f, OnSpeakEnd);
@@ -329,12 +329,12 @@ public class BountyHunterQuestClueInfoRadioAreaEvent : BountyHunterQuestClueInfo
         }
 
         if (!alreadyNotified) {
-            sb.AppendFormat("A witness of a monster, who was believed to kill a {1} a few days ago, was seen at {0}.", location, name);
+            sb.AppendFormat("A witness of an <color=yellow>extremely agile monster</color>, who was believed to kill a <color=yellow>{1}</color> a few days ago, was seen at <color=yellow>{0}</color>.", location, name);
             sb.AppendFormat(AlienDescriptionFactory.Formatter,
                 "{0:hair}. And {0:height}", body);
         }
         else {
-            sb.AppendFormat("A resident reported that they encountered the creature who killed the {1} few days ago at {0}.", location, name);
+            sb.AppendFormat("A resident reported that they encountered the creature who was <color=yellow>extremely agile</color>, and who killed the <color=yellow>{1}</color> few days ago at <color=yellow>{0}</color>.", location, name);
             sb.AppendFormat(AlienDescriptionFactory.Formatter,
                 "{0:hair}. And {0:height}", body);
         }

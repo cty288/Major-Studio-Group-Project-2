@@ -29,6 +29,7 @@ namespace _02._Scripts.GameEvents.BountyHunter {
 
 		private void OnSpeakEnd(Speaker obj) {
 			this.GetModel<TelephoneNumberRecordModel>().AddOrEditRecord(bountyHunterModel.PhoneNumber, "Bounty Hunter");
+			bountyHunterModel.ContactedBountyHunter = true;
 			EndConversation();
 		}
 

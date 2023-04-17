@@ -61,6 +61,7 @@ public abstract class GameEvent: ICanGetSystem, ICanGetModel, ICanSendEvent, ICa
     public bool LockedTime = false;
     public GameEvent(TimeRange startTimeRange): this() {
         this.StartTimeRange = startTimeRange;
+        gameTimeManager = this.GetSystem<GameTimeManager>();
     }
 
     public GameEvent() {
@@ -70,6 +71,8 @@ public abstract class GameEvent: ICanGetSystem, ICanGetModel, ICanSendEvent, ICa
     }
 
     public void Start() {
+        gameTimeManager = this.GetSystem<GameTimeManager>();
+        gameEventSystem = this.GetSystem<GameEventSystem>();
         gameTimeManager.LockDayEnd.Retain();
         LockedTime = true;
         OnStart();

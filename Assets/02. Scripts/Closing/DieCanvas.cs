@@ -45,12 +45,12 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
         Show("You Died!", dieReason, isPrologue);
     }
 
-    public void Show(string title, string dieReason, bool isPrologue = false) {
+    public void Show(string title, string dieReason, bool isPrologue = false, bool showRestart = true) {
         transform.Find("Panel").gameObject.SetActive(true);
         transform.Find("Panel/DieReason").GetComponent<TMP_Text>().text = dieReason;
         transform.Find("Panel/DieText").GetComponent<TMP_Text>().text = title;
         restartButton.gameObject.SetActive(!isPrologue);
-        restartTodayButton.gameObject.SetActive(!isPrologue);
+        restartTodayButton.gameObject.SetActive(!isPrologue && showRestart);
     }
     
     public void Hide() {

@@ -19,6 +19,10 @@ public class BountyHunterQuestAlienSpawnEvent : DailyKnockEvent {
         bodyModel = this.GetModel<BodyModel>();
     }
 
+    public override void OnStart() {
+        
+    }
+
     public override EventState OnUpdate() {
         if (bodyModel.IsInAllBodyTimeInfos(bodyInfo)) {
             return base.OnUpdate();

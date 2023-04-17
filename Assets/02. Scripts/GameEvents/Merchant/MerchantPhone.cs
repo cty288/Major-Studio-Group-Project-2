@@ -98,6 +98,8 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
     private List<MerchantGoods> todayGoods = new List<MerchantGoods>();
 
     private AudioMixerGroup mixer;
+
+    private Coroutine noResponseCoroutine = null;
     public MerchantPhone(): base() {
         speaker = GameObject.Find("MerchantSpeaker").GetComponent<Speaker>();
         gameTimeManager = this.GetSystem<GameTimeManager>((manager => {
@@ -157,21 +159,26 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
             speaker.Speak(welcome, mixer, "Merchant", 1f, null);
         }
         
-        gameTimeModel.CurrentTime.RegisterWithInitValue(OnTimeChanged);
-       
-      
+        
+        //gameTimeModel.CurrentTime.RegisterWithInitValue(OnTimeChanged);
+        noResponseCoroutine = CoroutineRunner.Singleton.StartCoroutine(OnTimeChanged());
+
+
     }
 
-    private void OnTimeChanged(DateTime time) {
-        if(time.Hour == 23 && time.Minute == 59) {
-            isTodayAvailable = false;
-            this.UnRegisterEvent<OnDialDigit>(OnDialDigit);
-            this.GetModel<GameTimeModel>().CurrentTime.UnRegisterOnValueChanged(OnTimeChanged);
-            TelephoneSystem.HangUp();
-        }
+    private IEnumerator OnTimeChanged() {
+        yield return new WaitForSeconds(60f);
+        isTodayAvailable = false;
+        this.UnRegisterEvent<OnDialDigit>(OnDialDigit);
+        //this.GetModel<GameTimeModel>().CurrentTime.UnRegisterOnValueChanged(OnTimeChanged);
+        TelephoneSystem.HangUp();
     }
 
     private void OnDialDigit(OnDialDigit e) {
+        if(noResponseCoroutine!=null){
+            CoroutineRunner.Singleton.StopCoroutine(noResponseCoroutine);
+            noResponseCoroutine = null;
+        }
         this.UnRegisterEvent<OnDialDigit>(OnDialDigit);
         if (speaker.IsSpeaking) {
             speaker.Stop(true);
@@ -210,7 +217,11 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
     }
 
     private void OnMerchantSpeakEnd(Speaker speaker) {
-        this.GetModel<GameTimeModel>().CurrentTime.UnRegisterOnValueChanged(OnTimeChanged);
+        if(noResponseCoroutine!=null){
+            CoroutineRunner.Singleton.StopCoroutine(noResponseCoroutine);
+            noResponseCoroutine = null;
+        }
+       //this.GetModel<GameTimeModel>().CurrentTime.UnRegisterOnValueChanged(OnTimeChanged);
         EndConversation();
     }
 
@@ -236,8 +247,11 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
         if (speaker.IsSpeaking) {
             speaker.Stop(invokeEndCallback);
         }
-        
-        this.GetModel<GameTimeModel>().CurrentTime.UnRegisterOnValueChanged(OnTimeChanged);
+        if(noResponseCoroutine!=null){
+            CoroutineRunner.Singleton.StopCoroutine(noResponseCoroutine);
+            noResponseCoroutine = null;
+        }
+       // this.GetModel<GameTimeModel>().CurrentTime.UnRegisterOnValueChanged(OnTimeChanged);
         this.UnRegisterEvent<OnDialDigit>(OnDialDigit);
     }
 }

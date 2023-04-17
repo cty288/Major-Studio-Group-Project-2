@@ -47,6 +47,11 @@ public class RadioRC : SimpleRC {
         base.Retain(refOwner);
         OnRefAdded?.Invoke();
     }
+    
+    public void Clear() {
+        RefCount = 0;
+        OnRefCleared?.Invoke();
+    }
 }
 
 public class Radio : ElectricalApplicance, IPointerClickHandler
@@ -123,6 +128,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
     }
 
     private void OnNewDay(OnNewDay e) {
+        lowSoundLock.Clear();
         if (electricityModel.HasElectricity()) {
             radioModel.IsOn.Value = true;
         }

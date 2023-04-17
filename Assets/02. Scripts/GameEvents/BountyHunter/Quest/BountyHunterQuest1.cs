@@ -46,13 +46,13 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
         bool alreadyNotified = this.GetModel<BountyHunterModel>().QuestBodyClueAllHappened;
         
         
-        string welcome = $"Buddy, I got some clues about the time when a victim was killed by the creature we are looking for. At <color=yellow>{hourIn12}:{ClueHappenTime.Minute} pm</color>," +
-                         $" pay attention to the flashlights outsivicde your home. The number of flashlights will indicate which <color=yellow>hour</color> the victim died in PM. " +
+        string welcome = $"Buddy, I got some clues about <color=yellow>the time</color> when a victim was killed by the creature we are looking for. At <color=yellow>{hourIn12}:{ClueHappenTime.Minute} pm</color>," +
+                         $" pay attention to the <color=yellow>flashlights</color> outside your window. The number of flashlights will indicate which <color=yellow>hour</color> the victim died in PM. " +
                          $"I suspect the creature has already micmicked the victim. Don't forget call me back when you find out the murderer! Good luck!";
 
         if (alreadyNotified) {
             welcome = $"Buddy, someone reported a new occurrence of that creature! At <color=yellow>{hourIn12}:{ClueHappenTime.Minute} pm</color>," +
-                      $" pay attention to the flashlights outside your home. As always, the number of flashlights will still indicate which <color=yellow>hour</color> in PM. Don't forget call me back when you find out the murderer! Good luck!";
+                      $" pay attention to the <color=yellow>flashlights outside your window</color>. As always, the number of flashlights will still indicate which <color=yellow>hour</color> in PM. Don't forget call me back when you find out the murderer! Good luck!";
         }
         speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], "Bounty Hunter", 1f, OnSpeakEnd);
     }
@@ -195,13 +195,13 @@ public class BountyHunterQuestClueInfoRadioEvent : BountyHunterQuestClueInfoEven
 
         
         if (!alreadyNotified) {
-            sb.AppendFormat("The speculation showed that a {1} died at {0} pm.", time, name);
+            sb.AppendFormat("The speculation showed that a <color=yellow>{1}</color> died at <color=yellow>{0} pm.</color>", time, name);
             sb.AppendFormat(AlienDescriptionFactory.Formatter,
                 " The CCTV captured his last image, {0:clothb}. In addition, {0:clothl}", body);
             return sb.ToString();
         }
         else {
-            sb.AppendFormat("The creature who killed the {1} a few days ago was once again seen at {0} pm this afternoon.", time, name);
+            sb.AppendFormat("<color=yellow>The creature who killed the {1}</color> a few days ago was once again seen at <color=yellow>{0}</color> pm this afternoon.", time, name);
             sb.AppendFormat(AlienDescriptionFactory.Formatter,
                 " The CCTV captured his last image. {0:clothb}. In addition, {0:clothl}", body);
             return sb.ToString();
