@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class NotebookWrittenTextDroppableInfo : DroppableInfo {
 	[field: ES3Serializable]
-	public override bool IsDefaultLeftPage { get; } = false;
+	public override bool IsDefaultOnTop { get; } = false;
 
 	[ES3Serializable] private string text = "";
 

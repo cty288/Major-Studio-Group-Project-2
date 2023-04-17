@@ -45,6 +45,8 @@ public class FashionCatalogUIPanel : OpenableUIPanel {
 	private Button lastPageButton;
 
 	private Button nextPageButton;
+	
+	[SerializeField] private Material bodyMaterial;
 	//private List<Transform> fashionElements = new List<Transform>();
 	//[SerializeField] private GameObject photoPrefab;
 
@@ -106,6 +108,7 @@ public class FashionCatalogUIPanel : OpenableUIPanel {
 		
 		List<int> headIndices = bodyPartIndices[BodyPartType.Head].ToList();
 		List<int> bodyIndices = bodyPartIndices[BodyPartType.Body].ToList();
+		List<int> legIndices = bodyPartIndices[BodyPartType.Legs].ToList();
 		currentPage = 0;
 		bodyPartIndexInfos = new List<BodyPartIndexInfo>();
 		for (int i = 0; i < headIndices.Count; i++) {
@@ -114,6 +117,10 @@ public class FashionCatalogUIPanel : OpenableUIPanel {
 		
 		for (int i = 0; i < bodyIndices.Count; i++) {
 			bodyPartIndexInfos.Add(new BodyPartIndexInfo(BodyPartType.Body, bodyIndices[i]));
+		}
+		
+		for (int i = 0; i < legIndices.Count; i++) {
+			bodyPartIndexInfos.Add(new BodyPartIndexInfo(BodyPartType.Legs, legIndices[i]));
 		}
 	}
 
@@ -147,23 +154,31 @@ public class FashionCatalogUIPanel : OpenableUIPanel {
 			photo.gameObject.SetActive(true);
 			
 			BodyPartPrefabInfo prefabInfo = AlienBodyPartCollections.Singleton.GetBodyPartCollectionByBodyType(bodyPartIndexInfo.BodyPartType, false)
-				.HeightSubCollections[0].NewspaperBodyPartDisplays.HumanTraitPartsPrefabs[bodyPartIndexInfo.Index]
+				.HeightSubCollections[0].ShadowBodyPartPrefabs.HumanTraitPartsPrefabs[bodyPartIndexInfo.Index]
 				.GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo(0);
 			
 			BodyInfo bodyInfo = null;
 			float scale = 1f;
 			if (bodyPartIndexInfo.BodyPartType == BodyPartType.Head) {
 				bodyInfo =  BodyInfo.GetBodyInfo(null, null, prefabInfo, HeightType.Tall, null, null,
-					BodyPartDisplayType.Newspaper, false);
-				scale = 1.5f;
+					BodyPartDisplayType.Shadow, false);
+				scale = 1f;
 			}else if (bodyPartIndexInfo.BodyPartType == BodyPartType.Body) {
 				bodyInfo =  BodyInfo.GetBodyInfo(null, prefabInfo, null, HeightType.Tall, null, null,
-					BodyPartDisplayType.Newspaper, false);
+					BodyPartDisplayType.Shadow, false);
+				scale = 0.8f;
+			}
+			else {
+				bodyInfo =  BodyInfo.GetBodyInfo(prefabInfo, null , null, HeightType.Short, null, null,
+					BodyPartDisplayType.Shadow, false);
+				scale = 0.5f;
 			}
 			
 			
 			Transform imageTr = photo.transform.Find("SpawnPos/PhotoImg");
-			GameObject spawnedBody = AlienBody.BuildNewspaperAlienBody(bodyInfo, 0, i + 100, 0, scale);
+			GameObject spawnedBody =
+				AlienBody.BuildNewspaperAlienBody(bodyInfo, 0, i + 100, 0, scale, Instantiate(bodyMaterial), "FashionCatalogBody");
+			spawnedBody.GetComponent<AlienBody>().ShowColor(0);
 			Camera camera = spawnedBody.GetComponentInChildren<Camera>();
 			spawnedBodies.Add(spawnedBody);
 			RenderTexture renderTexture = camera.targetTexture;
@@ -183,6 +198,9 @@ public class FashionCatalogUIPanel : OpenableUIPanel {
         for (int i = 0; i < prefabInfo.AllTags.Count; i++) {
 	        IAlienTag alienTag = prefabInfo.AllTags[i];
             List<string> shortDescriptions = alienTag.GetShortDescriptions();
+            if (shortDescriptions == null) {
+	            continue;
+            }
             foreach (string shortDescription in shortDescriptions) {
 	            if(!String.IsNullOrEmpty(shortDescription)) {
 		            return shortDescription;

@@ -249,6 +249,9 @@ namespace MikroFramework.AudioKit
         }
         private AudioSource Create2DAudioSource() {
             GameObject audio2DObj =GameObjectPoolManager.Singleton.Allocate(sound2DPrefab);
+            if (!audio2DObj) {
+                return null;
+            }
             AudioSource audioSource = audio2DObj.GetComponent<AudioSource>();
             audioSource.volume = SoundVolume;
             return audioSource;
@@ -282,7 +285,9 @@ namespace MikroFramework.AudioKit
 
 
         public AudioSource PlaySound(AudioClip clip, AudioSource audioSource, bool loop, float relativeVolume = 1f, bool autoDestroy = true) {
-            
+            if (audioSource == null) {
+                return null;
+            }
             audioSource.clip = clip;
             if (clip.length > 0.5f) {
                 
@@ -314,6 +319,10 @@ namespace MikroFramework.AudioKit
         }
         
         public AudioSource PlaySound(string clipName, AudioSource audioSource,  out AudioClip clip, bool loop, float relativeVolume = 1f, bool autoDestroy = true) {
+            if (!audioSource) {
+                clip = null;
+                return null;
+            }
             audioSource.volume = SoundVolume;
             return Play(clipName, _soundClipDict, audioSource, relativeVolume,loop, autoDestroy, PlaySound, out clip);
         }

@@ -84,7 +84,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
 
         this.RegisterEvent<OnRadioEnd>(OnRadioEnd).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnRadioProgramStart>(OnRadioStart).UnRegisterWhenGameObjectDestroyed(gameObject);
-        this.RegisterEvent<OnConstructDescriptionDatas>(OnConstructDescriptionDatas).UnRegisterWhenGameObjectDestroyed(gameObject);
+       // this.RegisterEvent<OnConstructDescriptionDatas>(OnConstructDescriptionDatas).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.GetSystem<TelephoneSystem>().State.RegisterOnValueChaned(OnTelephoneStateChange).UnRegisterWhenGameObjectDestroyed(gameObject);
         
         radioModel = this.GetModel<RadioModel>();
@@ -97,7 +97,15 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         
         radioModel.RelativeVolume.RegisterWithInitValue(OnVolumeChange).UnRegisterWhenGameObjectDestroyed(gameObject);
         radioModel.CurrentChannel.RegisterWithInitValue(OnChannelChange).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
 
+    }
+
+    private void OnNewDay(OnNewDay e) {
+        if (electricityModel.HasElectricity()) {
+            radioModel.IsOn.Value = true;
+        }
+        
     }
 
     private void InitializePlayers() {
@@ -126,11 +134,13 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         
         if (activePlayers.ContainsKey(newChannel)) {
             //speakers[newChannel].SetOverallVolume(1);
-            activePlayers[newChannel]?.Mute(false);
+           
             if (IsPlayerPlaying(newChannel) && radioModel.IsOn.Value && electricityModel.HasElectricity()) {
                 transform.DOShakeRotation(3f, 5, 20, 90, false).SetLoops(-1);
+                activePlayers[newChannel]?.Mute(false);
             }
             else {
+                activePlayers[newChannel]?.Mute(true);
                 transform.DOKill();
             }
             
@@ -149,6 +159,8 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
             .GetComponent<RadioContentPlayer>();
         
         activePlayers[channel] = player;
+        
+        
         return player;
     }
     
@@ -166,6 +178,9 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
             mouseHoverHint.text = "Radio (Off)";
         }
         else {
+            if (!electricityModel.HasElectricity()) {
+                return;
+            }
             TurnRadioOn();
             UpdateSpeakerVolume(false);
             mouseHoverHint.text = "Radio (On)";
@@ -263,11 +278,24 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         }
     }
 
-    private void OnConstructDescriptionDatas(OnConstructDescriptionDatas e) {
-        
+   
+    
+    private void OnBodyInfoGenerated(OnNewBodyInfoGenerated e) {
         int day = this.GetSystem<GameTimeManager>().Day;
         float radioReality = radioRealityCurve.Evaluate(day);
+
+        radioModel.DescriptionDatas.Clear();
         ConstructDescriptionDatas(radioModel.DescriptionDatas, radioReality, day);
+
+      
+        if (day == 1) {
+            AddDeadBodyIntroRadio();
+            AddInitialRadio();
+        }
+
+        if (day == 0) {
+            AddPrologueBodyIntroRadio();
+        }
     }
 
     private void OnRadioStart(OnRadioProgramStart e) {
@@ -277,11 +305,11 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         if (radioModel.CurrentChannel.Value == channel && radioModel.IsOn.Value && electricityModel.HasElectricity()) {
             volume = 1;
         }
-        ContentStart(e.radioContent, channel, volume<=0);
+       
         if (volume > 0) {
             transform.DOShakeRotation(3f, 5, 20, 90, false).SetLoops(-1);
         }
-       
+        ContentStart(e.radioContent, channel, volume<=0);
     }
 
  
@@ -307,6 +335,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
                     player = SpawnPlayer(channel, content.ContentType);
                     radioModel.SetIsSpeaking(channel, true);
                     player.Play(content, OnSpeakerStop, isMuted);
+                    UpdateSpeakerVolume(true);
                 }
                 //activePlayers[channel].Speak(speakText, mixer, "Radio", overallVolume, OnSpeakerStop, speakRate, 1f, speakGender);
                 
@@ -315,55 +344,39 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
     }
 
     private void ConstructDescriptionDatas(List<AlienDescriptionData> descriptionDatas, float radioReality, int day) {
-
         descriptionDatas.Clear();
 
-        List<BodyInfo> todayBodies = bodyModel.AllTodayDeadBodies.Select((info => info.BodyInfo)).ToList();
 
-        todayBodies.CTShuffle();
+        List<BodyTimeInfo> allTodayAliens = bodyModel.AllTodayAliens;
+        List<BodyTimeInfo> allAliens = bodyModel.Aliens;
+        List<BodyTimeInfo> allTodayDeadBodies = bodyModel.AllTodayDeadBodies;
+        if (allAliens == null || allAliens.Count == 0 || allTodayDeadBodies.Count == 0) {
+            radioModel.HasDescriptionDatasToday = false;
+            return;
+        }
+        allTodayAliens.CTShuffle();
+        allAliens.CTShuffle();
+
+        radioModel.HasDescriptionDatasToday = true;
+
+        foreach (BodyTimeInfo info in allAliens) {
+            if(allTodayAliens.Exists((timeInfo => timeInfo.BodyInfo.ID == info.BodyInfo.ID))) {
+                continue;
+            }
+            allTodayAliens.Add(info);
+        }
+        
+        List<BodyInfo> todayBodies = allTodayAliens.Select((info => info.BodyInfo)).ToList();
+        
         foreach (BodyInfo bodyInfo in todayBodies) {
             descriptionDatas.Add(new AlienDescriptionData(bodyInfo, radioReality));
         }
-
-
-
-
-        /*
-        for (int i = 0; i < unrelatedBodyInfoCountWithDay.Evaluate(day); i++) {
-            if (Random.Range(0, 2) < 1) {
-                descriptionDatas.Add(
-                    new AlienDescriptionData(BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, false,
-                            new NormalKnockBehavior(3, Random.Range(3,7),
-                                null)),
-                        radioReality));
-            }
-            else {
-                BodyInfo info = allPossibleBodyInfos[i];
-                descriptionDatas.Add(new AlienDescriptionData(info, radioReality));
-            }
-        }*/
-        descriptionDatas.CTShuffle();
+        
+        //descriptionDatas.CTShuffle();
 
     }
 
-    private void OnBodyInfoGenerated(OnNewBodyInfoGenerated e) {
-        int day = this.GetSystem<GameTimeManager>().Day;
-        float radioReality = radioRealityCurve.Evaluate(day);
 
-        radioModel.DescriptionDatas.Clear();
-        ConstructDescriptionDatas(radioModel.DescriptionDatas, radioReality, day);
-
-      
-       if (day == 1) {
-          
-           AddDeadBodyIntroRadio();
-           AddInitialRadio();
-       }
-
-       if (day == 0) {
-           AddPrologueBodyIntroRadio();
-       }
-    }
 
     private void AddPrologueBodyIntroRadio() {
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
@@ -373,7 +386,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
 
 
         eventSystem.AddEvent(new PrologueBodyRadio(
-            new TimeRange(currentTime + new TimeSpan(0, 5, 0), currentTime + new TimeSpan(0, 30, 0)),
+            new TimeRange(currentTime + new TimeSpan(0, 10, 0), currentTime + new TimeSpan(0, 30, 0)),
             AudioMixerList.Singleton.AudioMixerGroups[1]));
 
     }
@@ -384,6 +397,8 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         GameEventSystem eventSystem = this.GetSystem<GameEventSystem>();
 
         string speakContent = this.GetModel<HotUpdateDataModel>().GetData("Radio_Intro").values[0];
+
+        
         
         eventSystem.AddEvent(new DeadBodyRadioIntroEvent(
             new TimeRange(currentTime + new TimeSpan(0, 0, 0), currentTime + new TimeSpan(0, 20, 0)),
@@ -418,6 +433,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
     }
     
     private void TurnRadioOn() {
+        radioModel.IsOn.Value = true;
         RadioChannel channel = radioModel.CurrentChannel.Value;
         if (activePlayers.ContainsKey(channel)) {
             //speakers[channel].SetOverallVolume(1);

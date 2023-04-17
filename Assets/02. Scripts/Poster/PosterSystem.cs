@@ -21,9 +21,7 @@ namespace _02._Scripts.Poster {
 				DateTime nextEndTime = nextTime.AddMinutes(20);
 
 
-				this.GetSystem<GameEventSystem>().AddEvent(new AdPosterDeliverEvent(
-					new TimeRange(nextTime, nextEndTime),
-					0, AdPosterDeliverEvent.GetPosterDelivererBody()));
+				//this.GetSystem<GameEventSystem>().AddEvent(new AdPosterDeliverEvent(new TimeRange(nextTime, nextEndTime), 0, AdPosterDeliverEvent.GetPosterDelivererBody()));
 			}
 		}
 	}

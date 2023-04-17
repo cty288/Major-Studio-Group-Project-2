@@ -94,19 +94,27 @@ public class Speaker :  AbstractMikroController<MainGame> {
             SpeakSentence(nextSentence, nextSentence.Rate, nextSentence.volumeMultiplier);
         }
         else {
-            Stop();
+            Stop(true);
         }
     }
 
     public void Speak(string sentence, AudioMixerGroup mixer, string speakName, float overallVolume, Action<Speaker> onEnd = null, float rate = 1f, float volumeMultiplier = 1f, Gender gender = Gender.MALE ) {
+        List<string> splitedSentences = VoiceTextSpliter.Split(sentence);
+        if (splitedSentences.Count == 0) {
+            onEnd?.Invoke(this);
+            return;   
+        }
+        
         inited = true;
         IsSpeaking = true;
         bool needSpeak = sentenceQueues.Count == 0;
-        List<string> splitedSentences = VoiceTextSpliter.Split(sentence);
+       
         foreach (string splitedSentence in splitedSentences) {
             sentenceQueues.Enqueue(new SentenceInfo(sentence, splitedSentence,speakName,  mixer, onEnd, rate, gender, overallVolume, volumeMultiplier));
         }
 
+      
+       
         if (needSpeak && sentenceQueues.Count > 0) {
             SentenceInfo text = sentenceQueues.Dequeue();
             if (AudioMixer) {
@@ -116,6 +124,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
            
             SpeakSentence(text, rate, volumeMultiplier);
         }
+        
     }
     
    /* public void SetOverallVolume(float volume) {
@@ -193,16 +202,21 @@ public class Speaker :  AbstractMikroController<MainGame> {
         return text;
     }
     private void SpeakSentence(SentenceInfo text, float rate, float volumeMultiplier) {
+        if (!audioSource || string.IsNullOrEmpty(text.SentenceFragment)) {
+            string randomID = Guid.NewGuid().ToString();
+            currentSpeachUID = randomID;
+            OnSpeakCompleted(randomID);
+            return;
+        }
         currentSentence = text;
-        float volume = text.SpeakGender == Gender.MALE ? 0.5f : 0.8f;
+        float volume = text.SpeakGender == Gender.MALE ? 0.65f : 0.9f;
         volume *= volumeMultiplier;
-        audioSource.outputAudioMixerGroup = text.Mixer;
+        audioSource.outputAudioMixerGroup = text.Mixer ==null? null : text.Mixer;
 
         string processedSentence = text.SentenceFragment;
         //remove all rich text tags and all texts in <>
         processedSentence = RemoveRichTextTags(processedSentence);
-
-
+        
         currentSpeachUID = Crosstales.RTVoice.Speaker.Instance.Speak(processedSentence, audioSource, Crosstales.RTVoice.Speaker.Instance.VoiceForGender(text.SpeakGender), true, rate,1, volume);
         if (isMuted) {
             Crosstales.RTVoice.Speaker.Instance.Mute(currentSpeachUID);
@@ -219,7 +233,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
      
     }
 
-    public void Stop() {
+    public void Stop(bool invokeEndCallback) {
         sentenceQueues.Clear();
         
         if (subtitile && subtitleShowing) {
@@ -233,7 +247,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
         }
        
         audioSource.Stop();
-        if (currentSentence!=null) {
+        if (currentSentence!=null && invokeEndCallback) {
             currentSentence.Callback?.Invoke(this);
         }
         

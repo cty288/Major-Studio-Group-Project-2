@@ -56,7 +56,7 @@ public class OpeningManager : MonoBehaviour {
 
             if (speaker.IsSpeaking)
             {
-                speaker.Stop();
+                speaker.Stop(true);
             }
         }
     }

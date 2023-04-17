@@ -5,9 +5,9 @@ public interface IAccessoryTag : IAlienTag {
 }
 
 public abstract class AccessoryTag : AbstractAlienTag, IAccessoryTag {
-	public override List<string> GetFakeRadioDescription() {
+	public override List<string> GetFakeRadioDescription(string alienName) {
 		return bodyTagInfoModel.GetFakeRadioDescription(TagName,
-			description => typeof(IAccessoryTag).IsAssignableFrom(description.TagType));
+			description => typeof(IAccessoryTag).IsAssignableFrom(description.TagType), alienName);
 	}
 }
 

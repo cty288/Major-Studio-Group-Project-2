@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("date", "week", "tableBounds", "canDrag")]
+	[ES3PropertiesAttribute("date", "week", "spriteIndex", "tableBounds", "canDrag")]
 	public class ES3UserType_FashionCatalogViewController : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -18,6 +18,7 @@ namespace ES3Types
 			
 			writer.WritePrivateField("date", instance);
 			writer.WritePrivateField("week", instance);
+			writer.WritePrivateField("spriteIndex", instance);
 			writer.WritePrivateField("tableBounds", instance);
 			writer.WritePrivateField("canDrag", instance);
 		}
@@ -35,6 +36,9 @@ namespace ES3Types
 					break;
 					case "week":
 					instance = (FashionCatalogViewController)reader.SetPrivateField("week", reader.Read<System.Int32>(), instance);
+					break;
+					case "spriteIndex":
+					instance = (FashionCatalogViewController)reader.SetPrivateField("spriteIndex", reader.Read<System.Int32>(), instance);
 					break;
 					case "tableBounds":
 					instance = (FashionCatalogViewController)reader.SetPrivateField("tableBounds", reader.Read<UnityEngine.Bounds>(), instance);

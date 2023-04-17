@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3313851540
+CRC: 2044920850
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 623cc56c78d9ede1ce8bdefa51376e72
+    Hash: 364c47edd6f52eee7cdf8e387707aeaf
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 325319ff42990db097c22f69c3fa9297
+    Hash: 4210796b6aa97a5d3c9ec0a8ce90fad4
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -39,6 +39,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 43d5f0e52546b4c4f940ab135b99872a, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2840930b2bb8d2243847f19f5969378c, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 32624cc2be9f4be46b8063ec1ea07f9c, type: 3}
 - Class: 114
@@ -113,7 +115,9 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
+- Assets/05. Prefabs/Posters/SuspectBody.prefab
 - Assets/05. Prefabs/BodyParts/ExampleBody_Normal_Long.prefab
+- Assets/05. Prefabs/FashionCatalog/FashionCatalogBody.prefab
 - Assets/05. Prefabs/BodyParts/ExampleBody_Normal_Short.prefab
 - Assets/05. Prefabs/Newspaper/NewspaperFrame_0.prefab
 - Assets/05. Prefabs/BodyParts/ExampleNewspaper.prefab

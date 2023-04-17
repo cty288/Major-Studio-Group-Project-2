@@ -10,7 +10,7 @@ namespace _02._Scripts.Notebook {
 		
 		
 		[field: ES3Serializable]
-		public abstract bool IsDefaultLeftPage { get; } 
+		public abstract bool IsDefaultOnTop { get; } 
 		public abstract DroppedUIObjectViewController GetContentUIObject(RectTransform parent);
 	}
 	

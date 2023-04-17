@@ -8,12 +8,15 @@ using _02._Scripts.GameTime;
 using _02._Scripts.ImportantNewspaper;
 using _02._Scripts.Notebook;
 using _02._Scripts.Poster;
+using _02._Scripts.Poster.PosterEvents;
+using _02._Scripts.SurvivalGuide;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
 using MikroFramework.ResKit;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Table :  AbstractDroppableItemContainerViewController {
@@ -22,13 +25,14 @@ public class Table :  AbstractDroppableItemContainerViewController {
     [SerializeField] private List<GameObject> photoPrefabList;
     [SerializeField] private List<GameObject> crumbledPaperList;
     [SerializeField] private GameObject importantNewspaperPrefab;
-    [SerializeField] private GameObject posterPrefab;
-    [SerializeField] private GameObject dogRewardPrefab;
+   // [SerializeField] private GameObject posterPrefab;
+    [FormerlySerializedAs("dogRewardPrefab")] [SerializeField] private GameObject rewardPrefab;
 
     [SerializeField] private List<GameObject> fashionBookList;
 
     [SerializeField] private GameObject cameraPrefab;
 
+    [SerializeField] protected GameObject survivalGuidePrefab;
     
     private ImportantNewspaperModel importantNewspaperModel;
     private NewspaperViewController todayNewspaper;
@@ -40,7 +44,7 @@ public class Table :  AbstractDroppableItemContainerViewController {
         this.RegisterEvent<OnNewspaperGenerated>(OnNewspaperGenerated).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<SpawnTableItemEvent>(OnSpawnItem).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnBountyHunterKillCorrectAlien>(OnBountyHunterKillCorrectAlien).UnRegisterWhenGameObjectDestroyed(gameObject);
-        this.RegisterEvent<OnMissingDogReward>(OnMissingDogReward).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnRewardPackage>(OnRewardPackage).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNewPhotoTaken>(OnNewPhotoTaken).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNoteDeleted>(OnNoteDeleted).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnCameraReceive>(OnCameraReceive).UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -48,17 +52,28 @@ public class Table :  AbstractDroppableItemContainerViewController {
         this.RegisterEvent<OnImportantNewspaperGenerated>(OnImportantNewspaperGenerated)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnPosterGet>(OnPosterGet).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.GetModel<SurvivalGuideModel>().ReceivedSurvivalGuideBefore.RegisterOnValueChaned(OnHasSurvivalGuideChanged)
+            .UnRegisterWhenGameObjectDestroyed(gameObject);
 
         importantNewspaperModel = this.GetModel<ImportantNewspaperModel>();
     }
 
-    private void OnMissingDogReward(OnMissingDogReward e) {
-        GameObject reward = SpawnItem(dogRewardPrefab);
-        reward.GetComponent<DogRewardDeliveryViewController>().SetFoodCount(e.FoodCount);
+    private void OnHasSurvivalGuideChanged(bool hasGuide) {
+        if (hasGuide) {
+            GameObject obj = SpawnItem(survivalGuidePrefab);
+        }
+    }
+
+    private void OnRewardPackage(OnRewardPackage e) {
+        GameObject reward = SpawnItem(rewardPrefab);
+        reward.GetComponent<RewardDeliveryViewController>().SetReward(e.GoodsInfos, e.NoteText, e.NoteName);
     }
 
     private void OnPosterGet(OnPosterGet e) {
-        GameObject obj = SpawnItem(posterPrefab);
+        if (!e.SpawnPoster) {
+            return;
+        }
+        GameObject obj = SpawnItem(PosterAssets.Singleton.GetTableItem(this.GetModel<PosterModel>().GetPoster(e.ID)));
         obj.GetComponent<PosterViewController>().SetContent(e.ID);
     }
 
@@ -70,7 +85,7 @@ public class Table :  AbstractDroppableItemContainerViewController {
     private void OnFashionCatalogGenerated(OnFashionCatalogGenerated e) {
         GameObject book = SpawnItem(fashionBookList[Random.Range(0, fashionBookList.Count)]);
         GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
-        book.GetComponent<FashionCatalogViewController>().SetContent(e.BodyPartIndicesUpdateInfo.Time, gameTimeModel.Week);
+        book.GetComponent<FashionCatalogViewController>().SetContent(e.BodyPartIndicesUpdateInfo.Time, gameTimeModel.Week, e.CurrentSpriteIndex);
 
        
     }
@@ -102,7 +117,7 @@ public class Table :  AbstractDroppableItemContainerViewController {
 
     private void OnNewspaperGenerated(OnNewspaperGenerated e) {
         if (todayNewspaper) {
-            todayNewspaper.StopIndicateTodayNewspaper();
+          //  todayNewspaper.StopIndicateTodayNewspaper();
         }
 
         

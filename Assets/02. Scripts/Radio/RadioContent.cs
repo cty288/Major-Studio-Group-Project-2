@@ -49,7 +49,7 @@ public class RadioTextContent : IRadioContent {
 	[field: ES3Serializable] public string DisplayName { get; } = "Radio";
 
 	public void SetContent(object content) {
-		speakContent = (string) content;
+		speakContent = ((string) content).TrimEnd();
 	}
 
 	public RadioTextContent(string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, string displayName = "Radio") {

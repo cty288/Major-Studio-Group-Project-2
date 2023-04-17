@@ -123,3 +123,19 @@ public class LegsTag_GreyTrousers : ClothTag
 	[field: ES3Serializable]
 	public override bool IsUpperCloth { get; } = false;
 }
+
+public class LegsTag_SP_Police : ClothTag
+{
+    public override string TagName { get; } = "Cloth_Police";
+
+    [field: ES3Serializable]
+    public override bool IsUpperCloth { get; } = false;
+}
+
+public class LegsTag_SP_Sexy : ClothTag
+{
+    public override string TagName { get; } = "Cloth_Sexy";
+
+    [field: ES3Serializable]
+    public override bool IsUpperCloth { get; } = false;
+}

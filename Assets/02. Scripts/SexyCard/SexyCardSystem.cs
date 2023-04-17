@@ -37,20 +37,23 @@ namespace _02._Scripts.SexyCard {
 				.HeightSubCollections[0].ShadowBodyPartPrefabs
 				.HumanTraitPartsPrefabs;
 
-			List<int> targetHeadIndices = gender == Gender.MALE
-				? PosterAssets.Singleton.sexyCardMenHeadPrefabIndices
-				: PosterAssets.Singleton.sexyCardWomenHeadPrefabIndices;
 
-			BodyPartPrefabInfo headPrefabInfo = headPrefabs[targetHeadIndices[Random.Range(0, targetHeadIndices.Count)]]
-				.GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
-			BodyPartPrefabInfo bodyPrefabInfo = AlienBodyPartCollections.Singleton.MainBodyPartPrefabs
-				.HeightSubCollections[0].ShadowBodyPartPrefabs
-				.HumanTraitPartsPrefabs[PosterAssets.Singleton.nakeBodyPrefabIndex].GetComponent<AlienBodyPartInfo>()
+
+			SexyCardPrefabs targetPrefabs = gender == Gender.MALE
+				? PosterAssets.Singleton.sexyCardMenPrefabs
+				: PosterAssets.Singleton.sexyCardWomenPrefabs;
+
+			int targetIndex = Random.Range(0, targetPrefabs.headPrefabs.Count);
+
+
+			BodyPartPrefabInfo headPrefabInfo =
+				targetPrefabs.headPrefabs[targetIndex].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo();
+
+			BodyPartPrefabInfo bodyPrefabInfo = targetPrefabs.bodyPrefabs[targetIndex].GetComponent<AlienBodyPartInfo>()
 				.GetBodyPartPrefabInfo(0);
-			BodyPartPrefabInfo legPrefabInfo = AlienBodyPartCollections.Singleton.LegBodyPartPrefabs
-				.HeightSubCollections[0].ShadowBodyPartPrefabs
-				.HumanTraitPartsPrefabs[PosterAssets.Singleton.nakeLegsPrefabIndex].GetComponent<AlienBodyPartInfo>()
-				.GetBodyPartPrefabInfo();
+			
+			BodyPartPrefabInfo legPrefabInfo = targetPrefabs.legPrefabs[targetIndex].GetComponent<AlienBodyPartInfo>()
+				.GetBodyPartPrefabInfo(0);
 
 			BodyInfo bodyInfo = BodyInfo.GetBodyInfo(legPrefabInfo, bodyPrefabInfo, headPrefabInfo, HeightType.Tall,
 				new VoiceTag(AudioMixerList.Singleton.SexCardVoiceGroups[(int) gender], 1, gender), new SexyCardKnockBehavior(3,
@@ -62,7 +65,7 @@ namespace _02._Scripts.SexyCard {
 			model.SexyPersonPhoneNumber = PhoneNumberGenor.GeneratePhoneNumber(7);
 			this.GetSystem<TelephoneSystem>().AddContact(model.SexyPersonPhoneNumber, new SexyCardPhoneContact());
 			this.GetModel<SuspectModel>().AddSuspect(bodyInfo,
-				GoodsInfo.GetGoodsInfo(new BulletGoods(), 2));
+				"Robber",GoodsInfo.GetGoodsInfo(new BulletGoods(), 2));
 
 			DateTime sexyCardEventDay = this.GetModel<GameTimeModel>().GetDay(Random.Range(7, 15));
 			this.GetSystem<GameEventSystem>().AddEvent(new SexyCardDeliverEvent(new TimeRange(sexyCardEventDay)));

@@ -16,6 +16,7 @@ public class DroppableTextInfo : DroppableInfo{
 	[ES3Serializable]
 	private GameObject contentUIPrefab;
 	
+	
 	public DroppableTextInfo(){}
 	
 	public DroppableTextInfo(string text, GameObject prefab){
@@ -24,7 +25,7 @@ public class DroppableTextInfo : DroppableInfo{
 	}
 	
 	[field: ES3Serializable]
-	public override bool IsDefaultLeftPage { get; } = false;
+	public override bool IsDefaultOnTop { get; } = false;
 	
 	public override DroppedUIObjectViewController GetContentUIObject(RectTransform parent) {
 		NotebookDroppedText droppedText =

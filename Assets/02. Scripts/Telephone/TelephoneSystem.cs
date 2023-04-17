@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.ChoiceSystem;
 using _02._Scripts.Electricity;
 using _02._Scripts.GameTime;
 using _02._Scripts.Telephone;
@@ -239,6 +240,7 @@ public class TelephoneSystem : AbstractSavableSystem {
     public void HangUp() {
         if (State.Value != TelephoneState.Idle && State.Value != TelephoneState.Dealing) {
             State.Value = TelephoneState.Idle;
+            this.GetSystem<ChoiceSystem>().StopChoiceGroup(ChoiceType.Telephone);
 
             if (incomingCallCoroutine != null) {
                 CoroutineRunner.Singleton.StopCoroutine(incomingCallCoroutine);

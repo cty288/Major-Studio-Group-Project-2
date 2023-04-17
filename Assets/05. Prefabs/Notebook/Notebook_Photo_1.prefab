@@ -42,8 +42,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -536, y: 176.76}
-  m_SizeDelta: {x: 353.52, y: 353.52}
+  m_AnchoredPosition: {x: -569.825, y: 142.93498}
+  m_SizeDelta: {x: 285, y: 285}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4803065130247343447
 CanvasRenderer:
@@ -96,7 +96,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.425148, y: 4.988159}
+  m_Offset: {x: -1.4251404, y: 0.5960388}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -107,7 +107,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 354.63086, y: 341.80432}
+  m_Size: {x: 291.38428, y: 283.8283}
   m_EdgeRadius: 0
 --- !u!114 &8545222857817425171
 MonoBehaviour:
@@ -180,7 +180,7 @@ MonoBehaviour:
     - {fileID: 7015968251257442774}
     - {fileID: 252156163499453088}
     - {fileID: 6183937463429900758}
-    _Values: 86021b53c07f537747a8e0921b0c3016c3ce25b0464090479337347bc400e041ae2287997c0c1e0c2e35c0a55ee2dc3ffe26f0bd4d5771389363e6f8b4ce3c4789214ec325e1786a8db17def7f14164f5cf57e9d0f23f464ca1fbb3aecab73038ef8d080cf609b21c53c0f841e735826246e8c4fd8f4141e0f62e6a9f8c7cf1af5fff278947e650f60a4b4002b9e487fb469ac55b326a852eb4d07fadac1821d6ff9535dd142db2ab7f6f808c414bb253d796186439580446f60024b270b702b29c312a9a836484ba0236a1d6795fb21
+    _Values: 86021b53c07f537747a8e0921b0c3016c3ce25b0464090479337347bc400e0417de81df946d1b33a2e35c0a55ee2dc3ffe26f0bd4d5771389363e6f8b4ce3c4789214ec325e1786a8db17def7f14164f5cf57e9d0f23f464ca1fbb3aecab73038ef8d080cf609b21c53c0f841e735826246e8c4fd8f4141e0f62e6a9f8c7cf1af5fff278947e650f60a4b4002b9e487fb469ac55b326a852eb4d07fadac1821d6ff9535dd142db2ab7f6f808c414bb253d796186439580446f60024b270b702b29c312a9a836484ba0236a1d6795fb21
 --- !u!114 &1161037916888174722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +288,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.25
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -365,7 +365,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.1218287, y: 0.13014346}
   m_AnchorMax: {x: 0.8865139, y: 0.88382876}
-  m_AnchoredPosition: {x: -1.5, y: -2.5}
+  m_AnchoredPosition: {x: -1.5000076, y: -2.5000076}
   m_SizeDelta: {x: 1.3099976, y: 5.3099976}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &252156163499453088

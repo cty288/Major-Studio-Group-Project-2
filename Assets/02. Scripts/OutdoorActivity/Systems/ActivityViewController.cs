@@ -23,5 +23,8 @@ where TActivity: class, IActivity {
 	public void SetPlace(IPlace place) {
 		this.place = place;
 		this.activity = this.place.GetActivity<TActivity>();
+		OnInit();
 	}
+
+	protected virtual void OnInit() { }
 }

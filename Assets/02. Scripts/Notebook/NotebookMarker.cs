@@ -7,7 +7,7 @@ namespace _02._Scripts.Notebook {
 	
 	public class NotebookMarkerDroppableInfo : DroppableInfo {
 		[field: ES3Serializable]
-		public override bool IsDefaultLeftPage { get; } = false;
+		public override bool IsDefaultOnTop { get; } = false;
 		[field: ES3Serializable]
 
 		public List<Vector3> markerPositions = new List<Vector3>();

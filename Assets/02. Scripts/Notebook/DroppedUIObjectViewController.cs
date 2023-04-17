@@ -91,6 +91,12 @@ public abstract class DroppedUIObjectViewController : AbstractMikroController<Ma
         
     }
 
+    protected virtual void OnDestroy() {
+        if(CurrentDroppingItem == this) {
+            CurrentDroppingItem = null;
+        }
+    }
+
     public void OnPointerDown(PointerEventData eventData) {
         pointerDownTime = DateTime.Now;
     }

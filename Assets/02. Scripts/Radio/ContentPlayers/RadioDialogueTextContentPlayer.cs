@@ -39,7 +39,7 @@ namespace _02._Scripts.Radio {
 		}
 
 		public override void Stop() {
-			speaker.Stop();
+			speaker.Stop(true);
 			isPlaying = false;
 		}
 
@@ -59,20 +59,23 @@ namespace _02._Scripts.Radio {
 				return;
 			}
 			isPlaying = true;
-			this.Delay(0.1f, () => {
-				RadioTextContent textContent = radioDialogueContent.TextContents[i];
-				speaker.Speak(textContent.speakContent, textContent.mixer, textContent.DisplayName, 1, (speaker) => {
-					StartSpeak(i + 1);
-				}, textContent.speakRate, 1f, textContent.speakGender);
+			this.Delay(0.15f, () => {
+				if (this) {
+					RadioTextContent textContent = radioDialogueContent.TextContents[i];
+					speaker.Speak(textContent.speakContent, textContent.mixer, textContent.DisplayName, 1, (speaker) => {
+						StartSpeak(i + 1);
+					}, textContent.speakRate, 1f, textContent.speakGender);
 				
-				Mute(isMuted);
+					Mute(isMuted);
+				}
+				
 			});
 			
 		}
 
 		public override void SetVolume(float relativeVolume, bool isLoud, bool isInstant) {
-			float loudVolume = -20 * (1 / relativeVolume);
-			float notLoudVolume = -45 * (1 / relativeVolume);
+			float loudVolume = -17 * (1 / relativeVolume);
+			float notLoudVolume = -37 * (1 / relativeVolume);
 			
 			
 			if (!isInstant) {

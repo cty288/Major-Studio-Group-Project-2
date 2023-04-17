@@ -36,7 +36,7 @@ public class SubtitleNotebookHightlightedTextRecorder : AbstractMikroController<
             List<string> allRichTexts = GetRichTexts();
                 
             if (allRichTexts.Count > 0) {
-                string clickedWord = text.textInfo.wordInfo[wordIndex].GetWord();
+                string clickedWord = text.textInfo.wordInfo[wordIndex].GetWord().ToUpper();
                     
                 List<string> clickedWordNeighbours = GetNeighbours(wordIndex);
 
@@ -49,7 +49,7 @@ public class SubtitleNotebookHightlightedTextRecorder : AbstractMikroController<
                     
                     
                 if(richTexts.Count > 1) {
-                    clickedWordNeighbours.Add(clickedWord);
+                    clickedWordNeighbours.Add(clickedWord.ToUpper());
                     //find the rich text that contains the most of the clicked word's neighbours
                     int max = 0;
                     foreach (string richText in richTexts) {
@@ -138,9 +138,14 @@ public class SubtitleNotebookHightlightedTextRecorder : AbstractMikroController<
             }
         }
 	}
+    
+    
 
     private void OnDestroy() {
         //SubtitleHightlightedTextRecorder.CurrentDraggedText = null;
+        if(isMouseOverUI) {
+            IsMouseOverUIRC.Release();
+        }
     }
 
     private TMP_Text CreateDraggedText(string targetText, Color color, NotebookViewController notebook) {
@@ -160,10 +165,10 @@ public class SubtitleNotebookHightlightedTextRecorder : AbstractMikroController<
     private List<string> GetNeighbours(int wordIndex) {
         List<string> neighbours = new List<string>();
         if(wordIndex > 0) {
-            neighbours.Add(text.textInfo.wordInfo[wordIndex - 1].GetWord());
+            neighbours.Add(text.textInfo.wordInfo[wordIndex - 1].GetWord().ToUpper());
         }
         if(wordIndex < text.textInfo.wordCount - 1) {
-            neighbours.Add(text.textInfo.wordInfo[wordIndex + 1].GetWord());
+            neighbours.Add(text.textInfo.wordInfo[wordIndex + 1].GetWord().ToUpper());
         }
         return neighbours;
     }

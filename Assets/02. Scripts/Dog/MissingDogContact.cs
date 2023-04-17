@@ -82,7 +82,10 @@ namespace _02._Scripts.Dog {
 			GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
 			DateTime time = gameTimeModel.GetDay(gameTimeModel.Day + Random.Range(1, 3));
 
-			this.GetSystem<GameEventSystem>().AddEvent(new MissingDogRewardEvent(new TimeRange(time)));
+			this.GetSystem<GameEventSystem>().AddEvent(new GoodsRewardEvent(new TimeRange(time), 
+				new List<GoodsInfo>(){GoodsInfo.GetGoodsInfo(
+				new FoodResource(),
+				3)}, "Thank you for finding my little Doggy!", "Note from the Dog Owner"));
 
 			string speakContent =
 				"Oh my godness! I haven't expected such a kind person like you in such doomful times! " +
@@ -99,19 +102,24 @@ namespace _02._Scripts.Dog {
 		}
 
 		private void OnSpeakEnd(Speaker obj) {
-			if (dogSent) {
-				dogModel.SentDogBack = true;
-				this.SendEvent<OnDogSendBack>();
-			}
+			
 			
 			EndConversation();
 		}
 
 		protected override void OnHangUp() {
+			if (dogSent) {
+				dogModel.SentDogBack = true;
+				this.SendEvent<OnDogSendBack>();
+			}
 			dogSent = false;
 		}
 
 		protected override void OnEnd() {
+			if (dogSent) {
+				dogModel.SentDogBack = true;
+				this.SendEvent<OnDogSendBack>();
+			}
 			dogSent = false;
 		}
 	}

@@ -9,7 +9,7 @@ using UnityEngine;
 public class FoodResource : IPlayerResource {
     public string PrefabName { get; } = "Food";
     public int MaxCount { get; } = 8;
-    public string DisplayName { get; } = "Food";
+    public string DisplayName { get; } = "Cans";
 }
 
 public class PlayerResourceModel : AbstractSavableModel {

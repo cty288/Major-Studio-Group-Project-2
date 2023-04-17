@@ -106,6 +106,7 @@ namespace _02._Scripts.Radio.RadioScheduling {
 	}
 	
 	public class RadioSchedulingSystem: AbstractSystem {
+		public bool NoMonsterTodayAnnounced { get; set; } = false;
 		private List<PermanentRadioProgramInfo> permanentRadioProgramInfos = new List<PermanentRadioProgramInfo>();
 		private RadioSchedulingModel radioSchedulingModel;
 		//private DayOfWeek importantNewsPaperDay = 0;
@@ -120,6 +121,7 @@ namespace _02._Scripts.Radio.RadioScheduling {
 		}
 
 		private void OnNewDay(OnNewDay e) {
+			NoMonsterTodayAnnounced = false;
 			if (e.Date.DayOfWeek == importantNewspaperModel.ImportantNewsPaperDay) {
 				BuildThisWeekAllRadioPrograms(e.Date, 7, true);
 			}
@@ -135,7 +137,7 @@ namespace _02._Scripts.Radio.RadioScheduling {
 
 		private void RegisterPermanentRadioPrograms() {
 			permanentRadioProgramInfos.Add(new PermanentRadioProgramInfo(RadioProgramType.DailyDeadBody,
-				"Dead Body Report", 70, RadioChannel.FM96, new Vector2Int(7, 8), true));
+				"Monster Witness Report", 70, RadioChannel.FM96, new Vector2Int(7, 8), true));
 
 			permanentRadioProgramInfos.Add(new PermanentRadioProgramInfo(RadioProgramType.Ads,
 				"Ads", 45, RadioChannel.FM100, new Vector2Int(4, 8), true));

@@ -285,10 +285,7 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
         ResetEvents();
         
     }
-    public static Vector2 GetRelativePosOfWorldPoint(Vector3 worldPoint, Camera camera) {
-        Vector3 screenPoint = camera.WorldToScreenPoint(worldPoint);
-        return new Vector2(screenPoint.x / camera.pixelWidth, screenPoint.y / camera.pixelHeight);
-    }
+
  
 // Use it like this:
 
@@ -298,7 +295,17 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
         HashSet<long> existingIDs = new HashSet<long>();
 
         foreach (GameObject go in FindObjectsOfType(typeof(GameObject)) as GameObject[]) {
-            if (area.Contains(Camera.main.WorldToScreenPoint(go.transform.position))) {
+            Collider2D collider = go.GetComponent<Collider2D>();
+            Bounds bounds = new Bounds();
+            bool colliderInBounds = false;
+            if (collider) {
+                bounds = collider.bounds;
+                //convert to screen space
+                Vector3 screenPos = Camera.main.WorldToScreenPoint(bounds.center);
+                bounds.center = screenPos;
+                colliderInBounds = area.Contains(screenPos);
+            }
+            if (area.Contains(Camera.main.WorldToScreenPoint(go.transform.position))||(collider && colliderInBounds)) {
                 if(go.TryGetComponent<IHaveBodyInfo>(out var bodyInfo)) {
                     foreach (BodyInfo info in bodyInfo.BodyInfos) {
                         if (!existingIDs.Contains(info.ID)) {

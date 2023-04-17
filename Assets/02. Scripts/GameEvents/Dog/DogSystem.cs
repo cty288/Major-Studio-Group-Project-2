@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using _02._Scripts.Dog;
+using _02._Scripts.GameEvents.Dog;
+using _02._Scripts.GameTime;
 using MikroFramework.ActionKit;
 using MikroFramework.Architecture;
 using UnityEngine;
@@ -31,14 +33,15 @@ public class DogSystem : AbstractSystem
     private void OnNewDay(OnNewDay e) {
         if (e.Day == 0) {
             GenerateMissingDogContact();
+
+            DateTime dogPosterUnderDoorDeliverTime = this.GetModel<GameTimeModel>().GetDay(Random.Range(4, 7));
+            gameEventSystem.AddEvent(new DogPosterUnderDoorDeliverEvent(new TimeRange(dogPosterUnderDoorDeliverTime)));
         }
 			
 			
         if (e.IsNewWeek) {
             if(!dogModel.SentDogBack && dogModel.isDogAlive){
-                ImportantNewspaperModel newspaperModel = this.GetModel<ImportantNewspaperModel>();
-                newspaperModel.AddPageToNewspaper(newspaperModel.GetWeekForNews(e.Day),
-                    new MissingDogImportantNewsContent(dogModel.MissingDogPhoneNumber, dogModel.MissingDogBodyInfo), 1);
+                
             }
 				
         }

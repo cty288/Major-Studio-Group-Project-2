@@ -10,8 +10,8 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 		}
 
 		public DogKnockBehavior():base(){}
-		
-		public override string TagName { get; }= "Knock_dog";
+		[field: ES3Serializable]
+		public override string TagName { get; protected set; }= "Knock_dog";
 
 		public override IEnumerator OnKnockDoor(Speaker speaker, IVoiceTag voiceTag, bool isAlien) {
 			

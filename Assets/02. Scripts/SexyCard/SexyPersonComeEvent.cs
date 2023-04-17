@@ -19,7 +19,7 @@ namespace _02._Scripts.SexyCard {
 			sexyCardModel = this.GetModel<SexyCardModel>();
 		}
 		public override void OnMissed() {
-			
+			this.GetModel<SexyCardModel>().IsSexyPersonAvailable = true;
 		}
 
 		protected override Func<bool> OnOpen() {

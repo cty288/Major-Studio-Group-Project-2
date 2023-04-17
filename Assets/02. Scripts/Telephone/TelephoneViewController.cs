@@ -71,7 +71,7 @@ public class TelephoneViewController : ElectricalApplicance, IPointerClickHandle
             incomingCallAudioSource.Stop();
             incomingCallAudioSource = null;
         }
-        speaker.Stop();
+        speaker.Stop(false);
     }
 
     private Func<bool> OnDealFailed(PhoneDealErrorType failType) {

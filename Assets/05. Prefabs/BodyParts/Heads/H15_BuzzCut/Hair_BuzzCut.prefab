@@ -138,7 +138,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5931786737172396057, guid: 9a6be3e2fcec66b4a9ed605b17d078c6, type: 3}
   m_PrefabInstance: {fileID: 3445117020678961225}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9141512005610981402
+--- !u!114 &8457813683792467662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9051798957158563920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 603b3cca7e185ef43be71d9c8cb592f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 32f34fd1ce0ef804f81a94eeaa927ad3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   JointPoint: {fileID: 2045262120364932652}
@@ -157,5 +157,5 @@ MonoBehaviour:
   IsTall: 0
   IsNewspaper: 0
   eyes:
-  - {fileID: 2731205717924908270}
   - {fileID: 8166461560523879351}
+  - {fileID: 2731205717924908270}

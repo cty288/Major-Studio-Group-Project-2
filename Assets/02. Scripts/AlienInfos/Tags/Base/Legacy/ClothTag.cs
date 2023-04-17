@@ -7,9 +7,10 @@ public interface IClothTag : IAlienTag {
 }
 
 public abstract class ClothTag : AbstractAlienTag, IClothTag {
-    public override List<string> GetFakeRadioDescription() {
+    public override List<string> GetFakeRadioDescription(string alienName) {
         return bodyTagInfoModel.GetFakeRadioDescription(TagName,
-            description => typeof(IClothTag).IsAssignableFrom(description.TagType) && description.IsUpperBody == IsUpperCloth);
+            description => typeof(IClothTag).IsAssignableFrom(description.TagType) && description.IsUpperBody == IsUpperCloth,
+            alienName);
     }
 
     public abstract bool IsUpperCloth { get; }

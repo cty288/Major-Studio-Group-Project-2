@@ -135,6 +135,28 @@ public class GameEventSystem : AbstractSavableSystem {
     }
 
     private void OnTimeChanged(DateTime oldTime, DateTime newTime) {
+        //get all times in minutes between oldTime and newTime
+        List<DateTime> times = new List<DateTime>();
+        if (oldTime.Day != newTime.Day) {
+            times.Add(newTime);
+        }
+        else {
+            for (DateTime time = oldTime.AddMinutes(1); time <= newTime; time = time.AddMinutes(1)) {
+                times.Add(time);
+            }
+        }
+        
+
+        foreach (DateTime time in times) {
+            if (EventDict.ContainsKey(time)) {
+                List<GameEvent> evs = EventDict[time];
+                EventDict.Remove(newTime);
+                foreach (GameEvent ev in evs) {
+                    AllPossibleEvents[ev.GameEventType].Add(ev);
+                }
+           
+            }
+        }
         //HashSet<GameEvent> removedEvents = new HashSet<GameEvent>();
         foreach (List<GameEvent> events in AllPossibleEvents.Values) {
             events.RemoveAll((ev => {
@@ -150,15 +172,7 @@ public class GameEventSystem : AbstractSavableSystem {
         
       
         
-        if (EventDict.ContainsKey(newTime)) {
-            List<GameEvent> evs = EventDict[newTime];
-            EventDict.Remove(newTime);
-            foreach (GameEvent ev in evs) {
-                AllPossibleEvents[ev.GameEventType].Add(ev);
-            }
-           
-        }
-
+        
         foreach (List<GameEvent> gameEvents in AllPossibleEvents.Values) {
             gameEvents.CTShuffle();
         }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _02._Scripts.AlienInfos;
 using _02._Scripts.Radio.RadioScheduling;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
@@ -11,9 +12,9 @@ using UnityEngine;
 using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
-public struct OnConstructDescriptionDatas {
+    //public struct OnConstructDescriptionDatas {
 
-}
+//}
 public class DailyBodyRadio : ScheduledRadioEvent<RadioTextContent> {
     [field: ES3Serializable]
     protected override bool DayEndAfterFinish { get; set; } = true;
@@ -25,6 +26,7 @@ public class DailyBodyRadio : ScheduledRadioEvent<RadioTextContent> {
         [field: ES3Serializable] protected Gender speakerGender;
         [field: ES3Serializable] protected AudioMixerGroup mixer;
 
+      //  protected bool noMonsterToday = false;
         protected override RadioTextContent GetRadioContent() {
             return radioContent;
         }
@@ -41,16 +43,44 @@ public class DailyBodyRadio : ScheduledRadioEvent<RadioTextContent> {
            
          }
 
-         public override void OnStart() {
-             base.OnStart();
-             if (!radioModel.DescriptionDatas.Any()) {
-                 this.SendEvent<OnConstructDescriptionDatas>();
+         protected void SetRadioContent() {
+             if (radioModel.DescriptionDatas.Count == 0) {
+                 RadioSchedulingSystem radioSchedulingSystem = this.GetSystem<RadioSchedulingSystem>();
+                 if (!radioModel.HasDescriptionDatasToday) {
+                     if (!radioSchedulingSystem.NoMonsterTodayAnnounced) {
+                         radioSchedulingSystem.NoMonsterTodayAnnounced = true;
+                         List<string> noMonsterToday = new List<string>();
+
+                         noMonsterToday.Add(
+                             "Good evening, listeners. Today, we have no reports of any monster sightings. Dorcha is safe, at least for today.");
+                         noMonsterToday.Add(
+                             "Welcome to our daily broadcast. Today, we have no reports of any monster sightings. Take a deep breath and enjoy the peace while it lasts!");
+                         
+                         SetRadioContent(new RadioTextContent(noMonsterToday[Random.Range(0, noMonsterToday.Count)],
+                             this.speakRate, this.speakerGender, this.mixer));
+                     } else {
+                         SetRadioContent(new RadioTextContent("", this.speakRate, this.speakerGender, this.mixer));
+                     }
+                 }
+                 else {
+                     SetRadioContent(new RadioTextContent("", this.speakRate, this.speakerGender, this.mixer));
+                 }
+                 return;
              }
+             
              AlienDescriptionData descriptionData = radioModel.DescriptionDatas[0];
              radioModel.DescriptionDatas.RemoveAt(0);
              SetRadioContent(new RadioTextContent(
-                 AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo, descriptionData.Reality),
+                 AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo, descriptionData.Reality, this.GetModel<AlienNameModel>().AlienName),
                  this.speakRate, this.speakerGender, this.mixer));
+         }
+        
+    
+
+
+         protected override void OnScheduledRadioStartPlay() {
+             base.OnScheduledRadioStartPlay();
+             SetRadioContent();
          }
 
          public DailyBodyRadio(): base(){}
@@ -87,14 +117,14 @@ public class DailyBodyRadio : ScheduledRadioEvent<RadioTextContent> {
         }
 
         private IEnumerator RadioCorruptCheck()
-    {
-        while (true) {
-            yield return new WaitForSeconds(Random.Range(15f, 25f));
-            if (Random.Range(0, 100) <= 10) {
-                //EndRadio();
-                break;
+        {
+            while (true) {
+                yield return new WaitForSeconds(Random.Range(15f, 25f));
+                if (Random.Range(0, 100) <= 10) {
+                    //EndRadio();
+                    break;
+                }
             }
         }
-    }
 }
 

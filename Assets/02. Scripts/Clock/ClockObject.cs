@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using MikroFramework.Architecture;
+using MikroFramework.AudioKit;
 using MikroFramework.Event;
 using TMPro;
 
@@ -15,6 +16,7 @@ public class ClockObject : AbstractMikroController<MainGame>
 
     private SpriteRenderer[] sprites;
     private TMP_Text timeText;
+    private DateTime lastPlayedTime;
     void Awake()
     {
         //base.Awake();
@@ -42,5 +44,14 @@ public class ClockObject : AbstractMikroController<MainGame>
         hour = time.Hour;
         minute = time.Minute;
         timeText.text = hour.ToString("00") + ":" + minute.ToString("00");
+        if (!AudioSystem.Singleton) {
+            return;
+        }
+
+        if (time - lastPlayedTime <= TimeSpan.FromMinutes(1)) {
+            return;
+        }
+        lastPlayedTime = time;
+        AudioSystem.Singleton.Play2DSound("clock_tick", 0.3f);
     }
 }

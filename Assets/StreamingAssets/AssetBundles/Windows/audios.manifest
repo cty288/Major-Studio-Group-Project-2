@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 779992059
+CRC: 3164586953
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: cfc68021d212f7ec5a5d390b2d9ed5da
+    Hash: b4d83f814e967e1bfdedc327ba372458
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9a2ca7bdbd1871f7131daf57de908e0c
@@ -39,6 +39,7 @@ Assets:
 - Assets/04. Audios/Dog/New/dog_outside_door_3.mp3
 - Assets/04. Audios/Dog/New/dog_attack.mp3
 - Assets/04. Audios/telephone/phone_dialing.ogg
+- Assets/04. Audios/Clock/clock_tick.wav
 - Assets/04. Audios/Knocks/knock_3.ogg
 - Assets/04. Audios/Knocks/knock_6.mp3
 - Assets/04. Audios/Dog/dogBark_3.wav

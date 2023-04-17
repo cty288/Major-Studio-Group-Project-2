@@ -118,6 +118,9 @@ public class GameTimeManager : AbstractSystem, ISystem {
         timeSpeedUntil = until;
     }
 
+    public void SkipTimeTo(DateTime time) {
+        gameTimeModel.CurrentTime.Value = time;
+    }
     private IEnumerator GameTimerCoroutine() {
         while (true) {
             if (gameStateModel.GameState == GameState.End) {

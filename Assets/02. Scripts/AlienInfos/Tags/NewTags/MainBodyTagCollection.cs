@@ -125,3 +125,19 @@ public class MainBodyTag_BlackLongSleeve : ClothTag
 	[field: ES3Serializable]
 	public override bool IsUpperCloth { get; } = true;
 }
+
+public class MainBodyTag_SP_Police : ClothTag
+{
+    public override string TagName { get; } = "Cloth_Police";
+
+    [field: ES3Serializable]
+    public override bool IsUpperCloth { get; } = true;
+}
+
+public class MainBodyTag_SP_Sexy : ClothTag
+{
+    public override string TagName { get; } = "Cloth_Sexy";
+
+    [field: ES3Serializable]
+    public override bool IsUpperCloth { get; } = true;
+}

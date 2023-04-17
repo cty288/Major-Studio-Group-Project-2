@@ -11,9 +11,16 @@ namespace _02._Scripts.FashionCatalog {
 		private BodyModel bodyModel;
 		protected override void OnInit() {
 			this.RegisterEvent<BodyPartIndicesUpdateInfo>(OnBodyPartIndicesUpdate);
+			this.RegisterEvent<OnNewDay>(OnNewDay);
 			model = this.GetModel<FashionCatalogModel>();
 			gameTimeModel = this.GetModel<GameTimeModel>();
 			bodyModel = this.GetModel<BodyModel>();
+		}
+
+		private void OnNewDay(OnNewDay e) {
+			if (e.Date.DayOfWeek == DayOfWeek.Sunday) {
+				model.UpdateSpriteIndex();
+			}
 		}
 
 		private void OnBodyPartIndicesUpdate(BodyPartIndicesUpdateInfo e) {
@@ -21,6 +28,7 @@ namespace _02._Scripts.FashionCatalog {
 				
 				e.Time = gameTimeModel.CurrentTime.Value.Date;
 				model.AddBodyPartIndicesUpdateInfo(e);
+				
 			}
 		}
 	}

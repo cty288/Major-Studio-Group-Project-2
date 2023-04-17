@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 767531324
+CRC: 2103558566
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 85428e71d7f651944ecf2707ca643739
+    Hash: d8dea089955edc8f0bdca9fc8cf428e1
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c47d8ebe4c1670f224db57f21781ae85
+    Hash: b0cf34565d136645c4a7992187841807
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -21,10 +21,18 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 61
   Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
 - Class: 114
@@ -32,13 +40,19 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 1cb6101d773401e49ba07a5be4f3bc3b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b2b050deffd6f8e4d954fc3bd211884a, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 713e266a9b6765a45a4e214d417a0729, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: ce17f3e0a2003d1489c87029cdad6cb1, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 650910a5192c6bc419d61e4a3b7fe274, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: a3f101520a4b4c3418a30505021817cb, type: 3}
 - Class: 114
@@ -64,6 +78,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 9f10fed3cbc19422bba628fff172e431, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
@@ -78,6 +94,8 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 - Class: 222
+  Script: {instanceID: 0}
+- Class: 223
   Script: {instanceID: 0}
 - Class: 224
   Script: {instanceID: 0}
@@ -99,9 +117,19 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: Unity.TextMeshPro
   ClassName: TMPro.TMP_FontWeightPair
 - AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_GlyphAdjustmentRecord
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_GlyphPairAdjustmentRecord
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_GlyphValueRecord
+- AssemblyName: Unity.TextMeshPro
   ClassName: TMPro.VertexGradient
 - AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.ArgumentCache
+- AssemblyName: UnityEngine.CoreModule
   ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentListenerMode
 - AssemblyName: UnityEngine.CoreModule
   ClassName: UnityEngine.RectOffset
 - AssemblyName: UnityEngine.TextCoreFontEngineModule
@@ -113,12 +141,23 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.TextCoreFontEngineModule
   ClassName: UnityEngine.TextCore.GlyphRect
 - AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.AnimationTriggers
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Button/ButtonClickedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ColorBlock
+- AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Navigation
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.SpriteState
 Assets:
 - Assets/05. Prefabs/OutdoorActivity/TestActivity/TestArea_TestActivity.prefab
-- Assets/05. Prefabs/ImportantNewspaper/MissingDogContent.prefab
+- Assets/05. Prefabs/Posters/MissingDogContent.prefab
 - Assets/05. Prefabs/ImportantNewspaper/TextContent.prefab
 - Assets/05. Prefabs/General/DraggedText.prefab
 - Assets/05. Prefabs/ImportantNewspaper/RadioScheduleContent/RadioScheduleContent.prefab
 - Assets/05. Prefabs/General/RadioSubtitle.prefab
+- Assets/05. Prefabs/OutdoorActivity/01Hunting/HuntingGround_Hunting.prefab
 Dependencies: []

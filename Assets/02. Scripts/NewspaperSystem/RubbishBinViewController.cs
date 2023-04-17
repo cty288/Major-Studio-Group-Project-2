@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using MikroFramework.Architecture;
+using MikroFramework.Event;
 using UnityEngine;
 
 public class RubbishBinViewController : AbstractMikroController<MainGame> {
@@ -19,6 +20,12 @@ public class RubbishBinViewController : AbstractMikroController<MainGame> {
         defaultMaterial = spriteRenderer.material;
         newspaperSystem = this.GetSystem<NewspaperSystem>();
         collider = GetComponent<Collider2D>();
+        gameObject.SetActive(false);
+        this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
+    }
+
+    private void OnNewDay(OnNewDay e) {
+        gameObject.SetActive(e.Day > 0);
     }
 
     private void Update() {

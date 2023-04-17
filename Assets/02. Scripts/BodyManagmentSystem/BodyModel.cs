@@ -28,12 +28,13 @@ namespace _02._Scripts.BodyManagmentSystem {
 		[ES3Serializable] private Dictionary<BodyPartType, Dictionary<int, BindableProperty<int>>>
 			availableBodyPartIndices = null;
 
+		[field: ES3Serializable]
+		public BodyInfo ProloguePlayerBodyInfo { get; set; }
 
 		[field: ES3Serializable] public int AvailableBodyPartIndexCount { get; protected set; } =6;
 		
+		[field: ES3Serializable] public int ConsecutiveNonAlianSpawnCount { get;  set; } = 0;
 		
-		
-
 		public Dictionary<BodyPartType, HashSet<int>> AvailableBodyPartIndices {
 			get {
 				if (availableBodyPartIndices == null) {
@@ -72,11 +73,19 @@ namespace _02._Scripts.BodyManagmentSystem {
 			}
 		}
 
+		public List<BodyTimeInfo> AllTodayAliens {
+			get {
+				return allBodyTimeInfos.FindAll(bodyTimeInfo =>
+					bodyTimeInfo.IsTodayDead && bodyTimeInfo.BodyInfo.IsAlien);
+			}
+		}
+
 		public void UpdateAvailableBodyPartIndices(int count) {
 			if(availableBodyPartIndices == null) {
 				availableBodyPartIndices = new Dictionary<BodyPartType, Dictionary<int, BindableProperty<int>>>();
 				availableBodyPartIndices.Add(BodyPartType.Head, new Dictionary<int, BindableProperty<int>>());
 				availableBodyPartIndices.Add(BodyPartType.Body, new Dictionary<int, BindableProperty<int>>());
+				availableBodyPartIndices.Add(BodyPartType.Legs, new Dictionary<int, BindableProperty<int>>());
 			}
 
 			Dictionary<BodyPartType, List<int>> removedIndices = new Dictionary<BodyPartType, List<int>>();
@@ -104,7 +113,7 @@ namespace _02._Scripts.BodyManagmentSystem {
 
 			foreach (BodyPartType bodyPartType in availableBodyPartIndices.Keys) {
 				var targetList = AlienBodyPartCollections.Singleton.GetBodyPartCollectionByBodyType(bodyPartType, false)
-					.HeightSubCollections[0].NewspaperBodyPartDisplays.HumanTraitPartsPrefabs;
+					.HeightSubCollections[0].ShadowBodyPartPrefabs.HumanTraitPartsPrefabs;
 				
 				int actualCount = Mathf.Min(count, targetList.Count);
 				

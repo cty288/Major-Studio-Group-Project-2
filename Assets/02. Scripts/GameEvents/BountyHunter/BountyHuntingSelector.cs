@@ -45,6 +45,7 @@ public class BountyHuntingSelector : AbstractMikroController<MainGame>, IPointer
     }
     
     public void SetHintText(string text) {
+        Awake();
         if (playerControlModel.ControlType.Value != PlayerControlType.BountyHunting) {
             hintText.text = text;
         }

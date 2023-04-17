@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public static class AlienDescriptionFactory {
 
-    public static List<Func<BodyInfo,float, string>> RadioDescriptions = new List<Func<BodyInfo, float, string>>();
+    public static List<Func<BodyInfo,float, string, string>> RadioDescriptions = new List<Func<BodyInfo, float,string, string>>();
 
     private static bool inited = false;
 
@@ -15,7 +15,7 @@ public static class AlienDescriptionFactory {
     public static DescriptionFormatter Formatter => formatter;
     public static void Init() {
         //RegisterRadioDescription(TestRadioDescription);
-        RegisterRadioDescription(Radio0);
+       // RegisterRadioDescription(Radio0);
         RegisterRadioDescription(Radio1);
         RegisterRadioDescription(Radio2);
         RegisterRadioDescription(Radio3);
@@ -23,37 +23,37 @@ public static class AlienDescriptionFactory {
         RegisterRadioDescription(Radio5);
     }
 
-    public static string GetRadioDescription(BodyInfo bodyInfo, float reality) {
+    public static string GetRadioDescription(BodyInfo bodyInfo, float reality, string monsterName) {
         if (!inited) {
             Init();
         }
 
        
         // bodyInfo = BodyInfo.GetRandomBodyInfo();
-        return RadioDescriptions[Random.Range(0, RadioDescriptions.Count)](bodyInfo, reality).TrimEnd();
+        return RadioDescriptions[Random.Range(0, RadioDescriptions.Count)](bodyInfo, reality, monsterName).TrimEnd();
     }
     
-    public static string GetRadioDescription(BodyInfo bodyInfo, float reality, int index) {
+    public static string GetRadioDescription(BodyInfo bodyInfo, float reality, int index, string monsterName) {
         if (!inited) {
             Init();
         }
 
        
         // bodyInfo = BodyInfo.GetRandomBodyInfo();
-        return RadioDescriptions[index](bodyInfo, reality).TrimEnd();
+        return RadioDescriptions[index](bodyInfo, reality, monsterName).TrimEnd();
     }
     
-    public static string GetRadioDescription(BodyInfo bodyInfo, float reality, Func<BodyInfo, float, string> template) {
+    public static string GetRadioDescription(BodyInfo bodyInfo, float reality, string monsterName, Func<BodyInfo, float, string, string> template) {
         if (!inited) {
             Init();
         }
 
        
         // bodyInfo = BodyInfo.GetRandomBodyInfo();
-        return template(bodyInfo, reality).TrimEnd();
+        return template(bodyInfo, reality, monsterName).TrimEnd();
     }
 
-    public static void RegisterRadioDescription(Func<BodyInfo, float, string> description) {
+    public static void RegisterRadioDescription(Func<BodyInfo, float, string, string> description) {
         RadioDescriptions.Add(description);
     }
 
@@ -75,81 +75,88 @@ public static class AlienDescriptionFactory {
         StringBuilder sb = new StringBuilder();
 
         sb.AppendFormat("We have just got the latest information of the newly discovered corpse!");
-        sb.AppendFormat(formatter, "{0:height} and {0:clothb} Also, {0:hair}", body);
+        sb.AppendFormat(formatter, "{0:height} and {0:clothb} Also, {0:hair}");
         return sb.ToString();
     }
 
-    private static string Radio1(BodyInfo body, float reality)
+    private static string Radio1(BodyInfo body, float reality, string monsterName)
     {
         DescriptionFormatter.Reality = reality;
         StringBuilder sb = new StringBuilder();
 
-        sb.AppendFormat("Welcome back, we have some updated information about the dead body we found this morning.");
+        sb.AppendFormat(formatter, "Welcome back, we have some updated information about a {1} we saw this morning.", null, monsterName);
         if (body.CheckContainTag<IAccessoryTag>(out var accessoryTag)) {
-            sb.AppendFormat(formatter, "According to our source, {0:acc} and it is also believed that, {0:clothb} {0:clothl}", body);
+            sb.AppendFormat(formatter, "According to our source, {0:acc} and it is also believed that, {0:clothb} {0:clothl}", body, monsterName);
         }
         else {
-            sb.AppendFormat(formatter, "According to our source, {0:clothb} {0:clothl}", body);
+            sb.AppendFormat(formatter, "According to our source, {0:clothb} {0:clothl}", body, monsterName);
         }
        
         return sb.ToString();
     }
 
-    private static string Radio2(BodyInfo body, float reality)
+    private static string Radio2(BodyInfo body, float reality, string monsterName)
     {
         DescriptionFormatter.Reality = reality;
         StringBuilder sb = new StringBuilder();
 
-        sb.AppendFormat("This is FM96: Dead Body Report, and I’m your host. New reports indicate that a newly found dead body yesterday has the following trait: ");
-        sb.AppendFormat(formatter, "{0:height} and {0:voice} {0:clothb}", body);
-        sb.AppendFormat("Since the creature can disguise itself into human bodies, we highly recommend you to be aware of anyone who looks like this dead body.");
+        sb.AppendFormat(formatter, "This is FM96: {1} Witness Report, and I’m your host. Our beloved citizens witnessed a {1}-like figure yesterday that has the following trait: ", body, monsterName);
+        if (body.CheckContainTag<IAccessoryTag>(out var accessoryTag)) {
+            sb.AppendFormat(formatter, "{0:acc} and {0:voice} {0:clothb}", body);
+        }
+        else {
+            sb.AppendFormat(formatter, "{0:clothb} and {0:voice} {0:clothl}", body);
+        }
+        
+        sb.AppendFormat(formatter, "Since the {1} can disguise itself into human bodies, we highly recommend you to be aware of anyone who looks like this {1}.", body, monsterName);
         return sb.ToString();
     }
 
-    private static string Radio3(BodyInfo body, float reality)
+    private static string Radio3(BodyInfo body, float reality, string monsterName)
     {
         DescriptionFormatter.Reality = reality;
         StringBuilder sb = new StringBuilder();
 
-        sb.AppendFormat("This just in. A resident was reported misssing since yesterday morning.");
+        sb.AppendFormat(formatter, "Welcome back to FM96, your source for the latest {1} News. I'm your host. In the latest update on the {1} sightings, {0:hair} ",body, monsterName);
         if (body.CheckContainTag<IAccessoryTag>(out var accessoryTag)) {
-            sb.AppendFormat(formatter, "{0:voice} Other sources have shown what it was wearing. {0:acc} {0:clothl}", body);
+            sb.AppendFormat(formatter, "{0:acc} {0:clothl}", body, monsterName);
         }
         else {
-            sb.AppendFormat(formatter, "{0:voice} Other sources have shown what it was wearing. {0:clothl}", body);
+            sb.AppendFormat(formatter, "{0:clothl} {0:voice}", body, monsterName);
         }
        
         return sb.ToString();
     }
 
-    private static string Radio4(BodyInfo body, float reality)
+    private static string Radio4(BodyInfo body, float reality, string monsterName)
     {
         DescriptionFormatter.Reality = reality;
         StringBuilder sb = new StringBuilder();
 
-        sb.AppendFormat("From recent reports, a resident went missing since two days ago.");
+        sb.AppendFormat(formatter, "Good evening, Dorcha friends. Get ready for the latest {0} witness report on FM96.", monsterName);
         if (body.CheckContainTag<IAccessoryTag>(out var accessoryTag)) {
-            sb.AppendFormat(formatter, "{0:hair} and {0:acc} In addition, {0:clothl}", body);
+            sb.AppendFormat(formatter, "According to witnesses, {0:hair} and {0:acc} In addition, {0:clothb}", body);
         }
         else {
-            sb.AppendFormat(formatter, "{0:hair}. In addition, {0:clothl}", body);
+            sb.AppendFormat(formatter, "According to witnesses, {0:hair}. In addition, {0:clothb}", body);
         }
        
         sb.AppendFormat("Please be aware of those who have the similar traits.");
         return sb.ToString();
     }
 
-    private static string Radio5(BodyInfo body, float reality)
+    private static string Radio5(BodyInfo body, float reality, string monsterName)
     {
         DescriptionFormatter.Reality = reality;
         StringBuilder sb = new StringBuilder();
 
         sb.AppendFormat(formatter,
-            "We’ve got some news for you coming right up. One of the delivery couriers went missing yesterday according to our source.");
-        sb.AppendFormat(formatter, "{0:height}  {0:clothb} And {0:hair}", body);
+            "Good evening, citizens. It's time to tune into FM96 for the {0} witness report. ", monsterName);
+        sb.AppendFormat(formatter, "In the latest update on the {1} sightings, {0:hair} {0:clothb} And {0:clothl}",
+            body, monsterName);
         return sb.ToString();
     }
-    public static string RadioPrologue(BodyInfo body, float reality)
+    public static string RadioPrologue(BodyInfo body, float reality, string monsterName)
     {
         DescriptionFormatter.Reality = reality;
         StringBuilder sb = new StringBuilder();

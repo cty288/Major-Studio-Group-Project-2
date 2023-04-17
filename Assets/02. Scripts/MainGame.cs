@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.AlienInfos;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.ChoiceSystem;
 using _02._Scripts.Electricity;
 using _02._Scripts.FashionCatalog;
 using _02._Scripts.GameEvents.BountyHunter;
+using _02._Scripts.GameEvents.FoodBorrowEvent;
 using _02._Scripts.GameEvents.Merchant;
 using _02._Scripts.GameTime;
 using _02._Scripts.ImportantNewspaper;
+using _02._Scripts.KFC;
 using _02._Scripts.Notebook;
 using _02._Scripts.Poster;
 using _02._Scripts.Radio;
@@ -15,6 +18,7 @@ using _02._Scripts.Radio.RadioScheduling;
 using _02._Scripts.Radio.RadioScheduling.DorchaDaily;
 using _02._Scripts.Radio.RadioScheduling.GhostStory;
 using _02._Scripts.SexyCard;
+using _02._Scripts.SurvivalGuide;
 using MikroFramework.Architecture;
 using MikroFramework.ResKit;
 using MikroFramework.TimeSystem;
@@ -30,6 +34,7 @@ public class MainGame : Architecture<MainGame> {
         
         this.RegisterExtensibleUtility<ResLoader>(ResLoader.Allocate());
         
+        this.RegisterModel<AlienNameModel>();
         this.RegisterModel<PlayerControlModel>();
         this.RegisterModel<GameStateModel>();
         this.RegisterModel<GameSceneModel>();
@@ -58,6 +63,10 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<GhostStoryModel>();
         this.RegisterModel<SexyCardModel>();
         this.RegisterModel<SuspectModel>();
+        this.RegisterModel<TelephoneNumberRecordModel>();
+        this.RegisterModel<FoodBorrowModel>();
+        this.RegisterModel<SurvivalGuideModel>();
+        
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
         this.RegisterSystem<GameTimeManager>();
@@ -81,6 +90,8 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<ChoiceSystem>();
         this.RegisterSystem<SexyCardSystem>();
         this.RegisterSystem<SuspectSystem>();
+        this.RegisterSystem<FoodBorrowSystem>();
+        this.RegisterSystem<KFCSystem>();
     }
     
     protected void RegisterModel<T>() where T : class, IModel, new() {

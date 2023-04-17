@@ -47,7 +47,8 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
         
         
         string welcome = $"Buddy, I got some clues about the time when a victim was killed by the creature we are looking for. At <color=yellow>{hourIn12}:{ClueHappenTime.Minute} pm</color>," +
-                         $" pay attention to the flashlights outside your home. The number of flashlights will indicate which <color=yellow>hour</color> the victim died in PM. Don't forget call me back when you find out the murderer! Good luck!";
+                         $" pay attention to the flashlights outsivicde your home. The number of flashlights will indicate which <color=yellow>hour</color> the victim died in PM. " +
+                         $"I suspect the creature has already micmicked the victim. Don't forget call me back when you find out the murderer! Good luck!";
 
         if (alreadyNotified) {
             welcome = $"Buddy, someone reported a new occurrence of that creature! At <color=yellow>{hourIn12}:{ClueHappenTime.Minute} pm</color>," +

@@ -19,27 +19,36 @@ namespace _02._Scripts.BodyManagmentSystem {
 	
 	public class BodyTagInfoModel: AbstractModel {
 		protected Dictionary<string, TagDescription> tagDescriptions = new Dictionary<string, TagDescription>();
-
+		protected DescriptionFormatter formatter = new DescriptionFormatter();
 		protected override void OnInit() {
 			LoadInfo();
 		}
 		
-		public List<string> GetRealRadioDescription(string tag) {
+		public List<string> GetRealRadioDescription(string tag, string monsterName) {
 			tag = tag.ToLower();
 			if (tagDescriptions.ContainsKey(tag)) {
-				return tagDescriptions[tag].RealRadioDescription;
+				List<string> formattedDescriptions = new List<string>();
+				foreach (string description in tagDescriptions[tag].RealRadioDescription) {
+					formattedDescriptions.Add(String.Format(formatter, description, "{0}", monsterName));
+				}
+				return formattedDescriptions;
 			}
 			else {
 				return null;
 			}
 		}
 		
-		public List<string> GetFakeRadioDescription(string tag, Predicate<TagDescription> predicate) {
+		public List<string> GetFakeRadioDescription(string tag, Predicate<TagDescription> predicate, string monsterName) {
 			tag = tag.ToLower();
 			if (tagDescriptions.ContainsKey(tag)) {
 				List<string> targetList = tagDescriptions[tag].FakeRadioDescription;
 				if (targetList.Count > 0) {
-					return targetList;
+					List<string> formattedDescriptions = new List<string>();
+					
+					foreach (string description in targetList) {
+						formattedDescriptions.Add(String.Format(formatter, description, "{0}", monsterName));
+					}
+					return formattedDescriptions;
 				}
 			}
 
@@ -62,8 +71,13 @@ namespace _02._Scripts.BodyManagmentSystem {
 				}
 			}
 			
-			return fakeDescriptions;
-			
+			List<string> results = new List<string>();
+					
+			foreach (string description in fakeDescriptions) {
+				results.Add(String.Format(formatter, description, null, monsterName));
+			}
+			return results;
+
 		}
 		
 		public List<string> GetShortDescriptions(string tag) {

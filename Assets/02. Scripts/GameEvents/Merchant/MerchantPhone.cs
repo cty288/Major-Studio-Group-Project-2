@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.GameEvents.Merchant;
 using _02._Scripts.GameTime;
 using Crosstales;
 using MikroFramework.Architecture;
@@ -146,10 +147,13 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
     }
 
     private void OnWelcomeSpeakFinished(Speaker speaker){
+        
         this.RegisterEvent<OnDialDigit>(OnDialDigit);
+        this.GetModel<TelephoneNumberRecordModel>()
+            .AddOrEditRecord(this.GetModel<MerchantModel>().PhoneNumber, "Merchant");
         string welcome = GetSellListSentence();
         GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
-        if(!(gameTimeModel.CurrentTime.Value.Hour==23 && gameTimeModel.CurrentTime.Value.Minute>=59)){
+        if(!(gameTimeModel.CurrentTime.Value.Hour==23 && gameTimeModel.CurrentTime.Value.Minute>=58)){
             speaker.Speak(welcome, mixer, "Merchant", 1f, null);
         }
         
@@ -170,7 +174,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
     private void OnDialDigit(OnDialDigit e) {
         this.UnRegisterEvent<OnDialDigit>(OnDialDigit);
         if (speaker.IsSpeaking) {
-            speaker.Stop();
+            speaker.Stop(true);
         }
         if (e.Digit == 9) {
             speaker.Speak(GetSellListSentence(), mixer,"Merchant", 1f, OnWelcomeSpeakFinished);
@@ -221,16 +225,16 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
     }
 
     protected override void OnHangUp() {
-        StopSpeaking();
+        StopSpeaking(true);
     }
 
     protected override void OnEnd() {
-       StopSpeaking();
+       StopSpeaking(true);
     }
 
-    private void StopSpeaking() {
+    private void StopSpeaking(bool invokeEndCallback) {
         if (speaker.IsSpeaking) {
-            speaker.Stop();
+            speaker.Stop(invokeEndCallback);
         }
         
         this.GetModel<GameTimeModel>().CurrentTime.UnRegisterOnValueChanged(OnTimeChanged);

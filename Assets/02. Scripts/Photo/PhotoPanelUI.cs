@@ -47,11 +47,12 @@ public class PhotoPanelUI : OpenableUIPanel {
 		bgImage.sprite = e.BGSprite;
 		photoRawImage.texture = photoSaveModel.GetPhotoTexture(photoSaveModel.GetPhoto(e.Content));
 		bodyInfoContainer.BodyInfos = e.BodyInfos;
+		BountyHuntingSelector selector = GetComponentInChildren<BountyHuntingSelector>(true);
 		if(e.BodyInfos!=null && e.BodyInfos.Count>0){
-			hintText.text = $"This photo contains {e.BodyInfos.Count} figures";
+			selector.SetHintText($"This photo contains {e.BodyInfos.Count} figures");
 		}
 		else {
-			hintText.text = "";
+			selector.SetHintText("");
 		}
 		Show(0.5f);
 	}

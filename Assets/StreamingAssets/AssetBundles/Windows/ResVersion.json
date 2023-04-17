@@ -3,8 +3,8 @@
   "ABMD5List": [
     {
       "AssetName": "aliens",
-      "MD5": "ddcfc7bd515e0f13a0c476ab19a484a3",
-      "FileSize": 465.855469,
+      "MD5": "360adecdd91dc7c2dfeb183ae5abc863",
+      "FileSize": 507.754883,
       "assetDatas": [
         {
           "Name": "AlienBody",
@@ -23,6 +23,11 @@
         },
         {
           "Name": "ExampleNewspaper",
+          "OwnerBundleName": "aliens",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "FashionCatalogBody",
           "OwnerBundleName": "aliens",
           "AssetType": "UnityEngine.GameObject"
         },
@@ -47,6 +52,11 @@
           "AssetType": "UnityEngine.GameObject"
         },
         {
+          "Name": "SuspectBody",
+          "OwnerBundleName": "aliens",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
           "Name": "NewspaperTex1",
           "OwnerBundleName": "aliens",
           "AssetType": "UnityEngine.RenderTexture"
@@ -55,9 +65,14 @@
     },
     {
       "AssetName": "audios",
-      "MD5": "a164f3c3c6b52360efc1d6ec2c389573",
-      "FileSize": 1435.291,
+      "MD5": "3cdcc3cbb89cb300665624215f1d023b",
+      "FileSize": 1438.833,
       "assetDatas": [
+        {
+          "Name": "clock_tick",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
         {
           "Name": "dogBark_1",
           "OwnerBundleName": "audios",
@@ -212,8 +227,8 @@
     },
     {
       "AssetName": "general",
-      "MD5": "240a0ba2e037c61f3583d3869062e3c1",
-      "FileSize": 908.7822,
+      "MD5": "5703516e2a746031336028b4e1aae48a",
+      "FileSize": 1653.082,
       "assetDatas": [
         {
           "Name": "DraggedText",
@@ -222,11 +237,6 @@
         },
         {
           "Name": "RadioSubtitle",
-          "OwnerBundleName": "general",
-          "AssetType": "UnityEngine.GameObject"
-        },
-        {
-          "Name": "MissingDogContent",
           "OwnerBundleName": "general",
           "AssetType": "UnityEngine.GameObject"
         },
@@ -241,7 +251,17 @@
           "AssetType": "UnityEngine.GameObject"
         },
         {
+          "Name": "HuntingGround_Hunting",
+          "OwnerBundleName": "general",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
           "Name": "TestArea_TestActivity",
+          "OwnerBundleName": "general",
+          "AssetType": "UnityEngine.GameObject"
+        },
+        {
+          "Name": "MissingDogContent",
           "OwnerBundleName": "general",
           "AssetType": "UnityEngine.GameObject"
         }
@@ -249,8 +269,8 @@
     },
     {
       "AssetName": "mftest",
-      "MD5": "b42266f84ede4c86f07da942deb8a5c2",
-      "FileSize": 1092.00391,
+      "MD5": "c49c505fb7d20c63fc239a81588fb917",
+      "FileSize": 1043.28223,
       "assetDatas": [
         {
           "Name": "War loop",
@@ -349,7 +369,7 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "f9a3e92bd72374ed4739bbaf75fdd019",
+      "MD5": "37c1cfe770006f23678fe7ea7b7634e2",
       "FileSize": 1.79296875,
       "assetDatas": []
     },

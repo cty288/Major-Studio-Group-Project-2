@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _02._Scripts.AlienInfos;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.BodyOutside;
@@ -30,15 +31,13 @@ public class PrologueBodyRadio : RadioEvent<RadioTextContent> {
          base(startTimeRange,new RadioTextContent("", 1, Gender.MALE, mixer),
          RadioChannel.AllChannels) {
          
-         if (!radioModel.DescriptionDatas.Any()) {
-             this.SendEvent<OnConstructDescriptionDatas>();
-         }
+         
         
          AlienDescriptionData descriptionData = radioModel.DescriptionDatas[0];
          radioModel.DescriptionDatas.RemoveAt(0);
 
          radioContent.SetContent(AlienDescriptionFactory.GetRadioDescription(descriptionData.BodyInfo,
-             descriptionData.Reality,
+             descriptionData.Reality,this.GetModel<AlienNameModel>().AlienName,
              AlienDescriptionFactory.RadioPrologue));
          
          DeliveryRadio();
@@ -65,10 +64,10 @@ public class PrologueBodyRadio : RadioEvent<RadioTextContent> {
     private void DeliveryRadio() {
         DateTime currentTime = gameTimeManager.CurrentTime;
         DateTime happenTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day,
-            23, 10, 0);
+            23, 00, 0);
 
         gameEventSystem.AddEvent(new PrologueDeliveryRadio(
-            new TimeRange(happenTime, happenTime.AddMinutes(30)),
+            new TimeRange(happenTime, happenTime.AddMinutes(60)),
             AudioMixerList.Singleton.AudioMixerGroups[1]));
     }
 
