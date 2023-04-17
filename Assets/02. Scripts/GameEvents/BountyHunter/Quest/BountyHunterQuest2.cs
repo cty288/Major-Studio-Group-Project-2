@@ -45,7 +45,7 @@ public class BountyHunterQuest2Notification : BountyHunterQuestClueNotification 
 }
 
 public class BountyHunterQuest2ClueNotificationNotificationContact : BountyHunterQuestClueNotificationContact {
-    public BountyHunterQuest2ClueNotificationNotificationContact(){}
+    public BountyHunterQuest2ClueNotificationNotificationContact() : base(){}
     protected override void OnStart() {
         if (ClueHappenTime.Hour == 23 && ClueHappenTime.Minute >= 50) {
             ClueHappenTime = new DateTime(ClueHappenTime.Year, ClueHappenTime.Month, ClueHappenTime.Day, 23,

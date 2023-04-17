@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;using MikroFramework.Architecture;
+using System.Collections.Generic;
+using _02._Scripts.GameTime;
+using MikroFramework.Architecture;
 using UnityEngine;
 [ES3Serializable]
 public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegisterEvent, ICanGetModel {
@@ -10,6 +12,8 @@ public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegist
     //protected TelephoneSystem telephoneSystem;
     public Action OnTelephoneHangUp { get; set; }
     public Action OnTelephoneStart { get; set; }
+    
+    protected GameTimeModel gameTimeModel;
 
     public TelephoneSystem TelephoneSystem {
         get {
@@ -18,10 +22,12 @@ public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegist
     }
 
     public TelephoneContact() {
+        gameTimeModel = this.GetModel<GameTimeModel>();
        // telephoneSystem = this.GetSystem<TelephoneSystem>();
     }
     public void Start() {
         OnTelephoneStart?.Invoke();
+        gameTimeModel.LockTime.Retain();
         OnStart();
     }
 
@@ -31,6 +37,7 @@ public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegist
         if (speaker.IsSpeaking) {
             speaker.Stop(false);
         }
+        gameTimeModel.LockTime.Release();
         OnHangUp();
     }
     
@@ -41,6 +48,7 @@ public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegist
         {
             speaker.Stop(true);
         }
+        gameTimeModel.LockTime.Release();
         OnEnd();
     }
 

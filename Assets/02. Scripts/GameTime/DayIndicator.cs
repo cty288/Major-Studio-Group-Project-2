@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.GameTime;
 using DG.Tweening;
+using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
 using TMPro;
@@ -17,15 +19,18 @@ public class DayIndicator : AbstractMikroController<MainGame> {
     [SerializeField] private List<Image> foodImages;
     [SerializeField] private TMP_Text foodIndicatorText;
 
-    
+    private Animator prologueSkipPanelAnimator;
+    private Button onSkipButton;
+    private GameTimeModel gameTimeModel;
+    private Button notSkipButton;
     private void Awake() {
         playerResourceModel = this.GetModel<PlayerResourceModel>();
         
         dayIndicator = transform.Find("DayIndicator").GetComponent<TMP_Text>();
         animator = GetComponent<Animator>();
         this.GetSystem<GameTimeManager>().OnDayStart += OnDayStart;
-
-
+        gameTimeModel = this.GetModel<GameTimeModel>();
+        prologueSkipPanelAnimator = transform.Find("PrologueSkipPanel").GetComponent<Animator>();
         lastFoodCount = playerResourceModel.GetResourceCount<FoodResource>();
         GameTimeManager gameTimer = this.GetSystem<GameTimeManager>();
         if (this.GetModel<OutdoorActivityModel>().HasMap) {
@@ -39,11 +44,30 @@ public class DayIndicator : AbstractMikroController<MainGame> {
             dayIndicator.text = $"Prologue";
         }
         
+        onSkipButton = prologueSkipPanelAnimator.transform.Find("SkipPrologueButton").GetComponent<Button>();
+        notSkipButton = prologueSkipPanelAnimator.transform.Find("NotSkipPrologueButton").GetComponent<Button>();
         
-        
+        onSkipButton.onClick.AddListener(OnSkipPrologue);
+        notSkipButton.onClick.AddListener(OnNotSkipPrologue);
+
+        this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
+
         //SetFoodCount(lastFoodCount);
         //this.RegisterEvent<OnShowFood>(OnShowFood).UnRegisterWhenGameObjectDestroyed(gameObject);
     }
+
+    private void OnNewDay(OnNewDay e) {
+        PlayerPrefs.SetInt("PlayedBefore", 1);
+        if (PlayerPrefs.GetInt("PlayedBefore", 0) == 1 && gameTimeModel.Day == 0) {
+            gameTimeModel.LockTime.Retain();
+            return;
+        }
+        this.Delay(1f, () => {
+            animator.CrossFade("Idle", 0.25f);
+        });
+      
+    }
+
 
     private void OnShowFood(OnShowFood obj) {
         OnShowFoodIndicator();
@@ -110,12 +134,42 @@ public class DayIndicator : AbstractMikroController<MainGame> {
         else {
             dayIndicator.text = $"Day {day}\n{hour}:00";
         }
+        
+        
        
         animator.CrossFade("Show", 1.5f);
+        if (day == 0) {
+           
+        }
+        else {
+            PlayerPrefs.SetInt("PlayedBefore", 1);
+        }
     }
 
     private void OnShowFoodIndicator() {
        // PlayFoodCountAnimation();
     }
+
+    public void ShowPrologueSkipPanel() {
+        if(PlayerPrefs.GetInt("PlayedBefore", 0) == 1 && gameTimeModel.Day == 0) {
+            prologueSkipPanelAnimator.CrossFade("Show", 0.02f);
+        }
+       
+    }
     
+    private void OnNotSkipPrologue() {
+        prologueSkipPanelAnimator.CrossFade("Hide", 0.02f);
+        this.Delay(1f, () => {
+            animator.CrossFade("Idle", 0.25f);
+        });
+        gameTimeModel.LockTime.Release();
+    }
+
+    private void OnSkipPrologue() {
+        DateTime time = gameTimeModel.CurrentTime.Value;
+        this.GetSystem<GameTimeManager>().SkipTimeTo(new DateTime(time.Year, time.Month, time.Day, 23, 58, 0));
+        prologueSkipPanelAnimator.CrossFade("Hide", 0.02f);
+        gameTimeModel.LockTime.Release();
+    }
+
 }

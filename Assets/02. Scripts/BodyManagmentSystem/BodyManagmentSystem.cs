@@ -63,13 +63,18 @@ public class BodyManagmentSystem : AbstractSystem {
             timeInfo.DayRemaining--;
             timeInfo.IsTodayDead = false;
         }
+
+        int median = Mathf.RoundToInt(MaxBodyEveryDay / 2f);
+        median = Mathf.RoundToInt(median + e.Day * 0.1f);
+        median = Mathf.Min(5, median);
+        
         GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
-        int bodyCount = Mathf.Clamp(Mathf.RoundToInt(GenerateNormalRandom(MaxBodyEveryDay / 2f, 2.34f)), 0,
+        int bodyCount = Mathf.Clamp(Mathf.RoundToInt(GenerateNormalRandom(median, 2.34f)), 0,
             MaxBodyEveryDay);
         
         List<int> testCount = new List<int>();
         for (int i = 0; i < 10; i++) {
-            testCount.Add(Mathf.Clamp(Mathf.RoundToInt(GenerateNormalRandom(MaxBodyEveryDay / 2f, 2.34f)), 0,
+            testCount.Add(Mathf.Clamp(Mathf.RoundToInt(GenerateNormalRandom(median, 2.34f)), 0,
                 MaxBodyEveryDay));
         }
 
@@ -141,6 +146,9 @@ public class BodyManagmentSystem : AbstractSystem {
         newBodyInfos.CTShuffle();
         //transform an alien
         int alienCount = bodyCount / 3;
+        if (bodyCount >= 1 && bodyCount < 3) {
+            alienCount = Random.Range(0, 2);
+        }
 
         if (gameTimeModel.Day <= 1) {
             alienCount = 1;

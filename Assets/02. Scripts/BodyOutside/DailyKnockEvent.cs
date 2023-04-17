@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.ChoiceSystem;
 using _02._Scripts.GameTime;
 using _02._Scripts.SurvivalGuide;
 using MikroFramework.Architecture;
@@ -149,42 +150,74 @@ namespace _02._Scripts.BodyOutside {
 
 	    protected void OnAlienClickedOutside(Speaker speaker) {
 		    DogModel dogModel = this.GetModel<DogModel>();
-		    DogSystem dogSystem = this.GetSystem<DogSystem>();
-		    
-	        if (dogModel.HaveDog && dogModel.isDogAlive && !dogModel.SentDogBack) {
-	            float clipLength = AudioSystem.Singleton.Play2DSound("dogBark_4").clip.length;
-	            timeSystem.AddDelayTask(clipLength, () => {
-	                LoadCanvas.Singleton.HideImage(1f);
-	                AudioSystem.Singleton.Play2DSound("dog_die");
-	                LoadCanvas.Singleton.ShowMessage("Your friend is gone...");
-	                dogSystem.KillDog();
-	                timeSystem.AddDelayTask(2f, () => {
-	                    LoadCanvas.Singleton.HideMessage();
-	                    timeSystem.AddDelayTask(1f, () => {
-	                        onClickPeepholeSpeakEnd = true;
-	                    });                    
-	                });
-	            });
-	        } else if (playerResourceModel.HasEnoughResource<BulletGoods>(1) && playerResourceModel.HasEnoughResource<GunResource>(1)) {
-	            playerResourceModel.RemoveResource<BulletGoods>(1);
-	            float clipLength = AudioSystem.Singleton.Play2DSound("gun_fire").clip.length;
+		   
 
-	            timeSystem.AddDelayTask(1f, () => {
-	                LoadCanvas.Singleton.HideImage(1f);
-	                LoadCanvas.Singleton.ShowMessage("You shot the creature and it fleed.\n\nBullet - 1");
-	                timeSystem.AddDelayTask(2f, () => {
-	                    LoadCanvas.Singleton.HideMessage();
-	                    timeSystem.AddDelayTask(1f, () => {
-	                        onClickPeepholeSpeakEnd = true;
-	                    });
-	                });
-	            });
+
+		    bool hasBulletAndGun = playerResourceModel.HasEnoughResource<BulletGoods>(1) &&
+		                           playerResourceModel.HasEnoughResource<GunResource>(1);
+
+		    bool hasDog = dogModel.HaveDog && dogModel.isDogAlive && !dogModel.SentDogBack;
+	        if (hasDog && !hasBulletAndGun) {
+	           SacrificeDog();
+	           
+	        } else if (hasBulletAndGun && !hasDog) {
+	           GunKill();
+	        }else if (hasBulletAndGun && hasDog) {
+		        SelectGunOrDog();
 	        }else {
 	            LoadCanvas.Singleton.HideImage(1f);
 	            DieCanvas.Singleton.Show("You are killed by the creature!");
 	            this.GetModel<GameStateModel>().GameState.Value = GameState.End;
 	            this.GetSystem<BodyGenerationSystem>().StopCurrentBody();
-	        } 
+	        }
+	    }
+
+	    private void SelectGunOrDog() {
+		    ChoiceSystem.ChoiceSystem choiceSystem = this.GetSystem<ChoiceSystem.ChoiceSystem>();
+		    choiceSystem.StartChoiceGroup(new ChoiceGroup(ChoiceType.Outside,
+			    new ChoiceOption("- Use the gun", OnSelectUseGun),
+			    new ChoiceOption("- Call the dog for help", OnSelectUseDog)));
+	    }
+
+	    private void OnSelectUseDog(ChoiceOption obj) {
+		    SacrificeDog();
+	    }
+
+	    private void OnSelectUseGun(ChoiceOption obj) {
+		    GunKill();
+	    }
+
+	    protected void SacrificeDog() {
+		    DogSystem dogSystem = this.GetSystem<DogSystem>();
+		    float clipLength = AudioSystem.Singleton.Play2DSound("dogBark_4").clip.length;
+		    timeSystem.AddDelayTask(clipLength, () => {
+			    LoadCanvas.Singleton.HideImage(1f);
+			    AudioSystem.Singleton.Play2DSound("dog_die");
+			    LoadCanvas.Singleton.ShowMessage("Your friend is gone...");
+			    dogSystem.KillDog();
+			    timeSystem.AddDelayTask(2f, () => {
+				    LoadCanvas.Singleton.HideMessage();
+				    timeSystem.AddDelayTask(1f, () => {
+					    onClickPeepholeSpeakEnd = true;
+				    });                    
+			    });
+		    });
+	    }
+
+	    protected void GunKill() {
+		    playerResourceModel.RemoveResource<BulletGoods>(1);
+		    float clipLength = AudioSystem.Singleton.Play2DSound("gun_fire").clip.length;
+
+		    timeSystem.AddDelayTask(1f, () => {
+			    LoadCanvas.Singleton.HideImage(1f);
+			    LoadCanvas.Singleton.ShowMessage("You shot the creature and it fleed.\n\nBullet - 1");
+			    timeSystem.AddDelayTask(2f, () => {
+				    LoadCanvas.Singleton.HideMessage();
+				    timeSystem.AddDelayTask(1f, () => {
+					    onClickPeepholeSpeakEnd = true;
+				    });
+			    });
+		    });
 	    }
 
 	    public override void OnMissed() {

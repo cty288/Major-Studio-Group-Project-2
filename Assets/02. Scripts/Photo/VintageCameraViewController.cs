@@ -80,8 +80,8 @@ public class VintageCameraViewController : DraggableItems {
 	}
 
 	public override void SetLayer(int layer) {
-		spriteRenderer.sortingOrder = layer * 100;
-		canvas.sortingOrder = layer * 1000;
+		spriteRenderer.sortingOrder = 2000;
+		canvas.sortingOrder = 4000;
 	}
 
 	protected override void OnClick() {

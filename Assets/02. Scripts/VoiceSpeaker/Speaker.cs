@@ -108,7 +108,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
         inited = true;
         IsSpeaking = true;
         bool needSpeak = sentenceQueues.Count == 0;
-       
+       // AudioMixerGroup mixerCopy = Instantiate(mixer)
         foreach (string splitedSentence in splitedSentences) {
             sentenceQueues.Enqueue(new SentenceInfo(sentence, splitedSentence,speakName,  mixer, onEnd, rate, gender, overallVolume, volumeMultiplier));
         }

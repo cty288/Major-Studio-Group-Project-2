@@ -37,9 +37,15 @@ public class AlienDescriptionData {
 
 public class RadioRC : SimpleRC {
     public Action OnRefCleared;
+    public Action OnRefAdded;
     protected override void OnZeroRef() {
         base.OnZeroRef();
         OnRefCleared?.Invoke();
+    }
+
+    public override void Retain(object refOwner = null) {
+        base.Retain(refOwner);
+        OnRefAdded?.Invoke();
     }
 }
 
@@ -66,7 +72,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
     private RadioModel radioModel;
 
     private RadioRC lowSoundLock = new RadioRC();
-
+    
     [SerializeField] private GameObject speakerPrefab;
     protected Dictionary<RadioChannel, RadioContentPlayer> activePlayers = new Dictionary<RadioChannel, RadioContentPlayer>();
 
@@ -92,13 +98,28 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
 
        // Crosstales.RTVoice.Speaker.Instance.Caching = false;
         lowSoundLock.OnRefCleared += OnLowSoundReleased;
+        lowSoundLock.OnRefAdded += OnLowSoundAdded;
         mouseHoverHint = transform.Find("RadioCanvas/Hint").GetComponent<TMP_Text>();
         radioModel.IsOn.RegisterWithInitValue(OnRadioOnOffChange).UnRegisterWhenGameObjectDestroyed(gameObject);
         
         radioModel.RelativeVolume.RegisterWithInitValue(OnVolumeChange).UnRegisterWhenGameObjectDestroyed(gameObject);
         radioModel.CurrentChannel.RegisterWithInitValue(OnChannelChange).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnOutsideBodyStartSpeak>(OnOutsideBodyStartSpeaking).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnOutsideBodyStopSpeak>(OnOutsideBodyStopSpeaking).UnRegisterWhenGameObjectDestroyed(gameObject);
 
+    }
+
+    private void OnOutsideBodyStartSpeaking(OnOutsideBodyStartSpeak obj) {
+        lowSoundLock.Retain();
+    }
+
+    private void OnOutsideBodyStopSpeaking(OnOutsideBodyStopSpeak obj) {
+        lowSoundLock.Release();
+    }
+
+    private void OnLowSoundAdded() {
+        UpdateSpeakerVolume(true);
     }
 
     private void OnNewDay(OnNewDay e) {
@@ -260,7 +281,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         }
         else {
             lowSoundLock.Retain();
-            UpdateSpeakerVolume(false);
+            //UpdateSpeakerVolume(false);
         }
     }
 
@@ -269,7 +290,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
             (newState == TelephoneState.IncomingCall || newState == TelephoneState.Waiting ||
              newState == TelephoneState.Talking)) {
             lowSoundLock.Retain();
-            UpdateSpeakerVolume(false);
+          //  UpdateSpeakerVolume(false);
         }
         else if ((oldState == TelephoneState.IncomingCall || oldState == TelephoneState.Waiting ||
                  oldState == TelephoneState.Talking) &&
@@ -335,11 +356,12 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
                     player = SpawnPlayer(channel, content.ContentType);
                     radioModel.SetIsSpeaking(channel, true);
                     player.Play(content, OnSpeakerStop, isMuted);
-                    UpdateSpeakerVolume(true);
+                  
                 }
                 //activePlayers[channel].Speak(speakText, mixer, "Radio", overallVolume, OnSpeakerStop, speakRate, 1f, speakGender);
                 
             }
+            UpdateSpeakerVolume(true);
         }
     }
 

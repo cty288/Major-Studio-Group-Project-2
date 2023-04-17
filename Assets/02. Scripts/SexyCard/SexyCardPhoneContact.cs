@@ -34,7 +34,7 @@ namespace _02._Scripts.SexyCard {
 			DateTime now = gameTimeModel.CurrentTime.Value;
 			List<string> speakContent = new List<string>();
 			bool tooLate = false;
-			gameTimeModel.LockTime.Retain();
+			//gameTimeModel.LockTime.Retain();
 			if (now.Hour >= 23) {
 				tooLate = true;
 				speakContent.Add(
@@ -106,12 +106,12 @@ namespace _02._Scripts.SexyCard {
 
 		protected override void OnHangUp() {
 			GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
-			gameTimeModel.LockTime.Release();
+			//gameTimeModel.LockTime.Release();
 		}
 
 		protected override void OnEnd() {
 			GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
-			gameTimeModel.LockTime.Release();
+			//gameTimeModel.LockTime.Release();
 		}
 	}
 }

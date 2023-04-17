@@ -6,6 +6,7 @@ using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.Dog;
 using _02._Scripts.GameTime;
 using MikroFramework.Architecture;
+using MikroFramework.TimeSystem;
 using UnityEngine;
 using UnityEngine.Audio;
 using Random = UnityEngine.Random;
@@ -19,6 +20,7 @@ namespace _02._Scripts.SuspectSystem {
 		
 		public CrimialReportHotline(): base() {
 			speaker = GameObject.Find("CriminalHotlineSpeaker").GetComponent<Speaker>();
+			mixer = speaker.GetComponent<AudioSource>().outputAudioMixerGroup;
 			playerControlModel = this.GetModel<PlayerControlModel>();
 		}
 		public override bool OnDealt() {
@@ -72,7 +74,11 @@ namespace _02._Scripts.SuspectSystem {
 	            CoroutineRunner.Singleton.StopCoroutine(waitingForInteractionCoroutine);
 	            waitingForInteractionCoroutine = null;
 	        }
-	        playerControlModel.ControlType.Value = PlayerControlType.Normal;
+
+	        this.GetSystem<ITimeSystem>().AddDelayTask(0.05f, () => {
+		        playerControlModel.ControlType.Value = PlayerControlType.Normal;
+	        });
+	       
 	        TopScreenHintText.Singleton.Hide();
 
 

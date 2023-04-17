@@ -39,8 +39,12 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 				bool speak = Random.Range(0, 100) <= 30;
 				bool speakFinished = false;
 				if(doorKnockingPhrases!=null && doorKnockingPhrases.Count>0 && speak) {
+					this.SendEvent<OnOutsideBodyStartSpeak>();
 					speaker.Speak(doorKnockingPhrases[Random.Range(0, doorKnockingPhrases.Count)],
-						mixer, "???", 1,(speaker) => { speakFinished = true;}, voiceTag.VoiceSpeed, 1, voiceTag.VoiceType);
+						mixer, "???", 1, (speaker) => {
+							this.SendEvent<OnOutsideBodyStopSpeak>();
+							speakFinished = true;
+						}, voiceTag.VoiceSpeed, 1, voiceTag.VoiceType);
 					
 					while (!speakFinished) {
 						yield return null;
@@ -59,6 +63,15 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 		public override void OnStopKnock() {
 			currentSpeaker.Stop(true);
 			knockAudioSource.Stop();
+			
 		}
+	}
+
+	public struct OnOutsideBodyStartSpeak {
+		
+	}
+	
+	public struct OnOutsideBodyStopSpeak {
+		
 	}
 }

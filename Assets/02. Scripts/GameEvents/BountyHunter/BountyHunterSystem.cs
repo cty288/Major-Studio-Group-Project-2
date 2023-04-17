@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using _02._Scripts.GameEvents.BountyHunter;
+using _02._Scripts.GameTime;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using MikroFramework.BindableProperty;
@@ -89,5 +90,10 @@ public class BountyHunterSystem : AbstractSystem {
         gameEventSystem.AddEvent(new BountyHunterAdEvent(
             new TimeRange(nextEventTime, nextEventTime + new TimeSpan(0, 0, Random.Range(30, 50), 0, 0)),
             BountyHunterAdEvent.GetRandomAD(), 1, Gender.MALE, AudioMixerList.Singleton.AudioMixerGroups[0], 1));
+
+        DateTime bountyHunterTelephoneEvent = this.GetModel<GameTimeModel>().GetDay(minDay + Random.Range(2, 5));
+        bountyHunterTelephoneEvent = bountyHunterTelephoneEvent.AddMinutes(Random.Range(20, 100));
+        gameEventSystem.AddEvent(new BountyHunterAdPhoneCallEvent(new TimeRange(bountyHunterTelephoneEvent, bountyHunterTelephoneEvent.AddMinutes(60)),
+            new BountyHunterAdPhoneCallContact(), 5));
     }
 }

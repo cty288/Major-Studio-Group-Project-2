@@ -142,7 +142,7 @@ public class MainGame : Architecture<MainGame> {
         ES3AutoSaveMgr.Current.Save();
     }
     
-    public void ClearSave() {
+    public static void ClearSave() {
         
         ES3.DeleteFile("models.es3");
         ES3.DeleteFile("systems.es3");

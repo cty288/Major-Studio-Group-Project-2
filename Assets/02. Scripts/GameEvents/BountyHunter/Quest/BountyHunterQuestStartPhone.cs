@@ -7,7 +7,7 @@ using UnityEngine;
 public class BountyHunterQuestStartPhone : TelephoneContact, ICanGetModel {
     protected BountyHunterModel bountyHunterModel;
     
-    public BountyHunterQuestStartPhone() {
+    public BountyHunterQuestStartPhone() : base() {
         speaker = GameObject.Find("BountyHunterSpeaker").GetComponent<Speaker>();
         bountyHunterModel = this.GetModel<BountyHunterModel>();
     }
