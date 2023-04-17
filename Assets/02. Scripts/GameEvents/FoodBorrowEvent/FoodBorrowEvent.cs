@@ -107,8 +107,10 @@ namespace _02._Scripts.GameEvents.FoodBorrowEvent {
 		}
 
 		private void OnGreetingEnd(Speaker obj) {
+			int foodCount = this.GetModel<PlayerResourceModel>().GetResourceCount(typeof(FoodResource));
+			
 			this.GetSystem<ChoiceSystem.ChoiceSystem>().StartChoiceGroup(new ChoiceGroup(ChoiceType.Outside,
-				new ChoiceOption("- \"Sure!\"", OnYes),
+				new ChoiceOption($"- \"Sure! (You have {foodCount} foods)\"", OnYes),
 				new ChoiceOption("- \"Sorry, I can't.\"", OnNo)));
 		}
 
