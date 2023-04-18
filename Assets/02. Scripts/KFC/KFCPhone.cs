@@ -49,7 +49,7 @@ namespace _02._Scripts.KFC {
 				.HumanTraitPartsPrefabs[15].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo(0);
 			BodyInfo bodyInfo = BodyInfo.GetBodyInfo(legPrefabInfo, bodyPrefabInfo, headPrefabInfo, HeightType.Tall,
 				new VoiceTag(AudioMixerList.Singleton.AlienVoiceGroups[1], 1, Gender.MALE),
-				new NormalKnockBehavior(3, Random.Range(3, 7), null, "Knock_KFC"), BodyPartDisplayType.Shadow, false);
+				new NormalKnockBehavior(4, 5, null, "Knock_KFC"), BodyPartDisplayType.Shadow, false);
 			return bodyInfo;
 		}
 

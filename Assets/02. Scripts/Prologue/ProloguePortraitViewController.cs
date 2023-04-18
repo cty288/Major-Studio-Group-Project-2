@@ -25,7 +25,7 @@ public class ProloguePortraitViewController : DraggableItems {
 	private void OnNewBodyInfoGenerated(OnNewBodyInfoGenerated e) {
 		if (gameTimeModel.Day == 0) {
 			BodyInfo info = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, Random.Range(0.5f, 1f),
-				new NormalKnockBehavior(3, 7, null), bodyModel.AvailableBodyPartIndices, 40);
+				new NormalKnockBehavior(4, 7, null), bodyModel.AvailableBodyPartIndices, 40);
 			bodyModel.ProloguePlayerBodyInfo = info;
 			bodyModel.AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(new BodyTimeInfo(2, info, true));
 		}

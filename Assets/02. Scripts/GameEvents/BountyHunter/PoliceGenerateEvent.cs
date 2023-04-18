@@ -28,7 +28,7 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
 
         return BodyInfo.GetBodyInfo(leg, body, head, height,
             new VoiceTag(AudioMixerList.Singleton.AlienVoiceGroups[1], 1, Gender.MALE),
-            new NormalKnockBehavior(3, Random.Range(3,7), null, "Knock_Police"),BodyPartDisplayType.Shadow, false);
+            new NormalKnockBehavior(4, Random.Range(3,7), null, "Knock_Police"),BodyPartDisplayType.Shadow, false);
 
     }
 

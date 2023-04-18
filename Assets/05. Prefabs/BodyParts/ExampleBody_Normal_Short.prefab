@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 0}
+  overriddeImage: {fileID: 0}
   followingObject: {fileID: 7669932490035817638}
   followingObjectIsUI: 0
   moveToTopWhenHovering: 0
@@ -354,7 +355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4747785536886524387, guid: 643c72c4c8543514982baa15ea1f2482, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4765117181526495087, guid: 643c72c4c8543514982baa15ea1f2482, type: 3}
       propertyPath: m_RootOrder

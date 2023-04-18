@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using _02._Scripts.ArmyEnding;
+using _02._Scripts.ArmyEnding.InitialPhoneCalls;
 using _02._Scripts.ChoiceSystem;
 using _02._Scripts.GameTime;
 using Crosstales.RTVoice.Model.Enum;
@@ -92,8 +94,28 @@ namespace _02._Scripts.Dog {
 				"I will deliver you a reward later on! Thank you so much!";
 			speaker.Speak(speakContent, mixer, "Dog Owner", 1f, OnSpeakEnd,
 				1.2f,1f, Gender.FEMALE);
+
+			ArmyEndingInitialCallCheck();
 		}
-		
+
+		private void ArmyEndingInitialCallCheck() {
+			ArmyEndingModel armyEndingModel = this.GetModel<ArmyEndingModel>();
+			if (!armyEndingModel.TriggeredStartPhoneCall) {
+				armyEndingModel.TriggeredStartPhoneCall = true;
+
+				GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
+				DateTime nextTime = this.GetModel<GameTimeModel>().GetDay(gameTimeModel.Day + Random.Range(3, 5));
+				nextTime = nextTime.AddMinutes(Random.Range(20, 60));
+				
+
+
+				this.GetSystem<GameEventSystem>().AddEvent(new DogOwnerArmyEndingInitialPhoneCall(
+					new TimeRange(nextTime, nextTime.AddMinutes(60)),
+					new DogOwnerArmyEndingInitialPhoneCallContact(), 5));
+			}
+		}
+
+
 		private void OnChooseNotToSendBack(ChoiceOption obj) {
 			string speakContent =
 				"Oh, I see. I will keep looking for him. Thank you for your help!";

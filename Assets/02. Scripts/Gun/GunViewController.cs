@@ -15,12 +15,14 @@ public class GunViewController : AbstractMikroController<MainGame> {
     private void Awake() {
         infoText = transform.Find("Canvas/InfoText").GetComponent<TMP_Text>();
         playerResourceModel = this.GetModel<PlayerResourceModel>();
+        gameObject.SetActive(false);
 
-        
         this.RegisterEvent<OnPlayerResourceNumberChanged>(OnResourceNumberChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
     }
+    
+    
 
     private void OnNewDay(OnNewDay e) {
         if (e.Day == 0) {
@@ -33,6 +35,8 @@ public class GunViewController : AbstractMikroController<MainGame> {
 
     private void Start() {
         int bulletCount = playerResourceModel.GetResourceCount<BulletGoods>();
+        bool hasGun = playerResourceModel.GetResourceCount<GunResource>() > 0;
+        gameObject.SetActive(hasGun);
         UpdateBullets(bulletCount);
     }
 
@@ -40,6 +44,10 @@ public class GunViewController : AbstractMikroController<MainGame> {
         if (e.GoodsInfo.Type == typeof(BulletGoods)) {
             int count = e.GoodsInfo.Count;
             UpdateBullets(count);
+        }
+
+        if (e.GoodsInfo.Type == typeof(GunResource)) {
+            gameObject.SetActive(e.GoodsInfo.Count > 0);
         }
     }
 

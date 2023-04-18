@@ -118,7 +118,7 @@ public class BodyGenerationSystem : AbstractSystem {
             }
             else {
                 targetBody = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, 0,
-                    new NormalKnockBehavior(3, Random.Range(4, 7), null), availableBodyPartIndices, 40);
+                    new NormalKnockBehavior(4, Random.Range(4, 7), null), availableBodyPartIndices, 40);
             }
             // Debug.Log("Spawned a non-alien");
             //bodyModel.ConsecutiveNonAlianSpawnCount++;

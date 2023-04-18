@@ -56,8 +56,8 @@ namespace _02._Scripts.SexyCard {
 				.GetBodyPartPrefabInfo(0);
 
 			BodyInfo bodyInfo = BodyInfo.GetBodyInfo(legPrefabInfo, bodyPrefabInfo, headPrefabInfo, HeightType.Tall,
-				new VoiceTag(AudioMixerList.Singleton.SexCardVoiceGroups[(int) gender], 1, gender), new SexyCardKnockBehavior(3,
-					5, null),
+				new VoiceTag(AudioMixerList.Singleton.SexCardVoiceGroups[(int) gender], 1, gender), new SexyCardKnockBehavior(4,
+					10, null),
 				BodyPartDisplayType.Shadow, false);
 
 			model.SexyPersonID = bodyInfo.ID;

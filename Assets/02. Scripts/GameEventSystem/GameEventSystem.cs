@@ -25,7 +25,8 @@ public enum GameEventType {
     General,
     IncomingCall,
     BountyHunterQuestClueNotification,
-    BountyHunterQuestClue
+    BountyHunterQuestClue,
+    ArmyHeadcount
 }
 public class GameEventSystem : AbstractSavableSystem {
     //[field: ES3Serializable]

@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _02._Scripts.ArmyEnding;
+using _02._Scripts.ArmyEnding.InitialPhoneCalls;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.Dog;
 using _02._Scripts.GameTime;
@@ -145,6 +147,24 @@ namespace _02._Scripts.SuspectSystem {
 	        this.GetSystem<GameEventSystem>().AddEvent(new GoodsRewardEvent(new TimeRange(tomorrow), new List<GoodsInfo>(){suspectInfo.rewards},
 		        "Thanks for your making our community safer!",
 		        "Note from Dorcha Police Department"));
+	        ArmyEndingInitialCallCheck();
+		}
+		
+		private void ArmyEndingInitialCallCheck() {
+			ArmyEndingModel armyEndingModel = this.GetModel<ArmyEndingModel>();
+			if (!armyEndingModel.TriggeredStartPhoneCall) {
+				armyEndingModel.TriggeredStartPhoneCall = true;
+
+				GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
+				DateTime nextTime = this.GetModel<GameTimeModel>().GetDay(gameTimeModel.Day + Random.Range(3, 5));
+				nextTime = nextTime.AddMinutes(Random.Range(20, 60));
+				
+
+
+				this.GetSystem<GameEventSystem>().AddEvent(new PoliceArmyEndingInitialPhoneCall(
+					new TimeRange(nextTime, nextTime.AddMinutes(60)),
+					new PoliceArmyEndingInitialPhoneCallContact(mixer, officerName), 5));
+			}
 		}
 		private void OnEndingSpeak(Speaker speaker) {
 			EndConversation();

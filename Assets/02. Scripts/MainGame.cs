@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos;
+using _02._Scripts.ArmyEnding;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.ChoiceSystem;
 using _02._Scripts.Electricity;
@@ -66,6 +67,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<TelephoneNumberRecordModel>();
         this.RegisterModel<FoodBorrowModel>();
         this.RegisterModel<SurvivalGuideModel>();
+        this.RegisterModel<ArmyEndingModel>();
         
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());

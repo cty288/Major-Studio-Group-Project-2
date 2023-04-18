@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base;
+using _02._Scripts.ArmyEnding;
+using _02._Scripts.ArmyEnding.InitialPhoneCalls;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.BodyOutside;
 using _02._Scripts.ChoiceSystem;
@@ -35,7 +37,8 @@ namespace _02._Scripts.GameEvents.FoodBorrowEvent
 			foodBorrowModel = this.GetModel<FoodBorrowModel>();
 			playerResourceModel = this.GetModel<PlayerResourceModel>();
 			bodyModel = this.GetModel<BodyModel>();
-			Debug.Log("A food borrow event is generated. The time is between " + startTimeRange.StartTime + " and " + startTimeRange.EndTime);
+			Debug.Log("A food borrow event is generated. The time is between " + startTimeRange.StartTime + " and " + startTimeRange.EndTime + ", " +
+			          "and it is " + (isScammer ? "a scammer" : "not a scammer"));
 
 		}
 
@@ -73,10 +76,10 @@ namespace _02._Scripts.GameEvents.FoodBorrowEvent
 				isScammer, 1));
 		}
 
-		protected void AddTomorrowEvent()
-		{
+		protected void AddMissedEvent() {
+			int nextDayTime = isScammer ? Random.Range(2, 5) : Random.Range(1, 3);
 			GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
-			DateTime nextTime = gameTimeModel.GetDay(gameTimeModel.Day + 1);
+			DateTime nextTime = gameTimeModel.GetDay(gameTimeModel.Day + nextDayTime);
 			nextTime = nextTime.AddMinutes(Random.Range(20, 100));
 			this.GetSystem<GameEventSystem>().AddEvent(new FoodBorrowEvent(
 				new TimeRange(nextTime, nextTime.AddMinutes(20)),
@@ -87,7 +90,7 @@ namespace _02._Scripts.GameEvents.FoodBorrowEvent
 		public override void OnMissed()
 		{
 			//spawn one tomorrow
-			AddTomorrowEvent();
+			AddMissedEvent();
 		}
 
 		protected override Func<bool> OnOpen()
@@ -103,7 +106,7 @@ namespace _02._Scripts.GameEvents.FoodBorrowEvent
 				$"Any chance you could hook me up <color=yellow>{borrowFoodStr}</color> of foods? " +
 				"I promise to return you double next week!",
 				$"Could you loan me <color=yellow>{borrowFoodStr}</color> of your food? " +
-				"I promise to give back double next week.",
+				"I promise to give back double next week. I really need your help!",
 			};
 
 
@@ -120,8 +123,9 @@ namespace _02._Scripts.GameEvents.FoodBorrowEvent
 
 		private void OnGreetingEnd(Speaker obj)
 		{
+			int foodCount = this.GetModel<PlayerResourceModel>().GetResourceCount(typeof(FoodResource));
 			this.GetSystem<ChoiceSystem.ChoiceSystem>().StartChoiceGroup(new ChoiceGroup(ChoiceType.Outside,
-				new ChoiceOption("- \"Sure!\"", OnYes),
+				new ChoiceOption($"- \"Sure! (You have {foodCount} foods)\"", OnYes),
 				new ChoiceOption("- \"Sorry, I can't.\"", OnNo)));
 		}
 
@@ -139,7 +143,7 @@ namespace _02._Scripts.GameEvents.FoodBorrowEvent
 				messages.Add(
 					"Seriously? You're gonna leave me out to dry like that?");
 				messages.Add(
-					"You won't last long in this city with that attitude.");
+					"Seriously? You won't last long in this city with that attitude.");
 			}
 			else
 			{
@@ -182,6 +186,24 @@ namespace _02._Scripts.GameEvents.FoodBorrowEvent
 						GoodsInfo.GetGoodsInfo(new FoodResource(), borrowFoodCount * 2),
 						GoodsInfo.GetGoodsInfo(new BulletGoods(), 2)
 					}, "Thanks for lending me food!", "Food Borrower"));
+				ArmyEndingInitialCallCheck();
+			}
+		}
+		
+		private void ArmyEndingInitialCallCheck() {
+			ArmyEndingModel armyEndingModel = this.GetModel<ArmyEndingModel>();
+			if (!armyEndingModel.TriggeredStartPhoneCall) {
+				armyEndingModel.TriggeredStartPhoneCall = true;
+
+				GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
+				DateTime nextTime = this.GetModel<GameTimeModel>().GetDay(gameTimeModel.Day + Random.Range(3, 5));
+				nextTime = nextTime.AddMinutes(Random.Range(20, 60));
+				
+
+
+				this.GetSystem<GameEventSystem>().AddEvent(new FoodBorrowerArmyEndingInitialPhoneCall(
+					new TimeRange(nextTime, nextTime.AddMinutes(60)),
+					new FoodBorrowerArmyEndingInitialPhoneCallContact(bodyInfo.VoiceTag.VoiceGroup), 5));
 			}
 		}
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
+using _02._Scripts.ArmyEnding;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.GameTime;
 using MikroFramework.Architecture;
@@ -18,10 +19,7 @@ public class Cheater : AbstractMikroController<MainGame> {
     // Update is called once per frame
     void Update() {
 
-        if (Input.GetKeyDown(KeyCode.P)) {
-            DateTime time = this.GetSystem<GameTimeManager>().CurrentTime.Value;
-            this.GetSystem<GameEventSystem>().AddEvent(new ExampleEvent(new TimeRange(time, time.AddMinutes(10))));
-        }
+      
         
         if (Input.GetKeyDown(KeyCode.F1)) {
             enable = !enable;
@@ -77,10 +75,7 @@ public class Cheater : AbstractMikroController<MainGame> {
         if (Input.GetKeyDown(KeyCode.DownArrow)) {
             Time.timeScale = Mathf.Max(Time.timeScale-10, 1);
         }
-
-        if (Input.GetKeyDown(KeyCode.I)) {
-           // this.GetSystem<TelephoneSystem>().IncomingCall(new TestIncomingCallContact(), 3);
-        }
+        
 
         if (Input.GetKeyDown(KeyCode.B)) {
             this.GetModel<PlayerResourceModel>().AddResource(new BulletGoods(), 1);
@@ -88,6 +83,13 @@ public class Cheater : AbstractMikroController<MainGame> {
         
         if (Input.GetKeyDown(KeyCode.G)) {
             this.GetModel<PlayerResourceModel>().AddResource(new PowerGeneratorGoods(), 1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) { //start army ending storyline
+            GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
+            DateTime armyPrologueRadioTime = gameTimeModel.GetDay(gameTimeModel.Day + 1);
+            this.GetSystem<GameEventSystem>().AddEvent(new ShelterPrologueRadio(new TimeRange(armyPrologueRadioTime),
+                AudioMixerList.Singleton.AudioMixerGroups[13]));
         }
     }
 }

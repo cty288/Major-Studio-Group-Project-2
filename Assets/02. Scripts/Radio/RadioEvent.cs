@@ -99,12 +99,12 @@ public abstract class RadioEvent<TRadioContent> : GameEvent, ICanGetModel, ICanS
 
         if (!started) {
             started = true;
+            OnRadioStart();
             this.SendEvent<OnRadioProgramStart>(new OnRadioProgramStart() {
                 radioContent = GetRadioContent(),
                 channel = channel,
                // programType = programType
             });
-            OnRadioStart();
         }
 
         if ((!radioModel.GetIsSpeaking(channel) || ended)&& !startDelayEnded) {

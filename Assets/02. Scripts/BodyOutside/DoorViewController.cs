@@ -32,6 +32,9 @@ public class DoorViewController : AbstractMikroController<MainGame>, IPointerCli
     }
 
     public void OnPointerClick(PointerEventData eventData) {
+        if (SubtitleNotebookHightlightedTextRecorder.IsMouseOverUIRC.RefCount > 0) {
+            return;
+        }
         this.GetModel<GameSceneModel>().GameScene.Value = GameScene.Peephole;
        
     }

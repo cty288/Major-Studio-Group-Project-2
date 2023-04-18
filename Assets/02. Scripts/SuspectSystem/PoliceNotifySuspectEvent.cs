@@ -36,7 +36,7 @@ namespace _02._Scripts.SuspectSystem {
 		}
 
 		public override void OnMissed() {
-			DateTime nextTime = gameTimeModel.GetDay(gameTimeModel.Day + 1);
+			DateTime nextTime = gameTimeModel.GetDay(gameTimeModel.Day + Random.Range(1,3));
 			nextTime = nextTime.AddMinutes(Random.Range(20, 80));
 			gameEventSystem.AddEvent(new PoliceNotifySuspectEvent(new TimeRange(nextTime, nextTime.AddMinutes(40)),
 				PoliceGenerateEvent.GeneratePolice()));
@@ -106,7 +106,7 @@ namespace _02._Scripts.SuspectSystem {
 			this.GetModel<PosterModel>().AddPoster(new SuspectPoster(suspectID, suspectInfo));
 			onClickPeepholeSpeakEnd = true;
 
-			DateTime nextTime = gameTimeModel.GetDay(gameTimeModel.Day + Random.Range(3, 7));
+			DateTime nextTime = gameTimeModel.GetDay(gameTimeModel.Day + Random.Range(4, 8));
 			nextTime = nextTime.AddMinutes(Random.Range(20, 80));
 			gameEventSystem.AddEvent(new PoliceNotifySuspectEvent(new TimeRange(nextTime, nextTime.AddMinutes(40)),
 				PoliceGenerateEvent.GeneratePolice()));

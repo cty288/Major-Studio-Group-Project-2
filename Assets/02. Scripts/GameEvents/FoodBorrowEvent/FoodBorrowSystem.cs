@@ -47,7 +47,7 @@ namespace _02._Scripts.GameEvents.FoodBorrowEvent {
 
 			if (isScammer) {
 				BodyInfo scammer = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, 0,
-					new NormalKnockBehavior(3, Random.Range(5, 10), null, "Knock_BorrowFood"),
+					new NormalKnockBehavior(4, Random.Range(5, 10), null, "Knock_BorrowFood"),
 					bodyModel.AvailableBodyPartIndices,
 					40);
 			
@@ -57,7 +57,7 @@ namespace _02._Scripts.GameEvents.FoodBorrowEvent {
 			}
 			else {
 				BodyInfo nonScammer = BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, 0,
-					new NormalKnockBehavior(3, Random.Range(5, 10), null, "Knock_BorrowFood"),
+					new NormalKnockBehavior(5, Random.Range(5, 10), null, "Knock_BorrowFood"),
 					bodyModel.AvailableBodyPartIndices,
 					40);
 				bodyModel.AddToManagedBodyInfos(nonScammer);

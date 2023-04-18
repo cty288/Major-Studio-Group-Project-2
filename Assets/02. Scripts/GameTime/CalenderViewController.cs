@@ -105,6 +105,7 @@ public class CalenderViewController : AbstractMikroController<MainGame>, IPointe
         isSkippingTime = true;
         
         gameTimeManager.SkipTimeTo(new DateTime(time.Year, time.Month, time.Day, 23, 58, 0));
+        this.GetSystem<TelephoneSystem>().HangUp();
         
     }
 }

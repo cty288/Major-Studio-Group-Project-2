@@ -11,7 +11,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PeepholeSceneUI : AbstractMikroController<MainGame> {
+public class PeepholeSceneUI : AbstractMikroController<MainGame> , ICanSendEvent{
     
     //protected List<Collider2D> colliders = new List<Collider2D>();
     private Button lightButton;
@@ -71,10 +71,10 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
     }
 
     private void OnLightPressed() {
-       
         
         if (this.electricityModel.Electricity.Value > 0.2f && flashed == false) {
             OnLightButtonPressed?.Invoke();
+            this.SendEvent<OnLightFlash>();
             StartCoroutine(FlashCoolDown());
             flashed = true;
             if (electricityModel.PowerCutoff) {
@@ -89,5 +89,16 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> {
         yield return new WaitForSeconds(5);
         flashed = false;
         OnLightStopped?.Invoke();
+        this.SendEvent<OnLightStopFlash>();
     }
 }
+
+public struct OnLightFlash {
+    
+}
+
+public struct OnLightStopFlash {
+    
+}
+    
+

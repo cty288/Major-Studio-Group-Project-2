@@ -9,6 +9,7 @@ public enum RadioChannel {
     FM96,
     FM100,
     FM104,
+    FM108,
     FM92,
     None,
     AllChannels
@@ -55,7 +56,9 @@ public class RadioModel : AbstractSavableModel {
         RadioChannel.FM96,
         RadioChannel.FM100,
         RadioChannel.FM104,
-        RadioChannel.FM92
+        RadioChannel.FM92,
+        RadioChannel.FM108
+        
     };
     protected override void OnInit() {
         
