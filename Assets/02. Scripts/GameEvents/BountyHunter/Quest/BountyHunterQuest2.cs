@@ -69,7 +69,7 @@ public class BountyHunterQuest2ClueNotificationNotificationContact : BountyHunte
         speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], "Bounty Hunter", 1f, OnSpeakEnd);
     }
 
-    protected override void OnHangUp() {
+    protected override void OnHangUp(bool hangUpByPlayer) {
         
     }
 

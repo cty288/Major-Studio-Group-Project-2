@@ -152,7 +152,7 @@ public class TelephoneSystem : AbstractSavableSystem {
             incomingCallCoroutine = CoroutineRunner.Singleton.StartCoroutine(IncomingCallWait(maxWaitTime));
         }
         else {
-            contact.HangUp();
+            contact.HangUp(false);
         }
     }
 
@@ -170,7 +170,7 @@ public class TelephoneSystem : AbstractSavableSystem {
             yield return new WaitForSeconds(4.5f);
         }
         incomingCallCoroutine = null;
-        HangUp();
+        HangUp(false);
     }
 
     private IEnumerator DealWait() {
@@ -188,7 +188,7 @@ public class TelephoneSystem : AbstractSavableSystem {
                 }
                 dealWaitCoroutine = null;
                 OnDealFailed?.Invoke(PhoneDealErrorType.NumberNotAvailable);
-                Contacts[dealingDigits].HangUp();
+                Contacts[dealingDigits].HangUp(false);
                 OnDealFailedCallback();
             }
             else {
@@ -237,7 +237,7 @@ public class TelephoneSystem : AbstractSavableSystem {
     /// <summary>
     /// This does not work for idle and dealing
     /// </summary>
-    public void HangUp() {
+    public void HangUp(bool hangUpByPlayer) {
         if (State.Value != TelephoneState.Idle && State.Value != TelephoneState.Dealing) {
             State.Value = TelephoneState.Idle;
             this.GetSystem<ChoiceSystem>().StopChoiceGroup(ChoiceType.Telephone);
@@ -257,13 +257,13 @@ public class TelephoneSystem : AbstractSavableSystem {
 
             if (CurrentTalkingContact.Value != null) {
                 CurrentTalkingContact.Value.OnConversationComplete -= OnFinishConversation;
-                CurrentTalkingContact.Value.HangUp();
+                CurrentTalkingContact.Value.HangUp(hangUpByPlayer);
                 CurrentTalkingContact.Value = null;
             }
 
             if (currentIncomingCallContact != null) {
                 currentIncomingCallContact.OnConversationComplete -= OnFinishConversation;
-                currentIncomingCallContact.HangUp();
+                currentIncomingCallContact.HangUp(hangUpByPlayer);
                 currentIncomingCallContact = null;
             }
             OnHangUp?.Invoke();

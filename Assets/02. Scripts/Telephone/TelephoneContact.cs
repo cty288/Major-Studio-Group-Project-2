@@ -10,7 +10,7 @@ public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegist
     public Action OnConversationComplete { get; set; }
     protected Speaker speaker;
     //protected TelephoneSystem telephoneSystem;
-    public Action OnTelephoneHangUp { get; set; }
+    public Action<bool> OnTelephoneHangUp { get; set; }
     public Action OnTelephoneStart { get; set; }
     
     protected GameTimeModel gameTimeModel;
@@ -31,14 +31,14 @@ public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegist
         OnStart();
     }
 
-    public void HangUp() {
-        OnTelephoneHangUp?.Invoke();
+    public void HangUp(bool hangUpByPlayer) {
+        OnTelephoneHangUp?.Invoke(hangUpByPlayer);
         OnConversationComplete = null;
         if (speaker.IsSpeaking) {
             speaker.Stop(false);
         }
         gameTimeModel.LockTime.Release();
-        OnHangUp();
+        OnHangUp(hangUpByPlayer);
     }
     
 
@@ -56,7 +56,7 @@ public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegist
 
     protected abstract void OnStart();
 
-    protected abstract void OnHangUp();
+    protected abstract void OnHangUp(bool hangUpByPlayer);
 
     protected abstract void OnEnd();
     public IArchitecture GetArchitecture() {

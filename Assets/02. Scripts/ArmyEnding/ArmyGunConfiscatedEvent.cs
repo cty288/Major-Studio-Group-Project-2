@@ -32,8 +32,11 @@ namespace _02._Scripts.ArmyEnding {
 
 		public static BodyInfo GenerateArmyBodyInfo() {
 			HeightType height = HeightType.Tall;
-			var targetList = AlienBodyPartCollections.Singleton.SpecialBodyPartPrefabs.HeightSubCollections[4]
+
+			int armyIndex = Random.Range(4, 6);
+			var targetList = AlienBodyPartCollections.Singleton.SpecialBodyPartPrefabs.HeightSubCollections[armyIndex]
 				.ShadowBodyPartPrefabs.HumanTraitPartsPrefabs;
+			
 			BodyPartPrefabInfo body = targetList[1].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo(0);
         
 			BodyPartPrefabInfo leg =  targetList[0].GetComponent<AlienBodyPartInfo>().GetBodyPartPrefabInfo(0);

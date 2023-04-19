@@ -101,11 +101,11 @@ public class CalenderViewController : AbstractMikroController<MainGame>, IPointe
     private void OnSkipTimeStart() {
         DateTime time = gameTimeManager.CurrentTime.Value;
         this.GetModel<RadioModel>().IsOn.Value = false;
-        this.GetSystem<TelephoneSystem>().HangUp();
+        this.GetSystem<TelephoneSystem>().HangUp(false);
         isSkippingTime = true;
         
         gameTimeManager.SkipTimeTo(new DateTime(time.Year, time.Month, time.Day, 23, 58, 0));
-        this.GetSystem<TelephoneSystem>().HangUp();
+        this.GetSystem<TelephoneSystem>().HangUp(false);
         
     }
 }

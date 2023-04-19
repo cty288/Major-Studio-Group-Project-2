@@ -57,7 +57,7 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
 
         int timeDifference = (Contact.ClueHappenTime - currentTime).Minutes;
         if (timeDifference <= 0) {
-            NotificationContact.HangUp();
+            NotificationContact.HangUp(false);
             return;
         }
 
@@ -120,7 +120,11 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
         Debug.Log("Conversation Complete. Next Clue Happen Time: " + nextClueHappenTime);
     }
 
-    protected override void OnHangUp() {
+    protected override void OnHangUp(bool hangUpByPlayer) {
+        if (hangUpByPlayer) {
+            OnComplete();
+            return;
+        }
         if (bountyHunterModel.QuestBodyTimeInfo.DayRemaining <= 0) {
             return;
         }

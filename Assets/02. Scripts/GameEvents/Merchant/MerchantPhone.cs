@@ -171,7 +171,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
         isTodayAvailable = false;
         this.UnRegisterEvent<OnDialDigit>(OnDialDigit);
         //this.GetModel<GameTimeModel>().CurrentTime.UnRegisterOnValueChanged(OnTimeChanged);
-        TelephoneSystem.HangUp();
+        TelephoneSystem.HangUp(false);
     }
 
     private void OnDialDigit(OnDialDigit e) {
@@ -235,7 +235,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
         return welcome;
     }
 
-    protected override void OnHangUp() {
+    protected override void OnHangUp(bool hangUpByPlayer) {
         StopSpeaking(true);
     }
 

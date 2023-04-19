@@ -35,7 +35,7 @@ public class BountyHunterQuestStartPhone : TelephoneContact, ICanGetModel {
 
     }
 
-    protected override void OnHangUp() {
+    protected override void OnHangUp(bool hangUpByPlayer) {
        
     }
 

@@ -38,7 +38,7 @@ namespace _02._Scripts.GameEvents.BountyHunter {
 			
 		}
 
-		protected override void OnHangUp() {
+		protected override void OnHangUp(bool hang) {
 			OnMissedOrHangUp();
 		}
 

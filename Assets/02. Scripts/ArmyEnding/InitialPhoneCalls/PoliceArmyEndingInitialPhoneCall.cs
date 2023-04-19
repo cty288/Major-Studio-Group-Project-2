@@ -35,7 +35,10 @@ namespace _02._Scripts.ArmyEnding.InitialPhoneCalls {
 				AudioMixerList.Singleton.AudioMixerGroups[13]));
 		}
 
-		protected override void OnHangUp() {
+		protected override void OnHangUp(bool hangUpByPlayer) {
+			if (hangUpByPlayer) {
+				return;
+			}
 			OnMissedOrHangUp();
 		}
 
@@ -104,7 +107,7 @@ namespace _02._Scripts.ArmyEnding.InitialPhoneCalls {
 			EndConversation();
 		}
 
-		protected override void OnHangUp() {
+		protected override void OnHangUp(bool hangUpByPlayer) {
 			
 		}
 

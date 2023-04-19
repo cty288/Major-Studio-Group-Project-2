@@ -38,7 +38,8 @@ public class BountyHunterQuestFinishPhoneEvent: IncomingCallEvent {
         });
     }
 
-    protected override void OnHangUp() {
+    protected override void OnHangUp(bool hangUpByPlayer) {
+        
         OnMissedOrHangUp();
     }
 }
@@ -67,7 +68,7 @@ public class BountyHunterQuestFinishContact : TelephoneContact {
         EndConversation();
     }
 
-    protected override void OnHangUp() {
+    protected override void OnHangUp(bool hangUpByPlayer) {
         
     }
 

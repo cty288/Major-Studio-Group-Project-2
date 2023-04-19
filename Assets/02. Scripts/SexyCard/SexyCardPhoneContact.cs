@@ -104,7 +104,7 @@ namespace _02._Scripts.SexyCard {
 			EndConversation();
 		}
 
-		protected override void OnHangUp() {
+		protected override void OnHangUp(bool hangUpByPlayer) {
 			GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
 			//gameTimeModel.LockTime.Release();
 		}

@@ -46,14 +46,14 @@ public abstract class IncomingCallEvent : GameEvent {
         onHangupOrFinish = true;
     }
 
-    protected void OnConversationHangUp() {
+    protected void OnConversationHangUp(bool hangUpByPlayer) {
         UnRegisterEvents();
-        OnHangUp();
+        OnHangUp(hangUpByPlayer);
         onHangupOrFinish = true;
     }    
 
     protected abstract void OnComplete();
-    protected abstract void OnHangUp();
+    protected abstract void OnHangUp(bool hangUpByPlayer);
 
     protected void UnRegisterEvents() {
         NotificationContact.OnConversationComplete -= OnFinishConversation;

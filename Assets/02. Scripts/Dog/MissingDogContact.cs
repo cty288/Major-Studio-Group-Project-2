@@ -129,7 +129,7 @@ namespace _02._Scripts.Dog {
 			EndConversation();
 		}
 
-		protected override void OnHangUp() {
+		protected override void OnHangUp(bool hangUpByPlayer) {
 			if (dogSent) {
 				dogModel.SentDogBack = true;
 				this.SendEvent<OnDogSendBack>();

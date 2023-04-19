@@ -35,7 +35,7 @@ public class TelephoneButtonViewController : AbstractMikroController<MainGame> {
                 case TelephoneState.Waiting:
                 case TelephoneState.Talking:
                 case TelephoneState.IncomingCall:
-                    telephoneSystem.HangUp();
+                    telephoneSystem.HangUp(true);
                     break;
             }
         }

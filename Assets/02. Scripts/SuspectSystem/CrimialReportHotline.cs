@@ -63,7 +63,7 @@ namespace _02._Scripts.SuspectSystem {
 				string noInfo =
 					"Seems like you don't have any information about the criminal. I will end this call now. You are free to call us again if you have any information.";
 				speaker.Speak(noInfo, mixer, $"Officer {officerName}", 1f, (speaker) => {
-					this.GetSystem<TelephoneSystem>().HangUp();
+					this.GetSystem<TelephoneSystem>().HangUp(false);
 				});
 			}
 		}
@@ -169,7 +169,7 @@ namespace _02._Scripts.SuspectSystem {
 		private void OnEndingSpeak(Speaker speaker) {
 			EndConversation();
 		}
-		protected override void OnHangUp() {
+		protected override void OnHangUp(bool hangUpByPlayer) {
 			End();
 		}
 

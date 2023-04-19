@@ -81,7 +81,7 @@ namespace _02._Scripts.KFC {
 			EndConversation();
 		}
 
-		protected override void OnHangUp() {
+		protected override void OnHangUp(bool hangUpByPlayer) {
 			
 		}
 

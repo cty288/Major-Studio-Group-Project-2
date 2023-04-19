@@ -22,7 +22,7 @@ public class TestIncomingCallContact : TelephoneContact {
         EndConversation();
     }
 
-    protected override void OnHangUp() {
+    protected override void OnHangUp(bool h) {
       End();
     }
 

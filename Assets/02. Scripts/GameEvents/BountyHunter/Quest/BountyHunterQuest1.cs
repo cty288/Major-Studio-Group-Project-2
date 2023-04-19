@@ -79,7 +79,7 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
         EndConversation();
     }
 
-    protected override void OnHangUp() {
+    protected override void OnHangUp(bool hangUpByPlayer) {
        
     }
 

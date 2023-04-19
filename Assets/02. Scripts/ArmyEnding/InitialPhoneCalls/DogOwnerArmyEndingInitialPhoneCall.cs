@@ -36,7 +36,10 @@ namespace _02._Scripts.ArmyEnding.InitialPhoneCalls {
 
 		}
 
-		protected override void OnHangUp() {
+		protected override void OnHangUp(bool hangUpByPlayer) {
+			if (hangUpByPlayer) {
+				return;
+			}
 			OnMissedOrHangUp();
 		}
 		
@@ -84,7 +87,7 @@ namespace _02._Scripts.ArmyEnding.InitialPhoneCalls {
 			EndConversation();
 		}
 
-		protected override void OnHangUp() {
+		protected override void OnHangUp(bool hangUpByPlayer) {
 			
 		}
 

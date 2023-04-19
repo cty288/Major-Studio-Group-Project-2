@@ -30,7 +30,11 @@ public class BountyHunterQuestStartEvent : IncomingCallEvent {
         OnMissedOrHangUp();
     }
 
-    protected override void OnHangUp() {
+    protected override void OnHangUp(bool hangUpByPlayer) {
+        if (hangUpByPlayer) {
+            OnComplete();
+            return;
+        }
         OnMissedOrHangUp();
     }
 

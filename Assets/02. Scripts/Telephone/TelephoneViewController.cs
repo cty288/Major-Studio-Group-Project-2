@@ -49,7 +49,7 @@ public class TelephoneViewController : ElectricalApplicance, IPointerClickHandle
     }
 
     protected override void OnNoElectricity() {
-        telephoneSystem.HangUp();
+        telephoneSystem.HangUp(false);
     }
 
     protected override void OnElectricityRecovered() {

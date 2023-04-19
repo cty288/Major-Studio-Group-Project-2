@@ -28,6 +28,7 @@ public class ArmyHeadCountRadio: RadioEvent<RadioTextContent> {
 			RadioChannel.FM108) {
 		Debug.Log("A army head count radio is created at " + startTimeRange.StartTime);
 		
+		
 	}
 	
 	private void SetContent() {

@@ -33,7 +33,7 @@ namespace _02._Scripts.GameEvents.BountyHunter {
 			EndConversation();
 		}
 
-		protected override void OnHangUp() {
+		protected override void OnHangUp(bool hangUpByPlayer) {
 			
 		}
 
