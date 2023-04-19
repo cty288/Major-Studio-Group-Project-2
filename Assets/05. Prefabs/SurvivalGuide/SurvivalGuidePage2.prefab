@@ -304,8 +304,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.22, y: -140.07}
-  m_SizeDelta: {x: 629.36, y: 596.54}
+  m_AnchoredPosition: {x: 14.319, y: -128}
+  m_SizeDelta: {x: 600.7219, y: 544.97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8871937217330609636
 CanvasRenderer:
@@ -335,11 +335,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "- Read the <color=red>daily death report</color> for reported victims\n\r\n-
-    It's possible that one of them are monsters!\n\n- Listen to <color=red>FM96</color>
-    radio channel for witnessed features of the monster!\n\n- Radio schedules are
-    posted on <color=red>weekly newspaper</color> delivered on <color=red>Wednesday</color>\n\n-
-    Organize your information in your <color=red>notebook\r</color>"
+  m_text: "- Look for the <color=red>DEATH REPORT</color> on the daily newspaper's
+    front page\n\r\n- One of the people on the death report is a monster\n\n- Listen
+    to <color=red>96 FM</color> on the radio for witness reports of the monster!\n\n-
+    <color=red>Radio schedules</color> are posted on the <color=red>weekly newspaper</color>
+    delivered every <color=red>Wednesday</color>\n\n- Organize your information in
+    your <color=red>notebook\r</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e470fa1343de79f468a4e330039bc546, type: 2}
   m_sharedMaterial: {fileID: 1724549828375453005, guid: e470fa1343de79f468a4e330039bc546, type: 2}
@@ -366,7 +367,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36.65
+  m_fontSize: 33.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -443,8 +444,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.22, y: 233.41}
-  m_SizeDelta: {x: 629.36, y: 116.42}
+  m_AnchoredPosition: {x: -0.00000453, y: 229.82}
+  m_SizeDelta: {x: 502.4739, y: 143.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8871937218039144840
 CanvasRenderer:
@@ -537,7 +538,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -0.000015258789, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

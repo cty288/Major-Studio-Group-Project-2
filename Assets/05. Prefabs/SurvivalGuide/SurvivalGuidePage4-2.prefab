@@ -305,7 +305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.22, y: 91.99}
+  m_AnchoredPosition: {x: 11.452, y: 91.995}
   m_SizeDelta: {x: 629.36, y: 54.02}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5850249814389139116
@@ -471,7 +471,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Chapter 4: \nUsing Tools"
+  m_text: "Chapter 4: \nUsing your Tools"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e470fa1343de79f468a4e330039bc546, type: 2}
   m_sharedMaterial: {fileID: 1724549828375453005, guid: e470fa1343de79f468a4e330039bc546, type: 2}
@@ -575,8 +575,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.22, y: -135.3}
-  m_SizeDelta: {x: 629.36, y: 400.57}
+  m_AnchoredPosition: {x: 11.4521, y: -135.3}
+  m_SizeDelta: {x: 618.8958, y: 400.57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8756650946119112517
 CanvasRenderer:
@@ -606,9 +606,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "- Click yellow text to <color=red>import key text into the notebook</color>\n\n-
-    <color=red>Drag photo</color> into the notebook to record photo in the notebook\r.\n\n-
-    <color=red>Hold</color> to drag things around in the notebook.\n"
+  m_text: '- Click yellow subtitle text to <color=red>import key text directly into
+    your notebook.</color>
+
+
+    - Keep and organize photos by <color=red>dragging
+    photos</color> into the notebook.
+
+
+    - <color=red>Hold to drag</color> items
+    around in the notebook.
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e470fa1343de79f468a4e330039bc546, type: 2}
   m_sharedMaterial: {fileID: 1724549828375453005, guid: e470fa1343de79f468a4e330039bc546, type: 2}
@@ -636,9 +645,9 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontSize: 43
-  m_fontSizeBase: 36
+  m_fontSizeBase: 43
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 43
   m_fontStyle: 0

@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.22, y: -165.86}
-  m_SizeDelta: {x: 629.36, y: 544.97}
+  m_AnchoredPosition: {x: 14.319, y: -165.86}
+  m_SizeDelta: {x: 600.7219, y: 544.97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &253817434408451988
 CanvasRenderer:
@@ -66,11 +66,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "- Monsters can <color=red>kill</color> and <color=red>disguise</color>
+  m_text: "- The Monsters can <color=red>kill</color> and <color=red>disguise</color>
     themselves as <color=red>their victims</color>\n\r\n- <color=red>New Monsters</color>
-    may appear each day\r.\n\n- Monsters are alive for <color=red>3 days </color>from
-    their first reported appearance\r\n\n- Monster can <color=red>knock</color> on
-    your door!"
+    appear each day\r.\n\n- Monsters are alive for <color=red>3 days </color>from
+    their first reported appearance\r\n\n- The Monsters can <color=red>knock</color>
+    on your door!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e470fa1343de79f468a4e330039bc546, type: 2}
   m_sharedMaterial: {fileID: 1724549828375453005, guid: e470fa1343de79f468a4e330039bc546, type: 2}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 41.95
+  m_fontSize: 39.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -174,8 +174,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000019073, y: 195.29}
-  m_SizeDelta: {x: 629.36, y: 143.24}
+  m_AnchoredPosition: {x: 0, y: 206}
+  m_SizeDelta: {x: 414.5746, y: 143.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &253817434781508600
 CanvasRenderer:

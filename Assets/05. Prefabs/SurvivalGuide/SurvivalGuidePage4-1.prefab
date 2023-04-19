@@ -305,7 +305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.22, y: 91.99}
+  m_AnchoredPosition: {x: 24.1, y: 106}
   m_SizeDelta: {x: 629.36, y: 54.02}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5412575957485457640
@@ -471,7 +471,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Chapter 4: \nUsing Tools"
+  m_text: "Chapter 4: \nUsing your Tools"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e470fa1343de79f468a4e330039bc546, type: 2}
   m_sharedMaterial: {fileID: 1724549828375453005, guid: e470fa1343de79f468a4e330039bc546, type: 2}
@@ -575,8 +575,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.22, y: -135.3}
-  m_SizeDelta: {x: 629.36, y: 400.57}
+  m_AnchoredPosition: {x: 15.16, y: -135.31}
+  m_SizeDelta: {x: 611.48, y: 400.57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7181211405902455041
 CanvasRenderer:
@@ -606,10 +606,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "- Long-established fashion magazine in Dorcha, through which you can learn
-    about <color=red>the latest fashion trends in Dorcha this week.</color> \n\n-
-    Maybe a good way to <color=red>reference the appearance and names of the clothing
-    of the deceased.</color>"
+  m_text: "- The long-established fashion magazine in Dorcha. Learn about <color=red>the
+    weekly Dorchan fashion trends.</color> \n\n- Use this to <color=red>reference
+    victims' clothing and accessories.</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e470fa1343de79f468a4e330039bc546, type: 2}
   m_sharedMaterial: {fileID: 1724549828375453005, guid: e470fa1343de79f468a4e330039bc546, type: 2}
@@ -636,7 +635,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 41.1
+  m_fontSize: 43
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
