@@ -114,3 +114,8 @@ public class DogTag_6 : HaircutTag
 {
 	public override string TagName { get; } = "Dog_6";
 }
+
+public class SPTag_cult : HaircutTag
+{
+    public override string TagName { get; } = "SP_cult";
+}
