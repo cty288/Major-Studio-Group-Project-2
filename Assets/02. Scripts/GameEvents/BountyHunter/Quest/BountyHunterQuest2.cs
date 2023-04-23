@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.FPSEnding;
 using _02._Scripts.GameEvents.BountyHunter;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.ActionKit;
@@ -291,7 +292,8 @@ public class BountyHunterQuestClueInfoRadioAreaEvent : BountyHunterQuestClueInfo
     public BountyHunterQuestClueInfoRadioAreaEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, bool isReal, DateTime startDate, string location) : 
         base(startTimeRange, speakContent, speakRate, speakGender, mixer, isReal, startDate) {
         this.location = location;
-        BodyInfo info = this.GetModel<BountyHunterModel>().QuestBodyTimeInfo.BodyInfo;
+        MonsterMotherModel monsterMotherModel = this.GetModel<MonsterMotherModel>();
+        BodyInfo info =monsterMotherModel.MotherBodyTimeInfo.BodyInfo;
         this.radioContent.SetContent(Radio(info, isReal));
     }
 

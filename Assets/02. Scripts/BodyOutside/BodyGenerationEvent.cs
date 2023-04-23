@@ -86,6 +86,10 @@ public abstract  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegist
 
     public override EventState OnUpdate() {
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
+
+        if (this.GetModel<GameStateModel>().IsDoorOpened && !interacted) {
+            return EventState.Missed;
+        }
         
         if ((currentTime.Hour == 23 && currentTime.Minute >= 58 && !interacted) || gameStateModel.GameState.Value == GameState.End) {
             if (knockDoorCheckCoroutine != null) {

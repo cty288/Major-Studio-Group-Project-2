@@ -6,6 +6,7 @@ using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.ChoiceSystem;
 using _02._Scripts.Electricity;
 using _02._Scripts.FashionCatalog;
+using _02._Scripts.FPSEnding;
 using _02._Scripts.GameEvents.BountyHunter;
 using _02._Scripts.GameEvents.FoodBorrowEvent;
 using _02._Scripts.GameEvents.Merchant;
@@ -68,6 +69,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<FoodBorrowModel>();
         this.RegisterModel<SurvivalGuideModel>();
         this.RegisterModel<ArmyEndingModel>();
+        this.RegisterModel<MonsterMotherModel>();
         
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());

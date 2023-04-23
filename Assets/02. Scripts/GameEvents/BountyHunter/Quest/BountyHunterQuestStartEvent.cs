@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.FPSEnding;
 using _02._Scripts.GameEvents.BountyHunter;
 using MikroFramework.Architecture;
 using UnityEngine;
@@ -53,7 +54,8 @@ public class BountyHunterQuestStartEvent : IncomingCallEvent {
     }
 
     protected override void OnComplete() {
-        this.GetModel<BodyModel>().AddToAllBodyTimeInfos(this.GetModel<BountyHunterModel>().QuestBodyTimeInfo);
+        MonsterMotherModel monsterMotherModel = this.GetModel<MonsterMotherModel>();
+        this.GetModel<BodyModel>().AddToAllBodyTimeInfos(monsterMotherModel.MotherBodyTimeInfo);
 
 
         DateTime nextClueHappenTime = gameTimeManager.CurrentTime.Value.AddDays(1);

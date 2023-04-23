@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.FPSEnding;
 using _02._Scripts.GameEvents.BountyHunter;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
@@ -61,6 +62,7 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
 
     private void OnSpeakEnd(Speaker speaker) {
         BountyHunterModel bountyHunterModel = this.GetModel<BountyHunterModel>();
+        MonsterMotherModel monsterMotherModel = this.GetModel<MonsterMotherModel>();
         if (!bountyHunterModel.QuestBodyClueAllHappened) {
             
             DateTime nextStartTime = ClueHappenTime.AddDays(1);
@@ -70,9 +72,9 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
             DateTime nextEndTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day,
                 23, 50, 0);
 
-            this.GetSystem<GameEventSystem>().AddEvent(new BountyHunterQuestAlienSpawnEvent(
+            this.GetSystem<GameEventSystem>().AddEvent(new MonsterMotherSpawnEvent(
                 new TimeRange(nextStartTime, nextEndTime),
-                bountyHunterModel.QuestBodyTimeInfo.BodyInfo, 1));
+                monsterMotherModel.MotherBodyTimeInfo.BodyInfo, 1));
 
             Debug.Log("Target quest body will be spawned at " + nextStartTime);
         }
@@ -106,6 +108,7 @@ public class BountyHunterQuest1ClueEvent : BountyHunterQuestClueEvent {
 
     public override void OnStart() {
         BountyHunterModel bountyHunterModel = this.GetModel<BountyHunterModel>();
+        MonsterMotherModel monsterMotherModel = this.GetModel<MonsterMotherModel>();
         Debug.Log($"Clue Start! Flash Time: {flashedTime}");
         float chanceForNewspaperShowBody = Random.Range(0f, 1f);
         if (!bountyHunterModel.QuestBodyClueAllHappened) {
@@ -113,7 +116,7 @@ public class BountyHunterQuest1ClueEvent : BountyHunterQuestClueEvent {
         }
         if (chanceForNewspaperShowBody > 0.6f) {
             this.GetModel<BodyModel>()
-                .AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(bountyHunterModel.QuestBodyTimeInfo);
+                .AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(monsterMotherModel.MotherBodyTimeInfo);
             Debug.Log("Tomorrow's Quest Body will be shown in newspaper!");
         }
     }
@@ -158,7 +161,8 @@ public class BountyHunterQuestClueInfoRadioEvent : BountyHunterQuestClueInfoEven
     private int dieTime;
     public BountyHunterQuestClueInfoRadioEvent(TimeRange startTimeRange, string speakContent, float speakRate, Gender speakGender, AudioMixerGroup mixer, bool isReal, DateTime startDate, int dieTime) : base(startTimeRange, speakContent, speakRate, speakGender, mixer, isReal, startDate) {
         this.dieTime = dieTime;
-        BodyInfo info = this.GetModel<BountyHunterModel>().QuestBodyTimeInfo.BodyInfo;
+        MonsterMotherModel monsterMotherModel = this.GetModel<MonsterMotherModel>();
+        BodyInfo info = monsterMotherModel.MotherBodyTimeInfo.BodyInfo;
         this.radioContent.SetContent(Radio(info, isReal));
     }
 

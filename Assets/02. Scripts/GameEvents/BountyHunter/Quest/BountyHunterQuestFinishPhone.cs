@@ -56,11 +56,13 @@ public class BountyHunterQuestFinishContact : TelephoneContact {
 
     protected override void OnStart() {
         string welcome =
-            "Good day, mister. I'm the chief of the Police Department of Dorcha. Congratulations on your glory achievement in protecting our community.";
-        welcome +=
-            "With your help in hunting down the dangerous creatures, we have successfully suppressed recent waves of infiltration in our neighborhood.";
-        welcome +=
-            "Thanks again for your contribution to our neighborhood.";
+            "Good day, mister. I'm the chief of the Dorcha Military. " +
+            "We heard from one bounty hunter that you reported a creature last night. " +
+            "We investigated the creature's body and" +
+            "it turns out that it was the source of all the monsters. It's a rare type of creature called a \"Xenovore,\" " +
+            "which means it consumes DNA and mutates it into different types of monsters. By killing the Xenovore, " +
+            "we believe the other monsters will soon lose their activity with last night's success, " +
+            "and the crisis is finally coming to an end. Thank you for your bravery, and please stay safe";
         speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[3], "???", 1f, OnSpeakEnd, 1.1f);
     }
 

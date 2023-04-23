@@ -9,6 +9,8 @@ public abstract class IncomingCallEvent : GameEvent {
     protected TelephoneContact NotificationContact;
     [ES3Serializable]
     protected int callWaitTime;
+    
+    
     protected IncomingCallEvent(TimeRange startTimeRange, TelephoneContact notificationContact, int callWaitTime) : base(startTimeRange) {
         telephoneSystem = this.GetSystem<TelephoneSystem>(sys => {
             telephoneSystem = sys;

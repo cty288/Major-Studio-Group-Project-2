@@ -7,20 +7,20 @@ using UnityEngine.Audio;
 
 namespace _02._Scripts.AlienInfos.Tags.Base {
 	public interface IVoiceTag: IAlienTag {
-		public AudioMixerGroup VoiceGroup { get; }
+		public AudioMixerGroup VoiceGroup { get; set; }
 		public float VoiceSpeed { get; }
-		public Gender VoiceType { get; }
+		public Gender VoiceType { get; set; }
 
 		public IVoiceTag GetOpposite();
 	}
 
 	public class VoiceTag : IVoiceTag, ICanGetModel {
 		[field: ES3Serializable]
-		public AudioMixerGroup VoiceGroup { get; protected set; }
+		public AudioMixerGroup VoiceGroup { get; set; }
 		[field: ES3Serializable]
 		public float VoiceSpeed { get; protected set; }
 		[field: ES3Serializable]
-		public Gender VoiceType { get; protected set; }
+		public Gender VoiceType { get; set; }
 		public IVoiceTag GetOpposite() {
 			int voiceIndex = Random.Range(0, AudioMixerList.Singleton.AlienVoiceGroups.Count);
 			float voiceSpeed = 0;

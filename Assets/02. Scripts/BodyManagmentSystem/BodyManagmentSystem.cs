@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.FPSEnding;
 using _02._Scripts.GameTime;
 using Crosstales;
 using MikroFramework.Architecture;
@@ -94,6 +95,11 @@ public class BodyManagmentSystem : AbstractSystem {
             bodyCount = 1;
         }
 
+        bool motherDied = this.GetModel<MonsterMotherModel>().MotherHealth.Value == 0;
+        if (motherDied) {
+            bodyCount = 0;
+        }
+
         //bodyCount = 0;
 
 
@@ -152,6 +158,10 @@ public class BodyManagmentSystem : AbstractSystem {
 
         if (gameTimeModel.Day <= 1) {
             alienCount = 1;
+        }
+
+        if (motherDied) {
+            alienCount = 0;
         }
         for (int i = 0; i < alienCount; i++) {
             BodyInfo selectedAlien = newBodyInfos[Random.Range(0, newBodyInfos.Count)].BodyInfo;

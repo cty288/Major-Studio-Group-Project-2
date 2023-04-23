@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.FPSEnding;
 using _02._Scripts.GameEvents.BountyHunter;
 using _02._Scripts.Radio.RadioScheduling;
 using Crosstales.RTVoice.Model.Enum;
@@ -40,7 +41,8 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
 
     public override void OnStart() {
         BountyHunterQuestClueNotificationContact Contact = NotificationContact as BountyHunterQuestClueNotificationContact;
-        if (bountyHunterModel.QuestBodyTimeInfo.DayRemaining <= 0 || bountyHunterModel.QuestFinished) {
+        MonsterMotherModel monsterMotherModel = this.GetModel<MonsterMotherModel>();
+        if (monsterMotherModel.MotherBodyTimeInfo.DayRemaining <= 0 || bountyHunterModel.QuestFinished) {
             onHangupOrFinish = true;
             Debug.Log("The Quests is end.");
             return;
@@ -98,8 +100,8 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
     protected override void OnComplete() {
         BountyHunterQuestClueNotificationContact Contact = NotificationContact as BountyHunterQuestClueNotificationContact;
         gameEventSystem.AddEvent(GetClueEvent(new TimeRange(Contact.ClueHappenTime)));
-
-        if (bountyHunterModel.QuestBodyTimeInfo.DayRemaining <= 0 || bountyHunterModel.QuestFinished)
+        MonsterMotherModel monsterMotherModel = this.GetModel<MonsterMotherModel>();
+        if (monsterMotherModel.MotherBodyTimeInfo.DayRemaining <= 0 || bountyHunterModel.QuestFinished)
         {
             onHangupOrFinish = true;
             Debug.Log("The Quests is end.");
@@ -125,7 +127,8 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
             OnComplete();
             return;
         }
-        if (bountyHunterModel.QuestBodyTimeInfo.DayRemaining <= 0) {
+        MonsterMotherModel monsterMotherModel = this.GetModel<MonsterMotherModel>();
+        if (monsterMotherModel.MotherBodyTimeInfo.DayRemaining <= 0) {
             return;
         }
         SendSameEventTomorrow();

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.FPSEnding;
 using _02._Scripts.GameEvents.BountyHunter;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
@@ -13,8 +14,8 @@ using Random = UnityEngine.Random;
 public class BountyHunterPhone : TelephoneContact, ICanGetModel {
     private BountyHunterSystem bountyHunterSystem;
     private BountyHunterModel bountyHunterModel;
-   
-    
+    private MonsterMotherModel monsterMotherModel;
+
     private GameTimeManager gameTimeManager;
     private AudioMixerGroup mixer;
     private Coroutine waitingForInteractionCoroutine;
@@ -49,6 +50,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
         bodyModel = this.GetModel<BodyModel>();
         playerControlModel = this.GetModel<PlayerControlModel>();
         bountyHunterModel = this.GetModel<BountyHunterModel>();
+        monsterMotherModel = this.GetModel<MonsterMotherModel>();
     }
     public override bool OnDealt() {
         return gameTimeManager.CurrentTime.Value.Date >= bountyHunterModel.NextAvailableDate.Date;
@@ -140,10 +142,10 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
                 if (info.IsAlien) {
                     killAliens = true;
                     
-                    if (info.ID == bountyHunterModel.QuestBodyTimeInfo.BodyInfo.ID)
-                    {
+                    if (info.ID == monsterMotherModel.MotherBodyTimeInfo.BodyInfo.ID) {
                         bountyHunterModel.QuestFinished = true;
                         Debug.Log("Correct Quest Info!! Call will start at " + questStartTime);
+                        
                         gameEventSystem.AddEvent(new BountyHunterQuestFinishPhoneEvent(
                             new TimeRange(questStartTime, questEndTime),
                             new BountyHunterQuestFinishContact(), 6));

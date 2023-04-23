@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.FPSEnding;
 using _02._Scripts.GameTime;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
@@ -63,6 +64,10 @@ public class BountyHunterHuntEvent : GameEvent{
                     
                     if (targetInfo.IsAlien) {
                         killAlien = true;
+                        MonsterMotherModel monsterMotherModel = this.GetModel<MonsterMotherModel>();
+                        if (targetInfo.ID == monsterMotherModel.MotherBodyTimeInfo.BodyInfo.ID) {
+                            monsterMotherModel.MotherHealth.Value = 0;
+                        }
                     }
                     else {
                         killGood = true;

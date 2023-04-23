@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using _02._Scripts.ArmyEnding;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.FPSEnding;
 using _02._Scripts.GameTime;
 using MikroFramework.Architecture;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Cheater : AbstractMikroController<MainGame> {
+public class Cheater : AbstractMikroController<MainGame>, ICanSendEvent {
     public bool enable = false;
     // Start is called before the first frame update
     void Start() {
@@ -44,7 +45,7 @@ public class Cheater : AbstractMikroController<MainGame> {
             this.GetModel<BodyGenerationModel>().CurrentOutsideBody.Value = info;
         }
 
-        if (Input.GetKeyDown(KeyCode.D)) {
+        if (Input.GetKeyDown(KeyCode.D) && !Input.GetKey(KeyCode.LeftControl)) {
             this.GetModel<BodyGenerationModel>().CurrentOutsideBody.Value = null;
         }
 
@@ -90,6 +91,21 @@ public class Cheater : AbstractMikroController<MainGame> {
             DateTime armyPrologueRadioTime = gameTimeModel.GetDay(gameTimeModel.Day + 1);
             this.GetSystem<GameEventSystem>().AddEvent(new ShelterPrologueRadio(new TimeRange(armyPrologueRadioTime),
                 AudioMixerList.Singleton.AudioMixerGroups[13]));
+        }
+        
+        if(Input.GetKeyDown(KeyCode.Alpha2)) { //start army ending storyline
+            
+            GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
+            DateTime spawnTime = gameTimeModel.CurrentTime.Value;
+            this.GetModel<BodyModel>().AddToAllBodyTimeInfos(this.GetModel<MonsterMotherModel>().MotherBodyTimeInfo);
+            this.GetSystem<GameEventSystem>().AddEvent(new MonsterMotherSpawnEvent(new TimeRange(spawnTime, spawnTime.AddMinutes(20)),
+                this.GetModel<MonsterMotherModel>().MotherBodyTimeInfo.BodyInfo, 1));
+        }
+
+        if (Input.GetKeyDown(KeyCode.D) && Input.GetKey(KeyCode.LeftControl)) {
+            this.SendEvent<OnDogGet>(new OnDogGet() {
+                BodyInfo = this.GetModel<DogModel>().MissingDogBodyInfo
+            });
         }
     }
 }

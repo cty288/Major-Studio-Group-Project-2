@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.ChoiceSystem;
+using _02._Scripts.FPSEnding;
 using _02._Scripts.GameTime;
 using _02._Scripts.SurvivalGuide;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
+using MikroFramework.TimeSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -42,7 +44,14 @@ namespace _02._Scripts.BodyOutside {
 			if (bodyInfo == null) {
 				return EventState.End;
 			}
+			
+			if (this.GetModel<GameStateModel>().IsDoorOpened && !interacted) {
+				return EventState.Missed;
+			}
 
+			if (bodyInfo.IsAlien && this.GetModel<MonsterMotherModel>().MotherHealth.Value <= 0) {
+				return EventState.End;
+			}
 			if (currentTime.Hour == gameTimeManager.NightTimeStart && currentTime.Minute <= 20) {
 				
 				return EventState.End;
@@ -95,37 +104,41 @@ namespace _02._Scripts.BodyOutside {
 		protected override Func<bool> OnOpen() {
 				onClickPeepholeSpeakEnd = false;
 				Speaker speaker = GameObject.Find("OutsideBodySpeaker").GetComponent<Speaker>();
-				if (bodyInfo.IsAlien) {
-					LoadCanvas.Singleton.ShowImage(0, 0.2f);
-					List<string> messages = new List<string>() {
-						"goOD dAy sIR. buT iT'S yOuR tiME!",
-						"hI, Hi! iT IS yOur tiMe!",
-						"I nEeD yOU cLotHEs!",
-						"YOur bRaIN iS MiNE!",
-						"YOuR TimE IS oVeR!"
-					};
-					speaker.Speak(messages[Random.Range(0, messages.Count)], AudioMixerList.Singleton.AudioMixerGroups[4], "???", 1f,OnAlienClickedOutside);
-				}
-				else {
-					int foodCount = Random.Range(1, 3);
-					this.GetModel<PlayerResourceModel>().AddFood(foodCount);
-					LoadCanvas.Singleton.ShowImage(1, 0.2f);
-					List<string> messages = new List<string>() {
-						$"Delivery service! I got {foodCount} can{((foodCount > 1) ? "s" : "")} of food for you!",
-						$"Here {(foodCount > 1 ? "are" : "is")} your food delivery! {foodCount} can{((foodCount > 1) ? "s" : "")} of food!",
-						$"Hey, I brought you {foodCount} can{((foodCount > 1) ? "s" : "")} of food! Take care!",
-					};
+				AudioSystem.Singleton.Play2DSound("door_open");
+				this.GetSystem<ITimeSystem>().AddDelayTask(0.5f, () => {
+					if (bodyInfo.IsAlien) {
+						LoadCanvas.Singleton.ShowImage(0, 0f);
+						List<string> messages = new List<string>() {
+							"goOD dAy sIR. buT iT'S yOuR tiME!",
+							"hI, Hi! iT IS yOur tiMe!",
+							"I nEeD yOU cLotHEs!",
+							"YOur bRaIN iS MiNE!",
+							"YOuR TimE IS oVeR!"
+						};
+						speaker.Speak(messages[Random.Range(0, messages.Count)],
+							AudioMixerList.Singleton.AudioMixerGroups[4], "???", 1f, OnAlienClickedOutside);
+					}
+					else {
+						int foodCount = Random.Range(1, 3);
+						this.GetModel<PlayerResourceModel>().AddFood(foodCount);
+						LoadCanvas.Singleton.ShowImage(1, 0.2f);
+						List<string> messages = new List<string>() {
+							$"Delivery service! I got {foodCount} can{((foodCount > 1) ? "s" : "")} of food for you!",
+							$"Here {(foodCount > 1 ? "are" : "is")} your food delivery! {foodCount} can{((foodCount > 1) ? "s" : "")} of food!",
+							$"Hey, I brought you {foodCount} can{((foodCount > 1) ? "s" : "")} of food! Take care!",
+						};
 
-					IVoiceTag voiceTag = bodyInfo.VoiceTag;
-					
-					string additionalMessage = "";
-					additionalMessage += SendSurvivalGuideAndGetPhrases();
+						IVoiceTag voiceTag = bodyInfo.VoiceTag;
 
-					speaker.Speak(messages[Random.Range(0, messages.Count)]+additionalMessage,
-						bodyInfo.VoiceTag.VoiceGroup,
-						"Deliver", 1, OnDelivererClickedOutside,
-						voiceTag.VoiceSpeed, 1, voiceTag.VoiceType);
-				}
+						string additionalMessage = "";
+						additionalMessage += SendSurvivalGuideAndGetPhrases();
+
+						speaker.Speak(messages[Random.Range(0, messages.Count)] + additionalMessage,
+							bodyInfo.VoiceTag.VoiceGroup,
+							"Deliver", 1, OnDelivererClickedOutside,
+							voiceTag.VoiceSpeed, 1, voiceTag.VoiceType);
+					}
+				});
 				return () => onClickPeepholeSpeakEnd;
 			}
 
@@ -187,7 +200,7 @@ namespace _02._Scripts.BodyOutside {
 		    GunKill();
 	    }
 
-	    protected void SacrificeDog() {
+	    protected virtual void SacrificeDog() {
 		    DogSystem dogSystem = this.GetSystem<DogSystem>();
 		    float clipLength = AudioSystem.Singleton.Play2DSound("dogBark_4").clip.length;
 		    timeSystem.AddDelayTask(clipLength, () => {

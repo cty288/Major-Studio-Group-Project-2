@@ -11,8 +11,7 @@ namespace _02._Scripts.GameEvents.BountyHunter {
 		public bool ContactedBountyHunter { get; set; } = false;
 		[field: ES3Serializable]
 		public string PhoneNumber { get; private set; } = "";
-		[field: ES3Serializable]
-		public BodyTimeInfo QuestBodyTimeInfo { get; private set; }
+
 		[field: ES3Serializable]
 		public bool QuestBodyClueAllHappened { get; set; } = false;
 		[field: ES3Serializable]
@@ -37,12 +36,7 @@ namespace _02._Scripts.GameEvents.BountyHunter {
 				PhoneNumber = PhoneNumberGenor.GeneratePhoneNumber(6);
 			}
 			
-			if(QuestBodyTimeInfo == null) {
-				QuestBodyTimeInfo = new BodyTimeInfo(UnityEngine.Random.Range(20, 30),
-					BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true, Random.Range(0.1f,0.9f),
-						new NormalKnockBehavior(4, 6, new List<string>() { }), null, 40),
-					true);
-			}
+			
 		}
 	}
 	
