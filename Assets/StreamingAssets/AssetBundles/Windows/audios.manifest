@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3164586953
+CRC: 439765411
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b4d83f814e967e1bfdedc327ba372458
+    Hash: b895c3918db3716bb110945c6763ef3f
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9a2ca7bdbd1871f7131daf57de908e0c
@@ -14,12 +14,14 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/04. Audios/telephone/incoming_call.ogg
+- Assets/04. Audios/FPS/monster_die.ogg
 - Assets/04. Audios/Knocks/knock_5.mp3
 - Assets/04. Audios/Dog/dogBark_1.wav
 - Assets/04. Audios/Electricity/motor_gear_loop.mp3
 - Assets/04. Audios/Dog/New/dog_die.mp3
 - Assets/04. Audios/Dog/dogBark_2.wav
 - Assets/04. Audios/Dog/dogBark_4.wav
+- Assets/04. Audios/FPS/monster_roar_2.wav
 - Assets/04. Audios/Dog/New/dog_usual_1.mp3
 - Assets/04. Audios/Knocks/knock_7.wav
 - Assets/04. Audios/SexPerson/hit_player.wav
@@ -36,6 +38,8 @@ Assets:
 - Assets/04. Audios/Dog/New/dog_outside_door_2.mp3
 - Assets/04. Audios/Gun/gun_fire.wav
 - Assets/04. Audios/Knocks/knock_2.ogg
+- Assets/04. Audios/FPS/monster_roar_1.wav
+- Assets/04. Audios/FPS/monster_kill_player.wav
 - Assets/04. Audios/Dog/New/dog_outside_door_3.mp3
 - Assets/04. Audios/Dog/New/dog_attack.mp3
 - Assets/04. Audios/telephone/phone_dialing.ogg
@@ -45,4 +49,5 @@ Assets:
 - Assets/04. Audios/Dog/dogBark_3.wav
 - Assets/04. Audios/Knocks/knock_1.ogg
 - Assets/04. Audios/Knocks/knock_4.mp3
+- Assets/04. Audios/Gun/gun_no_bullet.wav
 Dependencies: []

@@ -21,7 +21,7 @@ public class RadioSchedulePageContentUIPanel : ImportantNewspaperPageContentUIPa
 		ImportantNewspaperRadioSchedulePage radioSchedulePage = content as ImportantNewspaperRadioSchedulePage;
 		this.schedule = radioSchedulePage.Schedule;
 
-		weekText.text = $"Week {weekCount}";
+		weekText.text = $"Issue {weekCount}";
 		foreach (DateTime date in schedule.Keys) {
 			Dictionary<RadioChannel, List<RadioScheduleInfo>> daySchedule = schedule[date];
 			RadioScheduleDayContentUI dayContent =

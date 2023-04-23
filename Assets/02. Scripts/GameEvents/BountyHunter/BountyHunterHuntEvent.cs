@@ -93,12 +93,13 @@ public class BountyHunterHuntEvent : GameEvent{
     private void AddToImportantNews(bool killAlien) {
         ImportantNewspaperModel importantNewspaperModel = this.GetModel<ImportantNewspaperModel>();
         ImportantNewsTextModel importantNewsTextModel = this.GetModel<ImportantNewsTextModel>();
-        int week = importantNewspaperModel.GetWeekForNews(this.GetModel<GameTimeModel>().Day);
+        GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
+        int week = importantNewspaperModel.GetIssueForNews(gameTimeModel.Day, gameTimeModel.CurrentTime.Value.Date);
         if (importantNewspaperModel.HasPageOfID(week, "BountyHunterKill")) {
             importantNewspaperModel.RemoveAllPagesOfID(week, "BountyHunterKill");
         }
 
-        importantNewspaperModel.AddPageToNewspaper(week,
+        importantNewspaperModel.AddPageToNewspaper(this.GetModel<GameTimeModel>().Day,
             importantNewsTextModel.GetInfo(killAlien ? "BountyHunterSuccess" : "BountyHunterFail"), 1);
     }
 

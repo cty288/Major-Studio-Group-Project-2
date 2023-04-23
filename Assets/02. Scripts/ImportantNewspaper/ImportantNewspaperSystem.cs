@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Linq;
 using _02._Scripts.GameTime;
 using MikroFramework.Architecture;
 
 namespace _02._Scripts.ImportantNewspaper {
 
 	public struct OnImportantNewspaperGenerated {
-		public int Week;
+		public int Issue;
 	}
 	public class ImportantNewspaperSystem: AbstractSystem {
 		
@@ -17,7 +18,7 @@ namespace _02._Scripts.ImportantNewspaper {
 				int.Parse(this.GetModel<HotUpdateDataModel>().GetData("ImportantNewsDay").values[0]);
 			gameTimeModel = this.GetModel<GameTimeModel>();
 			importantNewspaperModel = this.GetModel<ImportantNewspaperModel>();
-			importantNewspaperModel.ImportantNewsPaperDay = gameTimeModel.GetDay(eventDay).DayOfWeek;
+			importantNewspaperModel.NewspaperStartDay = eventDay;
 			importantNewspaperModel.NewspaperStartDay = eventDay;
 			
 			this.RegisterEvent<OnNewDay>(OnNewDay);
@@ -28,8 +29,8 @@ namespace _02._Scripts.ImportantNewspaper {
 				importantNewspaperModel.AddPageToNewspaper(1,
 					this.GetModel<ImportantNewsTextModel>().GetInfo("ManDead"), 0);
 			}
-			if(e.Date.DayOfWeek == importantNewspaperModel.ImportantNewsPaperDay) {
-				this.SendEvent(new OnImportantNewspaperGenerated() {Week = gameTimeModel.Week});
+			if(importantNewspaperModel.newsDays.Contains(e.Date.DayOfWeek) && e.Day>=1) {
+				this.SendEvent(new OnImportantNewspaperGenerated() {Issue = importantNewspaperModel.GetIssueForNews(e.Day, e.Date)});
 			}
 		}
 	}

@@ -187,7 +187,7 @@ public abstract class BountyHunterQuestClueNotificationContact : TelephoneContac
 //情报发送的事件
 public abstract class BountyHunterQuestClueEvent : GameEvent {
     protected BountyHunterQuestClueEvent(TimeRange startTimeRange) : base(startTimeRange) {
-        
+        //Debug.Log("Clue Radio will Happen at: " + startTimeRange.StartTime);
     }
     [field: ES3Serializable]
     public override GameEventType GameEventType { get; } = GameEventType.BountyHunterQuestClue;
@@ -215,7 +215,7 @@ public abstract class BountyHunterQuestClueEvent : GameEvent {
         DateTime clueEndTime = new DateTime(clueHappenTime.Year, clueHappenTime.Month, clueHappenTime.Day,
             23, 59, 0);
         gameEventSystem.AddEvent(GetClueInfoEvent(new TimeRange(clueHappenTime, clueEndTime), isReal, currentTime));
-        Debug.Log("Clue Radio will Happen at: " + clueHappenTime);
+        
     }
     public override void OnMissed() {
         
@@ -249,6 +249,7 @@ public abstract class BountyHunterQuestClueInfoEvent : ScheduledRadioEvent<Radio
         : base(startTimeRange, new RadioTextContent(speakContent, speakRate, speakGender, mixer), RadioChannel.FM96) {
         this.IsRealClue = isReal;
         this.startDate = startDate;
+        Debug.Log("Clue Radio will Happen at: " + startTimeRange.StartTime);
     }
     
     public BountyHunterQuestClueInfoEvent(): base(){}
@@ -268,11 +269,11 @@ public abstract class BountyHunterQuestClueInfoEvent : ScheduledRadioEvent<Radio
     
     protected override ScheduledRadioEvent<RadioTextContent> OnGetNextRadioProgramMessage(TimeRange nextTimeRange, bool playSuccess) {
         DateTime currentTime = this.GetSystem<GameTimeManager>().CurrentTime.Value;
-        if ((currentTime - startDate).Days > 3) {
+        if ((currentTime - startDate).Days > 3 || playSuccess) {
             return null;
         }
-
-       
+        
+        
         return GetSameEvent(nextTimeRange, IsRealClue, startDate) as ScheduledRadioEvent<RadioTextContent>;
     }
 

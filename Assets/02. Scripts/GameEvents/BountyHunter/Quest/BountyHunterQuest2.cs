@@ -38,6 +38,7 @@ public class BountyHunterQuest2Notification : BountyHunterQuestClueNotification 
     protected override BountyHunterQuestClueEvent GetClueEvent(TimeRange happenTimeRange) {
         TimeRange newTimeRange = new TimeRange(happenTimeRange.StartTime, happenTimeRange.StartTime.AddMinutes(10));
         string location = BountyHunterQuestClueInfoRadioAreaEvent.GetRandomLocation();
+        
         return new BountyHunterQuest2ClueEvent(newTimeRange,location,
             BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, false, 0,
                 new NormalKnockBehavior(3, UnityEngine.Random.Range(3,6),
@@ -57,12 +58,12 @@ public class BountyHunterQuest2ClueNotificationNotificationContact : BountyHunte
         bool alreadyNotified = this.GetModel<BountyHunterModel>().QuestBodyClueAllHappened;
 
         string welcome =
-            $"Hey friend, I hope you got some clues. I have gathered more information about the <color=yellow>location</color> of a dead body killed by the creature we are looking for." +
+            $"Hey friend, I hope you got some clues. I have gathered more information about the <color=yellow>location</color> of a dead body killed by the Xenovore." +
             $" Between <color=yellow>{hourIn12_1}:{ClueHappenTime.Minute} and {hourIn12_1}:{ClueHappenTime.Minute+10} pm</color>," +
             $" <color=yellow>someone will deliver a note to you</color>. Make sure there's no one outside your home when he arrives, otherwise he might be scared away. Call me back when you find out that guy!";
 
         if (alreadyNotified) {
-            welcome = $"Hey friend, someone reported to me that they saw that creature again this morning." +
+            welcome = $"Hey friend, someone reported to me that they saw that Xenovore again this morning." +
                       $" Between <color=yellow>{hourIn12_1}:{ClueHappenTime.Minute} and {hourIn12_1}:{ClueHappenTime.Minute + 10} pm</color>," +
                       $" <color=yellow>I will let my friend to deliver you a note</color> again about its <color=yellow>location</color>. Make sure there's no one outside your home when he arrives, otherwise he might be scared away. Call me back when you find out that guy!";
 

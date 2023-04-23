@@ -96,7 +96,7 @@ public class Cheater : AbstractMikroController<MainGame>, ICanSendEvent {
         if(Input.GetKeyDown(KeyCode.Alpha2)) { //start army ending storyline
             
             GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
-            DateTime spawnTime = gameTimeModel.CurrentTime.Value;
+            DateTime spawnTime = gameTimeModel.CurrentTime.Value.AddMinutes(1);
             this.GetModel<BodyModel>().AddToAllBodyTimeInfos(this.GetModel<MonsterMotherModel>().MotherBodyTimeInfo);
             this.GetSystem<GameEventSystem>().AddEvent(new MonsterMotherSpawnEvent(new TimeRange(spawnTime, spawnTime.AddMinutes(20)),
                 this.GetModel<MonsterMotherModel>().MotherBodyTimeInfo.BodyInfo, 1));

@@ -79,7 +79,8 @@ public class Table :  AbstractDroppableItemContainerViewController {
 
     private void OnImportantNewspaperGenerated(OnImportantNewspaperGenerated e) {
         GameObject obj = SpawnItem(importantNewspaperPrefab);
-        obj.GetComponent<ImportantNewspaperViewController>().SetContent(e.Week);
+        
+        obj.GetComponent<ImportantNewspaperViewController>().SetContent(e.Issue);
     }
 
     private void OnFashionCatalogGenerated(OnFashionCatalogGenerated e) {

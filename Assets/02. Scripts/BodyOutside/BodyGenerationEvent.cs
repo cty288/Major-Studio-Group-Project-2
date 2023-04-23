@@ -59,7 +59,7 @@ public abstract  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegist
         this.RegisterEvent<OnOutsideBodyClicked>(OnOutsideBodyClicked);
     }
 
-    private void OnOutsideBodyClicked(OnOutsideBodyClicked e) {
+    protected void OnOutsideBodyClicked(OnOutsideBodyClicked e) {
         if (e.BodyInfo.ID == bodyInfo.ID) {
             interacted = true;
             if (knockDoorCheckCoroutine != null) {

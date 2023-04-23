@@ -31,7 +31,7 @@ RectTransform:
   m_Children:
   - {fileID: 756582164981529083}
   m_Father: {fileID: 5772153133084242374}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -85,8 +85,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.6311, y: -199.89}
-  m_SizeDelta: {x: 634.62, y: 150.76}
+  m_AnchoredPosition: {x: -0.6311, y: -224.35748}
+  m_SizeDelta: {x: 634.62, y: 168.2749}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2200983541752350171
 CanvasRenderer:
@@ -123,8 +123,8 @@ MonoBehaviour:
     to the police, no traces of the murderer have been found so far. The victim's
     \r\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 664d0beaa48fddd4888aca5585583208, type: 2}
-  m_sharedMaterial: {fileID: 2148452639067674455, guid: 664d0beaa48fddd4888aca5585583208, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
+  m_sharedMaterial: {fileID: 1724549828375453005, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -148,12 +148,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.35
-  m_fontSizeBase: 18
+  m_fontSize: 24.9
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 20
+  m_fontSizeMax: 26
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -219,7 +219,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5772153133435674379}
   m_Father: {fileID: 5772153133084242374}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -661,7 +662,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Communication Restored After An Uneasy Week of Silence. \r\n"
+  m_text: -- Murder Committed with Suspect on the Run.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 664d0beaa48fddd4888aca5585583208, type: 2}
   m_sharedMaterial: {fileID: 2148452639067674455, guid: 664d0beaa48fddd4888aca5585583208, type: 2}
@@ -688,7 +689,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.6
+  m_fontSize: 23.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -765,8 +766,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.5, y: -152.76468}
-  m_SizeDelta: {x: 604.27, y: 243.8293}
+  m_AnchoredPosition: {x: 2.5, y: -163.45972}
+  m_SizeDelta: {x: 604.27, y: 265.2194}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5772153132651671681
 CanvasRenderer:
@@ -806,8 +807,8 @@ MonoBehaviour:
     to the police, no traces of the murderer have been found so far. He victim''s
     house showed no signs of forced entry'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 664d0beaa48fddd4888aca5585583208, type: 2}
-  m_sharedMaterial: {fileID: 2148452639067674455, guid: 664d0beaa48fddd4888aca5585583208, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
+  m_sharedMaterial: {fileID: 1724549828375453005, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -831,12 +832,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 24.5
   m_fontSizeBase: 9.5
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 18
+  m_fontSizeMax: 26
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -1039,11 +1040,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5772153133084242374}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.04, y: -287.95}
+  m_AnchoredPosition: {x: -2.04, y: -313}
   m_SizeDelta: {x: 612.85, y: 17.891}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5772153132999162601
@@ -1115,7 +1116,6 @@ RectTransform:
   m_Children:
   - {fileID: 5772153133684560552}
   - {fileID: 5772153132153799433}
-  - {fileID: 5772153133435674379}
   - {fileID: 5772153133992764951}
   - {fileID: 4891505427186129631}
   - {fileID: 5772153132999162603}
@@ -1174,12 +1174,12 @@ RectTransform:
   - {fileID: 5772153132632002865}
   - {fileID: 5772153133478070652}
   - {fileID: 7768773698767291330}
-  m_Father: {fileID: 5772153133084242374}
-  m_RootOrder: 2
+  m_Father: {fileID: 5772153132153799433}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 7, y: -346.37}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &781104804824211413
@@ -1229,8 +1229,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 108.56, y: -90.76092}
-  m_SizeDelta: {x: 416.24, y: 67.5048}
+  m_AnchoredPosition: {x: 108.56, y: -98.61256}
+  m_SizeDelta: {x: 416.24, y: 83.2081}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5772153133478070653
 CanvasRenderer:
@@ -1267,8 +1267,8 @@ MonoBehaviour:
     to the police, no traces of the murderer have been found so far. The victim's
     \r\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 664d0beaa48fddd4888aca5585583208, type: 2}
-  m_sharedMaterial: {fileID: 2148452639067674455, guid: 664d0beaa48fddd4888aca5585583208, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
+  m_sharedMaterial: {fileID: 1724549828375453005, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1292,8 +1292,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1441,12 +1441,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5772153133084242374}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.51, y: -381.81915}
-  m_SizeDelta: {x: 607.9, y: 157.2416}
+  m_AnchoredPosition: {x: -4.51, y: -392.55762}
+  m_SizeDelta: {x: 607.9, y: 135.7646}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5772153133863916241
 CanvasRenderer:
@@ -1519,7 +1519,7 @@ RectTransform:
   - {fileID: 5772153132811905238}
   - {fileID: 5772153132651671683}
   m_Father: {fileID: 5772153133084242374}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1649,8 +1649,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.5, y: -59.20041}
-  m_SizeDelta: {x: 604.27, y: 430.9579}
+  m_AnchoredPosition: {x: 2.5, y: -72.363525}
+  m_SizeDelta: {x: 604.27, y: 457.2841}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3043570595446782434
 CanvasRenderer:
@@ -1691,8 +1691,8 @@ MonoBehaviour:
     later that night, the victim was reportedly seen walking down the streets again.
     \n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 664d0beaa48fddd4888aca5585583208, type: 2}
-  m_sharedMaterial: {fileID: 2148452639067674455, guid: 664d0beaa48fddd4888aca5585583208, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
+  m_sharedMaterial: {fileID: 1724549828375453005, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1716,12 +1716,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 24
   m_fontSizeBase: 9.5
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 18
+  m_fontSizeMax: 26
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256

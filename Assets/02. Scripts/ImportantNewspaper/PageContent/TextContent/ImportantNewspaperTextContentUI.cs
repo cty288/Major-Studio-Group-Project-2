@@ -17,7 +17,7 @@ public class ImportantNewspaperTextContentUI : ImportantNewspaperPageContentUIPa
 		ImportantNewsTextInfo info = content as ImportantNewsTextInfo;
 		bool hasImage = info.ImageIndex >= 0;
 		bool hasTitle = !string.IsNullOrEmpty(info.Title);
-		weekText.text = $"Week {weekCount}";
+		weekText.text = $"Issue {weekCount}";
 		foreach (ImportantTextContent textContent in importantTextContents) {
 			textContent.gameObject.SetActive(false);
 		}

@@ -3,8 +3,8 @@
   "ABMD5List": [
     {
       "AssetName": "aliens",
-      "MD5": "f3143983e45133eb653adce1ddf8c250",
-      "FileSize": 509.0127,
+      "MD5": "ae1fd6375caf6e2986174e9d51a75990",
+      "FileSize": 520.556641,
       "assetDatas": [
         {
           "Name": "AlienBody",
@@ -65,8 +65,8 @@
     },
     {
       "AssetName": "audios",
-      "MD5": "3cdcc3cbb89cb300665624215f1d023b",
-      "FileSize": 1438.833,
+      "MD5": "3ffd4fc81f2d81be388e92bdca3c6b81",
+      "FileSize": 2682.01563,
       "assetDatas": [
         {
           "Name": "clock_tick",
@@ -134,7 +134,32 @@
           "AssetType": "UnityEngine.AudioClip"
         },
         {
+          "Name": "monster_die",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "monster_kill_player",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "monster_roar_1",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "monster_roar_2",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
           "Name": "gun_fire",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "gun_no_bullet",
           "OwnerBundleName": "audios",
           "AssetType": "UnityEngine.AudioClip"
         },
@@ -227,8 +252,8 @@
     },
     {
       "AssetName": "general",
-      "MD5": "d46e20ca8facf3be8be839b022acb451",
-      "FileSize": 1665.66016,
+      "MD5": "286caef9801275fbbb779735ac955378",
+      "FileSize": 1650.17676,
       "assetDatas": [
         {
           "Name": "DraggedText",
@@ -269,8 +294,8 @@
     },
     {
       "AssetName": "mftest",
-      "MD5": "d0d36ed784ca6e56c11f1f8d2d9335a5",
-      "FileSize": 1054.10742,
+      "MD5": "10871f3c51118b1714a66e98177ea1a8",
+      "FileSize": 1028.24707,
       "assetDatas": [
         {
           "Name": "War loop",
@@ -369,7 +394,7 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "7b519d6108dab47662f9624e4f994bda",
+      "MD5": "951c36f0775a2270d66d2d446eff9680",
       "FileSize": 1.79296875,
       "assetDatas": []
     },

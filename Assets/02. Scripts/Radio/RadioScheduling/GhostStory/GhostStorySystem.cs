@@ -30,7 +30,7 @@ namespace _02._Scripts.Radio.RadioScheduling.GhostStory {
 		}
 
 		private void OnNewDay(OnNewDay e) {
-			if (e.Date.DayOfWeek == importantNewspaperModel.ImportantNewsPaperDay) {
+			if ((e.Day - importantNewspaperModel.NewspaperStartDay)%7==0) {
 				GhostStoryProgram(gameTimeModel.Week);
 			}
 		}

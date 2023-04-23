@@ -122,13 +122,13 @@ namespace _02._Scripts.Radio.RadioScheduling {
 
 		private void OnNewDay(OnNewDay e) {
 			NoMonsterTodayAnnounced = false;
-			if (e.Date.DayOfWeek == importantNewspaperModel.ImportantNewsPaperDay) {
-				BuildThisWeekAllRadioPrograms(e.Date, 7, true);
+			if ( (e.Day - importantNewspaperModel.NewspaperStartDay) % 7 == 0) {
+				BuildThisWeekAllRadioPrograms(e.Date, 7, true, e.Day);
 			}
 
 			if (e.Day == 1) {
 				DateTime date = e.Date;
-				BuildThisWeekAllRadioPrograms(e.Date, importantNewspaperModel.ImportantNewsPaperDay - date.DayOfWeek, false);
+				BuildThisWeekAllRadioPrograms(e.Date, importantNewspaperModel.NewspaperStartDay - e.Day, false, e.Day);
 			}
 			
 		}
@@ -158,7 +158,7 @@ namespace _02._Scripts.Radio.RadioScheduling {
 			radioSchedulingModel.AddToUnscheduled(info, date.Date, gameTimeModel.NightTimeStart);
 		}
 		
-		private void BuildThisWeekAllRadioPrograms(DateTime date, int weekDayCount, bool addToImportantNewspaper) {
+		private void BuildThisWeekAllRadioPrograms(DateTime date, int weekDayCount, bool addToImportantNewspaper, int day) {
 			date = date.Date;
 			Dictionary<DateTime, List<RadioScheduleInfo>> permanentRadioPrograms =
 				GenerateWeeklyPermanentRadioProgramInfo(date, weekDayCount);
@@ -177,10 +177,18 @@ namespace _02._Scripts.Radio.RadioScheduling {
 			this.SendEvent(new OnWeeklyRadioScheduleGenerated() {
 				Schedule = schedule
 			});
+			
+			
 
 			if (addToImportantNewspaper) {
-				importantNewspaperModel.AddPageToNewspaper(gameTimeModel.Week,
+				int issue = importantNewspaperModel.GetIssueForNews(day, date);
+				importantNewspaperModel.AddPageToNewspaper(issue,
 					new ImportantNewspaperRadioSchedulePage(schedule));
+				
+				if ((day - importantNewspaperModel.NewspaperStartDay) % 7 == 0) {
+					importantNewspaperModel.AddPageToNewspaper(issue+1,
+						new ImportantNewspaperRadioSchedulePage(schedule));
+				}
 			}
 		}
 

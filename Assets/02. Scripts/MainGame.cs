@@ -4,6 +4,7 @@ using _02._Scripts.AlienInfos;
 using _02._Scripts.ArmyEnding;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.ChoiceSystem;
+using _02._Scripts.CultEnding;
 using _02._Scripts.Electricity;
 using _02._Scripts.FashionCatalog;
 using _02._Scripts.FPSEnding;
@@ -96,6 +97,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<SuspectSystem>();
         this.RegisterSystem<FoodBorrowSystem>();
         this.RegisterSystem<KFCSystem>();
+        this.RegisterSystem<CultEndingSystem>();
     }
     
     protected void RegisterModel<T>() where T : class, IModel, new() {

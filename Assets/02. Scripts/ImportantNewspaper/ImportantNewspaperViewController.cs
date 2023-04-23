@@ -10,7 +10,7 @@ public class ImportantNewspaperViewController : DraggableItems {
 	
 	private List<SpriteRenderer> renderers = new List<SpriteRenderer>();
 
-	[ES3Serializable] private int week = 0;
+	[ES3Serializable] private int issue = 0;
 	
 	protected TMP_Text weekText;
 	protected GameObject hintCanvas;
@@ -33,7 +33,7 @@ public class ImportantNewspaperViewController : DraggableItems {
 		this.Delay(0.1f, () => {
 			if (this) {
 				this.SendCommand<OpenImportantNewspaperUIPanelCommand>(new OpenImportantNewspaperUIPanelCommand(
-					week));
+					issue));
 				hintCanvas.SetActive(false);
 			}
 		});
@@ -41,13 +41,13 @@ public class ImportantNewspaperViewController : DraggableItems {
 
 	protected override void Start() {
 		base.Start();
-		weekText.text = $"Week {week} Newspaper";
+		weekText.text = $"Newspaper Issue {issue}";
 	}
 
-	public void SetContent(int week) {
-		this.week = week;
+	public void SetContent(int Issue) {
+		this.issue = Issue;
 		hintCanvas.gameObject.SetActive(true);
-		weekText.text = $"Week {week} Newspaper";
+		weekText.text = $"Newspaper Issue {Issue}";
 	}
 
 	public override void OnThrownToRubbishBin() {
@@ -55,17 +55,17 @@ public class ImportantNewspaperViewController : DraggableItems {
 	}
 }
 public class OpenImportantNewspaperUIPanelCommand : AbstractCommand<OpenImportantNewspaperUIPanelCommand> {
-	private int week;
+	private int _issue;
 	public OpenImportantNewspaperUIPanelCommand(){}
-	public OpenImportantNewspaperUIPanelCommand(int week) {
-		this.week = week;
+	public OpenImportantNewspaperUIPanelCommand(int issue) {
+		this._issue = issue;
 	}
 	protected override void OnExecute() {
 		this.SendEvent<OnImportantNewspaperUIPanelOpened>(
-			new OnImportantNewspaperUIPanelOpened() {Week =  week});
+			new OnImportantNewspaperUIPanelOpened() {Issue =  _issue});
 	}
 }
 
 public struct OnImportantNewspaperUIPanelOpened {
-	public int Week;
+	public int Issue;
 }

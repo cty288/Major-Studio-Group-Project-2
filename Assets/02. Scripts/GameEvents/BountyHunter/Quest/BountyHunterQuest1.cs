@@ -47,12 +47,12 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
         bool alreadyNotified = this.GetModel<BountyHunterModel>().QuestBodyClueAllHappened;
         
         
-        string welcome = $"Buddy, I got some clues about <color=yellow>the time</color> when a victim was killed by the creature we are looking for. At <color=yellow>{hourIn12}:{ClueHappenTime.Minute} pm</color>," +
+        string welcome = $"Buddy, I got some clues about <color=yellow>the time</color> when a victim was killed by the Xenovore. At <color=yellow>{hourIn12}:{ClueHappenTime.Minute} pm</color>," +
                          $" pay attention to the <color=yellow>flashlights</color> outside your window. The number of flashlights will indicate which <color=yellow>hour</color> the victim died in PM. " +
-                         $"I suspect the creature has already micmicked the victim. Don't forget call me back when you find out the murderer! Good luck!";
+                         $"I suspect it has already micmicked the victim. Don't forget call me back when you find out the murderer! Good luck!";
 
         if (alreadyNotified) {
-            welcome = $"Buddy, someone reported a new occurrence of that creature! At <color=yellow>{hourIn12}:{ClueHappenTime.Minute} pm</color>," +
+            welcome = $"Buddy, someone reported a new occurrence of the Xenovore! At <color=yellow>{hourIn12}:{ClueHappenTime.Minute} pm</color>," +
                       $" pay attention to the <color=yellow>flashlights outside your window</color>. As always, the number of flashlights will still indicate which <color=yellow>hour</color> in PM. Don't forget call me back when you find out the murderer! Good luck!";
         }
         speaker.Speak(welcome, AudioMixerList.Singleton.AudioMixerGroups[2], "Bounty Hunter", 1f, OnSpeakEnd);

@@ -61,16 +61,16 @@ public class ImportantNewspaperPanelViewController : OpenableUIPanel {
 	}
 
 	private void OnImportantNewspaperUIPanelOpened(OnImportantNewspaperUIPanelOpened e) {
-		newsInfo = model.GetNewspaperInfo(e.Week);
+		newsInfo = model.GetNewspaperInfo(e.Issue);
 		currentPage = 0;
-		if (lastOpenedPage.ContainsKey(e.Week)) {
-			currentPage = lastOpenedPage[e.Week];
+		if (lastOpenedPage.ContainsKey(e.Issue)) {
+			currentPage = lastOpenedPage[e.Issue];
 		}
 		else {
-			lastOpenedPage.Add(e.Week, currentPage);
+			lastOpenedPage.Add(e.Issue, currentPage);
 		}
 		ShowPage(currentPage);
-		Show(e.Week);
+		Show(e.Issue);
 	}
 
 	private void ShowPage(int page) {
@@ -85,7 +85,7 @@ public class ImportantNewspaperPanelViewController : OpenableUIPanel {
 		nextPageButton.gameObject.SetActive(page < newsInfo.News.Count - 1);
 	}
 
-	private void Show(int week) {
+	private void Show(int issue) {
 		Show(0.5f);
 	}
 

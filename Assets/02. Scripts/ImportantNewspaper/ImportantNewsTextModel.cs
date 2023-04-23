@@ -43,10 +43,10 @@ public class ImportantNewsTextInfo: IImportantNewspaperPageContent {
 	public List<IImportantNewspaperPageContent> GetPages() {
 		int pageNumbers = 1;
 		List<IImportantNewspaperPageContent> pages = new List<IImportantNewspaperPageContent>();
-		int firstPageLength = (ImageIndex >= 0) ? 400 : (Title.Length > 0) ? 430 : 715;
+		int firstPageLength = (ImageIndex >= 0) ? 350 : (Title.Length > 0) ? 400 : 690;
 		//first page has image, then the remaining pages are text only
 		if(Content.Length > firstPageLength) {
-			pageNumbers += Mathf.CeilToInt((Content.Length - firstPageLength) / 715f);
+			pageNumbers += Mathf.CeilToInt((Content.Length - firstPageLength) / 690f);
 		}
 			
 		//get the text for each page. If the cut is in the middle of a word, cut it at the end of the word
@@ -56,7 +56,7 @@ public class ImportantNewsTextInfo: IImportantNewspaperPageContent {
 			string subtitle = i == 0 ? SubTitle : "";
 			int imageIndex = i == 0 ? ImageIndex : -1;
 			if(i > 0) {
-				pageContentLength = 715;
+				pageContentLength = 690;
 			}
 			int cutIndex = pageContentLength;
 			bool hasNextPage = false;
