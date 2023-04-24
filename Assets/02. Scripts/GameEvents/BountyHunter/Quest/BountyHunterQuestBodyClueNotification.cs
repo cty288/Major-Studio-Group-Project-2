@@ -40,6 +40,7 @@ public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
     }
 
     public override void OnStart() {
+        telephoneSystem = this.GetSystem<TelephoneSystem>();
         BountyHunterQuestClueNotificationContact Contact = NotificationContact as BountyHunterQuestClueNotificationContact;
         MonsterMotherModel monsterMotherModel = this.GetModel<MonsterMotherModel>();
         if (monsterMotherModel.MotherBodyTimeInfo.DayRemaining <= 0 || bountyHunterModel.QuestFinished) {

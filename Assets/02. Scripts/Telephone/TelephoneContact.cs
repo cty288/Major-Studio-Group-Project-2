@@ -7,11 +7,11 @@ using UnityEngine;
 [ES3Serializable]
 public abstract class TelephoneContact: ICanGetSystem, ICanSendEvent, ICanRegisterEvent, ICanGetModel {
    // [field: ES3NonSerializable]
-    public Action OnConversationComplete { get; set; }
+    public Action OnConversationComplete { get; set; } = null;
     protected Speaker speaker;
     //protected TelephoneSystem telephoneSystem;
-    public Action<bool> OnTelephoneHangUp { get; set; }
-    public Action OnTelephoneStart { get; set; }
+    public Action<bool> OnTelephoneHangUp { get; set; } = delegate { };
+    public Action OnTelephoneStart { get; set; } = delegate { };    
     
     protected GameTimeModel gameTimeModel;
 
