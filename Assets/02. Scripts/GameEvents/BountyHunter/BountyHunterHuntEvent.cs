@@ -99,7 +99,7 @@ public class BountyHunterHuntEvent : GameEvent{
             importantNewspaperModel.RemoveAllPagesOfID(week, "BountyHunterKill");
         }
 
-        importantNewspaperModel.AddPageToNewspaper(this.GetModel<GameTimeModel>().Day,
+        importantNewspaperModel.AddPageToNewspaper(week,
             importantNewsTextModel.GetInfo(killAlien ? "BountyHunterSuccess" : "BountyHunterFail"), 1);
     }
 
