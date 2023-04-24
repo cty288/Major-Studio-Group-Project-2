@@ -40,6 +40,14 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
             Destroy(updater.gameObject);
         }
         
+        foreach (var updater in GameObject.FindObjectsOfType<GameEventSystemUpdater>()) {
+            Destroy(updater.gameObject);
+        }
+        
+        foreach (var updater in GameObject.FindObjectsOfType<TelephoneSystemUpdater>()) {
+            Destroy(updater.gameObject);
+        }
+        
         SceneManager.LoadScene("Opening");
     }
 

@@ -56,7 +56,13 @@ public class MainMenuPanel : MonoBehaviour {
         foreach (var updater in GameObject.FindObjectsOfType<ElectricitySystemUpdater>()) {
             Destroy(updater.gameObject);
         }
+        foreach (var updater in GameObject.FindObjectsOfType<GameEventSystemUpdater>()) {
+            Destroy(updater.gameObject);
+        }
         
+        foreach (var updater in GameObject.FindObjectsOfType<TelephoneSystemUpdater>()) {
+            Destroy(updater.gameObject);
+        }
         SceneManager.LoadScene("Opening");
     }
 }

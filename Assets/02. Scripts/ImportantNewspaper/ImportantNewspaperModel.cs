@@ -127,11 +127,25 @@ public class ImportantNewspaperModel: AbstractSavableModel {
 	}
 
 	public int GetIssueForNews(int day, DateTime date) {
+		
 		//suppose newspaper start day is 3. So if day is 1-3 (inclusive), week is 1; if day is 4-10 (inclusive) , it is week 2 and so on
 		if (day <= NewspaperStartDay) {
 			return 1;
 		}
 		else {
+			//Mon-Sun
+			int wk = day / 7 + 1;
+			if(day % 7 == 0) {
+				wk--;
+			}
+			int dow = (int) date.DayOfWeek;
+			if(dow > (int) newsDays[1] && dow<= (int)newsDays[0]) {
+				return wk * 2 - 1;
+			}else {
+				return wk * 2;
+			}
+			
+			/*
 			if (newsDays.Length <= 1) {
 				if((day - NewspaperStartDay) % 7 == 0) {
 					return (day - NewspaperStartDay) / 7 + 1;
@@ -149,7 +163,7 @@ public class ImportantNewspaperModel: AbstractSavableModel {
 				else {
 					return week * 2 + 2;
 				}
-			}
+			}*/
 			
 		}
 
