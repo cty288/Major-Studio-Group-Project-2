@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class RubbishBinViewController : AbstractMikroController<MainGame> {
     [SerializeField] private Material outlineMaterial;
+    [SerializeField] private WarningPanel warningPanel;
+    
     private SpriteRenderer spriteRenderer;
     private Material defaultMaterial;
     private NewspaperSystem newspaperSystem;
@@ -34,12 +36,13 @@ public class RubbishBinViewController : AbstractMikroController<MainGame> {
         //check if the mouse is over the sprite
         if (collider.bounds.Contains(mousePosition)) {
             if (DraggableItems.CurrentDroppingItem) {
+                warningPanel.Show(1);
                 Highlight();
                 draggingItem = DraggableItems.CurrentDroppingItem;
             }
             else {
                 if (draggingItem) {
-                   
+                    warningPanel.Hide();
                     StopHighlight();
                     draggingItem.OnThrown();
                     
@@ -49,6 +52,7 @@ public class RubbishBinViewController : AbstractMikroController<MainGame> {
             }
         }
         else {
+            warningPanel.Hide();
             StopHighlight();
             draggingItem = null;
         }
