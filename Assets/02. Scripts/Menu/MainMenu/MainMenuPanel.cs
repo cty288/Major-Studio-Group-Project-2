@@ -53,6 +53,10 @@ public class MainMenuPanel : MonoBehaviour {
             Destroy(updater.gameObject);
         }
         
+        foreach (var updater in GameObject.FindObjectsOfType<ElectricitySystemUpdater>()) {
+            Destroy(updater.gameObject);
+        }
+        
         SceneManager.LoadScene("Opening");
     }
 }

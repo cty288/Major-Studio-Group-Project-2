@@ -8,7 +8,7 @@ namespace _02._Scripts.GameEvents.BountyHunter {
 	public class BountyHunterAdPhoneCallEvent : IncomingCallEvent {
 		public override float TriggerChance {
 			get {
-				if (bountyHunterModel.ContactedBountyHunter) {
+				if (this.GetModel<BountyHunterModel>().ContactedBountyHunter) {
 					return 0;
 				}
 

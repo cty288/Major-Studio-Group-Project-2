@@ -36,6 +36,9 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
         foreach (var updater in GameObject.FindObjectsOfType<TimeSystem.TimeSystemUpdate>()) {
             Destroy(updater.gameObject);
         }
+        foreach (var updater in GameObject.FindObjectsOfType<ElectricitySystemUpdater>()) {
+            Destroy(updater.gameObject);
+        }
         
         SceneManager.LoadScene("Opening");
     }
