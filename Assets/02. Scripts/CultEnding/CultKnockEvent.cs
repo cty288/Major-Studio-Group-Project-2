@@ -94,7 +94,7 @@ namespace _02._Scripts.CultEnding {
 			refuseTime++;
 			Speaker speaker = GameObject.Find("OutsideBodySpeaker").GetComponent<Speaker>();
 			string message =
-				"Well...You have been brainwashed by the government. That is disappointing, perhaps you will see the truth next time.";
+				"Well...That is disappointing. You have been brainwashed by the government. Perhaps you will see the truth next time.";
 
 			if (refuseTime >= 3) {
 				message = "If you're not willing to see the truth, then we cannot help you. " +
