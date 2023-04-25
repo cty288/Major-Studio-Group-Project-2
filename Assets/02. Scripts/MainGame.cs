@@ -71,6 +71,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<SurvivalGuideModel>();
         this.RegisterModel<ArmyEndingModel>();
         this.RegisterModel<MonsterMotherModel>();
+        this.RegisterModel<CultEndingModel>();
         
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());
@@ -98,6 +99,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterSystem<FoodBorrowSystem>();
         this.RegisterSystem<KFCSystem>();
         this.RegisterSystem<CultEndingSystem>();
+        
     }
     
     protected void RegisterModel<T>() where T : class, IModel, new() {

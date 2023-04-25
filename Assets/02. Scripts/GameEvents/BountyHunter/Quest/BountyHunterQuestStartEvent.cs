@@ -54,8 +54,12 @@ public class BountyHunterQuestStartEvent : IncomingCallEvent {
     }
 
     protected override void OnComplete() {
+        BodyModel bodyModel = this.GetModel<BodyModel>();
         MonsterMotherModel monsterMotherModel = this.GetModel<MonsterMotherModel>();
-        this.GetModel<BodyModel>().AddToAllBodyTimeInfos(monsterMotherModel.MotherBodyTimeInfo);
+        if (!this.GetModel<MonsterMotherModel>().MonsterMotherSpawned && !bodyModel.IsInAllBodyTimeInfos(monsterMotherModel.MotherBodyTimeInfo.BodyInfo)) {
+            bodyModel.AddToAllBodyTimeInfos(monsterMotherModel.MotherBodyTimeInfo);
+        }
+       
 
 
         DateTime nextClueHappenTime = gameTimeManager.CurrentTime.Value.AddDays(1);

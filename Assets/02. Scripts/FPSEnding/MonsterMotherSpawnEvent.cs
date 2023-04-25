@@ -109,10 +109,9 @@ public class MonsterMotherSpawnEvent : DailyKnockEvent {
         }
 
         DateTime nextStartTime = StartTimeRange.StartTime.AddDays(Random.Range(2, 4));
-        nextStartTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day, Random.Range(gameTimeManager.NightTimeStart, 24),
-            Random.Range(10, 45), 0);
-        DateTime nextEndTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day,
-            23, 50, 0);
+        nextStartTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day, 23,
+            Random.Range(0, 39), 0);
+        DateTime nextEndTime = nextStartTime.AddMinutes(20);
         gameEventSystem.AddEvent(new MonsterMotherSpawnEvent(new TimeRange(nextStartTime, nextEndTime),
             bodyInfo, 1));
     }

@@ -34,6 +34,8 @@ public class Table :  AbstractDroppableItemContainerViewController {
 
     [SerializeField] protected GameObject survivalGuidePrefab;
     
+    [SerializeField] protected GameObject cultLetterPrefab;
+    
     private ImportantNewspaperModel importantNewspaperModel;
     private NewspaperViewController todayNewspaper;
     
@@ -52,10 +54,18 @@ public class Table :  AbstractDroppableItemContainerViewController {
         this.RegisterEvent<OnImportantNewspaperGenerated>(OnImportantNewspaperGenerated)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnPosterGet>(OnPosterGet).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnSpawnCultLetterOnTable>(OnSpawnCultLetterOnTable).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.GetModel<SurvivalGuideModel>().ReceivedSurvivalGuideBefore.RegisterOnValueChaned(OnHasSurvivalGuideChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
+        
+        
 
         importantNewspaperModel = this.GetModel<ImportantNewspaperModel>();
+    }
+
+    private void OnSpawnCultLetterOnTable(OnSpawnCultLetterOnTable e) {
+        GameObject obj = SpawnItem(cultLetterPrefab);
+        obj.GetComponent<CultLetterOnTableViewController>().SetContent(e.Contents);
     }
 
     private void OnHasSurvivalGuideChanged(bool hasGuide) {

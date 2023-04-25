@@ -13,14 +13,16 @@ namespace _02._Scripts.FPSEnding {
 
 		public BindableProperty<int> MotherHealth { get; private set; } = new BindableProperty<int>(3);
 		
-		
+		[field: ES3Serializable]
+		public bool MonsterMotherSpawned { get; set; } = false;
 
 		protected override void OnInit() {
 			base.OnInit();
+			
 			if(MotherBodyTimeInfo == null) {
 				MotherBodyTimeInfo = new BodyTimeInfo(9999,
 					BodyInfo.GetRandomBodyInfo(BodyPartDisplayType.Shadow, true, Random.Range(0.1f,0.9f),
-						new NormalKnockBehavior(4, 6, null, "FPS_Monster"), null, 40),
+						new MonsterMotherKnockBehavior(4, 6, null, "FPS_Monster"), null, 40),
 					true);
 				MotherBodyTimeInfo.BodyInfo.VoiceTag.VoiceGroup = AudioMixerList.Singleton.AudioMixerGroups[4];
 				MotherBodyTimeInfo.BodyInfo.VoiceTag.VoiceType = Gender.MALE;

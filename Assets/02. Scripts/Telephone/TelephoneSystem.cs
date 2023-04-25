@@ -145,7 +145,9 @@ public class TelephoneSystem : AbstractSavableSystem {
 
     public TelephoneContact CurrentIncomingCallContact => currentIncomingCallContact;
     public void IncomingCall(TelephoneContact contact, int maxWaitTime) {
-        if ((State.Value == TelephoneState.Idle || State.Value == TelephoneState.Dealing) && electricityModel.HasElectricity() && contact.OnDealt() && !IsBroken) {
+        DateTime currentTime = gameTimeManager.CurrentTime.Value;
+        if ((State.Value == TelephoneState.Idle || State.Value == TelephoneState.Dealing) && electricityModel.HasElectricity() && contact.OnDealt() && !IsBroken
+            &&(!(currentTime.Hour!=23 && currentTime.Minute >= 58))) {
             currentIncomingCallContact = contact;
             State.Value = TelephoneState.IncomingCall;
 
@@ -178,6 +180,11 @@ public class TelephoneSystem : AbstractSavableSystem {
         for (int i = 0; i < beepTime; i++) {
             OnDealWaitBeep?.Invoke();
             yield return new WaitForSeconds(2.5f);
+            DateTime currentTime = gameTimeManager.CurrentTime.Value;
+            if (currentTime.Hour == 23 && currentTime.Minute >= 58) {
+                HangUp(false);
+                break;
+            }
         }
 
         if (CheckContactExists(dealingDigits)) {

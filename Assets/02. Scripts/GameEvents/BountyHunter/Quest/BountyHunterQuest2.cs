@@ -110,6 +110,8 @@ public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
     protected ITimeSystem timeSystem;
     protected AudioSource knockAudioSource;
     
+    protected bool interacted = false;
+    
     public BountyHunterQuest2ClueEvent(TimeRange startTimeRange, string location, BodyInfo bodyInfo, 
         Action onEnd, Action onMissed) : base(startTimeRange) {
         this.location = location;
@@ -133,6 +135,7 @@ public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
     private void OnOutsideBodyClicked(OnOutsideBodyClicked e) {
         if (e.BodyInfo.Equals(bodyInfo))
         {
+            interacted = true;
             if (knockDoorCheckCoroutine != null) {
                 CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
                 knockDoorCheckCoroutine = null;
@@ -165,17 +168,21 @@ public class BountyHunterQuest2ClueEvent : BountyHunterQuestClueEvent
     public override EventState OnUpdate()
     {
         DateTime currentTime = gameTimeManager.CurrentTime.Value;
+        
+        if (this.GetModel<GameStateModel>().IsDoorOpened && !interacted) {
+            return EventState.Missed;
+        }
 
-        if (gameStateModel.GameState.Value == GameState.End || (currentTime.Hour == 23 && currentTime.Minute >= 58)) {
+        if ((currentTime.Hour == 23 && currentTime.Minute >= 58 && !interacted) || gameStateModel.GameState.Value == GameState.End) {
             if (knockDoorCheckCoroutine != null) {
                 CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
                 knockDoorCheckCoroutine = null;
             }
+            
             if (nestedKnockDoorCheckCoroutine != null) {
                 CoroutineRunner.Singleton.StopCoroutine(nestedKnockDoorCheckCoroutine);
                 nestedKnockDoorCheckCoroutine = null;
             }
-            
             bodyGenerationModel.CurrentOutsideBody.Value = null;
             OnNotOpen();
             return EventState.End;
@@ -332,14 +339,14 @@ public class BountyHunterQuestClueInfoRadioAreaEvent : BountyHunterQuestClueInfo
         }
 
         if (!alreadyNotified) {
-            sb.AppendFormat("A witness of an <color=yellow>extremely agile monster</color>, who was believed to kill a <color=yellow>{1}</color> a few days ago, was seen at <color=yellow>{0}</color>.", location, name);
+            sb.AppendFormat("A witness of an <color=yellow>extremely agile monster</color>, who was believed to kill a <color=yellow>{1}</color> a few days ago, was seen again at <color=yellow>{0}</color>.", location, name);
             sb.AppendFormat(AlienDescriptionFactory.Formatter,
-                "{0:hair}. And {0:height}", body);
+                "{0:hair}. And {0:voice}", body);
         }
         else {
             sb.AppendFormat("A resident reported that they encountered the creature who was <color=yellow>extremely agile</color>, and who killed the <color=yellow>{1}</color> few days ago at <color=yellow>{0}</color>.", location, name);
             sb.AppendFormat(AlienDescriptionFactory.Formatter,
-                "{0:hair}. And {0:height}", body);
+                "{0:hair}. And {0:voice}", body);
         }
         
         return sb.ToString();

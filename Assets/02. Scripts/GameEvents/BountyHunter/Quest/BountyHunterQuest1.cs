@@ -67,14 +67,20 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
             
             DateTime nextStartTime = ClueHappenTime.AddDays(1);
             GameTimeManager gameTimeManager = this.GetSystem<GameTimeManager>();
-            nextStartTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day, Random.Range(gameTimeManager.NightTimeStart, 24),
-                Random.Range(10, 45), 0);
-            DateTime nextEndTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day,
-                23, 50, 0);
+            nextStartTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day, 23,
+                Random.Range(0, 39), 0);
+            DateTime nextEndTime = nextStartTime.AddMinutes(20);
 
-            this.GetSystem<GameEventSystem>().AddEvent(new MonsterMotherSpawnEvent(
-                new TimeRange(nextStartTime, nextEndTime),
-                monsterMotherModel.MotherBodyTimeInfo.BodyInfo, 1));
+            if (!monsterMotherModel.MonsterMotherSpawned) {
+               
+				
+                
+                monsterMotherModel.MonsterMotherSpawned = true;
+                this.GetSystem<GameEventSystem>().AddEvent(new MonsterMotherSpawnEvent(
+                    new TimeRange(nextStartTime, nextEndTime),
+                    monsterMotherModel.MotherBodyTimeInfo.BodyInfo, 1));
+            }
+           
 
             Debug.Log("Target quest body will be spawned at " + nextStartTime);
         }
@@ -199,15 +205,15 @@ public class BountyHunterQuestClueInfoRadioEvent : BountyHunterQuestClueInfoEven
 
         
         if (!alreadyNotified) {
-            sb.AppendFormat("The speculation showed that a <color=yellow>{1}</color> died at <color=yellow>{0} pm.</color>", time, name);
+            sb.AppendFormat("Dear Residents, our security camera captured a <color=yellow>{1}</color> was killed by a monster at <color=yellow>{0} pm today.</color>", time, name);
             sb.AppendFormat(AlienDescriptionFactory.Formatter,
-                " The CCTV captured his last image, {0:clothb}. In addition, {0:clothl}", body);
+                " According to the security camera, {0:clothb} In addition, {0:clothl}", body);
             return sb.ToString();
         }
         else {
             sb.AppendFormat("<color=yellow>The creature who killed the {1}</color> a few days ago was once again seen at <color=yellow>{0}</color> pm this afternoon.", time, name);
             sb.AppendFormat(AlienDescriptionFactory.Formatter,
-                " The CCTV captured his last image. {0:clothb}. In addition, {0:clothl}", body);
+                " The security camera captured his last image. {0:clothb} In addition, {0:clothl}", body);
             return sb.ToString();
         }
        

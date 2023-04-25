@@ -192,6 +192,8 @@ namespace _02._Scripts.BodyManagmentSystem {
 		public void AddToAllBodyTimeInfos(BodyTimeInfo bodyTimeInfo) {
 			allBodyTimeInfos.Add(bodyTimeInfo);
 		}
+		
+		
 
 	}
 }

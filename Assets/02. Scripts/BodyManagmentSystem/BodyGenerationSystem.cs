@@ -101,7 +101,13 @@ public class BodyGenerationSystem : AbstractSystem {
         float baseProb = float.Parse(hotUpdateDataModel.GetData("Monster_Knock_Prob_Base").values[0]);
         var availableBodyPartIndices = GetAvailableBodyPartIndicesa();
         float alienChance = Mathf.Min((baseProb + Mathf.Min(0.15f, dayNum * 0.007f)) * Aliens.Count, 0.8f);
-        alienChance += bodyModel.ConsecutiveNonAlianSpawnCount * 0.05f;
+        if (dayNum >= 7) {
+            alienChance += bodyModel.ConsecutiveNonAlianSpawnCount * 0.05f;
+        }
+        else {
+            alienChance += bodyModel.ConsecutiveNonAlianSpawnCount * 0.02f;
+        }
+       
         alienChance = Mathf.Min(alienChance, 0.9f);
         
         
