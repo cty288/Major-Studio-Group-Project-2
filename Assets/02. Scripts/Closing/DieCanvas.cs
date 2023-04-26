@@ -29,10 +29,16 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
         BackToOpening();
     }
 
-    protected void BackToOpening() {
+    public static void BackToOpening() {
         Architecture<MainGame>.ResetArchitecture();
         
         //MainGame.Interface.ResetArchitecture();
+        DeleteUpdaters();
+
+        SceneManager.LoadScene("Opening");
+    }
+
+    private static void DeleteUpdaters() {
         foreach (var updater in GameObject.FindObjectsOfType<TimeSystem.TimeSystemUpdate>()) {
             Destroy(updater.gameObject);
         }
@@ -47,8 +53,14 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
         foreach (var updater in GameObject.FindObjectsOfType<TelephoneSystemUpdater>()) {
             Destroy(updater.gameObject);
         }
+    }
+    public static void BackToMenu() {
+        Architecture<MainGame>.ResetArchitecture();
         
-        SceneManager.LoadScene("Opening");
+        //MainGame.Interface.ResetArchitecture();
+        DeleteUpdaters();
+        
+        SceneManager.LoadScene("Menu");
     }
 
     public void Show(string dieReason, bool isPrologue = false) {

@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using MikroFramework.Architecture;
 using Crosstales.RTVoice;
+using MikroFramework.TimeSystem;
+using UnityEngine.SceneManagement;
 
 public class PauseGame : MonoBehaviour {
     protected static bool isPause = false;
@@ -16,6 +18,8 @@ public class PauseGame : MonoBehaviour {
     [SerializeField] protected Sprite Spr_Pause;
     [SerializeField] protected Sprite Spr_Resume;
 
+    protected Button continueButton;
+    protected Button mainMenuButton;
     private void Awake() {
         PausePanel = transform.Find("Panel").gameObject;
         PauseBtn = transform.Find("PauseButton").gameObject;
@@ -23,7 +27,26 @@ public class PauseGame : MonoBehaviour {
         PauseBtn.GetComponent<Button>().onClick.AddListener(OnPauseButtonClicked);
         isPause = false;
         PausePanel.transform.Find("BG").GetComponent<Button>().onClick.AddListener(OnPausePanelClicked);
+        continueButton = PausePanel.transform.Find("ContinueButton").GetComponent<Button>();
+        mainMenuButton = PausePanel.transform.Find("QuitButton").GetComponent<Button>();
+        
+        continueButton.onClick.AddListener(OnContinueButtonClicked);
+        mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
     }
+
+    private void OnMainMenuButtonClicked() {
+        BackToOpening();
+    }
+    
+    protected void BackToOpening() {
+        Time.timeScale = 1;
+       DieCanvas.BackToMenu();
+    }
+    private void OnContinueButtonClicked() {
+        Btn_Pause();
+    }
+    
+    
 
     private void OnPausePanelClicked() {
         if (isPause) {
