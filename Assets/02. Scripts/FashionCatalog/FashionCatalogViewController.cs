@@ -11,7 +11,7 @@ using UnityEngine;
 public class FashionCatalogViewController : DraggableItems {
 	private GameObject indicateCanvas;
 	private GameObject dateCanvas;
-	private List<SpriteRenderer> renderers = new List<SpriteRenderer>();
+	private SpriteRenderer renderer;
 	private SpriteRenderer selfRenderer;
 	protected FashionCatalogModel fashionCatalogModel;
 	//protected SpriteRenderer spriteRenderer;
@@ -24,7 +24,7 @@ public class FashionCatalogViewController : DraggableItems {
 	[ES3Serializable] private int spriteIndex = 0;
 	protected override void Awake() {
 		base.Awake();
-		renderers = GetComponentsInChildren<SpriteRenderer>(true).ToList();
+		renderer = GetComponent<SpriteRenderer>();
 		selfRenderer = GetComponent<SpriteRenderer>();
 		indicateCanvas = transform.Find("CanvasParent/Canvas").gameObject;
 		dateCanvas = transform.Find("CanvasParent/DateCanvas").gameObject;
@@ -46,9 +46,7 @@ public class FashionCatalogViewController : DraggableItems {
 
 
 	public override void SetLayer(int layer) {
-		foreach (var renderer in renderers) {
-			renderer.sortingOrder = layer;
-		}
+		renderer.sortingOrder = layer;
 		//indicateCanvas.GetComponent<Canvas>().sortingOrder = layer;
 		dateCanvas.GetComponent<Canvas>().sortingOrder = 1000;
 	}

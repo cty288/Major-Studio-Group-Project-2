@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.FPSEnding;
+using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
 using TMPro;
@@ -12,17 +14,34 @@ public class GunViewController : AbstractMikroController<MainGame> {
     
     [SerializeField] private List<GameObject> bullets = new List<GameObject>();
     
+    [SerializeField] private Sprite gunShootingSprite;
+    private Sprite gunIdleSprite;
+    private SpriteRenderer spriteRenderer;
     private void Awake() {
         infoText = transform.Find("Canvas/InfoText").GetComponent<TMP_Text>();
         playerResourceModel = this.GetModel<PlayerResourceModel>();
         gameObject.SetActive(false);
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        gunIdleSprite = spriteRenderer.sprite;
 
         this.RegisterEvent<OnPlayerResourceNumberChanged>(OnResourceNumberChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.GetModel<MonsterMotherModel>().isFightingMother.RegisterOnValueChaned(OnFightMotherChanged)
+            .UnRegisterWhenGameObjectDestroyed(gameObject);
     }
-    
-    
+
+    private void OnFightMotherChanged(bool isFighting) {
+        if (isFighting) {
+            spriteRenderer.sprite = gunShootingSprite;
+        }
+        else {
+            this.Delay(1f, () => {
+                spriteRenderer.sprite = gunIdleSprite;
+            });
+        }
+    }
+
 
     private void OnNewDay(OnNewDay e) {
         if (e.Day == 0) {

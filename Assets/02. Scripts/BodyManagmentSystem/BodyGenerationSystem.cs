@@ -112,8 +112,10 @@ public class BodyGenerationSystem : AbstractSystem {
         
         
         Debug.Log("alienChance: " + alienChance);
-        if (bodyModel.AllTodayDeadBodies.Count ==0) {
+        PlayerResourceModel playerResourceModel = this.GetModel<PlayerResourceModel>();
+        if (bodyModel.AllTodayDeadBodies.Count ==0 || playerResourceModel.GetResourceCount<FoodResource>()<=0) {
             alienChance = 0;
+            bodyModel.ConsecutiveNonAlianSpawnCount = 0;
         }
         float nonAlienChance = 1f - alienChance;
         

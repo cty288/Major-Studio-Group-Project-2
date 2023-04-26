@@ -37,8 +37,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.34, y: 0.08}
-  m_SizeDelta: {x: 24.96, y: 2.895}
+  m_AnchoredPosition: {x: -0.1, y: -0.1}
+  m_SizeDelta: {x: 7.5985, y: 0.8807}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7309040252877850278
 Canvas:
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2.4
+  m_fontSize: 0.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -396,8 +396,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8146898807985125150}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: -2.2, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_LocalPosition: {x: 3.32, y: -1.06, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3481374917927229039}
@@ -434,10 +434,10 @@ GameObject:
   - component: {fileID: 5228881148542255888}
   - component: {fileID: 7700382587268888030}
   - component: {fileID: 8653328285625172375}
-  - component: {fileID: 8767235146603684940}
   - component: {fileID: 6657078895914074961}
   - component: {fileID: -1236852565294065796}
   - component: {fileID: -2478064881115994032}
+  - component: {fileID: 7403307831524961255}
   m_Layer: 0
   m_Name: CultistLetterOnTable
   m_TagString: Untagged
@@ -453,8 +453,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8221454714545420841}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.7215295, y: -1.7691003, z: 0}
-  m_LocalScale: {x: 0.11709041, y: 0.11709041, z: 0.11709041}
+  m_LocalPosition: {x: -3.701, y: -1.812, z: 0}
+  m_LocalScale: {x: 0.5626618, y: 0.5626618, z: 0.5626618}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1377242584356710572}
@@ -503,8 +503,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -434282231, guid: 0a58cf51016929c4982e3a2c62369e4f, type: 3}
-  m_Color: {r: 0.21918821, g: 1, b: 0, a: 1}
+  m_Sprite: {fileID: 1782396984, guid: 838af90605dcb3045a39ba25d650593d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -526,37 +526,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 260b52fa4b43b9d4296254fbde67bf60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMaterial: {fileID: 2100000, guid: 954f8f9d322adc04a81c417cc230a15a, type: 2}
+  outlineMaterial: {fileID: 2100000, guid: 4e0ae13635569ec4faae7fbcd37a0854, type: 2}
   overriddeImage: {fileID: 0}
   followingObject: {fileID: 893649775285794547}
   followingObjectIsUI: 0
   moveToTopWhenHovering: 0
---- !u!61 &8767235146603684940
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8221454714545420841}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.5, y: 5}
-    newSize: {x: 7.3125, y: 9.4375}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 8.5, y: 5}
-  m_EdgeRadius: 0
 --- !u!114 &6657078895914074961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,7 +583,6 @@ MonoBehaviour:
     - {fileID: 7652230241926893968}
     - {fileID: 8182485274407277429}
     - {fileID: 0}
-    - {fileID: 8767235146603684940}
     - {fileID: 6657078895914074961}
     - {fileID: 11500000, guid: 1f9c4b9154b0b9a47b79dd35febc8a09, type: 3}
     - {fileID: -1236852565294065796}
@@ -625,7 +598,7 @@ MonoBehaviour:
     - {fileID: 5372419191741428433}
     - {fileID: 5608783702819186545}
     - {fileID: 2012706408550138822}
-    _Values: abb44f57ba565a0786d31e78626b273a770ee2e7d1b8a51c3fa63e381c59a931e55d75aeee972d2e542444411aaa843c3d3d4da391efc10d0f3318141722ea1f7d505dc0e1d628201f4bc3090318c916d5848aa658b23c2be07c604581e6e9770f64c4ca4dc45b67ecd37cbad347f527fd2fe99cac9078351331df6476e39f38624bfa9e53fec9112822912b2ef6fe288f78be4f307adb60dcf9b71be4f6f1308d4ae3e0bd6b840407053a30dd5b9b1cfea4d38997a86859275ac25a47ad2c3231609ee3131d6a06fdc35735b50b3e7fa26517d2fcfd7162e206b963a92abd5ad808fe7dbcb708154cecea65469e92329941fbadc4ff2e2e2efefef29cf8a32781b10ebd0abb3c5991d3e016172857438c793598d1f06a26dacfaabbb5fbb1459012e6f8ac4f3d5483abe40ee1e8e956a9be99dc3df4a96f
+    _Values: abb44f57ba565a0786d31e78626b273a770ee2e7d1b8a51c3fa63e381c59a931e55d75aeee972d2e542444411aaa843c3d3d4da391efc10d0f3318141722ea1f7d505dc0e1d628201f4bc3090318c916d5848aa658b23c2be07c604581e6e9770f64c4ca4dc45b67ecd37cbad347f527fd2fe99cac9078351331df6476e39f38624bfa9e53fec9112822912b2ef6fe288f78be4f307adb60dcf9b71be4f6f1308d4ae3e0bd6b840407053a30dd5b9b1c617c7d1dd9a9fc0531609ee3131d6a06fdc35735b50b3e7fa26517d2fcfd7162e206b963a92abd5ad808fe7dbcb708154cecea65469e92329941fbadc4ff2e2e2efefef29cf8a32781b10ebd0abb3c5991d3e016172857438c793598d1f06a26dacfaabbb5fbb1459012e6f8ac4f3d5483abe40ee1e8e956a9be99dc3df4a96f
 --- !u!114 &-2478064881115994032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,6 +620,32 @@ MonoBehaviour:
   componentsToSave:
   - {fileID: 5228881148542255888}
   - {fileID: 6657078895914074961}
+--- !u!61 &7403307831524961255
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8221454714545420841}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.57, y: 1.76}
+    newSize: {x: 7.3125, y: 9.4375}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.57, y: 1.76}
+  m_EdgeRadius: 0
 --- !u!1 &8232570952311117751
 GameObject:
   m_ObjectHideFlags: 0

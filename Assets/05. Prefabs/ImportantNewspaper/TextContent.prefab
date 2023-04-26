@@ -116,12 +116,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Residents of the quiet suburban neighborhood were left in shock yesterday
-    when a middle-aged man was found dead in his room. The victim lived alone, was
-    discovered wrapped in sheets and thrown in the large bin behind his house. His
-    neighbor, who made the grisly discovery, immediately alerted the authorities.\r\nAccording
-    to the police, no traces of the murderer have been found so far. The victim's
-    \r\n"
+  m_text: 'The Shadow Sect cult has been dealt a serious blow as several members
+    were found dead in the streets of the city. They were dressed in their distinctive
+    red robes, and appeared to have been attacked by the Monsters. The police are
+    investigating the incident as a possible act of vigilantism.
+
+    
+
+    Upon
+    investigation, police officers discovered that the cult members had been carrying
+    several letters on their person. They have identified these letters as Shadow
+    Sect''s record of their pursuit of Xenovore. Ironically, this has greatly helped
+    our understanding of Xenovore. Below we list some of the record entries:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
   m_sharedMaterial: {fileID: 1724549828375453005, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
@@ -148,7 +154,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.9
+  m_fontSize: 17.35
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -392,7 +398,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Landline Maintenance ends
+  m_text: Deadly Consequences for Shadow Sect
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 664d0beaa48fddd4888aca5585583208, type: 2}
   m_sharedMaterial: {fileID: 2148452639067674455, guid: 664d0beaa48fddd4888aca5585583208, type: 2}
@@ -419,7 +425,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.1
+  m_fontSize: 33.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -662,7 +668,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: -- Murder Committed with Suspect on the Run.
+  m_text: -- Red-robed Cultists Found Dead in the Streets
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 664d0beaa48fddd4888aca5585583208, type: 2}
   m_sharedMaterial: {fileID: 2148452639067674455, guid: 664d0beaa48fddd4888aca5585583208, type: 2}
@@ -689,7 +695,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.65
+  m_fontSize: 22.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1156,7 +1162,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5772153133435674379
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1260,12 +1266,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Residents of the quiet suburban neighborhood were left in shock yesterday
-    when a middle-aged man was found dead in his room. The victim lived alone, was
-    discovered wrapped in sheets and thrown in the large bin behind his house. His
-    neighbor, who made the grisly discovery, immediately alerted the authorities.\r\nAccording
-    to the police, no traces of the murderer have been found so far. The victim's
-    \r\n"
+  m_text: 'The Shadow Sect cult has been dealt a serious blow as several members
+    were found dead in the streets of the city. They were dressed in their distinctive
+    red robes, and appeared to have been attacked by the Monsters. The police are
+    investigating the incident as a possible act of vigilantism.
+
+    
+
+    Upon
+    investigation, police officers discovered that the cult members had been carrying
+    several letters on their person. They have identified these letters as Shadow
+    Sect''s record of their pursuit of Xenovore. Ironically, this has greatly helped
+    our understanding of Xenovore. Below we list some of the record entries:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
   m_sharedMaterial: {fileID: 1724549828375453005, guid: a041dcb29a7c3e24f92b07671e73b7d1, type: 2}
