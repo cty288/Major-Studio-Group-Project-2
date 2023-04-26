@@ -56,29 +56,20 @@ namespace _02._Scripts.SuspectSystem {
 			List<string> messages = new List<string>();
 
 			if (!suspectModel.HasMetPoliceBefore) {
-				messages.Add("How's it going? I'm the police in Dorcha and we got a warrant for your review. " +
-				             "Our reports show that this guy appeared in your area recently, " +
-				             "if you spot the guy on this poster, please <color=yellow>contact us and send us a photo</color> as soon as possible. Thank you.");
+				messages.Add( "if you spot the guy on this poster, please <color=yellow>contact us and send us a photo</color> as soon as possible.");
 			
-				messages.Add("Well hello there, I'm the police and we have a warrant for you to look over in Dorcha. And we need your help too - " +
-				             "if you come across the person on the poster, <color=yellow>give us a call and send us a photo</color>" +
-				             " so we can bring them to justice.");
+				messages.Add("if you come across the person on the poster, <color=yellow>give us a call and send us a photo</color>");
 			
-				messages.Add("Greetings, I'm the police in Dorcha, and we got a warrant for your attention. And we need your assistance too - " +
-				             "if you happen to see the person on the poster, " +
-				             "please don't hesitate to <color=yellow>contact us and send us a photo</color> so we can bring them to justice.");
-
+				messages.Add( "if you happen to see the person on the poster, " +
+				             "please don't hesitate to <color=yellow>contact us and send us a photo</color>.");
 			}
 			else {
 				messages.Add("Hello again! " +
-				             "Well, we need your help again. If you spot the guy on this poster, please <color=yellow>contact us and send us a photo</color>. Thank you!");
+				             "If you spot the guy on this poster, please <color=yellow>contact us and send us a photo</color>.");
 				
-				messages.Add("Well hello again, the days are getting more and more crazy and we've got a new warrant for you to look over again. " +
-				             "You know how to do it! Thank you!");
+				messages.Add("Well hello again,  we've got a new warrant for you to look over again. " );
 
-				messages.Add(
-					"Greetings, I'm the police in Dorcha again. We've got another warrant for your attention." +
-					"As always, please don't hesitate to <color=yellow>contact us and send us a photo</color> so we can bring them to justice.");
+				messages.Add("We've got another warrant for your attention." );
 			}
 			
 			IVoiceTag voiceTag = bodyInfo.VoiceTag;
@@ -86,8 +77,7 @@ namespace _02._Scripts.SuspectSystem {
 			DogModel dogModel = this.GetModel<DogModel>();
 			string additionalMessage = "";
 			if(!dogModel.SentDogBack && dogModel.isDogAlive) {
-				additionalMessage = " By the way, one of our residents has a dog that went missing. " +
-				                           "She asked us to help her find it. Here's the photo and the number to call if you find it.";
+				additionalMessage = " By the way, one of our residents has a dog that went missing.";
 				this.GetModel<PosterModel>()
 					.AddPoster(new MissingDogPoster(dogModel.MissingDogPhoneNumber, dogModel.MissingDogBodyInfo));
 			}
