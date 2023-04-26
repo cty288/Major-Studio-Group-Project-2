@@ -43,6 +43,7 @@ namespace _02._Scripts.Radio.RadioScheduling.GhostStory {
 			
 			RadioDialogueContent data = ghostStoryModel.GetRandomContent();
 			if (data != null) {
+				
 				TimeRange timeRange1 = radioSchedulingModel.AddToScheduled(
 					new RadioScheduleInfo(new RadioProgramNameInfo(RadioProgramType.GhostStory, "Ghost Story"),
 						RadioChannel.FM92, null, 90),
@@ -80,6 +81,10 @@ namespace _02._Scripts.Radio.RadioScheduling.GhostStory {
 					if (timeRange2 != null) {
 						gameEventSystem.AddEvent(new GhostStoryRadioEvent(timeRange2, data));
 					}
+				}
+
+				if (data.Name == "GhostStories_3") {
+					Debug.Log("Ghost story 3 played!");
 				}
 			}
 		}

@@ -119,3 +119,19 @@ public class SPTag_cult : HaircutTag
 {
     public override string TagName { get; } = "SP_cult";
 }
+
+public class CatTag_0 : HaircutTag
+{
+	public override string TagName { get; } = "Cat_0";
+}
+
+public class CatTag_1 : HaircutTag
+{
+	public override string TagName { get; } = "Cat_2";
+}
+
+public class CatTag_2 : HaircutTag
+{
+	public override string TagName { get; } = "Cat_2";
+}
+

@@ -17,8 +17,9 @@ public interface IRadioContent {
 
 public class RadioDialogueContent : IRadioContent {
 	[field: ES3Serializable] public List<RadioTextContent> TextContents { get; set; } = new List<RadioTextContent>();
-	[field: ES3Serializable]
-	public RadioContentType ContentType { get; } = RadioContentType.DialogueText;
+	[field: ES3Serializable] public RadioContentType ContentType { get; } = RadioContentType.DialogueText;
+
+	[field: ES3Serializable] public string Name { get; set; } = "";
 	public void SetContent(object content) {
 		TextContents = (List<RadioTextContent>) content;
 	}

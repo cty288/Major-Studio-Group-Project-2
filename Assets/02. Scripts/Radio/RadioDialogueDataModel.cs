@@ -62,6 +62,7 @@ namespace _02._Scripts.Radio {
 					}
 
 					RadioDialogueContent info = new RadioDialogueContent();
+					info.Name = keyName;
 					int dialogueCount = int.Parse(rows[i + 1][0]);
 					int dialogueContentStartColumn = 2;
 					int dialogueContentEndColumn = dialogueContentStartColumn + dialogueCount - 1;
