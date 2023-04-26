@@ -127,8 +127,8 @@ namespace _02._Scripts.Radio.RadioScheduling {
 			}
 
 			if (e.Day == 1) {
-				DateTime date = e.Date;
-				BuildThisWeekAllRadioPrograms(e.Date, importantNewspaperModel.NewspaperStartDay - e.Day, false, e.Day);
+				//DateTime date = e.Date;
+				//BuildThisWeekAllRadioPrograms(e.Date, importantNewspaperModel.NewspaperStartDay - e.Day, false, e.Day);
 			}
 			
 		}

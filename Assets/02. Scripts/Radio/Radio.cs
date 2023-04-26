@@ -316,7 +316,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
 
       
         if (day == 1) {
-            AddDeadBodyIntroRadio();
+            //AddDeadBodyIntroRadio();
             AddInitialRadio();
         }
 

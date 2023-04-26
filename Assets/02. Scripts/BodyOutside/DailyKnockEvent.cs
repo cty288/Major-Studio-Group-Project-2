@@ -131,7 +131,7 @@ namespace _02._Scripts.BodyOutside {
 						IVoiceTag voiceTag = bodyInfo.VoiceTag;
 
 						string additionalMessage = "";
-						additionalMessage += SendSurvivalGuideAndGetPhrases();
+						//additionalMessage += SendSurvivalGuideAndGetPhrases();
 
 						speaker.Speak(messages[Random.Range(0, messages.Count)] + additionalMessage,
 							bodyInfo.VoiceTag.VoiceGroup,

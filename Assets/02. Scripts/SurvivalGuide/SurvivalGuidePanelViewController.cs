@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _02._Scripts.SurvivalGuide;
 using DG.Tweening;
 using MikroFramework;
 using MikroFramework.Architecture;
@@ -44,6 +45,15 @@ public class SurvivalGuidePanelViewController : OpenableUIPanel
 
 		this.RegisterEvent<OpenSurvivalGuideUIPanel>(OnOpenSurvivalGuideUIPanel)
 			.UnRegisterWhenGameObjectDestroyed(gameObject);
+		
+		this.RegisterEvent<OnNewDay>(OnNewDay)
+			.UnRegisterWhenGameObjectDestroyed(gameObject);
+	}
+
+	private void OnNewDay(OnNewDay e) {
+		if (e.Day == 1) {
+			this.GetModel<SurvivalGuideModel>().ReceivedSurvivalGuideBefore.Value = true;
+		}
 	}
 
 	private void OnOpenSurvivalGuideUIPanel(OpenSurvivalGuideUIPanel e) {

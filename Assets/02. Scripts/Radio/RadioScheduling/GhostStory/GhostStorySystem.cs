@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using _02._Scripts.Cat;
 using _02._Scripts.GameTime;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using UnityEngine;
 using UnityEngine.Audio;
+using Random = UnityEngine.Random;
 
 namespace _02._Scripts.Radio.RadioScheduling.GhostStory {
 	public class GhostStorySystem: AbstractSystem {
@@ -80,11 +83,14 @@ namespace _02._Scripts.Radio.RadioScheduling.GhostStory {
 					
 					if (timeRange2 != null) {
 						gameEventSystem.AddEvent(new GhostStoryRadioEvent(timeRange2, data));
+						
 					}
 				}
 
-				if (data.Name == "GhostStories_3") {
-					Debug.Log("Ghost story 3 played!");
+				if (data.Name == "GhostStories_2") {
+					Debug.Log("Ghost story 2 played!");
+					DateTime catTime = gameTimeModel.GetDay(gameTimeModel.Day + Random.Range(1, 4));
+					gameEventSystem.AddEvent(new CatSpawnEvent(new TimeRange(catTime)));
 				}
 			}
 		}

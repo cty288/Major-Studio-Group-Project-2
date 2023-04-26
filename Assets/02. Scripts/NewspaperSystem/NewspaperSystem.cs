@@ -36,8 +36,8 @@ public class NewspaperSystem : AbstractSystem {
             DateTime eventTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 22, 40, 0);
             DateTime endTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 23, 59, 0);
 
-            this.GetSystem<GameEventSystem>().AddEvent(new NewspaperTutorialRadio(new TimeRange(eventTime, endTime),
-                AudioMixerList.Singleton.AudioMixerGroups[1]));
+            //this.GetSystem<GameEventSystem>().AddEvent(new NewspaperTutorialRadio(new TimeRange(eventTime, endTime),
+                //AudioMixerList.Singleton.AudioMixerGroups[1]));
         }
         
         
