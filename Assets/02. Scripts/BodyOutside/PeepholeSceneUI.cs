@@ -6,6 +6,7 @@ using _02._Scripts.Electricity;
 using DG.Tweening;
 using MikroFramework;
 using MikroFramework.Architecture;
+using MikroFramework.AudioKit;
 using MikroFramework.Event;
 using TMPro;
 using UnityEngine;
@@ -71,7 +72,7 @@ public class PeepholeSceneUI : AbstractMikroController<MainGame> , ICanSendEvent
     }
 
     private void OnLightPressed() {
-        
+        AudioSystem.Singleton.Play2DSound("flash_light");
         if (this.electricityModel.Electricity.Value > 0.2f && flashed == false) {
             OnLightButtonPressed?.Invoke();
             this.SendEvent<OnLightFlash>();

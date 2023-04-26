@@ -3,7 +3,12 @@ guid: 86e9488eb85e144fea0008e5ff7b9baa
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - useCameraMask: {instanceID: 0}
+  - droppingText: {instanceID: 0}
+  - writtenTextPrefab: {instanceID: 0}
+  - markerPrefab: {instanceID: 0}
+  - tear_sound: {fileID: 8300000, guid: d32803281b240ac489677932dbb00b77, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

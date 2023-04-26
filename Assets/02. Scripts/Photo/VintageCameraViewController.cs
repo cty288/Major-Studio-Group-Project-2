@@ -5,6 +5,7 @@ using _02._Scripts.GameEvents.Camera;
 using _02._Scripts.GameTime;
 using MikroFramework;
 using MikroFramework.Architecture;
+using MikroFramework.AudioKit;
 using MikroFramework.Event;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ public class VintageCameraViewController : DraggableItems {
 	
 	[SerializeField]
 	private Vector3 originalLocalPosition = new Vector3(5, -0.5f, 0);
+
+	[SerializeField] private AudioClip cam_shutter;
 	
 	private PlayerControlModel playerControlModel;
 	protected int cameraDay = 3;
@@ -94,6 +97,7 @@ public class VintageCameraViewController : DraggableItems {
 	
 	private void OnFinishCropping(CropInfo info) {
 		//info.
+		AudioSystem.Singleton.Play2DSound(cam_shutter);
 		photoSaveModel.SavePhoto(info);
 	}
 

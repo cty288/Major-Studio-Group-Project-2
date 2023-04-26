@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using MikroFramework.Architecture;
+using MikroFramework.AudioKit;
 using MikroFramework.Event;
 using UnityEngine;
 
 public class RubbishBinViewController : AbstractMikroController<MainGame> {
     [SerializeField] private Material outlineMaterial;
     [SerializeField] private WarningPanel warningPanel;
+    [SerializeField] private AudioClip trashSound;
     
     private SpriteRenderer spriteRenderer;
     private Material defaultMaterial;
@@ -42,6 +44,7 @@ public class RubbishBinViewController : AbstractMikroController<MainGame> {
             }
             else {
                 if (draggingItem) {
+                    AudioSystem.Singleton.Play2DSound(trashSound);
                     warningPanel.Hide();
                     StopHighlight();
                     draggingItem.OnThrown();
@@ -51,7 +54,8 @@ public class RubbishBinViewController : AbstractMikroController<MainGame> {
                 }
             }
         }
-        else {
+        else
+        {
             warningPanel.Hide();
             StopHighlight();
             draggingItem = null;

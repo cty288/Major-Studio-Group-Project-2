@@ -4,14 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using MikroFramework.AudioKit;
 
 public class RadioHintBtn : MonoBehaviour
 {
     public RadioHint radioHint;
-   
-
+    [SerializeField] private AudioClip ui_click;
     public void Awake() {
-        GetComponent<Button>().onClick.AddListener(() => {
+        GetComponent<Button>().onClick.AddListener(() =>
+        {
+            AudioSystem.Singleton.Play2DSound(ui_click);
             if(radioHint.IsShowing) {
                 radioHint.Hide();
             } else {
