@@ -18,6 +18,7 @@ public class OptionsPanel : MonoBehaviour
     protected Button screenSize;
     protected Button audioSettings;
     protected Button exitToMenu;
+    protected Button resumeBtn;
 
     protected Slider MasterSlider;
     protected Slider SFXSlider;
@@ -46,12 +47,14 @@ public class OptionsPanel : MonoBehaviour
         screenSize = btn.transform.Find("Btn_ScreenSize").GetComponent<Button>();
         audioSettings = btn.transform.Find("Btn_Audio").GetComponent<Button>();
         exitToMenu = btn.transform.Find("Btn_Exit").GetComponent<Button>();
+        resumeBtn = btn.transform.Find("Btn_Resume").GetComponent<Button>();
 
         //add On click event
         optionsBtn.GetComponent<Button>().onClick.AddListener(Btn_Options);
         screenSize.onClick.AddListener(fullScreen);
         audioSettings.onClick.AddListener(activateAudioPanel);
         exitToMenu.onClick.AddListener(BackToOpening);
+        resumeBtn.onClick.AddListener(Resume);
 
         //bars
         MasterSlider = audioPanel.transform.Find("Master").GetComponent<Slider>();
@@ -80,6 +83,12 @@ public class OptionsPanel : MonoBehaviour
     private void Btn_Options()
     {
         optOn = !optOn;
+        optionsPanel.SetActive(optOn);
+    }
+
+    private void Resume()
+    {
+        optOn = false;
         optionsPanel.SetActive(optOn);
     }
     private void fullScreen()

@@ -20,6 +20,22 @@ public class PauseGame : MonoBehaviour {
 
     protected Button continueButton;
     protected Button mainMenuButton;
+
+    //Audio Setting
+    protected GameObject audioPanel;
+    protected Button audioSettings;
+
+    protected Slider MasterSlider;
+    protected Slider SFXSlider;
+    protected Slider RadioSlider;
+    protected Slider VoicesSlider;
+
+    [SerializeField] public float Master_Volume;
+    [SerializeField] public float SFX_Volume;
+    [SerializeField] public float Radio_Volume;
+    [SerializeField] public float Voices_Volume;
+
+
     private void Awake() {
         PausePanel = transform.Find("Panel").gameObject;
         PauseBtn = transform.Find("PauseButton").gameObject;
@@ -32,6 +48,43 @@ public class PauseGame : MonoBehaviour {
         
         continueButton.onClick.AddListener(OnContinueButtonClicked);
         mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
+
+        audioPanel = PausePanel.transform.Find("AudioPanel").gameObject;
+        audioSettings = PausePanel.transform.Find("AudioButton").GetComponent<Button>();
+        audioSettings.onClick.AddListener(activateAudioPanel);
+
+        //bars
+        MasterSlider = audioPanel.transform.Find("Master").GetComponent<Slider>();
+        SFXSlider = audioPanel.transform.Find("SFX").GetComponent<Slider>();
+        RadioSlider = audioPanel.transform.Find("Radio").GetComponent<Slider>();
+        VoicesSlider = audioPanel.transform.Find("Voices").GetComponent<Slider>();
+    }
+
+    private void Start()
+    {
+        audioPanel.SetActive(false);
+    }
+
+    private void Update()
+    {
+        //Read Slider Value
+        Master_Volume = MasterSlider.value;
+        SFX_Volume = SFXSlider.value;
+        Radio_Volume = RadioSlider.value;
+        Voices_Volume = VoicesSlider.value;
+        //TO DO: Pass Them into System
+    }
+
+    private void activateAudioPanel()
+    {
+        if (audioPanel.activeSelf)
+        {
+            audioPanel.SetActive(false);
+        }
+        else
+        {
+            audioPanel.SetActive(true);
+        }
     }
 
     private void OnMainMenuButtonClicked() {
