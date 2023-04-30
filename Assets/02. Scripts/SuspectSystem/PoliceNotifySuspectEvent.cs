@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base;
 using _02._Scripts.Dog;
+using _02._Scripts.GameEvents.BountyHunter;
 using _02._Scripts.GameTime;
 using _02._Scripts.Poster;
 using MikroFramework.Architecture;
@@ -14,18 +15,24 @@ namespace _02._Scripts.SuspectSystem {
 		protected long suspectID = -1;
 		protected SuspectInfo suspectInfo = null;
 		protected GameTimeModel gameTimeModel;
+		protected BountyHunterModel bountyHunterModel;
 		public PoliceNotifySuspectEvent(TimeRange startTimeRange, BodyInfo bodyInfo): base(startTimeRange, bodyInfo, 1) {
 			suspectModel = this.GetModel<SuspectModel>();
 			gameTimeModel = this.GetModel<GameTimeModel>();
 			Debug.Log("Police Notify Time Range: " + startTimeRange.StartTime + " - " + startTimeRange.EndTime);
+			bountyHunterModel = this.GetModel<BountyHunterModel>();
 		}
 
 		public PoliceNotifySuspectEvent(): base() {
 			gameTimeModel = this.GetModel<GameTimeModel>();
 			suspectModel = this.GetModel<SuspectModel>();
+			bountyHunterModel = this.GetModel<BountyHunterModel>();
 		}
 
 		public override EventState OnUpdate() {
+			if (bountyHunterModel.FalseClueCount >= bountyHunterModel.FalseClueCountForPolice) {
+				return EventState.End;
+			}
 			if (suspectID == -1) {
 				suspectID = suspectModel.GetRandomSuspect(out suspectInfo);
 				if(suspectID == -1) {
@@ -56,18 +63,18 @@ namespace _02._Scripts.SuspectSystem {
 			List<string> messages = new List<string>();
 
 			if (!suspectModel.HasMetPoliceBefore) {
-				messages.Add( "if you spot the guy on this poster, please <color=yellow>contact us and send us a photo</color> as soon as possible.");
+				messages.Add( "How's it going? I'm the police in Dorcha and we got a warrant for your review. If you spot the guy on this poster, please <color=yellow>contact us and send us a photo</color> as soon as possible.");
 			
-				messages.Add("if you come across the person on the poster, <color=yellow>give us a call and send us a photo</color>");
+				messages.Add("Well hello there, I'm the police and we have a warrant for you to look over in Dorcha. If you come across the person on the poster, <color=yellow>give us a call and send us a photo</color>");
 			
-				messages.Add( "if you happen to see the person on the poster, " +
+				messages.Add( "Greetings, I'm the police in Dorcha, and we got a warrant for your attention. If you happen to see the person on the poster, " +
 				             "please don't hesitate to <color=yellow>contact us and send us a photo</color>.");
 			}
 			else {
 				messages.Add("Hello again! " +
 				             "If you spot the guy on this poster, please <color=yellow>contact us and send us a photo</color>.");
 				
-				messages.Add("Well hello again,  we've got a new warrant for you to look over again. " );
+				messages.Add("Well hello again, we've got a new warrant for you to look over again. " );
 
 				messages.Add("We've got another warrant for your attention." );
 			}
@@ -77,7 +84,9 @@ namespace _02._Scripts.SuspectSystem {
 			DogModel dogModel = this.GetModel<DogModel>();
 			string additionalMessage = "";
 			if(!dogModel.SentDogBack && dogModel.isDogAlive) {
-				additionalMessage = " By the way, one of our residents has a dog that went missing.";
+				additionalMessage =
+					" By the way, one of our residents has a dog that went missing. Here's the photo and the number to call if you find it.";
+				
 				this.GetModel<PosterModel>()
 					.AddPoster(new MissingDogPoster(dogModel.MissingDogPhoneNumber, dogModel.MissingDogBodyInfo));
 			}

@@ -24,10 +24,10 @@ namespace _02._Scripts.BodyManagmentSystem {
 
 		public void LoadInfo() {
 			string result = "";
-			var enumerator = GoogleDownload.DownloadSheet("1lmnHrIwzQdimzbfLRgKDrLi43lfnCQKSiukUL9kffQo",
-				"1969147239", s => {
+			var enumerator = HotUpdateLoader.LoadOrDownload("1lmnHrIwzQdimzbfLRgKDrLi43lfnCQKSiukUL9kffQo",
+				"1969147239", "knock_phrase.csv",s => {
 					result = s;
-				}, GoogleDriveDownloadFormat.CSV);
+				});
 			while (enumerator.MoveNext()) {
 				
 			}

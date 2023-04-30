@@ -21,7 +21,7 @@ namespace _02._Scripts.GameEvents.BountyHunter {
 		[field: ES3Serializable]
 		public int MaxFalseClueCountForQuest = 3;
 		[field: ES3Serializable]
-		public int FalseClueCountForPolice = 3;
+		public int FalseClueCountForPolice = 4;
 		[field: ES3Serializable]
 		public DateTime NextAvailableDate { get; set; }
 		[field: ES3Serializable]

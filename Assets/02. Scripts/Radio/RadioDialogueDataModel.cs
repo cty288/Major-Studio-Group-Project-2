@@ -30,10 +30,10 @@ namespace _02._Scripts.Radio {
 
 		public void LoadInfo() {
 			string result = "";
-			var enumerator = GoogleDownload.DownloadSheet("1lmnHrIwzQdimzbfLRgKDrLi43lfnCQKSiukUL9kffQo",
-				"1039588817", s => {
+			var enumerator = HotUpdateLoader.LoadOrDownload("1lmnHrIwzQdimzbfLRgKDrLi43lfnCQKSiukUL9kffQo",
+				"1039588817", "radio_dialogue.csv" ,s => {
 					result = s;
-				}, GoogleDriveDownloadFormat.CSV);
+				});
 			while (enumerator.MoveNext()) {
 					
 			}

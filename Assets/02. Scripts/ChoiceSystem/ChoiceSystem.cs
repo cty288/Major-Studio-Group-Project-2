@@ -52,7 +52,7 @@ namespace _02._Scripts.ChoiceSystem {
 				this.GetSystem<GameTimeManager>().LockDayEnd.Retain();
 			}
 			currentChoiceGroup[choiceGroup.Type].Value = choiceGroup;
-			playerControlModel.ControlType.Value = PlayerControlType.Choosing;
+			playerControlModel.AddControlType(PlayerControlType.Choosing);
 		}
 		
 		public void StopChoiceGroup(ChoiceType choiceType) {
@@ -69,7 +69,7 @@ namespace _02._Scripts.ChoiceSystem {
 			}
 			
 			if (!isAnyChoiceGroupActive) {
-				playerControlModel.ControlType.Value = PlayerControlType.Normal;
+				playerControlModel.RemoveControlType(PlayerControlType.Choosing);
 			}
 		}
 		

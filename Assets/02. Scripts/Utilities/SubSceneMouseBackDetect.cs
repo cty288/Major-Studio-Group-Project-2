@@ -28,7 +28,7 @@ public class SubSceneMouseBackDetect : AbstractMikroController<MainGame>
                 return;
             }
 
-            if (playerControlModel.ControlType.Value == PlayerControlType.Screenshot) {
+            if (playerControlModel.HasControlType(PlayerControlType.Screenshot)) {
                 return;
             }
             Vector2 mousePos = Input.mousePosition;

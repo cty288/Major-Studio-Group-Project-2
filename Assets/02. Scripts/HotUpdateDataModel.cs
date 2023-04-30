@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts;
 using MikroFramework.Architecture;
 using Polyglot;
 using UnityEngine;
@@ -21,10 +22,10 @@ public class HotUpdateDataModel : AbstractModel {
 
 	public void LoadInfo() {
 		string result = "";
-		var enumerator = GoogleDownload.DownloadSheet("1lmnHrIwzQdimzbfLRgKDrLi43lfnCQKSiukUL9kffQo",
-			"1293010699", s => {
+		var enumerator = HotUpdateLoader.LoadOrDownload("1lmnHrIwzQdimzbfLRgKDrLi43lfnCQKSiukUL9kffQo",
+			"1293010699", "hot_update.csv" ,s => {
 				result = s;
-			}, GoogleDriveDownloadFormat.CSV);
+			});
 		while (enumerator.MoveNext()) {
 				
 		}

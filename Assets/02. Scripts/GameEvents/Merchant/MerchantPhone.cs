@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.ChoiceSystem;
 using _02._Scripts.GameEvents.Merchant;
 using _02._Scripts.GameTime;
 using Crosstales;
@@ -14,10 +15,6 @@ public interface IPlayerResource {
     public int MaxCount { get; }
     public string DisplayName { get; }
 }
-
-
-
-
 
 
 public abstract class MerchantGoods: IPlayerResource {
@@ -43,7 +40,7 @@ public class BulletGoods : MerchantGoods {
     public override int BaseFoodPerUnit { get; } = 3;
    
     public override void RefreshFoodPerUnit() {
-        FoodPerUnit = Random.Range(BaseFoodPerUnit - 1, BaseFoodPerUnit + 2);
+        FoodPerUnit = Random.Range(BaseFoodPerUnit - 1, BaseFoodPerUnit + 1);
     }
 
     public override string SellSentence {
@@ -99,7 +96,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
 
     private AudioMixerGroup mixer;
 
-    private Coroutine noResponseCoroutine = null;
+   // private Coroutine noResponseCoroutine = null;
     public MerchantPhone(): base() {
         speaker = GameObject.Find("MerchantSpeaker").GetComponent<Speaker>();
         gameTimeManager = this.GetSystem<GameTimeManager>((manager => {
@@ -155,14 +152,17 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
             .AddOrEditRecord(this.GetModel<MerchantModel>().PhoneNumber, "Merchant");
         string welcome = GetSellListSentence();
         GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
-        if(!(gameTimeModel.CurrentTime.Value.Hour==23 && gameTimeModel.CurrentTime.Value.Minute>=58)){
-            speaker.Speak(welcome, mixer, "Merchant", 1f, null);
-        }
-        
+       
+        speaker.Speak(welcome, mixer, "Merchant", 1f, null);
         
         //gameTimeModel.CurrentTime.RegisterWithInitValue(OnTimeChanged);
-        noResponseCoroutine = CoroutineRunner.Singleton.StartCoroutine(OnTimeChanged());
-
+        //noResponseCoroutine = CoroutineRunner.Singleton.StartCoroutine(OnTimeChanged());
+        this.GetSystem<ChoiceSystem>().StartChoiceGroup(new ChoiceGroup(ChoiceType.Telephone, new ChoiceOption(
+            "Hang up", (option) => {
+                isTodayAvailable = false;
+                this.UnRegisterEvent<OnDialDigit>(OnDialDigit);
+                TelephoneSystem.HangUp(false);
+            })));
 
     }
 
@@ -175,10 +175,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
     }
 
     private void OnDialDigit(OnDialDigit e) {
-        if(noResponseCoroutine!=null){
-            CoroutineRunner.Singleton.StopCoroutine(noResponseCoroutine);
-            noResponseCoroutine = null;
-        }
+      
         this.UnRegisterEvent<OnDialDigit>(OnDialDigit);
         if (speaker.IsSpeaking) {
             speaker.Stop(true);
@@ -217,11 +214,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
     }
 
     private void OnMerchantSpeakEnd(Speaker speaker) {
-        if(noResponseCoroutine!=null){
-            CoroutineRunner.Singleton.StopCoroutine(noResponseCoroutine);
-            noResponseCoroutine = null;
-        }
-       //this.GetModel<GameTimeModel>().CurrentTime.UnRegisterOnValueChanged(OnTimeChanged);
+      
         EndConversation();
     }
 
@@ -247,10 +240,7 @@ public class MerchantPhone : TelephoneContact, ICanGetModel {
         if (speaker.IsSpeaking) {
             speaker.Stop(invokeEndCallback);
         }
-        if(noResponseCoroutine!=null){
-            CoroutineRunner.Singleton.StopCoroutine(noResponseCoroutine);
-            noResponseCoroutine = null;
-        }
+       
        // this.GetModel<GameTimeModel>().CurrentTime.UnRegisterOnValueChanged(OnTimeChanged);
         this.UnRegisterEvent<OnDialDigit>(OnDialDigit);
     }

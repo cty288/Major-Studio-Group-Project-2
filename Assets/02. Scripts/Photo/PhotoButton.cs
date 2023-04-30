@@ -48,7 +48,7 @@ public class PhotoButton : AbstractMikroController<MainGame>, IPointerClickHandl
 	}
 
 	public void OnPointerClick(PointerEventData eventData) {
-		if (ScreenSpaceImageCropper.Singleton.IsCropping || playerControlModel.ControlType.Value!= PlayerControlType.Normal) {
+		if (ScreenSpaceImageCropper.Singleton.IsCropping || !playerControlModel.IsNormal()) {
 			return;
 		}
 

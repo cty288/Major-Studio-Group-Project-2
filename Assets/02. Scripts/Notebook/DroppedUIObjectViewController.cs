@@ -36,7 +36,7 @@ public abstract class DroppedUIObjectViewController : AbstractMikroController<Ma
         if (!canDrag) {
             return;
         }
-        if (playerControlModel.ControlType.Value == PlayerControlType.Screenshot) {
+        if (playerControlModel.HasControlType(PlayerControlType.Screenshot)) {
             return;
         }
         
@@ -52,7 +52,7 @@ public abstract class DroppedUIObjectViewController : AbstractMikroController<Ma
             return;
         }
 
-        if (playerControlModel.ControlType.Value == PlayerControlType.Screenshot) {
+        if (playerControlModel.HasControlType(PlayerControlType.Screenshot)) {
             return;
         }
             
@@ -66,7 +66,7 @@ public abstract class DroppedUIObjectViewController : AbstractMikroController<Ma
         if (!canDrag) {
             return;
         }
-        if (playerControlModel.ControlType.Value == PlayerControlType.Screenshot) {
+        if (playerControlModel.HasControlType(PlayerControlType.Screenshot)) {
             return;
         }
         

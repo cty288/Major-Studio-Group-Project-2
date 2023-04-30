@@ -43,7 +43,7 @@ public abstract class DraggableItems : AbstractMikroController<MainGame>, IDragH
         if (!canDrag) {
             return;
         }
-        if (playerControlModel.ControlType.Value == PlayerControlType.Screenshot) {
+        if (playerControlModel.HasControlType(PlayerControlType.Screenshot)) {
             return;
         }
         
@@ -57,7 +57,7 @@ public abstract class DraggableItems : AbstractMikroController<MainGame>, IDragH
             return;
         }
 
-        if (playerControlModel.ControlType.Value == PlayerControlType.Screenshot) {
+        if (playerControlModel.HasControlType(PlayerControlType.Screenshot)) {
             return;
         }
             
@@ -73,7 +73,7 @@ public abstract class DraggableItems : AbstractMikroController<MainGame>, IDragH
         if (!canDrag) {
             return;
         }
-        if (playerControlModel.ControlType.Value == PlayerControlType.Screenshot) {
+        if (playerControlModel.HasControlType(PlayerControlType.Screenshot)) {
             return;
         }
         

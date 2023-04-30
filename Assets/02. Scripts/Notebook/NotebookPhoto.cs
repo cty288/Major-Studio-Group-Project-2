@@ -66,7 +66,7 @@ public class NotebookPhoto : DroppedUIObjectViewController, IHaveBodyInfo {
     }
 
     protected override void OnClick() {
-        if (playerControlModel.ControlType.Value != PlayerControlType.Normal) {
+        if (!playerControlModel.HasControlType(PlayerControlType.Normal)) {
             return;
         }
         this.SendCommand<OpenPhotoPanelCommand>(new OpenPhotoPanelCommand() {

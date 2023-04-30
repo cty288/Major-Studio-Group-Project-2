@@ -3,8 +3,8 @@
   "ABMD5List": [
     {
       "AssetName": "aliens",
-      "MD5": "ae1fd6375caf6e2986174e9d51a75990",
-      "FileSize": 520.556641,
+      "MD5": "9952bf159bafe021862258f2db769afe",
+      "FileSize": 545.5547,
       "assetDatas": [
         {
           "Name": "AlienBody",
@@ -65,9 +65,14 @@
     },
     {
       "AssetName": "audios",
-      "MD5": "3ffd4fc81f2d81be388e92bdca3c6b81",
-      "FileSize": 2682.01563,
+      "MD5": "1b88849718b3ab5a1685c0e2f60cd7d7",
+      "FileSize": 3048.90625,
       "assetDatas": [
+        {
+          "Name": "Cat",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
         {
           "Name": "clock_tick",
           "OwnerBundleName": "audios",
@@ -164,6 +169,21 @@
           "AssetType": "UnityEngine.AudioClip"
         },
         {
+          "Name": "kick_door_1",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "kick_door_2",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "kick_door_3",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
           "Name": "knock_1",
           "OwnerBundleName": "audios",
           "AssetType": "UnityEngine.AudioClip"
@@ -252,8 +272,8 @@
     },
     {
       "AssetName": "general",
-      "MD5": "286caef9801275fbbb779735ac955378",
-      "FileSize": 1650.17676,
+      "MD5": "602d6d6b493d7b3a13204b6dafe94194",
+      "FileSize": 1652.6416,
       "assetDatas": [
         {
           "Name": "DraggedText",
@@ -394,7 +414,7 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "951c36f0775a2270d66d2d446eff9680",
+      "MD5": "6cbb27752d41293231edafff67e592d0",
       "FileSize": 1.79296875,
       "assetDatas": []
     },

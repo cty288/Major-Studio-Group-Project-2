@@ -173,7 +173,7 @@ public class AlienBody : AbstractMikroController<MainGame>, IPointerClickHandler
         return bodyInstance;
     }
     public void OnPointerClick(PointerEventData eventData) {
-        if (playerControlModel.ControlType.Value == PlayerControlType.BountyHunting) {
+        if (playerControlModel.HasControlType(PlayerControlType.BountyHunting)) {
             return;
         }
         onClickAlienBody?.Invoke();

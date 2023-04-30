@@ -12,7 +12,7 @@ public class CalenderViewController : AbstractMikroController<MainGame>, IPointe
     [SerializeField] private TMP_Text dayText;
     [SerializeField] private TMP_Text dayOfWeekText;
 
-    [SerializeField] private WarningPanel warningPanel;
+   // [SerializeField] private WarningPanel warningPanel;
     
     private GameTimeManager gameTimeManager;
     private bool isSkippingTime = false;
@@ -21,7 +21,7 @@ public class CalenderViewController : AbstractMikroController<MainGame>, IPointe
             .UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNewDay>(OnNewDay);
         gameTimeManager = this.GetSystem<GameTimeManager>();
-        warningPanel = GetComponent<WarningPanel>();
+        //warningPanel = GetComponent<WarningPanel>();
     }
 
     private void OnNewDay(OnNewDay e) {
@@ -89,11 +89,11 @@ public class CalenderViewController : AbstractMikroController<MainGame>, IPointe
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-      warningPanel.Show(0);
+    //  warningPanel.Show(0);
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-      warningPanel.Hide();
+   //   warningPanel.Hide();
     }
 
     public void OnPointerClick(PointerEventData eventData) {

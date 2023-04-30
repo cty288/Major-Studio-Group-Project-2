@@ -54,6 +54,28 @@ namespace _02._Scripts.Poster.PosterEvents {
 			currentSpeaker.Stop(true);
 			knockAudioSource.Stop();
 		}
+
+		public override void OnHitByFlashlight(Speaker speaker, IVoiceTag voiceTag, bool isAlien) {
+			if (!isAlien) {
+				bool speak = Random.Range(0, 100) <= 40;
+				if (speak) {
+					List<string> replies = new List<string>();
+					replies.Add("Hey! I'm not the monster! I send you poster!");
+					replies.Add("Cut it off! I'm not the monster!");
+					string reply = replies[UnityEngine.Random.Range(0, replies.Count)];
+
+                    
+					if (voiceTag != null) {
+						speaker.Speak(reply, voiceTag.VoiceGroup,
+							"",1f, null,voiceTag.VoiceSpeed,1f,
+							voiceTag.VoiceType);
+					}
+					else {
+						speaker.Speak(reply, null, "",1f, null,Random.Range(0.8f, 1.2f));
+					}
+				}
+			}
+		}
 	}
 	
 	

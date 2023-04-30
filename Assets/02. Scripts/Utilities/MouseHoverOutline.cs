@@ -9,7 +9,7 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider2D))]
-public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ICanGetModel {
+public class MouseHoverOutline : AbstractMikroController<MainGame>, IPointerEnterHandler, IPointerExitHandler, ICanGetModel {
     [SerializeField] private Material outlineMaterial;
 
     public Material OutlineMaterial => outlineMaterial;
@@ -50,11 +50,17 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
         }
 
         playerControlModel = this.GetModel<PlayerControlModel>();
-        playerControlModel.ControlType.RegisterOnValueChaned(OnControlChanged)
-            .UnRegisterWhenGameObjectDestroyed(gameObject);
+        
+     
 
+        this.RegisterEvent<OnAddControlType>(OnAddControlType).UnRegisterWhenGameObjectDestroyed(gameObject);
 
+    }
 
+    private void OnAddControlType(OnAddControlType e) {
+        if (e.controlType == PlayerControlType.Screenshot) {
+            StopHovering();
+        }
     }
 
     private void OnShowValueChanged(bool isShow) {
@@ -76,11 +82,7 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
         }
     }
 
-    private void OnControlChanged(PlayerControlType controlType) {
-        if (controlType == PlayerControlType.Screenshot) {
-            StopHovering();
-        }
-    }
+
 
     private void OnDestroy() {
        
@@ -112,7 +114,7 @@ public class MouseHoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerEx
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        if (playerControlModel.ControlType.Value == PlayerControlType.Screenshot) {
+        if (playerControlModel.HasControlType(PlayerControlType.Screenshot)) {
             return;
         }
       //  if (!string.IsNullOrEmpty(SubtitleHightlightedTextRecorder.CurrentDraggedText)) {

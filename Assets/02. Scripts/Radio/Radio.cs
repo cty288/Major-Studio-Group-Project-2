@@ -5,6 +5,7 @@ using System.Linq;
 using _02._Scripts.AlienInfos.Tags.Base.KnockBehavior;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.Radio;
+using _02._Scripts.Radio.RadioScheduling;
 using Crosstales;
 using Crosstales.RTVoice.Model.Enum;
 using DG.Tweening;
@@ -446,6 +447,22 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
 
         eventSystem.AddEvent(new FoodTutorialRadio(new TimeRange(currentTime.AddDays(1)),
             AudioMixerList.Singleton.AudioMixerGroups[1]));
+        
+
+        eventSystem.AddEvent(new DailyBodyRadio(
+            new TimeRange(currentTime + new TimeSpan(0, 10, 0), currentTime + new TimeSpan(0, 20, 0)),
+            
+            Random.Range(0.85f, 1.2f), Random.Range(0, 2) == 0 ? Gender.MALE : Gender.FEMALE,
+            AudioMixerList.Singleton.AudioMixerGroups[1]));
+
+        eventSystem.AddEvent(new RandomStuffRadio(
+            new TimeRange(currentTime + new TimeSpan(0, Random.Range(30, 60), 0)),
+            RadioRandomStuff.Singleton.GetNextRandomRadio(RadioProgramType.Ads)));
+        
+        eventSystem.AddEvent(new RandomStuffRadio(
+            new TimeRange(currentTime + new TimeSpan(0, Random.Range(30, 60), 0)),
+            RadioRandomStuff.Singleton.GetNextRandomRadio(RadioProgramType.Announcement)));
+
     }
 
 

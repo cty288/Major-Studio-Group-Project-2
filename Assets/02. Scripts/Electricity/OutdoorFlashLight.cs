@@ -43,29 +43,12 @@ public class OutdoorFlashLight : ElectricalApplicance
     void OpenFlashLight()
     {
         if (bodyGenerationModel.CurrentOutsideBody.Value != null) {
-            if (bodyGenerationModel.CurrentOutsideBody.Value.IsAlien) {
-                //bodyGenerationModel.CurrentOutsideBody.Value = null;
-            }
-            else {
-                bool speak = Random.Range(0, 100) <= 40;
-                if (speak) {
-                    List<string> replies = new List<string>();
-                    replies.Add("Hey! Da fuck are you doing?! Stop pointing that stupid light at me!");
-                    replies.Add("Holy! You've got a SUN in your house?! Don't tell me you are some kind of giant light bulb alien!");
-                    replies.Add("Cut it off, mister! Or I will call the officers!");
-                    string reply = replies[UnityEngine.Random.Range(0, replies.Count)];
+            IVoiceTag voiceTag = bodyGenerationModel.CurrentOutsideBody.Value.VoiceTag;
 
-                    IVoiceTag voiceTag = bodyGenerationModel.CurrentOutsideBody.Value.VoiceTag;
-                    if (voiceTag != null) {
-                        speaker.Speak(reply, voiceTag.VoiceGroup,
-                            "",1f, null,voiceTag.VoiceSpeed,1f,
-                            voiceTag.VoiceType);
-                    }
-                    else {
-                        speaker.Speak(reply, null, "",1f, null,Random.Range(0.8f, 1.2f));
-                    }
-                }
-            }
+
+            bodyGenerationModel.CurrentOutsideBody.Value.KnockBehavior?.OnHitByFlashlight(speaker, voiceTag,
+                bodyGenerationModel.CurrentOutsideBody.Value.IsAlien);
+            
         }
        
         DOTween.To(() => flashlight.intensity, x => flashlight.intensity = x, 5, 0.2f);

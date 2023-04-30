@@ -74,7 +74,7 @@ namespace _02._Scripts.Notebook {
 			
 			NotebookMarkerDroppableInfo info = (NotebookMarkerDroppableInfo)DroppableInfo;
 			if (info.CanDraw) {
-				if (playerControlModel.ControlType.Value != PlayerControlType.Normal) {
+				if (!playerControlModel.HasControlType(PlayerControlType.Normal)) {
 					return;
 				}
 				

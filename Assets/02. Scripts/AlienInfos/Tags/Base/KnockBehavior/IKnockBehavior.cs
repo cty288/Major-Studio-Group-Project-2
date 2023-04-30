@@ -11,6 +11,8 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 
 		public IKnockBehavior GetOpposite();
 		public void OnStopKnock();
+
+		public void OnHitByFlashlight(Speaker speaker, IVoiceTag voiceTag, bool isAlien);
 	}
 
 	public abstract class AbstractKnockBehavior : IKnockBehavior, ICanGetModel {
@@ -87,8 +89,9 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 		public abstract IKnockBehavior GetOpposite();
 
 		public abstract void OnStopKnock();
+		public abstract void OnHitByFlashlight(Speaker speaker, IVoiceTag voiceTag, bool isAlien);
 
-		public IArchitecture GetArchitecture() {
+			public IArchitecture GetArchitecture() {
 			return MainGame.Interface;
 		}
 	}

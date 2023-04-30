@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 439765411
+CRC: 2265132675
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b895c3918db3716bb110945c6763ef3f
+    Hash: b625cb46d3c64e6d55cba0549e692ff5
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9a2ca7bdbd1871f7131daf57de908e0c
@@ -30,6 +30,7 @@ Assets:
 - Assets/04. Audios/Newspaper/pick_up_newspaper.wav
 - Assets/04. Audios/Dog/New/dog_outside_door_1.mp3
 - Assets/04. Audios/SexPerson/rummage.mp3
+- Assets/04. Audios/Knocks/kick_door_3.wav
 - Assets/04. Audios/Newspaper/Newspaper SOUND EFFECT - Reading Newspaper Flipping
   Newspaper SOUND-[AudioTrimmer.com].mp3
 - Assets/04. Audios/Newspaper/put_down_newspaper.mp3
@@ -41,10 +42,13 @@ Assets:
 - Assets/04. Audios/FPS/monster_roar_1.wav
 - Assets/04. Audios/FPS/monster_kill_player.wav
 - Assets/04. Audios/Dog/New/dog_outside_door_3.mp3
+- Assets/04. Audios/Knocks/kick_door_1.ogg
+- Assets/04. Audios/Knocks/kick_door_2.ogg
 - Assets/04. Audios/Dog/New/dog_attack.mp3
 - Assets/04. Audios/telephone/phone_dialing.ogg
 - Assets/04. Audios/Clock/clock_tick.wav
 - Assets/04. Audios/Knocks/knock_3.ogg
+- Assets/04. Audios/Cat/Cat.wav
 - Assets/04. Audios/Knocks/knock_6.mp3
 - Assets/04. Audios/Dog/dogBark_3.wav
 - Assets/04. Audios/Knocks/knock_1.ogg

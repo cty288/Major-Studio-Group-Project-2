@@ -64,7 +64,7 @@ public class PhotoOnTable : DraggableItems, IHaveBodyInfo, IDroppable {
 	}
 	
 	protected override void OnClick() {
-		if (playerControlModel.ControlType.Value != PlayerControlType.Normal) {
+		if (!playerControlModel.IsNormal()) {
 			return;
 		}
 		this.SendCommand<OpenPhotoPanelCommand>(new OpenPhotoPanelCommand() {

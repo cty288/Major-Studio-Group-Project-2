@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts;
 using MikroFramework.BindableProperty;
 using Polyglot;
 using UnityEngine;
@@ -41,10 +42,10 @@ public class OutdoorActivityModel : AbstractSavableModel {
     
     public void DownloadSheet(string sheetID, Dictionary<string, DescriptionData> descriptionData) {
         string result = "";
-        var enumerator = GoogleDownload.DownloadSheet("1lmnHrIwzQdimzbfLRgKDrLi43lfnCQKSiukUL9kffQo",
-            sheetID, s => {
+        var enumerator = HotUpdateLoader.LoadOrDownload("1lmnHrIwzQdimzbfLRgKDrLi43lfnCQKSiukUL9kffQo",
+            sheetID, "outdoor.csv", s => {
                 result = s;
-            }, GoogleDriveDownloadFormat.CSV);
+            });
         while (enumerator.MoveNext()) {
 				
         }

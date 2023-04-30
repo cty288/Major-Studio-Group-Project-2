@@ -24,7 +24,7 @@ public class NotebookTool : AbstractMikroController<MainGame> {
     }
 
     private void OnClick() {
-        if (playerControlModel.ControlType != PlayerControlType.Normal) {
+        if (!playerControlModel.IsNormal()) {
             return;
         }
         OnToolClicked?.Invoke(this);

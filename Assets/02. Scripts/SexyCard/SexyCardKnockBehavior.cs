@@ -52,5 +52,28 @@ namespace _02._Scripts.SexyCard {
 			currentSpeaker.Stop(true);
 			knockAudioSource.Stop();
 		}
+
+		public override void OnHitByFlashlight(Speaker speaker, IVoiceTag voiceTag, bool isAlien) {
+			if (!isAlien) {
+				bool speak = Random.Range(0, 100) <= 40;
+				if (speak) {
+					List<string> replies = new List<string>();
+					replies.Add("Don't be such a prude. I promise I'll make it worth your while.");
+					replies.Add("What a shame, I could've shown you a good time.");
+					string reply = replies[UnityEngine.Random.Range(0, replies.Count)];
+
+                    
+					if (voiceTag != null) {
+						speaker.Speak(reply, voiceTag.VoiceGroup,
+							"",1f, null,voiceTag.VoiceSpeed,1f,
+							voiceTag.VoiceType);
+					}
+					else {
+						speaker.Speak(reply, null, "",1f, null,Random.Range(0.8f, 1.2f));
+					}
+				}
+			}
+		}
 	}
+	
 }

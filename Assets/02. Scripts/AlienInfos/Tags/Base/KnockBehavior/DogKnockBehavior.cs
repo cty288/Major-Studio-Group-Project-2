@@ -30,5 +30,9 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 		public override void OnStopKnock() {
 			AudioSystem.Singleton.StopSound(knockAudioSource);
 		}
+
+		public override void OnHitByFlashlight(Speaker speaker, IVoiceTag voiceTag, bool isAlien) {
+			
+		}
 	}
 }

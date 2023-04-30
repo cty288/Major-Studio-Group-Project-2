@@ -49,7 +49,7 @@ namespace _02._Scripts.SuspectSystem {
 		}
 
 		private void StartSelect() {
-			playerControlModel.ControlType.Value = PlayerControlType.BountyHunting;
+			playerControlModel.HasControlType(PlayerControlType.BountyHunting);
 			TopScreenHintText.Singleton.Show(
 				"Please select any information related to the unknown creatures to report to the bounty hunter.\n\nPossible information includes: figure outside / death report photos");
 			this.RegisterEvent<OnBodyHuntingSelect>(OnBodyHuntingSelect);
@@ -59,7 +59,7 @@ namespace _02._Scripts.SuspectSystem {
 		private IEnumerator WaitingInteraction() {
 			
 			yield return new WaitForSeconds(30);
-			if (playerControlModel.ControlType.Value == PlayerControlType.BountyHunting) {
+			if (playerControlModel.HasControlType(PlayerControlType.BountyHunting)) {
 				string noInfo =
 					"Seems like you don't have any information about the criminal. I will end this call now. You are free to call us again if you have any information.";
 				speaker.Speak(noInfo, mixer, $"Officer {officerName}", 1f, (speaker) => {
@@ -78,7 +78,7 @@ namespace _02._Scripts.SuspectSystem {
 	        }
 
 	        this.GetSystem<ITimeSystem>().AddDelayTask(0.05f, () => {
-		        playerControlModel.ControlType.Value = PlayerControlType.Normal;
+		        playerControlModel.RemoveControlType(PlayerControlType.BountyHunting);
 	        });
 	       
 	        TopScreenHintText.Singleton.Hide();
@@ -178,7 +178,7 @@ namespace _02._Scripts.SuspectSystem {
 		}
 		
 		private void End() {
-			playerControlModel.ControlType.Value = PlayerControlType.Normal;
+			playerControlModel.RemoveControlType(PlayerControlType.BountyHunting);
 			TopScreenHintText.Singleton.Hide();
 			this.UnRegisterEvent<OnBodyHuntingSelect>(OnBodyHuntingSelect);
 			if (waitingForInteractionCoroutine != null) {

@@ -99,7 +99,7 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
         this.OnCropCancelled = onCanceled;
         this.OnCropFinished = onFinished;
         isCropping = true;
-        playerControlModel.ControlType.Value = PlayerControlType.Screenshot;
+        playerControlModel.HasControlType(PlayerControlType.Screenshot);
         OnStartCrop?.Invoke();
     }
     
@@ -135,7 +135,7 @@ public class ScreenSpaceImageCropper : MonoMikroSingleton<ScreenSpaceImageCroppe
         OnCropCancelled = null;
         OnCropFinished = null;
         isCropping = false;
-        playerControlModel.ControlType.Value = PlayerControlType.Normal;
+        playerControlModel.RemoveControlType(PlayerControlType.Screenshot);
     }
     //»æÖÆ¿òÑ¡  
     

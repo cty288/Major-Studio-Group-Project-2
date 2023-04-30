@@ -93,10 +93,10 @@ namespace _02._Scripts.BodyManagmentSystem {
 
 		public void LoadInfo() {
 			string result = "";
-			var enumerator = GoogleDownload.DownloadSheet("1lmnHrIwzQdimzbfLRgKDrLi43lfnCQKSiukUL9kffQo",
-				"0", s => {
-					result = s;
-				}, GoogleDriveDownloadFormat.CSV);
+			var enumerator = HotUpdateLoader.LoadOrDownload("1lmnHrIwzQdimzbfLRgKDrLi43lfnCQKSiukUL9kffQo",
+				"0", "body_tag.csv", s => {
+					result = s; 
+				});
 			while (enumerator.MoveNext()) {
 				
 			}

@@ -20,7 +20,7 @@ namespace Polyglot
             var url = string.Format("https://docs.google.com/spreadsheets/d/{0}/export?format={2}&gid={1}", docsId, sheetId, Enum.GetName(typeof(GoogleDriveDownloadFormat), format).ToLower());
 #if UNITY_2017_2_OR_NEWER
             var www = UnityWebRequest.Get(url);
-            www.timeout = 5;
+            www.timeout = 2;
             www.SendWebRequest();
 #else
             var www = new WWW(url);
@@ -54,7 +54,7 @@ namespace Polyglot
 
             if (text.StartsWith("<!"))
             {
-                Debug.LogError("Google sheet could not be downloaded.\nURL:" + url + "\n" + text);
+                Debug.LogWarning("Google sheet could not be downloaded.\nURL:" + url + "\n" + text);
                 done(null);
                 yield break;
             }

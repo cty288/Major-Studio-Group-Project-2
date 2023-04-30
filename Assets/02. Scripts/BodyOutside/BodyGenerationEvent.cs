@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base;
+using _02._Scripts.GameTime;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
 using MikroFramework.TimeSystem;
@@ -71,7 +72,7 @@ public abstract  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegist
                 CoroutineRunner.Singleton.StopCoroutine(nestedKnockDoorCheckCoroutine);
                 nestedKnockDoorCheckCoroutine = null;
             }
-            
+            this.GetModel<GameTimeModel>().LockTime.Retain();
             LoadCanvas.Singleton.LoadUntil(OnOpen, OnFinishOutsideBodyInteraction);
             bodyInfo.KnockBehavior?.OnStopKnock();
         }
@@ -80,6 +81,7 @@ public abstract  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegist
     }
 
     private void OnFinishOutsideBodyInteraction() {
+        this.GetModel<GameTimeModel>().LockTime.Release();
         this.GetModel<GameSceneModel>().GameScene.Value = GameScene.MainGame;
         this.GetSystem<BodyGenerationSystem>().StopCurrentBody();
     }

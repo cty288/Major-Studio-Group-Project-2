@@ -35,8 +35,10 @@ public class TelephonePanel : OpenableUIPanel {
         telephoneSystem = this.GetSystem<TelephoneSystem>();
         bountyHunterSystem = this.GetSystem<BountyHunterSystem>();
         playerControlModel = this.GetModel<PlayerControlModel>();
-        playerControlModel.ControlType.RegisterOnValueChaned(OnPlayerControlTypeChanged)
-            .UnRegisterWhenGameObjectDestroyed(gameObject);
+        
+        this.RegisterEvent<OnAddControlType>(OnAddControlType).UnRegisterWhenGameObjectDestroyed(gameObject);
+        
+       
         // bountyHunterSystem.IsBountyHunting.RegisterOnValueChaned(OnBountyHuntingChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
         telephoneSystem.State.RegisterOnValueChaned(OnTelephoneSystemStateChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -49,12 +51,13 @@ public class TelephonePanel : OpenableUIPanel {
         Hide(0.5f);
     }
 
-    private void OnPlayerControlTypeChanged(PlayerControlType oldControlType, PlayerControlType newControlType) {
-        if (newControlType == PlayerControlType.BountyHunting) {
+    private void OnAddControlType(OnAddControlType e) {
+        if (e.controlType == PlayerControlType.BountyHunting) {
             Hide(0.5f);
         }
     }
 
+    
     private void OnPhoneCallClicked(BaseEventData e) {
         if (telephoneSystem.CurrentIncomingCallContact != null) {
             telephoneSystem.ReceiveIncomingCall();
@@ -129,6 +132,6 @@ public class TelephonePanel : OpenableUIPanel {
     }
 
     public override bool AdditionMouseExitCheck() {
-        return playerControlModel.ControlType.Value != PlayerControlType.Choosing;
+        return !playerControlModel.HasControlType(PlayerControlType.Choosing);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _02._Scripts.BodyManagmentSystem;
+using _02._Scripts.ChoiceSystem;
 using _02._Scripts.FPSEnding;
 using _02._Scripts.GameEvents.BountyHunter;
 using Crosstales.RTVoice.Model.Enum;
@@ -87,21 +88,27 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
     }
 
     private void OnWelcomeEnd(Speaker speaker) {
-        playerControlModel.ControlType.Value = PlayerControlType.BountyHunting;
+        playerControlModel.AddControlType(PlayerControlType.BountyHunting);
         TopScreenHintText.Singleton.Show(
             "Please select any information related to the unknown creatures to report to the bounty hunter.\n\nPossible information includes: figure outside / death report photos");
         this.RegisterEvent<OnBodyHuntingSelect>(OnBodyHuntingSelect);
         waitingForInteractionCoroutine = CoroutineRunner.Singleton.StartCoroutine(WaitingInteraction());
+        
+        
+        this.GetSystem<ChoiceSystem>().StartChoiceGroup(new ChoiceGroup(ChoiceType.Telephone, new ChoiceOption(
+            "Hang up", (option) => {
+                TelephoneSystem.HangUp(false);
+            })));
     }
 
     private void OnBodyHuntingSelect(OnBodyHuntingSelect e) {
-     
+        this.GetSystem<ChoiceSystem>().StopChoiceGroup(ChoiceType.Telephone);
         this.UnRegisterEvent<OnBodyHuntingSelect>(OnBodyHuntingSelect);
         if (waitingForInteractionCoroutine != null) {
             CoroutineRunner.Singleton.StopCoroutine(waitingForInteractionCoroutine);
             waitingForInteractionCoroutine = null;
         }
-        playerControlModel.ControlType.Value = PlayerControlType.Normal;
+        playerControlModel.RemoveControlType(PlayerControlType.BountyHunting);
         TopScreenHintText.Singleton.Hide();
 
         //remove this body from the manager no matter what
@@ -224,7 +231,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
     private IEnumerator WaitingInteraction() {
         while (true) {
             yield return new WaitForSeconds(30);
-            if (playerControlModel.ControlType.Value == PlayerControlType.BountyHunting) {
+            if (playerControlModel.HasControlType(PlayerControlType.BountyHunting)) {
                 string noInfo = "Don't waste my time! Tell me something about the creatures!";
                 speaker.Speak(noInfo, mixer, "Bounty Hunter", 1f, null);
             }
@@ -240,7 +247,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
     }
 
     private void End() {
-        playerControlModel.ControlType.Value = PlayerControlType.Normal;
+        playerControlModel.RemoveControlType(PlayerControlType.BountyHunting);
         TopScreenHintText.Singleton.Hide();
         this.UnRegisterEvent<OnBodyHuntingSelect>(OnBodyHuntingSelect);
         if (waitingForInteractionCoroutine != null) {

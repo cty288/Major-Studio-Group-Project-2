@@ -62,6 +62,10 @@ namespace _02._Scripts.AlienInfos.Tags.Base.KnockBehavior {
 			knockAudioSource.Stop();
 			
 		}
+
+		public override void OnHitByFlashlight(Speaker speaker, IVoiceTag voiceTag, bool isAlien) {
+			
+		}
 	}
 	
 }

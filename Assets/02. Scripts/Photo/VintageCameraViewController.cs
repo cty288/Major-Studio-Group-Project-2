@@ -85,7 +85,7 @@ public class VintageCameraViewController : DraggableItems {
 	}
 
 	protected override void OnClick() {
-		if (ScreenSpaceImageCropper.Singleton.IsCropping || playerControlModel.ControlType.Value!= PlayerControlType.Normal) {
+		if (ScreenSpaceImageCropper.Singleton.IsCropping || !playerControlModel.IsNormal()) {
 			return;
 		}
 

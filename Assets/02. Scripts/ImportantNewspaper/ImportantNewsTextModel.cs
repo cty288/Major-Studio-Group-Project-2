@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using _02._Scripts;
 using _02._Scripts.BodyManagmentSystem;
 using MikroFramework.Architecture;
 using Polyglot;
@@ -128,10 +129,10 @@ public class ImportantNewsTextModel: AbstractModel {
 
 	public void LoadInfo() {
 		string result = "";
-		var enumerator = GoogleDownload.DownloadSheet("1lmnHrIwzQdimzbfLRgKDrLi43lfnCQKSiukUL9kffQo",
-			"24778915", s => {
+		var enumerator = HotUpdateLoader.LoadOrDownload("1lmnHrIwzQdimzbfLRgKDrLi43lfnCQKSiukUL9kffQo",
+			"24778915", "important_news.csv", s => {
 				result = s;
-			}, GoogleDriveDownloadFormat.CSV);
+			});
 		while (enumerator.MoveNext()) {
 				
 		}

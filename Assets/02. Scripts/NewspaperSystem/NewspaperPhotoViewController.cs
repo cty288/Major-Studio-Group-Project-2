@@ -36,7 +36,7 @@ public class NewspaperPhotoViewController : AbstractMikroController<MainGame>, I
 	}
 
 	public void OnPointerClick(PointerEventData eventData) {
-		if (playerControlModel.ControlType.Value != PlayerControlType.Normal) {
+		if (!playerControlModel.HasControlType(PlayerControlType.Normal)) {
 			return;
 		}
 		//Vector2 notebookScreenPos = Vector2.zero;

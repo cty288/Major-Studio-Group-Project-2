@@ -177,7 +177,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
 
     protected override void Update() {
         base.Update();
-        if (playerControl.ControlType.Value != PlayerControlType.Normal) {
+        if (!playerControl.HasControlType(PlayerControlType.Normal)) {
             return;
         }
         if (panel.activeInHierarchy && CurrentScreenSpaceCameraMarker) {
