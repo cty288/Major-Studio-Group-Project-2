@@ -6,6 +6,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using MikroFramework.Architecture;
+using MikroFramework.AudioKit;
 using MikroFramework.Event;
 using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
@@ -17,6 +18,7 @@ public class OutdoorFlashLight : ElectricalApplicance
     private BodyGenerationModel bodyGenerationModel;
     [SerializeField] private Speaker speaker;
     [SerializeField] private PeepholeSceneUI peepholeSceneUI;
+   
     
     protected override void Awake() {
         base.Awake();

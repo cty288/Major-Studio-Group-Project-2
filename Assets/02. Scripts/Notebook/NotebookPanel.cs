@@ -8,6 +8,7 @@ using DG.Tweening;
 using UnityEngine;
 using MikroFramework;
 using MikroFramework.Architecture;
+using MikroFramework.AudioKit;
 using MikroFramework.Event;
 using UnityEngine;
 using UnityEngine.UI;
@@ -55,6 +56,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
     protected TMP_Text controlHint;
     
     protected  Animator flipAnimator;
+    [SerializeField] private AudioClip tear_sound;
     protected override void Awake() {
         base.Awake();
         panel = transform.Find("Panel").gameObject;
@@ -114,9 +116,6 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         controlHint.text = "Hold & Drag to Erase";
     }
 
-
-   
-
     protected override void OnDestroy() {
         base.OnDestroy();
         lastPageButton.onClick.RemoveListener(OnLastPageButtonClicked);
@@ -155,14 +154,15 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         }
     }
     
-    private void OnTear() {
+    private void OnTear()
+    {
+        AudioSystem.Singleton.Play2DSound(tear_sound);
         DateTime lastNoteBookOpenTime = notebookModel.LastOpened;
         if(lastNoteBookOpenTime == DateTime.MinValue) {
             lastNoteBookOpenTime = gameTimeModel.CurrentTime.Value.Date;
         }
 
         DeleteNotes(lastNoteBookOpenTime, true);
-
     }
 
     private void DeleteNotes(DateTime date, bool spawnTrash) {
