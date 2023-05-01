@@ -53,7 +53,8 @@ public class ElectricitySystem : AbstractSystem {
 
     private void OnNewDay(OnNewDay e) {
         if (e.Day == 1) {
-            importantNewspaperModel.AddPageToNewspaper(importantNewspaperModel.GetIssueForNews(powerCutoffDay, e.Date),
+            DateTime day = gameTimeModel.GetDay(powerCutoffDay);
+            importantNewspaperModel.AddPageToNewspaper(importantNewspaperModel.GetIssueForNews(powerCutoffDay, day),
                 this.GetModel<ImportantNewsTextModel>().GetInfo("NoElectricity"),0);
         }
         

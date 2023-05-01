@@ -181,7 +181,7 @@ namespace _02._Scripts.Radio.RadioScheduling {
 			
 
 			if (addToImportantNewspaper) {
-				int issue = importantNewspaperModel.GetIssueForNews(day, date);
+				int issue = importantNewspaperModel.GetIssueForNews(day, date)-1;
 				importantNewspaperModel.AddPageToNewspaper(issue,
 					new ImportantNewspaperRadioSchedulePage(schedule));
 				

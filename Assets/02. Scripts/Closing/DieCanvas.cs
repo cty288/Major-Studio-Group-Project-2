@@ -24,6 +24,8 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
     [SerializeField]
     private List<EndingAnimation> endingAnimations;
 
+    private Image bgStrip;
+
     private Animator animator;
     private void Awake() {
         //restartButton = transform.Find("Panel/OptionGroup/RestartButton").GetComponent<Button>();
@@ -34,6 +36,7 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
         backToMenuButton.onClick.AddListener(OnBackToMenuButtonClicked);
         endingBG = transform.Find("Panel/EndingBG").GetComponent<Image>();
         animator = transform.Find("Panel").GetComponent<Animator>();
+        bgStrip = transform.Find("Panel/BGStrip").GetComponent<Image>();
     }
 
     private void OnBackToMenuButtonClicked() {
@@ -98,6 +101,9 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
         backToMenuButton.gameObject.SetActive(!isPrologue);
         restartTodayButton.gameObject.SetActive(!isPrologue && showRestart);
         endingBG.gameObject.SetActive(endingAnimIndex >= 0 && !isPrologue);
+        if (!isPrologue) {
+            bgStrip.DOFade(1f, 1f);
+        }
         this.Delay(1f, () => {
             animator.enabled = false;
         });
@@ -122,7 +128,9 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
             endingBG.sprite = endingAnimation.sprites[startIndex];
             endingBG.DOFade(1, 0.5f).OnComplete(() => {
                 if (startIndex < endingAnimation.sprites.Count - 1) {
-                    PlayBGAnim(endingAnimation, startIndex + 1);
+                    this.Delay(1f, () => {
+                        PlayBGAnim(endingAnimation, startIndex + 1);
+                    });
                 }
             });
         });

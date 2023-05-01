@@ -63,7 +63,7 @@ public class DayIndicator : AbstractMikroController<MainGame> {
             return;
         }
         this.Delay(1f, () => {
-            animator.CrossFade("Idle", 0.25f);
+            animator.Play("StopShow");
         });
       
     }

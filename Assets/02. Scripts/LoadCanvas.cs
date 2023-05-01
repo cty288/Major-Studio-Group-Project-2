@@ -14,6 +14,7 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
     private GameTimeManager gameTimeManager;
     private Image bg;
     private TMP_Text message;
+    private Animator animator;
 
     [SerializeField] private List<Camera> scenesToCameras = new List<Camera>();
     [SerializeField] private List<Sprite> imageSprites = new List<Sprite>();
@@ -27,6 +28,7 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
         this.GetModel<GameSceneModel>().GameScene.RegisterOnValueChaned(OnGameSceneChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnEndOfOutdoorDayTimeEvent>(OnEndOfOutdoorDayTime).UnRegisterWhenGameObjectDestroyed(gameObject);
         image = transform.Find("Image").GetComponent<Image>();
+        animator = GetComponent<Animator>();
     }
 
     private void OnEndOfOutdoorDayTime(OnEndOfOutdoorDayTimeEvent e) {
@@ -80,15 +82,17 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
     public void Load(float loadTime, Action onScreenBlack, Action onScreenRecover) {
         bg.raycastTarget = true;
         gameTimeManager.LockDayEnd.Retain();
-        bg.DOFade(1, 0.5f).OnComplete(() => {
+        animator.Play("StartLoad");
+        this.Delay(0.5f, () => {
             onScreenBlack?.Invoke();
             this.Delay(loadTime, () => {
                 bg.raycastTarget = false;
                 onScreenRecover?.Invoke();
+                animator.Play("StopLoad");
+                this.Delay(0.5f, () => {
+                    gameTimeManager.LockDayEnd.Release();
+                });
             });
-            bg.DOFade(0, 0.5f).OnComplete(() => {
-                gameTimeManager.LockDayEnd.Release();
-            }).SetDelay(loadTime);
         });
     }
 
@@ -98,7 +102,8 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
             gameTimeManager.LockDayEnd.Retain();
         }
         
-        bg.DOFade(1, 0.5f).OnComplete(() => {
+        animator.Play("StartLoad");
+        this.Delay(0.5f, () => {
             onScreenBlack?.Invoke();
         });
     }
@@ -107,8 +112,8 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
     {
         bg.raycastTarget = false;
         gameTimeManager.LockDayEnd.Release();
-        bg.DOFade(0, 0.5f).OnComplete(() =>
-        {
+        animator.Play("StopLoad");
+        this.Delay(0.5f, () => {
             onScreenRecover?.Invoke();
         });
     }
@@ -118,7 +123,8 @@ public class LoadCanvas : MonoMikroSingleton<LoadCanvas>, IController {
     public void LoadUntil(Func<Func<bool>> onScreenBlack, Action onScreenRecover) {
         gameTimeManager.LockDayEnd.Retain();
         bg.raycastTarget = true;
-        bg.DOFade(1, 0.5f).OnComplete(() => {
+        animator.Play("StartLoad");
+        this.Delay(0.5f, () => {
             Func<bool> condition = onScreenBlack?.Invoke();
 
             UntilAction action = UntilAction.Allocate(condition);

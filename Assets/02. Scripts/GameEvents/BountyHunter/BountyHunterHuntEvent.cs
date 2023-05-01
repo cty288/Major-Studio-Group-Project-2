@@ -100,7 +100,7 @@ public class BountyHunterHuntEvent : GameEvent{
         }
 
         importantNewspaperModel.AddPageToNewspaper(week,
-            importantNewsTextModel.GetInfo(killAlien ? "BountyHunterSuccess" : "BountyHunterFail"), 1);
+            importantNewsTextModel.GetInfo(killAlien ? "BountyHunterSuccess" : "BountyHunterFail"), 0);
     }
 
     public override void OnEnd() {

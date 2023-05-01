@@ -140,9 +140,9 @@ public class ImportantNewspaperModel: AbstractSavableModel {
 			}
 			int dow = (int) date.DayOfWeek;
 			if(dow >= (int) newsDays[1] && dow< (int)newsDays[0]) {
-				return wk * 2 - 1;
-			}else {
 				return wk * 2;
+			}else {
+				return wk * 2 + 1;
 			}
 			
 			/*

@@ -30,7 +30,7 @@ namespace _02._Scripts.ImportantNewspaper {
 					this.GetModel<ImportantNewsTextModel>().GetInfo("ManDead"), 0);
 			}
 			if(importantNewspaperModel.newsDays.Contains(e.Date.DayOfWeek) && e.Day>=1) {
-				this.SendEvent(new OnImportantNewspaperGenerated() {Issue = importantNewspaperModel.GetIssueForNews(e.Day, e.Date)});
+				this.SendEvent(new OnImportantNewspaperGenerated() {Issue = importantNewspaperModel.GetIssueForNews(e.Day, e.Date)-1});
 			}
 		}
 	}
