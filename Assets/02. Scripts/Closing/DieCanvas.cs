@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Singletons;
 using MikroFramework.TimeSystem;
@@ -9,15 +11,33 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
-    private Button restartButton;
-    private Button restartTodayButton;
+[Serializable]
+public struct EndingAnimation {
+    public List<Sprite> sprites;
+}
 
+public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
+    //private Button restartButton;
+    private Button backToMenuButton;
+    private Button restartTodayButton;
+    private Image endingBG;
+    [SerializeField]
+    private List<EndingAnimation> endingAnimations;
+
+    private Animator animator;
     private void Awake() {
-        restartButton = transform.Find("Panel/RestartButton").GetComponent<Button>();
-        restartTodayButton = transform.Find("Panel/RestartFromToday").GetComponent<Button>();
-        restartButton.onClick.AddListener(OnRestartButtonClicked);
+        //restartButton = transform.Find("Panel/OptionGroup/RestartButton").GetComponent<Button>();
+        restartTodayButton = transform.Find("Panel/OptionGroup/RestartFromToday").GetComponent<Button>();
+        backToMenuButton = transform.Find("Panel/OptionGroup/BackToMenu").GetComponent<Button>();
+       // restartButton.onClick.AddListener(OnRestartButtonClicked);
         restartTodayButton.onClick.AddListener(OnRestartTodayButtonClicked);
+        backToMenuButton.onClick.AddListener(OnBackToMenuButtonClicked);
+        endingBG = transform.Find("Panel/EndingBG").GetComponent<Image>();
+        animator = transform.Find("Panel").GetComponent<Animator>();
+    }
+
+    private void OnBackToMenuButtonClicked() {
+        BackToMenu();
     }
 
     private void OnRestartTodayButtonClicked() {
@@ -63,19 +83,51 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
         SceneManager.LoadScene("Menu");
     }
 
-    public void Show(string dieReason, bool isPrologue = false) {
+    public void Show(string dieReason, int endingAnimIndex, bool isPrologue = false) {
         
-        Show("You Died!", dieReason, isPrologue);
+        Show("You Died!", dieReason, endingAnimIndex, isPrologue);
     }
 
-    public void Show(string title, string dieReason, bool isPrologue = false, bool showRestart = true) {
+    public void Show(string title, string dieReason, int endingAnimIndex, bool isPrologue = false, bool showRestart = true) {
+        Awake();
+        animator.enabled = true;
         transform.Find("Panel").gameObject.SetActive(true);
         transform.Find("Panel/DieReason").GetComponent<TMP_Text>().text = dieReason;
         transform.Find("Panel/DieText").GetComponent<TMP_Text>().text = title;
-        restartButton.gameObject.SetActive(!isPrologue);
+        //restartButton.gameObject.SetActive(!isPrologue);
+        backToMenuButton.gameObject.SetActive(!isPrologue);
         restartTodayButton.gameObject.SetActive(!isPrologue && showRestart);
+        endingBG.gameObject.SetActive(endingAnimIndex >= 0 && !isPrologue);
+        this.Delay(1f, () => {
+            animator.enabled = false;
+        });
+        if (endingAnimIndex >= 0 && !isPrologue) {
+            EndingAnimation endingAnimation = endingAnimations[endingAnimIndex];
+            endingBG.sprite = endingAnimation.sprites[0];
+            this.Delay(2f, () => {
+                PlayBGAnim(endingAnimation, 1);
+            });
+           // StartCoroutine(Fade());
+
+        }
     }
-    
+
+
+
+    private void PlayBGAnim(EndingAnimation endingAnimation, int startIndex) {
+        if(startIndex >= endingAnimation.sprites.Count) {
+            return;
+        }
+        endingBG.DOFade(0, 0.5f).OnComplete(() => {
+            endingBG.sprite = endingAnimation.sprites[startIndex];
+            endingBG.DOFade(1, 0.5f).OnComplete(() => {
+                if (startIndex < endingAnimation.sprites.Count - 1) {
+                    PlayBGAnim(endingAnimation, startIndex + 1);
+                }
+            });
+        });
+    }
+
     public void Hide() {
         transform.Find("Panel").gameObject.SetActive(false);
     }

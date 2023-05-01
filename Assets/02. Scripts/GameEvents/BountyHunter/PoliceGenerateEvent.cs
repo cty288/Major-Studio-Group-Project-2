@@ -66,7 +66,7 @@ public class PoliceGenerateEvent : BodyGenerationEvent {
     }
 
     private void OnFinishSpeak(Speaker speaker) {
-        DieCanvas.Singleton.Show("You are arrested by the police!");
+        DieCanvas.Singleton.Show("You are arrested by the police!", 1);
         this.GetModel<GameStateModel>().GameState.Value = GameState.End;
         this.GetSystem<BodyGenerationSystem>().StopCurrentBody();
     }

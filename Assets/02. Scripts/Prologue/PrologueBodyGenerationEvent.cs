@@ -65,7 +65,7 @@ namespace _02._Scripts.Prologue {
 
 		private void OnPrologueSpeakEnd(Speaker speaker) {
 			onClickPeepholeSpeakEnd = true;
-			DieCanvas.Singleton.Show("","", true);
+			DieCanvas.Singleton.Show("","", -1, true);
 			this.GetSystem<ITimeSystem>().AddDelayTask(2.7f, () => {
 				DieCanvas.Singleton.Hide();
 			});

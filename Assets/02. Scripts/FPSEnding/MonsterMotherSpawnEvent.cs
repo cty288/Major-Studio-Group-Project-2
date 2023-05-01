@@ -67,7 +67,7 @@ public class MonsterMotherSpawnEvent : DailyKnockEvent {
        
         if (!hasBulletAndGun) {
             LoadCanvas.Singleton.HideImage(1f);
-            DieCanvas.Singleton.Show("You are killed by the monster!");
+            DieCanvas.Singleton.Show("You are killed by the monster!", 3);
             this.GetModel<GameStateModel>().GameState.Value = GameState.End;
             this.GetSystem<BodyGenerationSystem>().StopCurrentBody();
         }

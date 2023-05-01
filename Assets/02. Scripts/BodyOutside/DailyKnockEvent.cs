@@ -179,7 +179,7 @@ namespace _02._Scripts.BodyOutside {
 		        SelectGunOrDog();
 	        }else {
 	            LoadCanvas.Singleton.HideImage(1f);
-	            DieCanvas.Singleton.Show("You are killed by the creature!");
+	            DieCanvas.Singleton.Show("You are killed by the monster!", 2);
 	            this.GetModel<GameStateModel>().GameState.Value = GameState.End;
 	            this.GetSystem<BodyGenerationSystem>().StopCurrentBody();
 	        }
