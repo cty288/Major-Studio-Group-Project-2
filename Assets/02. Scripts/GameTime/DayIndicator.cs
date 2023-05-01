@@ -74,7 +74,7 @@ public class DayIndicator : AbstractMikroController<MainGame> {
     }
 
     private void OnDestroy() {
-        this.GetSystem<GameTimeManager>().OnDayStart -= OnDayStart;
+        //this.GetSystem<GameTimeManager>().OnDayStart -= OnDayStart;
     }
 
 

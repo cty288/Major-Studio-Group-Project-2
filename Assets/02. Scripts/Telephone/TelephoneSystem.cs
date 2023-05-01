@@ -168,6 +168,10 @@ public class TelephoneSystem : AbstractSavableSystem {
     }
     private IEnumerator IncomingCallWait(int maxWaitTime) {
         for (int i = 0; i < maxWaitTime; i++) {
+            DateTime currentTime = gameTimeManager.CurrentTime.Value;
+            if (currentTime.Hour == 23 && currentTime.Minute >= 58) {
+                break;
+            }
             OnIncomingCallBeep?.Invoke();
             yield return new WaitForSeconds(4.5f);
         }
