@@ -38,9 +38,9 @@ namespace _02._Scripts.SexyCard {
 			if (now.Hour >= 23) {
 				tooLate = true;
 				speakContent.Add(
-					"Sorry, it's too late for me to come over. Make sure to call earlier next time if you want to have some fun.");
+					"Sorry, I am booked for today. Make sure to call earlier next time if you want to have some fun.");
 				speakContent.Add(
-					"Sorry, you caught me at a bad time. Next time, try calling earlier and we'll make something happen.");
+					"Sorry, I am booked for today. Next time, try calling earlier and we'll make something happen.");
 			}
 			else {
 				speakContent.Add("Hello there, welcome to my world of pleasure. Do you want to make something happen?");
