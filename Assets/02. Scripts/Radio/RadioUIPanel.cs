@@ -7,6 +7,7 @@ using _02._Scripts.Notebook;
 using DG.Tweening;
 using MikroFramework;
 using MikroFramework.Architecture;
+using MikroFramework.AudioKit;
 using MikroFramework.Event;
 using NHibernate.Mapping;
 using TMPro;
@@ -90,6 +91,8 @@ public class RadioUIPanel : OpenableUIPanel
         else {
             radioModel.IsOn.Value = true;
         }
+
+        AudioSystem.Singleton.Play2DSound("radio_button");
     }
 
     private void OnRadioIsOnChanged(bool isOn) {

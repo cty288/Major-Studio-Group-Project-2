@@ -56,7 +56,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
     protected TMP_Text controlHint;
     
     protected  Animator flipAnimator;
-    [SerializeField] private AudioClip tear_sound;
+   // [SerializeField] private AudioClip tear_sound;
     protected override void Awake() {
         base.Awake();
         panel = transform.Find("Panel").gameObject;
@@ -156,7 +156,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
     
     private void OnTear()
     {
-        AudioSystem.Singleton.Play2DSound(tear_sound);
+        AudioSystem.Singleton.Play2DSound("page_tear");
         DateTime lastNoteBookOpenTime = notebookModel.LastOpened;
         if(lastNoteBookOpenTime == DateTime.MinValue) {
             lastNoteBookOpenTime = gameTimeModel.CurrentTime.Value.Date;

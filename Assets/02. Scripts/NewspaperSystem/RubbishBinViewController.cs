@@ -9,7 +9,7 @@ using UnityEngine;
 public class RubbishBinViewController : AbstractMikroController<MainGame> {
     [SerializeField] private Material outlineMaterial;
     [SerializeField] private WarningPanel warningPanel;
-    [SerializeField] private AudioClip trashSound;
+    //[SerializeField] private AudioClip trashSound;
     
     private SpriteRenderer spriteRenderer;
     private Material defaultMaterial;
@@ -44,7 +44,7 @@ public class RubbishBinViewController : AbstractMikroController<MainGame> {
             }
             else {
                 if (draggingItem) {
-                    AudioSystem.Singleton.Play2DSound(trashSound);
+                    AudioSystem.Singleton.Play2DSound("trash-crumple");
                     warningPanel.Hide();
                     StopHighlight();
                     draggingItem.OnThrown();

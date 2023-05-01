@@ -9,11 +9,11 @@ using MikroFramework.AudioKit;
 public class RadioHintBtn : MonoBehaviour
 {
     public RadioHint radioHint;
-    [SerializeField] private AudioClip ui_click;
+    //[SerializeField] private AudioClip ui_click;
     public void Awake() {
         GetComponent<Button>().onClick.AddListener(() =>
         {
-            AudioSystem.Singleton.Play2DSound(ui_click);
+            AudioSystem.Singleton.Play2DSound("UI_Click");
             if(radioHint.IsShowing) {
                 radioHint.Hide();
             } else {
