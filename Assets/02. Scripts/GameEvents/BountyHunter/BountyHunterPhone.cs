@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.ChoiceSystem;
+using _02._Scripts.Dog;
 using _02._Scripts.FPSEnding;
 using _02._Scripts.GameEvents.BountyHunter;
 using Crosstales.RTVoice.Model.Enum;
@@ -131,14 +132,19 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
             }
         }
 
-
+        List<string> messages = new List<string>();
+        messages.Add("Thank you partner! I will dig deeper into this. Once I find out the truth, I will reward you with foods!");
+        messages.Add("Appreciate it buddy. I¡¯ll keep an eye on that person. I will reward you with foods once I find out the truth!");
+        messages.Add("Thank you citizen! Your cooperation will make our community a better place!");
+        
+        
         lastPersonDead = true;
         bool killGoodPeople = false;
         bool killAliens = false;
         DateTime questStartTime = tomorrow.AddMinutes(Random.Range(30, 60));
         DateTime questEndTime = new DateTime(questStartTime.Year, questStartTime.Month, questStartTime.Day, 23, 58, 0);
-        
-        
+
+        bool pointMonsterMother = false;
         foreach (BodyInfo info in bodyInfos) {
             talkedBefore = true;
             if (info == null) {
@@ -149,13 +155,27 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
                 if (info.IsAlien) {
                     killAliens = true;
                     
-                    if (info.ID == monsterMotherModel.MotherBodyTimeInfo.BodyInfo.ID) {
-                        bountyHunterModel.QuestFinished = true;
-                        Debug.Log("Correct Quest Info!! Call will start at " + questStartTime);
+                    if (info.ID == monsterMotherModel.MotherBodyTimeInfo.BodyInfo.ID && bodyInfos.Count == 1) {
+                        pointMonsterMother = true;
+                        messages.Clear();
+                        if (!bountyHunterModel.QuestFinished) {
+                            bountyHunterModel.QuestFinished = true;
+                            
+                            messages.Add(
+                                "Wait... I'm 99% sure that it's the Xenovore we've been looking for. It looks exactly the same as the one I told you." +
+                                "I will start my hunt for the creature tomorrow and I need your help too. And listen, Xenovore is tough. " +
+                                "<color=yellow>It's going to take a lot of firepower to bring it down</color>. I will reward you with more bullets tomorrow and <color=yellow>I advise you to bring as many bullets as possible if you encounter the Xenovore</color>. " +
+                                "Thanks again for your help, buddy!");
                         
-                        gameEventSystem.AddEvent(new BountyHunterQuestFinishPhoneEvent(
-                            new TimeRange(questStartTime, questEndTime),
-                            new BountyHunterQuestFinishContact(), 6));
+                            gameEventSystem.AddEvent(new GoodsRewardEvent(new TimeRange(tomorrow), new List<GoodsInfo>() {
+                                GoodsInfo.GetGoodsInfo(new FoodResource(), Random.Range(3, 5)),
+                                GoodsInfo.GetGoodsInfo(new BulletGoods(), 2)
+                            }, "Thanks for pointing out the Xenovore!\nRemember: you need more bullets to take it down!\n\t-- Bounty Hunter", "A note from Bounty Hunter"));
+                        }
+                        else {
+                            messages.Add(
+                                "This is the Xenovore you already told me about. I am still looking for it. If you encounter the Xenovore again, make sure you have enough bullets before opening door!");
+                        }
 
                     }
                     Debug.Log("Killed Alien");
@@ -181,6 +201,13 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
                 gameEventSystem.AddEvent(new BountyHunterQuestStartEvent(new TimeRange(questStartTime, questEndTime),
                     new BountyHunterQuestStartPhone(), 6));
             }
+
+            if (!pointMonsterMother) {
+                gameEventSystem.AddEvent(new GoodsRewardEvent(new TimeRange(tomorrow), new List<GoodsInfo>() {
+                    GoodsInfo.GetGoodsInfo(new FoodResource(), Random.Range(3, 5))
+                }, "Thanks for finding out the monster!", "A note from Bounty Hunter"));
+            }
+           
             
 
         }else if(killGoodPeople) {
@@ -199,18 +226,19 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
                 AudioMixerList.Singleton.AudioMixerGroups[1]);
             gameEventSystem.AddEvent(radio);
 
+           
+
             Debug.Log("Current Time is " + current);
         }
 
 
+
+        if (!pointMonsterMother) {
+            gameEventSystem.AddEvent(new BountyHunterHuntEvent(new TimeRange(tomorrow), bodyInfos.ToList()));
+        }
+       
         
-        
-        gameEventSystem.AddEvent(new BountyHunterHuntEvent(new TimeRange(tomorrow), bodyInfos.ToList()));
-        
-        List<string> messages = new List<string>();
-        messages.Add("Thank you partner! I will dig deeper into this. Once I find out the truth, I will reward you with foods!");
-        messages.Add("Appreciate it buddy. I¡¯ll keep an eye on that person. I will reward you with foods once I find out the truth!");
-        messages.Add("Thank you citizen! Your cooperation will make our community a better place!");
+       
         string message = messages[Random.Range(0, messages.Count)];
         speaker.Speak(message, mixer, "Bounty Hunter", 1f, OnEndingSpeak);
 

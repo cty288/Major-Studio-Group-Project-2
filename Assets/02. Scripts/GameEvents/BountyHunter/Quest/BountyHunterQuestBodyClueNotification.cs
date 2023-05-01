@@ -15,7 +15,7 @@ using Random = UnityEngine.Random;
 [ES3Serializable]
 public abstract class BountyHunterQuestClueNotification: IncomingCallEvent {
     [field: ES3Serializable]
-    public override GameEventType GameEventType { get; } = GameEventType.BountyHunterQuestClueNotification;
+    public override GameEventType GameEventType { get; } = GameEventType.IncomingCall;
     protected BountyHunterModel bountyHunterModel;
     
    

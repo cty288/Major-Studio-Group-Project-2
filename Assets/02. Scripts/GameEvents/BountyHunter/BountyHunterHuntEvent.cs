@@ -77,9 +77,9 @@ public class BountyHunterHuntEvent : GameEvent{
         }
 
         if (killAlien && !killGood) {
-            this.SendEvent<OnBountyHunterKillCorrectAlien>(new OnBountyHunterKillCorrectAlien() {
-                FoodCount = Random.Range(3, 5)
-            });
+            //this.SendEvent<OnBountyHunterKillCorrectAlien>(new OnBountyHunterKillCorrectAlien() {
+               // FoodCount = Random.Range(3, 5)
+           // });
             AddToImportantNews(true);
         }
 

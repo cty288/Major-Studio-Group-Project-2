@@ -72,9 +72,6 @@ public class BountyHunterQuest1ClueNotificationNotificationContact : BountyHunte
             DateTime nextEndTime = nextStartTime.AddMinutes(20);
 
             if (!monsterMotherModel.MonsterMotherSpawned) {
-               
-				
-                
                 monsterMotherModel.MonsterMotherSpawned = true;
                 this.GetSystem<GameEventSystem>().AddEvent(new MonsterMotherSpawnEvent(
                     new TimeRange(nextStartTime, nextEndTime),
@@ -121,9 +118,9 @@ public class BountyHunterQuest1ClueEvent : BountyHunterQuestClueEvent {
             chanceForNewspaperShowBody = 1;
         }
         if (chanceForNewspaperShowBody > 0.6f) {
-            this.GetModel<BodyModel>()
-                .AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(monsterMotherModel.MotherBodyTimeInfo);
-            Debug.Log("Tomorrow's Quest Body will be shown in newspaper!");
+         //   this.GetModel<BodyModel>()
+           //     .AddNewBodyTimeInfoToNextDayDeterminedBodiesQueue(monsterMotherModel.MotherBodyTimeInfo);
+           // Debug.Log("Tomorrow's Quest Body will be shown in newspaper!");
         }
     }
 

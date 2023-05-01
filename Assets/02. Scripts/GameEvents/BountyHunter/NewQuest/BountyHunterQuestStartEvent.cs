@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.FPSEnding;
 using _02._Scripts.GameEvents.BountyHunter;
+using _02._Scripts.GameEvents.BountyHunter.NewQuest;
+using _02._Scripts.GameTime;
 using MikroFramework.Architecture;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -59,20 +61,28 @@ public class BountyHunterQuestStartEvent : IncomingCallEvent {
         if (!this.GetModel<MonsterMotherModel>().MonsterMotherSpawned && !bodyModel.IsInAllBodyTimeInfos(monsterMotherModel.MotherBodyTimeInfo.BodyInfo)) {
             bodyModel.AddToAllBodyTimeInfos(monsterMotherModel.MotherBodyTimeInfo);
         }
+        
+       
+        GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
+        DateTime nextStartTime = gameTimeModel.GetDay(gameTimeModel.Day + Random.Range(2, 4));
+        nextStartTime = new DateTime(nextStartTime.Year, nextStartTime.Month, nextStartTime.Day, 23, Random.Range(0,40), 0);
+        DateTime nextEndTime = nextStartTime.AddMinutes(20);
+
+        if (!monsterMotherModel.MonsterMotherSpawned) {
+            monsterMotherModel.MonsterMotherSpawned = true;
+            this.GetSystem<GameEventSystem>().AddEvent(new MonsterMotherSpawnEvent(new TimeRange(nextStartTime, nextEndTime), monsterMotherModel.MotherBodyTimeInfo.BodyInfo, 1));
+        }
        
 
 
         DateTime nextClueHappenTime = gameTimeManager.CurrentTime.Value.AddDays(1);
-       
-        nextClueHappenTime = new DateTime(nextClueHappenTime.Year, nextClueHappenTime.Month, nextClueHappenTime.Day, 23, Random.Range(20, 56), 0);
+        nextClueHappenTime = nextClueHappenTime.AddMinutes(Random.Range(5, 60));
 
-        DateTime nextEventStartTime =
-            new DateTime(nextClueHappenTime.Year, nextClueHappenTime.Month, nextClueHappenTime.Day, gameTimeManager.NightTimeStart, Random.Range(5, 20), 0);
-        DateTime nextEventEndTime = nextClueHappenTime.AddMinutes(-20);
 
-        gameEventSystem.AddEvent(new BountyHunterQuest1ClueNotification(
-            new TimeRange(nextEventStartTime, nextEventEndTime),
-            new BountyHunterQuest1ClueNotificationNotificationContact(), 6, nextClueHappenTime));
+
+        gameEventSystem.AddEvent(new BountyHunterClue1Event(
+            new TimeRange(nextClueHappenTime, nextClueHappenTime.AddMinutes(30)),
+            new BountyHunterClue1Contact(), 6));
 
         Debug.Log("Bounty Hunter First Clue Happen Time: " + nextClueHappenTime);
     }
