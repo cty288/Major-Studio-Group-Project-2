@@ -39,6 +39,7 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
         bgStrip = transform.Find("Panel/BGStrip").GetComponent<Image>();
     }
 
+
     private void OnBackToMenuButtonClicked() {
         BackToMenu();
     }
