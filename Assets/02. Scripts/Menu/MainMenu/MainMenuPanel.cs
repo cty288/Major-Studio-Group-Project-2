@@ -13,9 +13,9 @@ public class MainMenuPanel : MonoBehaviour {
     private Button loadGameButton;
 
     private void Awake() {
-        newGameButton = transform.Find("NewGameButton").GetComponent<Button>();
-        quitGameButton = transform.Find("QuitGameButton").GetComponent<Button>();
-        loadGameButton = transform.Find("LoadGameButton").GetComponent<Button>();
+        newGameButton = GameObject.Find("NewGameButton").GetComponent<Button>();
+        quitGameButton = GameObject.Find("QuitGameButton").GetComponent<Button>();
+        loadGameButton = GameObject.Find("LoadGameButton").GetComponent<Button>();
         
         newGameButton.onClick.AddListener(OnNewGameButtonClicked);
         quitGameButton.onClick.AddListener(OnQuitGameButtonClicked);
