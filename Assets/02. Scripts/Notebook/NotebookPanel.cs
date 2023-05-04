@@ -375,17 +375,15 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
     }
 
     private void EraseMarker(Vector3 mousePos) {
-        if (markerPanel.childCount <= 0) {
-            return;
-        }
-        
+
         DateTime lastNoteBookOpenTime = notebookModel.LastOpened;
         if(lastNoteBookOpenTime == DateTime.MinValue) {
             lastNoteBookOpenTime = gameTimeModel.CurrentTime.Value.Date;
         }
-
+        
+        
         List<NotebookMarker> markers = markerPanel.GetComponentsInChildren<NotebookMarker>(true).ToList();
-        //Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+        Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
         if (markers != null) {
             foreach (NotebookMarker info in markers) {
                 NotebookMarkerDroppableInfo droppableInfo = info.DroppableInfo as NotebookMarkerDroppableInfo;
@@ -404,6 +402,29 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
                         break;
                     }
                 }
+            }
+        }
+        
+        List<DroppedUIObjectViewController> mainContents = contentPanel.GetComponentsInChildren<DroppedUIObjectViewController>(true).ToList();
+        if (mainContents != null) {
+            foreach (DroppedUIObjectViewController info in mainContents) {
+                DroppableInfo droppableInfo = info.DroppableInfo;
+               
+
+                Bounds bounds = info.DroppableInfo.Bounds;
+                //set z to 0
+               
+                bounds = new Bounds(new Vector3(bounds.center.x, bounds.center.y, 0), new Vector3(bounds.size.x, bounds.size.y, 0));
+                
+               
+                
+                
+                if (bounds.Contains(mousePos2D)) {
+                    notebookModel.RemoveNote(lastNoteBookOpenTime, droppableInfo);
+                    Destroy(info.gameObject);
+                    break;
+                }
+                
             }
         }
     }
