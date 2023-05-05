@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2265132675
+CRC: 3477967111
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b625cb46d3c64e6d55cba0549e692ff5
+    Hash: 6e2609d1128590df71810b7868884e8a
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9a2ca7bdbd1871f7131daf57de908e0c
@@ -13,45 +13,51 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/04. Audios/telephone/incoming_call.ogg
 - Assets/04. Audios/FPS/monster_die.ogg
-- Assets/04. Audios/Knocks/knock_5.mp3
 - Assets/04. Audios/Dog/dogBark_1.wav
 - Assets/04. Audios/Electricity/motor_gear_loop.mp3
 - Assets/04. Audios/Dog/New/dog_die.mp3
-- Assets/04. Audios/Dog/dogBark_2.wav
 - Assets/04. Audios/Dog/dogBark_4.wav
 - Assets/04. Audios/FPS/monster_roar_2.wav
-- Assets/04. Audios/Dog/New/dog_usual_1.mp3
 - Assets/04. Audios/Knocks/knock_7.wav
-- Assets/04. Audios/SexPerson/hit_player.wav
-- Assets/04. Audios/telephone/hang_out.ogg
 - Assets/04. Audios/SexPerson/door_open.wav
 - Assets/04. Audios/Newspaper/pick_up_newspaper.wav
 - Assets/04. Audios/Dog/New/dog_outside_door_1.mp3
 - Assets/04. Audios/SexPerson/rummage.mp3
+- Assets/04. Audios/Electricity/flash_light.mp3
 - Assets/04. Audios/Knocks/kick_door_3.wav
 - Assets/04. Audios/Newspaper/Newspaper SOUND EFFECT - Reading Newspaper Flipping
   Newspaper SOUND-[AudioTrimmer.com].mp3
-- Assets/04. Audios/Newspaper/put_down_newspaper.mp3
 - Assets/04. Audios/SexPerson/slam_door.wav
-- Assets/04. Audios/Dog/New/dog_usual_2.mp3
 - Assets/04. Audios/Dog/New/dog_outside_door_2.mp3
 - Assets/04. Audios/Gun/gun_fire.wav
 - Assets/04. Audios/Knocks/knock_2.ogg
-- Assets/04. Audios/FPS/monster_roar_1.wav
 - Assets/04. Audios/FPS/monster_kill_player.wav
-- Assets/04. Audios/Dog/New/dog_outside_door_3.mp3
 - Assets/04. Audios/Knocks/kick_door_1.ogg
 - Assets/04. Audios/Knocks/kick_door_2.ogg
-- Assets/04. Audios/Dog/New/dog_attack.mp3
 - Assets/04. Audios/telephone/phone_dialing.ogg
+- Assets/04. Audios/Radio/radio_button.wav
+- Assets/04. Audios/Cat/Cat.wav
+- Assets/04. Audios/Knocks/knock_4.mp3
+- Assets/04. Audios/telephone/incoming_call.ogg
+- Assets/04. Audios/Knocks/knock_5.mp3
+- Assets/04. Audios/Dog/dogBark_2.wav
+- Assets/04. Audios/Notebook/page_tear.mp3
+- Assets/04. Audios/Dog/New/dog_usual_1.mp3
+- Assets/04. Audios/SexPerson/hit_player.wav
+- Assets/04. Audios/telephone/hang_out.ogg
+- Assets/04. Audios/UI/UI_Click.mp3
+- Assets/04. Audios/Newspaper/put_down_newspaper.mp3
+- Assets/04. Audios/Dog/New/dog_usual_2.mp3
+- Assets/04. Audios/VintageCamera/camera-shutter.wav
+- Assets/04. Audios/FPS/monster_roar_1.wav
+- Assets/04. Audios/Dog/New/dog_outside_door_3.mp3
+- Assets/04. Audios/Dog/New/dog_attack.mp3
+- Assets/04. Audios/RubbishBin/trash-crumple.wav
 - Assets/04. Audios/Clock/clock_tick.wav
 - Assets/04. Audios/Knocks/knock_3.ogg
-- Assets/04. Audios/Cat/Cat.wav
 - Assets/04. Audios/Knocks/knock_6.mp3
 - Assets/04. Audios/Dog/dogBark_3.wav
 - Assets/04. Audios/Knocks/knock_1.ogg
-- Assets/04. Audios/Knocks/knock_4.mp3
 - Assets/04. Audios/Gun/gun_no_bullet.wav
 Dependencies: []

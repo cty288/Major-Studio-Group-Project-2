@@ -36,9 +36,9 @@ namespace _02._Scripts.Radio {
 			});
 		}
 
-		public override void SetVolume(float relativeVolume, bool isLoud, bool isInstant) {
-			float loudVolume = 0.8f;
-			float notLoudVolume = 0.3f;
+		public override void SetVolume(float relativeVolume, float globalVolume, bool isLoud, bool isInstant) {
+			float loudVolume = 0.8f * globalVolume;
+			float notLoudVolume = 0.3f * globalVolume;
 			
 			
 			if (!isInstant) {
@@ -57,6 +57,15 @@ namespace _02._Scripts.Radio {
 				else {
 					audioSource.volume = loudVolume * relativeVolume;
 				}
+			}
+		}
+
+		public override void OnGamePaused(bool isPaused) {
+			if (isPaused) {
+				audioSource.Pause();
+			}
+			else {
+				audioSource.UnPause();
 			}
 		}
 	}

@@ -14,5 +14,7 @@ public abstract class RadioContentPlayer : AbstractMikroController<MainGame> {
     
     public abstract void Play(IRadioContent content, Action<RadioContentPlayer> onFinish, bool isMuted);
 
-    public abstract void SetVolume(float relativeVolume, bool isLoud, bool isInstant);
+    public abstract void SetVolume(float relativeVolume, float globalVolume, bool isLoud, bool isInstant);
+    
+    public abstract void OnGamePaused(bool isPaused);
 }

@@ -7,6 +7,7 @@ using Crosstales.RTVoice.Model.Enum;
 using DG.Tweening;
 using MikroFramework;
 using MikroFramework.Architecture;
+using MikroFramework.Event;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -62,15 +63,21 @@ public class Speaker :  AbstractMikroController<MainGame> {
     private bool inited = false;
 
     private string currentSpeachUID = "";
-    
+    VoiceAudioControl audioControl = null;
     private void Awake() {
         audioSource = GetComponent<AudioSource>();
-
-   
         
+        audioControl = GetComponent<VoiceAudioControl>();
+        if (audioControl) {
+            audioControl.GlobalVolume.RegisterOnValueChaned(OnGlobalVolumeChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
+        }
         
         Crosstales.RTVoice.Speaker.Instance.OnSpeakCompleted.AddListener(OnSpeakCompleted);
         Destroy(GetComponent<LiveSpeaker>());
+    }
+
+    private void OnGlobalVolumeChanged(float volume) {
+        audioSource.volume = volume * currentSentenceBaseVolume;
     }
 
     private void OnDestroy() {
@@ -152,6 +159,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
 
     private bool isMuted = false;
     private bool subtitleShowing = false;
+    private float currentSentenceBaseVolume = 0;
     public void Mute(bool mute) {
         isMuted = mute;
         if (!String.IsNullOrEmpty(currentSpeachUID)) {
@@ -211,6 +219,11 @@ public class Speaker :  AbstractMikroController<MainGame> {
         currentSentence = text;
         float volume = text.SpeakGender == Gender.MALE ? 0.65f : 0.9f;
         volume *= volumeMultiplier;
+        currentSentenceBaseVolume = volume;
+
+        if (audioControl) {
+            volume *= audioControl.GlobalVolume.Value;
+        }
         audioSource.outputAudioMixerGroup = text.Mixer ==null? null : text.Mixer;
 
         string processedSentence = text.SentenceFragment;
@@ -226,6 +239,7 @@ public class Speaker :  AbstractMikroController<MainGame> {
         }
         
         audioSource.volume = volume;
+        
         if (subtitile && !isMuted) {
             subtitile.OnSpeakStart(text.SentenceFragment, text.SpeakName);
             subtitleShowing = true;

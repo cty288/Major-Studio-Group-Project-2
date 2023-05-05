@@ -84,7 +84,7 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
 
     protected float NoiseVolume {
         get {
-            return 1 - radioModel.RelativeVolume;
+            return (1 - radioModel.RelativeVolume) * AudioSystem.Singleton.MasterVolume *PlayerPrefs.GetFloat("Radio_Volume", 1f);
         }
     }
     protected override void Awake() {
@@ -113,8 +113,36 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
         this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnOutsideBodyStartSpeak>(OnOutsideBodyStartSpeaking).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnOutsideBodyStopSpeak>(OnOutsideBodyStopSpeaking).UnRegisterWhenGameObjectDestroyed(gameObject);
-
+        this.RegisterEvent<OnPauseAudioSet>(OnPauseAudioSet).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<OnPause>(OnPauseGame).UnRegisterWhenGameObjectDestroyed(gameObject);
     }
+
+    private void OnPauseGame(OnPause e) {
+        if (e.isPause) {
+            foreach (RadioContentPlayer radioContentPlayer in activePlayers.Values) {
+                if (radioContentPlayer) {
+                    radioContentPlayer.OnGamePaused(true);
+                }
+                
+                
+            }
+            radioNoiseAudioSource.Pause();
+            
+        }else {
+            radioNoiseAudioSource.UnPause();
+            foreach (RadioContentPlayer radioContentPlayer in activePlayers.Values) {
+                if (radioContentPlayer) {
+                    radioContentPlayer.OnGamePaused(false);     
+                }
+               
+            }
+        }
+    }
+
+    private void OnPauseAudioSet(OnPauseAudioSet obj) {
+        UpdateSpeakerVolume(true);
+    }
+
 
     private void OnOutsideBodyStartSpeaking(OnOutsideBodyStartSpeak obj) {
         lowSoundLock.Retain();
@@ -216,7 +244,8 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
     }
 
     private void OnVolumeChange(float volume) {
-        radioNoiseAudioSource.volume = 1 - volume;
+        radioNoiseAudioSource.volume = (1 - volume) * AudioSystem.Singleton.MasterVolume *
+                                       PlayerPrefs.GetFloat("Radio_Volume", 1f);
         UpdateSpeakerVolume(true);
     }
 
@@ -256,7 +285,11 @@ public class Radio : ElectricalApplicance, IPointerClickHandler
             if (player == null) {
                 continue;
             }
-            player.SetVolume(relativeVolume, isLoud, isInstant);
+
+            float globalVolume = AudioSystem.Singleton.MasterVolume * PlayerPrefs.GetFloat("Radio_Volume", 1f);
+            //globalVolume = 1 - Mathf.Pow(1-globalVolume, 2);
+            player.SetVolume(relativeVolume ,globalVolume , isLoud, isInstant);
+            
         }
     }
         

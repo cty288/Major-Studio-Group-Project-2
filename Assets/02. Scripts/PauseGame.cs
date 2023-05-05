@@ -5,10 +5,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using MikroFramework.Architecture;
 using Crosstales.RTVoice;
+using MikroFramework;
+using MikroFramework.AudioKit;
 using MikroFramework.TimeSystem;
 using UnityEngine.SceneManagement;
 
-public class PauseGame : MonoBehaviour {
+public struct OnPauseAudioSet {
+    
+}
+
+public struct OnPause {
+    public bool isPause;
+}
+public class PauseGame : MonoBehaviour, ICanSendEvent {
     protected static bool isPause = false;
 
     public static bool IsPause => isPause;
@@ -24,16 +33,15 @@ public class PauseGame : MonoBehaviour {
     //Audio Setting
     protected GameObject audioPanel;
     protected Button audioSettings;
+    protected Collider2D audioSettingsBaseCollider;
+    protected Collider2D audioSettingsRangeCollider;
 
     protected Slider MasterSlider;
     protected Slider SFXSlider;
     protected Slider RadioSlider;
     protected Slider VoicesSlider;
 
-    [SerializeField] public float Master_Volume;
-    [SerializeField] public float SFX_Volume;
-    [SerializeField] public float Radio_Volume;
-    [SerializeField] public float Voices_Volume;
+    
 
 
     private void Awake() {
@@ -51,41 +59,97 @@ public class PauseGame : MonoBehaviour {
 
         audioPanel = PausePanel.transform.Find("AudioPanel").gameObject;
         audioSettings = PausePanel.transform.Find("AudioButton").GetComponent<Button>();
-        audioSettings.onClick.AddListener(activateAudioPanel);
+        Collider2D[] colliders = audioSettings.GetComponents<Collider2D>();
+        audioSettingsBaseCollider = colliders[0];
+        audioSettingsRangeCollider = colliders[1];
+        //audioSettings.onClick.AddListener(activateAudioPanel);
 
         //bars
         MasterSlider = audioPanel.transform.Find("Master").GetComponent<Slider>();
         SFXSlider = audioPanel.transform.Find("SFX").GetComponent<Slider>();
         RadioSlider = audioPanel.transform.Find("Radio").GetComponent<Slider>();
         VoicesSlider = audioPanel.transform.Find("Voices").GetComponent<Slider>();
+        
+        MasterSlider.onValueChanged.AddListener(OnMasterSliderValueChanged);
+        SFXSlider.onValueChanged.AddListener(OnSFXSliderValueChanged);
+        RadioSlider.onValueChanged.AddListener(OnRadioSliderValueChanged);
+        VoicesSlider.onValueChanged.AddListener(OnVoicesSliderValueChanged);
+        
     }
+
+
 
     private void Start()
     {
         audioPanel.SetActive(false);
+        this.Delay(0.3f, () => {
+            MasterSlider.SetValueWithoutNotify( AudioSystem.Singleton.MasterVolume);
+            SFXSlider.SetValueWithoutNotify(AudioSystem.Singleton.SoundVolume);
+            RadioSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat("Radio_Volume", 1f));
+            VoicesSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat("Voices_Volume", 1f));
+        });
+        
+
+    }
+    
+    private void OnMasterSliderValueChanged(float value) {
+        AudioSystem.Singleton.MasterVolume = value;
+    }
+    
+    private void OnSFXSliderValueChanged(float value) {
+        AudioSystem.Singleton.SoundVolume = value;
+    }
+    
+    private void OnRadioSliderValueChanged(float value) {
+        PlayerPrefs.SetFloat("Radio_Volume", value);
+       
+    }
+    
+    private void OnVoicesSliderValueChanged(float value) {
+        PlayerPrefs.SetFloat("Voices_Volume", value);
+        
     }
 
     private void Update()
     {
+        AudioSettingsPanelControl();
         //Read Slider Value
+        /*
         Master_Volume = MasterSlider.value;
         SFX_Volume = SFXSlider.value;
         Radio_Volume = RadioSlider.value;
-        Voices_Volume = VoicesSlider.value;
+        Voices_Volume = VoicesSlider.value;*/
         //TO DO: Pass Them into System
     }
 
-    private void activateAudioPanel()
-    {
-        if (audioPanel.activeSelf)
-        {
-            audioPanel.SetActive(false);
-        }
-        else
-        {
+    private bool isMouseInAudioSettingsBaseColliderBefore = false;
+    private void AudioSettingsPanelControl() {
+        Vector2 mousePos = Input.mousePosition;
+        
+        bool isMouseInAudioSettingsBaseCollider = audioSettingsBaseCollider.OverlapPoint(mousePos);
+        if (isMouseInAudioSettingsBaseCollider) {
             audioPanel.SetActive(true);
         }
+        else {
+            if (isMouseInAudioSettingsBaseColliderBefore) {
+                bool isMouseInAudioSettingsRangeCollider = audioSettingsRangeCollider.OverlapPoint(mousePos);
+                if (!isMouseInAudioSettingsRangeCollider) {
+                    audioPanel.SetActive(false);
+                }
+                else {
+                    audioPanel.SetActive(true);
+                    return;
+                }
+            }
+            else {
+                audioPanel.SetActive(false);
+            }
+        }
+        
+        
+        isMouseInAudioSettingsBaseColliderBefore = isMouseInAudioSettingsBaseCollider;
     }
+    
 
     private void OnMainMenuButtonClicked() {
         BackToOpening();
@@ -127,6 +191,7 @@ public class PauseGame : MonoBehaviour {
         isPause = !isPause;
         if (isPause)
         {
+            this.SendEvent<OnPause>(new OnPause(){isPause = true});
             Time.timeScale = 0;
             PauseBtn.GetComponent<Image>().sprite = Spr_Resume;
             Crosstales.RTVoice.Speaker.Instance.Pause();
@@ -135,8 +200,14 @@ public class PauseGame : MonoBehaviour {
         {
             Time.timeScale = 1;
             PauseBtn.GetComponent<Image>().sprite = Spr_Pause;
+            this.SendEvent<OnPauseAudioSet>();
             Crosstales.RTVoice.Speaker.Instance.UnPause();
+            this.SendEvent<OnPause>(new OnPause(){isPause = false});
         }
         PausePanel.SetActive(isPause);
+    }
+
+    public IArchitecture GetArchitecture() {
+        return MainGame.Interface;
     }
 }

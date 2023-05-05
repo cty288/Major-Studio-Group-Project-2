@@ -40,9 +40,9 @@ public class BodyGenerationSystem : AbstractSystem {
         gameEventSystem = this.GetSystem<GameEventSystem>();
         this.GetSystem<ITimeSystem>().AddDelayTask(0.1f, () => {
             AudioSystem.Singleton.Initialize(null);
-            AudioSystem.Singleton.MasterVolume = 1f;
-            AudioSystem.Singleton.MusicVolume = 1f;
-            AudioSystem.Singleton.SoundVolume = 1f;
+            //AudioSystem.Singleton.MasterVolume = 1f;
+            //AudioSystem.Singleton.MusicVolume = 1f;
+            //AudioSystem.Singleton.SoundVolume = 1f;
         });
        
         this.GetSystem<GameTimeManager>().OnDayStart += OnEndOfDay;

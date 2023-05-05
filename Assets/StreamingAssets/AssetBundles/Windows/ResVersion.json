@@ -65,8 +65,8 @@
     },
     {
       "AssetName": "audios",
-      "MD5": "1b88849718b3ab5a1685c0e2f60cd7d7",
-      "FileSize": 3048.90625,
+      "MD5": "e47c8589a08bce6c4ec9680f9824e8cb",
+      "FileSize": 3075.81934,
       "assetDatas": [
         {
           "Name": "Cat",
@@ -130,6 +130,11 @@
         },
         {
           "Name": "dog_usual_2",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "flash_light",
           "OwnerBundleName": "audios",
           "AssetType": "UnityEngine.AudioClip"
         },
@@ -234,6 +239,21 @@
           "AssetType": "UnityEngine.AudioClip"
         },
         {
+          "Name": "page_tear",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "radio_button",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "trash-crumple",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
           "Name": "door_open",
           "OwnerBundleName": "audios",
           "AssetType": "UnityEngine.AudioClip"
@@ -267,13 +287,23 @@
           "Name": "phone_dialing",
           "OwnerBundleName": "audios",
           "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "UI_Click",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "camera-shutter",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
         }
       ]
     },
     {
       "AssetName": "general",
-      "MD5": "602d6d6b493d7b3a13204b6dafe94194",
-      "FileSize": 1652.6416,
+      "MD5": "6b2621f83f58fc23c8797d39188de5f9",
+      "FileSize": 1652.67773,
       "assetDatas": [
         {
           "Name": "DraggedText",
@@ -414,7 +444,7 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "6cbb27752d41293231edafff67e592d0",
+      "MD5": "0568ab94a3182d62aa49eb0e4aa0ebc9",
       "FileSize": 1.79296875,
       "assetDatas": []
     },

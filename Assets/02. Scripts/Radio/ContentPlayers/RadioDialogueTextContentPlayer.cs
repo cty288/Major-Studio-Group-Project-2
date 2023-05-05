@@ -73,9 +73,13 @@ namespace _02._Scripts.Radio {
 			
 		}
 
-		public override void SetVolume(float relativeVolume, bool isLoud, bool isInstant) {
+		public override void SetVolume(float relativeVolume, float globalVolume, bool isLoud, bool isInstant) {
+			globalVolume = Mathf.Max(0.01f, 1 - Mathf.Pow(1 - globalVolume, 2));
+			relativeVolume *= globalVolume;
+			
 			float loudVolume = -17 * (1 / relativeVolume);
 			float notLoudVolume = -30 * (1 / relativeVolume);
+			
 			
 			
 			if (!isInstant) {
@@ -94,6 +98,10 @@ namespace _02._Scripts.Radio {
 					speaker.AudioMixer.SetFloat("volume", loudVolume);
 				}
 			}
+		}
+
+		public override void OnGamePaused(bool isPaused) {
+			
 		}
 	}
 }

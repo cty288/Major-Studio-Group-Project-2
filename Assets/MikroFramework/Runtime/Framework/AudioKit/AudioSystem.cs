@@ -78,7 +78,16 @@ namespace MikroFramework.AudioKit
         private GameObject sound3DPrefab;
         private GameObject sound2DPrefab;
 
-        private Dictionary<string, List<AudioSource>> playingSounds = new Dictionary<string, List<AudioSource>>();
+        internal class PlayingAudioInfo {
+            public float RelativeVolume;
+            public AudioSource AudioSource;
+            public PlayingAudioInfo(float relativeVolume, AudioSource audioSource) {
+                RelativeVolume = relativeVolume;
+                AudioSource = audioSource;
+            }
+        }
+        private Dictionary<string, List<PlayingAudioInfo>> playingSounds = new Dictionary<string, List<PlayingAudioInfo>>();
+        private float bgmRelativeVolume = 1f;
         private Dictionary<AudioSource, float> pausedAudioSourceOriginalVolume = new Dictionary<AudioSource, float>();
         public void Initialize(Action onInitialize) {
             ResLoader.Create((loader => {
@@ -93,7 +102,7 @@ namespace MikroFramework.AudioKit
                 GameObjectPoolManager.AutoCreatePoolWhenAllocating = true;
 
                 DontDestroyOnLoad(gameObject);
-                bgm.volume = MusicVolume;
+                bgm.volume = MusicVolume * MasterVolume;
                 //sound2D.volume = SoundVolume;
 
 #if UNITY_EDITOR
@@ -116,6 +125,7 @@ namespace MikroFramework.AudioKit
             float duration = 1f;
             float timer = 0f;
 
+            bgmRelativeVolume = relativeVolume;
             if (bgm.clip == null || newClip.name != bgm.clip.name)
             {
                 float minVolume = 0f;
@@ -134,7 +144,7 @@ namespace MikroFramework.AudioKit
             }
 
 
-            maxVolume = MusicVolume * relativeVolume;
+            maxVolume = MusicVolume * relativeVolume * MasterVolume;
             timer = 0f;
             while (timer < duration)
             {
@@ -201,39 +211,53 @@ namespace MikroFramework.AudioKit
             }
             set {
                 value = Mathf.Clamp01(value);
-                
                 PlayerPrefs.SetFloat(MasterVolumeStorageKey, value);
-                bgm.volume = MusicVolume;
+                UpdateAudios();
+                //bgm.volume = MusicVolume;
                 //sound2D.volume = SoundVolume;
                 //sound3D.volume = SoundVolume;
             }
         }
 
         public float MusicVolume {
-            get
-            {
-                return PlayerPrefs.GetFloat(MusicVolumeStorageKey, 1f) * 0.05f * MasterVolume;
+            get {
+                return PlayerPrefs.GetFloat(MusicVolumeStorageKey, 1f);
             }
             set
             {
                 value = Mathf.Clamp01(value);
-                bgm.volume = value * 0.05f * MasterVolume;
-             
+                //bgm.volume = value * MasterVolume;
                 PlayerPrefs.SetFloat(MusicVolumeStorageKey, value);
+                UpdateAudios();
             }
         }
         public float SoundVolume {
             get
             {
-                return PlayerPrefs.GetFloat(SoundVolumeStorageKey, 1f) * 0.5f * MasterVolume ;
+                return PlayerPrefs.GetFloat(SoundVolumeStorageKey, 1f);
             }
             set
             {
                 value = Mathf.Clamp01(value);
                // sound2D.volume = value * 0.5f * MasterVolume;
                 PlayerPrefs.SetFloat(SoundVolumeStorageKey, value);
+                UpdateAudios();
             }
         }
+
+        private void UpdateAudios() {
+            foreach (List<PlayingAudioInfo> sources in playingSounds.Values) {
+                foreach (PlayingAudioInfo info in sources) {
+                    info.AudioSource.volume = SoundVolume * info.RelativeVolume * MasterVolume;
+                }
+            }
+
+            if (bgm) {
+                bgm.volume = MusicVolume * bgmRelativeVolume * MasterVolume;
+            }
+          
+        }
+
         public void Destroy() {
             _soundClipDict.Clear();
             _soundClipDict = null;
@@ -253,7 +277,7 @@ namespace MikroFramework.AudioKit
                 return null;
             }
             AudioSource audioSource = audio2DObj.GetComponent<AudioSource>();
-            audioSource.volume = SoundVolume;
+            audioSource.volume = SoundVolume  * MasterVolume;
             return audioSource;
         }
         
@@ -272,7 +296,7 @@ namespace MikroFramework.AudioKit
             GameObject audio3DObj = GameObjectPoolManager.Singleton.Allocate(sound3DPrefab);
             audio3DObj.transform.position = position;
             AudioSource audioSource = audio3DObj.GetComponent<AudioSource>();
-            audioSource.volume = SoundVolume;
+            audioSource.volume = SoundVolume * MasterVolume;
             return audioSource;
         }
         
@@ -292,10 +316,10 @@ namespace MikroFramework.AudioKit
             if (clip.length > 0.5f) {
                 
                 //audioSource.volume = 0;
-                audioSource.DOFade(SoundVolume * relativeVolume, 0.2f);
+                audioSource.DOFade(SoundVolume * relativeVolume * MasterVolume, 0.2f);
             }
             else {
-                audioSource.volume = SoundVolume * relativeVolume;
+                audioSource.volume = SoundVolume * relativeVolume * MasterVolume;
             }
           
             audioSource.Play();
@@ -304,9 +328,9 @@ namespace MikroFramework.AudioKit
             
 
             if (playingSounds.ContainsKey(clip.name)) {
-                playingSounds[clip.name].Add(audioSource);
+                playingSounds[clip.name].Add(new PlayingAudioInfo(relativeVolume, audioSource));
             }else {
-                playingSounds.Add(clip.name, new List<AudioSource>() {audioSource});
+                playingSounds.Add(clip.name, new List<PlayingAudioInfo>() {new PlayingAudioInfo(relativeVolume, audioSource) });
             }
             
             if (autoDestroy && !loop) {
@@ -323,7 +347,7 @@ namespace MikroFramework.AudioKit
                 clip = null;
                 return null;
             }
-            audioSource.volume = SoundVolume;
+            audioSource.volume = SoundVolume * relativeVolume * MasterVolume;
             return Play(clipName, _soundClipDict, audioSource, relativeVolume,loop, autoDestroy, PlaySound, out clip);
         }
 
@@ -347,7 +371,7 @@ namespace MikroFramework.AudioKit
             if (bgm.clip == null) {
                 bgm.clip = clip;
                 bgm.loop = true;
-                bgm.volume = MusicVolume * relativeVolume;
+                bgm.volume = MusicVolume * relativeVolume * MasterVolume;
             }
           
             StartPlayMusicCoroutine(clip, relativeVolume);
@@ -356,7 +380,7 @@ namespace MikroFramework.AudioKit
         public void StopSound(string clipName) {
             if (playingSounds.ContainsKey(clipName)) {
                 while (playingSounds[clipName].Count > 0) {
-                    StopSound(playingSounds[clipName][0]);
+                    StopSound(playingSounds[clipName][0].AudioSource);
                 }
             }else {
                 Debug.LogWarning("No sound clip named " + clipName + " is playing.");
@@ -376,7 +400,10 @@ namespace MikroFramework.AudioKit
 
                 if (audioSource && audioSource.clip) {
                     if (playingSounds.ContainsKey(audioSource.clip.name)) {
-                        playingSounds[audioSource.clip.name].Remove(audioSource);
+                        var info = playingSounds[audioSource.clip.name].Find((info => info.AudioSource == audioSource));
+                        if (info != null) {
+                            playingSounds[audioSource.clip.name].Remove(info);
+                        }
                     }
 
                     if (pausedAudioSourceOriginalVolume.ContainsKey(audioSource)) {
@@ -385,7 +412,7 @@ namespace MikroFramework.AudioKit
                 }
 
                 foreach (var sounds in playingSounds.Values) {
-                    sounds.RemoveAll((source => !source));
+                    sounds.RemoveAll((source => source==null || !source.AudioSource));
                 }
 
             }
@@ -404,7 +431,7 @@ namespace MikroFramework.AudioKit
         public void PauseSound(string clipName) {
             if (playingSounds.ContainsKey(clipName)) {
                 foreach (var audioSource in playingSounds[clipName]) {
-                    PauseSound(audioSource);
+                    PauseSound(audioSource.AudioSource);
                 }
             }
         }
@@ -416,7 +443,7 @@ namespace MikroFramework.AudioKit
         public void ResumeSound(string clipName) {
             if (playingSounds.ContainsKey(clipName)) {
                 foreach (var audioSource in playingSounds[clipName]) {
-                    ResumeSound(audioSource);
+                    ResumeSound(audioSource.AudioSource);
                 }
             }
         }
