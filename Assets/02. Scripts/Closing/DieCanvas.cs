@@ -20,10 +20,11 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
     //private Button restartButton;
     private Button backToMenuButton;
     private Button restartTodayButton;
+    private Button statsButton;
     private Image endingBG;
     [SerializeField]
     private List<EndingAnimation> endingAnimations;
-
+    private StatsPanel statsPanel;
     private Image bgStrip;
 
     private Animator animator;
@@ -37,6 +38,13 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
         endingBG = transform.Find("Panel/EndingBG").GetComponent<Image>();
         animator = transform.Find("Panel").GetComponent<Animator>();
         bgStrip = transform.Find("Panel/BGStrip").GetComponent<Image>();
+        statsButton = transform.Find("Panel/OptionGroup/Stats").GetComponent<Button>();
+        statsButton.onClick.AddListener(OnStatsButtonClicked);
+        statsPanel = transform.Find("Panel/Panel_Stats").GetComponent<StatsPanel>();
+    }
+
+    private void OnStatsButtonClicked() {
+        statsPanel.TurnOnStatsPanel();
     }
 
 
@@ -99,6 +107,7 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
         transform.Find("Panel/DieReason").GetComponent<TMP_Text>().text = dieReason;
         transform.Find("Panel/DieText").GetComponent<TMP_Text>().text = title;
         //restartButton.gameObject.SetActive(!isPrologue);
+        statsButton.gameObject.SetActive(!isPrologue);
         backToMenuButton.gameObject.SetActive(!isPrologue);
         restartTodayButton.gameObject.SetActive(!isPrologue && showRestart);
         endingBG.gameObject.SetActive(endingAnimIndex >= 0 && !isPrologue);
