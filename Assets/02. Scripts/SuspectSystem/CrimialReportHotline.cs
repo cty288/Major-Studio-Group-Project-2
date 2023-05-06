@@ -49,7 +49,7 @@ namespace _02._Scripts.SuspectSystem {
 		}
 
 		private void StartSelect() {
-			playerControlModel.HasControlType(PlayerControlType.BountyHunting);
+			playerControlModel.AddControlType(PlayerControlType.BountyHunting);
 			TopScreenHintText.Singleton.Show(
 				"Please select any information related to the unknown creatures to report to the bounty hunter.\n\nPossible information includes: figure outside / death report photos");
 			this.RegisterEvent<OnBodyHuntingSelect>(OnBodyHuntingSelect);

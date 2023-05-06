@@ -37,7 +37,10 @@ public abstract  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegist
     protected bool interacted = false;
     protected int knockWaitTime = 5;
     protected int knockDoorWaitTimer = 0;
-
+    
+    [field: ES3Serializable]
+    protected virtual bool freezeTimeWhenOpenDoor { get; set; } = true;
+    
     public BodyGenerationEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float eventTriggerChance) : base(startTimeRange) {
         
         bodyGenerationModel = this.GetModel<BodyGenerationModel>();
@@ -72,7 +75,11 @@ public abstract  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegist
                 CoroutineRunner.Singleton.StopCoroutine(nestedKnockDoorCheckCoroutine);
                 nestedKnockDoorCheckCoroutine = null;
             }
-            this.GetModel<GameTimeModel>().LockTime.Retain();
+
+            if (freezeTimeWhenOpenDoor) {
+                this.GetModel<GameTimeModel>().LockTime.Retain();
+            }
+            
             LoadCanvas.Singleton.LoadUntil(OnOpen, OnFinishOutsideBodyInteraction);
             bodyInfo.KnockBehavior?.OnStopKnock();
         }
@@ -81,7 +88,10 @@ public abstract  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegist
     }
 
     private void OnFinishOutsideBodyInteraction() {
-        this.GetModel<GameTimeModel>().LockTime.Release();
+        if (freezeTimeWhenOpenDoor) {
+            this.GetModel<GameTimeModel>().LockTime.Release();
+        }
+        
         this.GetModel<GameSceneModel>().GameScene.Value = GameScene.MainGame;
         this.GetSystem<BodyGenerationSystem>().StopCurrentBody();
     }

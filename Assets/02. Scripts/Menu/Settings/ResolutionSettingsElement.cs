@@ -16,7 +16,11 @@ public class ResolutionSettingsElement : MenuSettingsElement {
 		toggles = transform.Find("SelectionElements").GetComponentsInChildren<Toggle>(true);
 		
 		//get the monitor's resolution
-		Resolution currentResolution = Screen.currentResolution;
+		Resolution currentResolution = new Resolution() {
+			width = Display.main.systemWidth, height = Display.main.systemHeight,
+			refreshRate = Screen.currentResolution.refreshRate
+		};
+		Debug.Log("Current resolution x: " + currentResolution.width + " y: " + currentResolution.height);
 		resolutions[3] = new Vector2Int(currentResolution.width, currentResolution.height);
 
 		foreach (Toggle toggle in toggles) {
