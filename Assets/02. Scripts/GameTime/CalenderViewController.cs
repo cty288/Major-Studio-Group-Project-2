@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.GameTime;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
 using TMPro;
@@ -11,9 +12,9 @@ public class CalenderViewController : AbstractMikroController<MainGame>, IPointe
     [SerializeField] private TMP_Text monthText;
     [SerializeField] private TMP_Text dayText;
     [SerializeField] private TMP_Text dayOfWeekText;
-
-   // [SerializeField] private WarningPanel warningPanel;
-    
+    private GameTimeModel gameTimeModel;
+    // [SerializeField] private WarningPanel warningPanel;
+   private GameObject warningPanel;
     private GameTimeManager gameTimeManager;
     private bool isSkippingTime = false;
     private void Awake() {
@@ -21,7 +22,10 @@ public class CalenderViewController : AbstractMikroController<MainGame>, IPointe
             .UnRegisterWhenGameObjectDestroyed(gameObject);
         this.RegisterEvent<OnNewDay>(OnNewDay);
         gameTimeManager = this.GetSystem<GameTimeManager>();
+        gameTimeModel = this.GetModel<GameTimeModel>();
         //warningPanel = GetComponent<WarningPanel>();
+        warningPanel = transform.Find("WarningCanvas").gameObject;
+        warningPanel.SetActive(false);
     }
 
     private void OnNewDay(OnNewDay e) {
@@ -89,11 +93,17 @@ public class CalenderViewController : AbstractMikroController<MainGame>, IPointe
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-    //  warningPanel.Show(0);
+     //  warningPanel.Show(0);
+         if (gameTimeModel.Day != 0) {
+             warningPanel.SetActive(true);
+         }
     }
 
     public void OnPointerExit(PointerEventData eventData) {
    //   warningPanel.Hide();
+       if (gameTimeModel.Day != 0) {
+           warningPanel.SetActive(false);
+       }
     }
 
     public void OnPointerClick(PointerEventData eventData) {
