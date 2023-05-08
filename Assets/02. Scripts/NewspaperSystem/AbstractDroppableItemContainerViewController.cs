@@ -45,8 +45,11 @@ public class AbstractDroppableItemContainerViewController : AbstractMikroControl
         DraggableItems obj = Instantiate(prefab, position, Quaternion.identity).GetComponent<DraggableItems>();
 
         AddItem(obj);
+        OnItemAdded(obj);
         return obj.gameObject;
     }
+    
+    public virtual void OnItemAdded(DraggableItems obj){}
 
     public void AddItem(DraggableItems obj) {
         obj.SetLayer(CurrentMaxLayer++);

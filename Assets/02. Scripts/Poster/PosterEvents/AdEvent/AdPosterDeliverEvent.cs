@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.GameTime;
+using _02._Scripts.Stats;
 using MikroFramework.Architecture;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -55,6 +56,9 @@ namespace _02._Scripts.Poster.PosterEvents {
 
 		protected override void OnFinishOpenDoor() {
 			index++;
+			statsModel.UpdateStat("TotalPosterGet",
+				new SaveData("Posters Collected", (int) statsModel.GetStat("TotalPosterGet", 0) + 1));
+
 			if (index < PosterAssets.Singleton.PosterSprites.Count) {
 				GameTimeModel gameTimeModel = this.GetModel<GameTimeModel>();
 				DateTime currentTime = gameTimeModel.CurrentTime.Value;

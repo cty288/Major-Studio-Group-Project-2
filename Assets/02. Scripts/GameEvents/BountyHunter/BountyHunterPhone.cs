@@ -7,6 +7,7 @@ using _02._Scripts.ChoiceSystem;
 using _02._Scripts.Dog;
 using _02._Scripts.FPSEnding;
 using _02._Scripts.GameEvents.BountyHunter;
+using _02._Scripts.Stats;
 using Crosstales.RTVoice.Model.Enum;
 using MikroFramework.Architecture;
 using UnityEngine;
@@ -187,7 +188,7 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
         }
         
         
-       
+        StatsModel statsModel = this.GetModel<StatsModel>();
            
         if (killAliens && !killGoodPeople) {
 
@@ -208,6 +209,9 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
                 }, "Thanks for finding out the monster!", "A note from Bounty Hunter"));
             }
            
+            statsModel.UpdateStat("MonstersReported",
+                new SaveData("Total Monsters Reported to the Bounty Hunter", (int) statsModel.GetStat("MonstersReported", 0) + 1));
+           
             
 
         }else if(killGoodPeople) {
@@ -226,7 +230,9 @@ public class BountyHunterPhone : TelephoneContact, ICanGetModel {
                 AudioMixerList.Singleton.AudioMixerGroups[1]);
             gameEventSystem.AddEvent(radio);
 
-           
+            statsModel.UpdateStat("GoodPeopleReported",
+                new SaveData("Total Innocent People Reported to the Bounty Hunter", (int) statsModel.GetStat("GoodPeopleReported", 0) + 1));
+
 
             Debug.Log("Current Time is " + current);
         }

@@ -302,8 +302,8 @@
     },
     {
       "AssetName": "general",
-      "MD5": "6b2621f83f58fc23c8797d39188de5f9",
-      "FileSize": 1652.67773,
+      "MD5": "9809eb18616a5d2bee18739be4057170",
+      "FileSize": 1668.06543,
       "assetDatas": [
         {
           "Name": "DraggedText",
@@ -344,8 +344,8 @@
     },
     {
       "AssetName": "mftest",
-      "MD5": "10871f3c51118b1714a66e98177ea1a8",
-      "FileSize": 1028.24707,
+      "MD5": "c49c505fb7d20c63fc239a81588fb917",
+      "FileSize": 1043.28223,
       "assetDatas": [
         {
           "Name": "War loop",
@@ -444,7 +444,7 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "0568ab94a3182d62aa49eb0e4aa0ebc9",
+      "MD5": "1e050d1ecb40a30a5bc615a13336581e",
       "FileSize": 1.79296875,
       "assetDatas": []
     },

@@ -104,7 +104,7 @@ public class NewspaperUIPanel : OpenableUIPanel {
         } ));
         CurrentScreenSpaceCameraMarker = null;
         
-        outOfDateText.SetActive(gameTimeManager.CurrentTime.Value.Day - news.date.Day >= 3);
+        outOfDateText.SetActive((gameTimeManager.CurrentTime.Value - news.date).Days >= 3);
         
         dateText.text = news.dateString;
         panel.gameObject.SetActive(true);

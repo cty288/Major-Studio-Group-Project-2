@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.AlienInfos.Tags.Base;
 using _02._Scripts.GameTime;
+using _02._Scripts.Stats;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
 using MikroFramework.TimeSystem;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -40,15 +42,15 @@ public abstract  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegist
     
     [field: ES3Serializable]
     protected virtual bool freezeTimeWhenOpenDoor { get; set; } = true;
-    
+    protected StatsModel statsModel;
     public BodyGenerationEvent(TimeRange startTimeRange, BodyInfo bodyInfo, float eventTriggerChance) : base(startTimeRange) {
         
         bodyGenerationModel = this.GetModel<BodyGenerationModel>();
         this.bodyInfo = bodyInfo;
         this.TriggerChance = eventTriggerChance;
-     
-       
-        
+        statsModel = this.GetModel<StatsModel>();
+
+
         playerResourceModel = this.GetModel<PlayerResourceModel>();
         timeSystem = this.GetSystem<ITimeSystem>();
     }
@@ -57,15 +59,22 @@ public abstract  class BodyGenerationEvent : GameEvent, ICanGetModel, ICanRegist
         bodyGenerationModel = this.GetModel<BodyGenerationModel>();
         playerResourceModel = this.GetModel<PlayerResourceModel>();
         timeSystem = this.GetSystem<ITimeSystem>();
+        statsModel = this.GetModel<StatsModel>();
     }
 
     public override void OnStart() {
         this.RegisterEvent<OnOutsideBodyClicked>(OnOutsideBodyClicked);
+        statsModel.UpdateStat("TotalDoorKnock",
+            new SaveData("Total Visitors", (int) statsModel.GetStat("TotalDoorKnock", 0) + 1));
+
     }
 
     protected void OnOutsideBodyClicked(OnOutsideBodyClicked e) {
         if (e.BodyInfo.ID == bodyInfo.ID) {
             interacted = true;
+            statsModel.UpdateStat("TotalDoorOpen",
+                new SaveData("Door Opened", (int) statsModel.GetStat("TotalDoorOpen", 0) + 1));
+
             if (knockDoorCheckCoroutine != null) {
                 CoroutineRunner.Singleton.StopCoroutine(knockDoorCheckCoroutine);
                 knockDoorCheckCoroutine = null;

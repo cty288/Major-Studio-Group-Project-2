@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.GameEvents.Camera;
 using _02._Scripts.GameTime;
+using _02._Scripts.Stats;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
@@ -21,9 +22,10 @@ public class VintageCameraViewController : DraggableItems {
 	[SerializeField]
 	private Vector3 originalLocalPosition = new Vector3(5, -0.5f, 0);
 
-	[SerializeField] private AudioClip cam_shutter;
+	//[SerializeField] private AudioClip cam_shutter;
 	
 	private PlayerControlModel playerControlModel;
+	protected StatsModel statsModel;
 	protected int cameraDay = 3;
 	protected override void Awake() {
 		base.Awake();
@@ -40,6 +42,7 @@ public class VintageCameraViewController : DraggableItems {
 
 		this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
 		cameraDay = int.Parse(this.GetModel<HotUpdateDataModel>().GetData("CameraDay").values[0]);
+		statsModel = this.GetModel<StatsModel>();
 	}
 
 	private void OnNewDay(OnNewDay e)
@@ -97,8 +100,10 @@ public class VintageCameraViewController : DraggableItems {
 	
 	private void OnFinishCropping(CropInfo info) {
 		//info.
-		AudioSystem.Singleton.Play2DSound(cam_shutter);
+		AudioSystem.Singleton.Play2DSound("camera-shutter");
 		photoSaveModel.SavePhoto(info);
+		statsModel.UpdateStat("PhotoTaken",
+			new SaveData("Photos Taken", (int) statsModel.GetStat("PhotoTaken", 0) + 1));
 	}
 
 	public override void OnThrownToRubbishBin() {

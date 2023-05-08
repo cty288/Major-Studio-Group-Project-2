@@ -52,6 +52,12 @@ public class ClockObject : AbstractMikroController<MainGame>
             return;
         }
         lastPlayedTime = time;
-        AudioSystem.Singleton.Play2DSound("clock_tick", 0.3f);
+        try {
+            AudioSystem.Singleton.Play2DSound("clock_tick", 0.3f);
+        }
+        catch (Exception e) {
+           
+        }
+        
     }
 }

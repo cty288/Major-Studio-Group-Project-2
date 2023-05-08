@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.GameTime;
+using _02._Scripts.Stats;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.BindableProperty;
@@ -36,8 +37,7 @@ public class GameTimeManager : AbstractSystem, ISystem {
     
     private GameTimeModel gameTimeModel;
 
-   
-
+    private StatsModel statsModel;
     protected float timeSpeed = 1f;
     protected DateTime timeSpeedUntil = DateTime.MinValue;
 
@@ -95,6 +95,9 @@ public class GameTimeManager : AbstractSystem, ISystem {
                 (MainGame.Interface as MainGame)?.SaveGame();
                 DateTime nextDay = gameTimeModel.CurrentTime.Value.AddDays(1);
                 gameTimeModel.CurrentTime.Value = new DateTime(nextDay.Year, nextDay.Month, nextDay.Day, startHour, 0, 0);
+
+                statsModel.UpdateStat("DaySurvived",
+                    new SaveData("Days Survived", (int) statsModel.GetStat("DaySurvived", -1) + 1));
                 
                 this.SendEvent<OnNewDay>(new OnNewDay() {
                     Date = gameTimeModel.CurrentTime.Value,
@@ -215,6 +218,7 @@ public class GameTimeManager : AbstractSystem, ISystem {
         gameStateModel = this.GetModel<GameStateModel>();
         gameTimeModel = this.GetModel<GameTimeModel>();
         OutdoorActivityModel = this.GetModel<OutdoorActivityModel>();
+        statsModel = this.GetModel<StatsModel>();
         //NextDay();
         
         if (Day == -1) {

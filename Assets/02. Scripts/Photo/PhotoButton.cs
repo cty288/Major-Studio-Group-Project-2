@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.Stats;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class PhotoButton : AbstractMikroController<MainGame>, IPointerClickHandl
 	private GameObject controlHintObj;
 	private PhotoSaveModel photoSaveModel;
 	private PlayerControlModel playerControlModel;
+	private StatsModel statsModel;
 	private void Awake() {
 		ScreenSpaceImageCropper.Singleton.OnStartCrop += OnStartCrop;
 		ScreenSpaceImageCropper.Singleton.OnEndCrop += OnEndCrop;
@@ -20,6 +22,7 @@ public class PhotoButton : AbstractMikroController<MainGame>, IPointerClickHandl
 		playerControlModel = this.GetModel<PlayerControlModel>();
 		photoSaveModel.HasCamera.RegisterWithInitValue(OnHasCameraChanged)
 			.UnRegisterWhenGameObjectDestroyed(gameObject);
+		statsModel = this.GetModel<StatsModel>();
 	}
 
 	private void OnHasCameraChanged(bool hasCamera) {
@@ -58,5 +61,8 @@ public class PhotoButton : AbstractMikroController<MainGame>, IPointerClickHandl
 	private void OnFinishCropping(CropInfo info) {
 		//info.
 		photoSaveModel.SavePhoto(info);
+		statsModel.UpdateStat("PhotoTaken",
+			new SaveData("Photos Taken", (int) statsModel.GetStat("PhotoTaken", 0) + 1));
+
 	}
 }

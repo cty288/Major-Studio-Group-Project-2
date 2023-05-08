@@ -17,7 +17,13 @@ public class MainMenuPanel : AbstractPanelContainer {
     private Button settingButton;
 
     private void Awake() {
-        this.Delay(0.3f, () => { AudioSystem.Singleton.Initialize(null); });
+        this.Delay(0.3f, () => {
+            AudioSystem.Singleton.Initialize(() => {
+                
+                AudioSystem.Singleton.Play2DSound("Starve_Arrested_End", 1f, true);
+            }); 
+           
+        });
         bool isFullScreen = PlayerPrefs.GetInt("FullScreen", 1) == 1;
         newGameButton = transform.Find("ButtonPanels/NewGameButton").GetComponent<Button>();
         quitGameButton = transform.Find("QuitGameButton").GetComponent<Button>();
@@ -35,11 +41,12 @@ public class MainMenuPanel : AbstractPanelContainer {
         int resolutionWidth = PlayerPrefs.GetInt("ResolutionWidth", currentResolution.width);
         int resolutionHeight = PlayerPrefs.GetInt("ResolutionHeight", currentResolution.height);
         Screen.SetResolution(resolutionWidth, resolutionHeight, isFullScreen);
-        
+       
     }
 
     private void OnSettingButtonClicked() {
         UIManager.Singleton.Open<MainMenuSetting>(Parent, null);
+        
     }
 
     private void Start() {

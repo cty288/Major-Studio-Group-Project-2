@@ -123,7 +123,7 @@ public class DayIndicator : AbstractMikroController<MainGame> {
 
     private void CheckDeath() {
         if (this.GetModel<GameStateModel>().GameState == GameState.End) {
-            DieCanvas.Singleton.Show("You've run out of food!", 5);
+            DieCanvas.Singleton.Show("You've run out of food!", 5,"Killed_End");
         }
     }
 

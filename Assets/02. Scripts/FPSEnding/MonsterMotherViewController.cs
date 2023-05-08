@@ -74,7 +74,7 @@ public class MonsterMotherViewController : AbstractMikroController<MainGame>, IP
 
 	public void OnMonsterKillPlayer() {
 		this.GetModel<GameStateModel>().GameState.Value = GameState.End;
-		DieCanvas.Singleton.Show("You are killed by the monster!", 3);
+		DieCanvas.Singleton.Show("You are killed by the monster!", 3, "Killed_End");
 		if (roarAudio != null) {
 			AudioSystem.Singleton.StopSound(roarAudio);
 			roarAudio = null;

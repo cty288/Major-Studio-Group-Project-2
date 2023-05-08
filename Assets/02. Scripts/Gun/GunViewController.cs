@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.FPSEnding;
+using _02._Scripts.Stats;
 using MikroFramework;
 using MikroFramework.Architecture;
 using MikroFramework.Event;
@@ -17,6 +18,7 @@ public class GunViewController : AbstractMikroController<MainGame> {
     [SerializeField] private Sprite gunShootingSprite;
     private Sprite gunIdleSprite;
     private SpriteRenderer spriteRenderer;
+    private StatsModel statsModel;
     private void Awake() {
         infoText = transform.Find("Canvas/InfoText").GetComponent<TMP_Text>();
         playerResourceModel = this.GetModel<PlayerResourceModel>();
@@ -29,6 +31,7 @@ public class GunViewController : AbstractMikroController<MainGame> {
         this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.GetModel<MonsterMotherModel>().isFightingMother.RegisterOnValueChaned(OnFightMotherChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
+        statsModel = this.GetModel<StatsModel>();
     }
 
     private void OnFightMotherChanged(bool isFighting) {
@@ -63,6 +66,12 @@ public class GunViewController : AbstractMikroController<MainGame> {
         if (e.GoodsInfo.Type == typeof(BulletGoods)) {
             int count = e.GoodsInfo.Count;
             UpdateBullets(count);
+            int bulletNumChanged = e.NewValue - e.OldValue;
+            if (bulletNumChanged > 0) {
+                statsModel.UpdateStat("TotalBulletsGet",
+                    new SaveData("Bullets Obtained", (int) statsModel.GetStat("TotalBulletsGet", 0) + bulletNumChanged));
+
+            }
         }
 
         if (e.GoodsInfo.Type == typeof(GunResource)) {

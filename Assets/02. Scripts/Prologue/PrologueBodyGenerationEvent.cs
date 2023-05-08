@@ -108,7 +108,7 @@ namespace _02._Scripts.Prologue {
 		private List<PrologueSpeakInfo> ConstructPrologueSpeakInfo() {
 			List<PrologueSpeakInfo> prologueSpeakInfos = new List<PrologueSpeakInfo>();
 			prologueSpeakInfos.Add(new PrologueSpeakInfo(
-				"Attention, citizens of Dorcha.There have been reports circulating about some  <color=yellow>mysterious creatures </color> that have been attempting to  <color=yellow>disguise itself as humans </color> and infiltrate our neighborhoods.",
+				"Attention, citizens of Dorcha. There have been reports circulating about some  <color=yellow>mysterious creatures </color> that have been attempting to  <color=yellow>disguise itself as humans </color> and infiltrate our neighborhoods.",
 				0));
 
 			prologueSpeakInfos.Add(new PrologueSpeakInfo(
@@ -132,7 +132,7 @@ namespace _02._Scripts.Prologue {
 
 		private void OnPrologueSpeakEnd(Speaker speaker) {
 			onClickPeepholeSpeakEnd = true;
-			DieCanvas.Singleton.Show("","", -1, true);
+			DieCanvas.Singleton.Show("","", -1, null, true);
 			this.GetSystem<ITimeSystem>().AddDelayTask(2.7f, () => {
 				DieCanvas.Singleton.Hide();
 			});

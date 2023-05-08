@@ -5,6 +5,7 @@ using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.ChoiceSystem;
 using _02._Scripts.FPSEnding;
 using _02._Scripts.GameTime;
+using _02._Scripts.Stats;
 using _02._Scripts.SurvivalGuide;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
@@ -36,6 +37,11 @@ namespace _02._Scripts.BodyOutside {
 		public override void OnStart() {
 			base.OnStart();
 			bodyInfo = bodyGenerationSystem.GetAlienOrDeliverBody();
+			if (bodyInfo.IsAlien) {
+				statsModel.UpdateStat("TotalMonsterKnock",
+					new SaveData("Monsters Knocked on Your Door", (int) statsModel.GetStat("TotalMonsterKnock", 0) + 1));
+
+			}
 		}
 
 		public override EventState OnUpdate() {
@@ -111,9 +117,10 @@ namespace _02._Scripts.BodyOutside {
 						List<string> messages = new List<string>() {
 							"goOD dAy sIR. buT iT'S yOuR tiME!",
 							"hI, Hi! iT IS yOur tiMe!",
-							"I nEeD yOU cLotHEs!",
-							"YOur bRaIN iS MiNE!",
-							"YOuR TimE IS oVeR!"
+							//"I nEeD yOU cLotHEs!",
+							//"YOur bRaIN iS MiNE!",
+							"YOuR TimE IS oVeR!",
+							
 						};
 						speaker.Speak(messages[Random.Range(0, messages.Count)],
 							AudioMixerList.Singleton.AudioMixerGroups[4], "???", 1f, OnAlienClickedOutside);
@@ -179,7 +186,7 @@ namespace _02._Scripts.BodyOutside {
 		        SelectGunOrDog();
 	        }else {
 	            LoadCanvas.Singleton.HideImage(1f);
-	            DieCanvas.Singleton.Show("You are killed by the monster!", 2);
+	            DieCanvas.Singleton.Show("You are killed by the monster!", 2, "Killed_End");
 	            this.GetModel<GameStateModel>().GameState.Value = GameState.End;
 	            this.GetSystem<BodyGenerationSystem>().StopCurrentBody();
 	        }
@@ -220,7 +227,8 @@ namespace _02._Scripts.BodyOutside {
 	    protected void GunKill() {
 		    playerResourceModel.RemoveResource<BulletGoods>(1);
 		    float clipLength = AudioSystem.Singleton.Play2DSound("gun_fire").clip.length;
-
+		    statsModel.UpdateStat("GunKilledMonster",
+			    new SaveData("Bullets Shot", (int) statsModel.GetStat("GunKilledMonster", 0) + 1));
 		    timeSystem.AddDelayTask(1f, () => {
 			    LoadCanvas.Singleton.HideImage(1f);
 			    LoadCanvas.Singleton.ShowMessage("You shot the creature and it fleed.\n\nBullet - 1");

@@ -106,7 +106,7 @@ namespace MikroFramework.AudioKit
                 //sound2D.volume = SoundVolume;
 
 #if UNITY_EDITOR
-                //Debug.Log(string.Format("Current BGM and Sound Volume£º{0}£¬{1}", bgm.volume, sound2D.volume));
+                //Debug.Log(string.Format("Current BGM and Sound Volumeï¼š{0}ï¼Œ{1}", bgm.volume, sound2D.volume));
 #endif
         
                 onInitialize?.Invoke();
@@ -177,7 +177,7 @@ namespace MikroFramework.AudioKit
                 if (clip != null) {
                     dict.Add(clipName, clip);
 #if UNITY_EDITOR
-                    Debug.Log("Added Audio£º" + clipName);
+                    Debug.Log("Added Audioï¼š" + clipName);
 #endif
                 }
             }

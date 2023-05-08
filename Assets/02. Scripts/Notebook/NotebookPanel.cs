@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _02._Scripts.GameTime;
 using _02._Scripts.Notebook;
+using _02._Scripts.Stats;
 using DG.Tweening;
 using UnityEngine;
 using MikroFramework;
@@ -44,7 +45,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
     [SerializeField] private TMP_Text droppingText;
     [SerializeField] private GameObject writtenTextPrefab;
     [SerializeField] private GameObject markerPrefab;
-
+    protected StatsModel statsModel;
     protected NotebookWrittenText currentWritingText = null;
     protected  NotebookMarker currentMarker = null;
     protected NotebookWritePage notebookWritePage;
@@ -78,7 +79,7 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         nextPageButton = panel.transform.Find("NextPage").GetComponent<Button>();
         controlHint = panel.transform.Find("ControlHint").GetComponent<TMP_Text>();
         
-        
+        statsModel = this.GetModel<StatsModel>();
         
         this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
         selfCollider = GetComponent<Collider2D>();
@@ -620,6 +621,10 @@ public class NotebookPanel : OpenableUIPanel, ICanHaveDroppableItems {
         content.Bounds = new Bounds(pos, extent);
         
         notebookModel.AddNote(content, day);
+
+        
+        statsModel.UpdateStat("NotebookContentAdded",
+            new SaveData("Total Contents Added to the Notebook", (int) statsModel.GetStat("NotebookContentAdded", 0) + 1));
 
         if (hide) {
             Destroy(droppedUIObjectViewController.gameObject);

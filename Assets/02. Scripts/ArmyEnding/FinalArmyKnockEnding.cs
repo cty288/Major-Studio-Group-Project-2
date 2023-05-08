@@ -55,7 +55,7 @@ namespace _02._Scripts.ArmyEnding {
 			
 			LoadCanvas.Singleton.Load(() => {
 				this.GetModel<GameStateModel>().GameState.Value = GameState.End;
-				DieCanvas.Singleton.Show("Game Ends", "You are saved!", 4, false, false);
+				DieCanvas.Singleton.Show("Game Ends", "You are saved!", 4, "Shelter_End", false, false);
 			});
 		}
 

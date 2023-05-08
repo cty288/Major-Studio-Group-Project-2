@@ -9,6 +9,7 @@ using _02._Scripts.ImportantNewspaper;
 using _02._Scripts.Notebook;
 using _02._Scripts.Poster;
 using _02._Scripts.Poster.PosterEvents;
+using _02._Scripts.Stats;
 using _02._Scripts.SurvivalGuide;
 using MikroFramework;
 using MikroFramework.Architecture;
@@ -38,7 +39,7 @@ public class Table :  AbstractDroppableItemContainerViewController {
     
     private ImportantNewspaperModel importantNewspaperModel;
     private NewspaperViewController todayNewspaper;
-    
+    private StatsModel statsModel;
 
    
     protected override void Awake() {
@@ -57,7 +58,7 @@ public class Table :  AbstractDroppableItemContainerViewController {
         this.RegisterEvent<OnSpawnCultLetterOnTable>(OnSpawnCultLetterOnTable).UnRegisterWhenGameObjectDestroyed(gameObject);
         this.GetModel<SurvivalGuideModel>().ReceivedSurvivalGuideBefore.RegisterOnValueChaned(OnHasSurvivalGuideChanged)
             .UnRegisterWhenGameObjectDestroyed(gameObject);
-        
+        statsModel = this.GetModel<StatsModel>();
         
 
         importantNewspaperModel = this.GetModel<ImportantNewspaperModel>();
@@ -135,5 +136,12 @@ public class Table :  AbstractDroppableItemContainerViewController {
         todayNewspaper = SpawnItem(newspaperPrefab).GetComponent<NewspaperViewController>();
         todayNewspaper.StartIndicateTodayNewspaper();
         todayNewspaper.SetContent(e.Newspaper);
+    }
+
+    public override void OnItemAdded(DraggableItems obj) {
+        base.OnItemAdded(obj);
+        statsModel.UpdateStat("ItemsAddedToTable",
+            new SaveData("Total Items Added to the Table", (int) statsModel.GetStat("ItemsAddedToTable", 0) + 1));
+
     }
 }

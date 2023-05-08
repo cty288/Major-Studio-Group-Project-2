@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using _02._Scripts.ChoiceSystem;
 using _02._Scripts.Electricity;
 using _02._Scripts.GameTime;
+using _02._Scripts.Stats;
 using _02._Scripts.Telephone;
 using MikroFramework;
 using MikroFramework.Architecture;
@@ -64,7 +65,7 @@ public class TelephoneSystem : AbstractSavableSystem {
     private Coroutine dealWaitCoroutine;
     private Coroutine incomingCallCoroutine;
     private ElectricityModel electricityModel;
-    
+    private StatsModel statsModel;
     [field: ES3Serializable]
     public BindableProperty<TelephoneContact> CurrentTalkingContact { get; } =
         new BindableProperty<TelephoneContact>();
@@ -80,6 +81,7 @@ public class TelephoneSystem : AbstractSavableSystem {
         electricityModel = this.GetModel<ElectricityModel>();
         this.RegisterEvent<OnNewDay>(OnNewDayStart);
         State.RegisterOnValueChaned(OnStateChanged);
+        statsModel = this.GetModel<StatsModel>();
     }
 
     
@@ -162,6 +164,9 @@ public class TelephoneSystem : AbstractSavableSystem {
         if (State.Value == TelephoneState.IncomingCall && currentIncomingCallContact != null) {
             CoroutineRunner.Singleton.StopCoroutine(incomingCallCoroutine);
             StartCallConversation(currentIncomingCallContact);
+            statsModel.UpdateStat("IncomingCallReceived",
+                new SaveData("Received Incoming Calls", (int) statsModel.GetStat("IncomingCallReceived", 0) + 1));
+
             OnPickUp.Invoke();
             currentIncomingCallContact = null;
         }
@@ -190,6 +195,8 @@ public class TelephoneSystem : AbstractSavableSystem {
                 break;
             }
         }
+        
+       
 
         if (CheckContactExists(dealingDigits)) {
             if (!Contacts[dealingDigits].OnDealt() || IsBroken) {
@@ -204,6 +211,9 @@ public class TelephoneSystem : AbstractSavableSystem {
             }
             else {
                 StartCallConversation(Contacts[dealingDigits]);
+                statsModel.UpdateStat("TelephoneDealt",
+                    new SaveData("Phone Call Dealt", (int) statsModel.GetStat("TelephoneDealt", 0) + 1));
+
             }
           
         }
@@ -231,6 +241,9 @@ public class TelephoneSystem : AbstractSavableSystem {
             CurrentTalkingContact.Value = contact;
             CurrentTalkingContact.Value.OnConversationComplete += OnFinishConversation;
             CurrentTalkingContact.Value.Start();
+            
+            StatsModel statsModel = this.GetModel<StatsModel>();
+           
         }
     }
 

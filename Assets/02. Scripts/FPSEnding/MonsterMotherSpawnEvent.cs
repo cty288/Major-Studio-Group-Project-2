@@ -5,6 +5,7 @@ using _02._Scripts.AlienInfos.Tags.Base;
 using _02._Scripts.BodyManagmentSystem;
 using _02._Scripts.BodyOutside;
 using _02._Scripts.FPSEnding;
+using _02._Scripts.Stats;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
 using MikroFramework.TimeSystem;
@@ -26,6 +27,9 @@ public class MonsterMotherSpawnEvent : DailyKnockEvent {
 
     public override void OnStart() {
         this.RegisterEvent<OnOutsideBodyClicked>(OnOutsideBodyClicked);
+        statsModel.UpdateStat("TotalDoorKnock",
+            new SaveData("Total Visitors", (int) statsModel.GetStat("TotalDoorKnock", 0) + 1));
+
     }
 
     public override EventState OnUpdate() {
@@ -67,7 +71,7 @@ public class MonsterMotherSpawnEvent : DailyKnockEvent {
        
         if (!hasBulletAndGun) {
             LoadCanvas.Singleton.HideImage(1f);
-            DieCanvas.Singleton.Show("You are killed by the monster!", 3);
+            DieCanvas.Singleton.Show("You are killed by the monster!", 3, "Killed_End");
             this.GetModel<GameStateModel>().GameState.Value = GameState.End;
             this.GetSystem<BodyGenerationSystem>().StopCurrentBody();
         }

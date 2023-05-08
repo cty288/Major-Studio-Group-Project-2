@@ -15,7 +15,7 @@ public abstract class ElectricalApplicance : AbstractMikroController<MainGame> {
         
         noElectricityCanvas = transform.Find("NoElectricityCanvas");
 
-        if (!electricityModel.HasElectricity() && noElectricityCanvas) {
+        if (electricityModel!=null && !electricityModel.HasElectricity() && noElectricityCanvas) {
             noElectricityCanvas.gameObject.SetActive(true);
         }
     }

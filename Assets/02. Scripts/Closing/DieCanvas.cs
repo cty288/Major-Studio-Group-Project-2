@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using MikroFramework;
 using MikroFramework.Architecture;
+using MikroFramework.AudioKit;
 using MikroFramework.Singletons;
 using MikroFramework.TimeSystem;
 using TMPro;
@@ -95,12 +96,12 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
         SceneManager.LoadScene("Menu");
     }
 
-    public void Show(string dieReason, int endingAnimIndex, bool isPrologue = false) {
+    public void Show(string dieReason, int endingAnimIndex, string bgmAudioName, bool isPrologue = false) {
         
-        Show("You Died!", dieReason, endingAnimIndex, isPrologue);
+        Show("You Died!", dieReason, endingAnimIndex,bgmAudioName, isPrologue);
     }
 
-    public void Show(string title, string dieReason, int endingAnimIndex, bool isPrologue = false, bool showRestart = true) {
+    public void Show(string title, string dieReason, int endingAnimIndex, string bgmAudioName, bool isPrologue = false, bool showRestart = true) {
         Awake();
         animator.enabled = true;
         transform.Find("Panel").gameObject.SetActive(true);
@@ -116,6 +117,9 @@ public class DieCanvas : MonoMikroSingleton<DieCanvas>, IController {
         }
         this.Delay(1f, () => {
             animator.enabled = false;
+            if (!String.IsNullOrEmpty(bgmAudioName) && !isPrologue) {
+                AudioSystem.Singleton.Play2DSound(bgmAudioName, 1f, true);
+            }
         });
         if (endingAnimIndex >= 0 && !isPrologue) {
             EndingAnimation endingAnimation = endingAnimations[endingAnimIndex];

@@ -21,6 +21,7 @@ using _02._Scripts.Radio.RadioScheduling;
 using _02._Scripts.Radio.RadioScheduling.DorchaDaily;
 using _02._Scripts.Radio.RadioScheduling.GhostStory;
 using _02._Scripts.SexyCard;
+using _02._Scripts.Stats;
 using _02._Scripts.SurvivalGuide;
 using MikroFramework.Architecture;
 using MikroFramework.ResKit;
@@ -72,6 +73,7 @@ public class MainGame : Architecture<MainGame> {
         this.RegisterModel<ArmyEndingModel>();
         this.RegisterModel<MonsterMotherModel>();
         this.RegisterModel<CultEndingModel>();
+        this.RegisterModel<StatsModel>();
         
         
         this.RegisterSystem<ITimeSystem>(new TimeSystem());

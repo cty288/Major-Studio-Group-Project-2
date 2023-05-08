@@ -34,7 +34,7 @@ public class FPSKillMonsterEndingPhoneEvent: IncomingCallEvent {
     protected override void OnComplete() {
         LoadCanvas.Singleton.Load(() => {
             this.GetModel<GameStateModel>().GameState.Value = GameState.End;
-            DieCanvas.Singleton.Show("Game Ends", "You solved the crisis!", 0,false, false);
+            DieCanvas.Singleton.Show("Game Ends", "You solved the crisis!", 0,"Good_End", false, false);
         });
     }
 

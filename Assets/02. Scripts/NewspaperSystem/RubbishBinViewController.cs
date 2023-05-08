@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.Stats;
 using MikroFramework.Architecture;
 using MikroFramework.AudioKit;
 using MikroFramework.Event;
@@ -17,6 +18,7 @@ public class RubbishBinViewController : AbstractMikroController<MainGame> {
     [SerializeField] private GameObject hintCanvas;
     private Collider2D collider;
     private DraggableItems draggingItem;
+    private StatsModel statsModel;
     private void Awake()
     {
         outlineMaterial = Material.Instantiate(outlineMaterial);
@@ -24,6 +26,7 @@ public class RubbishBinViewController : AbstractMikroController<MainGame> {
         defaultMaterial = spriteRenderer.material;
         newspaperSystem = this.GetSystem<NewspaperSystem>();
         collider = GetComponent<Collider2D>();
+        statsModel = this.GetModel<StatsModel>();
         gameObject.SetActive(false);
         this.RegisterEvent<OnNewDay>(OnNewDay).UnRegisterWhenGameObjectDestroyed(gameObject);
     }
@@ -48,7 +51,9 @@ public class RubbishBinViewController : AbstractMikroController<MainGame> {
                     warningPanel.Hide();
                     StopHighlight();
                     draggingItem.OnThrown();
-                    
+                    statsModel.UpdateStat("RubbishThrown",
+                        new SaveData("Total Rubbish Thrown", (int) statsModel.GetStat("RubbishThrown", 0) + 1));
+
                     DraggableItems.CurrentDroppingItem = null;
                     draggingItem = null;
                 }
