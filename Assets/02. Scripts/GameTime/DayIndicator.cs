@@ -167,6 +167,7 @@ public class DayIndicator : AbstractMikroController<MainGame> {
 
     private void OnSkipPrologue() {
         DateTime time = gameTimeModel.CurrentTime.Value;
+        this.GetSystem<GameTimeManager>().HasCharmingSoundToday = false;
         this.GetSystem<GameTimeManager>().SkipTimeTo(new DateTime(time.Year, time.Month, time.Day, 23, 58, 0));
         prologueSkipPanelAnimator.CrossFade("Hide", 0.02f);
         gameTimeModel.LockTime.Release();
