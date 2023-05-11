@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3477967111
+CRC: 2416482877
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6e2609d1128590df71810b7868884e8a
+    Hash: 5b3856b05cffcd1f8426296bcb589ae6
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9a2ca7bdbd1871f7131daf57de908e0c
@@ -21,6 +21,7 @@ Assets:
 - Assets/04. Audios/FPS/monster_roar_2.wav
 - Assets/04. Audios/Knocks/knock_7.wav
 - Assets/04. Audios/SexPerson/door_open.wav
+- Assets/04. Audios/Endings/Starve_Arrested_End.wav
 - Assets/04. Audios/Newspaper/pick_up_newspaper.wav
 - Assets/04. Audios/Dog/New/dog_outside_door_1.mp3
 - Assets/04. Audios/SexPerson/rummage.mp3
@@ -28,10 +29,13 @@ Assets:
 - Assets/04. Audios/Knocks/kick_door_3.wav
 - Assets/04. Audios/Newspaper/Newspaper SOUND EFFECT - Reading Newspaper Flipping
   Newspaper SOUND-[AudioTrimmer.com].mp3
+- Assets/04. Audios/EndOfDay3Chimes.mp3
 - Assets/04. Audios/SexPerson/slam_door.wav
 - Assets/04. Audios/Dog/New/dog_outside_door_2.mp3
 - Assets/04. Audios/Gun/gun_fire.wav
 - Assets/04. Audios/Knocks/knock_2.ogg
+- Assets/04. Audios/Endings/Killed_End.wav
+- Assets/04. Audios/Endings/Good_End.wav
 - Assets/04. Audios/FPS/monster_kill_player.wav
 - Assets/04. Audios/Knocks/kick_door_1.ogg
 - Assets/04. Audios/Knocks/kick_door_2.ogg
@@ -39,6 +43,7 @@ Assets:
 - Assets/04. Audios/Radio/radio_button.wav
 - Assets/04. Audios/Cat/Cat.wav
 - Assets/04. Audios/Knocks/knock_4.mp3
+- Assets/04. Audios/Endings/Shelter_End.mp3
 - Assets/04. Audios/telephone/incoming_call.ogg
 - Assets/04. Audios/Knocks/knock_5.mp3
 - Assets/04. Audios/Dog/dogBark_2.wav
@@ -49,6 +54,7 @@ Assets:
 - Assets/04. Audios/UI/UI_Click.mp3
 - Assets/04. Audios/Newspaper/put_down_newspaper.mp3
 - Assets/04. Audios/Dog/New/dog_usual_2.mp3
+- Assets/04. Audios/DeathSound.mp3
 - Assets/04. Audios/VintageCamera/camera-shutter.wav
 - Assets/04. Audios/FPS/monster_roar_1.wav
 - Assets/04. Audios/Dog/New/dog_outside_door_3.mp3

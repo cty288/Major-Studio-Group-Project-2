@@ -3,8 +3,8 @@
   "ABMD5List": [
     {
       "AssetName": "aliens",
-      "MD5": "9952bf159bafe021862258f2db769afe",
-      "FileSize": 545.5547,
+      "MD5": "84ddd2dc4d6709d45cc2d400705f5a6a",
+      "FileSize": 547.7715,
       "assetDatas": [
         {
           "Name": "AlienBody",
@@ -65,8 +65,8 @@
     },
     {
       "AssetName": "audios",
-      "MD5": "e47c8589a08bce6c4ec9680f9824e8cb",
-      "FileSize": 3075.81934,
+      "MD5": "40d203cd1f98cc8406685694a170d9d0",
+      "FileSize": 4245.785,
       "assetDatas": [
         {
           "Name": "Cat",
@@ -75,6 +75,11 @@
         },
         {
           "Name": "clock_tick",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "DeathSound",
           "OwnerBundleName": "audios",
           "AssetType": "UnityEngine.AudioClip"
         },
@@ -140,6 +145,31 @@
         },
         {
           "Name": "motor_gear_loop",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "Good_End",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "Killed_End",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "Shelter_End",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "Starve_Arrested_End",
+          "OwnerBundleName": "audios",
+          "AssetType": "UnityEngine.AudioClip"
+        },
+        {
+          "Name": "EndOfDay3Chimes",
           "OwnerBundleName": "audios",
           "AssetType": "UnityEngine.AudioClip"
         },
@@ -302,8 +332,8 @@
     },
     {
       "AssetName": "general",
-      "MD5": "9809eb18616a5d2bee18739be4057170",
-      "FileSize": 1668.06543,
+      "MD5": "339a052fb51f71d26e2477f8c6b11412",
+      "FileSize": 1652.64551,
       "assetDatas": [
         {
           "Name": "DraggedText",
@@ -344,8 +374,8 @@
     },
     {
       "AssetName": "mftest",
-      "MD5": "c49c505fb7d20c63fc239a81588fb917",
-      "FileSize": 1043.28223,
+      "MD5": "10871f3c51118b1714a66e98177ea1a8",
+      "FileSize": 1028.24707,
       "assetDatas": [
         {
           "Name": "War loop",
@@ -444,7 +474,7 @@
     },
     {
       "AssetName": "Windows",
-      "MD5": "1e050d1ecb40a30a5bc615a13336581e",
+      "MD5": "1e592e87780ec9e2deaa5bbba036e2fe",
       "FileSize": 1.79296875,
       "assetDatas": []
     },
