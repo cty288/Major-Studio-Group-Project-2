@@ -25,7 +25,7 @@ namespace _02._Scripts.CultEnding {
 				DateTime date = gameTimeModel.GetDay(motherNews1Day);
 
 
-				int issue1Num = importantNewsModel.GetIssueForNews(motherNews1Day, date);
+				int issue1Num = 2; //importantNewsModel.GetIssueForNews(motherNews1Day, date);
 				importantNewsModel.AddPageToNewspaper(issue1Num,
 					importantNewsTextModel.GetInfo("MotherNews_1"));
 

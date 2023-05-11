@@ -122,6 +122,7 @@ namespace _02._Scripts.BodyOutside {
 							"YOuR TimE IS oVeR!",
 							
 						};
+						AudioSystem.Singleton.Play2DSound("DeathSound");
 						speaker.Speak(messages[Random.Range(0, messages.Count)],
 							AudioMixerList.Singleton.AudioMixerGroups[4], "???", 1f, OnAlienClickedOutside);
 					}
@@ -186,6 +187,7 @@ namespace _02._Scripts.BodyOutside {
 		        SelectGunOrDog();
 	        }else {
 	            LoadCanvas.Singleton.HideImage(1f);
+	            
 	            DieCanvas.Singleton.Show("You are killed by the monster!", 2, "Killed_End");
 	            this.GetModel<GameStateModel>().GameState.Value = GameState.End;
 	            this.GetSystem<BodyGenerationSystem>().StopCurrentBody();

@@ -5,6 +5,7 @@ using _02._Scripts.GameTime;
 using _02._Scripts.Stats;
 using MikroFramework;
 using MikroFramework.Architecture;
+using MikroFramework.AudioKit;
 using MikroFramework.BindableProperty;
 using MikroFramework.Singletons;
 using MikroFramework.TimeSystem;
@@ -75,7 +76,7 @@ public class GameTimeManager : AbstractSystem, ISystem {
 
     public void NextDay() {
         gameTimeModel.AddDay(out bool isNewWeek);
-        
+        hasCharmingSoundToday = true;
         //beforeEndOfTodayEvent = null;
         int startHour = OutdoorActivityModel.HasMap.Value ? DayTimeStart : NightTimeStart;
         
@@ -121,6 +122,12 @@ public class GameTimeManager : AbstractSystem, ISystem {
         timeSpeedUntil = until;
     }
 
+    private bool hasCharmingSoundToday = true;
+
+    public bool HasCharmingSoundToday {
+        get => hasCharmingSoundToday;
+        set => hasCharmingSoundToday = value;
+    }
     public void SkipTimeTo(DateTime time) {
         gameTimeModel.CurrentTime.Value = time;
     }
@@ -153,8 +160,19 @@ public class GameTimeManager : AbstractSystem, ISystem {
                 if (LockDayEnd.RefCount > 0) {
                     continue;
                 }
+
+                if (Day > 0 && hasCharmingSoundToday) {
+                    AudioSource source = AudioSystem.Singleton.Play2DSound("EndOfDay3Chimes");
+                    this.GetSystem<ITimeSystem>().AddDelayTask(source.clip.length/2, () => {
+                        NextDay();
+                    });
+                }
+                else {
+                    NextDay();
+                }
+               
                // (MainGame.Interface as MainGame)?.SaveGame();
-                NextDay();
+               
                 break;
             }
             

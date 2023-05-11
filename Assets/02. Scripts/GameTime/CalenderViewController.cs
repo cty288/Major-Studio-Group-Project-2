@@ -115,7 +115,7 @@ public class CalenderViewController : AbstractMikroController<MainGame>, IPointe
         this.GetModel<RadioModel>().IsOn.Value = false;
         this.GetSystem<TelephoneSystem>().HangUp(false);
         isSkippingTime = true;
-        
+        gameTimeManager.HasCharmingSoundToday = false;
         gameTimeManager.SkipTimeTo(new DateTime(time.Year, time.Month, time.Day, 23, 58, 0));
         this.GetSystem<TelephoneSystem>().HangUp(false);
         
